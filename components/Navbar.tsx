@@ -1,11 +1,10 @@
+import BrandLogo from "./BrandLogo";
+
 export default function Navbar() {
   return (
     <header className="site-header">
       <div className="site-container site-header__inner">
-        <a className="site-brand" href="#home" aria-label="Entimema — начало">
-          <img className="site-brand__mark" src="/entimema-mark.png" alt="" width="63" height="68" />
-          <span className="site-brand__word">Entimema</span>
-        </a>
+        <BrandLogo />
 
         <nav className="site-nav" aria-label="Основна навигация">
           <a className="is-active" href="#home">Начало</a>

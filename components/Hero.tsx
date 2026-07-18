@@ -1,3 +1,5 @@
+import DotField from "./DotField";
+
 const services = [
   { number: "01", title: "ФИНАНСОВА АРХИТЕКТУРА", description: "Структурата определя резултата." },
   { number: "02", title: "КРЕДИТЕН РИСК", description: "Рискът трябва да бъде измерим." },
@@ -6,21 +8,10 @@ const services = [
   { number: "05", title: "CFO ФУНКЦИЯ", description: "Финансовата функция се изгражда." },
 ];
 
-const orangeDots = [
-  [10.7, 0.7], [81.8, 0.8], [97.8, 0.8], [4.5, 12.4], [27.9, 11.9], [35.8, 8.7],
-  [49.8, 11.9], [94.3, 21.2], [98.9, 36.8], [2.2, 83.2], [42.2, 87.4], [52.3, 93.8],
-  [94.6, 95.5], [34.2, 99.2], [86.8, 99.2]
-];
-
 export default function Hero() {
   return (
     <section className="hero" id="home">
-      <div className="hero__blue-dots" aria-hidden="true" />
-      <div className="hero__orange-dots" aria-hidden="true">
-        {orangeDots.map(([left, top], index) => (
-          <i key={index} style={{ left: `${left}%`, top: `${top}%` }} />
-        ))}
-      </div>
+      <DotField />
 
       <div className="site-container hero__layout">
         <div className="hero__copy">
