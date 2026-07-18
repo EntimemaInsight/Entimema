@@ -3,7 +3,8 @@ export default function Navbar() {
     <header className="site-header">
       <div className="site-container site-header__inner">
         <a className="site-brand" href="#home" aria-label="Entimema — начало">
-          <img src="/entimema-logo.png" alt="Entimema" width="300" height="85" />
+          <img className="site-brand__mark" src="/entimema-mark.png" alt="" width="63" height="68" />
+          <span className="site-brand__word">Entimema</span>
         </a>
 
         <nav className="site-nav" aria-label="Основна навигация">
