@@ -1,31 +1,22 @@
-import Image from "next/image";
-
 export default function Navbar() {
   return (
-    <header className="navbar">
-      <div className="page-shell navbar__inner">
-        <a className="brand" href="#home" aria-label="Entimema — начало">
-          <Image
-            src="/entimema-logo.png"
-            alt="Entimema"
-            width={310}
-            height={94}
-            priority
-            className="brand__logo"
-          />
+    <header className="site-header">
+      <div className="site-container site-header__inner">
+        <a className="site-brand" href="#home" aria-label="Entimema — начало">
+          <img src="/entimema-logo.png" alt="Entimema" width="1200" height="308" />
         </a>
 
-        <nav className="navlinks" aria-label="Основна навигация">
-          <a className="active" href="#home">Начало</a>
+        <nav className="site-nav" aria-label="Основна навигация">
+          <a className="is-active" href="#home">Начало</a>
           <a href="#services">Услуги</a>
           <a href="#about">За Entimema</a>
           <a href="#analyses">Анализи</a>
           <a href="#contact">Контакти</a>
         </nav>
 
-        <button className="language" type="button" aria-label="Избор на език">
+        <button className="language-switch" type="button" aria-label="Избор на език">
           <span>BG</span>
-          <span className="language__chevron" aria-hidden="true" />
+          <span className="language-switch__chevron" aria-hidden="true" />
         </button>
       </div>
     </header>

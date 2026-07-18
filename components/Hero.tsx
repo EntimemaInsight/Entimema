@@ -1,37 +1,38 @@
 const services = [
-  ["01", "ФИНАНСОВА АРХИТЕКТУРА", "Структурата определя резултата."],
-  ["02", "КРЕДИТЕН РИСК", "Рискът трябва да бъде измерим."],
-  ["03", "ФИНАНСОВА ТРАНСФОРМАЦИЯ", "Ефективността се проектира."],
-  ["04", "ДАННИ, AI И АВТОМАТИЗАЦИЯ", "Данните създават стойност в контекст."],
-  ["05", "CFO ФУНКЦИЯ", "Финансовата функция се изгражда."],
+  { number: "01", title: "ФИНАНСОВА АРХИТЕКТУРА", description: "Структурата определя резултата." },
+  { number: "02", title: "КРЕДИТЕН РИСК", description: "Рискът трябва да бъде измерим." },
+  { number: "03", title: "ФИНАНСОВА ТРАНСФОРМАЦИЯ", description: "Ефективността се проектира." },
+  { number: "04", title: "ДАННИ, AI И АВТОМАТИЗАЦИЯ", description: "Данните създават стойност в контекст." },
+  { number: "05", title: "CFO ФУНКЦИЯ", description: "Финансовата функция се изгражда." },
 ];
 
 export default function Hero() {
   return (
     <section className="hero" id="home">
-      <div className="dot-field" aria-hidden="true" />
-      <div className="page-shell hero__grid">
+      <div className="hero__dots" aria-hidden="true" />
+      <div className="site-container hero__layout">
         <div className="hero__copy">
-          <h1>
-            Структурата<br />
-            превръща
-            <span className="accent">стратегията в<br />резултати.</span>
+          <h1 className="hero__title">
+            <span>Структурата</span>
+            <span>превръща</span>
+            <span className="hero__accent">стратегията в</span>
+            <span className="hero__accent">резултати.</span>
           </h1>
-          <p className="hero__lead">
-            Изграждаме системи, които превръщат<br />
-            данните в решения, риска – в предвидимост,<br />
-            а стратегията – в изпълнение.
+          <p className="hero__description">
+            <span>Изграждаме системи, които превръщат</span>
+            <span>данните в решения, риска – в предвидимост,</span>
+            <span>а стратегията – в изпълнение.</span>
           </p>
         </div>
 
-        <div className="services" id="services">
-          {services.map(([number, title, description]) => (
-            <article className="service" key={number}>
-              <div className="service__number">{number}</div>
-              <div className="service__dash" aria-hidden="true" />
-              <div className="service__content">
-                <h2>{title}</h2>
-                <p>{description}</p>
+        <div className="service-list" id="services">
+          {services.map((service) => (
+            <article className="service-row" key={service.number}>
+              <div className="service-row__number">{service.number}</div>
+              <span className="service-row__rule" aria-hidden="true" />
+              <div className="service-row__copy">
+                <h2>{service.title}</h2>
+                <p>{service.description}</p>
               </div>
             </article>
           ))}
