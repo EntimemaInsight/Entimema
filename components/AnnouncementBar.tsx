@@ -1,11 +1,13 @@
 export default function AnnouncementBar() {
   return (
-    <section className="announcement" aria-label="Announcement">
-      <div className="announcement__inner">
-        <span>Financial systems are being redefined. AI, data and risk intelligence unlock smarter decisions.</span>
-        <a className="announcement__link" href="#insights">Explore insights →</a>
+    <aside className="announcement" aria-label="Актуално съобщение">
+      <div className="page-shell announcement__inner">
+        <p>Финансовите системи се променят. AI, данните и анализът на риска създават ново поколение управленски решения.</p>
+        <a className="announcement__link" href="#analyses">
+          Разгледайте анализите <span aria-hidden="true">→</span>
+        </a>
       </div>
-      <button className="announcement__close" aria-label="Close announcement">×</button>
-    </section>
+      <button className="announcement__close" type="button" aria-label="Затвори съобщението">×</button>
+    </aside>
   );
 }

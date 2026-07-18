@@ -1,32 +1,27 @@
 const services = [
-  ["01", "FINANCIAL ARCHITECTURE", "Building finance functions that scale."],
-  ["02", "CREDIT RISK INTELLIGENCE", "Quantifying uncertainty through data and models."],
-  ["03", "FINANCIAL (RE)STRUCTURING", "Improving performance through financial transformation."],
-  ["04", "DATA, AI & AUTOMATION", "Connecting finance, technology and intelligent processes."],
-  ["05", "CFO AS A SERVICE", "Strategic financial leadership when you need it most."],
+  ["01", "ФИНАНСОВА АРХИТЕКТУРА", "Структурата определя резултата."],
+  ["02", "КРЕДИТЕН РИСК", "Рискът трябва да бъде измерим."],
+  ["03", "ФИНАНСОВА ТРАНСФОРМАЦИЯ", "Ефективността се проектира."],
+  ["04", "ДАННИ, AI И АВТОМАТИЗАЦИЯ", "Данните създават стойност в контекст."],
+  ["05", "CFO ФУНКЦИЯ", "Финансовата функция се изгражда."],
 ];
 
 export default function Hero() {
   return (
     <section className="hero" id="home">
+      <div className="dot-field" aria-hidden="true" />
       <div className="page-shell hero__grid">
-        <div className="hero__left">
-          <div className="progress" aria-hidden="true">
-            <span className="progress__top" />
-            <span className="progress__active" />
-          </div>
-
-          <div className="hero__copy">
-            <h1>
-              Structure<br />before
-              <span className="accent">decisions</span>
-            </h1>
-            <p className="hero__lead">
-              We build financial systems,<br />
-              quantify risk and drive performance<br />
-              through data, models and insight.
-            </p>
-          </div>
+        <div className="hero__copy">
+          <h1>
+            Структурата<br />
+            превръща
+            <span className="accent">стратегията в<br />резултати.</span>
+          </h1>
+          <p className="hero__lead">
+            Изграждаме системи, които превръщат<br />
+            данните в решения, риска – в предвидимост,<br />
+            а стратегията – в изпълнение.
+          </p>
         </div>
 
         <div className="services" id="services">
@@ -34,7 +29,7 @@ export default function Hero() {
             <article className="service" key={number}>
               <div className="service__number">{number}</div>
               <div className="service__dash" aria-hidden="true" />
-              <div>
+              <div className="service__content">
                 <h2>{title}</h2>
                 <p>{description}</p>
               </div>
