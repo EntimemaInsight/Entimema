@@ -3,21 +3,21 @@
 import { useEffect, useRef } from "react";
 
 const financeItems = [
-  "Мениджърска отчетност",
+  "Финансово планиране",
   "Финансово моделиране",
-  "Бюджетиране и прогнозиране",
+  "Управленска отчетност",
   "Управление чрез KPI",
-  "Парични потоци и ликвидност",
+  "Ликвидност",
   "Финансов контрол",
   "Управление на разходите",
-  "Външен финансов директор",
+  "CFO функция",
 ];
 
 const riskItems = [
   "Апликационен скоринг",
   "AI системи за решения",
   "Поведенчески скоринг",
-  "Мониторинг на портфейли",
+  "Fraud Detection",
   "PD / LGD / EAD модели",
   "Стрес тестове",
   "IFRS 9 модели",
@@ -32,12 +32,6 @@ type SystemCardProps = {
 };
 
 function SystemCard({ kind, title, description, items }: SystemCardProps) {
-  const href = kind === "finance" ? "#financial-architecture" : "#credit-risk";
-  const linkLabel =
-    kind === "finance"
-      ? "Разгледайте финансовата архитектура"
-      : "Разгледайте решенията";
-
   return (
     <article className={`approach-card approach-card--${kind}`}>
       <div className="approach-card__copy">
@@ -53,10 +47,6 @@ function SystemCard({ kind, title, description, items }: SystemCardProps) {
         ))}
       </div>
 
-      <a className="approach-card__link" href={href}>
-        <span>{linkLabel}</span>
-        <span aria-hidden="true">→</span>
-      </a>
     </article>
   );
 }
@@ -94,7 +84,7 @@ export default function ApproachSection() {
         </div>
 
         <p className="approach-section__lead reveal reveal--2">
-          Финансовите системи, моделите за кредитен риск и решенията,
+          Финансовите системи, управлението на риска и решенията,
           базирани на изкуствен интелект, създават стойност, когато стъпват
           върху обща логика и последователна методология. Приложенията се
           различават. Принципите остават постоянни.
@@ -104,13 +94,13 @@ export default function ApproachSection() {
           <SystemCard
             kind="finance"
             title="Финансова архитектура"
-            description="Проектираме финансови системи, които превръщат данните в ясни управленски решения и се развиват заедно с бизнеса."
+            description="Осигурява последователност между финансовата информация, контрола и управленските решения."
             items={financeItems}
           />
           <SystemCard
             kind="risk"
-            title="Кредитен риск"
-            description="Разработваме системи за оценка, мониторинг и автоматизация на кредитния риск — от скоринг модели до решения, подпомагани от изкуствен интелект."
+            title="Управление на риска"
+            description="Обединява оценката, наблюдението и вземането на решения в обща рамка."
             items={riskItems}
           />
         </div>
