@@ -1531,3 +1531,115 @@ html.announcement-collapsed .site-header {
   .process-summary__icon { width:58px; height:58px; }
   .process-summary__icon svg { width:34px; height:34px; }
 }
+
+/* --------------------------------------------------------------------------
+   Approach cards v3.3 — premium iconography and aligned visual balance
+   -------------------------------------------------------------------------- */
+.approach-card__top {
+  grid-template-columns: minmax(0, 1fr) 228px;
+  align-items: center;
+  min-height: 252px;
+}
+
+.approach-card__graphic {
+  width: 228px;
+  height: 184px;
+  display: block;
+  justify-self: end;
+  align-self: center;
+  overflow: visible;
+}
+
+.approach-card__graphic--risk {
+  transform: translateY(0);
+}
+
+.approach-card__icon {
+  width: 58px;
+  height: 58px;
+  margin-bottom: 22px;
+  border: 1px solid rgba(8, 43, 131, .16);
+  background: rgba(247, 250, 255, .86);
+  box-shadow: 0 12px 30px rgba(8, 31, 94, .055);
+}
+
+.approach-card--orange .approach-card__icon {
+  border-color: rgba(255, 77, 10, .18);
+  background: rgba(255, 248, 245, .9);
+}
+
+.approach-card__icon .premium-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.approach-card__icon .premium-icon svg {
+  width: 24px;
+  height: 24px;
+  stroke-width: 1.55;
+}
+
+.approach-card__item {
+  grid-template-columns: 32px minmax(0, 1fr);
+  gap: 12px;
+  min-height: 52px;
+}
+
+.approach-card__item .premium-icon {
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+  color: #1749b4;
+  background: rgba(38, 92, 205, .055);
+  border: 1px solid rgba(38, 92, 205, .07);
+}
+
+.approach-card--orange .approach-card__item .premium-icon {
+  color: var(--brand-orange-500);
+  background: rgba(255, 77, 10, .055);
+  border-color: rgba(255, 77, 10, .08);
+}
+
+.approach-card__item .premium-icon svg {
+  width: 16px;
+  height: 16px;
+  stroke-width: 1.55;
+}
+
+.approach-card__item b {
+  font-weight: 590;
+  color: #26395f;
+}
+
+.approach-card__button {
+  min-height: 56px;
+  height: auto;
+  border-radius: 16px;
+  letter-spacing: -.01em;
+  box-shadow: none;
+}
+
+.approach-card--blue .approach-card__button {
+  background: #081d6e;
+}
+
+.approach-card--orange .approach-card__button {
+  background: #ff4d0a;
+}
+
+@media (max-width: 1180px) {
+  .approach-card__top { grid-template-columns: minmax(0,1fr) 196px; }
+  .approach-card__graphic { width: 196px; height: 168px; }
+}
+
+@media (max-width: 900px) {
+  .approach-card__top { grid-template-columns: 1fr; }
+  .approach-card__graphic {
+    width: min(100%, 250px);
+    height: 180px;
+    justify-self: center;
+    margin-top: 12px;
+  }
+}

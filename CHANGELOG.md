@@ -28,3 +28,10 @@
 - Rebuilt the five-step visual flow against the approved reference.
 - Removed decorative section numbering while retaining functional process numbering.
 - Added responsive process layout and unified SVG icon treatment.
+
+## v3.3 — Premium service iconography
+- Rebuilt the service icon set with a consistent 24px optical grid and lighter strokes.
+- Replaced visually dated icon containers with subtle, restrained icon tiles.
+- Simplified the credit-risk network graphic and aligned it with the financial architecture graphic.
+- Normalized graphic dimensions and vertical centering across both service cards.
+- Refined CTA geometry to match the premium card system.
