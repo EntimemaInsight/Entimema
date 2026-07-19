@@ -49,59 +49,63 @@ const steps: Step[] = [
 ];
 
 function StepIcon({ type }: { type: Step["icon"] }) {
-  const shell = (content: ReactNode) => (
-    <svg viewBox="0 0 120 88" aria-hidden="true">
-      <rect className="frame" x="1" y="1" width="118" height="86" rx="16" />
-      <path className="chrome" d="M1 21h118" />
-      <circle className="chrome-dot" cx="14" cy="11" r="2" />
-      <circle className="chrome-dot" cx="22" cy="11" r="2" />
-      <circle className="chrome-dot" cx="30" cy="11" r="2" />
-      {content}
+  const Frame = ({ children, label }: { children: ReactNode; label: string }) => (
+    <svg viewBox="0 0 132 96" role="img" aria-label={label}>
+      <rect className="ui-shell" x="1" y="1" width="130" height="94" rx="18" />
+      <rect className="ui-panel" x="10" y="10" width="112" height="76" rx="13" />
+      {children}
     </svg>
   );
 
   if (type === "search") {
-    return shell(<>
-      <rect x="12" y="31" width="42" height="9" rx="4.5" />
-      <rect className="muted" x="12" y="47" width="31" height="6" rx="3" />
-      <circle className="accent-fill" cx="84" cy="49" r="14" />
-      <path className="accent-line" d="m94 59 10 10" />
-    </>);
+    return <Frame label="Разбиране"><>
+      <rect className="ui-chip" x="20" y="21" width="34" height="7" rx="3.5" />
+      <rect className="ui-muted" x="20" y="35" width="52" height="6" rx="3" />
+      <rect className="ui-muted" x="20" y="47" width="39" height="6" rx="3" />
+      <circle className="ui-focus" cx="91" cy="48" r="17" />
+      <circle className="ui-focus-core" cx="91" cy="48" r="6" />
+      <path className="ui-accent-line" d="m103 60 10 10" />
+      <path className="ui-hairline" d="M20 67h42" />
+    </></Frame>;
   }
   if (type === "structure") {
-    return shell(<>
-      <rect x="15" y="32" width="24" height="15" rx="4" />
-      <rect x="48" y="32" width="24" height="15" rx="4" />
-      <rect className="accent-box" x="81" y="32" width="24" height="15" rx="4" />
-      <path className="muted-line" d="M27 47v12h66V47M60 47v12" />
-      <rect className="muted" x="33" y="64" width="54" height="6" rx="3" />
-    </>);
+    return <Frame label="Структуриране"><>
+      <rect className="ui-node" x="18" y="21" width="28" height="19" rx="6" />
+      <rect className="ui-node" x="52" y="21" width="28" height="19" rx="6" />
+      <rect className="ui-node ui-node--accent" x="86" y="21" width="28" height="19" rx="6" />
+      <path className="ui-hairline" d="M32 40v18h68V40M66 40v18" />
+      <rect className="ui-muted" x="33" y="66" width="66" height="7" rx="3.5" />
+    </></Frame>;
   }
   if (type === "model") {
-    return shell(<>
-      <path className="muted-line" d="M15 67V33h88" />
-      <path className="accent-line" d="m19 62 18-14 16 7 17-20 25 8" />
-      <circle className="accent-fill" cx="37" cy="48" r="3" />
-      <circle className="accent-fill" cx="70" cy="35" r="3" />
-      <rect className="muted" x="76" y="55" width="24" height="8" rx="4" />
-    </>);
+    return <Frame label="Моделиране"><>
+      <path className="ui-axis" d="M20 70V25h90" />
+      <path className="ui-hairline" d="M20 52h90M44 25v45M68 25v45M92 25v45" />
+      <path className="ui-accent-line" d="m25 62 20-14 17 7 19-22 25 8" />
+      <circle className="ui-dot" cx="45" cy="48" r="3.4" />
+      <circle className="ui-dot" cx="81" cy="33" r="3.4" />
+      <rect className="ui-pill" x="80" y="58" width="28" height="9" rx="4.5" />
+    </></Frame>;
   }
   if (type === "automation") {
-    return shell(<>
-      <rect x="13" y="34" width="27" height="19" rx="5" />
-      <rect x="80" y="34" width="27" height="19" rx="5" />
-      <rect className="accent-box" x="47" y="56" width="27" height="16" rx="5" />
-      <path className="muted-line" d="M40 43h40M60 43v13" />
-      <path className="accent-line" d="m72 40 8 3-8 3" />
-    </>);
+    return <Frame label="Автоматизация"><>
+      <rect className="ui-node" x="17" y="29" width="30" height="22" rx="7" />
+      <rect className="ui-node" x="85" y="29" width="30" height="22" rx="7" />
+      <rect className="ui-node ui-node--accent" x="51" y="60" width="30" height="18" rx="7" />
+      <path className="ui-hairline" d="M47 40h38M66 40v20" />
+      <path className="ui-accent-line" d="m75 35 10 5-10 5" />
+      <circle className="ui-status" cx="32" cy="40" r="3.2" />
+      <circle className="ui-status" cx="100" cy="40" r="3.2" />
+    </></Frame>;
   }
-  return shell(<>
-    <rect x="15" y="52" width="15" height="16" rx="3" />
-    <rect x="38" y="43" width="15" height="25" rx="3" />
-    <rect x="61" y="34" width="15" height="34" rx="3" />
-    <rect className="accent-box" x="84" y="27" width="15" height="41" rx="3" />
-    <path className="accent-line" d="M16 40c20-1 38-9 58-22l18 3" />
-  </>);
+  return <Frame label="Развитие"><>
+    <rect className="ui-bar" x="22" y="58" width="14" height="17" rx="4" />
+    <rect className="ui-bar" x="44" y="49" width="14" height="26" rx="4" />
+    <rect className="ui-bar" x="66" y="39" width="14" height="36" rx="4" />
+    <rect className="ui-bar ui-bar--accent" x="88" y="27" width="14" height="48" rx="4" />
+    <path className="ui-accent-line" d="M23 46c18-1 35-9 52-20l19 3" />
+    <path className="ui-accent-line" d="m86 23 9 6-9 5" />
+  </></Frame>;
 }
 function Connector() {
   return <div className="process-connector" aria-hidden="true"><span>›</span></div>;

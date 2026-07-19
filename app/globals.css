@@ -1780,3 +1780,102 @@ body{font-family:"Segoe UI Variable","Segoe UI",Inter,Arial,sans-serif;letter-sp
   .process-step__icon,
   .process-step--featured .process-step__icon { width: 84px; height: 64px; }
 }
+
+/* =========================================================
+   PREMIUM ICONOGRAPHY 2026 — process micro-system glyphs
+   ========================================================= */
+.process-step__icon {
+  width: clamp(132px, 10.8vw, 168px);
+  aspect-ratio: 1.22;
+  margin-bottom: clamp(20px,2.2vh,28px);
+  border: 0;
+  border-radius: 24px;
+  background: transparent;
+  box-shadow: none;
+}
+.process-step--featured .process-step__icon {
+  width: clamp(132px, 10.8vw, 168px);
+  border: 0;
+  box-shadow: none;
+}
+.process-step__icon svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  stroke: none;
+  filter: drop-shadow(0 18px 28px rgba(8,31,94,.08));
+}
+.process-step__icon .ui-shell {
+  fill: rgba(255,255,255,.92);
+  stroke: rgba(8,31,94,.13);
+  stroke-width: 1;
+}
+.process-step__icon .ui-panel {
+  fill: rgba(246,249,254,.82);
+  stroke: rgba(8,31,94,.06);
+  stroke-width: 1;
+}
+.process-step__icon .ui-chip,
+.process-step__icon .ui-muted,
+.process-step__icon .ui-pill {
+  fill: rgba(8,31,94,.10);
+}
+.process-step__icon .ui-node,
+.process-step__icon .ui-focus,
+.process-step__icon .ui-bar {
+  fill: rgba(255,255,255,.72);
+  stroke: #0b2d83;
+  stroke-width: 1.55;
+}
+.process-step__icon .ui-node--accent,
+.process-step__icon .ui-bar--accent {
+  fill: rgba(255,77,18,.05);
+  stroke: var(--brand-orange-500);
+}
+.process-step__icon .ui-focus-core,
+.process-step__icon .ui-dot,
+.process-step__icon .ui-status {
+  fill: var(--brand-orange-500);
+}
+.process-step__icon .ui-hairline,
+.process-step__icon .ui-axis {
+  fill: none;
+  stroke: rgba(11,45,131,.24);
+  stroke-width: 1.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.process-step__icon .ui-axis { stroke: rgba(11,45,131,.52); }
+.process-step__icon .ui-accent-line {
+  fill: none;
+  stroke: var(--brand-orange-500);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.process-step__icon .ui-pill { fill: rgba(11,45,131,.09); }
+.process-step:hover .process-step__icon svg {
+  transform: translateY(-3px);
+  filter: drop-shadow(0 24px 36px rgba(8,31,94,.12));
+}
+.process-step__icon svg { transition: transform .28s cubic-bezier(.22,1,.36,1), filter .28s ease; }
+.process-step:hover .ui-panel { fill: rgba(249,251,255,.96); }
+.process-connector {
+  background: linear-gradient(90deg, rgba(11,45,131,.05), rgba(11,45,131,.20), rgba(11,45,131,.05));
+}
+.process-connector span {
+  width: 30px;
+  height: 30px;
+  border-color: rgba(255,77,18,.36);
+  background: rgba(255,255,255,.92);
+  box-shadow: 0 8px 22px rgba(8,31,94,.06);
+  font-size: 22px;
+}
+@media (max-width: 900px) {
+  .process-step__icon,
+  .process-step--featured .process-step__icon { width: 128px; }
+}
+@media (max-width: 600px) {
+  .process-step__icon,
+  .process-step--featured .process-step__icon { width: 90px; }
+}
