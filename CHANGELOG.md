@@ -35,3 +35,8 @@
 - Simplified the credit-risk network graphic and aligned it with the financial architecture graphic.
 - Normalized graphic dimensions and vertical centering across both service cards.
 - Refined CTA geometry to match the premium card system.
+
+## v5.1 — Process UI refinement
+- Replaced process icons with product-UI glyphs.
+- Corrected vertical alignment of step 03 “Моделиране”.
+- Standardized row heights across all five process steps.

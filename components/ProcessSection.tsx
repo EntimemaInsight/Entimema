@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 
 type Step = {
   number: string;
@@ -49,21 +49,60 @@ const steps: Step[] = [
 ];
 
 function StepIcon({ type }: { type: Step["icon"] }) {
+  const shell = (content: ReactNode) => (
+    <svg viewBox="0 0 120 88" aria-hidden="true">
+      <rect className="frame" x="1" y="1" width="118" height="86" rx="16" />
+      <path className="chrome" d="M1 21h118" />
+      <circle className="chrome-dot" cx="14" cy="11" r="2" />
+      <circle className="chrome-dot" cx="22" cy="11" r="2" />
+      <circle className="chrome-dot" cx="30" cy="11" r="2" />
+      {content}
+    </svg>
+  );
+
   if (type === "search") {
-    return <svg viewBox="0 0 96 96" aria-hidden="true"><circle cx="41" cy="40" r="24"/><path d="M58 58 77 77"/><path className="accent" d="M28 40a13 13 0 0 1 13-13"/></svg>;
+    return shell(<>
+      <rect x="12" y="31" width="42" height="9" rx="4.5" />
+      <rect className="muted" x="12" y="47" width="31" height="6" rx="3" />
+      <circle className="accent-fill" cx="84" cy="49" r="14" />
+      <path className="accent-line" d="m94 59 10 10" />
+    </>);
   }
   if (type === "structure") {
-    return <svg viewBox="0 0 96 96" aria-hidden="true"><rect x="37" y="14" width="22" height="22"/><rect x="14" y="60" width="22" height="22"/><rect className="accent" x="60" y="60" width="22" height="22"/><path d="M48 36v14M25 50h46M25 50v10M71 50v10"/></svg>;
+    return shell(<>
+      <rect x="15" y="32" width="24" height="15" rx="4" />
+      <rect x="48" y="32" width="24" height="15" rx="4" />
+      <rect className="accent-box" x="81" y="32" width="24" height="15" rx="4" />
+      <path className="muted-line" d="M27 47v12h66V47M60 47v12" />
+      <rect className="muted" x="33" y="64" width="54" height="6" rx="3" />
+    </>);
   }
   if (type === "model") {
-    return <svg viewBox="0 0 96 96" aria-hidden="true"><path d="M18 15v65h65"/><path className="accent" d="m24 66 20-20 16 9 20-25"/><path className="accent" d="M69 30h11v11"/><circle cx="42" cy="25" r="3"/><circle cx="60" cy="30" r="3"/><circle cx="69" cy="68" r="3"/><circle cx="48" cy="72" r="3"/></svg>;
+    return shell(<>
+      <path className="muted-line" d="M15 67V33h88" />
+      <path className="accent-line" d="m19 62 18-14 16 7 17-20 25 8" />
+      <circle className="accent-fill" cx="37" cy="48" r="3" />
+      <circle className="accent-fill" cx="70" cy="35" r="3" />
+      <rect className="muted" x="76" y="55" width="24" height="8" rx="4" />
+    </>);
   }
   if (type === "automation") {
-    return <svg viewBox="0 0 96 96" aria-hidden="true"><path d="m48 12 6 9 11-2 2 11 10 5-5 10 5 10-10 5-2 11-11-2-6 9-6-9-11 2-2-11-10-5 5-10-5-10 10-5 2-11 11 2z"/><circle className="accent" cx="48" cy="45" r="13"/></svg>;
+    return shell(<>
+      <rect x="13" y="34" width="27" height="19" rx="5" />
+      <rect x="80" y="34" width="27" height="19" rx="5" />
+      <rect className="accent-box" x="47" y="56" width="27" height="16" rx="5" />
+      <path className="muted-line" d="M40 43h40M60 43v13" />
+      <path className="accent-line" d="m72 40 8 3-8 3" />
+    </>);
   }
-  return <svg viewBox="0 0 96 96" aria-hidden="true"><path d="M18 78V58h14v20M42 78V43h14v35M66 78V28h14v50"/><path className="accent" d="M18 45c21-2 38-12 59-31"/><path className="accent" d="M66 14h11v11"/></svg>;
+  return shell(<>
+    <rect x="15" y="52" width="15" height="16" rx="3" />
+    <rect x="38" y="43" width="15" height="25" rx="3" />
+    <rect x="61" y="34" width="15" height="34" rx="3" />
+    <rect className="accent-box" x="84" y="27" width="15" height="41" rx="3" />
+    <path className="accent-line" d="M16 40c20-1 38-9 58-22l18 3" />
+  </>);
 }
-
 function Connector() {
   return <div className="process-connector" aria-hidden="true"><span>›</span></div>;
 }
