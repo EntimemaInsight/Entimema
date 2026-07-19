@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import ScrollExperience from "@/components/ScrollExperience";
 
 export const metadata: Metadata = {
   title: "Entimema | Финансови системи, риск и AI",
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="bg">
-      <body>{children}</body>
+      <body><ScrollExperience />{children}</body>
     </html>
   );
 }

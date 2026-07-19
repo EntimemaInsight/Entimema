@@ -2029,3 +2029,126 @@ body{font-family:"Segoe UI Variable","Segoe UI",Inter,Arial,sans-serif;letter-sp
   .service-row__number { font-size: 38px; }
   .service-row__rule { height: 40px; }
 }
+
+/* Sprint B — motion, scroll and interaction system */
+:root {
+  --motion-fast: 180ms;
+  --motion-base: 320ms;
+  --motion-slow: 680ms;
+  --motion-ease: cubic-bezier(.22, 1, .36, 1);
+  --header-compact-height: 78px;
+}
+
+html { scroll-padding-top: 112px; }
+section[id], [id="services"], [id="about"], [id="approach"] { scroll-margin-top: 112px; }
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 80;
+  transition:
+    height var(--motion-base) var(--motion-ease),
+    background-color var(--motion-base) ease,
+    border-color var(--motion-base) ease,
+    box-shadow var(--motion-base) ease,
+    transform var(--motion-base) var(--motion-ease);
+  will-change: transform;
+}
+
+html.is-scrolled .site-header {
+  height: var(--header-compact-height);
+  background: rgba(255,255,255,.90);
+  border-color: rgba(8,31,94,.09);
+  box-shadow: 0 10px 34px rgba(7,27,82,.075);
+}
+html.is-scrolled .site-brand__mark { transform: scale(.86); }
+html.is-scrolled .site-brand__word { font-size: clamp(27px,1.85vw,31px); }
+html.is-scrolled .header-cta { min-height: 36px; padding-inline: 16px; }
+.site-brand__mark,
+.site-brand__word,
+.header-cta,
+.language-switch { transition: transform var(--motion-base) var(--motion-ease), font-size var(--motion-base) var(--motion-ease), min-height var(--motion-base) var(--motion-ease), padding var(--motion-base) var(--motion-ease), box-shadow var(--motion-fast) ease; }
+
+@media (hover:hover) and (pointer:fine) {
+  .site-nav a::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 24%;
+    width: 0;
+    height: 1px;
+    background: var(--brand-orange-500);
+    transform: translateX(-50%);
+    transition: width var(--motion-fast) var(--motion-ease);
+  }
+  .site-nav a:hover::before { width: 100%; }
+  .site-nav a.is-active::before { width: 0; }
+
+  .service-row { cursor: default; }
+  .service-row:hover {
+    transform: translateX(6px);
+    border-color: rgba(240,90,40,.30);
+  }
+  .service-row:hover .service-row__rule { transform: scaleY(1.12); }
+  .service-row:hover .service-row__number { color: var(--brand-orange-500); }
+  .service-row__rule,
+  .service-row__number { transition: transform var(--motion-fast) var(--motion-ease), color var(--motion-fast) ease; }
+
+  .approach-card { transition: transform var(--motion-base) var(--motion-ease), box-shadow var(--motion-base) ease, border-color var(--motion-base) ease; }
+  .approach-card:hover { transform: translateY(-6px); }
+  .approach-card__button { overflow: hidden; }
+  .approach-card__button span { transition: transform var(--motion-fast) var(--motion-ease); }
+  .approach-card__button:hover span { transform: translate(4px,-2px); }
+
+  .process-step { transition: transform var(--motion-base) var(--motion-ease); }
+  .process-step:hover { transform: translateY(-4px); }
+  .process-step:hover .process-step__icon { opacity: 1; }
+}
+
+.motion-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity var(--motion-slow) ease,
+    transform var(--motion-slow) var(--motion-ease);
+  transition-delay: calc(var(--motion-order, 0) * 54ms);
+}
+.motion-reveal.is-in-view {
+  opacity: 1;
+  transform: none;
+}
+.hero__copy.motion-reveal { transform: translateY(14px); }
+.service-row.motion-reveal { transform: translateX(16px); }
+.service-row.motion-reveal.is-in-view { transform: none; }
+
+.announcement a span,
+.header-cta span { transition: transform var(--motion-fast) var(--motion-ease); }
+.announcement a:hover span { transform: translateX(4px); }
+
+.process-connector span {
+  transition: transform var(--motion-fast) var(--motion-ease), border-color var(--motion-fast) ease, color var(--motion-fast) ease;
+}
+.process-flow__unit:hover .process-connector span {
+  transform: translateX(3px);
+  border-color: rgba(255,77,18,.55);
+  color: var(--brand-orange-500);
+}
+
+@media (max-width: 920px) {
+  html { scroll-padding-top: 84px; }
+  section[id], [id="services"], [id="about"], [id="approach"] { scroll-margin-top: 84px; }
+  html.is-scrolled .site-header { height: auto; }
+  .motion-reveal { transform: translateY(14px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .motion-reveal,
+  .motion-reveal.is-in-view { opacity: 1 !important; transform: none !important; }
+}

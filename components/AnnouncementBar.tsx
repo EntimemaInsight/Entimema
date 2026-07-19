@@ -8,6 +8,10 @@ export default function AnnouncementBar() {
   const [isDismissed, setIsDismissed] = useState(false);
 
   useEffect(() => {
+    setIsDismissed(window.sessionStorage.getItem("entimema-announcement-dismissed") === "1");
+  }, []);
+
+  useEffect(() => {
     const root = document.documentElement;
     let frame = 0;
 
@@ -44,7 +48,10 @@ export default function AnnouncementBar() {
         className="announcement__close"
         type="button"
         aria-label="Затвори съобщението"
-        onClick={() => setIsDismissed(true)}
+        onClick={() => {
+          window.sessionStorage.setItem("entimema-announcement-dismissed", "1");
+          setIsDismissed(true);
+        }}
       >
         ×
       </button>
