@@ -1,0 +1,12 @@
+ENTIMEMA — Sprint 3: Premium Copy Flow & Iconography
+
+Changes:
+- corrected Hero copy flow and removed forced line fragmentation;
+- removed the punctuation construction that visually merged words around the dash;
+- rebalanced the first section columns and text widths;
+- enabled natural, balanced wrapping for service titles and descriptions;
+- replaced all Unicode-symbol service icons with a coherent custom SVG icon family;
+- redesigned the main card icons with layered premium containers;
+- refined methodology icons into a consistent architectural tile system;
+- preserved Home, Services and About structure and routes;
+- production build passed successfully.

@@ -1132,3 +1132,125 @@ html.announcement-collapsed .site-header {
   .methodology__statement p { text-align: left; }
   .founder-card__content { padding: 26px 22px; }
 }
+
+/* =========================================================
+   SPRINT 3 — PREMIUM COPY FLOW & ICONOGRAPHY
+   ========================================================= */
+.hero__layout {
+  grid-template-columns: minmax(0, 1.02fr) minmax(430px, .78fr);
+  gap: clamp(76px, 8.5vw, 138px);
+}
+.hero__copy {
+  max-width: 710px;
+  padding-left: clamp(8px, 2vw, 28px);
+}
+.hero__title {
+  max-width: 12.2ch;
+  margin-bottom: clamp(28px, 3vw, 42px);
+  font-size: clamp(58px, 5.25vw, 84px);
+  line-height: .99;
+  text-wrap: balance;
+}
+.hero__title span { display: block; }
+.hero__description {
+  max-width: 36rem;
+  margin: 0;
+  font-size: clamp(17px, 1.12vw, 19px);
+  line-height: 1.72;
+  letter-spacing: -.016em;
+  text-wrap: pretty;
+}
+.service-list { width: 100%; max-width: 520px; margin-left: 0; }
+.service-row {
+  grid-template-columns: 32px 42px minmax(0, 1fr);
+  transition: transform .28s cubic-bezier(.22,1,.36,1), border-color .28s ease;
+}
+.service-row:hover { border-color: rgba(7,27,82,.16); }
+.service-row h2 { white-space: normal; text-wrap: balance; }
+.service-row p { text-wrap: pretty; }
+
+/* one coherent icon language */
+.premium-icon {
+  width: 30px;
+  height: 30px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 10px;
+  background: color-mix(in srgb, currentColor 7%, transparent);
+  box-shadow: 0 1px 0 rgba(255,255,255,.82) inset;
+}
+.premium-icon svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.55;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.approach-card__icon {
+  width: 58px;
+  height: 58px;
+  border: 1px solid color-mix(in srgb, currentColor 18%, transparent);
+  background: color-mix(in srgb, currentColor 4%, white);
+  box-shadow: 0 16px 42px color-mix(in srgb, currentColor 10%, transparent), 0 1px 0 rgba(255,255,255,.88) inset;
+}
+.approach-card__icon .premium-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: transparent;
+  box-shadow: none;
+}
+.approach-card__icon .premium-icon svg { width: 24px; height: 24px; stroke-width: 1.45; }
+.approach-card__item {
+  grid-template-columns: 34px minmax(0,1fr);
+  gap: 10px;
+  padding-block: 6px;
+}
+.approach-card__item .premium-icon {
+  width: 28px;
+  height: 28px;
+  color: #123f9f;
+}
+.approach-card--orange .approach-card__item .premium-icon { color: var(--brand-orange-500); }
+.approach-card__item b { font-weight: 610; line-height: 1.35; }
+
+.methodology-step__icon {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border-radius: 24px;
+  transform: rotate(-2deg);
+  background: linear-gradient(145deg, rgba(255,255,255,.95), rgba(246,249,255,.76));
+  box-shadow: 0 18px 44px rgba(7,27,82,.075), 0 1px 0 rgba(255,255,255,.95) inset;
+}
+.methodology-step:nth-child(even) .methodology-step__icon { transform: rotate(2deg); }
+.methodology-step:nth-child(3) .methodology-step__icon {
+  background: linear-gradient(145deg, rgba(255,255,255,.96), rgba(255,244,239,.82));
+}
+.methodology-step__icon::after {
+  content: "";
+  position: absolute;
+  inset: 7px;
+  border: 1px solid rgba(7,27,82,.055);
+  border-radius: 18px;
+  pointer-events: none;
+}
+.methodology-step__icon svg { width: 36px; height: 36px; position: relative; z-index: 1; }
+
+@media (max-width: 1120px) {
+  .hero__layout { gap: 54px; }
+  .hero__copy { padding-left: 0; }
+}
+@media (max-width: 900px) {
+  .hero__layout { grid-template-columns: 1fr; }
+  .hero__copy { max-width: 760px; }
+  .service-list { max-width: 760px; }
+}
+@media (max-width: 640px) {
+  .hero__title { max-width: 11ch; font-size: clamp(45px, 13.2vw, 61px); }
+  .hero__description { font-size: 16px; line-height: 1.68; }
+  .service-row { grid-template-columns: 28px 28px minmax(0,1fr); }
+  .premium-icon { border-radius: 9px; }
+}

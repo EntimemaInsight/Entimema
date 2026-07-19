@@ -1,5 +1,3 @@
-import DotField from "./DotField";
-
 const services = [
   { number: "01", title: "ФИНАНСОВА АРХИТЕКТУРА", description: "Структурата определя резултата." },
   { number: "02", title: "КРЕДИТЕН РИСК", description: "Рискът трябва да бъде измерим." },
@@ -11,24 +9,18 @@ const services = [
 export default function Hero() {
   return (
     <section className="hero" id="home">
-      <DotField />
-
       <div className="site-container hero__layout">
         <div className="hero__copy">
           <h1 className="hero__title">
-            <span>Структурата</span>
-            <span>превръща</span>
-            <span className="hero__accent">стратегията в</span>
-            <span className="hero__accent">резултати.</span>
+            <span>Структурата превръща</span>
+            <span className="hero__accent">стратегията в резултати.</span>
           </h1>
           <p className="hero__description">
-            <span>Изграждаме системи, които превръщат</span>
-            <span>данните в решения, риска – в предвидимост,</span>
-            <span>а стратегията – в изпълнение.</span>
+            Изграждаме системи, които превръщат данните в решения, риска в предвидимост, а стратегията в изпълнение.
           </p>
         </div>
 
-        <div className="service-list" id="services">
+        <div className="service-list" id="services" aria-label="Основни направления">
           {services.map((service) => (
             <article className="service-row" key={service.number}>
               <div className="service-row__number">{service.number}</div>

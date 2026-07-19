@@ -3,18 +3,42 @@
 import { useEffect, useRef } from "react";
 
 const financeItems = [
-  ["▥", "Мениджърска отчетност"], ["↗", "Финансово моделиране"],
-  ["◔", "Бюджетиране и прогнозиране"], ["◎", "Управление чрез показатели (KPI)"],
-  ["⌁", "Парични потоци и ликвидност"], ["♢", "Финансов контрол"],
-  ["▦", "Управление на разходите"], ["♙", "Външен финансов директор"],
+  ["report", "Мениджърска отчетност"], ["trend", "Финансово моделиране"],
+  ["forecast", "Бюджетиране и прогнозиране"], ["target", "Управление чрез показатели (KPI)"],
+  ["cashflow", "Парични потоци и ликвидност"], ["control", "Финансов контрол"],
+  ["cost", "Управление на разходите"], ["cfo", "Външен финансов директор"],
 ];
 
 const riskItems = [
-  ["♙", "Апликационен скоринг"], ["⚙", "AI системи за вземане на решения"],
-  ["⌁", "Поведенчески скоринг"], ["↻", "Мониторинг на кредитни портфейли"],
-  ["▥", "PD / LGD / EAD модели"], ["◉", "Стрес тестове"],
-  ["▤", "IFRS 9 модели"], ["⌘", "Сценариен анализ"],
+  ["score", "Апликационен скоринг"], ["ai", "AI системи за вземане на решения"],
+  ["behavior", "Поведенчески скоринг"], ["monitor", "Мониторинг на кредитни портфейли"],
+  ["model", "PD / LGD / EAD модели"], ["stress", "Стрес тестове"],
+  ["ifrs", "IFRS 9 модели"], ["scenario", "Сценариен анализ"],
 ];
+
+
+function PremiumIcon({ type }: { type: string }) {
+  const common = { viewBox: "0 0 24 24", "aria-hidden": true } as const;
+  const icons: Record<string, React.ReactNode> = {
+    report: <svg {...common}><path d="M5 4h14v16H5z"/><path d="M8 8h8M8 12h5M8 16h7"/></svg>,
+    trend: <svg {...common}><path d="M4 18 10 12l4 3 6-8"/><path d="M15 7h5v5"/></svg>,
+    forecast: <svg {...common}><circle cx="12" cy="12" r="8"/><path d="M12 8v5l3 2"/></svg>,
+    target: <svg {...common}><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M15 9l5-5"/></svg>,
+    cashflow: <svg {...common}><path d="M4 8h12M12 4l4 4-4 4M20 16H8M12 12l-4 4 4 4"/></svg>,
+    control: <svg {...common}><path d="M12 3 5 6v5c0 5 3 8 7 10 4-2 7-5 7-10V6z"/><path d="m9 12 2 2 4-4"/></svg>,
+    cost: <svg {...common}><path d="M6 5h12v14H6z"/><path d="M9 9h6M9 13h6M9 17h3"/></svg>,
+    cfo: <svg {...common}><circle cx="12" cy="8" r="3"/><path d="M5 20c1-5 4-7 7-7s6 2 7 7"/></svg>,
+    score: <svg {...common}><path d="M4 20V6h16v14"/><path d="M8 16v-4M12 16V8M16 16v-7"/></svg>,
+    ai: <svg {...common}><rect x="6" y="6" width="12" height="12" rx="3"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M18 9h4M2 15h4M18 15h4"/></svg>,
+    behavior: <svg {...common}><path d="M4 15c3-7 7-10 16-6"/><path d="M4 15c4 2 8 3 12 1"/><circle cx="17" cy="9" r="2"/></svg>,
+    monitor: <svg {...common}><path d="M4 12a8 8 0 1 1 2 5"/><path d="M4 16v-4h4"/><path d="M9 12h6M12 9v6"/></svg>,
+    model: <svg {...common}><circle cx="6" cy="6" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><path d="m8 7 3 8M16 7l-3 8M8 6h8"/></svg>,
+    stress: <svg {...common}><path d="M4 17h16"/><path d="M6 14l4-4 3 2 5-6"/><path d="M16 6h2v2"/></svg>,
+    ifrs: <svg {...common}><path d="M6 3h9l3 3v15H6z"/><path d="M14 3v4h4M9 11h6M9 15h6"/></svg>,
+    scenario: <svg {...common}><path d="M12 4v5M12 9l-5 4M12 9l5 4"/><circle cx="12" cy="4" r="2"/><circle cx="7" cy="15" r="2"/><circle cx="17" cy="15" r="2"/></svg>,
+  };
+  return <span className="premium-icon">{icons[type]}</span>;
+}
 
 function FinanceGraphic() {
   return <svg className="approach-card__graphic" viewBox="0 0 260 190" aria-hidden="true">
@@ -39,11 +63,11 @@ function ServiceCard({tone,title,description,items,graphic}:{tone:"blue"|"orange
   return <article className={`approach-card approach-card--${tone}`}>
     <div className="approach-card__top">
       <div className="approach-card__copy">
-        <div className="approach-card__icon" aria-hidden="true">{tone === "blue" ? "▰" : "♢"}</div>
+        <div className="approach-card__icon" aria-hidden="true">{tone === "blue" ? <PremiumIcon type="trend"/> : <PremiumIcon type="ai"/>}</div>
         <h3>{title}</h3><p>{description}</p>
       </div>{graphic}
     </div>
-    <div className="approach-card__items">{items.map(([icon,label])=><div className="approach-card__item" key={label}><span>{icon}</span><b>{label}</b></div>)}</div>
+    <div className="approach-card__items">{items.map(([icon,label])=><div className="approach-card__item" key={label}><PremiumIcon type={icon}/><b>{label}</b></div>)}</div>
     <a className="approach-card__button" href={tone === "blue" ? "#financial-architecture" : "#credit-risk"}>{tone === "blue" ? "Разгледайте финансовата архитектура" : "Разгледайте решенията"}<span>→</span></a>
   </article>
 }
