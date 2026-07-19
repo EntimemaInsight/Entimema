@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import EntimemaIllustration from "./EntimemaIllustration";
 
 type Step = {
   number: string;
@@ -48,24 +49,9 @@ const steps: Step[] = [
   },
 ];
 
-function StepIcon({ type }: { type: Step["icon"] }) {
-  if (type === "search") {
-    return <svg viewBox="0 0 96 96" aria-hidden="true"><circle cx="41" cy="40" r="24"/><path d="M58 58 77 77"/><path className="accent" d="M28 40a13 13 0 0 1 13-13"/></svg>;
-  }
-  if (type === "structure") {
-    return <svg viewBox="0 0 96 96" aria-hidden="true"><rect x="37" y="14" width="22" height="22"/><rect x="14" y="60" width="22" height="22"/><rect className="accent" x="60" y="60" width="22" height="22"/><path d="M48 36v14M25 50h46M25 50v10M71 50v10"/></svg>;
-  }
-  if (type === "model") {
-    return <svg viewBox="0 0 96 96" aria-hidden="true"><path d="M18 15v65h65"/><path className="accent" d="m24 66 20-20 16 9 20-25"/><path className="accent" d="M69 30h11v11"/><circle cx="42" cy="25" r="3"/><circle cx="60" cy="30" r="3"/><circle cx="69" cy="68" r="3"/><circle cx="48" cy="72" r="3"/></svg>;
-  }
-  if (type === "automation") {
-    return <svg viewBox="0 0 96 96" aria-hidden="true"><path d="m48 12 6 9 11-2 2 11 10 5-5 10 5 10-10 5-2 11-11-2-6 9-6-9-11 2-2-11-10-5 5-10-5-10 10-5 2-11 11 2z"/><circle className="accent" cx="48" cy="45" r="13"/></svg>;
-  }
-  return <svg viewBox="0 0 96 96" aria-hidden="true"><path d="M18 78V58h14v20M42 78V43h14v35M66 78V28h14v50"/><path className="accent" d="M18 45c21-2 38-12 59-31"/><path className="accent" d="M66 14h11v11"/></svg>;
-}
 
 function Connector() {
-  return <div className="process-connector" aria-hidden="true"><span>›</span></div>;
+  return <div className="process-connector" aria-hidden="true"><span>→</span></div>;
 }
 
 export default function ProcessSection() {
@@ -101,7 +87,7 @@ export default function ProcessSection() {
           {steps.map((step, index) => (
             <div className="process-flow__unit" key={step.number} style={{ "--step-delay": `${index * 90}ms` } as React.CSSProperties}>
               <article className={`process-step ${index === 2 ? "process-step--featured" : ""}`}>
-                <div className="process-step__icon"><StepIcon type={step.icon} /></div>
+                <div className="process-step__icon"><EntimemaIllustration compact name={{ search: "understand", structure: "structure", model: "model", automation: "automate", growth: "scale" }[step.icon] as "understand" | "structure" | "model" | "automate" | "scale"} /></div>
                 <div className="process-step__copy">
                   <span className="process-step__number">{step.number}</span>
                   <h3>{step.title}</h3>
@@ -116,7 +102,7 @@ export default function ProcessSection() {
 
         <div className="process-summary process-reveal process-reveal--4">
           <div className="process-summary__item process-summary__item--primary">
-            <div className="process-summary__icon process-summary__icon--chart"><StepIcon type="growth" /></div>
+            <div className="process-summary__icon process-summary__icon--chart"><EntimemaIllustration compact name="scale" /></div>
             <p>Целта е проста:<br /><strong>да превърнем <em>сложността в яснота,</em><br />а анализа — в <em>действие.</em></strong></p>
           </div>
           <span className="process-summary__divider" aria-hidden="true" />

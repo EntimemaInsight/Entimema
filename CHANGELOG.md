@@ -35,3 +35,10 @@
 - Simplified the credit-risk network graphic and aligned it with the financial architecture graphic.
 - Normalized graphic dimensions and vertical centering across both service cards.
 - Refined CTA geometry to match the premium card system.
+
+## v4.0 — Entimema Design Language 2026
+- Added bespoke illustration system for services and process steps.
+- Rebuilt service-card visual hierarchy around product diagrams.
+- Replaced oversized process icon circles with compact premium panels.
+- Unified typography, card surfaces, radius, stroke and motion tokens.
+- Refined brand wordmark scale and rendering.
