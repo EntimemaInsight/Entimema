@@ -839,3 +839,296 @@ html.announcement-collapsed .site-header {
   .about-header__nav { gap: 18px !important; }
   .about-header__nav a:not(.is-active):not(.about-header__home) { display:none; }
 }
+
+/* =========================================================
+   ENTIMEMA DESIGN SYSTEM V2 — SPRINT 2 / TYPOGRAPHY & RHYTHM
+   ========================================================= */
+:root {
+  --content-max: 1280px;
+  --section-space: clamp(88px, 8vw, 132px);
+  --section-space-tight: clamp(64px, 6vw, 92px);
+  --copy-narrow: 34rem;
+  --copy-medium: 46rem;
+  --display-tracking: -.062em;
+  --body-leading: 1.68;
+}
+
+.site-container {
+  width: min(var(--content-max), calc(100% - 96px));
+}
+
+/* Header optical alignment */
+.site-header__inner {
+  grid-template-columns: minmax(215px, 248px) minmax(0, 1fr) 64px;
+  column-gap: clamp(24px, 2.2vw, 36px);
+}
+.site-brand__mark { width: 40px; height: 40px; flex-basis: 40px; }
+.site-brand__word { top: 0; font-size: clamp(24px, 1.65vw, 28px); letter-spacing: -.05em; }
+.site-nav { gap: clamp(24px, 2.55vw, 42px); }
+.site-nav a { padding-block: 25px 23px; }
+.site-nav a::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  right: 50%;
+  bottom: 8px;
+  height: 1px;
+  background: var(--brand-orange-500);
+  opacity: 0;
+  transition: left .24s ease, right .24s ease, opacity .24s ease;
+}
+.site-nav a:hover::before { left: 22%; right: 22%; opacity: .5; }
+.site-nav a.is-active::before { display: none; }
+.language-switch { width: 64px; height: 34px; }
+
+/* Hero editorial rhythm */
+.hero__layout {
+  grid-template-columns: minmax(0, .94fr) minmax(460px, .86fr);
+  gap: clamp(72px, 8vw, 132px);
+  align-items: center;
+  padding-top: clamp(32px, 4vh, 54px);
+  padding-bottom: clamp(44px, 5vh, 72px);
+}
+.hero__copy { align-self: center; padding-top: 0; }
+.hero__title {
+  max-width: 9.8ch;
+  margin-bottom: clamp(32px, 3.2vw, 48px);
+  font-size: clamp(58px, 5.55vw, 86px);
+  line-height: .965;
+  letter-spacing: var(--display-tracking);
+  font-weight: 650;
+}
+.hero__description {
+  max-width: var(--copy-narrow);
+  font-size: clamp(17px, 1.18vw, 20px);
+  line-height: 1.62;
+  letter-spacing: -.018em;
+  font-weight: 510;
+}
+.hero__description span { display: inline; }
+.service-list { align-self: center; padding: 6px 0; }
+.service-row {
+  min-height: 92px;
+  grid-template-columns: 34px 54px 1fr;
+  padding: 19px 0 18px;
+  border-color: rgba(7,27,82,.085);
+}
+.service-row:hover { transform: translateX(5px); }
+.service-row__number { font-size: 12px; letter-spacing: .11em; }
+.service-row__rule { width: 28px; }
+.service-row__copy { padding-top: 0; }
+.service-row h2 {
+  margin-bottom: 7px;
+  font-size: clamp(14px, .98vw, 16px);
+  letter-spacing: .006em;
+  line-height: 1.2;
+}
+.service-row p {
+  font-size: clamp(12px, .84vw, 14px);
+  line-height: 1.45;
+  color: #53617d;
+}
+
+/* Shared section rhythm */
+.approach-section,
+.methodology,
+.services-hero {
+  padding-top: var(--section-space);
+  padding-bottom: var(--section-space);
+}
+.approach-section__inner {
+  grid-template-columns: minmax(0, .95fr) minmax(390px, .75fr);
+  column-gap: clamp(68px, 7vw, 112px);
+  row-gap: 0;
+}
+.approach-kicker,
+.methodology__kicker,
+.services-kicker {
+  margin-bottom: 22px;
+  gap: 14px;
+  font-size: 13px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.approach-kicker i,
+.methodology__kicker i,
+.services-kicker i { width: 14px; height: 1px; }
+.approach-section h2,
+.methodology h2,
+.services-hero h1 {
+  font-size: clamp(46px, 4.35vw, 68px);
+  line-height: 1.015;
+  letter-spacing: var(--display-tracking);
+  font-weight: 645;
+}
+.approach-section__lead,
+.services-hero__lead {
+  max-width: var(--copy-narrow);
+  margin-top: 14px;
+  font-size: clamp(16px, 1.08vw, 18px);
+  line-height: var(--body-leading);
+  letter-spacing: -.014em;
+  font-weight: 500;
+}
+
+/* Approach cards — quieter hierarchy */
+.approach-section__cards { gap: 16px; margin-top: clamp(44px, 4.8vw, 66px); }
+.approach-card { padding: clamp(24px, 2.1vw, 32px); border-radius: 24px; }
+.approach-card__top {
+  grid-template-columns: minmax(0, 1fr) minmax(180px, 220px);
+  min-height: 220px;
+  gap: 24px;
+}
+.approach-card__icon {
+  width: 54px;
+  height: 54px;
+  margin-bottom: 22px;
+  font-size: 22px;
+  border-color: rgba(7,27,82,.13);
+}
+.approach-card h3 {
+  margin-bottom: 14px;
+  font-size: clamp(24px, 1.7vw, 29px);
+  line-height: 1.08;
+  letter-spacing: -.042em;
+}
+.approach-card p { max-width: 40ch; font-size: 13.5px; line-height: 1.65; font-weight: 500; color: #40506e; }
+.approach-card__items { margin-top: 18px; border-top-color: rgba(7,27,82,.08); }
+.approach-card__item {
+  min-height: 44px;
+  grid-template-columns: 28px 1fr;
+  gap: 9px;
+  border-bottom-color: rgba(7,27,82,.075);
+  font-size: 12.5px;
+  color: #243553;
+}
+.approach-card__item:nth-child(odd) { border-right-color: rgba(7,27,82,.075); }
+.approach-card__item span { font-size: 18px; opacity: .8; }
+.approach-card__button {
+  height: 48px;
+  margin-top: 20px;
+  font-size: 14px;
+  font-weight: 620;
+  letter-spacing: -.01em;
+}
+.approach-card__button span { font-size: 20px; }
+.approach-next { margin-top: 30px; font-size: 13px; color: #596781; opacity: .72; }
+.approach-next span { font-size: 24px; }
+
+/* Methodology — editorial sequence */
+.methodology__header { max-width: 840px; margin-inline: auto; }
+.methodology__steps {
+  gap: clamp(24px, 2.6vw, 38px);
+  margin-top: clamp(64px, 6vw, 88px);
+  align-items: start;
+}
+.methodology-step { padding: 0 6px; }
+.methodology-step__icon {
+  width: 74px;
+  height: 74px;
+  margin-bottom: 20px;
+  box-shadow: 0 14px 40px rgba(7,27,82,.05);
+}
+.methodology-step__icon svg { width: 38px; height: 38px; stroke-width: 1.8; }
+.methodology-step__number { margin-bottom: 10px; font-size: 11px; letter-spacing: .14em; }
+.methodology-step h3 {
+  margin-bottom: 12px;
+  font-size: clamp(19px, 1.42vw, 23px);
+  line-height: 1.12;
+  letter-spacing: -.035em;
+}
+.methodology-step p {
+  max-width: 205px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: #53617a;
+}
+.methodology-step__arrow { top: 24px; right: -22px; font-size: 23px; opacity: .62; }
+.methodology__statement {
+  max-width: 900px;
+  min-height: 0;
+  margin-top: clamp(58px, 6vw, 82px);
+  padding: 24px 34px;
+  border-radius: 20px;
+  gap: 18px;
+}
+.methodology__statement-mark { font-size: 24px; }
+.methodology__statement p { max-width: 720px; font-size: clamp(15px, 1.05vw, 17px); line-height: 1.62; font-weight: 560; }
+
+/* Services page balance */
+.services-hero__inner { grid-template-columns: minmax(0,.9fr) minmax(440px,1fr); column-gap: clamp(72px,7vw,116px); }
+.services-hero__copy { max-width: 620px; }
+.services-grid { gap: 16px !important; margin-top: clamp(48px,5vw,70px) !important; }
+.service-card { border-radius: 24px !important; padding: clamp(24px,2.1vw,32px) !important; }
+.service-card h2 { letter-spacing: -.035em !important; line-height: 1.08 !important; }
+.service-card p { line-height: 1.68 !important; color: #475673 !important; }
+
+/* About — more editorial, less boxed */
+.about-shell { width: min(var(--content-max), calc(100% - 96px)); }
+.about-hero { padding-top: var(--section-space-tight); padding-bottom: var(--section-space); }
+.about-intro { max-width: 760px; }
+.about-intro h1 {
+  font-size: clamp(52px, 5vw, 76px);
+  line-height: 1.025;
+  letter-spacing: -.052em;
+}
+.about-lead { max-width: 34rem; font-size: 15.5px; line-height: 1.72; }
+.founder-card { margin-top: clamp(44px, 4.6vw, 66px); }
+.founder-card__content { padding: 34px 38px 36px 44px; }
+.founder-card__bio h2 { font-size: 33px; letter-spacing: -.035em; }
+.founder-card__bio > p:not(.founder-card__label) { max-width: 760px; font-size: 13.5px; line-height: 1.68; color: #3f4d68; }
+.founder-pillars { margin-top: 18px; padding-top: 24px; }
+.founder-pillar { min-height: 160px; }
+.founder-pillar p { font-size: 12px; line-height: 1.62; color: #526078; }
+.about-labs-seed { margin-top: 34px; padding: 26px 30px; }
+.about-labs-seed p { font-size: 19px; line-height: 1.55; }
+
+@media (max-width: 1120px) {
+  .hero__layout { grid-template-columns: 1fr 1fr; gap: 54px; }
+  .hero__title { font-size: clamp(52px, 5.5vw, 72px); }
+  .approach-card__top { grid-template-columns: 1fr; }
+  .approach-card__graphic { max-width: 210px; justify-self: end; margin-top: -42px; opacity: .82; }
+}
+
+@media (max-width: 900px) {
+  :root { --section-space: 78px; }
+  .site-container,
+  .about-shell { width: min(100% - 40px, var(--content-max)); }
+  .hero__layout,
+  .approach-section__inner,
+  .services-hero__inner { grid-template-columns: 1fr; gap: 48px; }
+  .hero { overflow: visible; }
+  .home-stage { position: relative; height: auto; min-height: 0; grid-template-rows: var(--announcement-height-v2) var(--header-height-v2) auto; }
+  .hero__layout { padding-top: 72px; padding-bottom: 78px; }
+  .service-list { max-width: 720px; }
+  .approach-section__lead { margin-top: 28px; }
+  .approach-section__cards { grid-template-columns: 1fr; }
+  .methodology__steps { grid-template-columns: 1fr 1fr; row-gap: 50px; }
+  .methodology-step__arrow { display: none; }
+  .methodology-step p { max-width: 280px; }
+}
+
+@media (max-width: 640px) {
+  :root { --section-space: 66px; }
+  .site-container,
+  .about-shell { width: calc(100% - 28px); }
+  .hero__layout { padding-top: 56px; padding-bottom: 64px; }
+  .hero__title { font-size: clamp(46px, 14vw, 62px); max-width: 10ch; margin-bottom: 28px; }
+  .hero__description { font-size: 16px; }
+  .service-row { grid-template-columns: 30px 32px 1fr; min-height: 84px; }
+  .service-row__rule { width: 18px; }
+  .approach-section h2,
+  .methodology h2,
+  .services-hero h1 { font-size: clamp(39px, 11vw, 52px); }
+  .approach-section__cards { margin-top: 38px; }
+  .approach-card { padding: 22px; }
+  .approach-card__items { grid-template-columns: 1fr; }
+  .approach-card__item:nth-child(odd) { border-right: 0; padding-right: 0; }
+  .approach-card__item:nth-child(even) { padding-left: 0; }
+  .approach-card__graphic { margin-top: 0; justify-self: center; }
+  .methodology__steps { grid-template-columns: 1fr; margin-top: 48px; }
+  .methodology-step p { max-width: 310px; }
+  .methodology__statement { padding: 22px 20px; align-items: flex-start; }
+  .methodology__statement p { text-align: left; }
+  .founder-card__content { padding: 26px 22px; }
+}

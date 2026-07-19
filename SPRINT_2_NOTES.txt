@@ -1,0 +1,14 @@
+ENTIMEMA DESIGN SYSTEM V2 — SPRINT 2
+Typography & Rhythm
+
+Implemented:
+- tighter optical alignment in the shared header
+- stronger hero typography and cleaner copy measure
+- consistent section spacing and vertical rhythm
+- quieter service list and card hierarchy
+- refined Approach cards and item density
+- editorial Methodology sequence with calmer arrows and icons
+- aligned Services and About page typography
+- improved tablet/mobile rhythm
+
+No content or routes were removed.
