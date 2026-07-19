@@ -1,28 +1,20 @@
-# ENTIMEMA OS v1.1.0 — Methodology
+# ENTIMEMA OS v1.0.0
 
-This release adds the third-scroll Methodology section to the current Home page.
-
-## Changed files
-
-- `app/page.tsx`
-- `app/globals.css`
-- `components/Methodology.tsx`
-- `CHANGELOG.md`
-- `README_RELEASE.md`
+This package adds the long-term brand and UI operating system while preserving the current working Home page.
 
 ## Install
+Copy the contents of this folder over `C:\Users\user\entimema` and allow replacement.
 
-Copy the contents of this folder over the existing Entimema project and allow file replacement.
-
+## Validate
 ```powershell
 cd C:\Users\user\entimema
 npm run dev
+npm run build
 ```
 
-After review:
-
+## Publish
 ```powershell
 git add .
-git commit -m "Add Entimema methodology section"
+git commit -m "Introduce Entimema OS v1.0.0"
 git push
 ```

@@ -15,8 +15,8 @@
   --hairline: rgba(154, 187, 216, 0.46);
 
   /* Typography */
-  --font-sans: "Segoe UI Variable", "Segoe UI", Arial, Helvetica, sans-serif;
-  --font-brand: "Segoe UI Variable", "Segoe UI", Arial, Helvetica, sans-serif;
+  --font-sans: "Avenir Next", "Segoe UI", Arial, Helvetica, sans-serif;
+  --font-brand: "Avenir Next", "Segoe UI", Arial, Helvetica, sans-serif;
   --font-weight-regular: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;

@@ -1,17 +1,17 @@
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import Methodology from "@/components/Methodology";
+import ApproachSection from "@/components/ApproachSection";
 
 export default function Home() {
   return (
     <main className="site-page">
+      <AnnouncementBar />
+      <Navbar />
       <section className="home-stage" aria-label="Entimema начало">
-        <AnnouncementBar />
-        <Navbar />
         <Hero />
       </section>
-      <Methodology />
+      <ApproachSection />
     </main>
   );
 }
