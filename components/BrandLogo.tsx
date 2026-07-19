@@ -1,6 +1,6 @@
-export default function BrandLogo() {
+export default function BrandLogo({ compact = false }: { compact?: boolean }) {
   return (
-    <a className="site-brand" href="#home" aria-label="Entimema — начало">
+    <span className={`site-brand${compact ? " site-brand--compact" : ""}`}>
       <svg
         className="site-brand__mark"
         viewBox="0 0 72 72"
@@ -21,6 +21,6 @@ export default function BrandLogo() {
         <rect x="13" y="50" width="9.5" height="4.5" rx=".7" fill="white" />
       </svg>
       <span className="site-brand__word">Entimema</span>
-    </a>
+    </span>
   );
 }

@@ -572,3 +572,60 @@ body { background: #fff; }
   .service-card__icon { width:78px; height:78px; }
   .service-card__icon svg { width:54px; height:54px; }
 }
+
+/* About / Entimema — a deliberately distinct editorial system */
+.about-page { min-height:100svh; background:#fbf7f1; color:#081a42; }
+.about-header { position:sticky; top:0; z-index:80; height:82px; background:rgba(255,252,247,.94); border-bottom:1px solid rgba(8,26,66,.12); backdrop-filter:blur(16px); }
+.about-header__inner { width:min(1400px,calc(100% - 120px)); height:100%; margin:auto; display:flex; align-items:center; justify-content:space-between; gap:48px; }
+.about-header__brand .site-brand { gap:14px; }
+.about-header__brand .site-brand__mark { width:50px; height:50px; flex-basis:50px; }
+.about-header__brand .site-brand__word { font-size:30px; font-weight:560; }
+.about-header__nav { height:100%; display:flex; align-items:center; gap:44px; font-size:15px; font-weight:560; }
+.about-header__nav > a { position:relative; height:100%; display:flex; align-items:center; }
+.about-header__nav > a.is-active { color:#183de0; }
+.about-header__nav > a.is-active::after { content:""; position:absolute; left:0; right:0; bottom:14px; height:2px; background:#2748ef; }
+.about-header__home { gap:18px; }
+.about-header__home svg { width:24px; height:24px; fill:none; stroke:currentColor; stroke-width:1.5; }
+.about-hero { position:relative; overflow:hidden; min-height:calc(100svh - 82px); padding:50px 0 54px; background:radial-gradient(circle at 63% 28%,rgba(255,255,255,.8),transparent 35%),#fbf7f1; }
+.about-network { position:absolute; top:-100px; right:-70px; width:min(56vw,850px); height:900px; pointer-events:none; opacity:.62; }
+.about-network svg { width:100%; height:100%; }
+.about-network__lines { fill:none; stroke:#7f8de8; stroke-width:1.2; opacity:.55; }
+.about-network__nodes { fill:#6f76e0; }
+.about-shell { position:relative; z-index:2; width:min(1372px,calc(100% - 128px)); margin:auto; }
+.about-intro { max-width:840px; }
+.about-eyebrow { margin:0 0 25px; color:#2446df; font-size:15px; letter-spacing:.12em; font-weight:650; }
+.about-intro h1 { margin:0; font-family:Georgia,"Times New Roman",serif; font-size:clamp(48px,5.2vw,78px); line-height:1.08; letter-spacing:-.04em; font-weight:400; color:#071940; }
+.about-accent-rule { display:block; width:56px; height:2px; margin:26px 0 24px; background:#2446df; }
+.about-lead { margin:0; max-width:560px; font-size:16px; line-height:1.62; font-weight:520; }
+.founder-card { margin-top:42px; display:grid; grid-template-columns:34% 66%; min-height:480px; overflow:hidden; border:1px solid rgba(8,26,66,.14); border-radius:14px; background:rgba(255,252,248,.82); box-shadow:0 26px 70px rgba(32,26,17,.05); }
+.founder-card__portrait { position:relative; min-height:480px; background:#eee5db; }
+.founder-card__portrait img { object-fit:cover; object-position:center top; }
+.founder-card__content { padding:24px 28px 30px 40px; display:grid; grid-template-rows:auto 1fr; }
+.founder-card__label { margin:0 0 3px; color:#2446df; font-size:14px; font-weight:650; letter-spacing:.1em; }
+.founder-card__bio h2 { margin:0 0 10px; font-family:Georgia,"Times New Roman",serif; font-size:35px; line-height:1.1; font-weight:400; letter-spacing:-.025em; }
+.founder-card__bio > p:not(.founder-card__label) { margin:0 0 12px; max-width:870px; font-size:14px; line-height:1.55; }
+.founder-pillars { align-self:end; display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid rgba(8,26,66,.13); margin-top:8px; padding-top:20px; }
+.founder-pillar { min-width:0; min-height:180px; padding:0 20px; border-left:1px solid rgba(8,26,66,.13); }
+.founder-pillar:first-child { border-left:0; padding-left:0; }
+.founder-pillar:last-child { padding-right:0; }
+.founder-pillar__title { display:flex; align-items:center; gap:10px; }
+.founder-pillar__title svg { width:29px; height:29px; fill:none; stroke:#2446df; stroke-width:1.5; flex:none; }
+.founder-pillar h3 { margin:0; font-size:15px; }
+.founder-pillar p { margin:12px 0 0; font-size:12.5px; line-height:1.52; }
+.founder-pillar .founder-pillar__subtitle { color:#2446df; font-weight:560; }
+.about-labs-seed { margin-top:28px; padding:22px 28px; display:grid; grid-template-columns:200px 1fr; align-items:center; gap:30px; border-top:1px solid rgba(8,26,66,.15); border-bottom:1px solid rgba(8,26,66,.15); }
+.about-labs-seed span { color:#2446df; font-size:14px; letter-spacing:.14em; font-weight:700; }
+.about-labs-seed p { margin:0; max-width:920px; font-family:Georgia,"Times New Roman",serif; font-size:20px; line-height:1.45; }
+@media(max-width:1050px){
+  .about-header__inner,.about-shell{width:calc(100% - 64px)}
+  .about-header__nav{gap:24px}.about-header__home span{display:none}
+  .founder-card{grid-template-columns:38% 62%}.founder-pillars{grid-template-columns:1fr 1fr;row-gap:22px}.founder-pillar:nth-child(3){border-left:0;padding-left:0}.founder-card__content{padding:26px}
+}
+@media(max-width:760px){
+  .about-header{height:74px}.about-header__inner,.about-shell{width:calc(100% - 36px)}
+  .about-header__brand .site-brand__mark{width:42px;height:42px;flex-basis:42px}.about-header__brand .site-brand__word{font-size:25px}
+  .about-header__nav{gap:18px;font-size:13px}.about-header__nav a:nth-child(2){display:none}.about-header__nav>a.is-active::after{bottom:10px}
+  .about-hero{padding-top:42px}.about-network{width:110vw;right:-55vw;opacity:.32}.about-intro h1{font-size:46px}.about-lead br{display:none}
+  .founder-card{grid-template-columns:1fr}.founder-card__portrait{min-height:470px}.founder-card__content{padding:26px 22px}.founder-pillars{grid-template-columns:1fr}.founder-pillar,.founder-pillar:nth-child(3){border-left:0;border-top:1px solid rgba(8,26,66,.12);padding:20px 0 0;margin-top:18px;min-height:0}.founder-pillar:first-child{border-top:0;margin-top:0}
+  .about-labs-seed{grid-template-columns:1fr;gap:10px;padding-inline:0}.about-labs-seed p{font-size:18px}
+}
