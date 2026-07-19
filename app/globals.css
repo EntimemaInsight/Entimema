@@ -137,7 +137,7 @@ html.announcement-collapsed .site-header {
   top: -1px;
   font-family: var(--font-brand);
   font-size: clamp(30px, 2.15vw, 36px);
-  font-weight: 620;
+  font-weight: 500;
   letter-spacing: -.038em;
   color: var(--brand-navy-950);
 }
@@ -2508,13 +2508,13 @@ html.is-scrolled .header-cta { min-height: 36px; padding-inline: 16px; }
 .approach-card__link {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 24px;
+  justify-content: flex-end;
+  gap: 12px;
   margin-top: auto;
-  padding-top: 28px;
+  padding-top: 30px;
   color: var(--brand-navy-950);
   font-size: clamp(14px, 0.98vw, 16px);
-  font-weight: 620;
+  font-weight: 500;
   letter-spacing: -0.01em;
   text-decoration: none;
 }

@@ -29,9 +29,10 @@ type SystemCardProps = {
   title: string;
   description: string;
   items: string[];
+  href: string;
 };
 
-function SystemCard({ kind, title, description, items }: SystemCardProps) {
+function SystemCard({ kind, title, description, items, href }: SystemCardProps) {
   return (
     <article className={`approach-card approach-card--${kind}`}>
       <div className="approach-card__copy">
@@ -47,6 +48,10 @@ function SystemCard({ kind, title, description, items }: SystemCardProps) {
         ))}
       </div>
 
+      <a className="approach-card__link" href={href}>
+        <span>Вижте подхода</span>
+        <span aria-hidden="true">→</span>
+      </a>
     </article>
   );
 }
@@ -96,12 +101,14 @@ export default function ApproachSection() {
             title="Финансова архитектура"
             description="Осигурява последователност между финансовата информация, контрола и управленските решения."
             items={financeItems}
+            href="/services"
           />
           <SystemCard
             kind="risk"
             title="Управление на риска"
             description="Обединява оценката, наблюдението и вземането на решения в обща рамка."
             items={riskItems}
+            href="/services"
           />
         </div>
       </div>
