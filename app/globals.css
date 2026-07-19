@@ -629,3 +629,213 @@ body { background: #fff; }
   .founder-card{grid-template-columns:1fr}.founder-card__portrait{min-height:470px}.founder-card__content{padding:26px 22px}.founder-pillars{grid-template-columns:1fr}.founder-pillar,.founder-pillar:nth-child(3){border-left:0;border-top:1px solid rgba(8,26,66,.12);padding:20px 0 0;margin-top:18px;min-height:0}.founder-pillar:first-child{border-top:0;margin-top:0}
   .about-labs-seed{grid-template-columns:1fr;gap:10px;padding-inline:0}.about-labs-seed p{font-size:18px}
 }
+
+/* =========================================================
+   ENTIMEMA DESIGN SYSTEM V2 — SPRINT 1 / ARCHITECTURAL LUXURY
+   ========================================================= */
+:root {
+  --surface: #fcfdff;
+  --surface-ice: #f7faff;
+  --surface-warm: #fbf9f5;
+  --premium-border: rgba(7, 27, 82, .075);
+  --premium-shadow: 0 22px 70px rgba(7, 27, 82, .075);
+  --premium-shadow-hover: 0 28px 90px rgba(7, 27, 82, .11);
+  --header-height-v2: 74px;
+  --announcement-height-v2: 34px;
+}
+
+body {
+  background:
+    radial-gradient(circle at 12% 8%, rgba(104, 151, 224, .045), transparent 28%),
+    radial-gradient(circle at 88% 34%, rgba(120, 164, 232, .035), transparent 34%),
+    #fcfdff;
+}
+
+.site-container { width: min(1360px, calc(100% - 96px)); }
+
+/* quieter, slimmer announcement */
+html { --announcement-height: var(--announcement-height-v2); }
+.announcement { height: var(--announcement-height-v2); }
+.announcement p,
+.announcement a { font-size: clamp(11px, .76vw, 13px); letter-spacing: -.008em; }
+.announcement a span { font-size: 17px; }
+.announcement__close { right: 14px; width: 22px; height: 22px; font-size: 21px; }
+.announcement__inner { padding-right: 30px; }
+
+/* compact glass header */
+.site-header {
+  height: var(--header-height-v2);
+  background: rgba(252, 253, 255, .82);
+  border-bottom: 1px solid var(--premium-border);
+  backdrop-filter: blur(22px) saturate(135%);
+  -webkit-backdrop-filter: blur(22px) saturate(135%);
+  box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;
+}
+html.announcement-collapsed .site-header {
+  box-shadow: 0 14px 40px rgba(7, 27, 82, .055);
+}
+.site-header__inner {
+  grid-template-columns: minmax(210px, 260px) minmax(0, 1fr) 68px;
+  column-gap: clamp(20px, 2.3vw, 38px);
+}
+.site-brand { gap: 11px; }
+.site-brand__mark { width: 42px; height: 42px; flex-basis: 42px; }
+.site-brand__word {
+  font-size: clamp(25px, 1.75vw, 30px);
+  font-weight: 640;
+  letter-spacing: -.045em;
+}
+.site-brand--compact .site-brand__mark { width: 38px; height: 38px; flex-basis: 38px; }
+.site-brand--compact .site-brand__word { font-size: 27px; }
+.site-nav {
+  justify-content: center;
+  gap: clamp(26px, 3.1vw, 54px);
+  font-size: clamp(13px, .86vw, 15px);
+  font-weight: 610;
+  letter-spacing: -.012em;
+}
+.site-nav a { height: auto; padding: 26px 0 24px; }
+.site-nav a.is-active::after {
+  top: auto;
+  bottom: 11px;
+  width: 5px;
+  height: 5px;
+}
+.language-switch {
+  width: 68px;
+  height: 36px;
+  gap: 9px;
+  border-color: rgba(7,27,82,.13);
+  background: rgba(255,255,255,.62);
+  font-size: 13px;
+  font-weight: 620;
+  box-shadow: 0 1px 0 rgba(255,255,255,.9) inset;
+}
+.language-switch__chevron { width: 6px; height: 6px; border-width: 1.5px; }
+
+/* atmospheric surfaces; dots removed */
+.dot-field,
+.approach-dots,
+.methodology__dots,
+.services-hero__dots { display: none !important; }
+.home-stage {
+  min-height: 640px;
+  background:
+    radial-gradient(circle at 76% 36%, rgba(126, 169, 236, .095), transparent 30%),
+    linear-gradient(180deg, #fcfdff 0%, #f9fbff 64%, #fcfdff 100%);
+}
+.hero {
+  background:
+    radial-gradient(circle at 82% 24%, rgba(113, 158, 226, .10), transparent 28%),
+    radial-gradient(circle at 58% 84%, rgba(255,255,255,.92), transparent 40%),
+    linear-gradient(180deg, #fcfdff 0%, #f8fbff 100%);
+}
+.approach-section {
+  border-top: 0;
+  background:
+    radial-gradient(circle at 10% 20%, rgba(106, 151, 222, .045), transparent 30%),
+    linear-gradient(180deg, #fcfdff 0%, #f9fbff 48%, #fcfdff 100%);
+}
+.methodology {
+  background:
+    radial-gradient(circle at 88% 24%, rgba(112, 157, 225, .055), transparent 31%),
+    linear-gradient(180deg, #fcfdff 0%, #f7faff 56%, #fcfdff 100%);
+}
+.services-page {
+  background:
+    radial-gradient(circle at 83% 16%, rgba(112, 158, 228, .07), transparent 30%),
+    #fcfdff;
+}
+.services-hero {
+  min-height: calc(100svh - var(--header-height-v2));
+  border-top: 0;
+  background:
+    radial-gradient(circle at 84% 18%, rgba(119, 165, 233, .08), transparent 33%),
+    linear-gradient(180deg,#fcfdff 0%,#f7faff 100%);
+}
+
+/* quieter geometry and premium cards */
+.approach-section,
+.methodology,
+.services-hero { padding-top: 64px; }
+.approach-section__cards { gap: 18px; margin-top: 28px; }
+.approach-card,
+.methodology__statement,
+.service-card,
+.founder-card,
+.about-labs-seed {
+  border-color: var(--premium-border) !important;
+  box-shadow: var(--premium-shadow);
+}
+.approach-card,
+.service-card { border-radius: 22px; background: rgba(255,255,255,.76); backdrop-filter: blur(12px); }
+.approach-card:hover,
+.service-card:hover { transform: translateY(-5px); box-shadow: var(--premium-shadow-hover); }
+.methodology-step__icon {
+  border-color: var(--premium-border);
+  background: rgba(255,255,255,.72);
+  box-shadow: 0 18px 55px rgba(7,27,82,.065);
+}
+.methodology__statement { background: rgba(255,255,255,.72); backdrop-filter: blur(12px); }
+
+/* typography refinement */
+.hero__title,
+.approach-section h2,
+.methodology h2,
+.services-hero h1,
+.about-intro h1 {
+  font-weight: 660;
+  letter-spacing: -.055em;
+}
+.hero__description,
+.approach-section__lead,
+.services-hero__lead,
+.about-lead { color: #26385f; }
+
+/* editorial About / future Entimema Labs */
+.about-page {
+  background:
+    radial-gradient(circle at 82% 14%, rgba(189, 207, 235, .18), transparent 32%),
+    radial-gradient(circle at 14% 48%, rgba(231, 216, 195, .20), transparent 36%),
+    linear-gradient(180deg, #fbfaf7 0%, #f8f9fc 56%, #fbfaf8 100%);
+}
+.about-header {
+  height: 72px;
+  background: rgba(251,250,247,.78);
+  border-bottom: 1px solid rgba(8,26,66,.075);
+  backdrop-filter: blur(22px) saturate(125%);
+  -webkit-backdrop-filter: blur(22px) saturate(125%);
+}
+.about-header__inner { width:min(1360px,calc(100% - 96px)); gap:32px; }
+.about-header__nav { gap: clamp(28px, 3vw, 52px) !important; font-size: 14px !important; }
+.about-hero { background: transparent !important; }
+.about-network { opacity: .34 !important; }
+.founder-card {
+  border-radius: 26px !important;
+  background: rgba(255,255,255,.72) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+.about-labs-seed {
+  border-radius: 22px !important;
+  background: rgba(255,255,255,.58) !important;
+  backdrop-filter: blur(14px);
+}
+
+@media (max-width: 980px) {
+  .site-container,
+  .about-header__inner { width: min(100% - 40px, 1360px); }
+  .site-header__inner { grid-template-columns: 1fr auto; }
+  .site-nav { display: none; }
+  .site-brand__mark { width: 38px; height: 38px; flex-basis: 38px; }
+  .site-brand__word { font-size: 26px; }
+}
+
+@media (max-width: 640px) {
+  :root { --header-height-v2: 66px; --announcement-height-v2: 32px; }
+  .announcement p { max-width: 70vw; overflow: hidden; text-overflow: ellipsis; }
+  .site-container,
+  .about-header__inner { width: calc(100% - 28px); }
+  .about-header__nav { gap: 18px !important; }
+  .about-header__nav a:not(.is-active):not(.about-header__home) { display:none; }
+}
