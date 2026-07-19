@@ -35,7 +35,6 @@ export default function Navbar({ active = "home" }: { active?: NavKey }) {
           <button className="language-switch" type="button" aria-label="Избор на език">
             <span>BG</span><span className="language-switch__chevron" aria-hidden="true" />
           </button>
-          <Link className="header-cta" href="/contact">Обсъдете казус</Link>
         </div>
       </div>
     </header>

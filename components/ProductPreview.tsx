@@ -6,23 +6,23 @@ export default function ProductPreview() {
           <span className="product-preview__signal" />
           <span>Entimema OS</span>
         </div>
-        <div className="product-preview__status"><i /> Live model</div>
+        <div className="product-preview__status"><i /> Активен модел</div>
       </div>
 
       <div className="product-preview__body">
         <div className="product-preview__heading">
-          <div><span>Executive scenario</span><strong>Base case · Q3 2026</strong></div>
-          <button type="button" aria-label="Избор на сценарий">Scenario <b>⌄</b></button>
+          <div><span>Управленски сценарий</span><strong>Базов сценарий · Q3 2026</strong></div>
+          <button type="button" aria-label="Избор на сценарий">Сценарий <b>⌄</b></button>
         </div>
 
         <div className="product-preview__metrics">
-          <article><span>Revenue</span><strong>€12.8m</strong><em>+8.4%</em></article>
+          <article><span>Приходи</span><strong>€12.8m</strong><em>+8.4%</em></article>
           <article><span>EBITDA</span><strong>€2.1m</strong><em>+1.7 pp</em></article>
-          <article><span>Cash runway</span><strong>18.4 mo</strong><em className="is-neutral">stable</em></article>
+          <article><span>Паричен хоризонт</span><strong>18,4 м.</strong><em className="is-neutral">стабилно</em></article>
         </div>
 
         <div className="product-preview__chart">
-          <div className="product-preview__chart-head"><span>Forecast confidence</span><strong>94.6%</strong></div>
+          <div className="product-preview__chart-head"><span>Надеждност на прогнозата</span><strong>94.6%</strong></div>
           <svg viewBox="0 0 520 180" role="img" aria-label="Прогнозна линия">
             <defs>
               <linearGradient id="area" x1="0" y1="0" x2="0" y2="1">
@@ -38,8 +38,8 @@ export default function ProductPreview() {
         </div>
 
         <div className="product-preview__decision">
-          <div><span>AI recommendation</span><strong>Protect margin before accelerating growth.</strong></div>
-          <span className="product-preview__confidence">High confidence</span>
+          <div><span>AI препоръка</span><strong>Защитете маржа преди ускоряване на растежа.</strong></div>
+          <span className="product-preview__confidence">Висока увереност</span>
         </div>
       </div>
     </div>

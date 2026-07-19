@@ -40,3 +40,9 @@
 - Replaced process icons with product-UI glyphs.
 - Corrected vertical alignment of step 03 “Моделиране”.
 - Standardized row heights across all five process steps.
+
+## Sprint A.1 — Editorial cleanup
+- Removed duplicate header CTA.
+- Removed “Как работим” eyebrow.
+- Localized visible English interface copy.
+- Strengthened services index in the Hero.

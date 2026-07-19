@@ -3,11 +3,11 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.entimema.net"),
-  title: { default: "Entimema | Financial, Risk & AI Operating Systems", template: "%s | Entimema" },
+  title: { default: "Entimema | Финансови, рискови и AI системи", template: "%s | Entimema" },
   description: "Entimema изгражда финансови, рискови и AI системи за по-бързи, ясни и предвидими управленски решения.",
   icons: { icon: "/entimema-mark.svg" },
   openGraph: {
-    title: "Entimema | Financial, Risk & AI Operating Systems",
+    title: "Entimema | Финансови, рискови и AI системи",
     description: "Финансови решения, проектирани за действие.",
     url: "https://www.entimema.net",
     siteName: "Entimema",
