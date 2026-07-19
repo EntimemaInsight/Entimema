@@ -1937,3 +1937,95 @@ body{font-family:"Segoe UI Variable","Segoe UI",Inter,Arial,sans-serif;letter-sp
   .header-cta { display: none; }
   .site-header__inner { grid-template-columns: auto 1fr 68px; }
 }
+
+/* Sprint A.3 — premium editorial service hierarchy
+   Number | vertical orange rule | title with supporting text below */
+@media (min-width: 921px) {
+  .hero__layout {
+    grid-template-columns: minmax(0, 1.02fr) minmax(520px, .98fr);
+    column-gap: clamp(54px, 5vw, 92px);
+  }
+
+  .service-list {
+    width: 100%;
+    max-width: 610px;
+    margin-left: 0;
+    padding: 18px 0 14px;
+  }
+
+  .service-row {
+    grid-template-columns: 72px 2px minmax(0, 1fr);
+    column-gap: 22px;
+    align-items: center;
+    align-content: center;
+    padding: clamp(18px, 2.1vh, 25px) 0;
+  }
+
+  .service-row__number {
+    align-self: start;
+    padding-top: 1px;
+    font-size: clamp(40px, min(3.55vw, 5.4vh), 56px);
+    line-height: .96;
+    letter-spacing: -.048em;
+    font-weight: 650;
+  }
+
+  .service-row__rule {
+    align-self: start;
+    width: 2px;
+    height: clamp(38px, 4.8vh, 52px);
+    margin-top: 0;
+    background: var(--brand-orange-500);
+    border-radius: 999px;
+  }
+
+  .service-row__copy {
+    align-self: start;
+    padding-top: 0;
+  }
+
+  .service-row h2 {
+    margin: 0 0 7px;
+    font-size: clamp(16px, min(1.26vw, 1.9vh), 20px);
+    line-height: 1.18;
+    letter-spacing: -.022em;
+    font-weight: 700;
+  }
+
+  .service-row p {
+    max-width: 100%;
+    font-size: clamp(13px, min(1vw, 1.52vh), 16px);
+    line-height: 1.42;
+    color: rgba(10, 34, 95, .74);
+  }
+}
+
+@media (max-width: 920px) {
+  .service-row {
+    grid-template-columns: 58px 2px minmax(0, 1fr);
+    column-gap: 18px;
+    align-items: start;
+    padding: 22px 0;
+  }
+  .service-row__rule {
+    width: 2px;
+    height: 44px;
+    margin-top: 0;
+    border-radius: 999px;
+  }
+  .service-row__number {
+    font-size: 44px;
+    line-height: .98;
+  }
+  .service-row__copy { padding-top: 0; }
+  .service-row h2 { margin-bottom: 6px; }
+}
+
+@media (max-width: 620px) {
+  .service-row {
+    grid-template-columns: 50px 2px minmax(0, 1fr);
+    column-gap: 14px;
+  }
+  .service-row__number { font-size: 38px; }
+  .service-row__rule { height: 40px; }
+}
