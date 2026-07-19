@@ -2,7 +2,7 @@ import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import ApproachSection from "@/components/ApproachSection";
-import ProcessSection from "@/components/ProcessSection";
+import MethodologySection from "@/components/MethodologySection";
 
 export default function Home() {
   return (
@@ -13,7 +13,7 @@ export default function Home() {
         <Hero />
       </section>
       <ApproachSection />
-      <ProcessSection />
+      <MethodologySection />
     </main>
   );
 }
