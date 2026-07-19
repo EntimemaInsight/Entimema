@@ -2284,3 +2284,133 @@ html.is-scrolled .header-cta { min-height: 36px; padding-inline: 16px; }
     line-height: 1.68;
   }
 }
+
+/* =========================================================
+   SPRINT D — PREMIUM MINIMALISM
+   Text-first process section; decorative icons removed.
+   ========================================================= */
+.process-section--text .process-flow {
+  align-items: stretch;
+  gap: clamp(28px, 3vw, 54px);
+  margin-top: clamp(30px, 4.5vh, 64px);
+}
+.process-section--text .process-step {
+  position: relative;
+  display: block;
+  min-width: 0;
+  padding: 0 0 0 clamp(18px, 1.6vw, 26px);
+  border-left: 1px solid rgba(7, 48, 145, .12);
+}
+.process-section--text .process-step__rule {
+  position: absolute;
+  top: 0;
+  left: -1px;
+  width: 2px;
+  height: 38px;
+  border-radius: 999px;
+  background: var(--brand-orange-500);
+  opacity: .82;
+  transform-origin: top;
+  transform: scaleY(.55);
+  transition: transform .55s cubic-bezier(.22,1,.36,1), opacity .28s ease;
+}
+.process-section--text.is-visible .process-step__rule {
+  transform: scaleY(1);
+}
+.process-section--text .process-step:hover .process-step__rule {
+  opacity: 1;
+  transform: scaleY(1.18);
+}
+.process-section--text .process-step__copy {
+  display: block;
+  padding: 0;
+  text-align: left;
+}
+.process-section--text .process-step__number {
+  display: block;
+  margin: 0 0 18px;
+  color: var(--brand-orange-500);
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: .14em;
+}
+.process-section--text .process-step h3 {
+  margin: 0 0 15px;
+  font-size: clamp(22px, 1.65vw, 29px);
+  line-height: 1.08;
+  letter-spacing: -.03em;
+  font-weight: 640;
+}
+.process-section--text .process-step p {
+  min-height: 88px;
+  margin: 0;
+  max-width: 30ch;
+  font-size: 14px;
+  line-height: 1.68;
+  color: #334568;
+}
+.process-section--text .process-step ul {
+  margin: 24px 0 0;
+  padding: 18px 0 0;
+  border-top: 1px solid rgba(7, 48, 145, .11);
+}
+.process-section--text .process-step li {
+  margin: 0 0 9px;
+  padding-left: 0;
+  font-size: 12.5px;
+  line-height: 1.48;
+  color: #27416f;
+}
+.process-section--text .process-step li::before {
+  display: none;
+}
+.process-section--text .process-summary {
+  min-height: 0;
+  margin-top: clamp(42px, 5.5vh, 78px);
+  padding: clamp(28px, 3.2vw, 44px) clamp(28px, 4vw, 58px);
+  border-radius: 12px;
+  box-shadow: none;
+  background: rgba(255,255,255,.66);
+}
+.process-section--text .process-summary__item {
+  display: block;
+}
+.process-section--text .process-summary__item p {
+  font-size: clamp(17px, 1.35vw, 21px);
+}
+
+@media (max-width: 1180px) {
+  .process-section--text .process-flow {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    row-gap: 54px;
+  }
+  .process-section--text .process-step p { min-height: 0; }
+}
+@media (max-width: 900px) {
+  .process-section--text .process-flow {
+    grid-template-columns: 1fr 1fr;
+    gap: 44px 34px;
+  }
+  .process-section--text .process-step {
+    max-width: none;
+    width: auto;
+    margin: 0;
+    padding: 0 0 0 22px;
+  }
+}
+@media (max-width: 600px) {
+  .process-section--text .process-flow {
+    grid-template-columns: 1fr;
+    gap: 46px;
+  }
+  .process-section--text .process-step {
+    padding-left: 20px;
+  }
+  .process-section--text .process-step p {
+    max-width: 40ch;
+  }
+  .process-section--text .process-summary {
+    padding: 26px 22px;
+  }
+}
