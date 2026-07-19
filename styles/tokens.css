@@ -1,33 +1,36 @@
 :root {
-  --brand-navy-950: #061338;
-  --brand-navy-900: #0a205b;
-  --brand-navy-800: #173675;
-  --brand-orange-500: #ff4f18;
-  --brand-orange-600: #e9440f;
-  --brand-blue-100: #e8f0f8;
-  --brand-blue-200: #d6e3ef;
+  /* Brand */
+  --brand-navy-950: #04133f;
+  --brand-navy-900: #071c57;
+  --brand-navy-800: #102b70;
+  --brand-orange-500: #ff4a12;
+  --brand-orange-600: #ef3e05;
+  --brand-blue-100: #dbe8f4;
+  --brand-blue-200: #c4d9eb;
 
+  /* Neutrals */
   --surface: #ffffff;
-  --surface-soft: #f7f9fc;
   --text-primary: var(--brand-navy-950);
-  --text-secondary: #52607a;
-  --hairline: rgba(6, 19, 56, .10);
+  --text-secondary: #2d426f;
+  --hairline: rgba(154, 187, 216, 0.46);
 
-  --font-sans: "Segoe UI Variable Text", "Inter", "Segoe UI", Arial, sans-serif;
-  --font-brand: "Segoe UI Variable Display", "Inter", "Segoe UI", Arial, sans-serif;
+  /* Typography */
+  --font-sans: "Segoe UI Variable", "Segoe UI", Inter, Arial, Helvetica, sans-serif;
+  --font-brand: "Segoe UI Variable", "Segoe UI", Inter, Arial, Helvetica, sans-serif;
   --font-weight-regular: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
 
-  --text-xs: .75rem;
-  --text-sm: .875rem;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
   --text-md: 1rem;
   --text-lg: 1.125rem;
   --text-xl: 1.375rem;
   --display-1: clamp(3.3rem, 4.45vw, 4.55rem);
 
-  --space-1: .5rem;
+  /* Spacing: 8 px rhythm */
+  --space-1: 0.5rem;
   --space-2: 1rem;
   --space-3: 1.5rem;
   --space-4: 2rem;
@@ -36,13 +39,11 @@
   --space-7: 5rem;
   --space-8: 6rem;
 
-  --page-gutter: clamp(1.5rem, 4vw, 3.875rem);
-  --content-max: 80rem;
+  /* Layout */
+  --page-gutter: clamp(2rem, 4vw, 3.875rem);
+  --content-max: 88.25rem;
   --announcement-height: 2.75rem;
-  --header-height: 4.5rem;
+  --header-height: clamp(7rem, 8.6vw, 8.25rem);
   --radius-pill: 999px;
-  --radius-card: 24px;
-  --ease-standard: cubic-bezier(.2,.8,.2,1);
-  --shadow-card: 0 1px 0 rgba(255,255,255,.9) inset, 0 18px 48px rgba(6,19,56,.06);
-  --shadow-card-hover: 0 1px 0 rgba(255,255,255,.95) inset, 0 30px 80px rgba(6,19,56,.11);
+  --ease-standard: cubic-bezier(.2, .8, .2, 1);
 }

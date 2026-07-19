@@ -1,93 +1,25 @@
 import Link from "next/link";
-import EntimemaIllustration from "./EntimemaIllustration";
 
 const services = [
-  {
-    number: "01",
-    title: "Финансова архитектура",
-    description: "Проектираме финансови системи, които превръщат данните в управленски решения, а стратегията – в изпълнение.",
-    cta: "Разгледайте финансовата архитектура",
-    href: "/services/financial-architecture",
-    icon: "architecture",
-    tone: "peach",
-  },
-  {
-    number: "02",
-    title: "Кредитен риск",
-    description: "Изграждаме модели и системи за оценка, мониторинг и управление на кредитния риск за банки и небанкови финансови институции.",
-    cta: "Разгледайте решенията",
-    href: "/services/credit-risk",
-    icon: "shield",
-    tone: "sand",
-  },
-  {
-    number: "03",
-    title: "Данни, AI и автоматизация",
-    description: "Свързваме данни, изкуствен интелект и автоматизация в единна среда за по-бързи и по-добри управленски решения.",
-    cta: "Разгледайте решенията",
-    href: "/services/data-ai-automation",
-    icon: "data",
-    tone: "lavender",
-  },
-  {
-    number: "04",
-    title: "Финансова трансформация",
-    description: "Трансформираме финансовата функция чрез процеси, технологии и управленски модели, които повишават ефективността.",
-    cta: "Разгледайте трансформацията",
-    href: "/services/finance-transformation",
-    icon: "people",
-    tone: "peach",
-  },
-  {
-    number: "05",
-    title: "CFO функция",
-    description: "Изграждаме или поемаме CFO функцията като стратегически партньор на бизнеса – от планирането до управленските решения.",
-    cta: "Разгледайте CFO услугите",
-    href: "/services/cfo",
-    icon: "dashboard",
-    tone: "mint",
-  },
-  {
-    number: "06",
-    title: "AI решения за финанси",
-    description: "Разработваме AI агенти, които автоматизират финансовия анализ, подпомагат вземането на решения и работят като дигитални членове на финансовия екип.",
-    cta: "Разгледайте AI решенията",
-    href: "/services/ai-finance",
-    icon: "ai",
-    tone: "sky",
-    badge: "НОВО",
-  },
+  { number:"01", title:"Финансова архитектура", description:"Проектираме финансови системи, които превръщат данните в управленски решения, а стратегията – в изпълнение.", cta:"Разгледайте финансовата архитектура", href:"/services/financial-architecture", preview:"finance" },
+  { number:"02", title:"Кредитен риск", description:"Изграждаме модели и системи за оценка, мониторинг и управление на кредитния риск за банки и небанкови финансови институции.", cta:"Разгледайте решенията", href:"/services/credit-risk", preview:"risk" },
+  { number:"03", title:"Данни, AI и автоматизация", description:"Свързваме данни, изкуствен интелект и автоматизация в единна среда за по-бързи и по-добри управленски решения.", cta:"Разгледайте решенията", href:"/services/data-ai-automation", preview:"ai" },
+  { number:"04", title:"Финансова трансформация", description:"Трансформираме финансовата функция чрез процеси, технологии и управленски модели, които повишават ефективността.", cta:"Разгледайте трансформацията", href:"/services/finance-transformation", preview:"workflow" },
+  { number:"05", title:"CFO функция", description:"Изграждаме или поемаме CFO функцията като стратегически партньор на бизнеса – от планирането до управленските решения.", cta:"Разгледайте CFO услугите", href:"/services/cfo", preview:"cfo" },
+  { number:"06", title:"AI решения за финанси", description:"Разработваме AI агенти, които автоматизират анализа и работят като дигитални членове на финансовия екип.", cta:"Разгледайте AI решенията", href:"/services/ai-finance", preview:"agent", badge:"НОВО" },
 ] as const;
 
-export default function ServicesSection() {
-  return (
-    <section className="services-hero" aria-labelledby="services-title">
-      <div className="services-hero__dots" aria-hidden="true" />
-      <div className="site-container services-hero__inner">
-        <div className="services-hero__heading">
-          <h1 id="services-title">Превръщаме<br/><em>сложността в яснота.</em></h1>
-        </div>
-        <p className="services-hero__lead">Всяка област носи собствена стойност.<br/>Заедно изграждат интегрирана<br/>управленска архитектура.</p>
+type Preview = typeof services[number]["preview"];
 
-        <div className="services-grid">
-          {services.map((service) => (
-            <article className="service-card" key={service.number}>
-              {"badge" in service && service.badge ? <span className="service-card__badge">{service.badge}</span> : null}
-              <div className={`service-card__icon service-card__icon--${service.tone}`}>
-                <EntimemaIllustration name={{ architecture: "finance", shield: "risk", data: "data", people: "transformation", dashboard: "cfo", ai: "ai" }[service.icon] as "finance" | "risk" | "data" | "transformation" | "cfo" | "ai"} />
-              </div>
-              <div className="service-card__copy">
-                <div className="service-card__number">{service.number}</div>
-                <h2>{service.title}</h2>
-                <p>{service.description}</p>
-              </div>
-              <Link className="service-card__link" href={service.href}>
-                <span>{service.cta}</span><b aria-hidden="true">→</b>
-              </Link>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
+function ProductPreview({ type }: { type: Preview }) {
+  if (type === "finance") return <div className="product-preview product-preview--finance" aria-hidden="true"><div className="preview-head"><span>Executive forecast</span><b>Q3</b></div><div className="metric-row"><strong>€12.8M</strong><small>Revenue outlook</small></div><svg viewBox="0 0 280 92"><path className="grid" d="M0 23h280M0 46h280M0 69h280"/><path className="area" d="M0 82 36 67 72 72 110 46 146 54 182 31 220 38 280 14V92H0Z"/><path className="line" d="M0 82 36 67 72 72 110 46 146 54 182 31 220 38 280 14"/></svg></div>;
+  if (type === "risk") return <div className="product-preview product-preview--risk" aria-hidden="true"><div className="preview-head"><span>Decision engine</span><b>Live</b></div><div className="risk-score"><div><small>Application</small><strong>#94831</strong></div><em>82</em></div><div className="decision-bar"><span>Approve</span><i/><span>Review</span><i/><span>Reject</span></div></div>;
+  if (type === "ai") return <div className="product-preview product-preview--ai" aria-hidden="true"><div className="preview-head"><span>Data orchestration</span><b>7 flows</b></div><div className="flow-row"><span>ERP</span><i>→</i><span>AI layer</span><i>→</i><span>Decision</span></div><div className="flow-status"><i/><span>Models synchronized</span><strong>99.7%</strong></div></div>;
+  if (type === "workflow") return <div className="product-preview product-preview--workflow" aria-hidden="true"><div className="preview-head"><span>Transformation map</span><b>Phase 2</b></div><div className="workflow-line"><span>Diagnose</span><i/><span>Design</span><i/><span>Deploy</span><i/><span>Scale</span></div><div className="progress"><span style={{width:"68%"}}/></div></div>;
+  if (type === "cfo") return <div className="product-preview product-preview--cfo" aria-hidden="true"><div className="preview-head"><span>CFO cockpit</span><b>Today</b></div><div className="cockpit-grid"><div><small>Cash</small><strong>€3.4M</strong></div><div><small>EBITDA</small><strong>18.6%</strong></div><div><small>Runway</small><strong>14 mo</strong></div></div><div className="signal-row"><span/><p>3 decisions require attention</p></div></div>;
+  return <div className="product-preview product-preview--agent" aria-hidden="true"><div className="preview-head"><span>Finance agent</span><b>Active</b></div><div className="agent-prompt">Analyse margin variance by product and explain the top three drivers.</div><div className="agent-result"><i/><span>Analysis completed</span><strong>12s</strong></div></div>;
+}
+
+export default function ServicesSection() {
+  return <section className="services-hero" aria-labelledby="services-title"><div className="site-container services-hero__inner"><div className="services-hero__heading"><h1 id="services-title">Превръщаме<br/><em>сложността в яснота.</em></h1></div><p className="services-hero__lead">Всяка област носи собствена стойност.<br/>Заедно изграждат интегрирана<br/>управленска архитектура.</p><div className="services-grid">{services.map((service)=><article className="service-card service-card--product" key={service.number}>{"badge" in service && service.badge ? <span className="service-card__badge">{service.badge}</span> : null}<div className="service-card__meta"><span>{service.number}</span><small>ENTIMEMA SYSTEM</small></div><ProductPreview type={service.preview}/><div className="service-card__copy"><h2>{service.title}</h2><p>{service.description}</p></div><Link className="service-card__link" href={service.href}><span>{service.cta}</span><b aria-hidden="true">↗</b></Link></article>)}</div></div></section>;
 }
