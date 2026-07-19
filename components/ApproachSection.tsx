@@ -78,13 +78,12 @@ export default function ApproachSection(){
   return <section className="approach-section" id="about" ref={ref}>
     <div className="approach-dots" aria-hidden="true"/>
     <div className="site-container approach-section__inner">
-      <div className="approach-section__intro reveal reveal--1"><div className="approach-kicker"><span>02</span><i/><b>ЕДИН ПОДХОД</b></div><h2>Финанси и риск,<br/><em>мислени като една система.</em></h2></div>
+      <div className="approach-section__intro reveal reveal--1"><h2>Финанси и риск,<br/><em>мислени като една система.</em></h2></div>
       <p className="approach-section__lead reveal reveal--2">Използваме единна методология за изграждане на финансови системи, модели за кредитен риск и AI решения. Независимо от приложението, принципите остават едни и същи.</p>
       <div className="approach-section__cards reveal reveal--3">
         <ServiceCard tone="blue" title="Финансова архитектура" description="Проектираме финансови системи, които превръщат данните в ясни управленски решения. От финансовото моделиране до функцията на финансовия директор изграждаме архитектура, която остава устойчива с развитието на бизнеса." items={financeItems} graphic={<FinanceGraphic/>}/>
         <ServiceCard tone="orange" title="Кредитен риск" description="Разработваме интелигентни системи за оценка, мониторинг и автоматизация на кредитния риск. От скоринг модели до AI системи за вземане на решения." items={riskItems} graphic={<RiskGraphic/>}/>
       </div>
-      <a className="approach-next reveal reveal--4" href="#contact"><span>↓</span> Следващата секция</a>
     </div>
   </section>
 }

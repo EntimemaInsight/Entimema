@@ -90,7 +90,6 @@ export default function ProcessSection() {
       <div className="process-dots process-dots--right" aria-hidden="true" />
       <div className="site-container process-section__inner">
         <div className="process-heading process-reveal process-reveal--1">
-          <div className="process-kicker"><span>03</span><i /><b>ПОДХОД</b></div>
           <h2>Всяко решение<br /><em>започва с разбиране.</em></h2>
         </div>
         <div className="process-quote process-reveal process-reveal--2">

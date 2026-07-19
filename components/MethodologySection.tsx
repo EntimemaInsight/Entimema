@@ -38,7 +38,6 @@ export default function MethodologySection() {
       <div className="methodology__dots" aria-hidden="true" />
       <div className="site-container methodology__inner">
         <header className="methodology__header methodology-reveal">
-          <div className="methodology__kicker"><span>03</span><i /><b>ПОДХОД</b></div>
           <h2>Променя се контекстът,<br/><em>а не логиката.</em></h2>
         </header>
 

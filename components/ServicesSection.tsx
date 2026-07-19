@@ -73,7 +73,6 @@ export default function ServicesSection() {
       <div className="services-hero__dots" aria-hidden="true" />
       <div className="site-container services-hero__inner">
         <div className="services-hero__heading">
-          <div className="services-kicker"><span>05</span><i /><b>РЕШЕНИЯ</b></div>
           <h1 id="services-title">Превръщаме<br/><em>сложността в яснота.</em></h1>
         </div>
         <p className="services-hero__lead">Всяка област носи собствена стойност.<br/>Заедно изграждат интегрирана<br/>управленска архитектура.</p>

@@ -17,3 +17,8 @@
 - Calibrate the Home viewport against final desktop acceptance screenshots.
 - Finalize the native SVG mark geometry and wordmark typography.
 - Build About, Services and Contact only after Home passes acceptance criteria.
+
+## v3.1 — Brand Cleanup
+- Removed decorative section numbering and next-section helper.
+- Preserved functional hierarchy numbering only.
+- Prevented Methodology from being reintroduced on Home.

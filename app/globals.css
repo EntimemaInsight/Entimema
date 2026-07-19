@@ -1254,3 +1254,27 @@ html.announcement-collapsed .site-header {
   .service-row { grid-template-columns: 28px 28px minmax(0,1fr); }
   .premium-icon { border-radius: 9px; }
 }
+
+
+/* Brand cleanup: section labels are content-first, never decoratively numbered. */
+.approach-kicker,
+.methodology__kicker,
+.services-kicker,
+.process-kicker,
+.approach-next {
+  display: none !important;
+}
+
+.approach-section__intro h2,
+.services-hero__heading h1,
+.methodology__heading h2,
+.process-heading h2 {
+  margin-top: 0;
+}
+
+/* Preserve numbering only where it communicates hierarchy: Home expertise and service cards. */
+.service-row__number,
+.service-card__number,
+.process-step__number {
+  font-variant-numeric: tabular-nums;
+}

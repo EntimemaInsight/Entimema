@@ -1,20 +1,20 @@
-# ENTIMEMA OS v1.0.0
+# ENTIMEMA Brand Cleanup v3.1
 
-This package adds the long-term brand and UI operating system while preserving the current working Home page.
+## Scope
+This patch removes decorative section numbering and the “Следващата секция” helper while preserving numbering that carries real information.
 
-## Install
-Copy the contents of this folder over `C:\Users\user\entimema` and allow replacement.
+## Changed
+- Removed `02 — ЕДИН ПОДХОД` from the Approach section.
+- Removed `05 — РЕШЕНИЯ` from the Services page.
+- Removed decorative `03 — ПОДХОД` labels from dormant methodology/process components.
+- Removed the “Следващата секция” link.
+- Kept `01–05` in the Home expertise list and service-card numbering.
+- Kept Methodology out of the Home page to match the current production state.
 
-## Validate
+## Verify locally
 ```powershell
-cd C:\Users\user\entimema
+npm install
 npm run dev
-npm run build
 ```
 
-## Publish
-```powershell
-git add .
-git commit -m "Introduce Entimema OS v1.0.0"
-git push
-```
+Check `/`, `/services`, and `/about` before publishing.
