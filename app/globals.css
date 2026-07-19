@@ -2414,3 +2414,141 @@ html.is-scrolled .header-cta { min-height: 36px; padding-inline: 16px; }
     padding: 26px 22px;
   }
 }
+
+/* Sprint E — editorial expertise cards, no decorative dashboards */
+.approach-section__cards {
+  gap: clamp(18px, 2vw, 28px);
+}
+
+.approach-card {
+  display: flex;
+  min-height: 520px;
+  flex-direction: column;
+  padding: clamp(32px, 3vw, 48px);
+  border: 1px solid rgba(7, 27, 82, 0.10);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: none;
+  transition:
+    transform 260ms ease,
+    border-color 260ms ease,
+    box-shadow 260ms ease;
+}
+
+.approach-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(7, 27, 82, 0.17);
+  box-shadow: 0 18px 52px rgba(7, 27, 82, 0.06);
+}
+
+.approach-card__topline,
+.approach-card__body,
+.system-preview,
+.approach-card__button {
+  display: none !important;
+}
+
+.approach-card__copy {
+  max-width: 34rem;
+  padding: 0;
+}
+
+.approach-card h3 {
+  margin: 0 0 18px;
+  font-size: clamp(30px, 2.3vw, 40px);
+  line-height: 1.04;
+  letter-spacing: -0.045em;
+  font-weight: 640;
+  color: var(--brand-navy-950);
+}
+
+.approach-card p {
+  max-width: 39rem;
+  margin: 0;
+  font-size: clamp(15px, 1.05vw, 18px);
+  line-height: 1.66;
+  letter-spacing: -0.012em;
+  font-weight: 480;
+  color: #465570;
+}
+
+.approach-card__items {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: clamp(34px, 3.2vw, 50px);
+  border-top: 1px solid rgba(7, 27, 82, 0.10);
+}
+
+.approach-card__item {
+  display: flex;
+  min-height: 58px;
+  align-items: center;
+  padding: 15px 16px 15px 0;
+  border-bottom: 1px solid rgba(7, 27, 82, 0.08);
+  color: #1f3153;
+}
+
+.approach-card__item:nth-child(odd) {
+  border-right: 1px solid rgba(7, 27, 82, 0.08);
+  padding-right: 24px;
+}
+
+.approach-card__item:nth-child(even) {
+  padding-left: 24px;
+}
+
+.approach-card__item b {
+  font-size: clamp(13px, 0.92vw, 15px);
+  line-height: 1.38;
+  font-weight: 560;
+  letter-spacing: -0.01em;
+}
+
+.approach-card__link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: auto;
+  padding-top: 28px;
+  color: var(--brand-navy-950);
+  font-size: clamp(14px, 0.98vw, 16px);
+  font-weight: 620;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+}
+
+.approach-card__link span:last-child {
+  color: var(--brand-orange-500);
+  font-size: 22px;
+  font-weight: 400;
+  transition: transform 220ms ease;
+}
+
+.approach-card__link:hover span:last-child {
+  transform: translateX(5px);
+}
+
+@media (max-width: 900px) {
+  .approach-card {
+    min-height: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .approach-card {
+    padding: 28px 22px;
+    border-radius: 18px;
+  }
+
+  .approach-card__items {
+    grid-template-columns: 1fr;
+  }
+
+  .approach-card__item:nth-child(odd),
+  .approach-card__item:nth-child(even) {
+    border-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}

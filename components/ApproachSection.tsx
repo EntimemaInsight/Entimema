@@ -2,12 +2,119 @@
 
 import { useEffect, useRef } from "react";
 
-const financeItems = ["Мениджърска отчетност","Финансово моделиране","Бюджетиране и прогнозиране","Управление чрез KPI","Парични потоци и ликвидност","Финансов контрол","Управление на разходите","Външен финансов директор"];
-const riskItems = ["Апликационен скоринг","AI системи за решения","Поведенчески скоринг","Мониторинг на портфейли","PD / LGD / EAD модели","Стрес тестове","IFRS 9 модели","Сценариен анализ"];
+const financeItems = [
+  "Мениджърска отчетност",
+  "Финансово моделиране",
+  "Бюджетиране и прогнозиране",
+  "Управление чрез KPI",
+  "Парични потоци и ликвидност",
+  "Финансов контрол",
+  "Управление на разходите",
+  "Външен финансов директор",
+];
 
-function FinancePreview(){return <div className="system-preview system-preview--finance" aria-hidden="true"><div className="system-preview__top"><span>Финансова система</span><b>Прогноза</b></div><div className="system-preview__metric"><strong>€12.8M</strong><small>Следващи 12 месеца</small></div><svg viewBox="0 0 360 120"><path className="grid" d="M0 30h360M0 60h360M0 90h360"/><path className="area" d="M0 110 50 91 100 95 150 67 205 74 250 42 305 50 360 20V120H0Z"/><path className="line" d="M0 110 50 91 100 95 150 67 205 74 250 42 305 50 360 20"/></svg></div>}
-function RiskPreview(){return <div className="system-preview system-preview--risk" aria-hidden="true"><div className="system-preview__top"><span>Рискова система</span><b>Решение в реално време</b></div><div className="system-preview__decision"><div><small>Заявление №94831</small><strong>82 / 100</strong></div><em>ОДОБРИ</em></div><div className="system-preview__factors"><span>Стабилност на дохода <b>Висока</b></span><span>Обслужване на дълга <b>Устойчиво</b></span><span>Поведение <b>Положително</b></span></div></div>}
+const riskItems = [
+  "Апликационен скоринг",
+  "AI системи за решения",
+  "Поведенчески скоринг",
+  "Мониторинг на портфейли",
+  "PD / LGD / EAD модели",
+  "Стрес тестове",
+  "IFRS 9 модели",
+  "Сценариен анализ",
+];
 
-function SystemCard({kind,title,description,items}:{kind:"finance"|"risk";title:string;description:string;items:string[]}){return <article className={`approach-card approach-card--${kind}`}><div className="approach-card__topline"><span>{kind==="finance"?"ФИНАНСОВА ОПЕРАЦИОННА СИСТЕМА":"ИНТЕЛИГЕНТНИ РЕШЕНИЯ"}</span><i/></div><div className="approach-card__body"><div className="approach-card__copy"><h3>{title}</h3><p>{description}</p></div>{kind==="finance"?<FinancePreview/>:<RiskPreview/>}</div><div className="approach-card__items">{items.map((label)=><div className="approach-card__item" key={label}><span aria-hidden="true"/><b>{label}</b></div>)}</div><a className="approach-card__button" href={kind==="finance"?"#financial-architecture":"#credit-risk"}>{kind==="finance"?"Разгледайте финансовата архитектура":"Разгледайте решенията"}<span>↗</span></a></article>}
+type SystemCardProps = {
+  kind: "finance" | "risk";
+  title: string;
+  description: string;
+  items: string[];
+};
 
-export default function ApproachSection(){const ref=useRef<HTMLElement>(null);useEffect(()=>{const el=ref.current;if(!el)return;const io=new IntersectionObserver(([e])=>{if(e.isIntersecting){el.classList.add("is-visible");io.disconnect();}},{threshold:.18});io.observe(el);return()=>io.disconnect();},[]);return <section className="approach-section" id="about" ref={ref}><div className="site-container approach-section__inner"><div className="approach-section__intro reveal reveal--1"><h2>Финанси и риск,<br/><em>мислени като една система.</em></h2></div><p className="approach-section__lead reveal reveal--2">Финансовите системи, моделите за кредитен риск и решенията, базирани на изкуствен интелект, създават стойност, когато стъпват върху обща логика и последователна методология. Приложенията се различават. Принципите остават постоянни.</p><div className="approach-section__cards reveal reveal--3"><SystemCard kind="finance" title="Финансова архитектура" description="Проектираме финансови системи, които превръщат данните в ясни управленски решения и растат заедно с бизнеса." items={financeItems}/><SystemCard kind="risk" title="Кредитен риск" description="Разработваме интелигентни системи за оценка, мониторинг и автоматизация на кредитния риск." items={riskItems}/></div></div></section>}
+function SystemCard({ kind, title, description, items }: SystemCardProps) {
+  const href = kind === "finance" ? "#financial-architecture" : "#credit-risk";
+  const linkLabel =
+    kind === "finance"
+      ? "Разгледайте финансовата архитектура"
+      : "Разгледайте решенията";
+
+  return (
+    <article className={`approach-card approach-card--${kind}`}>
+      <div className="approach-card__copy">
+        <h3>{title}</h3>
+        <p>{description}</p>
+      </div>
+
+      <div className="approach-card__items" aria-label={`Области в ${title}`}>
+        {items.map((label) => (
+          <div className="approach-card__item" key={label}>
+            <b>{label}</b>
+          </div>
+        ))}
+      </div>
+
+      <a className="approach-card__link" href={href}>
+        <span>{linkLabel}</span>
+        <span aria-hidden="true">→</span>
+      </a>
+    </article>
+  );
+}
+
+export default function ApproachSection() {
+  const ref = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.classList.add("is-visible");
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.18 },
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <section className="approach-section" id="about" ref={ref}>
+      <div className="site-container approach-section__inner">
+        <div className="approach-section__intro reveal reveal--1">
+          <h2>
+            Финанси и риск,
+            <br />
+            <em>мислени като една система.</em>
+          </h2>
+        </div>
+
+        <p className="approach-section__lead reveal reveal--2">
+          Финансовите системи, моделите за кредитен риск и решенията,
+          базирани на изкуствен интелект, създават стойност, когато стъпват
+          върху обща логика и последователна методология. Приложенията се
+          различават. Принципите остават постоянни.
+        </p>
+
+        <div className="approach-section__cards reveal reveal--3">
+          <SystemCard
+            kind="finance"
+            title="Финансова архитектура"
+            description="Проектираме финансови системи, които превръщат данните в ясни управленски решения и се развиват заедно с бизнеса."
+            items={financeItems}
+          />
+          <SystemCard
+            kind="risk"
+            title="Кредитен риск"
+            description="Разработваме системи за оценка, мониторинг и автоматизация на кредитния риск — от скоринг модели до решения, подпомагани от изкуствен интелект."
+            items={riskItems}
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
