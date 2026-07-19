@@ -22,3 +22,9 @@
 - Removed decorative section numbering and next-section helper.
 - Preserved functional hierarchy numbering only.
 - Prevented Methodology from being reintroduced on Home.
+
+## v3.2 — Process section restored
+- Restored the third scrolling section.
+- Rebuilt the five-step visual flow against the approved reference.
+- Removed decorative section numbering while retaining functional process numbering.
+- Added responsive process layout and unified SVG icon treatment.
