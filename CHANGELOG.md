@@ -1,3 +1,11 @@
+
+## Sprint A.2 — Editorial Hero Restoration
+- Restored the original “Структурата превръща стратегията в резултати.” opening composition.
+- Kept the five core service directions as the sole right-side Hero structure.
+- Removed product imagery from the opening screen.
+- Moved the single primary CTA “Обсъдете казус” to the header.
+- Removed/avoided the “Как работим” label.
+- Localised remaining visible English labels in the finance and risk system cards.
 # Changelog
 
 ## 1.0.0 — Brand OS foundation
@@ -40,9 +48,3 @@
 - Replaced process icons with product-UI glyphs.
 - Corrected vertical alignment of step 03 “Моделиране”.
 - Standardized row heights across all five process steps.
-
-## Sprint A.1 — Editorial cleanup
-- Removed duplicate header CTA.
-- Removed “Как работим” eyebrow.
-- Localized visible English interface copy.
-- Strengthened services index in the Hero.

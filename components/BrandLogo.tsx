@@ -1,10 +1,17 @@
 export default function BrandLogo({ compact = false }: { compact?: boolean }) {
   return (
     <span className={`site-brand${compact ? " site-brand--compact" : ""}`}>
-      <svg className="site-brand__mark" viewBox="0 0 48 48" role="img" aria-label="Entimema">
-        <rect x="1" y="1" width="46" height="46" rx="13" fill="currentColor" />
-        <path d="M14 14h20v4H19v4h12v4H19v4h15v4H14V14Z" fill="white" />
-        <circle cx="35" cy="14" r="2.25" fill="#FF5A1F" />
+      <svg
+        className="site-brand__mark"
+        viewBox="0 0 64 64"
+        role="img"
+        aria-label="Entimema"
+      >
+        <rect x="3" y="3" width="58" height="58" rx="14" fill="#071B52" />
+        <path
+          d="M18 18h28v6H25v8h17v6H25v8h21v6H18V38h-6v-6h6V18Z"
+          fill="white"
+        />
       </svg>
       <span className="site-brand__word">Entimema</span>
     </span>
