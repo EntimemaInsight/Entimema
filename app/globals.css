@@ -2152,3 +2152,135 @@ html.is-scrolled .header-cta { min-height: 36px; padding-inline: 16px; }
   .motion-reveal,
   .motion-reveal.is-in-view { opacity: 1 !important; transform: none !important; }
 }
+
+/* Sprint C — institutional philosophy section */
+.philosophy-section {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(92px, 10vw, 156px) 0;
+  background: #f7f9fc;
+  border-top: 1px solid rgba(8, 31, 94, .08);
+}
+
+.philosophy-section::after {
+  content: "";
+  position: absolute;
+  right: -120px;
+  bottom: -140px;
+  width: 440px;
+  height: 440px;
+  background-image: radial-gradient(circle, rgba(255, 77, 18, .16) 1.15px, transparent 1.15px);
+  background-size: 22px 22px;
+  mask-image: linear-gradient(135deg, transparent 8%, #000 58%, transparent 100%);
+  pointer-events: none;
+}
+
+.philosophy-section__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(320px, .92fr);
+  gap: clamp(64px, 9vw, 150px);
+  align-items: start;
+}
+
+.philosophy-section__title h2 {
+  margin: 0;
+  max-width: 780px;
+  color: #08205f;
+  font-size: clamp(42px, 5.1vw, 78px);
+  line-height: .98;
+  letter-spacing: -.045em;
+  font-weight: 760;
+}
+
+.philosophy-section__title em {
+  color: #ff4d12;
+  font-style: normal;
+}
+
+.philosophy-section__copy {
+  padding-top: clamp(8px, 1vw, 16px);
+  max-width: 590px;
+}
+
+.philosophy-section__copy p {
+  margin: 0;
+  color: #394765;
+  font-size: clamp(17px, 1.25vw, 21px);
+  line-height: 1.7;
+  font-weight: 430;
+}
+
+.philosophy-section__closing {
+  position: relative;
+  margin-top: 34px !important;
+  padding-top: 28px;
+  color: #08205f !important;
+  font-weight: 650 !important;
+}
+
+.philosophy-section__closing::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 58px;
+  height: 2px;
+  background: #ff4d12;
+}
+
+.philosophy-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity var(--motion-slow) ease, transform var(--motion-slow) var(--motion-ease);
+}
+
+.philosophy-section.is-visible .philosophy-reveal {
+  opacity: 1;
+  transform: none;
+}
+
+.philosophy-section.is-visible .philosophy-reveal--2 {
+  transition-delay: .1s;
+}
+
+@media (max-width: 920px) {
+  .philosophy-section {
+    padding: 76px 0 84px;
+  }
+
+  .philosophy-section__inner {
+    grid-template-columns: 1fr;
+    gap: 38px;
+  }
+
+  .philosophy-section__title h2 {
+    font-size: clamp(42px, 10vw, 64px);
+    line-height: 1.02;
+  }
+
+  .philosophy-section__copy {
+    padding-top: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .philosophy-section {
+    padding: 64px 0 72px;
+  }
+
+  .philosophy-section__inner {
+    gap: 30px;
+  }
+
+  .philosophy-section__title h2 {
+    font-size: clamp(36px, 11.4vw, 50px);
+    letter-spacing: -.04em;
+  }
+
+  .philosophy-section__copy p {
+    font-size: 16px;
+    line-height: 1.68;
+  }
+}

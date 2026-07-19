@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import ApproachSection from "@/components/ApproachSection";
 import ProcessSection from "@/components/ProcessSection";
+import PhilosophySection from "@/components/PhilosophySection";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       </section>
       <ApproachSection />
       <ProcessSection />
+      <PhilosophySection />
     </main>
   );
 }
