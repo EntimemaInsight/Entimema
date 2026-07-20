@@ -5,7 +5,7 @@ export default function Hero() {
         <div className="hero__copy hero__copy--editorial">
           <h1 className="hero__title hero__title--editorial">
             <span>Структурата превръща</span>
-            <span className="hero__accent">стратегията в резултати.</span>
+            <span className="hero__accent">Стратегията в резултати.</span>
           </h1>
           <p className="hero__description hero__description--editorial">
             Най-силните организации не управляват отделни функции. Те свързват финансите,
