@@ -53,9 +53,8 @@ export default function ApproachSection() {
       <div className="site-container approach-section__inner">
         <div className="approach-section__intro reveal reveal--1">
           <h2>
-            Финанси и риск,
-            <br />
-            <em>мислени като една система.</em>
+            <span>Финанси и риск,</span>
+            <span className="approach-section__accent">мислени като една система.</span>
           </h2>
         </div>
 
