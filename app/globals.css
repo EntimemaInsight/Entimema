@@ -3686,3 +3686,95 @@ html.is-scrolled .header-cta { min-height: 36px; padding-inline: 16px; }
   .philosophy-metric-card{min-height:205px;border-radius:22px;padding:30px 28px}
   .philosophy-metric-card strong{font-size:58px}
 }
+
+/* Sprint J — editorial philosophy with architecture backdrop */
+.philosophy-section--split{
+  isolation:isolate;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.98),rgba(248,250,255,.96));
+}
+.philosophy-section--split::before{
+  content:"";
+  position:absolute;
+  inset:clamp(105px,9vw,155px) 0 0;
+  z-index:0;
+  pointer-events:none;
+  opacity:.38;
+  background:
+    radial-gradient(circle at 18% 32%,rgba(86,72,210,.16) 0 2px,transparent 2.5px),
+    radial-gradient(circle at 42% 18%,rgba(86,72,210,.11) 0 2px,transparent 2.5px),
+    radial-gradient(circle at 68% 39%,rgba(86,72,210,.13) 0 2px,transparent 2.5px),
+    radial-gradient(circle at 83% 20%,rgba(86,72,210,.10) 0 2px,transparent 2.5px),
+    linear-gradient(115deg,transparent 0 18%,rgba(93,81,218,.055) 18.1% 18.25%,transparent 18.35% 100%),
+    linear-gradient(25deg,transparent 0 31%,rgba(93,81,218,.045) 31.1% 31.25%,transparent 31.35% 100%),
+    linear-gradient(150deg,transparent 0 63%,rgba(93,81,218,.045) 63.1% 63.25%,transparent 63.35% 100%);
+  mask-image:linear-gradient(to bottom,transparent 0,#000 18%,#000 86%,transparent 100%);
+}
+.philosophy-section__dotfield{
+  width:min(1120px,86vw);
+  height:50%;
+  opacity:.105;
+  background-size:18px 18px;
+}
+.philosophy-section__composition{
+  grid-template-columns:minmax(0,1.9fr) minmax(300px,.7fr);
+  gap:22px;
+}
+.philosophy-quote-card,
+.philosophy-metric-card{
+  background:rgba(255,255,255,.70);
+  backdrop-filter:blur(22px) saturate(108%);
+  border-color:rgba(8,32,95,.075);
+  box-shadow:0 26px 78px rgba(8,32,95,.055),inset 0 1px 0 rgba(255,255,255,.96);
+}
+.philosophy-quote-card{
+  min-height:438px;
+  padding:clamp(52px,5vw,78px);
+}
+.philosophy-quote-card p{
+  max-width:28ch;
+  font-size:clamp(23px,1.78vw,31px);
+  line-height:1.43;
+  letter-spacing:-.036em;
+  text-wrap:pretty;
+}
+.philosophy-quote-card p > span{display:block}
+.philosophy-quote-card__muted{color:#758198}
+.philosophy-quote-card em{
+  color:var(--brand-orange-500);
+  font-style:normal;
+  font-weight:650;
+}
+.philosophy-quote-card strong{
+  color:#0a285e;
+  font-weight:650;
+}
+.philosophy-metric-card{
+  min-height:208px;
+  grid-template-columns:minmax(120px,auto) 1fr;
+  column-gap:26px;
+  padding:clamp(32px,2.8vw,42px);
+}
+.philosophy-metric-card strong{
+  color:#101a35;
+  font-size:clamp(56px,4.3vw,74px);
+}
+.philosophy-metric-card > span{
+  max-width:15ch;
+  padding-left:24px;
+  font-size:clamp(16px,1.16vw,20px);
+}
+@media(max-width:1050px){
+  .philosophy-section__composition{grid-template-columns:1fr}
+  .philosophy-metrics{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:none}
+  .philosophy-metric-card{grid-template-columns:1fr;row-gap:24px;min-height:230px}
+  .philosophy-metric-card>span{max-width:20ch;padding:0;border:0}
+}
+@media(max-width:700px){
+  .philosophy-section--split::before{inset:160px 0 0;opacity:.24}
+  .philosophy-section__dotfield{width:92vw;height:38%;background-size:17px 17px}
+  .philosophy-quote-card{padding:88px 26px 34px}
+  .philosophy-quote-card p{font-size:20px;line-height:1.5}
+  .philosophy-metrics{grid-template-columns:1fr}
+  .philosophy-metric-card{min-height:190px}
+}

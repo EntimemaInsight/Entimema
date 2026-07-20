@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useRef } from "react";
 
 const metrics = [
@@ -50,9 +49,10 @@ export default function PhilosophySection() {
           <blockquote className="philosophy-quote-card">
             <span className="philosophy-quote-card__mark" aria-hidden="true">“</span>
             <p>
-              Организациите рядко се провалят поради липса на информация. По-често липсва
-              връзката между отделните управленски функции, която превръща информацията в
-              последователни решения.
+              <span>Организациите рядко се провалят</span>
+              <span className="philosophy-quote-card__muted">поради липса на информация.</span>
+              <span>По-често липсва <em>структурата</em>, която превръща информацията</span>
+              <span>в <strong>последователни решения.</strong></span>
             </p>
           </blockquote>
 
@@ -61,9 +61,6 @@ export default function PhilosophySection() {
               <article className="philosophy-metric-card" key={metric.value}>
                 <strong>{metric.value}</strong>
                 <span>{metric.label}</span>
-                <Link href="/contact" aria-label={`${metric.value} ${metric.label}`}>
-                  <span aria-hidden="true">→</span>
-                </Link>
               </article>
             ))}
           </div>
