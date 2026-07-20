@@ -2728,3 +2728,319 @@ html.is-scrolled .header-cta { min-height: 36px; padding-inline: 16px; }
   .site-brand__mark { width: 46px; height: 46px; flex-basis: 46px; }
   .site-brand__word { font-size: 27px; }
 }
+
+/* =========================================================
+   SPRINT G — PREMIUM HOMEPAGE / DECISION ARCHITECTURE
+   ========================================================= */
+.home-stage {
+  height: calc(100svh - var(--announcement-height-v2) - var(--header-height-v2));
+  min-height: 620px;
+}
+.hero__layout--editorial {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+.hero__copy--editorial {
+  width: 100%;
+  padding: clamp(70px, 8vw, 126px) 0 clamp(76px, 8vw, 124px);
+  justify-content: center;
+}
+.hero__title--editorial {
+  max-width: 13.5ch;
+  font-size: clamp(68px, 7.15vw, 112px);
+  line-height: .96;
+  letter-spacing: -.068em;
+  font-weight: 690;
+}
+.hero__description--editorial {
+  max-width: 760px;
+  margin-top: clamp(30px, 3.1vw, 48px);
+  font-size: clamp(18px, 1.35vw, 22px);
+  line-height: 1.6;
+  color: #3f4d6c;
+  font-weight: 430;
+}
+
+.decision-architecture {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(96px, 9vw, 150px) 0 clamp(104px, 10vw, 166px);
+  background:
+    radial-gradient(circle at 50% 52%, rgba(40, 78, 195, .09), transparent 31%),
+    radial-gradient(circle at 15% 18%, rgba(241, 111, 45, .055), transparent 23%),
+    linear-gradient(180deg, #f8faff 0%, #fff 100%);
+  border-top: 1px solid rgba(8, 29, 81, .065);
+  border-bottom: 1px solid rgba(8, 29, 81, .065);
+}
+.decision-architecture__inner { position: relative; }
+.decision-architecture__intro {
+  max-width: 760px;
+  margin-bottom: clamp(52px, 6vw, 86px);
+}
+.decision-architecture__eyebrow {
+  margin: 0 0 22px;
+  font-size: 12px;
+  line-height: 1;
+  letter-spacing: .17em;
+  color: var(--brand-orange-500);
+  font-weight: 750;
+}
+.decision-architecture__intro h2 {
+  margin: 0;
+  font-size: clamp(52px, 5.3vw, 82px);
+  line-height: .98;
+  letter-spacing: -.06em;
+  color: var(--brand-navy-950);
+  font-weight: 650;
+}
+.decision-architecture__intro > p:last-child {
+  max-width: 620px;
+  margin: 26px 0 0;
+  font-size: clamp(17px, 1.25vw, 21px);
+  line-height: 1.62;
+  color: #495673;
+}
+.decision-canvas {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1200 / 620;
+  min-height: 560px;
+  border: 1px solid rgba(11, 36, 98, .10);
+  border-radius: 28px;
+  background:
+    linear-gradient(rgba(47, 79, 151, .05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(47, 79, 151, .05) 1px, transparent 1px),
+    rgba(255,255,255,.76);
+  background-size: 38px 38px;
+  box-shadow: 0 34px 100px rgba(13, 38, 99, .085), inset 0 1px 0 rgba(255,255,255,.9);
+  backdrop-filter: blur(18px);
+  overflow: hidden;
+}
+.decision-canvas::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 48%, rgba(43, 78, 202, .115), transparent 29%);
+  pointer-events: none;
+}
+.decision-lines { position: absolute; inset: 0; width: 100%; height: 100%; }
+.decision-lines path {
+  fill: none;
+  stroke: rgba(55, 91, 192, .28);
+  stroke-width: 1.4;
+  stroke-dasharray: 7 9;
+  stroke-dashoffset: 180;
+  opacity: .22;
+}
+.decision-architecture.is-visible .decision-lines path {
+  animation: decision-flow 3.6s linear infinite;
+  opacity: 1;
+  transition: opacity 900ms ease;
+}
+.decision-lines__out { stroke: rgba(239, 105, 41, .48) !important; }
+@keyframes decision-flow { to { stroke-dashoffset: 0; } }
+
+.decision-node {
+  position: absolute;
+  width: 150px;
+  min-height: 60px;
+  display: grid;
+  place-items: center;
+  padding: 14px 18px;
+  border: 1px solid rgba(18, 49, 117, .12);
+  border-radius: 16px;
+  background: rgba(255,255,255,.86);
+  box-shadow: 0 16px 45px rgba(13, 38, 99, .075);
+  color: #122758;
+  font-size: 14px;
+  font-weight: 650;
+  letter-spacing: -.015em;
+  opacity: 0;
+  transform: translateY(18px) scale(.96);
+}
+.decision-architecture.is-visible .decision-node {
+  opacity: 1;
+  transform: none;
+  transition: opacity 700ms ease, transform 850ms cubic-bezier(.2,.85,.2,1);
+  animation: decision-float 5.8s ease-in-out infinite;
+}
+@keyframes decision-float { 0%,100% { translate: 0 0; } 50% { translate: 0 -8px; } }
+.decision-node--budget { left: 5.2%; top: 16%; transition-delay: .05s !important; }
+.decision-node--liquidity { left: 5.2%; top: 41%; transition-delay: .12s !important; animation-delay: .5s !important; }
+.decision-node--margin { left: 5.2%; top: 68%; transition-delay: .19s !important; animation-delay: 1s !important; }
+.decision-node--credit { right: 5.2%; top: 16%; transition-delay: .1s !important; animation-delay: .7s !important; }
+.decision-node--fraud { right: 5.2%; top: 41%; transition-delay: .17s !important; animation-delay: 1.2s !important; }
+.decision-node--scenario { right: 5.2%; top: 68%; transition-delay: .24s !important; animation-delay: .2s !important; }
+
+.decision-core {
+  position: absolute;
+  left: 50%;
+  top: 47%;
+  width: 206px;
+  height: 206px;
+  transform: translate(-50%, -50%) scale(.82);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: 1px solid rgba(50, 85, 202, .20);
+  border-radius: 50%;
+  background: linear-gradient(145deg, rgba(255,255,255,.96), rgba(239,244,255,.9));
+  box-shadow: 0 28px 70px rgba(26, 58, 153, .14), inset 0 0 0 10px rgba(71, 104, 213, .035);
+  opacity: 0;
+}
+.decision-architecture.is-visible .decision-core {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  transition: opacity 850ms ease .28s, transform 1000ms cubic-bezier(.15,.85,.2,1) .28s;
+}
+.decision-core__pulse {
+  position: absolute;
+  inset: -18px;
+  border: 1px solid rgba(54, 91, 211, .18);
+  border-radius: 50%;
+  animation: core-pulse 3.2s ease-out infinite;
+}
+@keyframes core-pulse { 0% { transform: scale(.86); opacity: 0; } 35% { opacity: .7; } 100% { transform: scale(1.18); opacity: 0; } }
+.decision-core small {
+  margin-bottom: 10px;
+  font-size: 10px;
+  letter-spacing: .22em;
+  color: var(--brand-orange-500);
+  font-weight: 760;
+}
+.decision-core strong {
+  font-size: 24px;
+  line-height: 1.04;
+  letter-spacing: -.04em;
+  color: #0d2356;
+}
+.decision-output {
+  position: absolute;
+  left: 50%;
+  bottom: 6.5%;
+  width: min(390px, 40%);
+  transform: translate(-50%, 18px);
+  padding: 17px 22px 19px;
+  border: 1px solid rgba(230, 99, 38, .18);
+  border-radius: 16px;
+  background: rgba(255,255,255,.92);
+  box-shadow: 0 18px 55px rgba(13, 38, 99, .10);
+  opacity: 0;
+}
+.decision-architecture.is-visible .decision-output {
+  opacity: 1;
+  transform: translate(-50%, 0);
+  transition: opacity 750ms ease .85s, transform 850ms cubic-bezier(.2,.85,.2,1) .85s;
+}
+.decision-output__status { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #48617f; }
+.decision-output__status i { width: 7px; height: 7px; border-radius: 50%; background: #24aa6b; box-shadow: 0 0 0 5px rgba(36,170,107,.10); }
+.decision-output strong { display: block; font-size: 18px; line-height: 1.2; color: #0b2355; }
+.decision-output small { display: block; margin-top: 7px; color: #63708b; font-size: 12px; }
+
+.approach-card--concept {
+  position: relative;
+  min-height: 430px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(34px, 4vw, 58px);
+  overflow: hidden;
+  border: 1px solid rgba(10, 35, 93, .09);
+  border-radius: 22px;
+  background: rgba(255,255,255,.86);
+  box-shadow: 0 24px 72px rgba(9, 35, 96, .065);
+}
+.approach-card--concept::after {
+  content: "";
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  right: -110px;
+  bottom: -120px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(66, 102, 213, .13), transparent 69%);
+  pointer-events: none;
+}
+.approach-card--risk::after { background: radial-gradient(circle, rgba(242, 111, 46, .12), transparent 69%); }
+.approach-card__number {
+  font-size: clamp(62px, 6vw, 92px);
+  line-height: .9;
+  letter-spacing: -.07em;
+  color: rgba(15, 42, 104, .10);
+  font-weight: 700;
+}
+.approach-card--concept .approach-card__copy { max-width: 520px; margin-top: auto; padding-top: 66px; }
+.approach-card--concept h3 {
+  margin: 0;
+  font-size: clamp(34px, 3vw, 48px);
+  line-height: 1.02;
+  letter-spacing: -.055em;
+  color: #0a2457;
+}
+.approach-card--concept .approach-card__copy p {
+  margin: 22px 0 0;
+  max-width: 500px;
+  font-size: 17px;
+  line-height: 1.62;
+  color: #50607c;
+}
+.approach-card--concept .approach-card__link {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  margin-top: 48px;
+  padding-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(11, 39, 98, .12);
+  font-size: 15px;
+  font-weight: 680;
+  color: #102a60;
+}
+.approach-card--concept .approach-card__link span:last-child { font-size: 24px; color: var(--brand-orange-500); transition: transform .2s ease; }
+.approach-card--concept .approach-card__link:hover span:last-child { transform: translateX(5px); }
+
+@media (max-width: 980px) {
+  .home-stage { height: auto; min-height: auto; }
+  .hero__copy--editorial { padding: 88px 0 104px; }
+  .hero__title--editorial { font-size: clamp(58px, 9.5vw, 86px); max-width: 12.5ch; }
+  .decision-canvas { min-height: 700px; aspect-ratio: auto; }
+  .decision-lines { display: none; }
+  .decision-node { width: 138px; }
+  .decision-node--budget, .decision-node--liquidity, .decision-node--margin { left: 5%; }
+  .decision-node--credit, .decision-node--fraud, .decision-node--scenario { right: 5%; }
+  .decision-core { top: 45%; width: 184px; height: 184px; }
+  .decision-output { bottom: 6%; width: min(360px, 70%); }
+}
+
+@media (max-width: 680px) {
+  .hero__copy--editorial { padding: 64px 0 80px; }
+  .hero__title--editorial { font-size: clamp(48px, 14vw, 66px); line-height: 1.01; }
+  .hero__description--editorial { margin-top: 26px; font-size: 17px; line-height: 1.58; }
+  .decision-architecture { padding: 78px 0 88px; }
+  .decision-architecture__intro h2 { font-size: 48px; }
+  .decision-canvas { min-height: 760px; border-radius: 20px; }
+  .decision-node { width: 118px; min-height: 54px; padding: 12px; font-size: 12px; }
+  .decision-node--budget { top: 8%; }
+  .decision-node--credit { top: 8%; }
+  .decision-node--liquidity { top: 24%; }
+  .decision-node--fraud { top: 24%; }
+  .decision-node--margin { top: 40%; }
+  .decision-node--scenario { top: 40%; }
+  .decision-core { top: 61%; width: 174px; height: 174px; }
+  .decision-output { width: calc(100% - 36px); bottom: 4%; }
+  .approach-card--concept { min-height: 370px; padding: 28px; }
+  .approach-card--concept .approach-card__copy { padding-top: 42px; }
+  .approach-card--concept h3 { font-size: 36px; }
+  .approach-card--concept .approach-card__copy p { font-size: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .decision-lines path,
+  .decision-node,
+  .decision-core__pulse { animation: none !important; }
+}

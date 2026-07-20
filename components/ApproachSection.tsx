@@ -1,57 +1,28 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef } from "react";
-
-const financeItems = [
-  "Финансово планиране",
-  "Финансово моделиране",
-  "Управленска отчетност",
-  "Управление чрез KPI",
-  "Ликвидност",
-  "Финансов контрол",
-  "Управление на разходите",
-  "CFO функция",
-];
-
-const riskItems = [
-  "Апликационен скоринг",
-  "AI системи за решения",
-  "Поведенчески скоринг",
-  "Fraud Detection",
-  "PD / LGD / EAD модели",
-  "Стрес тестове",
-  "IFRS 9 модели",
-  "Сценариен анализ",
-];
 
 type SystemCardProps = {
   kind: "finance" | "risk";
+  number: string;
   title: string;
   description: string;
-  items: string[];
   href: string;
 };
 
-function SystemCard({ kind, title, description, items, href }: SystemCardProps) {
+function SystemCard({ kind, number, title, description, href }: SystemCardProps) {
   return (
-    <article className={`approach-card approach-card--${kind}`}>
+    <article className={`approach-card approach-card--concept approach-card--${kind}`}>
+      <div className="approach-card__number">{number}</div>
       <div className="approach-card__copy">
         <h3>{title}</h3>
         <p>{description}</p>
       </div>
-
-      <div className="approach-card__items" aria-label={`Области в ${title}`}>
-        {items.map((label) => (
-          <div className="approach-card__item" key={label}>
-            <b>{label}</b>
-          </div>
-        ))}
-      </div>
-
-      <a className="approach-card__link" href={href}>
+      <Link className="approach-card__link" href={href}>
         <span>Вижте подхода</span>
         <span aria-hidden="true">→</span>
-      </a>
+      </Link>
     </article>
   );
 }
@@ -89,26 +60,25 @@ export default function ApproachSection() {
         </div>
 
         <p className="approach-section__lead reveal reveal--2">
-          Финансовите системи, управлението на риска и решенията,
-          базирани на изкуствен интелект, създават стойност, когато стъпват
-          върху обща логика и последователна методология. Приложенията се
-          различават. Принципите остават постоянни.
+          Финансовата архитектура и управлението на риска създават най-голяма стойност,
+          когато споделят обща логика, данни и методология. Различни дисциплини — една
+          система за по-добри решения.
         </p>
 
         <div className="approach-section__cards reveal reveal--3">
           <SystemCard
             kind="finance"
+            number="01"
             title="Финансова архитектура"
-            description="Осигурява последователност между финансовата информация, контрола и управленските решения."
-            items={financeItems}
-            href="/services"
+            description="Свързваме планирането, отчетността, контрола и управленските решения в последователна финансова система."
+            href="/services/financial-architecture"
           />
           <SystemCard
             kind="risk"
+            number="02"
             title="Управление на риска"
-            description="Обединява оценката, наблюдението и вземането на решения в обща рамка."
-            items={riskItems}
-            href="/services"
+            description="Изграждаме измерими модели и процеси за оценка, наблюдение и вземане на решения в условия на несигурност."
+            href="/services/risk-management"
           />
         </div>
       </div>
