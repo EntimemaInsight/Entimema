@@ -3094,3 +3094,212 @@ html.is-scrolled .header-cta { min-height: 36px; padding-inline: 16px; }
   .approach-section h2 { max-width: 13ch; }
   .approach-section__lead { max-width: 34rem; }
 }
+
+/* =========================================================
+   SPRINT G.2 — TYPOGRAPHIC & SPATIAL POLISH
+   Unified homepage typography, rhythm and composition
+   ========================================================= */
+:root {
+  --home-display-size: clamp(58px, 6.15vw, 96px);
+  --home-section-size: clamp(46px, 4.65vw, 74px);
+  --home-display-weight: 680;
+  --home-copy-size: clamp(17px, 1.28vw, 21px);
+  --home-copy-color: #43506b;
+  --home-max-copy: 920px;
+}
+
+/* A consistent editorial canvas across the homepage */
+.home-stage,
+.decision-architecture,
+.approach-section,
+.philosophy-section {
+  background-color: #fff;
+}
+
+/* Hero — centred, balanced and visually calm */
+.home-stage {
+  min-height: clamp(620px, 78svh, 820px);
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+.hero {
+  min-height: clamp(540px, 68svh, 740px);
+  height: auto;
+  display: flex;
+  align-items: center;
+}
+.hero__layout--editorial {
+  min-height: inherit;
+  justify-content: center;
+}
+.hero__copy--editorial {
+  max-width: 1240px;
+  margin-inline: auto;
+  padding: clamp(84px, 10vw, 150px) 0 clamp(78px, 9vw, 136px);
+  align-items: center;
+  text-align: center;
+}
+.hero__title--editorial {
+  width: 100%;
+  max-width: 15.8ch;
+  margin: 0 auto;
+  font-family: var(--font-sans);
+  font-size: var(--home-display-size);
+  line-height: .98;
+  letter-spacing: -.062em;
+  font-weight: var(--home-display-weight);
+  text-wrap: balance;
+  color: #24262d;
+}
+.hero__title--editorial span {
+  font: inherit;
+}
+.hero__title--editorial .hero__accent {
+  color: var(--brand-orange-500);
+  font-weight: inherit;
+}
+.hero__description--editorial {
+  max-width: var(--home-max-copy);
+  margin: clamp(30px, 3.3vw, 48px) auto 0;
+  font-family: var(--font-sans);
+  font-size: var(--home-copy-size);
+  line-height: 1.58;
+  letter-spacing: -.018em;
+  font-weight: 430;
+  color: var(--home-copy-color);
+  text-wrap: balance;
+}
+
+/* Animation follows the hero without a competing title block */
+.decision-architecture {
+  padding: clamp(24px, 3.2vw, 48px) 0 clamp(100px, 10vw, 156px);
+  border-top: 0;
+}
+.decision-canvas {
+  max-width: 1280px;
+  margin-inline: auto;
+}
+
+/* Unified section-heading language */
+.approach-section,
+.philosophy-section {
+  padding: clamp(110px, 11vw, 172px) 0;
+}
+.approach-section__inner,
+.philosophy-section__inner {
+  width: 100%;
+}
+.approach-section__intro,
+.philosophy-section__title {
+  width: 100%;
+  text-align: center;
+}
+.approach-section h2,
+.philosophy-section h2 {
+  max-width: 16.5ch;
+  margin: 0 auto;
+  font-family: var(--font-sans);
+  font-size: var(--home-section-size);
+  line-height: 1.02;
+  letter-spacing: -.057em;
+  font-weight: var(--home-display-weight);
+  color: #24262d;
+  text-wrap: balance;
+}
+.approach-section h2 em,
+.philosophy-section h2 em {
+  color: var(--brand-orange-500);
+  font-style: normal;
+  font-weight: inherit;
+}
+.approach-section__lead,
+.philosophy-section__copy {
+  max-width: var(--home-max-copy);
+  margin: clamp(28px, 3.1vw, 44px) auto 0;
+  font-family: var(--font-sans);
+  font-size: var(--home-copy-size);
+  line-height: 1.62;
+  letter-spacing: -.017em;
+  font-weight: 430;
+  color: var(--home-copy-color);
+  text-align: center;
+  text-wrap: balance;
+}
+.philosophy-section__copy p {
+  margin: 0;
+}
+.philosophy-section__closing {
+  margin-top: 18px !important;
+  font-weight: 610;
+  color: #162a55;
+}
+
+/* The two concept panels share one typographic system */
+.approach-section__cards {
+  max-width: 1280px;
+  margin: clamp(66px, 7vw, 104px) auto 0;
+  gap: clamp(22px, 2.3vw, 34px);
+}
+.approach-card--concept {
+  min-height: 430px;
+  padding: clamp(34px, 3.3vw, 52px);
+  border-radius: 22px;
+}
+.approach-card__number {
+  font-family: var(--font-sans);
+  font-size: clamp(54px, 5vw, 78px);
+  font-weight: 680;
+}
+.approach-card--concept h3 {
+  font-family: var(--font-sans);
+  font-size: clamp(32px, 2.7vw, 44px);
+  line-height: 1.04;
+  letter-spacing: -.05em;
+  font-weight: 670;
+}
+.approach-card--concept .approach-card__copy p {
+  font-family: var(--font-sans);
+  font-size: clamp(16px, 1.12vw, 18px);
+  line-height: 1.62;
+  letter-spacing: -.012em;
+  font-weight: 430;
+}
+.approach-card--concept .approach-card__link {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 650;
+}
+
+@media (max-width: 980px) {
+  :root {
+    --home-display-size: clamp(52px, 9vw, 76px);
+    --home-section-size: clamp(42px, 7vw, 62px);
+  }
+  .hero__copy--editorial {
+    padding: 88px 0 100px;
+  }
+  .approach-section,
+  .philosophy-section {
+    padding: 92px 0;
+  }
+}
+
+@media (max-width: 680px) {
+  :root {
+    --home-display-size: clamp(44px, 12.5vw, 62px);
+    --home-section-size: clamp(38px, 10.5vw, 52px);
+    --home-copy-size: 17px;
+  }
+  .site-container { width: calc(100% - 36px); }
+  .hero { min-height: auto; }
+  .hero__copy--editorial { padding: 68px 0 78px; }
+  .hero__title--editorial { max-width: 12.6ch; line-height: 1.01; }
+  .hero__description--editorial { max-width: 34rem; }
+  .decision-architecture { padding-top: 18px; }
+  .approach-section,
+  .philosophy-section { padding: 78px 0; }
+  .approach-section h2,
+  .philosophy-section h2 { max-width: 13.2ch; }
+  .approach-section__cards { margin-top: 54px; }
+}
