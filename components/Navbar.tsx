@@ -3,39 +3,101 @@ import BrandLogo from "./BrandLogo";
 
 type NavKey = "home" | "services" | "about" | "analyses" | "contact";
 
-const items: Array<{ key: NavKey; label: string; href: string }> = [
-  { key: "home", label: "Начало", href: "/" },
-  { key: "services", label: "Услуги", href: "/services" },
-  { key: "about", label: "За Entimema", href: "/about" },
-  { key: "analyses", label: "Анализи", href: "/insights" },
-  { key: "contact", label: "Контакти", href: "/contact" },
+const financeItems = [
+  "Финансово планиране",
+  "Финансово моделиране",
+  "Управленска отчетност",
+  "Управление чрез KPI",
+  "Ликвидност",
+  "Финансов контрол",
+  "Управление на разходите",
+  "CFO функция",
+];
+
+const riskItems = [
+  "Апликационен скоринг",
+  "Поведенчески скоринг",
+  "PD / LGD / EAD модели",
+  "IFRS 9 модели",
+  "AI системи за решения",
+  "Fraud Detection",
+  "Стрес тестове",
+  "Сценариен анализ",
 ];
 
 export default function Navbar({ active = "home" }: { active?: NavKey }) {
   return (
     <header className="site-header">
-      <div className="site-container site-header__inner">
-        <Link href="/" aria-label="Entimema – начало">
+      <div className="site-container site-header__inner site-header__inner--editorial">
+        <Link className="site-header__brand" href="/" aria-label="Entimema – начало">
           <BrandLogo />
         </Link>
 
-        <nav className="site-nav" aria-label="Основна навигация">
-          {items.map((item) => (
+        <nav className="site-nav site-nav--editorial" aria-label="Основна навигация">
+          <div className="site-nav__mega-trigger">
             <Link
-              key={item.key}
-              className={active === item.key ? "is-active" : undefined}
-              href={item.href}
-              aria-current={active === item.key ? "page" : undefined}
+              className={active === "services" ? "is-active" : undefined}
+              href="/services"
+              aria-current={active === "services" ? "page" : undefined}
             >
-              {item.label}
+              Какво правим
+              <span className="site-nav__chevron" aria-hidden="true" />
             </Link>
-          ))}
+
+            <div className="mega-menu" aria-label="Какво правим">
+              <div className="site-container mega-menu__inner">
+                <section className="mega-menu__column" aria-labelledby="mega-finance">
+                  <div className="mega-menu__heading">
+                    <span>01</span>
+                    <h2 id="mega-finance">Финансова архитектура</h2>
+                  </div>
+                  <p>Свързваме планирането, отчетността и контрола в единна управленска система.</p>
+                  <div className="mega-menu__links">
+                    {financeItems.map((item) => (
+                      <Link key={item} href="/services/financial-architecture">
+                        {item}<span aria-hidden="true">→</span>
+                      </Link>
+                    ))}
+                  </div>
+                </section>
+
+                <section className="mega-menu__column" aria-labelledby="mega-risk">
+                  <div className="mega-menu__heading">
+                    <span>02</span>
+                    <h2 id="mega-risk">Управление на риска</h2>
+                  </div>
+                  <p>Изграждаме модели и AI решения за оценка, наблюдение и вземане на решения.</p>
+                  <div className="mega-menu__links">
+                    {riskItems.map((item) => (
+                      <Link key={item} href="/services/risk-management">
+                        {item}<span aria-hidden="true">→</span>
+                      </Link>
+                    ))}
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+
+          <Link
+            className={active === "analyses" ? "is-active" : undefined}
+            href="/insights"
+            aria-current={active === "analyses" ? "page" : undefined}
+          >
+            Анализи
+          </Link>
+          <Link
+            className={active === "about" ? "is-active" : undefined}
+            href="/about"
+            aria-current={active === "about" ? "page" : undefined}
+          >
+            За Entimema
+          </Link>
         </nav>
 
         <div className="site-header__actions">
           <Link className="header-cta" href="/contact">
-            Обсъдете казус
-            <span aria-hidden="true">↗</span>
+            Контакт
           </Link>
           <button className="language-switch" type="button" aria-label="Избор на език">
             <span>BG</span>

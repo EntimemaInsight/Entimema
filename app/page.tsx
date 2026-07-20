@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import ApproachSection from "@/components/ApproachSection";
 import PhilosophySection from "@/components/PhilosophySection";
+import CaseCtaSection from "@/components/CaseCtaSection";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       </section>
       <ApproachSection />
       <PhilosophySection />
+      <CaseCtaSection />
     </main>
   );
 }
