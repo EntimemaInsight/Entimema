@@ -3453,3 +3453,50 @@ html.is-scrolled .header-cta { min-height: 36px; padding-inline: 16px; }
   .philosophy-section__quote::before { left: 24px; width: 58px; }
   .philosophy-section__quote p { font-size: 18px; }
 }
+
+/* Sprint H — unified premium homepage */
+.hero__proof{display:none!important}
+.hero__cta{margin-top:34px;min-width:178px;justify-content:center;text-align:center}
+.hero__title--editorial{max-width:none!important;text-align:center;font-family:var(--font-sans,Inter,"Helvetica Neue",Arial,sans-serif);font-weight:650;letter-spacing:-.058em;line-height:.98;font-size:clamp(58px,5.75vw,92px)}
+.hero__title--editorial span{white-space:nowrap}
+.hero__description--editorial{max-width:1050px;margin:34px auto 0;text-align:center;font-size:clamp(18px,1.48vw,24px);line-height:1.52;font-weight:420;letter-spacing:-.022em;color:#3f4d68}
+.hero__copy--editorial{max-width:1220px!important;margin:0 auto;text-align:center;display:flex;flex-direction:column;align-items:center}
+.hero__layout--editorial{min-height:calc(100svh - 112px);display:flex;align-items:center;justify-content:center;padding-top:86px;padding-bottom:96px}
+
+.approach-section--tiles{position:relative;min-height:auto;padding:clamp(96px,8vw,138px) 0 clamp(106px,9vw,150px);background:linear-gradient(180deg,#fff 0%,#fbfbff 70%,#f6f7ff 100%)}
+.approach-section--tiles .approach-section__inner{display:flex;flex-direction:column;align-items:center;text-align:center}
+.approach-section--tiles .approach-section__intro h2{font-family:var(--font-sans,Inter,"Helvetica Neue",Arial,sans-serif);font-size:clamp(52px,5vw,82px);line-height:.98;font-weight:640;letter-spacing:-.058em;color:#0b235b;margin:0}
+.approach-section--tiles .approach-section__intro h2 span{display:block;white-space:nowrap}
+.approach-section--tiles .approach-section__lead{max-width:900px;margin:34px auto 0;font-size:clamp(18px,1.4vw,23px);line-height:1.58;font-weight:420;letter-spacing:-.02em;color:#53617c}
+.approach-section__dotfield{position:absolute;left:0;right:0;bottom:0;height:58%;pointer-events:none;opacity:.42;background-image:radial-gradient(circle,rgba(84,76,215,.24) 0 1.15px,transparent 1.35px);background-size:24px 24px;mask-image:linear-gradient(to bottom,transparent 0,#000 22%,#000 100%)}
+.approach-section__tiles{position:relative;z-index:1;display:grid;grid-template-columns:repeat(2,minmax(0,360px));justify-content:center;gap:22px;width:100%;margin-top:clamp(52px,5.5vw,78px)}
+.approach-tile{min-height:310px;padding:42px 34px 34px;border:1px solid rgba(13,35,92,.075);border-radius:26px;background:rgba(255,255,255,.72);backdrop-filter:blur(18px);box-shadow:0 24px 70px rgba(42,50,105,.075),inset 0 1px 0 rgba(255,255,255,.92);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px;color:#222633;text-decoration:none;transition:transform .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s ease,border-color .3s ease}
+.approach-tile:hover{transform:translateY(-7px);border-color:rgba(78,69,213,.18);box-shadow:0 32px 90px rgba(42,50,105,.12),inset 0 1px 0 #fff}
+.approach-tile__icon{width:142px;height:142px;border-radius:36px;display:grid;place-items:center;background:linear-gradient(145deg,rgba(255,255,255,.94),rgba(242,241,255,.82));box-shadow:0 24px 55px rgba(90,77,220,.13),inset 0 1px 0 #fff}
+.approach-tile__icon svg{width:64px;height:64px;fill:none;stroke:#6354db;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 5px 10px rgba(99,84,219,.15))}
+.approach-tile--risk .approach-tile__icon svg{stroke:#4c43c6}
+.approach-tile__title{font-size:27px;line-height:1;font-weight:650;letter-spacing:-.035em}
+
+.philosophy-section__title h2{font-family:var(--font-sans,Inter,"Helvetica Neue",Arial,sans-serif);font-size:clamp(50px,4.8vw,80px);font-weight:640;line-height:.99;letter-spacing:-.058em;text-align:center}
+.philosophy-section__title h2 span{display:block;white-space:nowrap}
+.philosophy-section__quote{max-width:1040px;margin-left:auto;margin-right:auto}
+.case-cta__link{border-radius:12px!important}
+
+@media(max-width:900px){
+ .hero__title--editorial span,.approach-section--tiles .approach-section__intro h2 span,.philosophy-section__title h2 span{white-space:normal}
+ .hero__layout--editorial{min-height:auto;padding-top:74px;padding-bottom:82px}
+ .approach-section__tiles{grid-template-columns:repeat(2,minmax(0,300px))}
+ .approach-tile{min-height:282px}
+}
+@media(max-width:680px){
+ .hero__title--editorial{font-size:clamp(43px,13vw,60px);line-height:1.02}
+ .hero__description--editorial{font-size:16px;line-height:1.62;margin-top:28px}
+ .hero__cta{margin-top:28px}
+ .approach-section--tiles{padding:76px 0 92px}
+ .approach-section--tiles .approach-section__intro h2{font-size:clamp(42px,12vw,58px);line-height:1.02}
+ .approach-section--tiles .approach-section__lead{font-size:16px;line-height:1.62;margin-top:26px}
+ .approach-section__tiles{grid-template-columns:1fr;max-width:390px;gap:18px;margin-top:42px}
+ .approach-tile{min-height:260px}
+ .approach-tile__icon{width:124px;height:124px;border-radius:31px}
+ .philosophy-section__title h2{font-size:clamp(40px,11.5vw,56px);line-height:1.03}
+}

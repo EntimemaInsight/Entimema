@@ -13,17 +13,8 @@ export default function Hero() {
             Най-силните организации не управляват отделни функции. Те свързват финансите,
             риска, данните и технологиите в една последователна управленска архитектура.
           </p>
-
-          <div className="hero__proof" aria-label="Основни области на експертиза">
-            <span>Финансова архитектура</span>
-            <i aria-hidden="true" />
-            <span>Управление на риска</span>
-            <i aria-hidden="true" />
-            <span>AI и автоматизация</span>
-          </div>
-
-          <Link className="hero__cta" href="/contact">
-            Обсъдете казус <span aria-hidden="true">→</span>
+          <Link className="header-cta hero__cta" href="/contact">
+            Обсъдете казус
           </Link>
         </div>
       </div>
