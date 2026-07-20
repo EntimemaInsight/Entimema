@@ -32,15 +32,7 @@ export default function DecisionArchitecture() {
   return (
     <section className="decision-architecture" ref={ref} aria-labelledby="decision-title">
       <div className="site-container decision-architecture__inner">
-        <div className="decision-architecture__intro">
-          <p className="decision-architecture__eyebrow">ЕДНА УПРАВЛЕНСКА ЛОГИКА</p>
-          <h2 id="decision-title">От информация към решение.</h2>
-          <p>
-            Данните придобиват стойност, когато бъдат свързани в ясна система за анализ,
-            оценка и действие.
-          </p>
-        </div>
-
+        <h2 id="decision-title" className="sr-only">Анимирана архитектура на решенията</h2>
         <div className="decision-canvas" aria-label="Анимирана архитектура на решенията">
           <svg className="decision-lines" viewBox="0 0 1200 620" aria-hidden="true">
             <path d="M170 160 C330 160 360 270 520 300" />

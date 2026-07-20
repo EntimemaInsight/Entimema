@@ -3044,3 +3044,53 @@ html.is-scrolled .header-cta { min-height: 36px; padding-inline: 16px; }
   .decision-node,
   .decision-core__pulse { animation: none !important; }
 }
+
+/* =========================================================
+   SPRINT G.1 — CENTERED EDITORIAL FLOW
+   ========================================================= */
+.hero__copy--editorial {
+  align-items: center;
+  text-align: center;
+}
+.hero__title--editorial {
+  margin-inline: auto;
+  max-width: 15ch;
+}
+.hero__description--editorial {
+  margin-inline: auto;
+  max-width: 980px;
+}
+
+.decision-architecture {
+  padding-top: clamp(36px, 4vw, 64px);
+}
+
+.approach-section__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.approach-section__intro {
+  width: 100%;
+}
+.approach-section h2 {
+  margin-inline: auto;
+  max-width: 18ch;
+}
+.approach-section__lead {
+  align-self: auto;
+  max-width: 900px;
+  margin: clamp(26px, 3vw, 42px) auto 0;
+}
+.approach-section__cards {
+  width: 100%;
+  text-align: left;
+}
+
+@media (max-width: 680px) {
+  .hero__title--editorial { max-width: 12.5ch; }
+  .decision-architecture { padding-top: 28px; }
+  .approach-section h2 { max-width: 13ch; }
+  .approach-section__lead { max-width: 34rem; }
+}
