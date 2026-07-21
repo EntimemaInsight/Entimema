@@ -31,7 +31,7 @@
   transform: translate3d(calc(var(--pointer-x) * -4px), calc(var(--pointer-y) * -4px), 0);
 }
 
-.active .grid { animation: gridBreathing 8.7s cubic-bezier(.37,0,.24,1) infinite; }
+.active .grid { animation: gridBreathing var(--motion-grid-duration) cubic-bezier(.37,0,.24,1) infinite; }
 
 .glow {
   position: absolute;
@@ -52,7 +52,7 @@
   transform: translate3d(calc(-50% + var(--pointer-x) * -7px), calc(-50% + var(--pointer-y) * -5px), 0) scale(.9);
 }
 .active .glow { opacity: 1; }
-.active .glowPrimary { animation: glowPrimary 9.8s cubic-bezier(.37,0,.24,1) infinite; }
+.active .glowPrimary { animation: glowPrimary var(--motion-glow-duration) cubic-bezier(.37,0,.24,1) infinite; }
 .active .glowSecondary { animation: glowSecondary 12.4s cubic-bezier(.37,0,.24,1) -4.1s infinite; }
 
 .shimmers { position:absolute; inset:0; z-index:1; pointer-events:none; }
@@ -94,8 +94,8 @@
 
 .knowledgeCard {
   position:absolute; z-index:4; width:180px; min-height:94px; padding:11px 13px 10px;
-  border:1px solid rgba(30,54,117,.115); border-radius:15px; background:#fff;
-  box-shadow:0 10px 24px rgba(28,45,94,.085), inset 0 1px 0 rgba(255,255,255,.9);
+  border:1px solid rgba(30,54,117,.115); border-radius:var(--radius-elevation-base); background:#fff;
+  box-shadow:var(--shadow-elevation-base), inset 0 1px 0 rgba(255,255,255,.9);
   color:var(--ink); opacity:0;
   transform:translate3d(var(--entry-x),var(--entry-y),0) scale(.88);
   transition:
@@ -104,7 +104,7 @@
   transition-delay:var(--entry-delay); will-change:transform,opacity;
 }
 .active .knowledgeCard { opacity:1; transform:translate3d(0,0,0) scale(1); animation:var(--float-name) var(--float-time) cubic-bezier(.37,0,.24,1) var(--float-delay) infinite; }
-.knowledgeCard:hover { z-index:7; border-color:rgba(99,87,229,.36); box-shadow:0 14px 30px rgba(54,55,133,.14); }
+.knowledgeCard:hover { z-index:7; border-color:rgba(99,87,229,.36); border-radius:var(--radius-elevation-active); box-shadow:var(--shadow-elevation-active); }
 .cardTopline { display:flex; align-items:center; justify-content:space-between; margin-bottom:7px; color:#8a94aa; font-size:8px; font-weight:760; letter-spacing:.13em; }
 .cardTopline i { width:5px; height:5px; border-radius:50%; background:#6a83de; box-shadow:0 0 0 3px rgba(106,131,222,.1); }
 .grouprisk .cardTopline i { background:var(--orange); box-shadow:0 0 0 3px rgba(255,90,31,.1); }
@@ -133,8 +133,8 @@
 
 .architecture {
   position:absolute; z-index:5; left:50%; top:45%; width:360px; padding:17px;
-  border:1px solid rgba(75,78,171,.17); border-radius:21px; background:#fff;
-  box-shadow:0 18px 42px rgba(45,48,119,.13), 0 2px 8px rgba(37,49,94,.05);
+  border:1px solid rgba(75,78,171,.17); border-radius:var(--radius-elevation-featured); background:#fff;
+  box-shadow:var(--shadow-elevation-featured);
   opacity:0; transform:translate3d(calc(-50% + var(--pointer-x) * 5px),calc(-46% + var(--pointer-y) * 4px),0) scale(.9);
   transition:transform 980ms cubic-bezier(.16,1.22,.3,1),opacity 620ms cubic-bezier(.22,1,.36,1);
 }

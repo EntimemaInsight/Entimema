@@ -156,7 +156,6 @@ export default function DecisionArchitecture() {
   }, [visible, mode, requestMode]);
 
   useEffect(() => {
-    setActiveStep(0);
     if (!visible || transitioning) return;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduce) return;

@@ -4393,3 +4393,111 @@ html.is-scrolled .header-cta { min-height: 36px; padding-inline: 16px; }
   .process-heading h2 { max-width: 11ch; }
   .case-cta { padding: 52px 0; }
 }
+
+/* =========================================================
+   SPRINT 10.1 — PREMIUM CANVAS COMPOSITION & DEPTH SYSTEM
+   ========================================================= */
+.executive-intelligence__canvas {
+  min-height: 680px;
+  overflow: hidden;
+  border-color: var(--border-subtle);
+  border-radius: var(--radius-stage);
+  box-shadow: var(--shadow-stage);
+}
+.executive-intelligence__dots {
+  animation-duration: var(--motion-grid-duration);
+  animation-timing-function: cubic-bezier(.37, 0, .24, 1);
+}
+.executive-intelligence__glow {
+  width: 680px;
+  height: 470px;
+  animation-duration: var(--motion-glow-duration);
+  animation-timing-function: cubic-bezier(.37, 0, .24, 1);
+}
+.executive-intelligence__top-tags {
+  top: 22px;
+  gap: 10px;
+}
+.executive-intelligence__top-tags span,
+.executive-orbit-tag {
+  min-height: 38px;
+  padding: 8px 15px;
+  border-radius: var(--radius-elevation-base);
+  box-shadow: var(--shadow-elevation-base);
+}
+.executive-intelligence__layout {
+  inset: 82px 42px 118px;
+  grid-template-columns: minmax(240px, 1fr) minmax(350px, 430px) minmax(240px, 1fr);
+  gap: 24px;
+}
+.executive-agent {
+  padding: 16px;
+  border-radius: var(--radius-elevation-active);
+  box-shadow: var(--shadow-elevation-base);
+}
+.executive-agent:hover {
+  border-color: rgba(var(--executive-accent), .24);
+  box-shadow: var(--shadow-elevation-active), 0 0 24px rgba(var(--executive-accent), .055);
+}
+.executive-agent__header {
+  margin-bottom: 12px;
+}
+.executive-agent__steps {
+  padding: 12px 13px;
+  border-radius: var(--radius-elevation-base);
+}
+.executive-agent__step {
+  min-height: 37px;
+  font-size: var(--type-ui-label);
+}
+.executive-profile {
+  border-radius: var(--radius-elevation-featured);
+  box-shadow: var(--shadow-elevation-featured), 0 0 36px rgba(var(--executive-accent), .075) !important;
+}
+.executive-intelligence__output {
+  bottom: 18px;
+  border-radius: var(--radius-elevation-active);
+  box-shadow: var(--shadow-elevation-active);
+}
+.executive-orbit-tag {
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+.executive-intelligence.is-transitioning .executive-intelligence__layout {
+  filter: none;
+}
+
+/* Hover emphasis follows the scene's existing logical connections. */
+.executive-intelligence__canvas:has(.executive-agent--left:hover) .executive-line:not(.executive-line--2):not(.executive-line--4),
+.executive-intelligence__canvas:has(.executive-agent--right:hover) .executive-line:not(.executive-line--3):not(.executive-line--5),
+.executive-intelligence__canvas:has(.executive-profile:hover) .executive-line:not(.executive-line--1):not(.executive-line--6) {
+  opacity: .12;
+}
+.executive-intelligence__canvas:has(.executive-agent--left:hover) :is(.executive-line--2, .executive-line--4),
+.executive-intelligence__canvas:has(.executive-agent--right:hover) :is(.executive-line--3, .executive-line--5),
+.executive-intelligence__canvas:has(.executive-profile:hover) :is(.executive-line--1, .executive-line--6) {
+  opacity: .9;
+  stroke-width: 1.8;
+}
+
+@media (max-width: 1100px) {
+  .executive-intelligence__canvas { min-height: 800px; }
+  .executive-intelligence__layout {
+    inset: 90px 28px 188px;
+    grid-template-columns: 1fr 350px;
+    gap: 22px;
+  }
+  .executive-agent--right { width: min(540px, 70%); }
+  .executive-intelligence__output { bottom: 58px; }
+}
+
+@media (max-width: 760px) {
+  .executive-intelligence__canvas {
+    min-height: auto;
+    padding: 78px 14px 90px;
+    border-radius: 22px;
+  }
+  .executive-intelligence__layout { gap: 16px; }
+  .executive-agent { padding: 15px; }
+  .executive-intelligence__output { margin-top: 16px; }
+}

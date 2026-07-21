@@ -67,18 +67,21 @@ export default function DynamicArchitectureCanvas() {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const svg = svgRef.current;
     if (reduceMotion) {
-      setPhase(4);
       svg?.pauseAnimations();
-      return;
+      const reducedFrame = window.requestAnimationFrame(() => setPhase(4));
+      return () => window.cancelAnimationFrame(reducedFrame);
     }
     if (!active) {
       svg?.pauseAnimations();
       return;
     }
     svg?.unpauseAnimations();
-    setPhase(0);
+    const resetFrame = window.requestAnimationFrame(() => setPhase(0));
     const timer = window.setInterval(() => setPhase((current) => (current + 1) % 5), 2400);
-    return () => window.clearInterval(timer);
+    return () => {
+      window.cancelAnimationFrame(resetFrame);
+      window.clearInterval(timer);
+    };
   }, [active]);
 
   useEffect(() => () => {

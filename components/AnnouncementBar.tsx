@@ -8,7 +8,10 @@ export default function AnnouncementBar() {
   const [isDismissed, setIsDismissed] = useState(false);
 
   useEffect(() => {
-    setIsDismissed(window.sessionStorage.getItem("entimema-announcement-dismissed") === "1");
+    const frame = window.requestAnimationFrame(() => {
+      setIsDismissed(window.sessionStorage.getItem("entimema-announcement-dismissed") === "1");
+    });
+    return () => window.cancelAnimationFrame(frame);
   }, []);
 
   useEffect(() => {
