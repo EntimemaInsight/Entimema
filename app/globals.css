@@ -1,6 +1,16 @@
 @import "../styles/tokens.css";
 @import "../styles/components.css";
 
+:root {
+  --product-grid-size: 20px;
+  --product-grid-dot-color: rgba(78, 98, 178, .40);
+  --product-grid-dot-radius: 1.05px;
+  --product-grid-dot-edge: 1.32px;
+  --product-grid-shimmer: #7585df;
+  --product-grid-shimmer-duration: 8.8s;
+  --product-grid-edge-mask: radial-gradient(ellipse 84% 82% at 50% 48%, #000 0 70%, rgba(0,0,0,.82) 81%, transparent 98%);
+}
+
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; --announcement-height: 56px; }
 body {
@@ -3880,11 +3890,11 @@ html.is-scrolled .header-cta { min-height: 36px; padding-inline: 16px; }
 .executive-intelligence__dots {
   position: absolute;
   inset: 0;
-  opacity: .72;
-  background-image: radial-gradient(circle, rgba(103, 91, 224, .35) 0 1px, transparent 1.25px);
-  background-size: 16px 16px;
-  -webkit-mask-image: radial-gradient(ellipse 74% 72% at 50% 46%, #000 0 52%, transparent 82%);
-  mask-image: radial-gradient(ellipse 74% 72% at 50% 46%, #000 0 52%, transparent 82%);
+  opacity: .76;
+  background-image: radial-gradient(circle, var(--product-grid-dot-color) 0 var(--product-grid-dot-radius), transparent var(--product-grid-dot-edge));
+  background-size: var(--product-grid-size) var(--product-grid-size);
+  -webkit-mask-image: var(--product-grid-edge-mask);
+  mask-image: var(--product-grid-edge-mask);
 }
 .executive-intelligence__glow {
   position: absolute;
@@ -4105,13 +4115,13 @@ html.is-scrolled .header-cta { min-height: 36px; padding-inline: 16px; }
   will-change: opacity, transform;
 }
 @keyframes executive-grid-breathe {
-  0%,100% { opacity:.58; transform:translate3d(0,0,0) scale(1); }
-  50% { opacity:.82; transform:translate3d(0,-2px,0) scale(1.006); }
+  0%,100% { opacity:.68; transform:translate3d(0,0,0) scale(1); }
+  50% { opacity:.82; transform:translate3d(0,-2px,0) scale(1.004); }
 }
 .executive-intelligence__sparkles { position:absolute; inset:0; z-index:1; pointer-events:none; }
-.executive-intelligence__sparkles i { position:absolute; width:4px; height:4px; border-radius:50%; background:rgba(var(--executive-accent),.65); box-shadow:0 0 12px rgba(var(--executive-accent),.65); animation:executive-sparkle 4.8s ease-in-out infinite; opacity:.12; }
+.executive-intelligence__sparkles i { position:absolute; width:3px; height:3px; border-radius:50%; background:var(--product-grid-shimmer); box-shadow:0 0 7px rgba(117,133,223,.42); animation:executive-sparkle var(--product-grid-shimmer-duration) cubic-bezier(.4,0,.2,1) infinite; opacity:0; }
 .executive-intelligence__sparkles i:nth-child(1){left:18%;top:28%;animation-delay:-.4s}.executive-intelligence__sparkles i:nth-child(2){left:31%;top:62%;animation-delay:-2.1s}.executive-intelligence__sparkles i:nth-child(3){left:48%;top:18%;animation-delay:-1.4s}.executive-intelligence__sparkles i:nth-child(4){right:29%;top:55%;animation-delay:-3.2s}.executive-intelligence__sparkles i:nth-child(5){right:16%;top:31%;animation-delay:-.9s}.executive-intelligence__sparkles i:nth-child(6){right:38%;bottom:14%;animation-delay:-2.7s}
-@keyframes executive-sparkle { 0%,100%{opacity:.08;transform:scale(.7)} 45%{opacity:.78;transform:scale(1.7)} 62%{opacity:.2;transform:scale(1)} }
+@keyframes executive-sparkle { 0%,72%,100%{opacity:0;transform:translate3d(0,2px,0) scale(.62)} 80%{opacity:.16} 86%{opacity:.72;transform:translate3d(1px,-1px,0) scale(1.35)} 93%{opacity:.06;transform:translate3d(2px,-2px,0) scale(.84)} }
 .executive-intelligence__glow {
   background:radial-gradient(circle, rgba(var(--executive-accent),.18), rgba(var(--executive-accent),.052) 45%, transparent 73%) !important;
   animation:executive-glow-breathe 6.8s ease-in-out infinite;

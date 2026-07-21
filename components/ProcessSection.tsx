@@ -17,27 +17,6 @@ export default function ProcessSection() {
         </div>
 
         <DynamicArchitectureCanvas />
-
-        <div className="process-summary">
-          <div className="process-summary__item process-summary__item--primary">
-            <p>
-              Целта е проста:
-              <br />
-              <strong>
-                да превърнем <em>сложността в яснота,</em>
-                <br /> а анализа — в <em>действие.</em>
-              </strong>
-            </p>
-          </div>
-          <span className="process-summary__divider" aria-hidden="true" />
-          <div className="process-summary__item">
-            <p>
-              Така изграждаме
-              <br />
-              <strong>устойчиви системи за растеж.</strong>
-            </p>
-          </div>
-        </div>
       </div>
     </section>
   );
