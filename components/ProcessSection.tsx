@@ -117,12 +117,7 @@ export default function ProcessSection() {
         </div>
 
         <div className="process-quote">
-          <i aria-hidden="true" />
-          <p>
-            Променя се контекстът,
-            <br />
-            а не логиката.
-          </p>
+          <p>Променя се контекстът, а не логиката.</p>
         </div>
 
         <div className="process-flow" aria-label="Етапи на работа">

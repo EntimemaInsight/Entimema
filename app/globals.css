@@ -1312,14 +1312,15 @@ html.announcement-collapsed .site-header {
   position: relative;
   z-index: 2;
   display: grid;
-  grid-template-columns: minmax(0,1.15fr) minmax(320px,.85fr);
-  column-gap: clamp(64px, 8vw, 150px);
+  grid-template-columns: minmax(0, 1fr);
   row-gap: 30px;
   align-items: start;
 }
 .process-heading h2 {
   margin: 0;
-  max-width: 780px;
+  max-width: 1100px;
+  margin-inline: auto;
+  text-align: center;
   font-size: clamp(48px, 4.8vw, 78px);
   line-height: .99;
   letter-spacing: -.048em;
@@ -1329,24 +1330,18 @@ html.announcement-collapsed .site-header {
 }
 .process-heading h2 em { color: var(--brand-orange-500); font-style: normal; }
 .process-quote {
-  align-self: center;
-  display: grid;
-  grid-template-columns: 1px 1fr;
-  column-gap: 58px;
-  padding-top: 14px;
-}
-.process-quote i {
-  display:block;
-  width:1px;
-  height: 90px;
-  background: linear-gradient(180deg,var(--brand-orange-500) 0 8px, rgba(7,48,145,.22) 8px 100%);
+  width: 100%;
+  margin-inline: auto;
+  text-align: center;
+  padding-top: 0;
 }
 .process-quote p {
-  margin: 18px 0 0;
+  margin: 0;
   font-size: clamp(18px, 1.45vw, 24px);
-  line-height: 1.65;
+  line-height: 1.45;
   font-weight: 520;
   color: var(--brand-navy-950);
+  white-space: nowrap;
 }
 .process-flow {
   grid-column: 1 / -1;
@@ -3841,6 +3836,13 @@ html.is-scrolled .header-cta { min-height: 36px; padding-inline: 16px; }
     background-size:18px 18px;
     -webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 8%,#000 90%,transparent 100%);
     mask-image:linear-gradient(to bottom,transparent 0,#000 8%,#000 90%,transparent 100%);
+  }
+}
+
+
+@media (max-width: 680px) {
+  .process-quote p {
+    white-space: normal;
   }
 }
 
