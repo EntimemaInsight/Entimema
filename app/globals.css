@@ -3843,3 +3843,19 @@ html.is-scrolled .header-cta { min-height: 36px; padding-inline: 16px; }
     mask-image:linear-gradient(to bottom,transparent 0,#000 8%,#000 90%,transparent 100%);
   }
 }
+
+/* Sprint L — static foundation for the future scroll-driven process animation. */
+.process-section--static .process-flow__unit {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+.process-section--static .process-heading,
+.process-section--static .process-quote,
+.process-section--static .process-summary {
+  opacity: 1;
+  transform: none;
+}
+.process-section--static .process-step__icon {
+  will-change: auto;
+}

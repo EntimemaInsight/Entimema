@@ -4,6 +4,7 @@ import Hero from "@/components/Hero";
 import DecisionArchitecture from "@/components/DecisionArchitecture";
 import ApproachSection from "@/components/ApproachSection";
 import PhilosophySection from "@/components/PhilosophySection";
+import ProcessSection from "@/components/ProcessSection";
 import CaseCtaSection from "@/components/CaseCtaSection";
 
 export default function Home() {
@@ -17,6 +18,7 @@ export default function Home() {
       <DecisionArchitecture />
       <ApproachSection />
       <PhilosophySection />
+      <ProcessSection />
       <CaseCtaSection />
     </main>
   );
