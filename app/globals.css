@@ -2148,6 +2148,205 @@ html.is-scrolled .header-cta { min-height: 36px; padding-inline: 16px; }
   .motion-reveal.is-in-view { opacity: 1 !important; transform: none !important; }
 }
 
+/* =========================================================
+   SPRINT 10.4 — EXECUTIVE INSIGHT COMPOSITION & KPI CARDS
+   ========================================================= */
+.philosophy-section--split {
+  padding-block: clamp(92px, 7.5vw, 132px);
+  background:
+    radial-gradient(ellipse at 52% 56%, rgba(105, 92, 211, .075), transparent 46%),
+    linear-gradient(180deg, #fbfcff 0%, #f6f8fd 52%, #fafbfe 100%);
+}
+.philosophy-section--split::after {
+  content: "";
+  position: absolute;
+  inset: clamp(180px, 17vw, 270px) 4% 4%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: .45;
+  background:
+    linear-gradient(90deg, transparent 0 68%, rgba(63, 72, 132, .045) 68.1% 68.2%, transparent 68.3%),
+    linear-gradient(0deg, transparent 0 42%, rgba(91, 79, 205, .035) 42.1% 42.2%, transparent 42.3%);
+  mask-image: linear-gradient(90deg, transparent, #000 38%, #000 88%, transparent);
+}
+.philosophy-section__blueprint {
+  inset: clamp(220px, 19vw, 310px) 0 2% 42%;
+  width: 62%;
+  height: calc(100% - clamp(220px, 19vw, 310px));
+  opacity: .026;
+  mask-image: linear-gradient(90deg, transparent 0, #000 24%, #000 92%, transparent 100%);
+}
+.philosophy-section__blueprint .blueprint-structure path { stroke-width: 1.45; }
+.philosophy-section__blueprint .blueprint-focal-line { opacity: .85; }
+.philosophy-section__composition {
+  grid-template-columns: minmax(0, 1.62fr) minmax(340px, .78fr);
+  gap: clamp(18px, 1.8vw, 26px);
+  margin-top: clamp(42px, 4.5vw, 68px);
+}
+.philosophy-quote-card {
+  min-height: clamp(410px, 34vw, 500px);
+  padding: clamp(42px, 4.25vw, 66px);
+}
+.philosophy-quote-card__blueprint {
+  inset: 2% -3% 0 56%;
+  width: 49%;
+  height: 96%;
+  opacity: .035;
+  mask-image: linear-gradient(90deg, transparent, #000 25%);
+}
+.philosophy-quote-card__blueprint .blueprint-grid path { opacity: .72; }
+.philosophy-quote-card__blueprint .blueprint-structure path { stroke-width: 1.5; }
+.blueprint-focal-line {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+  opacity: .78;
+}
+.blueprint-signal {
+  fill: rgba(99, 83, 222, .78);
+  opacity: 0;
+  offset-path: path("M405 360 L575 168 L760 250 L920 92");
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.philosophy-section.is-in-viewport .blueprint-signal {
+  animation: philosophy-blueprint-signal 8.5s cubic-bezier(.4, 0, .2, 1) infinite;
+}
+.philosophy-section.is-in-viewport .blueprint-nodes g:nth-child(3n + 1) {
+  animation: philosophy-node-pulse 6s cubic-bezier(.16, 1, .3, 1) infinite;
+}
+.philosophy-quote-card__mark {
+  top: 26px;
+  right: clamp(28px, 3.8vw, 56px);
+  color: #8179b3;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(120px, 10vw, 166px);
+  opacity: .055;
+}
+.philosophy-quote-card__principle { margin-bottom: clamp(34px, 3.6vw, 52px); }
+.philosophy-quote-card p {
+  max-width: min(62%, 690px);
+  font-size: clamp(25px, 2vw, 34px);
+  line-height: 1.24;
+  letter-spacing: -.038em;
+}
+.philosophy-quote-card p > span:first-child {
+  font-size: 1.08em;
+  font-weight: 550;
+}
+.philosophy-quote-card p > span:nth-child(3) {
+  margin-top: .86em;
+  font-size: .91em;
+  line-height: 1.31;
+}
+.philosophy-metrics { gap: clamp(18px, 1.8vw, 26px); }
+.philosophy-metric-card {
+  min-height: 0;
+  padding: clamp(30px, 2.6vw, 42px);
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto 1fr;
+  grid-template-areas: "value value" "copy action";
+  align-items: end;
+  gap: clamp(26px, 2.7vw, 38px) 20px;
+}
+.philosophy-metric-card::before {
+  background:
+    linear-gradient(135deg, transparent 0 70%, rgba(90, 78, 200, .035) 70.1% 70.28%, transparent 70.4%),
+    radial-gradient(circle at 88% 16%, rgba(91, 79, 205, .07) 0 2px, transparent 2.5px);
+}
+.philosophy-metric-card strong {
+  grid-area: value;
+  align-self: start;
+  font-size: clamp(58px, 5vw, 76px);
+  line-height: .88;
+}
+.philosophy-metric-card__copy {
+  position: relative;
+  z-index: 1;
+  grid-area: copy;
+  min-width: 0;
+}
+.philosophy-metric-card__copy span,
+.philosophy-metric-card__copy small { display: block; }
+.philosophy-metric-card__copy span {
+  color: #1e2c48;
+  font-size: clamp(17px, 1.25vw, 20px);
+  font-weight: 650;
+  line-height: 1.22;
+  letter-spacing: -.025em;
+}
+.philosophy-metric-card__copy small {
+  margin-top: 7px;
+  color: #7a8499;
+  font-size: clamp(13px, .92vw, 15px);
+  line-height: 1.35;
+}
+.philosophy-metric-card a {
+  position: relative;
+  z-index: 2;
+  grid-area: action;
+  width: 48px;
+  height: 48px;
+  border-radius: 13px;
+  background: linear-gradient(145deg, #192c5b, #4d42c6);
+  box-shadow: 0 10px 22px rgba(42, 43, 119, .18), inset 0 1px 0 rgba(255, 255, 255, .24);
+  transition: transform 280ms cubic-bezier(.16, 1, .3, 1), box-shadow 280ms ease-out;
+}
+.philosophy-metric-card a svg { width: 20px; height: 20px; }
+.philosophy-metric-card a path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 280ms cubic-bezier(.16, 1, .3, 1);
+}
+.philosophy-metric-card a:hover {
+  transform: translate3d(0, -2px, 0);
+  box-shadow: 0 14px 28px rgba(56, 48, 158, .25), inset 0 1px 0 rgba(255, 255, 255, .28), 0 0 18px rgba(91, 79, 205, .09);
+}
+.philosophy-metric-card a:hover path { transform: translateX(2.5px); }
+.philosophy-metric-card a:focus-visible {
+  outline: 3px solid rgba(91, 79, 205, .25);
+  outline-offset: 3px;
+}
+@keyframes philosophy-blueprint-signal {
+  0%, 12% { offset-distance: 0%; opacity: 0; transform: scale(.72); }
+  18% { opacity: .72; }
+  72% { opacity: .5; }
+  82%, 100% { offset-distance: 100%; opacity: 0; transform: scale(1); }
+}
+@keyframes philosophy-node-pulse {
+  0%, 42%, 100% { opacity: .48; transform: scale(1); }
+  48% { opacity: 1; transform: scale(1.16); }
+  56% { opacity: .55; transform: scale(1); }
+}
+@media (max-width: 1050px) {
+  .philosophy-section__composition { grid-template-columns: 1fr; }
+  .philosophy-quote-card p { max-width: 62%; }
+  .philosophy-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: none; }
+  .philosophy-metric-card { min-height: 245px; }
+}
+@media (max-width: 700px) {
+  .philosophy-section--split { padding-block: 76px 86px; }
+  .philosophy-section__blueprint { left: 62%; width: 50%; opacity: .014; }
+  .philosophy-quote-card { padding: 34px 26px 38px; }
+  .philosophy-quote-card__blueprint { inset: 4% -5% 2% 68%; width: 38%; opacity: .025; }
+  .philosophy-quote-card__mark { top: 22px; right: 20px; font-size: 102px; }
+  .philosophy-quote-card p { max-width: 100%; font-size: 20px; line-height: 1.36; }
+  .philosophy-quote-card p > span:nth-child(3) { font-size: .94em; }
+  .philosophy-metrics { grid-template-columns: 1fr; }
+  .philosophy-metric-card { min-height: 212px; padding: 30px 26px; }
+  .philosophy-metric-card strong { font-size: 60px; }
+  .philosophy-metric-card a { width: 50px; height: 50px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .philosophy-section.is-in-viewport .blueprint-signal,
+  .philosophy-section.is-in-viewport .blueprint-nodes g { animation: none; }
+  .blueprint-signal { display: none; }
+}
+
 /* Sprint C — institutional philosophy section */
 .philosophy-section {
   position: relative;
@@ -4728,4 +4927,56 @@ html.is-scrolled .header-cta { min-height: 36px; padding-inline: 16px; }
   .philosophy-quote-card__blueprint,
   .philosophy-quote-card__mark,
   .philosophy-quote-card__principle i { transition: none; }
+}
+
+/* Sprint 10.4 final cascade layer */
+.philosophy-section--split {
+  padding-block: clamp(92px, 7.5vw, 132px);
+  background: radial-gradient(ellipse at 52% 56%, rgba(105,92,211,.075), transparent 46%), linear-gradient(180deg,#fbfcff 0%,#f6f8fd 52%,#fafbfe 100%);
+}
+.philosophy-section--split::after {
+  content:""; position:absolute; inset:clamp(180px,17vw,270px) 4% 4%; z-index:0; pointer-events:none; opacity:.45;
+  background:linear-gradient(90deg,transparent 0 68%,rgba(63,72,132,.045) 68.1% 68.2%,transparent 68.3%),linear-gradient(0deg,transparent 0 42%,rgba(91,79,205,.035) 42.1% 42.2%,transparent 42.3%);
+  mask-image:linear-gradient(90deg,transparent,#000 38%,#000 88%,transparent);
+}
+.philosophy-section__blueprint { inset:clamp(220px,19vw,310px) 0 2% 42%; width:62%; height:calc(100% - clamp(220px,19vw,310px)); opacity:.026; mask-image:linear-gradient(90deg,transparent 0,#000 24%,#000 92%,transparent 100%); }
+.philosophy-section__composition { grid-template-columns:minmax(0,1.62fr) minmax(340px,.78fr); gap:clamp(18px,1.8vw,26px); margin-top:clamp(42px,4.5vw,68px); }
+.philosophy-quote-card { min-height:clamp(410px,34vw,500px); padding:clamp(42px,4.25vw,66px); }
+.philosophy-quote-card__blueprint { inset:2% -3% 0 56%; width:49%; height:96%; opacity:.035; mask-image:linear-gradient(90deg,transparent,#000 25%); }
+.philosophy-quote-card__mark { top:26px; right:clamp(28px,3.8vw,56px); color:#8179b3; font-family:Georgia,"Times New Roman",serif; font-size:clamp(120px,10vw,166px); opacity:.055; }
+.philosophy-quote-card__principle { margin-bottom:clamp(34px,3.6vw,52px); }
+.philosophy-quote-card p { max-width:min(62%,690px); font-size:clamp(25px,2vw,34px); line-height:1.24; letter-spacing:-.038em; }
+.philosophy-quote-card p>span:first-child { font-size:1.08em; font-weight:550; }
+.philosophy-quote-card p>span:nth-child(3) { margin-top:.86em; font-size:.91em; line-height:1.31; }
+.philosophy-metrics { gap:clamp(18px,1.8vw,26px); }
+.philosophy-metric-card { min-height:0; padding:clamp(30px,2.6vw,42px); grid-template-columns:1fr auto; grid-template-rows:auto 1fr; grid-template-areas:"value value" "copy action"; align-items:end; gap:clamp(26px,2.7vw,38px) 20px; }
+.philosophy-metric-card strong { grid-area:value; align-self:start; font-size:clamp(58px,5vw,76px); line-height:.88; }
+.philosophy-metric-card__copy { position:relative; z-index:1; grid-area:copy; min-width:0; }
+.philosophy-metric-card__copy span,.philosophy-metric-card__copy small { display:block; }
+.philosophy-metric-card__copy span { color:#1e2c48; font-size:clamp(17px,1.25vw,20px); font-weight:650; line-height:1.22; letter-spacing:-.025em; }
+.philosophy-metric-card__copy small { margin-top:7px; color:#7a8499; font-size:clamp(13px,.92vw,15px); line-height:1.35; }
+.philosophy-metric-card a { position:relative; z-index:2; grid-area:action; width:48px; height:48px; border-radius:13px; background:linear-gradient(145deg,#192c5b,#4d42c6); box-shadow:0 10px 22px rgba(42,43,119,.18),inset 0 1px 0 rgba(255,255,255,.24); transition:transform 280ms cubic-bezier(.16,1,.3,1),box-shadow 280ms ease-out; }
+.philosophy-metric-card a svg { width:20px; height:20px; }
+.philosophy-metric-card a path { fill:none; stroke:currentColor; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; transition:transform 280ms cubic-bezier(.16,1,.3,1); }
+.philosophy-metric-card a:hover { transform:translate3d(0,-2px,0); box-shadow:0 14px 28px rgba(56,48,158,.25),inset 0 1px 0 rgba(255,255,255,.28),0 0 18px rgba(91,79,205,.09); }
+.philosophy-metric-card a:hover path { transform:translateX(2.5px); }
+.philosophy-metric-card a:focus-visible { outline:3px solid rgba(91,79,205,.25); outline-offset:3px; }
+@media (max-width:1050px) {
+  .philosophy-section__composition { grid-template-columns:1fr; }
+  .philosophy-quote-card p { max-width:62%; }
+  .philosophy-metrics { grid-template-columns:repeat(2,minmax(0,1fr)); grid-template-rows:none; }
+  .philosophy-metric-card { min-height:245px; }
+}
+@media (max-width:700px) {
+  .philosophy-section--split { padding-block:76px 86px; }
+  .philosophy-section__blueprint { left:62%; width:50%; opacity:.014; }
+  .philosophy-quote-card { padding:34px 26px 38px; }
+  .philosophy-quote-card__blueprint { inset:4% -5% 2% 68%; width:38%; opacity:.025; }
+  .philosophy-quote-card__mark { top:22px; right:20px; font-size:102px; }
+  .philosophy-quote-card p { max-width:100%; font-size:20px; line-height:1.36; }
+  .philosophy-quote-card p>span:nth-child(3) { font-size:.94em; }
+  .philosophy-metrics { grid-template-columns:1fr; }
+  .philosophy-metric-card { min-height:212px; padding:30px 26px; }
+  .philosophy-metric-card strong { font-size:60px; }
+  .philosophy-metric-card a { width:50px; height:50px; }
 }

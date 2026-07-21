@@ -8,13 +8,19 @@ const metrics = [
     value: "98%+",
     start: 97.9,
     end: 98,
-    label: "по-бързи решения чрез интегрирани данни",
+    title: "По-бързи решения",
+    description: "чрез интегрирани данни",
+    href: "#about",
+    ariaLabel: "Към секцията за финансова архитектура и интегрирани данни",
   },
   {
     value: "95%+",
     start: 94.8,
     end: 95,
-    label: "намаляване на ръчната работа чрез автоматизация",
+    title: "По-малко ръчна работа",
+    description: "чрез автоматизация",
+    href: "#approach",
+    ariaLabel: "Към секцията за автоматизация и управленска архитектура",
   },
 ] as const;
 
@@ -31,6 +37,8 @@ function ArchitectureBlueprint({ className }: { className: string }) {
         <path d="M250 292V112M575 168V520M760 250V78" />
         <path d="M160 530 310 420 490 482 650 340 860 410" />
       </g>
+      <path className="blueprint-focal-line" d="M405 360 575 168 760 250 920 92" />
+      <circle className="blueprint-signal" r="4" />
       <g className="blueprint-nodes">
         {[[90,470],[250,292],[405,360],[575,168],[760,250],[920,92],[310,420],[650,340],[860,410]].map(([x,y]) => (
           <g transform={`translate(${x} ${y})`} key={`${x}-${y}`}><circle r="7" /><circle r="2" /></g>
@@ -47,6 +55,7 @@ function ArchitectureBlueprint({ className }: { className: string }) {
 export default function PhilosophySection() {
   const ref = useRef<HTMLElement>(null);
   const animationFrame = useRef<number | null>(null);
+  const hasAnimatedMetrics = useRef(false);
   const [metricValues, setMetricValues] = useState<number[]>(metrics.map((metric) => metric.start));
 
   useEffect(() => {
@@ -55,11 +64,13 @@ export default function PhilosophySection() {
 
     const observer = new IntersectionObserver(
       ([entry]) => {
+        section.classList.toggle("is-in-viewport", entry.isIntersecting);
         if (entry.isIntersecting) {
           section.classList.add("is-visible");
+          if (hasAnimatedMetrics.current) return;
+          hasAnimatedMetrics.current = true;
           if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
             setMetricValues(metrics.map((metric) => metric.end));
-            observer.disconnect();
             return;
           }
           const startedAt = performance.now();
@@ -70,7 +81,6 @@ export default function PhilosophySection() {
             if (progress < 1) animationFrame.current = window.requestAnimationFrame(animateMetrics);
           };
           animationFrame.current = window.requestAnimationFrame(animateMetrics);
-          observer.disconnect();
         }
       },
       { threshold: 0.18 },
@@ -117,7 +127,15 @@ export default function PhilosophySection() {
                 <strong aria-label={metric.value}>
                   {metricValues[index] >= metric.end - 0.005 ? metric.value : `${metricValues[index].toFixed(1)}%`}
                 </strong>
-                <span>{metric.label}</span>
+                <div className="philosophy-metric-card__copy">
+                  <span>{metric.title}</span>
+                  <small>{metric.description}</small>
+                </div>
+                <a href={metric.href} aria-label={metric.ariaLabel}>
+                  <svg viewBox="0 0 20 20" aria-hidden="true">
+                    <path d="M4 10h11M11 6l4 4-4 4" />
+                  </svg>
+                </a>
               </article>
             ))}
           </div>
