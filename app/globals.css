@@ -4177,3 +4177,217 @@ html.is-scrolled .header-cta { min-height: 36px; padding-inline: 16px; }
   .executive-data-pulse { display:none; }
   .executive-profile__image img { transform:none !important; }
 }
+
+/* =========================================================
+   SPRINT 9.3A — GLOBAL LAYOUT, TYPOGRAPHY & SCROLL RHYTHM
+   Final homepage overrides: one type scale, one spacing scale.
+   ========================================================= */
+:root {
+  --type-display: clamp(44px, 5vw, 78px);
+  --type-section: clamp(40px, 4.35vw, 68px);
+  --type-subtitle: clamp(17px, 1.24vw, 21px);
+  --type-body-large: clamp(17px, 1.12vw, 20px);
+  --type-body: 16px;
+  --type-ui-label: 11px;
+  --leading-display: .96;
+  --leading-section: 1;
+  --leading-subtitle: 1.5;
+  --leading-body: 1.6;
+  --tracking-display: -.055em;
+  --tracking-section: -.052em;
+  --tracking-copy: -.016em;
+  --heading-max-width: 18ch;
+  --copy-max-width: 900px;
+  --space-section: clamp(72px, 7vw, 108px);
+  --space-section-tight: clamp(54px, 5vw, 80px);
+  --space-heading-copy: clamp(18px, 1.8vw, 28px);
+  --space-copy-stage: clamp(30px, 3vw, 46px);
+}
+
+/* Hero: compact first viewport with the following canvas already in view. */
+.home-stage {
+  position: relative;
+  top: auto;
+  display: block;
+  height: auto;
+  min-height: 0;
+  overflow: visible;
+  background: #fff;
+}
+.hero {
+  height: auto;
+  min-height: clamp(460px, calc(100svh - 260px), 620px);
+  align-items: flex-start;
+  overflow: clip;
+}
+.hero__layout--editorial {
+  min-height: inherit;
+  padding: 0;
+  align-items: flex-start;
+}
+.hero__copy--editorial {
+  width: 100%;
+  max-width: 1220px !important;
+  padding: clamp(44px, 5.2vh, 68px) 0 clamp(38px, 4.8vh, 62px);
+  justify-content: flex-start;
+}
+.hero__title--editorial {
+  width: 100%;
+  max-width: 1220px !important;
+  font-size: var(--type-display);
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-display);
+}
+.hero__description--editorial {
+  max-width: var(--copy-max-width);
+  margin-top: var(--space-heading-copy);
+  font-size: var(--type-subtitle);
+  line-height: var(--leading-subtitle);
+  letter-spacing: var(--tracking-copy);
+}
+.hero__cta {
+  min-width: 184px;
+  height: 50px;
+  margin-top: clamp(18px, 2vh, 24px);
+  font-size: var(--type-body);
+}
+
+/* One heading/subtitle language across the homepage. */
+.approach-section--tiles .approach-section__intro h2,
+.philosophy-section--split .philosophy-section__title h2,
+.process-heading h2,
+.case-cta h2 {
+  max-width: var(--heading-max-width);
+  font-size: var(--type-section);
+  line-height: var(--leading-section);
+  letter-spacing: var(--tracking-section);
+  font-weight: 650;
+}
+.approach-section--tiles .approach-section__lead,
+.process-quote p {
+  max-width: var(--copy-max-width);
+  margin-top: var(--space-heading-copy);
+  font-size: var(--type-subtitle);
+  line-height: var(--leading-subtitle);
+  letter-spacing: var(--tracking-copy);
+}
+.philosophy-quote-card p,
+.philosophy-metric-card > span {
+  line-height: var(--leading-body);
+  letter-spacing: var(--tracking-copy);
+}
+.approach-tile__title,
+.case-cta__eyebrow,
+.executive-agent__header small,
+.executive-intelligence__switch button {
+  letter-spacing: .08em;
+}
+
+/* Homepage section rhythm: no decorative full-screen gaps. */
+.decision-architecture.executive-intelligence {
+  min-height: 0;
+  padding: clamp(26px, 2.8vw, 42px) 0 var(--space-section-tight);
+}
+.approach-section--tiles {
+  min-height: 0;
+  padding: var(--space-section) 0;
+}
+.approach-section--tiles .approach-section__lead {
+  margin-top: var(--space-heading-copy);
+}
+.approach-section--tiles .approach-section__tiles {
+  margin-top: var(--space-copy-stage);
+}
+.philosophy-section--split {
+  min-height: 0;
+  padding: var(--space-section) 0;
+}
+.philosophy-section__composition {
+  margin-top: var(--space-copy-stage);
+}
+.process-section {
+  min-height: 0;
+  padding: var(--space-section) 0 var(--space-section-tight);
+  overflow: visible;
+  background: #fff;
+  border-top-color: rgba(7, 27, 82, .055);
+}
+.process-section::before,
+.process-section::after {
+  display: none;
+}
+.process-section__inner {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0;
+}
+.process-heading h2 {
+  max-width: 17ch;
+}
+.process-quote {
+  padding: 0;
+}
+.process-section__inner > [aria-label="Dynamic management architecture"] {
+  width: 100%;
+  margin-top: var(--space-copy-stage);
+}
+.case-cta {
+  padding: var(--space-section-tight) 0;
+}
+
+/* Skip offscreen rendering safely and pause existing loops outside viewport. */
+.decision-architecture,
+.approach-section,
+.philosophy-section,
+.process-section,
+.case-cta {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 760px;
+}
+.executive-intelligence:not(.is-visible) .executive-intelligence__dots,
+.executive-intelligence:not(.is-visible) .executive-intelligence__sparkles i,
+.executive-intelligence:not(.is-visible) .executive-intelligence__glow,
+.executive-intelligence:not(.is-visible) .executive-intelligence__connections path,
+.executive-intelligence:not(.is-visible) .executive-data-pulse,
+.executive-intelligence:not(.is-visible) .executive-agent,
+.executive-intelligence:not(.is-visible) .executive-profile,
+.executive-intelligence:not(.is-visible) .executive-profile__scan,
+.executive-intelligence:not(.is-visible) .executive-intelligence__output {
+  animation-play-state: paused !important;
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --type-display: clamp(44px, 7vw, 66px);
+    --type-section: clamp(38px, 5.8vw, 58px);
+    --space-section: clamp(66px, 8vw, 84px);
+  }
+  .hero { min-height: clamp(430px, calc(100svh - 220px), 560px); }
+  .hero__copy--editorial { padding: 48px 0 46px; }
+  .hero__title--editorial > span { white-space: normal; }
+  .decision-architecture.executive-intelligence { padding-top: 22px; }
+}
+
+@media (max-width: 680px) {
+  :root {
+    --type-display: clamp(39px, 11.2vw, 48px);
+    --type-section: clamp(36px, 9.8vw, 46px);
+    --type-subtitle: 17px;
+    --type-body-large: 17px;
+    --space-section: 64px;
+    --space-section-tight: 52px;
+    --space-heading-copy: 18px;
+    --space-copy-stage: 28px;
+  }
+  .hero { min-height: 0; }
+  .hero__copy--editorial { padding: 46px 0 48px; }
+  .hero__title--editorial { max-width: 10.8ch !important; line-height: .98; }
+  .hero__description--editorial { max-width: 32rem; }
+  .hero__cta { height: 48px; margin-top: 20px; }
+  .decision-architecture.executive-intelligence { padding: 18px 0 56px; }
+  .approach-section--tiles,
+  .philosophy-section--split,
+  .process-section { padding: 64px 0; }
+  .process-heading h2 { max-width: 11ch; }
+  .case-cta { padding: 52px 0; }
+}
