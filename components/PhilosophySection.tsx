@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { SectionHeader } from "./ui";
 
 const metrics = [
   {
@@ -38,12 +39,15 @@ export default function PhilosophySection() {
     <section className="philosophy-section philosophy-section--split" id="philosophy" ref={ref}>
       <div className="philosophy-section__dotfield" aria-hidden="true" />
       <div className="site-container philosophy-section__inner">
-        <div className="philosophy-section__title philosophy-reveal philosophy-reveal--1">
-          <h2>
-            <span>Начинът на мислене определя</span>
-            <span className="philosophy-section__accent">качеството на решенията.</span>
-          </h2>
-        </div>
+        <SectionHeader
+          className="philosophy-section__title philosophy-reveal philosophy-reveal--1"
+          title={
+            <>
+              <span>Начинът на мислене определя</span>
+              <span className="philosophy-section__accent">качеството на решенията.</span>
+            </>
+          }
+        />
 
         <div className="philosophy-section__composition philosophy-reveal philosophy-reveal--2">
           <blockquote className="philosophy-quote-card">

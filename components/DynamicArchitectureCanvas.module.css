@@ -10,12 +10,12 @@
   isolation: isolate;
   min-height: 510px;
   overflow: hidden;
-  border: 1px solid rgba(29, 55, 121, .105);
-  border-radius: 30px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-stage);
   background:
     linear-gradient(135deg, rgba(255,255,255,.98), rgba(247,249,255,.96) 52%, rgba(243,247,255,.98)),
     #f7f9fd;
-  box-shadow: 0 24px 70px rgba(28, 45, 98, .09), inset 0 1px 0 #fff;
+  box-shadow: var(--shadow-stage), inset 0 1px 0 #fff;
   contain: layout paint;
 }
 

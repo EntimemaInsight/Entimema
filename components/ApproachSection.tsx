@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef } from "react";
+import { SectionHeader } from "./ui";
 
 type SystemCardProps = {
   kind: "finance" | "risk";
@@ -69,17 +70,23 @@ export default function ApproachSection() {
     <section className="approach-section approach-section--tiles" id="about" ref={ref}>
       <div className="approach-section__dotfield" aria-hidden="true" />
       <div className="site-container approach-section__inner">
-        <div className="approach-section__intro reveal reveal--1">
-          <h2>
-            <span>Финанси и риск,</span>
-            <span className="approach-section__accent">мислени като една система.</span>
-          </h2>
-        </div>
-        <p className="approach-section__lead reveal reveal--2">
-          Финансовата архитектура и управлението на риска създават най-голяма стойност,
-          когато споделят обща логика, данни и методология. Различни дисциплини — една
-          система за по-добри решения.
-        </p>
+        <SectionHeader
+          className="approach-section__intro reveal reveal--1"
+          subtitleClassName="approach-section__lead reveal reveal--2"
+          title={
+            <>
+              <span>Финанси и риск,</span>
+              <span className="approach-section__accent">мислени като една система.</span>
+            </>
+          }
+          subtitle={
+            <>
+              Финансовата архитектура и управлението на риска създават най-голяма стойност,
+              когато споделят обща логика, данни и методология. Различни дисциплини — една
+              система за по-добри решения.
+            </>
+          }
+        />
         <div className="approach-section__tiles reveal reveal--3">
           <SystemCard kind="finance" title="Finance" href="/services/financial-architecture" />
           <SystemCard kind="risk" title="Risk" href="/services/risk-management" />
