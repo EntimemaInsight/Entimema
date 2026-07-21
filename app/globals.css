@@ -3861,3 +3861,123 @@ html.is-scrolled .header-cta { min-height: 36px; padding-inline: 16px; }
 .process-section--static .process-step__icon {
   will-change: auto;
 }
+
+/* Sprint N — Executive Intelligence interactive scene */
+.executive-intelligence {
+  padding: clamp(58px, 6vw, 92px) 0 clamp(80px, 8vw, 124px);
+  background: linear-gradient(180deg, #fbfcff 0%, #fff 100%);
+}
+.executive-intelligence__canvas {
+  position: relative;
+  min-height: 760px;
+  overflow: hidden;
+  border: 1px solid rgba(18, 46, 110, .09);
+  border-radius: 30px;
+  background: rgba(255,255,255,.88);
+  box-shadow: 0 30px 90px rgba(20, 44, 109, .08);
+  isolation: isolate;
+}
+.executive-intelligence__dots {
+  position: absolute;
+  inset: 0;
+  opacity: .72;
+  background-image: radial-gradient(circle, rgba(103, 91, 224, .35) 0 1px, transparent 1.25px);
+  background-size: 16px 16px;
+  -webkit-mask-image: radial-gradient(ellipse 74% 72% at 50% 46%, #000 0 52%, transparent 82%);
+  mask-image: radial-gradient(ellipse 74% 72% at 50% 46%, #000 0 52%, transparent 82%);
+}
+.executive-intelligence__glow {
+  position: absolute;
+  left: 50%; top: 48%;
+  width: 740px; height: 560px;
+  transform: translate(-50%,-50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(91,77,224,.16), rgba(91,77,224,.055) 44%, transparent 72%);
+  pointer-events: none;
+}
+.executive-intelligence.is-risk .executive-intelligence__glow {
+  background: radial-gradient(circle, rgba(255,100,28,.13), rgba(255,100,28,.045) 44%, transparent 72%);
+}
+.executive-intelligence__connections { position:absolute; inset:0; width:100%; height:100%; z-index:1; pointer-events:none; }
+.executive-intelligence__connections path { fill:none; stroke:rgba(91,77,224,.26); stroke-width:1.25; stroke-dasharray:3 6; stroke-dashoffset:90; animation: executive-line 4s linear infinite; }
+.executive-intelligence.is-risk .executive-intelligence__connections path { stroke:rgba(255,101,29,.25); }
+@keyframes executive-line { to { stroke-dashoffset:0; } }
+.executive-intelligence__top-tags { position:absolute; z-index:4; top:32px; left:50%; width:min(820px,66%); transform:translateX(-50%); display:flex; justify-content:center; gap:14px; }
+.executive-intelligence__top-tags span,.executive-orbit-tag {
+  display:inline-flex; align-items:center; justify-content:center; min-height:42px; padding:9px 18px;
+  border:1px solid rgba(63,73,156,.10); border-radius:11px; background:rgba(255,255,255,.94);
+  box-shadow:0 10px 28px rgba(26,39,91,.065); color:#263786; font-size:13px; font-weight:620;
+  opacity:0; transform:translateY(12px); animation:executive-tag-in .72s cubic-bezier(.2,.8,.2,1) forwards; animation-delay:calc(var(--tag) * 80ms + 120ms);
+}
+.executive-intelligence.is-risk .executive-intelligence__top-tags span,.executive-intelligence.is-risk .executive-orbit-tag { color:#d95419; }
+@keyframes executive-tag-in { to { opacity:1; transform:none; } }
+.executive-intelligence__layout { position:absolute; z-index:3; inset:105px 50px 148px; display:grid; grid-template-columns:minmax(250px,1fr) minmax(330px,420px) minmax(250px,1fr); align-items:center; gap:36px; animation:executive-scene-in .72s cubic-bezier(.2,.8,.2,1) both; }
+@keyframes executive-scene-in { from { opacity:0; transform:translateY(12px) scale(.99); } to { opacity:1; transform:none; } }
+.executive-agent { position:relative; border:1px solid rgba(25,48,106,.10); border-radius:22px; padding:18px; background:rgba(255,255,255,.93); box-shadow:0 22px 60px rgba(24,45,102,.09); }
+.executive-agent__header { display:flex; align-items:center; gap:13px; margin-bottom:15px; }
+.executive-agent__icon { width:48px; height:48px; display:grid; place-items:center; flex:0 0 auto; border-radius:13px; color:#fff; background:linear-gradient(145deg,#6958e7,#4935c9); box-shadow:0 10px 24px rgba(82,63,210,.25); }
+.executive-agent--orange .executive-agent__icon { background:linear-gradient(145deg,#ff772e,#ee4c08); box-shadow:0 10px 24px rgba(240,82,11,.22); }
+.executive-agent--navy .executive-agent__icon { background:linear-gradient(145deg,#244a9d,#0e2f78); box-shadow:0 10px 24px rgba(14,47,120,.22); }
+.executive-agent__icon svg { width:26px; height:26px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
+.executive-agent__header strong { display:block; color:#151d32; font-size:15px; }
+.executive-agent__header small { display:block; margin-top:2px; color:#6d7891; font-size:12px; }
+.executive-agent__steps { border:1px solid rgba(24,48,109,.07); border-radius:14px; padding:15px 14px; background:rgba(250,251,255,.92); }
+.executive-agent__step { position:relative; display:flex; align-items:center; min-height:42px; padding-left:23px; color:#56617b; font-size:12px; opacity:0; animation:executive-step-in .55s ease forwards; animation-delay:calc(var(--step) * 210ms + 320ms); }
+.executive-agent__step::before { content:""; position:absolute; left:5px; top:0; bottom:0; width:1px; background:#d9d8f7; }
+.executive-agent__step:first-child::before { top:50%; }.executive-agent__step:last-child::before { bottom:50%; }
+.executive-agent__step i { position:absolute; left:0; width:11px; height:11px; border-radius:50%; border:2px solid #8c7ef0; background:#fff; }
+.executive-agent--orange .executive-agent__step::before { background:#fed6c4; }.executive-agent--orange .executive-agent__step i { border-color:#ff7330; }
+@keyframes executive-step-in { to { opacity:1; } }
+.executive-agent__result { display:flex; gap:10px; align-items:center; margin-top:12px; padding:12px; border-radius:13px; background:#f0edff; }
+.executive-agent--orange .executive-agent__result { background:#fff0e9; }
+.executive-agent__result > span { width:25px; height:25px; display:grid; place-items:center; border:1px solid currentColor; border-radius:50%; color:#5d49db; font-weight:800; }
+.executive-agent--orange .executive-agent__result > span { color:#f45f1c; }
+.executive-agent__result strong,.executive-agent__result small { display:block; }
+.executive-agent__result strong { color:#1c2440; font-size:12px; }.executive-agent__result small { margin-top:3px; color:#68738a; font-size:10px; }
+.executive-profile { position:relative; width:100%; border:7px solid rgba(255,255,255,.94); border-radius:23px; overflow:hidden; background:#0d1730; box-shadow:0 25px 70px rgba(25,46,112,.18),0 0 0 1px rgba(85,72,222,.22); }
+.executive-intelligence.is-risk .executive-profile { box-shadow:0 25px 70px rgba(25,46,112,.16),0 0 0 1px rgba(247,94,24,.25); }
+.executive-profile__image { position:relative; aspect-ratio:4/3.05; }
+.executive-profile__image img { object-fit:cover; object-position:center 28%; }
+.executive-profile__veil { position:absolute; inset:48% 0 0; background:linear-gradient(180deg,transparent,rgba(7,14,34,.9)); }
+.executive-profile__identity { position:absolute; left:0; right:0; bottom:0; padding:24px 20px 15px; color:#fff; }
+.executive-profile__identity > strong { display:block; font-size:22px; letter-spacing:-.03em; }
+.executive-profile__identity > span { display:block; margin-top:4px; color:#ddd8ff; font-size:14px; }
+.executive-intelligence.is-risk .executive-profile__identity > span { color:#ffd4c2; }
+.executive-profile dl { display:grid; grid-template-columns:1.15fr 1fr .8fr; gap:10px; margin:16px 0 0; padding-top:12px; border-top:1px solid rgba(255,255,255,.18); }
+.executive-profile dt { color:rgba(255,255,255,.55); font-size:9px; }.executive-profile dd { margin:3px 0 0; color:#fff; font-size:10px; font-weight:600; }
+.executive-intelligence__orbit { position:absolute; z-index:5; inset:0; pointer-events:none; }
+.executive-orbit-tag { position:absolute; min-height:38px; padding:8px 14px; font-size:11px; }
+.executive-orbit-tag--1 { left:25%; top:25%; }.executive-orbit-tag--2 { right:25%; top:25%; }
+.executive-orbit-tag--3 { left:24%; top:42%; }.executive-orbit-tag--4 { right:24%; top:42%; }
+.executive-orbit-tag--5 { left:27%; bottom:18%; }.executive-orbit-tag--6 { left:43%; bottom:13%; }.executive-orbit-tag--7 { right:27%; bottom:18%; }.executive-orbit-tag--8 { right:12%; bottom:24%; }
+.executive-intelligence__output { position:absolute; z-index:6; left:50%; bottom:30px; transform:translateX(-50%); width:min(440px,43%); display:flex; align-items:center; gap:15px; padding:15px 20px; border:1px solid rgba(43,174,99,.22); border-radius:16px; background:rgba(255,255,255,.96); box-shadow:0 18px 50px rgba(23,72,52,.10); animation:executive-output-in .7s ease .9s both; }
+@keyframes executive-output-in { from { opacity:0; transform:translate(-50%,12px); } to { opacity:1; transform:translate(-50%,0); } }
+.executive-intelligence__check { width:38px; height:38px; flex:0 0 auto; display:grid; place-items:center; border-radius:50%; color:#fff; background:#53b975; font-size:22px; }
+.executive-intelligence__output strong,.executive-intelligence__output small { display:block; }.executive-intelligence__output strong { color:#151e31; font-size:16px; }.executive-intelligence__output small { margin-top:3px; color:#68738b; font-size:11px; }
+.executive-intelligence__switch { position:absolute; z-index:8; right:22px; bottom:22px; display:flex; padding:4px; border:1px solid rgba(26,47,103,.10); border-radius:999px; background:rgba(255,255,255,.88); }
+.executive-intelligence__switch button { border:0; border-radius:999px; padding:7px 11px; background:transparent; color:#6b7690; font-size:10px; font-weight:700; cursor:pointer; }
+.executive-intelligence__switch button.is-active { background:#162f73; color:#fff; }.executive-intelligence.is-risk .executive-intelligence__switch button.is-active { background:#f15b18; }
+@media (max-width:1100px) {
+  .executive-intelligence__canvas { min-height:900px; }
+  .executive-intelligence__layout { inset:105px 35px 210px; grid-template-columns:1fr 360px; }
+  .executive-agent--right { grid-column:1/-1; width:min(560px,72%); justify-self:center; }
+  .executive-orbit-tag--1,.executive-orbit-tag--3,.executive-orbit-tag--5 { left:4%; }
+  .executive-orbit-tag--2,.executive-orbit-tag--4,.executive-orbit-tag--8 { right:4%; }
+  .executive-orbit-tag--6,.executive-orbit-tag--7 { display:none; }
+  .executive-intelligence__output { bottom:72px; width:55%; }
+}
+@media (max-width:760px) {
+  .executive-intelligence { padding:48px 0 72px; }
+  .executive-intelligence__canvas { min-height:auto; padding:84px 16px 96px; border-radius:22px; }
+  .executive-intelligence__top-tags { top:20px; width:90%; gap:7px; overflow:hidden; }
+  .executive-intelligence__top-tags span { min-height:34px; padding:7px 10px; font-size:10px; white-space:nowrap; }
+  .executive-intelligence__layout { position:relative; inset:auto; display:flex; flex-direction:column; gap:18px; }
+  .executive-profile { order:-1; max-width:410px; }
+  .executive-agent { width:100%; max-width:510px; }
+  .executive-intelligence__orbit,.executive-intelligence__connections { display:none; }
+  .executive-intelligence__output { position:relative; left:auto; bottom:auto; transform:none; width:100%; max-width:510px; margin:18px auto 0; animation:none; }
+  .executive-intelligence__switch { right:14px; bottom:14px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .executive-intelligence__connections path,.executive-intelligence__top-tags span,.executive-orbit-tag,.executive-agent__step,.executive-intelligence__layout,.executive-intelligence__output { animation:none !important; opacity:1; transform:none; }
+}
