@@ -10,7 +10,6 @@ const REVEAL_SELECTOR = [
   ".approach-card",
   ".process-heading",
   ".process-quote",
-  ".process-flow__unit",
   ".process-summary",
   ".trust-layer > *",
 ].join(",");
