@@ -96,8 +96,8 @@ export default function Navbar({ active = "home" }: { active?: NavKey }) {
         </nav>
 
         <div className="site-header__actions">
-          <Link className="header-cta" href="/contact">
-            Контакт
+          <Link className="primary-cta header-cta" href="/contact">
+            Обсъдете Вашия казус
           </Link>
           <button className="language-switch" type="button" aria-label="Избор на език">
             <span>BG</span>

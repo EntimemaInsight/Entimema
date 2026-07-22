@@ -24,8 +24,8 @@ export default function Hero() {
             </>
           }
         >
-          <Link className="header-cta hero__cta" href="/contact">
-            Обсъдете казус
+          <Link className="primary-cta hero__cta" href="/contact">
+            <span>Обсъдете Вашия казус</span><b aria-hidden="true">→</b>
           </Link>
         </SectionHeader>
       </div>
