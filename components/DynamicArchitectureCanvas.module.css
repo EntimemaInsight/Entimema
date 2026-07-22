@@ -265,3 +265,65 @@
   .architectureProgress i { transform:scaleX(1); background:#6f75dc; }
   .decision { opacity:1; transform:translate3d(-50%,0,0) scale(1); transition:none; }
 }
+
+/* Sprint C: shared material hierarchy for the product canvas. */
+.canvas {
+  --canvas-edge-1: var(--edge-card, rgba(22,48,108,.09));
+  --canvas-edge-2: var(--edge-elevated, rgba(55,66,143,.14));
+  --canvas-edge-3: var(--edge-active, rgba(92,78,207,.24));
+  --canvas-divider: var(--edge-divider, rgba(24,48,105,.075));
+  --canvas-level-1: var(--elevation-1, 0 1px 2px rgba(15,31,73,.045), 0 10px 28px rgba(21,39,86,.055), inset 0 1px 0 rgba(255,255,255,.94));
+  --canvas-level-2: var(--elevation-2, 0 2px 4px rgba(15,31,73,.055), 0 16px 38px rgba(25,42,94,.08), inset 0 1px 0 rgba(255,255,255,.94));
+  --canvas-level-3: var(--elevation-3, 0 3px 7px rgba(13,28,68,.065), 0 24px 58px rgba(24,40,91,.095), inset 0 1px 0 rgba(255,255,255,.94));
+  border-color: var(--canvas-edge-1);
+  border-radius: var(--radius-canvas, 28px);
+  box-shadow: var(--canvas-level-1);
+}
+.status,
+.knowledgeCard {
+  border-color: var(--canvas-edge-1);
+  background: rgba(253,254,255,.985);
+  box-shadow: var(--canvas-level-1);
+}
+.status { border-radius: var(--radius-pill, 999px); }
+.knowledgeCard { border-radius: var(--radius-control-small, 10px); }
+.knowledgeCard:hover {
+  border-color: var(--canvas-edge-3);
+  border-radius: var(--radius-control-small, 10px);
+  box-shadow: var(--canvas-level-2), 0 0 20px rgba(96,82,216,.045);
+}
+.architecture {
+  border-color: var(--canvas-edge-2);
+  border-radius: var(--radius-card, 18px);
+  background: linear-gradient(145deg, rgba(255,255,255,.995), rgba(248,250,255,.985));
+  box-shadow: var(--canvas-level-3);
+}
+.architecture::after,
+.decision::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.94);
+  pointer-events:none;
+}
+.layer {
+  border-color: var(--canvas-divider);
+  border-radius: var(--radius-control-small, 10px);
+}
+.architectureHeader,
+.cardStatus { border-color: var(--canvas-divider); }
+.decision {
+  border-color: rgba(52,145,92,.18);
+  border-radius: var(--radius-card, 18px);
+  background: linear-gradient(145deg, #fff, #f8fcfa);
+  box-shadow: var(--canvas-level-2);
+}
+@media (max-width:820px) {
+  .canvas { border-radius: var(--radius-feature, 24px); }
+}
+@media (max-width:640px), (hover:none), (pointer:coarse) {
+  .canvas { border-radius: var(--radius-card, 18px); box-shadow: var(--canvas-level-1); }
+  .architecture,.decision { box-shadow: var(--canvas-level-2); }
+  .knowledgeCard:hover { transform:none; box-shadow:var(--canvas-level-1); }
+}
