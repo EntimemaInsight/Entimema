@@ -2,8 +2,6 @@
 
 import { useEffect, useState } from "react";
 
-const SCROLL_THRESHOLD = 18;
-
 export default function AnnouncementBar() {
   const [isDismissed, setIsDismissed] = useState(false);
 
@@ -16,27 +14,9 @@ export default function AnnouncementBar() {
 
   useEffect(() => {
     const root = document.documentElement;
-    let frame = 0;
-
-    const updateScrollState = () => {
-      root.classList.toggle(
-        "announcement-collapsed",
-        isDismissed || window.scrollY > SCROLL_THRESHOLD,
-      );
-      frame = 0;
-    };
-
-    const onScroll = () => {
-      if (frame) return;
-      frame = window.requestAnimationFrame(updateScrollState);
-    };
-
-    updateScrollState();
-    window.addEventListener("scroll", onScroll, { passive: true });
+    root.classList.toggle("announcement-collapsed", isDismissed);
 
     return () => {
-      window.removeEventListener("scroll", onScroll);
-      if (frame) window.cancelAnimationFrame(frame);
       root.classList.remove("announcement-collapsed");
     };
   }, [isDismissed]);

@@ -47,6 +47,7 @@ const layers = [
 export default function DynamicArchitectureCanvas() {
   const ref = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
+  const pointerBounds = useRef<DOMRect | null>(null);
   const pointerFrame = useRef<number | null>(null);
   const [active, setActive] = useState(false);
   const [phase, setPhase] = useState(0);
@@ -76,10 +77,8 @@ export default function DynamicArchitectureCanvas() {
       return;
     }
     svg?.unpauseAnimations();
-    const resetFrame = window.requestAnimationFrame(() => setPhase(0));
     const timer = window.setInterval(() => setPhase((current) => (current + 1) % 5), 2400);
     return () => {
-      window.cancelAnimationFrame(resetFrame);
       window.clearInterval(timer);
     };
   }, [active]);
@@ -89,12 +88,16 @@ export default function DynamicArchitectureCanvas() {
   }, []);
 
   const updateParallax = (event: React.PointerEvent<HTMLDivElement>) => {
-    if (event.pointerType !== "mouse" || !ref.current || pointerFrame.current) return;
+    if (event.pointerType !== "mouse" || !window.matchMedia("(hover: hover) and (pointer: fine)").matches || !ref.current || pointerFrame.current) return;
     const { clientX, clientY } = event;
     pointerFrame.current = window.requestAnimationFrame(() => {
       const node = ref.current;
       if (!node) return;
-      const rect = node.getBoundingClientRect();
+      const rect = pointerBounds.current;
+      if (!rect) {
+        pointerFrame.current = null;
+        return;
+      }
       node.style.setProperty("--pointer-x", String((clientX - rect.left) / rect.width - 0.5));
       node.style.setProperty("--pointer-y", String((clientY - rect.top) / rect.height - 0.5));
       pointerFrame.current = null;
@@ -102,8 +105,6 @@ export default function DynamicArchitectureCanvas() {
   };
 
   const resetParallax = () => {
-    ref.current?.style.setProperty("--pointer-x", "0");
-    ref.current?.style.setProperty("--pointer-y", "0");
     setHoveredGroup(null);
   };
 
@@ -111,6 +112,7 @@ export default function DynamicArchitectureCanvas() {
     <div
       className={`${styles.canvas} ${active ? styles.active : ""} ${styles[`phase${phase}`]} ${hoveredGroup ? styles[`hover${hoveredGroup}`] : ""}`}
       ref={ref}
+      onPointerEnter={() => { if (ref.current) pointerBounds.current = ref.current.getBoundingClientRect(); }}
       onPointerMove={updateParallax}
       onPointerLeave={resetParallax}
       aria-label="Dynamic management architecture"

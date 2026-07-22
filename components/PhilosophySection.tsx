@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { SectionHeader } from "./ui";
 
 const metrics = [
@@ -54,9 +54,6 @@ function ArchitectureBlueprint({ className }: { className: string }) {
 
 export default function PhilosophySection() {
   const ref = useRef<HTMLElement>(null);
-  const animationFrame = useRef<number | null>(null);
-  const hasAnimatedMetrics = useRef(false);
-  const [metricValues, setMetricValues] = useState<number[]>(metrics.map((metric) => metric.start));
 
   useEffect(() => {
     const section = ref.current;
@@ -67,20 +64,6 @@ export default function PhilosophySection() {
         section.classList.toggle("is-in-viewport", entry.isIntersecting);
         if (entry.isIntersecting) {
           section.classList.add("is-visible");
-          if (hasAnimatedMetrics.current) return;
-          hasAnimatedMetrics.current = true;
-          if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-            setMetricValues(metrics.map((metric) => metric.end));
-            return;
-          }
-          const startedAt = performance.now();
-          const animateMetrics = (now: number) => {
-            const progress = Math.min((now - startedAt) / 720, 1);
-            const eased = 1 - Math.pow(1 - progress, 3);
-            setMetricValues(metrics.map((metric) => metric.start + (metric.end - metric.start) * eased));
-            if (progress < 1) animationFrame.current = window.requestAnimationFrame(animateMetrics);
-          };
-          animationFrame.current = window.requestAnimationFrame(animateMetrics);
         }
       },
       { threshold: 0.18 },
@@ -89,7 +72,6 @@ export default function PhilosophySection() {
     observer.observe(section);
     return () => {
       observer.disconnect();
-      if (animationFrame.current) window.cancelAnimationFrame(animationFrame.current);
     };
   }, []);
 
@@ -122,10 +104,10 @@ export default function PhilosophySection() {
           </blockquote>
 
           <div className="philosophy-metrics" aria-label="Резултати от интегрирани управленски системи">
-            {metrics.map((metric, index) => (
+            {metrics.map((metric) => (
               <article className="philosophy-metric-card" key={metric.value}>
                 <strong aria-label={metric.value}>
-                  {metricValues[index] >= metric.end - 0.005 ? metric.value : `${metricValues[index].toFixed(1)}%`}
+                  {metric.value}
                 </strong>
                 <div className="philosophy-metric-card__copy">
                   <span>{metric.title}</span>

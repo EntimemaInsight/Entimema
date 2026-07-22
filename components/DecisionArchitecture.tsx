@@ -120,6 +120,7 @@ function AgentPanel({ side, scene, activeStep }: { side: "left" | "right"; scene
 
 export default function DecisionArchitecture() {
   const ref = useRef<HTMLElement>(null);
+  const svgRef = useRef<SVGSVGElement>(null);
   const switchTimer = useRef<number | null>(null);
   const [visible, setVisible] = useState(false);
   const [mode, setMode] = useState<Mode>("finance");
@@ -144,6 +145,13 @@ export default function DecisionArchitecture() {
     observer.observe(section);
     return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+    const svg = svgRef.current;
+    if (!svg) return;
+    if (visible && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) svg.unpauseAnimations();
+    else svg.pauseAnimations();
+  }, [visible]);
 
   useEffect(() => {
     if (!visible) return;
@@ -178,10 +186,7 @@ export default function DecisionArchitecture() {
             {tags.map((tag, index) => <span style={{ "--tag": index } as React.CSSProperties} key={tag}>{tag}</span>)}
           </div>
 
-          <svg className="executive-intelligence__connections" viewBox="0 0 1400 760" preserveAspectRatio="none" aria-hidden="true">
-            <defs>
-              <filter id="executivePulseGlow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-            </defs>
+          <svg ref={svgRef} className="executive-intelligence__connections" viewBox="0 0 1400 760" preserveAspectRatio="none" aria-hidden="true">
             {[
               "M700 118 C700 175 700 205 700 245",
               "M430 120 C470 172 515 196 576 238",
@@ -190,11 +195,11 @@ export default function DecisionArchitecture() {
               "M1055 380 C970 380 920 380 855 380",
               "M700 520 C700 565 700 588 700 630",
             ].map((path, index) => <path d={path} key={path} className={`executive-line executive-line--${index + 1}`} />)}
-            <circle className="executive-data-pulse executive-data-pulse--1" r="4" filter="url(#executivePulseGlow)"><animateMotion dur="3.8s" repeatCount="indefinite" path="M430 120 C470 172 515 196 576 238" /></circle>
-            <circle className="executive-data-pulse executive-data-pulse--2" r="4" filter="url(#executivePulseGlow)"><animateMotion dur="4.4s" begin="-1.8s" repeatCount="indefinite" path="M970 120 C930 172 885 196 824 238" /></circle>
-            <circle className="executive-data-pulse executive-data-pulse--3" r="4" filter="url(#executivePulseGlow)"><animateMotion dur="3.3s" begin="-.8s" repeatCount="indefinite" path="M345 380 C430 380 480 380 545 380" /></circle>
-            <circle className="executive-data-pulse executive-data-pulse--4" r="4" filter="url(#executivePulseGlow)"><animateMotion dur="3.7s" begin="-2.4s" repeatCount="indefinite" path="M1055 380 C970 380 920 380 855 380" /></circle>
-            <circle className="executive-data-pulse executive-data-pulse--5" r="4" filter="url(#executivePulseGlow)"><animateMotion dur="3.1s" begin="-1.2s" repeatCount="indefinite" path="M700 520 C700 565 700 588 700 630" /></circle>
+            <circle className="executive-data-pulse executive-data-pulse--1" r="4"><animateMotion dur="3.8s" repeatCount="indefinite" path="M430 120 C470 172 515 196 576 238" /></circle>
+            <circle className="executive-data-pulse executive-data-pulse--2" r="4"><animateMotion dur="4.4s" begin="-1.8s" repeatCount="indefinite" path="M970 120 C930 172 885 196 824 238" /></circle>
+            <circle className="executive-data-pulse executive-data-pulse--3" r="4"><animateMotion dur="3.3s" begin="-.8s" repeatCount="indefinite" path="M345 380 C430 380 480 380 545 380" /></circle>
+            <circle className="executive-data-pulse executive-data-pulse--4" r="4"><animateMotion dur="3.7s" begin="-2.4s" repeatCount="indefinite" path="M1055 380 C970 380 920 380 855 380" /></circle>
+            <circle className="executive-data-pulse executive-data-pulse--5" r="4"><animateMotion dur="3.1s" begin="-1.2s" repeatCount="indefinite" path="M700 520 C700 565 700 588 700 630" /></circle>
           </svg>
 
           <div className="executive-intelligence__layout">

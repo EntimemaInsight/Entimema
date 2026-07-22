@@ -5641,3 +5641,127 @@ html.is-scrolled .primary-cta,
   .primary-cta > b,
   .case-cta__link > b { transition: none; }
 }
+
+/* =========================================================
+   SPRINT A — MOTION POLISH & SCROLL STABILITY
+   ========================================================= */
+:root {
+  --motion-reveal-duration: 720ms;
+  --motion-reveal-ease: cubic-bezier(.22, 1, .36, 1);
+}
+html { scroll-behavior: auto; }
+.home-stage,
+.site-header,
+.announcement,
+.hero {
+  contain: layout paint;
+}
+.site-header {
+  height: 104px;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  will-change: auto;
+}
+html.is-scrolled .site-header,
+html.scrolling-down .site-header,
+html.scrolling-up .site-header {
+  height: 104px;
+  transform: none;
+  box-shadow: none;
+}
+html.is-scrolled .site-brand__mark { transform: none; }
+html.is-scrolled .site-brand__word { font-size: clamp(30px, 2.15vw, 36px); }
+.announcement {
+  max-height: 56px;
+  transition: opacity 220ms ease-out, transform 360ms var(--motion-reveal-ease);
+}
+.announcement::after,
+.site-header::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 1px;
+  background: rgba(10, 34, 95, .08);
+  pointer-events: none;
+}
+.motion-reveal,
+.reveal,
+.philosophy-reveal {
+  transform: translate3d(0, 20px, 0);
+  transition-property: opacity, transform;
+  transition-duration: var(--motion-reveal-duration);
+  transition-timing-function: var(--motion-reveal-ease);
+}
+.motion-reveal.is-in-view,
+.approach-section.is-visible .reveal,
+.philosophy-section.is-visible .philosophy-reveal {
+  transform: translate3d(0, 0, 0);
+}
+.approach-section.is-visible .reveal--2 { transition-delay: 90ms; }
+.approach-section.is-visible .reveal--3 { transition-delay: 180ms; }
+.philosophy-section.is-visible .philosophy-reveal--2 { transition-delay: 100ms; }
+
+.executive-intelligence__canvas,
+[aria-label="Dynamic management architecture"] {
+  contain: layout paint style;
+}
+.executive-intelligence__glow,
+.executive-intelligence__dots,
+.executive-intelligence__sparkles,
+.executive-intelligence__connections,
+.executive-profile__scan {
+  pointer-events: none;
+}
+.executive-intelligence__glow {
+  filter: none;
+  will-change: auto;
+}
+.executive-data-pulse {
+  filter: none;
+}
+.executive-intelligence.is-transitioning .executive-intelligence__layout {
+  filter: none;
+}
+.executive-orbit-tag {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+.executive-intelligence:not(.is-visible) *,
+.philosophy-section:not(.is-in-viewport) *,
+.canvas:not(.active) * {
+  animation-play-state: paused !important;
+}
+.executive-intelligence.is-visible :is(.executive-intelligence__dots,.executive-intelligence__glow,.executive-intelligence__sparkles i) {
+  will-change: transform, opacity;
+}
+.executive-intelligence:not(.is-visible) :is(.executive-intelligence__dots,.executive-intelligence__glow,.executive-intelligence__sparkles i) {
+  will-change: auto;
+}
+@media (max-width: 1024px), (hover: none), (pointer: coarse) {
+  .executive-orbit-tag:nth-child(n+6),
+  .executive-intelligence__sparkles i:nth-child(n+4) { display: none; }
+  .executive-intelligence__glow { opacity: .64; }
+  .executive-orbit-tag,
+  .executive-agent,
+  .executive-profile { animation: none !important; }
+}
+@media (max-width: 640px) {
+  .executive-intelligence__glow,
+  .executive-profile__scan { display: none; }
+  .executive-intelligence__connections .executive-data-pulse:nth-of-type(n+4) { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .motion-reveal,
+  .reveal,
+  .philosophy-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .executive-intelligence *,
+  .philosophy-section *,
+  [aria-label="Dynamic management architecture"] * {
+    animation: none !important;
+    transition-property: opacity, color, background-color, border-color, box-shadow !important;
+  }
+}
