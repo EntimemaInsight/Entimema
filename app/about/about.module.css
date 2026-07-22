@@ -5,6 +5,27 @@
   --about-gutter: clamp(1.5rem, 4vw, 4rem);
   --about-section-space: clamp(4.75rem, 7.5vw, 7.5rem);
   --about-block-space: clamp(2.75rem, 4.5vw, 4.5rem);
+  --about-type-display: clamp(2.875rem, 3.85vw, 3.875rem);
+  --about-type-lead: clamp(.96875rem, .98vw, 1.0625rem);
+  --about-type-section-heading: clamp(1.875rem, 2.25vw, 2.25rem);
+  --about-type-section-intro: clamp(1.0625rem, 1.2vw, 1.1875rem);
+  --about-type-body: clamp(.9375rem, .96vw, 1.0625rem);
+  --about-type-supporting: clamp(.8125rem, .78vw, .875rem);
+  --about-type-label: clamp(.75rem, .72vw, .8125rem);
+  --about-type-cta: clamp(.875rem, .82vw, .9375rem);
+  --about-leading-display: 1.09;
+  --about-leading-lead: 1.74;
+  --about-leading-heading: 1.12;
+  --about-leading-intro: 1.58;
+  --about-leading-body: 1.68;
+  --about-leading-supporting: 1.6;
+  --about-tracking-display: -.038em;
+  --about-tracking-heading: -.03em;
+  --about-tracking-copy: -.01em;
+  --about-tracking-label: .105em;
+  --about-space-label-heading: clamp(.75rem, 1.1vw, 1rem);
+  --about-space-heading-copy: clamp(1.125rem, 1.7vw, 1.5rem);
+  --about-space-paragraph: .9rem;
   min-width: 0;
   overflow-x: clip;
 }
@@ -41,13 +62,18 @@
 
 .page :global(.about-eyebrow) {
   margin-bottom: clamp(1.5rem, 2.2vw, 2rem);
+  font-size: var(--about-type-label);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: var(--about-tracking-label);
 }
 
 .page :global(.about-intro h1) {
   max-width: 14.5em;
-  font-size: clamp(2.875rem, 3.85vw, 3.875rem);
-  line-height: 1.09;
-  letter-spacing: -.038em;
+  font-size: var(--about-type-display);
+  line-height: var(--about-leading-display);
+  letter-spacing: var(--about-tracking-display);
+  text-wrap: balance;
 }
 
 .page :global(.about-accent-rule) {
@@ -56,8 +82,11 @@
 
 .page :global(.about-lead) {
   max-width: 56ch;
-  font-size: clamp(.96875rem, .98vw, 1.0625rem);
-  line-height: 1.74;
+  font-size: var(--about-type-lead);
+  font-weight: 450;
+  line-height: var(--about-leading-lead);
+  letter-spacing: var(--about-tracking-copy);
+  text-wrap: pretty;
 }
 
 .page :global(.founder-card) {
@@ -92,14 +121,31 @@
 }
 
 .page :global(.founder-card__bio h2) {
-  margin-bottom: 1.25rem;
+  max-width: 22ch;
+  margin-bottom: var(--about-space-heading-copy);
+  font-size: var(--about-type-section-heading);
+  font-weight: 400;
+  line-height: var(--about-leading-heading);
+  letter-spacing: var(--about-tracking-heading);
+  text-wrap: balance;
 }
 
 .page :global(.founder-card__bio > p:not(.founder-card__label)) {
   max-width: var(--about-reading);
-  margin-bottom: .9rem;
-  font-size: clamp(.9375rem, .96vw, 1.0625rem);
-  line-height: 1.68;
+  margin-bottom: var(--about-space-paragraph);
+  font-size: var(--about-type-body);
+  font-weight: 430;
+  line-height: var(--about-leading-body);
+  letter-spacing: var(--about-tracking-copy);
+  text-wrap: pretty;
+}
+
+.page :global(.founder-card__label) {
+  margin-bottom: var(--about-space-label-heading);
+  font-size: var(--about-type-label);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: var(--about-tracking-label);
 }
 
 .page :global(.founder-pillars) {
@@ -139,6 +185,24 @@
 
 .page :global(.founder-pillar p) {
   max-width: 38ch;
+  margin-top: .75rem;
+  font-size: var(--about-type-supporting);
+  line-height: var(--about-leading-supporting);
+  letter-spacing: var(--about-tracking-copy);
+  text-wrap: pretty;
+}
+
+.page :global(.founder-pillar h3) {
+  font-size: var(--about-type-body);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -.015em;
+}
+
+.page :global(.founder-pillar .founder-pillar__subtitle) {
+  font-size: var(--about-type-supporting);
+  font-weight: 560;
+  line-height: 1.5;
 }
 
 .page :global(.about-labs-seed) {
@@ -151,6 +215,18 @@
 
 .page :global(.about-labs-seed p) {
   max-width: var(--about-reading);
+  font-size: var(--about-type-section-intro);
+  font-weight: 400;
+  line-height: var(--about-leading-intro);
+  letter-spacing: -.015em;
+  text-wrap: pretty;
+}
+
+.page :global(.about-labs-seed > span) {
+  font-size: var(--about-type-label);
+  font-weight: 650;
+  line-height: 1.25;
+  letter-spacing: var(--about-tracking-label);
 }
 
 .page :global(.about-network) {
@@ -179,9 +255,12 @@
 }
 
 @media (max-width: 54rem) {
+  .page {
+    --about-type-display: clamp(2.625rem, 6.6vw, 3.5rem);
+  }
+
   .page :global(.about-intro h1) {
     max-width: 13.5em;
-    font-size: clamp(2.625rem, 6.6vw, 3.5rem);
   }
 
   .page :global(.about-lead) { max-width: 52ch; }
@@ -212,6 +291,15 @@
     --about-gutter: 1.125rem;
     --about-section-space: 4.5rem;
     --about-block-space: 3rem;
+    --about-type-display: clamp(2.375rem, 10.8vw, 2.875rem);
+    --about-type-lead: .96875rem;
+    --about-type-section-heading: clamp(1.75rem, 8vw, 2rem);
+    --about-type-section-intro: 1.0625rem;
+    --about-type-body: .9375rem;
+    --about-type-supporting: .8125rem;
+    --about-leading-display: 1.07;
+    --about-leading-lead: 1.68;
+    --about-leading-body: 1.66;
   }
 
   .page :global(.about-hero) {
@@ -220,8 +308,6 @@
 
   .page :global(.about-intro h1) {
     max-width: 12.5em;
-    font-size: clamp(2.375rem, 10.8vw, 2.875rem);
-    line-height: 1.07;
   }
 
   .page :global(.about-intro h1 br),
@@ -231,8 +317,6 @@
 
   .page :global(.about-lead) {
     max-width: 34ch;
-    font-size: .96875rem;
-    line-height: 1.68;
   }
 
   .page :global(.founder-card) { margin-top: 3.5rem; }
@@ -275,7 +359,7 @@
   }
 
   .page :global(.about-labs-seed p) {
-    font-size: 1.125rem;
-    line-height: 1.55;
+    font-size: var(--about-type-section-intro);
+    line-height: var(--about-leading-intro);
   }
 }
