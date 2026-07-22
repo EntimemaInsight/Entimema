@@ -1,5 +1,6 @@
 import Image from "next/image";
 import AboutHeader from "@/components/AboutHeader";
+import styles from "./about.module.css";
 
 const pillars = [
   {
@@ -37,7 +38,7 @@ function PillarIcon({ type }: { type: string }) {
 
 export default function AboutPage() {
   return (
-    <main className="about-page">
+    <main className={`about-page ${styles.page}`}>
       <AboutHeader />
       <section className="about-hero">
         <div className="about-network" aria-hidden="true">
