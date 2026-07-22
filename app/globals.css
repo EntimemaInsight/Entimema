@@ -2460,6 +2460,230 @@ html.is-scrolled .header-cta { min-height: 36px; padding-inline: 16px; }
 }
 
 /* =========================================================
+   SPRINT B — TYPOGRAPHY SYSTEM & OPTICAL RHYTHM
+   Eight shared levels for the homepage's editorial hierarchy.
+   ========================================================= */
+:root {
+  --type-hero-display: clamp(3.25rem, 5.45vw, 5.375rem);
+  --type-section-display: clamp(2.75rem, 4.45vw, 4.375rem);
+  --type-section-heading: clamp(1.5rem, 1.85vw, 1.875rem);
+  --type-section-subtitle: clamp(1.0625rem, 1.18vw, 1.25rem);
+  --type-body-large: clamp(1.0625rem, 1.08vw, 1.1875rem);
+  --type-body-standard: clamp(.9375rem, .96vw, 1.0625rem);
+  --type-ui-label: clamp(.75rem, .72vw, .8125rem);
+  --type-navigation: clamp(.8125rem, .86vw, .9375rem);
+
+  --leading-hero-display: .98;
+  --leading-section-display: 1.02;
+  --leading-section-heading: 1.2;
+  --leading-section-subtitle: 1.55;
+  --leading-body-large: 1.62;
+  --leading-body-standard: 1.64;
+  --leading-ui: 1.35;
+
+  --tracking-display: -.055em;
+  --tracking-heading: -.032em;
+  --tracking-copy: -.014em;
+  --tracking-ui: .045em;
+  --tracking-action: -.008em;
+
+  --text-max-display: 19ch;
+  --text-max-section: 21ch;
+  --text-max-subtitle: 48rem;
+  --text-max-body: 68ch;
+  --text-max-card: 42ch;
+
+  --type-rhythm-heading-copy: clamp(1.125rem, 1.65vw, 1.5rem);
+  --type-rhythm-copy-action: clamp(1.25rem, 1.8vw, 1.5rem);
+  --type-rhythm-card: .5rem;
+}
+
+/* Display and section headings */
+.hero__title--editorial,
+.section-header--display .section-header__title {
+  max-width: var(--text-max-display) !important;
+  font-size: var(--type-hero-display);
+  font-weight: 650;
+  line-height: var(--leading-hero-display);
+  letter-spacing: var(--tracking-display);
+  text-wrap: balance;
+}
+.section-header--section .section-header__title,
+.approach-section--tiles .approach-section__intro h2,
+.philosophy-section--split .philosophy-section__title .section-header__title,
+.process-heading h2,
+.case-cta h2,
+.case-cta.is-visible h2 {
+  width: 100%;
+  max-width: var(--text-max-section);
+  font-size: var(--type-section-display);
+  font-weight: 650;
+  line-height: var(--leading-section-display);
+  letter-spacing: var(--tracking-display);
+  text-wrap: balance;
+}
+
+/* Subtitles and long-form copy */
+.section-header__subtitle,
+.hero__description--editorial,
+.approach-section--tiles .approach-section__lead,
+.process-quote {
+  max-width: var(--text-max-subtitle);
+  margin-top: var(--type-rhythm-heading-copy);
+  font-size: var(--type-section-subtitle);
+  font-weight: 420;
+  line-height: var(--leading-section-subtitle);
+  letter-spacing: var(--tracking-copy);
+  text-wrap: pretty;
+}
+.hero__description--editorial {
+  max-width: min(var(--text-max-subtitle), 68ch);
+}
+.philosophy-quote-card p {
+  max-width: min(66%, var(--text-max-body));
+  font-size: var(--type-section-heading);
+  line-height: 1.3;
+  letter-spacing: var(--tracking-heading);
+  text-wrap: pretty;
+}
+.philosophy-quote-card p > span:nth-child(3) {
+  line-height: 1.38;
+}
+
+/* KPI and card hierarchy */
+.philosophy-metric-card strong {
+  font-size: clamp(3.625rem, 4.8vw, 4.75rem);
+  font-weight: 680;
+  line-height: .92;
+  letter-spacing: var(--tracking-display);
+  font-variant-numeric: tabular-nums;
+}
+.philosophy-metric-card__copy span {
+  max-width: var(--text-max-card);
+  font-size: var(--type-body-large);
+  font-weight: 650;
+  line-height: var(--leading-section-heading);
+  letter-spacing: var(--tracking-heading);
+  text-wrap: pretty;
+}
+.philosophy-metric-card__copy small,
+.approach-card p,
+.methodology-step p,
+.service-card p {
+  max-width: var(--text-max-card);
+  font-size: var(--type-body-standard);
+  line-height: var(--leading-body-standard);
+  letter-spacing: var(--tracking-copy);
+  text-wrap: pretty;
+}
+.philosophy-metric-card__copy small {
+  margin-top: var(--type-rhythm-card);
+  font-weight: 450;
+}
+
+/* Navigation, actions and compact product labels */
+.site-nav--editorial > a,
+.site-nav__mega-trigger > a,
+.primary-cta,
+html.is-scrolled .primary-cta,
+.case-cta__link,
+.case-cta__link:hover,
+.language-switch,
+.announcement p,
+.announcement a {
+  font-size: var(--type-navigation);
+  font-weight: 560;
+  line-height: 1;
+  letter-spacing: var(--tracking-action);
+}
+.mega-menu__heading > span,
+.mega-menu__links a,
+.approach-tile__title,
+.philosophy-quote-card__principle,
+.executive-agent__header small,
+.executive-intelligence__switch button {
+  font-size: var(--type-ui-label);
+  line-height: var(--leading-ui);
+  letter-spacing: var(--tracking-ui);
+}
+.mega-menu h2,
+.approach-card h3,
+.methodology-step h3,
+.service-card h2 {
+  font-size: var(--type-section-heading);
+  line-height: var(--leading-section-heading);
+  letter-spacing: var(--tracking-heading);
+}
+.mega-menu__column > p {
+  max-width: var(--text-max-card);
+  font-size: var(--type-body-standard);
+  line-height: var(--leading-body-standard);
+  letter-spacing: var(--tracking-copy);
+  text-wrap: pretty;
+}
+.section-header__content,
+.hero__cta {
+  margin-top: var(--type-rhythm-copy-action);
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --type-hero-display: clamp(3rem, 7vw, 4.125rem);
+    --type-section-display: clamp(2.5rem, 5.8vw, 3.625rem);
+    --text-max-display: 16ch;
+    --text-max-section: 18ch;
+  }
+  .hero__title--editorial > span,
+  .approach-section--tiles .approach-section__intro h2 span,
+  .philosophy-section__title h2 span {
+    white-space: normal;
+  }
+}
+
+@media (max-width: 680px) {
+  :root {
+    --type-hero-display: clamp(2.625rem, 11.2vw, 3.125rem);
+    --type-section-display: clamp(2.25rem, 9.8vw, 2.875rem);
+    --type-section-heading: clamp(1.3125rem, 5.8vw, 1.5rem);
+    --type-section-subtitle: 1.0625rem;
+    --type-body-large: 1.0625rem;
+    --type-body-standard: .9375rem;
+    --type-ui-label: .75rem;
+    --type-navigation: .8125rem;
+    --leading-hero-display: 1;
+    --leading-section-display: 1.04;
+    --leading-section-subtitle: 1.52;
+    --text-max-display: 12ch;
+    --text-max-section: 13ch;
+    --text-max-subtitle: 34rem;
+  }
+  .hero__title--editorial {
+    max-width: var(--text-max-display) !important;
+  }
+  .hero__description--editorial,
+  .section-header__subtitle,
+  .approach-section--tiles .approach-section__lead,
+  .process-quote {
+    max-width: 34ch;
+  }
+  .philosophy-quote-card p {
+    max-width: 100%;
+    font-size: 1.25rem;
+    line-height: 1.4;
+  }
+  .philosophy-metric-card strong {
+    font-size: clamp(3.375rem, 15vw, 3.75rem);
+  }
+  .primary-cta,
+  html.is-scrolled .primary-cta,
+  .case-cta__link,
+  .case-cta__link:hover {
+    font-size: var(--type-navigation);
+    white-space: nowrap;
+  }
+}
+
+/* =========================================================
    SPRINT 10.1 — PREMIUM CTA & NAVIGATION POLISH
    ========================================================= */
 :root {
@@ -5764,4 +5988,86 @@ html.is-scrolled .site-brand__word { font-size: clamp(30px, 2.15vw, 36px); }
     animation: none !important;
     transition-property: opacity, color, background-color, border-color, box-shadow !important;
   }
+}
+
+/* Sprint B final cascade authority: neutralizes legacy local type overrides. */
+.hero__title--editorial,
+.section-header--display .section-header__title {
+  max-width: var(--text-max-display) !important;
+  font-size: var(--type-hero-display);
+  line-height: var(--leading-hero-display);
+  letter-spacing: var(--tracking-display);
+}
+.section-header--section .section-header__title,
+.approach-section--tiles .approach-section__intro h2,
+.philosophy-section--split .philosophy-section__title .section-header__title,
+.process-heading h2,
+.case-cta h2,
+.case-cta.is-visible h2 {
+  max-width: var(--text-max-section);
+  font-size: var(--type-section-display);
+  line-height: var(--leading-section-display);
+  letter-spacing: var(--tracking-display);
+}
+.section-header__subtitle,
+.hero__description--editorial,
+.approach-section--tiles .approach-section__lead,
+.process-quote {
+  max-width: var(--text-max-subtitle);
+  margin-top: var(--type-rhythm-heading-copy);
+  font-size: var(--type-section-subtitle);
+  line-height: var(--leading-section-subtitle);
+  letter-spacing: var(--tracking-copy);
+}
+.philosophy-quote-card p {
+  max-width: min(66%, var(--text-max-body));
+  font-size: var(--type-section-heading);
+  line-height: 1.3;
+  letter-spacing: var(--tracking-heading);
+}
+.philosophy-metric-card strong {
+  font-size: clamp(3.625rem, 4.8vw, 4.75rem);
+  line-height: .92;
+  letter-spacing: var(--tracking-display);
+}
+.philosophy-metric-card__copy span {
+  font-size: var(--type-body-large);
+  line-height: var(--leading-section-heading);
+  letter-spacing: var(--tracking-heading);
+}
+.philosophy-metric-card__copy small {
+  font-size: var(--type-body-standard);
+  line-height: var(--leading-body-standard);
+  letter-spacing: var(--tracking-copy);
+}
+.site-nav--editorial > a,
+.site-nav__mega-trigger > a,
+.primary-cta,
+html.is-scrolled .primary-cta,
+.case-cta__link,
+.case-cta__link:hover,
+.language-switch,
+.announcement p,
+.announcement a {
+  font-size: var(--type-navigation);
+  font-weight: 560;
+  line-height: 1;
+  letter-spacing: var(--tracking-action);
+}
+.section-header__content,
+.hero__cta { margin-top: var(--type-rhythm-copy-action); }
+
+@media (max-width: 1024px) {
+  .hero__title--editorial > span,
+  .approach-section--tiles .approach-section__intro h2 span,
+  .philosophy-section__title h2 span { white-space: normal; }
+}
+@media (max-width: 680px) {
+  .hero__title--editorial { max-width: var(--text-max-display) !important; }
+  .hero__description--editorial,
+  .section-header__subtitle,
+  .approach-section--tiles .approach-section__lead,
+  .process-quote { max-width: 34ch; }
+  .philosophy-quote-card p { max-width: 100%; font-size: 1.25rem; line-height: 1.4; }
+  .philosophy-metric-card strong { font-size: clamp(3.375rem, 15vw, 3.75rem); }
 }
