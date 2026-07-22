@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import AboutHeader from "@/components/AboutHeader";
 import styles from "./about.module.css";
+import AboutMotion from "./AboutMotion";
 
 const pillars = [
   {
@@ -56,8 +57,9 @@ export default function AboutPage() {
           </svg>
         </div>
 
+        <AboutMotion>
         <div className="about-shell">
-          <div className="about-intro">
+          <div className={`about-intro ${styles.heroReveal}`} data-about-reveal="hero">
             <p className="about-eyebrow">ЗА ENTIMEMA</p>
             <h1>Управлението започва там,<br/>където данните придобиват смисъл.</h1>
             <span className="about-accent-rule" />
@@ -67,7 +69,7 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <section className={styles.narrativeSection} aria-labelledby="about-why-title">
+          <section className={styles.narrativeSection} aria-labelledby="about-why-title" data-about-reveal="section">
             <p className={styles.narrativeLabel}>ЗАЩО ENTIMEMA</p>
             <div className={styles.narrativeGrid}>
               <h2 id="about-why-title">Повече данни не означават по-добро управление.</h2>
@@ -78,7 +80,7 @@ export default function AboutPage() {
             </div>
           </section>
 
-          <section className={styles.narrativeSection} aria-labelledby="about-thinking-title">
+          <section className={styles.narrativeSection} aria-labelledby="about-thinking-title" data-about-reveal="section">
             <p className={styles.narrativeLabel}>НАЧИНЪТ НА МИСЛЕНЕ</p>
             <div className={styles.narrativeGrid}>
               <h2 id="about-thinking-title">Решението има стойност само ако работи в реална среда.</h2>
@@ -91,7 +93,7 @@ export default function AboutPage() {
             </div>
           </section>
 
-          <section className={styles.narrativeSection} aria-labelledby="about-work-title">
+          <section className={styles.narrativeSection} aria-labelledby="about-work-title" data-about-reveal="section">
             <p className={styles.narrativeLabel}>КАК РАБОТИМ</p>
             <div className={styles.narrativeGrid}>
               <h2 id="about-work-title">От реалния казус до работещата система.</h2>
@@ -103,7 +105,7 @@ export default function AboutPage() {
             </div>
           </section>
 
-          <article className="founder-card">
+          <article className={`founder-card ${styles.experienceReveal}`} data-about-reveal="experience">
             <div className="founder-card__portrait">
               <Image src="/aleksandar-about.png" alt="Александър Димитров, основател на Entimema" fill priority sizes="(max-width: 900px) 100vw, 34vw" />
             </div>
@@ -127,7 +129,7 @@ export default function AboutPage() {
             </div>
           </article>
 
-          <section className={`about-labs-seed ${styles.futureSection}`} aria-labelledby="about-future-title">
+          <section className={`about-labs-seed ${styles.futureSection}`} aria-labelledby="about-future-title" data-about-reveal="emphasis">
             <span>КАКВО ИЗГРАЖДАМЕ</span>
             <div>
               <h2 id="about-future-title">Експертиза, превърната в повторяеми системи.</h2>
@@ -136,12 +138,13 @@ export default function AboutPage() {
             </div>
           </section>
 
-          <section className={styles.conversation} aria-labelledby="about-conversation-title">
+          <section className={styles.conversation} aria-labelledby="about-conversation-title" data-about-reveal="section">
             <p className={styles.narrativeLabel}>СЛЕДВАЩАТА СТЪПКА</p>
             <h2 id="about-conversation-title">Всеки устойчив модел започва с точно разбиране на конкретния казус.</h2>
             <Link href="/contact">Обсъдете вашия казус <span aria-hidden="true">→</span></Link>
           </section>
         </div>
+        </AboutMotion>
       </section>
     </main>
   );
