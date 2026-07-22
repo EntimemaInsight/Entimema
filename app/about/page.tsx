@@ -1,30 +1,31 @@
 import Image from "next/image";
+import Link from "next/link";
 import AboutHeader from "@/components/AboutHeader";
 import styles from "./about.module.css";
 
 const pillars = [
   {
-    title: "Финанси",
-    subtitle: "Корпоративни финанси, контролинг и FP&A",
-    text: "Проектиране на финансови системи, които подобряват планирането, отчетността и управленските решения.",
+    title: "Финансово управление",
+    subtitle: "Контролинг, счетоводство и управленска отчетност",
+    text: "Практическа перспектива към планирането, измерването и финансовата дисциплина в реална бизнес среда.",
     icon: "pie",
   },
   {
-    title: "Риск",
-    subtitle: "Количествено моделиране и анализ на риска",
-    text: "Изграждане на аналитични модели, които измерват риска и подпомагат по-добрите управленски решения.",
+    title: "Риск и модели",
+    subtitle: "Кредитен риск и количествен анализ",
+    text: "Свързване на моделите с управленския контекст, вместо изолирането им като отделна аналитична функция.",
     icon: "chart",
   },
   {
-    title: "Системи",
-    subtitle: "ERP, архитектура на данните и автоматизация",
-    text: "Свързване на системи, данни и процеси в единна финансова архитектура.",
+    title: "Системи и данни",
+    subtitle: "SAP, ERP и производствена среда",
+    text: "Разбиране как финансовата логика, операциите и данните трябва да работят заедно в една система.",
     icon: "data",
   },
   {
-    title: "Agentic AI",
-    subtitle: "AI агенти, Copilots и интелигентни работни процеси",
-    text: "Прилагане на Agentic AI за автоматизация на финансови процеси и подпомагане на управленските решения.",
+    title: "AI и автоматизация",
+    subtitle: "Интеграции и работни процеси",
+    text: "Използване на AI там, където той намалява ръчната работа и прави анализа по-последователен.",
     icon: "ai",
   },
 ];
@@ -58,13 +59,49 @@ export default function AboutPage() {
         <div className="about-shell">
           <div className="about-intro">
             <p className="about-eyebrow">ЗА ENTIMEMA</p>
-            <h1>Изграждаме финансови<br/>системи. Създаваме увереност.</h1>
+            <h1>Управлението започва там,<br/>където данните придобиват смисъл.</h1>
             <span className="about-accent-rule" />
             <p className="about-lead">
-              Entimema е създадена около една проста идея: добрите решения са следствие от добре изградени системи.<br/>
-              Изграждаме финансова архитектура, която прави организациите по-ясни, по-предвидими и по-управляеми.
+              Entimema свързва финансовото управление, риска, данните и технологиите в системи, които могат да се използват всеки ден.<br/>
+              Подходът ни започва с разбиране на бизнеса и завършва с работещ начин за вземане на решения.
             </p>
           </div>
+
+          <section className={styles.narrativeSection} aria-labelledby="about-why-title">
+            <p className={styles.narrativeLabel}>ЗАЩО ENTIMEMA</p>
+            <div className={styles.narrativeGrid}>
+              <h2 id="about-why-title">Повече данни не означават по-добро управление.</h2>
+              <div className={styles.narrativeCopy}>
+                <p>Организациите рядко страдат от липса на информация. По-често финансите, рискът и операциите работят с различна логика, а важните зависимости остават между системите и екипите.</p>
+                <p>Entimema съществува, за да свърже тези части в практичен управленски модел — с общи определения, измерими зависимости и ясен път от анализа до действието.</p>
+              </div>
+            </div>
+          </section>
+
+          <section className={styles.narrativeSection} aria-labelledby="about-thinking-title">
+            <p className={styles.narrativeLabel}>НАЧИНЪТ НА МИСЛЕНЕ</p>
+            <div className={styles.narrativeGrid}>
+              <h2 id="about-thinking-title">Решението има стойност само ако работи в реална среда.</h2>
+              <ol className={styles.principles}>
+                <li><strong>Първо разбираме контекста.</strong><span>Инструментът идва след въпроса, не преди него.</span></li>
+                <li><strong>Анализът трябва да води до действие.</strong><span>Моделът е полезен, когато променя конкретно управленско решение.</span></li>
+                <li><strong>Финансите и рискът са част от операциите.</strong><span>Те работят най-добре като обща система, а не като отделни функции.</span></li>
+                <li><strong>Технологията трябва да намалява сложността.</strong><span>AI и автоматизацията са средства за по-последователна работа, не само етикети.</span></li>
+              </ol>
+            </div>
+          </section>
+
+          <section className={styles.narrativeSection} aria-labelledby="about-work-title">
+            <p className={styles.narrativeLabel}>КАК РАБОТИМ</p>
+            <div className={styles.narrativeGrid}>
+              <h2 id="about-work-title">От реалния казус до работещата система.</h2>
+              <ol className={styles.workSequence}>
+                {["Разбираме контекста", "Структурираме проблема", "Изграждаме модела", "Тестваме в реална среда", "Предаваме работещо решение", "Подобряваме чрез резултатите"].map((step, index) => (
+                  <li key={step}><span>{String(index + 1).padStart(2, "0")}</span><strong>{step}</strong></li>
+                ))}
+              </ol>
+            </div>
+          </section>
 
           <article className="founder-card">
             <div className="founder-card__portrait">
@@ -72,10 +109,11 @@ export default function AboutPage() {
             </div>
             <div className="founder-card__content">
               <div className="founder-card__bio">
-                <p className="founder-card__label">ОСНОВАТЕЛ</p>
+                <p className="founder-card__label">ОПИТЪТ ЗАД ПОДХОДА</p>
                 <h2>Александър Димитров</h2>
-                <p>Работи в пресечната точка на корпоративните финанси, количественото моделиране на риска и Agentic AI. Проектира финансови системи, които превръщат сложността в по-добри управленски решения.</p>
-                <p>Работата му свързва стратегия, данни и технологии в единна финансова архитектура, която създава по-ясна основа за планиране, измерване и вземане на решения.</p>
+                <p>Подходът на Entimema е формиран от работа във финансово управление, контролинг, счетоводство, SAP и ERP среди, кредитен риск, количествен анализ и автоматизация.</p>
+                <p>Тази перспектива свързва управленската отчетност с реалните операции — включително в производствена среда — и позволява моделите, данните и AI интеграциите да бъдат оценявани според това как работят на практика.</p>
+                <p className={styles.personalStatement}>Създадох Entimema, защото доброто решение не е най-сложният модел, а този, който организацията може да разбере, използва и подобрява.</p>
               </div>
               <div className="founder-pillars">
                 {pillars.map((pillar) => (
@@ -89,10 +127,20 @@ export default function AboutPage() {
             </div>
           </article>
 
-          <div className="about-labs-seed">
-            <span>ENTIMEMA LABS</span>
-            <p>Изследователската и продуктова линия на Entimema — мястото, в което финансовата архитектура, моделирането и Agentic AI ще се превръщат в собствени технологии.</p>
-          </div>
+          <section className={`about-labs-seed ${styles.futureSection}`} aria-labelledby="about-future-title">
+            <span>КАКВО ИЗГРАЖДАМЕ</span>
+            <div>
+              <h2 id="about-future-title">Експертиза, превърната в повторяеми системи.</h2>
+              <p>Entimema започва като консултантска компания и постепенно развива AI-подпомогнати финансови и рискови решения. Посоката е ясна: човешката преценка да остане водеща, а автоматизацията да поеме повтаряемата работа и да направи добрите практики по-последователни.</p>
+              <p>Това не е традиционен консултантски модел и не е просто софтуер. Това е практичен път от експертизата към системи и продукти, изграждани върху реални управленски казуси.</p>
+            </div>
+          </section>
+
+          <section className={styles.conversation} aria-labelledby="about-conversation-title">
+            <p className={styles.narrativeLabel}>СЛЕДВАЩАТА СТЪПКА</p>
+            <h2 id="about-conversation-title">Всеки устойчив модел започва с точно разбиране на конкретния казус.</h2>
+            <Link href="/contact">Обсъдете вашия казус <span aria-hidden="true">→</span></Link>
+          </section>
         </div>
       </section>
     </main>
