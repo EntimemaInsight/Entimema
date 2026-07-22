@@ -10,6 +10,7 @@ import CaseCtaSection from "@/components/CaseCtaSection";
 export default function Home() {
   return (
     <main className="site-page">
+      <a className="skip-link" href="#home">Към основното съдържание</a>
       <AnnouncementBar />
       <Navbar />
       <section className="home-stage" aria-label="Entimema начало">

@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useState } from "react";
 import BrandLogo from "./BrandLogo";
 
 type NavKey = "home" | "services" | "about" | "analyses" | "contact";
@@ -26,6 +29,9 @@ const riskItems = [
 ];
 
 export default function Navbar({ active = "home" }: { active?: NavKey }) {
+  const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const [isKeyboardDismissed, setIsKeyboardDismissed] = useState(false);
+
   return (
     <header className="site-header">
       <div className="site-container site-header__inner site-header__inner--editorial">
@@ -34,17 +40,48 @@ export default function Navbar({ active = "home" }: { active?: NavKey }) {
         </Link>
 
         <nav className="site-nav site-nav--editorial" aria-label="Основна навигация">
-          <div className="site-nav__mega-trigger">
+          <div
+            className={`site-nav__mega-trigger${isServicesOpen ? " is-open" : ""}${isKeyboardDismissed ? " is-escape-closed" : ""}`}
+            onMouseEnter={() => {
+              setIsKeyboardDismissed(false);
+              setIsServicesOpen(true);
+            }}
+            onMouseLeave={() => setIsServicesOpen(false)}
+            onFocusCapture={() => {
+              if (!isKeyboardDismissed) setIsServicesOpen(true);
+            }}
+            onBlurCapture={(event) => {
+              if (!event.currentTarget.contains(event.relatedTarget)) {
+                setIsServicesOpen(false);
+                setIsKeyboardDismissed(false);
+              }
+            }}
+            onKeyDown={(event) => {
+              if (event.key === "Escape") {
+                event.preventDefault();
+                setIsServicesOpen(false);
+                setIsKeyboardDismissed(true);
+                event.currentTarget.querySelector<HTMLAnchorElement>("a")?.focus();
+              }
+              if (event.key === "ArrowDown") {
+                setIsKeyboardDismissed(false);
+                setIsServicesOpen(true);
+              }
+            }}
+          >
             <Link
               className={active === "services" ? "is-active" : undefined}
               href="/services"
               aria-current={active === "services" ? "page" : undefined}
+              aria-expanded={isServicesOpen && !isKeyboardDismissed}
+              aria-controls="services-mega-menu"
+              aria-haspopup="true"
             >
               Какво правим
               <span className="site-nav__chevron" aria-hidden="true" />
             </Link>
 
-            <div className="mega-menu" aria-label="Какво правим">
+            <div className="mega-menu" id="services-mega-menu" aria-label="Какво правим">
               <div className="site-container mega-menu__inner">
                 <section className="mega-menu__column" aria-labelledby="mega-finance">
                   <div className="mega-menu__heading">

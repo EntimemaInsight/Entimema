@@ -6295,3 +6295,149 @@ html.is-scrolled .primary-cta,
   .executive-profile { border-radius: var(--radius-card); }
   .executive-intelligence__canvas { border-radius: var(--radius-feature); }
 }
+
+/* =========================================================
+   SPRINT D — INTERACTION, FOCUS & FINAL QA SYSTEM
+   ========================================================= */
+:root {
+  --interaction-fast: 160ms;
+  --interaction-standard: 220ms;
+  --interaction-premium: 620ms;
+  --interaction-ease: cubic-bezier(.22, 1, .36, 1);
+  --interaction-arrow-shift: 6px;
+  --interaction-focus: 0 0 0 3px rgba(101, 87, 218, .3), 0 0 0 6px rgba(255, 255, 255, .92);
+  --interaction-underline: rgba(23, 47, 101, .4);
+}
+.skip-link {
+  position: fixed;
+  z-index: 1000;
+  top: 10px;
+  left: 12px;
+  min-height: 44px;
+  padding: 0 16px;
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--edge-active);
+  border-radius: var(--radius-control-small);
+  background: #fff;
+  color: var(--brand-navy-950);
+  box-shadow: var(--elevation-2);
+  font-weight: 600;
+  text-decoration: none;
+  opacity: 0;
+  transform: translate3d(0, -120%, 0);
+  transition: opacity var(--interaction-fast) ease-out, transform var(--interaction-standard) var(--interaction-ease);
+}
+.skip-link:focus-visible { opacity: 1; transform: translate3d(0, 0, 0); outline: none; box-shadow: var(--interaction-focus), var(--elevation-2); }
+.site-nav__mega-trigger.is-open .mega-menu {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate3d(0, 0, 0);
+}
+.site-nav__mega-trigger.is-escape-closed:focus-within .mega-menu {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate3d(0, -7px, 0);
+}
+.mega-menu { transition: opacity var(--interaction-standard) ease-out, transform var(--interaction-standard) var(--interaction-ease), visibility 0s linear var(--interaction-standard); }
+.site-nav__mega-trigger.is-open .mega-menu { transition-delay: 0s; }
+.site-nav__mega-trigger > a[aria-expanded="true"] .site-nav__chevron { transform: rotate(180deg); }
+.site-page :is(a, button):focus-visible { outline: none; box-shadow: var(--interaction-focus); }
+.site-nav--editorial a:focus-visible,
+.announcement a:focus-visible,
+.mega-menu__links a:focus-visible { border-radius: 5px; box-shadow: 0 0 0 3px rgba(101, 87, 218, .28); }
+.announcement__close,
+.language-switch,
+.philosophy-metric-card a,
+.executive-intelligence__switch button { min-width: 44px; min-height: 44px; cursor: pointer; }
+.primary-cta,
+html.is-scrolled .primary-cta,
+.case-cta__link,
+.case-cta__link:hover {
+  transition-duration: var(--interaction-standard);
+  transition-timing-function: var(--interaction-ease);
+  -webkit-tap-highlight-color: transparent;
+}
+.primary-cta:hover > b,
+.case-cta__link:hover > b { transform: translate3d(var(--interaction-arrow-shift), 0, 0); }
+.primary-cta:active > b,
+.case-cta__link:active > b { transform: translate3d(2px, 0, 0); }
+.primary-cta > b,
+.case-cta__link > b { transition: transform var(--interaction-standard) var(--interaction-ease); }
+.site-nav--editorial a,
+.announcement a,
+.mega-menu__links a,
+.approach-card__link {
+  text-decoration: none;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .3em;
+  transition: color var(--interaction-fast) ease-out, text-decoration-color var(--interaction-fast) ease-out;
+}
+.announcement a:hover,
+.mega-menu__links a:hover,
+.approach-card__link:hover { text-decoration-line: underline; text-decoration-color: var(--interaction-underline); }
+.mega-menu__links a span,
+.approach-card__link span:last-child,
+.philosophy-metric-card a path { transition: transform var(--interaction-standard) var(--interaction-ease); }
+.mega-menu__links a:hover span,
+.approach-card__link:hover span:last-child { transform: translate3d(4px, 0, 0); }
+.approach-tile { cursor: pointer; transition: transform var(--interaction-standard) var(--interaction-ease), border-color var(--interaction-standard) ease-out, box-shadow var(--interaction-standard) ease-out; }
+.philosophy-quote-card,
+.philosophy-metric-card,
+.executive-agent,
+.executive-profile,
+.executive-orbit-tag { cursor: default; }
+.approach-tile:active { transform: translate3d(0, 0, 0); box-shadow: var(--elevation-1); }
+.philosophy-metric-card a {
+  display: inline-grid;
+  place-items: center;
+  transition: transform var(--interaction-standard) var(--interaction-ease), border-color var(--interaction-standard) ease-out, box-shadow var(--interaction-standard) ease-out;
+  -webkit-tap-highlight-color: transparent;
+}
+.philosophy-metric-card a:hover { transform: translate3d(0, -1px, 0); border-color: rgba(255,255,255,.28); }
+.philosophy-metric-card a:hover path { transform: translate3d(4px, 0, 0); }
+.philosophy-metric-card a:active { transform: translate3d(0, 0, 0); box-shadow: 0 1px 2px rgba(26,29,83,.14), 0 5px 12px rgba(48,42,144,.16), inset 0 1px 0 rgba(255,255,255,.2); }
+.philosophy-metric-card a:active path { transform: translate3d(1px, 0, 0); }
+.site-header__inner--editorial,
+.site-header__actions,
+.site-nav--editorial { align-items: center; }
+.primary-cta,
+.language-switch,
+.announcement__close,
+.philosophy-metric-card a { line-height: 1; }
+.case-cta,
+.hero,
+.site-header { overflow-clip-margin: 8px; }
+@media (hover: none), (pointer: coarse) {
+  .primary-cta:hover,
+  .case-cta__link:hover,
+  .approach-tile:hover,
+  .philosophy-metric-card a:hover { transform: none; }
+  .primary-cta:hover > b,
+  .case-cta__link:hover > b,
+  .philosophy-metric-card a:hover path { transform: none; }
+  .announcement a:hover,
+  .mega-menu__links a:hover,
+  .approach-card__link:hover { text-decoration-line: none; }
+}
+@media (max-width: 680px) {
+  .primary-cta,
+  .case-cta__link,
+  .language-switch { min-height: 48px; }
+  .case-cta { overflow: visible; }
+  .philosophy-metric-card { padding-inline: 24px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .skip-link,
+  .mega-menu,
+  .site-nav__chevron,
+  .primary-cta,
+  .primary-cta > b,
+  .case-cta__link,
+  .case-cta__link > b,
+  .philosophy-metric-card a,
+  .philosophy-metric-card a path,
+  .approach-tile { transition: none !important; }
+}
