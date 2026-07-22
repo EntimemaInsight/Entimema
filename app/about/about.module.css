@@ -11,7 +11,21 @@
 
 .page :global(.about-hero) {
   min-height: 0;
-  padding: clamp(4.75rem, 7vw, 7rem) 0 var(--about-section-space);
+  padding: clamp(5.25rem, 7.2vw, 7.25rem) 0 var(--about-section-space);
+  background:
+    radial-gradient(ellipse 46% 38% at 72% 18%, rgba(255,255,255,.5), transparent 74%),
+    linear-gradient(180deg, rgba(251,247,241,0) 0%, rgba(247,247,252,.16) 72%, rgba(251,247,241,0) 100%) !important;
+}
+
+.page :global(.about-hero)::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .16;
+  background-image: radial-gradient(circle, rgba(74,88,156,.12) 0 .55px, transparent .75px);
+  background-size: 28px 28px;
+  mask-image: linear-gradient(90deg, transparent, #000 48%, transparent 92%);
 }
 
 .page :global(.about-shell) {
@@ -20,7 +34,7 @@
 }
 
 .page :global(.about-intro) {
-  width: min(100%, var(--about-standard));
+  width: min(100%, 60rem);
   max-width: none;
   margin-inline: auto;
 }
@@ -30,26 +44,26 @@
 }
 
 .page :global(.about-intro h1) {
-  max-width: 16ch;
-  font-size: clamp(3rem, 4.25vw, 4.25rem);
-  line-height: 1.08;
+  max-width: 14.5em;
+  font-size: clamp(2.875rem, 3.85vw, 3.875rem);
+  line-height: 1.09;
   letter-spacing: -.038em;
 }
 
 .page :global(.about-accent-rule) {
-  margin: clamp(2rem, 3vw, 2.75rem) 0 clamp(1.75rem, 2.5vw, 2.25rem);
+  margin: clamp(2.125rem, 3vw, 2.75rem) 0 clamp(1.875rem, 2.6vw, 2.375rem);
 }
 
 .page :global(.about-lead) {
-  max-width: var(--about-reading);
-  font-size: clamp(1rem, 1.05vw, 1.125rem);
-  line-height: 1.72;
+  max-width: 56ch;
+  font-size: clamp(.96875rem, .98vw, 1.0625rem);
+  line-height: 1.74;
 }
 
 .page :global(.founder-card) {
   width: min(100%, var(--about-wide));
   min-height: 0;
-  margin: var(--about-block-space) auto 0;
+  margin: clamp(4rem, 5.8vw, 5.5rem) auto 0;
   grid-template-columns: minmax(18rem, .78fr) minmax(0, 1.42fr);
   align-items: stretch;
 }
@@ -152,7 +166,7 @@
   }
 
   .page :global(.about-hero) {
-    padding-top: clamp(4rem, 7vw, 5.25rem);
+    padding-top: clamp(4.5rem, 7vw, 5.5rem);
   }
 
   .page :global(.founder-card) {
@@ -166,9 +180,11 @@
 
 @media (max-width: 54rem) {
   .page :global(.about-intro h1) {
-    max-width: 14ch;
-    font-size: clamp(2.75rem, 7vw, 3.75rem);
+    max-width: 13.5em;
+    font-size: clamp(2.625rem, 6.6vw, 3.5rem);
   }
+
+  .page :global(.about-lead) { max-width: 52ch; }
 
   .page :global(.founder-card) {
     grid-template-columns: 1fr;
@@ -199,13 +215,13 @@
   }
 
   .page :global(.about-hero) {
-    padding: 3.75rem 0 4.5rem;
+    padding: 4rem 0 4.5rem;
   }
 
   .page :global(.about-intro h1) {
-    max-width: 12ch;
-    font-size: clamp(2.5rem, 11.5vw, 3.125rem);
-    line-height: 1.06;
+    max-width: 12.5em;
+    font-size: clamp(2.375rem, 10.8vw, 2.875rem);
+    line-height: 1.07;
   }
 
   .page :global(.about-intro h1 br),
@@ -214,10 +230,12 @@
   }
 
   .page :global(.about-lead) {
-    max-width: 36ch;
-    font-size: 1rem;
+    max-width: 34ch;
+    font-size: .96875rem;
     line-height: 1.68;
   }
+
+  .page :global(.founder-card) { margin-top: 3.5rem; }
 
   .page :global(.founder-card) {
     border-radius: 12px;
