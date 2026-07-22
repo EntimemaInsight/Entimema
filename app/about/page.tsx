@@ -32,10 +32,10 @@ const pillars = [
 ];
 
 function PillarIcon({ type }: { type: string }) {
-  if (type === "pie") return <svg viewBox="0 0 32 32"><path d="M16 3v13h13A13 13 0 1 1 16 3Z"/><path d="M19 3.5A12.5 12.5 0 0 1 28.5 13H19Z"/></svg>;
-  if (type === "chart") return <svg viewBox="0 0 32 32"><path d="M4 27V5M4 27h24"/><path d="m8 22 6-7 5 3 8-10"/><path d="M22 8h5v5"/></svg>;
-  if (type === "data") return <svg viewBox="0 0 32 32"><ellipse cx="16" cy="7" rx="10" ry="4"/><path d="M6 7v9c0 2.2 4.5 4 10 4s10-1.8 10-4V7M6 16v9c0 2.2 4.5 4 10 4s10-1.8 10-4v-9"/></svg>;
-  return <svg viewBox="0 0 32 32"><path d="M16 2v28M2 16h28M6 6l20 20M26 6 6 26"/><circle cx="16" cy="16" r="4"/></svg>;
+  if (type === "pie") return <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M16 3v13h13A13 13 0 1 1 16 3Z"/><path d="M19 3.5A12.5 12.5 0 0 1 28.5 13H19Z"/></svg>;
+  if (type === "chart") return <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M4 27V5M4 27h24"/><path d="m8 22 6-7 5 3 8-10"/><path d="M22 8h5v5"/></svg>;
+  if (type === "data") return <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><ellipse cx="16" cy="7" rx="10" ry="4"/><path d="M6 7v9c0 2.2 4.5 4 10 4s10-1.8 10-4V7M6 16v9c0 2.2 4.5 4 10 4s10-1.8 10-4v-9"/></svg>;
+  return <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M16 2v28M2 16h28M6 6l20 20M26 6 6 26"/><circle cx="16" cy="16" r="4"/></svg>;
 }
 
 export default function AboutPage() {
@@ -61,10 +61,10 @@ export default function AboutPage() {
         <div className="about-shell">
           <div className={`about-intro ${styles.heroReveal}`} data-about-reveal="hero">
             <p className="about-eyebrow">ЗА ENTIMEMA</p>
-            <h1>Управлението започва там,<br/>където данните придобиват смисъл.</h1>
+            <h1>Управлението започва там, <br/>където данните придобиват смисъл.</h1>
             <span className="about-accent-rule" />
             <p className="about-lead">
-              Entimema свързва финансовото управление, риска, данните и технологиите в системи, които могат да се използват всеки ден.<br/>
+              Entimema свързва финансовото управление, риска, данните и технологиите в системи, които могат да се използват всеки ден. <br/>
               Подходът ни започва с разбиране на бизнеса и завършва с работещ начин за вземане на решения.
             </p>
           </div>

@@ -387,8 +387,12 @@
   text-decoration: none;
 }
 .conversation a span { transition: transform 220ms cubic-bezier(.22,1,.36,1); }
-.conversation a:hover span { transform: translateX(5px); }
+.conversation a:active span { transform: translateX(3px); }
 .conversation a:focus-visible { outline: 2px solid #2446df; outline-offset: 5px; }
+
+@media (hover: hover) and (pointer: fine) {
+  .conversation a:hover span { transform: translateX(5px); }
+}
 
 /* About-only editorial motion: one-shot viewport groups, no loops. */
 .motionRoot { display: contents; }
@@ -399,7 +403,6 @@
   transition:
     opacity var(--about-motion-section) ease-out,
     transform var(--about-motion-section) var(--about-motion-ease);
-  will-change: opacity, transform;
 }
 
 .motionRoot [data-about-reveal].revealed {
@@ -582,7 +585,7 @@
     --about-gutter: 1.125rem;
     --about-section-space: 4.5rem;
     --about-block-space: 3rem;
-    --about-type-display: clamp(2.375rem, 10.8vw, 2.875rem);
+    --about-type-display: clamp(2.125rem, 9.4vw, 2.5rem);
     --about-type-lead: .96875rem;
     --about-type-section-heading: clamp(1.75rem, 8vw, 2rem);
     --about-type-section-intro: 1.0625rem;
