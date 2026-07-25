@@ -1,0 +1,66 @@
+.paths {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+  gap: clamp(12px, 1.5vw, 24px);
+  margin-top: clamp(40px, 5vw, 72px);
+}
+
+.path {
+  min-height: clamp(132px, 12vw, 180px);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  padding: clamp(24px, 2.5vw, 40px);
+  border-radius: var(--radius-card);
+  background: var(--brand-navy-900);
+  color: #fff;
+  font-size: var(--type-card-title);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.15;
+  letter-spacing: var(--tracking-copy);
+  transition: background-color 300ms var(--ease-standard), transform 300ms var(--ease-standard);
+}
+
+.arrow {
+  flex: 0 0 auto;
+  color: #fff;
+  transition: transform 300ms var(--ease-standard);
+}
+
+.path:hover {
+  background: var(--brand-navy-800);
+  transform: translateY(-3px);
+}
+
+.path:hover .arrow {
+  transform: translateX(3px);
+}
+
+.path:focus-visible {
+  outline: 3px solid var(--brand-blue-200);
+  outline-offset: 4px;
+}
+
+@media (max-width: 760px) {
+  .paths {
+    grid-template-columns: 1fr;
+  }
+
+  .path {
+    min-height: 120px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .path,
+  .arrow {
+    transition-duration: 0.01ms;
+  }
+
+  .path:hover,
+  .path:hover .arrow {
+    transform: none;
+  }
+}
