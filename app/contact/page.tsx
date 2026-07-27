@@ -77,7 +77,9 @@ export default function ContactPage() {
                 href={`mailto:office@entimema.net?subject=${encodeURIComponent(subject)}`}
                 key={title}
               >
-                <Icon className={styles.icon} />
+                <span className={styles.iconFrame} aria-hidden="true">
+                  <Icon className={styles.icon} />
+                </span>
                 <span className={styles.title}>{title}</span>
                 <span className={styles.arrow} aria-hidden="true">
                   →
