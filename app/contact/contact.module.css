@@ -1,41 +1,118 @@
+.page {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  overflow: clip;
+  background: var(--surface);
+}
+
+.hero {
+  flex: 1;
+  padding-block: clamp(88px, 10vw, 152px) clamp(80px, 9vw, 136px);
+}
+
+.heroInner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.intro {
+  max-width: var(--text-container);
+  text-align: center;
+}
+
+.intro h1 {
+  margin: 0;
+  color: var(--brand-navy-950);
+  font-size: var(--type-hero-display);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--leading-hero-display);
+  letter-spacing: var(--tracking-display);
+  text-wrap: balance;
+}
+
+.intro p {
+  margin: clamp(24px, 2.5vw, 36px) 0 0;
+  color: var(--text-secondary);
+  font-size: var(--type-section-subtitle);
+  line-height: var(--leading-section-subtitle);
+  letter-spacing: var(--tracking-copy);
+  text-wrap: balance;
+}
+
 .paths {
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   align-items: stretch;
-  gap: clamp(12px, 1.5vw, 24px);
-  margin-top: clamp(40px, 5vw, 72px);
+  gap: clamp(16px, 1.65vw, 24px);
+  margin-top: clamp(64px, 7vw, 104px);
 }
 
 .path {
-  min-height: clamp(132px, 12vw, 180px);
+  min-width: 0;
+  min-height: clamp(260px, 21vw, 326px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-5);
+  padding: clamp(28px, 2.6vw, 42px);
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  background: var(--brand-navy-900);
+  color: var(--surface);
+  transition: background-color 300ms var(--ease-standard);
+}
+
+.icon {
+  width: clamp(36px, 3vw, 44px);
+  height: clamp(36px, 3vw, 44px);
+  display: block;
+}
+
+.icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.35;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.cardFooter {
+  min-width: 0;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  gap: 24px;
-  padding: clamp(24px, 2.5vw, 40px);
-  border-radius: var(--radius-card);
-  background: var(--brand-navy-900);
-  color: #fff;
+  gap: var(--space-3);
   font-size: var(--type-card-title);
   font-weight: var(--font-weight-semibold);
   line-height: 1.15;
   letter-spacing: var(--tracking-copy);
-  transition: background-color 300ms var(--ease-standard), transform 300ms var(--ease-standard);
+}
+
+.cardFooter > :first-child {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .arrow {
   flex: 0 0 auto;
-  color: #fff;
+  font-size: 1.15em;
+  font-weight: var(--font-weight-regular);
+  line-height: 1;
   transition: transform 300ms var(--ease-standard);
 }
 
 .path:hover {
   background: var(--brand-navy-800);
-  transform: translateY(-3px);
 }
 
 .path:hover .arrow {
-  transform: translateX(3px);
+  transform: translateX(4px);
 }
 
 .path:focus-visible {
@@ -43,13 +120,46 @@
   outline-offset: 4px;
 }
 
-@media (max-width: 760px) {
+.footer {
+  border-top: 1px solid var(--hairline);
+}
+
+.footerInner {
+  min-height: 112px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+}
+
+@media (max-width: 920px) {
   .paths {
     grid-template-columns: 1fr;
+    max-width: 680px;
   }
 
   .path {
-    min-height: 120px;
+    min-height: 240px;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero {
+    padding-block: 72px 80px;
+  }
+
+  .paths {
+    margin-top: 56px;
+  }
+
+  .path {
+    min-height: 210px;
+  }
+
+  .footerInner {
+    min-height: 96px;
   }
 }
 
@@ -59,7 +169,6 @@
     transition-duration: 0.01ms;
   }
 
-  .path:hover,
   .path:hover .arrow {
     transform: none;
   }
