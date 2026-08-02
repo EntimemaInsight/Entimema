@@ -37,6 +37,7 @@ const related = [
   ["CFO функция", "Финансова архитектура, роли и управленски процеси.", "/services/cfo-function"],
   ["Бюджети и прогнози", "Планиране, основано на бизнес драйвери и сценарии.", "/services/budgets-and-forecasting"],
   ["Управленска отчетност", "Информация за ръководството, организирана около решенията.", "/services/management-reporting"],
+  ["Финансови данни", "Единна основа за отчетност, анализ и автоматизация.", "/services/financial-data"],
 ];
 
 function SectionHeader({ label, title, intro }: { label: string; title: string; intro?: string }) { return <header className={styles.sectionHeader}><span>{label}</span><h2>{title}</h2>{intro && <p>{intro}</p>}</header>; }
