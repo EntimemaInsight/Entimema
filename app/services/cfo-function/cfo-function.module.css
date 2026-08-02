@@ -746,12 +746,61 @@
   transition: border-color var(--duration-fast) ease, background var(--duration-fast) ease, box-shadow var(--duration-fast) ease, transform var(--duration-fast) var(--ease-standard);
 }
 
+/* Sprint 4: enterprise product identity */
+@media (min-width: 761px) {
+  .page > .section:nth-of-type(2) {
+    padding-block: clamp(128px, 9vw, 144px) clamp(112px, 8vw, 128px);
+  }
+
+  .page > .section:nth-of-type(3) {
+    padding-block: clamp(104px, 7.5vw, 120px);
+  }
+
+  .page > .section:nth-of-type(4) {
+    padding-block: clamp(136px, 9.5vw, 152px);
+  }
+
+  .page > .section:nth-of-type(5) {
+    padding-block: clamp(112px, 8vw, 128px);
+  }
+
+  .page > .section:nth-of-type(6) {
+    padding-block: clamp(104px, 7.5vw, 120px);
+  }
+}
+
+.capability {
+  min-height: 264px;
+  box-shadow: 0 1px 2px rgba(4, 19, 63, .018), 0 6px 18px rgba(4, 19, 63, .022);
+}
+
+.outcomeGrid article {
+  min-height: 224px;
+}
+
+.useCaseGrid article {
+  min-height: 232px;
+  box-shadow: 0 1px 2px rgba(4, 19, 63, .018);
+}
+
+.relatedGrid a {
+  transition: border-color var(--duration-fast) ease, color var(--duration-fast) ease;
+}
+
+.relatedGrid a:hover {
+  padding-inline: 10px;
+}
+
+.relatedGrid b {
+  transition: transform var(--duration-fast) var(--ease-standard);
+}
+
 @media (hover: hover) and (pointer: fine) {
   .capability:hover,
   .outcomeGrid article:hover,
   .useCaseGrid article:hover {
     border-color: rgba(16, 43, 112, .19);
-    transform: translateY(-2px);
+    transform: translateY(-1px);
   }
 
   .primaryButton:hover,
@@ -765,6 +814,10 @@
 
   .timeline li:hover h3 {
     color: var(--brand-navy-800);
+  }
+
+  .relatedGrid a:hover b {
+    transform: translate(2px, -2px);
   }
 }
 
@@ -826,6 +879,12 @@
     gap: 16px;
   }
 
+  .capability,
+  .outcomeGrid article,
+  .useCaseGrid article {
+    min-height: 0;
+  }
+
   .timeline li {
     padding: 8px 0 48px 40px;
   }
@@ -864,7 +923,9 @@
 
 @media (prefers-reduced-motion: reduce) {
   .timeline li,
-  .timeline h3 {
+  .timeline h3,
+  .relatedGrid a,
+  .relatedGrid b {
     transition: none;
   }
 
