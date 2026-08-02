@@ -79,11 +79,11 @@ export default function CfoFunctionPage() {
         <SectionHeader label="Резултати" title="Какво получавате" intro="Резултатът е работеща финансова система с определени роли, информация и управленски процеси." />
         <div className={styles.outcomeGrid}>{outcomes.map(([title, copy]) => <article key={title}><span aria-hidden="true">✓</span><div><h3>{title}</h3><p>{copy}</p></div></article>)}</div>
         <aside className={styles.caseExample} aria-labelledby="case-example-title">
-          <div className={styles.caseExampleIntro}><span>Примерен ангажимент</span><h3 id="case-example-title">Производствена компания</h3></div>
+          <div className={styles.caseExampleIntro}><span>Примерен сценарий</span><h3 id="case-example-title">Производствена компания</h3></div>
           <dl>
-            <div><dt>Предизвикателство</dt><dd>Фрагментирана финансова отчетност и непоследователна калкулация на себестойността.</dd></div>
-            <div><dt>Изградено</dt><dd>Управленска отчетност, бюджетна рамка и модел за себестойност, интегрирани в ERP.</dd></div>
-            <div><dt>Резултат</dt><dd>Единен управленски изглед за финансови решения.</dd></div>
+            <div><dt>Контекст</dt><dd>Разпокъсана управленска информация, липса на единен модел за себестойност и ограничена финансова видимост.</dd></div>
+            <div><dt>Подход</dt><dd>Единна финансова архитектура, управленска отчетност и модел за себестойност, интегрирани с данните от ERP.</dd></div>
+            <div><dt>Резултат</dt><dd>Последователна основа за финансови и оперативни решения.</dd></div>
           </dl>
         </aside>
       </div></section>
