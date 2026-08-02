@@ -17,8 +17,7 @@ const subscribeToClientMount = () => () => {};
 
 const serviceGroups = [
   {
-    category: "ФИНАНСИ",
-    subtitle: "За управлението на бизнеса.",
+    category: "Финанси",
     items: [
       {
         title: "CFO функция",
@@ -53,8 +52,7 @@ const serviceGroups = [
     ],
   },
   {
-    category: "РИСК",
-    subtitle: "За вземането на решения.",
+    category: "Риск",
     items: [
       {
         title: "Кредитен риск",
@@ -250,7 +248,6 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
             {serviceGroups.map((group) => (
               <section className={styles.panel} key={group.category}>
                 <h2 className={styles.category}>{group.category}</h2>
-                <p className={styles.categorySubtitle}>{group.subtitle}</p>
                 <div className={styles.items}>
                   {group.items.map((item) => (
                     <Link className={styles.item} href={item.href} key={item.href} onClick={close}>
