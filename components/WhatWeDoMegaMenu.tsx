@@ -37,7 +37,7 @@ const serviceGroups = [
       {
         title: "Себестойност и рентабилност",
         description: "Разходи, маржове и фактори за рентабилност.",
-        href: "/services/cost-profitability",
+        href: "/services/cost-and-profitability",
       },
       {
         title: "Финансови данни",
