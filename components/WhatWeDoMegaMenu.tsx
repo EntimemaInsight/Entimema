@@ -246,9 +246,6 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
         style={{ top: menuTop }}
       >
         <div className={`site-container ${styles.inner}`}>
-          <p className={styles.intro}>
-            Финансова архитектура за по-добри управленски решения
-          </p>
           <div className={styles.panels}>
             {serviceGroups.map((group) => (
               <section className={styles.panel} key={group.category}>
