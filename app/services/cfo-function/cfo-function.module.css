@@ -488,3 +488,353 @@
     transition: none;
   }
 }
+
+/* Sprint 3: premium product polish */
+.page {
+  --cfo-space-section: clamp(112px, 9.25vw, 152px);
+  --cfo-card-padding: clamp(34px, 3.15vw, 50px);
+  --cfo-card-radius: 14px;
+  --cfo-card-border: rgba(16, 43, 112, .105);
+  --cfo-card-shadow: 0 1px 2px rgba(4, 19, 63, .018), 0 10px 28px rgba(4, 19, 63, .03);
+  --cfo-card-shadow-hover: 0 2px 5px rgba(4, 19, 63, .025), 0 18px 42px rgba(4, 19, 63, .055);
+}
+
+.hero {
+  padding-block: clamp(88px, 7.8vw, 124px) clamp(120px, 9vw, 148px);
+}
+
+.heroInner {
+  grid-template-columns: minmax(0, .9fr) minmax(520px, 1.1fr);
+  gap: clamp(72px, 6.5vw, 112px);
+}
+
+.breadcrumb {
+  margin-bottom: clamp(52px, 4.8vw, 68px);
+}
+
+.hero h1 {
+  margin-block: 18px 28px;
+  line-height: .98;
+}
+
+.support {
+  margin-block: 34px 42px;
+}
+
+.dashboard {
+  padding: clamp(26px, 2.6vw, 38px);
+  border-color: rgba(16, 43, 112, .12);
+  box-shadow: 0 2px 4px rgba(4, 19, 63, .025), 0 28px 80px rgba(4, 19, 63, .07);
+}
+
+.dashboardTop {
+  align-items: center;
+}
+
+.dashboardTop h2 {
+  margin-top: 6px;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.demoBadge {
+  padding: 7px 10px;
+  border-color: rgba(16, 43, 112, .1);
+  border-radius: 6px;
+  letter-spacing: .045em;
+}
+
+.metrics {
+  gap: 10px;
+  margin-block: 34px 14px;
+}
+
+.metric {
+  padding: 17px 15px 16px;
+}
+
+.metric strong {
+  margin-block: 10px 6px;
+  line-height: 1.1;
+}
+
+.metric small {
+  line-height: 1.45;
+}
+
+.charts {
+  gap: 10px;
+}
+
+.chartPanel,
+.cashPanel {
+  padding: 21px;
+}
+
+.chartHeading {
+  align-items: center;
+}
+
+.chartHeading h3 {
+  margin-top: 5px;
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.25;
+}
+
+.lineChart {
+  margin-top: 16px;
+}
+
+.bars {
+  gap: 9px;
+  padding-top: 24px;
+}
+
+.axis {
+  padding-top: 5px;
+  line-height: 1.4;
+}
+
+.sectionHeader {
+  grid-template-columns: minmax(280px, .78fr) minmax(400px, 1.22fr);
+  column-gap: clamp(80px, 9vw, 144px);
+  margin-bottom: clamp(72px, 6.6vw, 104px);
+}
+
+.sectionHeader > span {
+  margin-bottom: 24px;
+  letter-spacing: .015em;
+}
+
+.sectionHeader h2 {
+  max-width: 11.5ch;
+  font-size: clamp(42px, 3.85vw, 58px);
+  font-weight: 560;
+  line-height: 1.04;
+}
+
+.sectionHeader p {
+  max-width: 44ch;
+  margin-top: 36px;
+  line-height: 1.74;
+}
+
+.capabilityGrid,
+.outcomeGrid,
+.useCaseGrid {
+  gap: 22px;
+}
+
+.capability,
+.outcomeGrid article,
+.useCaseGrid article {
+  border-color: var(--cfo-card-border);
+  box-shadow: var(--cfo-card-shadow);
+}
+
+.capability {
+  min-height: 276px;
+}
+
+.capability > span {
+  letter-spacing: .025em;
+}
+
+.capability h3 {
+  margin-block: 60px 18px;
+}
+
+.capability h3,
+.outcomeGrid h3,
+.useCaseGrid h3 {
+  letter-spacing: -.03em;
+}
+
+.capability p,
+.timeline p,
+.outcomeGrid p,
+.useCaseGrid p {
+  line-height: 1.72;
+}
+
+.timeline {
+  padding-top: 12px;
+}
+
+.timeline li {
+  min-height: 284px;
+  padding: 44px clamp(34px, 3.2vw, 52px) 28px 0;
+}
+
+.timeline li:not(:last-child) {
+  margin-right: 12px;
+}
+
+.timeline li::before {
+  box-shadow: 0 0 0 8px #f8f9fc;
+}
+
+.timeline span {
+  letter-spacing: .025em;
+}
+
+.timeline h3 {
+  margin-block: 52px 18px;
+  letter-spacing: -.025em;
+}
+
+.outcomeGrid article {
+  grid-template-columns: 42px 1fr;
+  gap: 26px;
+}
+
+.outcomeGrid article > span {
+  width: 34px;
+  height: 34px;
+}
+
+.outcomeGrid h3 {
+  margin-bottom: 18px;
+}
+
+.useCaseGrid h3 {
+  margin-block: 44px 18px;
+}
+
+.relatedGrid a {
+  min-height: 144px;
+  padding-inline: 10px;
+}
+
+.relatedGrid span {
+  gap: clamp(64px, 8vw, 120px);
+}
+
+.relatedGrid b {
+  transform: translateY(-1px);
+}
+
+.ctaSection {
+  padding-block: 32px var(--cfo-space-section);
+}
+
+.ctaBlock {
+  padding: clamp(68px, 6.4vw, 96px);
+}
+
+.ctaBlock h2 {
+  margin-block: 26px;
+}
+
+.ctaBlock p {
+  margin-bottom: 42px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .capability:hover,
+  .outcomeGrid article:hover,
+  .useCaseGrid article:hover {
+    border-color: rgba(16, 43, 112, .19);
+    transform: translateY(-2px);
+  }
+}
+
+@media (max-width: 1100px) {
+  .heroInner {
+    grid-template-columns: 1fr;
+  }
+
+  .sectionHeader {
+    column-gap: 68px;
+  }
+}
+
+@media (max-width: 760px) {
+  .page {
+    --cfo-space-section-mobile: 80px;
+  }
+
+  .hero {
+    padding-block: 56px 88px;
+  }
+
+  .heroInner {
+    gap: 56px;
+  }
+
+  .dashboard {
+    padding: 20px;
+  }
+
+  .metrics {
+    margin-block: 28px 12px;
+  }
+
+  .chartPanel,
+  .cashPanel {
+    padding: 18px;
+  }
+
+  .sectionHeader {
+    margin-bottom: 52px;
+  }
+
+  .sectionHeader > span {
+    margin-bottom: 0;
+  }
+
+  .sectionHeader h2 {
+    margin-top: 16px;
+  }
+
+  .sectionHeader p {
+    margin-top: 26px;
+  }
+
+  .capabilityGrid,
+  .outcomeGrid,
+  .useCaseGrid {
+    gap: 16px;
+  }
+
+  .timeline li {
+    padding: 8px 0 48px 40px;
+  }
+
+  .timeline li:not(:last-child) {
+    margin-right: 0;
+  }
+
+  .timeline h3 {
+    margin-block: 20px 12px;
+  }
+
+  .ctaSection {
+    padding-block: 8px var(--cfo-space-section-mobile);
+  }
+
+  .ctaBlock {
+    padding: 48px 36px;
+  }
+}
+
+@media (max-width: 430px) {
+  .chartPanel,
+  .cashPanel {
+    padding: 14px;
+  }
+
+  .ctaBlock {
+    padding: 40px 28px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .capability,
+  .outcomeGrid article,
+  .useCaseGrid article {
+    transform: none;
+  }
+}
