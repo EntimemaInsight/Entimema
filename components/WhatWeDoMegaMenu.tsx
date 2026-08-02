@@ -27,7 +27,7 @@ const serviceGroups = [
       {
         title: "Бюджети и прогнози",
         description: "Финансово планиране, основано на данни и бизнес сценарии.",
-        href: "/services/budgets-forecasts",
+        href: "/services/budgets-and-forecasting",
       },
       {
         title: "Управленска отчетност",
