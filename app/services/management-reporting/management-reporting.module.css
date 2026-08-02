@@ -1,0 +1,62 @@
+@import "../budgets-and-forecasting/budgets-and-forecasting.module.css";
+
+.unitBars {
+  display: grid;
+  gap: 11px;
+  margin-top: 18px;
+}
+
+.unitRow {
+  display: grid;
+  grid-template-columns: 72px 1fr 30px;
+  gap: 9px;
+  align-items: center;
+  color: var(--text-secondary);
+  font-size: 9px;
+}
+
+.unitTrack {
+  height: 7px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(16, 43, 112, .08);
+}
+
+.unitTrack i {
+  display: block;
+  width: var(--width);
+  height: 100%;
+  border-radius: inherit;
+  background: var(--brand-navy-700);
+}
+
+.unitRow:nth-child(2) .unitTrack i { background: var(--brand-orange-500); }
+
+.movement {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  height: 88px;
+  margin-top: 18px;
+}
+
+.movement span {
+  display: grid;
+  flex: 1;
+  height: var(--height);
+  place-items: end center;
+  padding-bottom: 7px;
+  border-radius: 2px;
+  background: rgba(16, 43, 112, .12);
+  color: var(--brand-navy-800);
+  font-size: 8px;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.movement span:nth-child(3) { background: rgba(255, 74, 18, .2); color: var(--brand-orange-600); }
+
+@media (max-width: 430px) {
+  .unitRow { grid-template-columns: 58px 1fr 28px; gap: 6px; }
+}
