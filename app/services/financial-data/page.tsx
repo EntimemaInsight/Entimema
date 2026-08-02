@@ -44,6 +44,7 @@ const related = [
   ["Управленска отчетност", "Информация за ръководството, организирана около решенията.", "/services/management-reporting"],
   ["Бюджети и прогнози", "Планиране, основано на бизнес драйвери и сценарии.", "/services/budgets-and-forecasting"],
   ["Себестойност и рентабилност", "Модели за разбиране на икономиката на бизнеса.", "/services/cost-and-profitability"],
+  ["Финансови AI агенти", "AI агенти за изпълнение на повтаряеми финансови процеси.", "/services/financial-ai-agents"],
 ];
 
 function SectionHeader({ label, title, intro }: { label: string; title: string; intro?: string }) {

@@ -1,0 +1,62 @@
+@import "../cfo-function/cfo-function.module.css";
+
+.operationsGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(180px, .75fr);
+  gap: 12px;
+}
+
+.activityList,
+.queueList {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.activityRow,
+.queueRow {
+  display: grid;
+  grid-template-columns: 10px minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 0;
+  border-top: 1px solid var(--border-subtle);
+  font-size: 11px;
+}
+
+.activityRow i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--brand-orange-500);
+}
+
+.activityRow span,
+.queueRow span { color: var(--text-secondary); }
+.activityRow strong,
+.queueRow strong { font-size: 11px; font-weight: 650; }
+
+.queueRow {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.statusTrack {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 22px;
+}
+
+.statusTrack div {
+  padding-top: 12px;
+  border-top: 3px solid var(--brand-navy-800);
+}
+
+.statusTrack div:nth-child(2) { border-color: var(--brand-orange-500); }
+.statusTrack div:nth-child(3) { border-color: var(--border-strong); }
+.statusTrack strong { display: block; font-size: 16px; }
+.statusTrack span { color: var(--text-secondary); font-size: 10px; }
+
+@media (max-width: 520px) {
+  .operationsGrid { grid-template-columns: 1fr; }
+}

@@ -6,7 +6,7 @@ const services = [
   { number:"03", title:"Данни, AI и автоматизация", description:"Свързваме данни, изкуствен интелект и автоматизация в единна среда за по-бързи и по-добри управленски решения.", cta:"Вижте подхода", href:"/services/data-ai-automation", preview:"ai" },
   { number:"04", title:"Финансова трансформация", description:"Трансформираме финансовата функция чрез процеси, технологии и управленски модели, които повишават ефективността.", cta:"Разгледайте трансформацията", href:"/services/finance-transformation", preview:"workflow" },
   { number:"05", title:"CFO функция", description:"Изграждаме или поемаме CFO функцията като стратегически партньор на бизнеса – от планирането до управленските решения.", cta:"Разгледайте CFO услугите", href:"/services/cfo", preview:"cfo" },
-  { number:"06", title:"AI решения за финанси", description:"Разработваме AI агенти, които автоматизират анализа и работят като дигитални членове на финансовия екип.", cta:"Разгледайте AI решенията", href:"/services/ai-finance", preview:"agent", badge:"НОВО" },
+  { number:"06", title:"Финансови AI агенти", description:"Разработваме AI агенти, които изпълняват повтаряеми финансови задачи и работят като дигитални членове на финансовия екип.", cta:"Разгледайте AI агентите", href:"/services/financial-ai-agents", preview:"agent", badge:"НОВО" },
 ] as const;
 
 type Preview = typeof services[number]["preview"];
