@@ -18,7 +18,7 @@ const subscribeToClientMount = () => () => {};
 const serviceGroups = [
   {
     category: "ФИНАНСИ",
-    subtitle: "Финансово управление чрез данни.",
+    subtitle: "За управлението на бизнеса.",
     items: [
       {
         title: "CFO функция",
@@ -54,7 +54,7 @@ const serviceGroups = [
   },
   {
     category: "РИСК",
-    subtitle: "Управление на риска чрез модели.",
+    subtitle: "За вземането на решения.",
     items: [
       {
         title: "Кредитен риск",
