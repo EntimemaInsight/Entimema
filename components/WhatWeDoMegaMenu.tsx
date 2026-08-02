@@ -54,7 +54,7 @@ const serviceGroups = [
   },
   {
     category: "РИСК",
-    subtitle: "Рискови решения чрез модели.",
+    subtitle: "Управление на риска чрез модели.",
     items: [
       {
         title: "Кредитен риск",
