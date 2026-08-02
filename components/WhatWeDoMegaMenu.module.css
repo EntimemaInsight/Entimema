@@ -48,12 +48,11 @@
 }
 
 .backdrop {
-  position: absolute;
-  z-index: 60;
-  top: 100%;
+  position: fixed;
+  z-index: 1000;
   left: 0;
-  width: 100%;
-  height: 100vh;
+  right: 0;
+  bottom: 0;
   padding: 0;
   border: 0;
   background: rgba(4, 19, 63, 0.055);
@@ -61,11 +60,10 @@
 }
 
 .menu {
-  position: absolute;
-  z-index: 70;
-  top: 100%;
+  position: fixed;
+  z-index: 1001;
   left: 0;
-  width: 100%;
+  width: 100vw;
   border-bottom: 1px solid var(--hairline);
   background: var(--surface);
   box-shadow: 0 8px 18px rgba(4, 19, 63, 0.035);
@@ -210,11 +208,6 @@
   .mobileRoot .trigger {
     padding-inline: 10px;
     font-size: 13px;
-  }
-
-  .menu,
-  .backdrop {
-    top: 100%;
   }
 
   .inner {

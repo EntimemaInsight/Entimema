@@ -1,14 +1,19 @@
 "use client";
 
 import Link from "next/link";
+import { createPortal } from "react-dom";
 import {
   useCallback,
   useEffect,
   useId,
+  useLayoutEffect,
   useRef,
   useState,
+  useSyncExternalStore,
 } from "react";
 import styles from "./WhatWeDoMegaMenu.module.css";
+
+const subscribeToClientMount = () => () => {};
 
 const serviceGroups = [
   {
@@ -81,10 +86,14 @@ type WhatWeDoMegaMenuProps = {
 };
 
 export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMegaMenuProps) {
+  const isMounted = useSyncExternalStore(subscribeToClientMount, () => true, () => false);
   const [isOpen, setIsOpen] = useState(false);
   const [isPinned, setIsPinned] = useState(false);
+  const [menuTop, setMenuTop] = useState(0);
+  const menuTopRef = useRef(0);
   const rootRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
+  const menuRef = useRef<HTMLElement>(null);
   const openTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const menuId = `what-we-do-${useId().replaceAll(":", "")}`;
@@ -115,11 +124,56 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
     setIsPinned(false);
   }, [clearCloseTimer, clearOpenTimer]);
 
+  const updateMenuPosition = useCallback(() => {
+    const header = triggerRef.current?.closest("header");
+    if (!header) return;
+
+    const nextTop = header.getBoundingClientRect().bottom;
+    if (Math.abs(nextTop - menuTopRef.current) > 0.25) {
+      menuTopRef.current = nextTop;
+      setMenuTop(nextTop);
+    }
+  }, []);
+
+  useLayoutEffect(() => {
+    if (!isOpen) return;
+
+    updateMenuPosition();
+    window.addEventListener("resize", updateMenuPosition);
+    window.addEventListener("scroll", updateMenuPosition, true);
+
+    const header = triggerRef.current?.closest("header");
+    const resizeObserver = header ? new ResizeObserver(updateMenuPosition) : null;
+    if (header) resizeObserver?.observe(header);
+
+    const classObserver = new MutationObserver(updateMenuPosition);
+    classObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+
+    let animationFrame = 0;
+    const trackHeaderPosition = () => {
+      updateMenuPosition();
+      animationFrame = window.requestAnimationFrame(trackHeaderPosition);
+    };
+    animationFrame = window.requestAnimationFrame(trackHeaderPosition);
+
+    return () => {
+      window.removeEventListener("resize", updateMenuPosition);
+      window.removeEventListener("scroll", updateMenuPosition, true);
+      resizeObserver?.disconnect();
+      classObserver.disconnect();
+      window.cancelAnimationFrame(animationFrame);
+    };
+  }, [isOpen, updateMenuPosition]);
+
   useEffect(() => {
     if (!isOpen) return;
 
     const handlePointerDown = (event: PointerEvent) => {
-      if (!rootRef.current?.contains(event.target as Node)) close();
+      const target = event.target as Node;
+      if (!rootRef.current?.contains(target) && !menuRef.current?.contains(target)) close();
     };
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -167,64 +221,78 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
       close();
       return;
     }
+    updateMenuPosition();
     setIsOpen(true);
     setIsPinned(true);
   };
 
-  return (
-    <div
-      className={`${styles.root} ${mobile ? styles.mobileRoot : styles.desktopRoot}`}
-      onPointerEnter={handlePointerEnter}
-      onPointerLeave={handlePointerLeave}
-      ref={rootRef}
-    >
+  const portalContent = isMounted && isOpen ? createPortal(
+    <>
       <button
-        aria-controls={menuId}
-        aria-expanded={isOpen}
-        aria-haspopup="true"
-        className={`${styles.trigger} ${active ? styles.active : ""}`}
-        onClick={handleTriggerClick}
-        ref={triggerRef}
+        aria-label="Затвори менюто"
+        className={styles.backdrop}
+        onClick={close}
+        style={{ top: menuTop }}
+        tabIndex={-1}
         type="button"
+      />
+      <nav
+        aria-label="Услуги"
+        className={styles.menu}
+        id={menuId}
+        onPointerEnter={handlePointerEnter}
+        onPointerLeave={handlePointerLeave}
+        ref={menuRef}
+        style={{ top: menuTop }}
       >
-        Какво правим
-        <span className={styles.chevron} aria-hidden="true" />
-      </button>
+        <div className={`site-container ${styles.inner}`}>
+          <p className={styles.intro}>
+            Финансова архитектура за по-добри управленски решения
+          </p>
+          <div className={styles.panels}>
+            {serviceGroups.map((group) => (
+              <section className={styles.panel} key={group.category}>
+                <h2 className={styles.category}>{group.category}</h2>
+                <p className={styles.categorySubtitle}>{group.subtitle}</p>
+                <div className={styles.items}>
+                  {group.items.map((item) => (
+                    <Link className={styles.item} href={item.href} key={item.href} onClick={close}>
+                      <span className={styles.itemTitle}>{item.title}</span>
+                      <span className={styles.itemDescription}>{item.description}</span>
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            ))}
+          </div>
+        </div>
+      </nav>
+    </>,
+    document.body,
+  ) : null;
 
-      {isOpen && (
-        <>
-          <button
-            aria-label="Затвори менюто"
-            className={styles.backdrop}
-            onClick={close}
-            tabIndex={-1}
-            type="button"
-          />
-          <nav className={styles.menu} id={menuId} aria-label="Услуги">
-            <div className={`site-container ${styles.inner}`}>
-              <p className={styles.intro}>
-                Финансова архитектура за по-добри управленски решения
-              </p>
-              <div className={styles.panels}>
-                {serviceGroups.map((group) => (
-                  <section className={styles.panel} key={group.category}>
-                    <h2 className={styles.category}>{group.category}</h2>
-                    <p className={styles.categorySubtitle}>{group.subtitle}</p>
-                    <div className={styles.items}>
-                      {group.items.map((item) => (
-                        <Link className={styles.item} href={item.href} key={item.href} onClick={close}>
-                          <span className={styles.itemTitle}>{item.title}</span>
-                          <span className={styles.itemDescription}>{item.description}</span>
-                        </Link>
-                      ))}
-                    </div>
-                  </section>
-                ))}
-              </div>
-            </div>
-          </nav>
-        </>
-      )}
-    </div>
+  return (
+    <>
+      <div
+        className={`${styles.root} ${mobile ? styles.mobileRoot : styles.desktopRoot}`}
+        onPointerEnter={handlePointerEnter}
+        onPointerLeave={handlePointerLeave}
+        ref={rootRef}
+      >
+        <button
+          aria-controls={menuId}
+          aria-expanded={isOpen}
+          aria-haspopup="true"
+          className={`${styles.trigger} ${active ? styles.active : ""}`}
+          onClick={handleTriggerClick}
+          ref={triggerRef}
+          type="button"
+        >
+          Какво правим
+          <span className={styles.chevron} aria-hidden="true" />
+        </button>
+      </div>
+      {portalContent}
+    </>
   );
 }
