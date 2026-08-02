@@ -58,26 +58,34 @@ export default function CfoFunctionPage() {
             <span className={styles.category}>Финанси</span>
             <h1 id="cfo-title">CFO функция</h1>
             <p className={styles.lead}>Финансова функция, адаптирана към начина, по който работи бизнесът.</p>
-            <p className={styles.support}>Изграждаме структурата, процесите и управленската информация, необходими за последователни финансови решения — без компанията да изгражда пълна CFO организация от първия ден.</p>
-            <Link className={styles.primaryButton} href="/contact">Обсъдете вашия казус <span aria-hidden="true">→</span></Link>
+            <p className={styles.support}>Проектираме роли, процеси и управленска информация за последователни финансови решения — без необходимост от пълна CFO организация от първия ден.</p>
+            <Link className={styles.primaryButton} href="/contact">Обсъдете финансовата си функция <span aria-hidden="true">→</span></Link>
           </div>
           <CfoDashboard />
         </div>
       </section>
 
       <section className={styles.section} aria-labelledby="capabilities-title"><div className="site-container">
-        <SectionHeader label="Обхват" title="Какво включва" intro="Изграждаме финансовата функция около реалните управленски нужди, данните и процесите на бизнеса." />
+        <SectionHeader label="Обхват" title="Какво включва" intro="Финансовата функция свързва управленските нужди с данните, процесите и отговорностите в бизнеса." />
         <div className={styles.capabilityGrid}>{capabilities.map(([title, copy], index) => <article className={styles.capability} key={title}><span>0{index + 1}</span><h3>{title}</h3><p>{copy}</p></article>)}</div>
       </div></section>
 
       <section className={`${styles.section} ${styles.tinted}`} aria-labelledby="process-title"><div className="site-container">
-        <SectionHeader label="Метод" title="Как работим" intro="Подхождаме към финансовата функция като към система — от диагностиката до работещия управленски процес." />
+        <SectionHeader label="Метод" title="Как работим" intro="Системата се изгражда поетапно — от оценка на текущото състояние до работещ управленски процес." />
         <ol className={styles.timeline}>{process.map(([number, title, copy]) => <li key={number}><span>{number}</span><h3>{title}</h3><p>{copy}</p></li>)}</ol>
       </div></section>
 
       <section className={styles.section} aria-labelledby="outcomes-title"><div className="site-container">
-        <SectionHeader label="Резултати" title="Какво получавате" intro="Не просто анализ или препоръка, а работеща финансова система с ясно определени резултати." />
+        <SectionHeader label="Резултати" title="Какво получавате" intro="Резултатът е работеща финансова система с определени роли, информация и управленски процеси." />
         <div className={styles.outcomeGrid}>{outcomes.map(([title, copy]) => <article key={title}><span aria-hidden="true">✓</span><div><h3>{title}</h3><p>{copy}</p></div></article>)}</div>
+        <aside className={styles.caseExample} aria-labelledby="case-example-title">
+          <div className={styles.caseExampleIntro}><span>Примерен ангажимент</span><h3 id="case-example-title">Производствена компания</h3></div>
+          <dl>
+            <div><dt>Предизвикателство</dt><dd>Фрагментирана финансова отчетност и непоследователна калкулация на себестойността.</dd></div>
+            <div><dt>Изградено</dt><dd>Управленска отчетност, бюджетна рамка и модел за себестойност, интегрирани в ERP.</dd></div>
+            <div><dt>Резултат</dt><dd>Единен управленски изглед за финансови решения.</dd></div>
+          </dl>
+        </aside>
       </div></section>
 
       <section className={`${styles.section} ${styles.tinted}`} aria-labelledby="applications-title"><div className="site-container">
@@ -90,7 +98,7 @@ export default function CfoFunctionPage() {
         <div className={styles.relatedGrid}>{related.map(([title, copy, href]) => <Link href={href} key={title}><span><strong>{title}</strong><small>{copy}</small></span><b aria-hidden="true">↗</b></Link>)}</div>
       </div></section>
 
-      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>Разговор за вашия бизнес</span><h2 id="cta-title">Изградете финансова функция около реалните нужди на бизнеса.</h2><p>Нека обсъдим къде са основните ограничения в текущите процеси и каква финансова архитектура е необходима за следващия етап от развитието.</p><Link className={styles.ctaButton} href="/contact">Обсъдете вашия казус <span aria-hidden="true">→</span></Link></div></div></section>
+      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>Оценка на финансовата функция</span><h2 id="cta-title">Финансова функция около реалните управленски нужди на бизнеса.</h2><p>Фокусът е върху ограниченията в текущите процеси и финансовата архитектура, необходима за следващия етап от развитието.</p><Link className={styles.ctaButton} href="/contact">Обсъдете финансовата си функция <span aria-hidden="true">→</span></Link></div></div></section>
     </main>
   );
 }

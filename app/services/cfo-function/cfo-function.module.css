@@ -795,6 +795,54 @@
   transition: transform var(--duration-fast) var(--ease-standard);
 }
 
+/* Sprint 5: executive credibility */
+.caseExample {
+  display: grid;
+  grid-template-columns: minmax(220px, .65fr) minmax(0, 1.35fr);
+  gap: clamp(40px, 5vw, 72px);
+  align-items: start;
+  margin-top: 24px;
+  padding: clamp(32px, 3vw, 48px);
+  border: 1px solid var(--cfo-card-border);
+  border-radius: var(--cfo-card-radius);
+  background: white;
+}
+
+.caseExampleIntro > span,
+.caseExample dt {
+  color: var(--brand-orange-600);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.caseExampleIntro h3 {
+  margin: 20px 0 0;
+  font-size: clamp(22px, 1.7vw, 27px);
+  font-weight: 600;
+  letter-spacing: -.03em;
+  line-height: 1.22;
+}
+
+.caseExample dl {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin: 0;
+}
+
+.caseExample dl > div {
+  padding-left: 24px;
+  border-left: 1px solid var(--cfo-card-border);
+}
+
+.caseExample dd {
+  margin: 12px 0 0;
+  color: var(--text-secondary);
+  font-size: 15px;
+  line-height: 1.65;
+}
+
 @media (hover: hover) and (pointer: fine) {
   .capability:hover,
   .outcomeGrid article:hover,
@@ -883,6 +931,17 @@
   .outcomeGrid article,
   .useCaseGrid article {
     min-height: 0;
+  }
+
+  .caseExample {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 28px;
+  }
+
+  .caseExample dl {
+    grid-template-columns: 1fr;
+    gap: 24px;
   }
 
   .timeline li {
