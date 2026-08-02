@@ -78,7 +78,7 @@ export default function CreditRiskPage() {
         <SectionHeader label="Резултати" title="Контрол върху всяко кредитно решение" intro="Една платформа превръща рисковата стратегия в последователни решения и измеримо портфейлно представяне." />
         <div className={styles.outcomeGrid}>{outcomes.map(([title, copy]) => <article key={title}><span aria-hidden="true">✓</span><div><h3>{title}</h3><p>{copy}</p></div></article>)}</div>
         <aside className={styles.caseExample} aria-labelledby="case-example-title">
-          <div className={styles.caseExampleIntro}><span>Примерен сценарий</span><h3 id="case-example-title">Дигитален кредитор</h3></div>
+          <div className={styles.caseExampleIntro}><span>Примерен сценарий</span><h3 id="case-example-title">Дружество за микрокредитиране</h3></div>
           <dl>
             <div><dt>Контекст</dt><dd>Различни скоринг модели, ръчни кредитни политики и ограничена видимост върху представянето на портфейла.</dd></div>
             <div><dt>Подход</dt><dd>Изградена е единна архитектура за application scoring, behavioural scoring, decision strategies и портфейлен мониторинг, интегрирана с decision engine.</dd></div>
