@@ -79,7 +79,7 @@ export default function AmlCompliancePage() {
         <SectionHeader label="Резултати" title="Контрол върху цялата AML среда" intro="Една операционна архитектура превръща регулаторните изисквания в проследими процеси, измерими контроли и по-бързи решения." />
         <div className={styles.outcomeGrid}>{outcomes.map(([title, copy]) => <article key={title}><span aria-hidden="true">✓</span><div><h3>{title}</h3><p>{copy}</p></div></article>)}</div>
         <aside className={styles.caseExample} aria-labelledby="case-example-title">
-          <div className={styles.caseExampleIntro}><span>Примерен сценарий</span><h3 id="case-example-title">Банка</h3></div>
+          <div className={styles.caseExampleIntro}><span>Примерен сценарий</span><h3 id="case-example-title">Оператор на онлайн хазарт</h3></div>
           <dl>
             <div><dt>Контекст</dt><dd>AML процесите се основават на множество независими правила, ръчни проверки и ограничена видимост върху рисковите събития.</dd></div>
             <div><dt>Подход</dt><dd>Изградена е единна AML архитектура, която интегрира KYC, санкционен скрининг, transaction monitoring, управление на случаи и аналитични модели.</dd></div>
