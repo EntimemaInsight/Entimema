@@ -42,6 +42,7 @@ const useCases = [
 const related = [
   ["Кредитен риск", "Модели, политики и автоматизирани решения за управление на кредитния риск.", "/services/credit-risk"],
   ["AML и съответствие", "Политики, сценарии и модели за управление на AML процесите.", "/services/aml-compliance"],
+  ["Автоматизация на решения", "Данни, модели и политики, превърнати в проследими автоматизирани решения.", "/services/decision-automation"],
 ];
 
 function SectionHeader({ label, title, intro }: { label: string; title: string; intro?: string }) {
