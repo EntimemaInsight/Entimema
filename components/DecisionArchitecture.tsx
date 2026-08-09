@@ -175,7 +175,7 @@ export default function DecisionArchitecture() {
   const output = scene.outputStates[activeStep];
 
   return (
-    <section className={`decision-architecture executive-intelligence is-${mode} ${visible ? "is-visible" : ""} ${transitioning ? "is-transitioning" : ""}`} ref={ref} aria-label="Interactive executive intelligence">
+    <section className={`decision-architecture executive-intelligence is-${mode} ${visible ? "is-visible" : ""} ${transitioning ? "is-transitioning" : ""}`} ref={ref} aria-label="Интерактивна управленска информация">
       <div className="site-container executive-intelligence__inner">
         <div className="executive-intelligence__canvas">
           <div className="executive-intelligence__dots" aria-hidden="true" />
@@ -215,9 +215,9 @@ export default function DecisionArchitecture() {
                 <strong>{scene.name}</strong>
                 <span>{scene.role}</span>
                 <dl>
-                  <div><dt>Company</dt><dd>{scene.company}</dd></div>
-                  <div><dt>Industry</dt><dd>{scene.industry}</dd></div>
-                  <div><dt>Period</dt><dd>{scene.period}</dd></div>
+                  <div><dt>Компания</dt><dd>{scene.company}</dd></div>
+                  <div><dt>Сектор</dt><dd>{scene.industry}</dd></div>
+                  <div><dt>Период</dt><dd>{scene.period}</dd></div>
                 </dl>
               </div>
             </div>
