@@ -214,6 +214,102 @@
   font-size: 14px;
 }
 
+.offices {
+  padding: clamp(76px, 8vw, 120px) 0 clamp(88px, 9vw, 136px);
+  background: #fff;
+}
+
+.officeHeader {
+  text-align: center;
+}
+
+.officeHeader h2 {
+  margin: 0;
+  color: var(--brand-navy-950);
+  font-size: var(--type-section-display);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1;
+  letter-spacing: var(--tracking-section);
+}
+
+.officeHeader p {
+  margin: var(--space-heading-copy) 0 0;
+  color: var(--text-secondary);
+  font-size: var(--type-section-subtitle);
+  line-height: var(--leading-subtitle);
+  letter-spacing: var(--tracking-copy);
+  text-wrap: balance;
+}
+
+.officeCard {
+  position: relative;
+  width: min(100%, 420px);
+  aspect-ratio: 4 / 5;
+  margin: clamp(40px, 4vw, 56px) auto 0;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  background: var(--brand-navy-900);
+}
+
+.officeImage {
+  object-fit: cover;
+  object-position: center;
+}
+
+.locationLabel {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  padding: 8px 13px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--brand-navy-950);
+  font-size: 12px;
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+}
+
+.addressOverlay {
+  position: absolute;
+  left: 28px;
+  right: 28px;
+  bottom: 28px;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(4, 19, 63, 0.72);
+}
+
+.addressOverlay p {
+  margin: 0;
+  font-size: clamp(22px, 2vw, 27px);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.22;
+  letter-spacing: -0.025em;
+}
+
+.addressOverlay a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  margin-top: 4px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: var(--font-weight-medium);
+  line-height: 1.4;
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 255, 255, 0.72);
+  text-underline-offset: 4px;
+}
+
+.addressOverlay a:hover {
+  text-decoration-color: #fff;
+}
+
+.addressOverlay a:focus-visible {
+  outline: 3px solid var(--brand-blue-200);
+  outline-offset: 4px;
+}
+
 .nextStep {
   max-width: 760px;
   margin: clamp(48px, 6vw, 84px) auto 0;
@@ -330,6 +426,30 @@
 
   .submitButton {
     width: 100%;
+  }
+
+  .offices {
+    padding-block: 72px 88px;
+  }
+
+  .officeHeader p {
+    max-width: 30ch;
+    margin-inline: auto;
+  }
+
+  .officeCard {
+    margin-top: 36px;
+  }
+
+  .locationLabel {
+    top: 20px;
+    left: 20px;
+  }
+
+  .addressOverlay {
+    left: 22px;
+    right: 22px;
+    bottom: 20px;
   }
 
 }
