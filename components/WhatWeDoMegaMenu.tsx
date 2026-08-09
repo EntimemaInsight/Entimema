@@ -21,7 +21,7 @@ const serviceGroups = [
     items: [
       {
         title: "CFO функция",
-        description: "Финансова функция, адаптирана към начина, по който работи бизнесът.",
+        description: "Финансова архитектура, планиране и управленски контрол за компании без изградена CFO функция.",
         href: "/services/cfo-function",
       },
       {
@@ -61,17 +61,17 @@ const serviceGroups = [
       },
       {
         title: "AML и съответствие",
-        description: "Политики, сценарии и модели за AML процеси.",
+        description: "AML архитектура, клиентски проверки и транзакционен мониторинг за последователен регулаторен контрол.",
         href: "/services/aml-compliance",
       },
       {
         title: "Автоматизация на решения",
-        description: "Decision engines за автоматизирани рискови решения.",
+        description: "Модели, правила и Decision Engine за последователно и контролируемо изпълнение на решения.",
         href: "/services/decision-automation",
       },
       {
         title: "Рискови AI агенти",
-        description: "AI агенти за автоматизация на рисковите процеси.",
+        description: "AI агенти за наблюдение, анализ и контролирано изпълнение на рискови процеси.",
         href: "/services/risk-ai-agents",
       },
     ],
@@ -87,6 +87,7 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
   const isMounted = useSyncExternalStore(subscribeToClientMount, () => true, () => false);
   const [isOpen, setIsOpen] = useState(false);
   const [isPinned, setIsPinned] = useState(false);
+  const [mobileCategory, setMobileCategory] = useState(0);
   const [menuTop, setMenuTop] = useState(0);
   const menuTopRef = useRef(0);
   const rootRef = useRef<HTMLDivElement>(null);
@@ -120,6 +121,7 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
     clearCloseTimer();
     setIsOpen(false);
     setIsPinned(false);
+    setMobileCategory(0);
   }, [clearCloseTimer, clearOpenTimer]);
 
   const updateMenuPosition = useCallback(() => {
@@ -224,6 +226,14 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
     setIsPinned(true);
   };
 
+  const handleMobileCategoryKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>, index: number) => {
+    if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+    event.preventDefault();
+    const nextIndex = event.key === "Home" ? 0 : event.key === "End" ? serviceGroups.length - 1 : event.key === "ArrowRight" ? (index + 1) % serviceGroups.length : (index - 1 + serviceGroups.length) % serviceGroups.length;
+    setMobileCategory(nextIndex);
+    document.getElementById(`${menuId}-tab-${nextIndex}`)?.focus();
+  };
+
   const portalContent = isMounted && isOpen ? createPortal(
     <>
       <button
@@ -244,9 +254,37 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
         style={{ top: menuTop }}
       >
         <div className={`site-container ${styles.inner}`}>
+          <p className={styles.proposition}>Изграждаме финансови и рискови системи за управление, решения и автоматизация.</p>
+          {mobile ? (
+            <div className={styles.mobileSelector} role="tablist" aria-label="Област на услугите">
+              {serviceGroups.map((group, index) => (
+                <button
+                  aria-controls={`${menuId}-panel-${index}`}
+                  aria-selected={mobileCategory === index}
+                  className={mobileCategory === index ? styles.mobileSelectorActive : undefined}
+                  id={`${menuId}-tab-${index}`}
+                  key={group.category}
+                  onClick={() => setMobileCategory(index)}
+                  onKeyDown={(event) => handleMobileCategoryKeyDown(event, index)}
+                  role="tab"
+                  tabIndex={mobileCategory === index ? 0 : -1}
+                  type="button"
+                >
+                  {group.category}
+                </button>
+              ))}
+            </div>
+          ) : null}
           <div className={styles.panels}>
-            {serviceGroups.map((group) => (
-              <section className={styles.panel} key={group.category}>
+            {serviceGroups.map((group, groupIndex) => (
+              <section
+                aria-labelledby={mobile ? `${menuId}-tab-${groupIndex}` : undefined}
+                className={styles.panel}
+                hidden={mobile && mobileCategory !== groupIndex}
+                id={`${menuId}-panel-${groupIndex}`}
+                key={group.category}
+                role={mobile ? "tabpanel" : undefined}
+              >
                 <h2 className={styles.category}>{group.category}</h2>
                 <div className={styles.items}>
                   {group.items.map((item) => (
