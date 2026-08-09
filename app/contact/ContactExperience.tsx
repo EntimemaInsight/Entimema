@@ -30,7 +30,8 @@ const partnershipTypes = [
   "Доставчик на данни или софтуер",
   "Консултантски партньор",
   "Академично / изследователско партньорство",
-  "Канал / referral партньор",
+  "Development партньор — Entimema Labs",
+  "Affiliate партньор",
   "Друго",
 ];
 
@@ -159,7 +160,6 @@ export default function ContactExperience({ initialTopic }: { initialTopic?: str
       )}
 
       <p className={styles.emailFallback}>Предпочитате e-mail? Пишете ни на <a href="mailto:office@entimema.net">office@entimema.net</a>.</p>
-      <section className={styles.nextStep} aria-labelledby="next-step-title"><h2 id="next-step-title">Какво следва</h2><p>Първият разговор е за контекста, проблема и обхвата. След него определяме подходящата следваща стъпка.</p></section>
     </>
   );
 }

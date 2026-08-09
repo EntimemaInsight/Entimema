@@ -1,7 +1,7 @@
 import { Resend } from "resend";
 import { isTopicKey, topicOptions } from "@/app/contact/contact-config";
 
-const partnershipTypes = new Set(["Технологичен партньор", "Доставчик на данни или софтуер", "Консултантски партньор", "Академично / изследователско партньорство", "Канал / referral партньор", "Друго"]);
+const partnershipTypes = new Set(["Технологичен партньор", "Доставчик на данни или софтуер", "Консултантски партньор", "Академично / изследователско партньорство", "Development партньор — Entimema Labs", "Affiliate партньор", "Друго"]);
 const inquiryTypes = new Set(["Технически въпрос", "Данни / модел", "Промяна по текущ проект", "Достъп / документация", "Друго"]);
 const allowedKeys = new Set(["intent", "topic", "topicName", "name", "email", "company", "role", "partnershipType", "project", "inquiryType", "message", "website"]);
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
