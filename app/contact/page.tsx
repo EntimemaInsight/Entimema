@@ -1,5 +1,6 @@
 import BrandLogo from "@/components/BrandLogo";
 import Navbar from "@/components/Navbar";
+import Link from "next/link";
 import ContactExperience from "./ContactExperience";
 import styles from "./contact.module.css";
 
@@ -18,7 +19,7 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
           <ContactExperience initialTopic={topic} />
         </div>
       </section>
-      <footer className="contact-footer"><div className="site-container"><BrandLogo compact /><span>© 2026 Entimema</span></div></footer>
+      <footer className="contact-footer"><div className="site-container"><BrandLogo compact /><span>© 2026 Entimema</span><Link href="/privacy">Поверителност</Link></div></footer>
     </main>
   );
 }
