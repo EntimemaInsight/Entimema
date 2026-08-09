@@ -19,7 +19,13 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
           <ContactExperience initialTopic={topic} />
         </div>
       </section>
-      <footer className="contact-footer"><div className="site-container"><BrandLogo compact /><span>© 2026 Entimema</span><Link href="/privacy">Поверителност</Link></div></footer>
+      <footer className={styles.footer}>
+        <div className={`site-container ${styles.footerInner}`}>
+          <BrandLogo compact />
+          <span className={styles.footerCopyright}>© 2026 Entimema</span>
+          <Link className={styles.footerLink} href="/privacy">Поверителност</Link>
+        </div>
+      </footer>
     </main>
   );
 }

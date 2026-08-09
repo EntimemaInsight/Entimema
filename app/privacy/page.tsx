@@ -85,8 +85,8 @@ export default function PrivacyPage() {
       <footer className={styles.footer}>
         <div className={`site-container ${styles.footerInner}`}>
           <BrandLogo compact />
-          <span>© 2026 Entimema</span>
-          <Link href="/privacy" aria-current="page">Поверителност</Link>
+          <span className={styles.footerCopyright}>© 2026 Entimema</span>
+          <Link className={styles.footerLink} href="/privacy" aria-current="page">Поверителност</Link>
         </div>
       </footer>
     </main>
