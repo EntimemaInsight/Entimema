@@ -30,51 +30,51 @@ const scenes: Record<Mode, Scene> = {
   finance: {
     mode: "finance",
     name: "Elena Angelova",
-    role: "Главен финансов директор",
+    role: "Chief Financial Officer",
     image: "/elena-angelova.webp",
-    company: "Индустриална група",
-    industry: "Производство",
+    company: "Industrial Group",
+    industry: "Manufacturing",
     period: "FY 2026",
-    topTags: ["P&L", "Баланс", "Парични потоци", "Бюджет", "KPI"],
-    orbitTags: ["Прогноза", "Оборотен капитал", "Управленски отчет", "Финансов модел", "Управленски анализ", "Сценариен анализ", "Доклад за ръководството", "Подкрепа при вземане на решения"],
-    leftTitle: "Финансова интелигентност",
-    leftSteps: ["Свързване с ERP…", "Четене на финансовите данни…", "Проверка за последователност…", "Откриване на аномалии…"],
-    leftResult: "Анализът е генериран.",
-    leftMeta: "8 ключови извода.",
-    rightTitle: "Управленска интелигентност",
-    rightSteps: ["Анализ на представянето…", "Изпълнение на сценарии…", "Оценка на ключовите фактори…", "Генериране на изводи…"],
-    rightResult: "Управленският преглед е готов.",
-    rightMeta: "5 препоръчани действия.",
+    topTags: ["P&L", "Balance Sheet", "Cash Flow", "Budget", "KPI"],
+    orbitTags: ["Forecast", "Working Capital", "Management Report", "Financial Model", "Management Analysis", "Scenario Analysis", "Board Report", "Decision Support"],
+    leftTitle: "Financial Intelligence",
+    leftSteps: ["Connecting to ERP…", "Reading financial data…", "Checking consistency…", "Detecting anomalies…"],
+    leftResult: "Insights generated.",
+    leftMeta: "8 key findings.",
+    rightTitle: "Management Intelligence",
+    rightSteps: ["Analyzing performance…", "Running scenarios…", "Evaluating key drivers…", "Generating insights…"],
+    rightResult: "Performance view ready.",
+    rightMeta: "5 actions recommended.",
     outputStates: [
-      { title: "Събиране на данни…", text: "ERP, бюджетните и оперативните данни се синхронизират." },
-      { title: "Изграждане на финансов модел…", text: "Драйверите, маржовете и зависимостите в паричните потоци се картографират." },
-      { title: "Изпълнение на сценарии…", text: "Оценяват се базовият, стресовият и оптимистичният сценарий." },
-      { title: "Решението е готово", text: "Управленското решение е готово за преглед от ръководството." },
+      { title: "Collecting data…", text: "ERP, budget and operational inputs are being synchronized." },
+      { title: "Building financial model…", text: "Drivers, margins and cash-flow dependencies are being mapped." },
+      { title: "Running scenarios…", text: "Base, stress and opportunity cases are being evaluated." },
+      { title: "Decision Ready", text: "Management decision is ready for executive review." },
     ],
   },
   risk: {
     mode: "risk",
     name: "Elisaveta Geneva",
-    role: "Риск мениджър",
+    role: "Risk Manager",
     image: "/elisaveta-geneva.webp",
-    company: "Финансова група",
-    industry: "Банкиране и финанси",
+    company: "Financial Group",
+    industry: "Banking & Finance",
     period: "FY 2026",
-    topTags: ["Кредитен риск", "Пазарен риск", "Ликвиден риск", "Оперативен риск", "Регулаторно съответствие"],
-    orbitTags: ["PD / LGD", "Сценариен анализ", "Стрес тестване", "Експозиция", "Концентрация", "Рисково табло", "Откриване на измами", "Подкрепа при вземане на решения"],
-    leftTitle: "Рискова интелигентност",
-    leftSteps: ["Събиране на рискови данни…", "Изчисляване на експозициите…", "Оценка на вероятностите…", "Откриване на рисковите фактори…"],
-    leftResult: "Рисковият анализ е генериран.",
-    leftMeta: "7 ключови сигнала.",
-    rightTitle: "Сценариен анализ",
-    rightSteps: ["Изпълнение на стрес сценарии…", "Оценка на въздействието…", "Тестване на допусканията…", "Генериране на рисковия преглед…"],
-    rightResult: "Сценариите са валидирани.",
-    rightMeta: "4 завършени сценария.",
+    topTags: ["Credit Risk", "Market Risk", "Liquidity Risk", "Operational Risk", "Compliance"],
+    orbitTags: ["PD / LGD", "Scenario Analysis", "Stress Testing", "Exposure", "Concentration", "Risk Dashboard", "Fraud Detection", "Decision Support"],
+    leftTitle: "Risk Intelligence",
+    leftSteps: ["Collecting risk data…", "Calculating exposures…", "Assessing probabilities…", "Detecting risk drivers…"],
+    leftResult: "Risk insights generated.",
+    leftMeta: "7 key alerts.",
+    rightTitle: "Scenario Analysis",
+    rightSteps: ["Running stress scenarios…", "Evaluating impact…", "Testing assumptions…", "Generating risk view…"],
+    rightResult: "Scenarios validated.",
+    rightMeta: "4 scenarios completed.",
     outputStates: [
-      { title: "Събиране на експозициите…", text: "Портфейлните, пазарните и оперативните рискови данни се съгласуват." },
-      { title: "Изчисляване на рисковия профил…", text: "Оценяват се вероятностите, концентрацията и факторите за загуба." },
-      { title: "Изпълнение на стрес тестове…", text: "Тестват се неблагоприятните сценарии и управленските лимити." },
-      { title: "Оценката на риска е завършена", text: "Рисковият профил е потвърден. Решението е готово за преглед." },
+      { title: "Collecting exposures…", text: "Portfolio, market and operational risk inputs are being aligned." },
+      { title: "Calculating risk profile…", text: "Probabilities, concentration and loss drivers are being assessed." },
+      { title: "Running stress tests…", text: "Adverse scenarios and management limits are being tested." },
+      { title: "Risk Assessment Complete", text: "Risk profile confirmed. Decision is ready for review." },
     ],
   },
 };
@@ -101,7 +101,7 @@ function AgentPanel({ side, scene, activeStep }: { side: "left" | "right"; scene
     <article className={`executive-agent executive-agent--${side} executive-agent--${accent}`}>
       <header className="executive-agent__header">
         <span className="executive-agent__icon"><MiniIcon type={side === "left" ? "brain" : finance ? "chart" : "shield"} /></span>
-        <span><strong>{title}</strong><small>AI агент · Активен</small></span>
+        <span><strong>{title}</strong><small>AI Agent · Live</small></span>
         <i className="executive-agent__live" aria-hidden="true" />
       </header>
       <div className="executive-agent__steps">
@@ -109,7 +109,7 @@ function AgentPanel({ side, scene, activeStep }: { side: "left" | "right"; scene
           <div className={`executive-agent__step ${i === activeStep ? "is-active" : ""} ${i < activeStep ? "is-complete" : ""}`} style={{ "--step": i } as React.CSSProperties} key={step}>
             <i />
             <span>{step}</span>
-            {i < activeStep && <b aria-label="завършено">✓</b>}
+            {i < activeStep && <b aria-label="completed">✓</b>}
           </div>
         ))}
       </div>
@@ -175,7 +175,7 @@ export default function DecisionArchitecture() {
   const output = scene.outputStates[activeStep];
 
   return (
-    <section className={`decision-architecture executive-intelligence is-${mode} ${visible ? "is-visible" : ""} ${transitioning ? "is-transitioning" : ""}`} ref={ref} aria-label="Интерактивна управленска информация">
+    <section className={`decision-architecture executive-intelligence is-${mode} ${visible ? "is-visible" : ""} ${transitioning ? "is-transitioning" : ""}`} ref={ref} aria-label="Interactive executive intelligence">
       <div className="site-container executive-intelligence__inner">
         <div className="executive-intelligence__canvas">
           <div className="executive-intelligence__dots" aria-hidden="true" />
@@ -215,9 +215,9 @@ export default function DecisionArchitecture() {
                 <strong>{scene.name}</strong>
                 <span>{scene.role}</span>
                 <dl>
-                  <div><dt>Компания</dt><dd>{scene.company}</dd></div>
-                  <div><dt>Сектор</dt><dd>{scene.industry}</dd></div>
-                  <div><dt>Период</dt><dd>{scene.period}</dd></div>
+                  <div><dt>Company</dt><dd>{scene.company}</dd></div>
+                  <div><dt>Industry</dt><dd>{scene.industry}</dd></div>
+                  <div><dt>Period</dt><dd>{scene.period}</dd></div>
                 </dl>
               </div>
             </div>
@@ -236,8 +236,8 @@ export default function DecisionArchitecture() {
           </div>
 
           <div className="executive-intelligence__switch" role="group" aria-label="Смяна на профил">
-            <button className={mode === "finance" ? "is-active" : ""} onClick={() => requestMode("finance")} aria-label="Покажи CFO профил">Финанси</button>
-            <button className={mode === "risk" ? "is-active" : ""} onClick={() => requestMode("risk")} aria-label="Покажи профила на риск мениджъра">Риск</button>
+            <button className={mode === "finance" ? "is-active" : ""} onClick={() => requestMode("finance")} aria-label="Покажи CFO профил">Finance</button>
+            <button className={mode === "risk" ? "is-active" : ""} onClick={() => requestMode("risk")} aria-label="Покажи Risk Manager профил">Risk</button>
           </div>
         </div>
       </div>
