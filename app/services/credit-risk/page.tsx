@@ -61,7 +61,7 @@ export default function CreditRiskPage() {
           <h1 id="credit-risk-title">Кредитен риск</h1>
           <p className={styles.lead}>Модели, политики и автоматизирани решения за управление на кредитния риск.</p>
           <p className={styles.support}>Изграждаме цялостни системи за кредитен риск – от application и behavioural scoring до стратегии за вземане на решения, портфейлен мониторинг и AI автоматизация.</p>
-          <Link className={styles.primaryButton} href="/contact">Обсъдете кредитната си архитектура <span aria-hidden="true">→</span></Link>
+          <Link className={styles.primaryButton} href="/contact?topic=credit-risk">Обсъдете кредитната си архитектура <span aria-hidden="true">→</span></Link>
         </div>
         <CreditRiskDashboard />
       </div></section>
@@ -99,7 +99,7 @@ export default function CreditRiskPage() {
         <div className={styles.relatedGrid}>{related.map(([title, copy, href]) => <Link href={href} key={title}><span><strong>{title}</strong><small>{copy}</small></span><b aria-hidden="true">↗</b></Link>)}</div>
       </div></section>
 
-      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>Оценка на кредитната архитектура</span><h2 id="cta-title">Изградете цялата си платформа за кредитни решения.</h2><p>Фокусът е върху връзката между моделите, политиките, автоматизираните решения и портфейлното представяне.</p><Link className={styles.ctaButton} href="/contact">Обсъдете кредитната си архитектура <span aria-hidden="true">→</span></Link></div></div></section>
+      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>Оценка на кредитната архитектура</span><h2 id="cta-title">Изградете цялата си платформа за кредитни решения.</h2><p>Фокусът е върху връзката между моделите, политиките, автоматизираните решения и портфейлното представяне.</p><Link className={styles.ctaButton} href="/contact?topic=credit-risk">Обсъдете кредитната си архитектура <span aria-hidden="true">→</span></Link></div></div></section>
     </main>
   );
 }

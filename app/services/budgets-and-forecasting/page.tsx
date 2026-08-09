@@ -58,7 +58,7 @@ export default function BudgetsAndForecastingPage() {
           <h1 id="budgets-title">Бюджети и прогнози</h1>
           <p className={styles.lead}>Система за планиране, свързана с реалните двигатели на бизнеса.</p>
           <p className={styles.support}>Изграждаме бюджетни и прогнозни модели, които свързват финансовите цели, оперативните допускания и паричните потоци в последователен управленски процес.</p>
-          <Link className={styles.primaryButton} href="/contact">Обсъдете системата си за планиране <span aria-hidden="true">→</span></Link>
+          <Link className={styles.primaryButton} href="/contact?topic=budgets-and-forecasting">Обсъдете системата си за планиране <span aria-hidden="true">→</span></Link>
         </div>
         <PlanningDashboard />
       </div></section>
@@ -96,7 +96,7 @@ export default function BudgetsAndForecastingPage() {
         <div className={styles.relatedGrid}>{related.map(([title, copy, href]) => <Link href={href} key={title}><span><strong>{title}</strong><small>{copy}</small></span><b aria-hidden="true">↗</b></Link>)}</div>
       </div></section>
 
-      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>Оценка на процеса за планиране</span><h2 id="cta-title">Система за планиране около реалните двигатели на бизнеса.</h2><p>Фокусът е върху връзката между допусканията, оперативните планове, финансовите резултати и бъдещата ликвидност.</p><Link className={styles.ctaButton} href="/contact">Обсъдете системата си за планиране <span aria-hidden="true">→</span></Link></div></div></section>
+      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>Оценка на процеса за планиране</span><h2 id="cta-title">Система за планиране около реалните двигатели на бизнеса.</h2><p>Фокусът е върху връзката между допусканията, оперативните планове, финансовите резултати и бъдещата ликвидност.</p><Link className={styles.ctaButton} href="/contact?topic=budgets-and-forecasting">Обсъдете системата си за планиране <span aria-hidden="true">→</span></Link></div></div></section>
     </main>
   );
 }

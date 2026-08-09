@@ -61,7 +61,7 @@ export default function RiskAiAgentsPage() {
           <h1 id="risk-ai-agents-title">Рискови AI агенти</h1>
           <p className={styles.lead}>AI агенти за анализ, мониторинг и изпълнение на рискови процеси.</p>
           <p className={styles.support}>Изграждаме AI агенти, които работят с рискови модели, правила и данни, анализират събития, подготвят решения и автоматизират контролирани работни процеси.</p>
-          <Link className={styles.primaryButton} href="/contact">Обсъдете своите рискови AI агенти <span aria-hidden="true">→</span></Link>
+          <Link className={styles.primaryButton} href="/contact?topic=risk-ai-agents">Обсъдете своите рискови AI агенти <span aria-hidden="true">→</span></Link>
         </div>
         <RiskAgentOperations />
       </div></section>
@@ -99,7 +99,7 @@ export default function RiskAiAgentsPage() {
         <div className={styles.relatedGrid}>{related.map(([title, copy, href]) => <Link href={href} key={title}><span><strong>{title}</strong><small>{copy}</small></span><b aria-hidden="true">↗</b></Link>)}</div>
       </div></section>
 
-      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>Рискови AI агенти</span><h2 id="cta-title">Автоматизирайте контролираните рискови процеси.</h2><p>Свържете контролираното изпълнение чрез AI с рисковите модели, бизнес правилата, правата, проследимостта и човешкия контрол.</p><Link className={styles.ctaButton} href="/contact">Обсъдете своите рискови AI агенти <span aria-hidden="true">→</span></Link></div></div></section>
+      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>Рискови AI агенти</span><h2 id="cta-title">Автоматизирайте контролираните рискови процеси.</h2><p>Свържете контролираното изпълнение чрез AI с рисковите модели, бизнес правилата, правата, проследимостта и човешкия контрол.</p><Link className={styles.ctaButton} href="/contact?topic=risk-ai-agents">Обсъдете своите рискови AI агенти <span aria-hidden="true">→</span></Link></div></div></section>
     </main>
   );
 }

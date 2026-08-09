@@ -59,7 +59,7 @@ export default function CfoFunctionPage() {
             <h1 id="cfo-title">CFO функция</h1>
             <p className={styles.lead}>Финансова функция, адаптирана към начина, по който работи бизнесът.</p>
             <p className={styles.support}>Проектираме роли, процеси и управленска информация за последователни финансови решения — без необходимост от пълна CFO организация от първия ден.</p>
-            <Link className={styles.primaryButton} href="/contact">Обсъдете финансовата си функция <span aria-hidden="true">→</span></Link>
+            <Link className={styles.primaryButton} href="/contact?topic=cfo-function">Обсъдете финансовата си функция <span aria-hidden="true">→</span></Link>
           </div>
           <CfoDashboard />
         </div>
@@ -98,7 +98,7 @@ export default function CfoFunctionPage() {
         <div className={styles.relatedGrid}>{related.map(([title, copy, href]) => <Link href={href} key={title}><span><strong>{title}</strong><small>{copy}</small></span><b aria-hidden="true">↗</b></Link>)}</div>
       </div></section>
 
-      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>Оценка на финансовата функция</span><h2 id="cta-title">Финансова функция около реалните управленски нужди на бизнеса.</h2><p>Фокусът е върху ограниченията в текущите процеси и финансовата архитектура, необходима за следващия етап от развитието.</p><Link className={styles.ctaButton} href="/contact">Обсъдете финансовата си функция <span aria-hidden="true">→</span></Link></div></div></section>
+      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>Оценка на финансовата функция</span><h2 id="cta-title">Финансова функция около реалните управленски нужди на бизнеса.</h2><p>Фокусът е върху ограниченията в текущите процеси и финансовата архитектура, необходима за следващия етап от развитието.</p><Link className={styles.ctaButton} href="/contact?topic=cfo-function">Обсъдете финансовата си функция <span aria-hidden="true">→</span></Link></div></div></section>
     </main>
   );
 }

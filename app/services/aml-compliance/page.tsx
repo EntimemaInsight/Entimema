@@ -61,7 +61,7 @@ export default function AmlCompliancePage() {
           <h1 id="aml-compliance-title">AML и съответствие</h1>
           <p className={styles.lead}>Политики, сценарии и модели за управление на AML процесите.</p>
           <p className={styles.support}>Изграждаме цялостни AML архитектури, които интегрират KYC, санкционен контрол, транзакционен мониторинг, управление на случаи и регулаторно съответствие.</p>
-          <Link className={styles.primaryButton} href="/contact">Обсъдете своята AML архитектура <span aria-hidden="true">→</span></Link>
+          <Link className={styles.primaryButton} href="/contact?topic=aml-compliance">Обсъдете своята AML архитектура <span aria-hidden="true">→</span></Link>
         </div>
         <AmlOperationsDashboard />
       </div></section>
@@ -99,7 +99,7 @@ export default function AmlCompliancePage() {
         <div className={styles.relatedGrid}>{related.map(([title, copy, href]) => <Link href={href} key={title}><span><strong>{title}</strong><small>{copy}</small></span><b aria-hidden="true">↗</b></Link>)}</div>
       </div></section>
 
-      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>Оценка на AML операционния модел</span><h2 id="cta-title">Изградете и модернизирайте цялата си AML функция.</h2><p>Фокусът е върху връзката между политиките, сценариите, данните, контролите, разследванията и регулаторното съответствие.</p><Link className={styles.ctaButton} href="/contact">Обсъдете своята AML архитектура <span aria-hidden="true">→</span></Link></div></div></section>
+      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>Оценка на AML операционния модел</span><h2 id="cta-title">Изградете и модернизирайте цялата си AML функция.</h2><p>Фокусът е върху връзката между политиките, сценариите, данните, контролите, разследванията и регулаторното съответствие.</p><Link className={styles.ctaButton} href="/contact?topic=aml-compliance">Обсъдете своята AML архитектура <span aria-hidden="true">→</span></Link></div></div></section>
     </main>
   );
 }

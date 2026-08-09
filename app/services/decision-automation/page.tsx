@@ -61,7 +61,7 @@ export default function DecisionAutomationPage() {
           <h1 id="decision-automation-title">Автоматизация на решения</h1>
           <p className={styles.lead}>Архитектура за последователни и автоматизирани бизнес решения.</p>
           <p className={styles.support}>Изграждаме платформи Decision Engine, които обединяват данни, модели, бизнес правила и политики в единна логика за автоматизирано вземане на решения.</p>
-          <Link className={styles.primaryButton} href="/contact">Обсъдете своята decision architecture <span aria-hidden="true">→</span></Link>
+          <Link className={styles.primaryButton} href="/contact?topic=decision-automation">Обсъдете своята decision architecture <span aria-hidden="true">→</span></Link>
         </div>
         <DecisionEngineDashboard />
       </div></section>
@@ -99,7 +99,7 @@ export default function DecisionAutomationPage() {
         <div className={styles.relatedGrid}>{related.map(([title, copy, href]) => <Link href={href} key={title}><span><strong>{title}</strong><small>{copy}</small></span><b aria-hidden="true">↗</b></Link>)}</div>
       </div></section>
 
-      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>Оценка на decision architecture</span><h2 id="cta-title">Превърнете бизнес логиката си в работеща система за решения.</h2><p>Свързваме данните, моделите, правилата и политиките в проследим execution layer, който взема последователни решения в реално време.</p><Link className={styles.ctaButton} href="/contact">Обсъдете автоматизацията на решения <span aria-hidden="true">→</span></Link></div></div></section>
+      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>Оценка на decision architecture</span><h2 id="cta-title">Превърнете бизнес логиката си в работеща система за решения.</h2><p>Свързваме данните, моделите, правилата и политиките в проследим execution layer, който взема последователни решения в реално време.</p><Link className={styles.ctaButton} href="/contact?topic=decision-automation">Обсъдете автоматизацията на решения <span aria-hidden="true">→</span></Link></div></div></section>
     </main>
   );
 }
