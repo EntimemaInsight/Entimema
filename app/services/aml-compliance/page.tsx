@@ -11,12 +11,12 @@ export const metadata: Metadata = {
 };
 
 const capabilities = [
-  ["KYC и Customer Due Diligence", "Политики и процеси за идентификация, оценка и периодичен преглед на клиентите."],
+  ["KYC и Customer Due Diligence (CDD)", "Политики и процеси за идентификация, оценка и периодичен преглед на клиентите."],
   ["Санкционен и PEP скрининг", "Автоматизирани проверки срещу санкционни списъци, PEP и други рискови източници."],
   ["Transaction Monitoring", "Сценарии и правила за наблюдение на транзакции и откриване на подозрителна активност."],
   ["Case Management", "Структуриран процес за анализ, ескалация и управление на AML случаи."],
-  ["AML Analytics", "Анализи, показатели и модели за наблюдение на ефективността на AML процесите."],
-  ["AML AI Agents", "AI агенти за анализ, мониторинг и автоматизация на AML дейности."],
+  ["AML анализи", "Анализи, показатели и модели за наблюдение на ефективността на AML процесите."],
+  ["AML AI агенти", "AI агенти за анализ, мониторинг и автоматизация на AML дейности."],
 ];
 
 const process = [
@@ -77,13 +77,13 @@ export default function AmlCompliancePage() {
       </div></section>
 
       <section className={styles.section} aria-labelledby="outcomes-title"><div className="site-container">
-        <SectionHeader label="Резултати" title="Контрол върху цялата AML среда" intro="Една операционна архитектура превръща регулаторните изисквания в проследими процеси, измерими контроли и по-бързи решения." />
+        <SectionHeader label="Резултати" title="Контрол върху цялата AML среда" intro="Една оперативна архитектура превръща регулаторните изисквания в проследими процеси, измерими контроли и по-бързи решения." />
         <div className={styles.outcomeGrid}>{outcomes.map(([title, copy]) => <article key={title}><span aria-hidden="true">✓</span><div><h3>{title}</h3><p>{copy}</p></div></article>)}</div>
         <aside className={styles.caseExample} aria-labelledby="case-example-title">
           <div className={styles.caseExampleIntro}><span>Примерен сценарий</span><h3 id="case-example-title">Оператор на онлайн хазарт</h3></div>
           <dl>
             <div><dt>Контекст</dt><dd>AML процесите се основават на множество независими правила, ръчни проверки и ограничена видимост върху рисковите събития.</dd></div>
-            <div><dt>Подход</dt><dd>Изградена е единна AML архитектура, която интегрира KYC, санкционен скрининг, transaction monitoring, управление на случаи и аналитични модели.</dd></div>
+            <div><dt>Подход</dt><dd>Изградена е единна AML архитектура, която интегрира KYC, санкционен скрининг, Transaction Monitoring, Case Management и аналитични модели.</dd></div>
             <div><dt>Резултат</dt><dd>По-бързо идентифициране на рискови събития, по-нисък дял на фалшивите сигнали и по-ефективно управление на AML процесите.</dd></div>
           </dl>
         </aside>

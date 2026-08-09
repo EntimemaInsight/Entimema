@@ -10,14 +10,14 @@ export const metadata: Metadata = { title: "Себестойност и рент
 const capabilities = [
   ["Модели за себестойност", "Изграждане на прозрачни модели за калкулиране на себестойността."],
   ["Рентабилност", "Анализ на печалбата по продукти, клиенти, процеси и бизнес звена."],
-  ["Cost Drivers", "Идентифициране на факторите, които определят разходите и маржовете."],
+  ["Драйвери на разходите", "Идентифициране на факторите, които определят разходите и маржовете."],
   ["Маржин анализ", "Проследяване на брутни, оперативни и нетни маржове."],
   ["Симулации", "Оценка на влиянието на цените, производствените разходи и продуктовия микс."],
   ["Автоматизация и AI", "Автоматизиран анализ на себестойността, отклоненията и рентабилността."],
 ];
 const process = [
   ["01", "Диагностика", "Анализираме начина, по който се формира себестойността и как се оценява рентабилността."],
-  ["02", "Архитектура", "Проектираме моделите за себестойност, cost drivers и правилата за разпределение."],
+  ["02", "Архитектура", "Проектираме моделите за себестойност, драйверите на разходите и правилата за разпределение."],
   ["03", "Внедряване", "Изграждаме моделите, анализите и автоматизираните изчисления."],
   ["04", "Управление", "Развиваме моделите според промените в бизнеса и новите управленски въпроси."],
 ];
@@ -52,7 +52,7 @@ export default function CostAndProfitabilityPage() {
     <section className={styles.section}><div className="site-container"><SectionHeader label="Обхват" title="Какво включва" intro="Системата свързва себестойността, маржовете и факторите зад тях в единна икономическа картина." /><div className={styles.capabilityGrid}>{capabilities.map(([title, copy], i) => <article className={styles.capability} key={title}><span>0{i + 1}</span><h3>{title}</h3><p>{copy}</p></article>)}</div></div></section>
     <section className={`${styles.section} ${styles.tinted}`}><div className="site-container"><SectionHeader label="Метод" title="Как работим" intro="Моделът се изгражда поетапно — от диагностиката на разходите до постоянен контрол върху рентабилността." /><ol className={styles.timeline}>{process.map(([n, title, copy]) => <li key={n}><span>{n}</span><h3>{title}</h3><p>{copy}</p></li>)}</ol></div></section>
     <section className={styles.section}><div className="site-container"><SectionHeader label="Резултати" title="Какво получавате" intro="Ясна икономическа основа за ценообразуване, продуктов микс и управление на разходите." /><div className={styles.outcomeGrid}>{outcomes.map(([title, copy]) => <article key={title}><span aria-hidden="true">✓</span><div><h3>{title}</h3><p>{copy}</p></div></article>)}</div>
-      <aside className={styles.caseExample} aria-labelledby="scenario-title"><div className={styles.caseExampleIntro}><span>Примерен сценарий</span><h3 id="scenario-title">Производствена компания</h3></div><dl><div><dt>Контекст</dt><dd>Ограничена видимост върху факторите, които формират себестойността, и липса на последователен анализ на рентабилността по продукти.</dd></div><div><dt>Подход</dt><dd>Изграден е модел за себестойност, свързан с ERP данните, cost drivers и анализ на рентабилността по ключови бизнес измерения.</dd></div><div><dt>Резултат</dt><dd>Последователна основа за ценообразуване, оптимизация на разходите и управленски решения.</dd></div></dl></aside>
+      <aside className={styles.caseExample} aria-labelledby="scenario-title"><div className={styles.caseExampleIntro}><span>Примерен сценарий</span><h3 id="scenario-title">Производствена компания</h3></div><dl><div><dt>Контекст</dt><dd>Ограничена видимост върху факторите, които формират себестойността, и липса на последователен анализ на рентабилността по продукти.</dd></div><div><dt>Подход</dt><dd>Изграден е модел за себестойност, свързан с ERP данните, драйверите на разходите и анализ на рентабилността по ключови бизнес измерения.</dd></div><div><dt>Резултат</dt><dd>Последователна основа за ценообразуване, оптимизация на разходите и управленски решения.</dd></div></dl></aside>
     </div></section>
     <section className={`${styles.section} ${styles.tinted}`}><div className="site-container"><SectionHeader label="Приложения" title="Къде е приложима системата" intro="Моделът се адаптира към продуктовата сложност, структурата на разходите и управленските нужди на бизнеса." /><div className={styles.useCaseGrid}>{useCases.map(([title, copy]) => <article key={title}><h3>{title}</h3><p>{copy}</p></article>)}</div></div></section>
     <section className={styles.section}><div className="site-container"><SectionHeader label="Следваща стъпка" title="Свързани услуги" /><div className={styles.relatedGrid}>{related.map(([title, copy, href]) => <Link href={href} key={title}><span><strong>{title}</strong><small>{copy}</small></span><b aria-hidden="true">↗</b></Link>)}</div></div></section>

@@ -2,10 +2,10 @@ import type { CSSProperties } from "react";
 import styles from "./management-reporting.module.css";
 
 const metrics = [
-  ["Revenue", "€1.42m", "+7.8% YoY"],
+  ["Приходи", "€1.42m", "+7.8% на годишна база"],
   ["EBITDA", "€226k", "15.9% margin"],
-  ["Operating Margin", "12.6%", "+1.4 pts"],
-  ["Working Capital", "€318k", "22.4% of revenue"],
+  ["Оперативен марж", "12.6%", "+1.4 т."],
+  ["Оборотен капитал", "€318k", "22.4% от приходите"],
 ];
 
 const units = [
@@ -18,33 +18,33 @@ export default function ManagementDashboard() {
   return (
     <div className={styles.dashboard} aria-label="Демонстрационно табло за управленска отчетност">
       <div className={styles.dashboardTop}>
-        <div><span className={styles.dashboardEyebrow}>Management intelligence</span><h2>Executive Overview</h2></div>
-        <span className={styles.demoBadge}>Current period</span>
+        <div><span className={styles.dashboardEyebrow}>Управленска информация</span><h2>Управленски преглед</h2></div>
+        <span className={styles.demoBadge}>Текущ период</span>
       </div>
       <div className={styles.metrics}>
         {metrics.map(([label, value, note]) => <div className={styles.metric} key={label}><span>{label}</span><strong>{value}</strong><small>{note}</small></div>)}
       </div>
       <div className={styles.charts}>
         <section className={styles.chartPanel} aria-labelledby="revenue-trend-title">
-          <div className={styles.chartHeading}><div><span>Growth</span><h3 id="revenue-trend-title">Revenue Trend</h3></div><div className={styles.legend}><i />Actual <i />Plan</div></div>
+          <div className={styles.chartHeading}><div><span>Растеж</span><h3 id="revenue-trend-title">Динамика на приходите</h3></div><div className={styles.legend}><i />Реално <i />План</div></div>
           <svg className={styles.lineChart} viewBox="0 0 420 150" role="img" aria-label="Тенденция на приходите спрямо плана за шест месеца">
             <g className={styles.gridLines}><path d="M10 25H410M10 75H410M10 125H410" /></g>
             <path className={styles.forecastLine} d="M12 119C66 109 102 99 145 91S228 76 275 67S352 55 408 43" />
             <path className={styles.actualLine} d="M12 126C60 117 101 108 145 102S226 82 275 86S349 51 408 35" />
           </svg>
-          <div className={styles.axis}><span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span></div>
+          <div className={styles.axis}><span>яну</span><span>фев</span><span>мар</span><span>апр</span><span>май</span><span>юни</span></div>
         </section>
         <section className={styles.cashPanel} aria-labelledby="ebitda-trend-title">
-          <div className={styles.chartHeading}><div><span>Earnings</span><h3 id="ebitda-trend-title">EBITDA Trend</h3></div></div>
+          <div className={styles.chartHeading}><div><span>Печалба</span><h3 id="ebitda-trend-title">Динамика на EBITDA</h3></div></div>
           <div className={styles.bars} aria-label="Нарастваща тенденция на EBITDA за шест месеца">{[42, 54, 49, 66, 74, 88].map((height, index) => <i key={index} style={{ height: `${height}%` }} />)}</div>
-          <div className={styles.axis}><span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span></div>
+          <div className={styles.axis}><span>яну</span><span>фев</span><span>мар</span><span>апр</span><span>май</span><span>юни</span></div>
         </section>
         <section className={styles.chartPanel} aria-labelledby="profitability-title">
-          <div className={styles.chartHeading}><div><span>Business units</span><h3 id="profitability-title">Profitability by Business Unit</h3></div></div>
+          <div className={styles.chartHeading}><div><span>Бизнес звена</span><h3 id="profitability-title">Рентабилност по бизнес звена</h3></div></div>
           <div className={styles.unitBars}>{units.map(([label, width, value]) => <div className={styles.unitRow} key={label}><span>{label}</span><span className={styles.unitTrack}><i style={{ "--width": width } as CSSProperties} /></span><strong>{value}</strong></div>)}</div>
         </section>
         <section className={styles.cashPanel} aria-labelledby="working-capital-title">
-          <div className={styles.chartHeading}><div><span>Cash discipline</span><h3 id="working-capital-title">Working Capital Movement</h3></div></div>
+          <div className={styles.chartHeading}><div><span>Парична дисциплина</span><h3 id="working-capital-title">Изменение на оборотния капитал</h3></div></div>
           <div className={styles.movement} aria-label="Движение на оборотния капитал по компоненти">{[["AR", "76%"], ["Stock", "61%"], ["AP", "48%"], ["Net", "69%"]].map(([label, height]) => <span key={label} style={{ "--height": height } as CSSProperties}>{label}</span>)}</div>
         </section>
       </div>

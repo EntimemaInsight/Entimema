@@ -55,7 +55,7 @@ export default function MethodologySection() {
 
         <div className="methodology__statement methodology-reveal methodology-reveal--6">
           <span className="methodology__statement-mark">✦</span>
-          <p>Подходът ни е последователен, измерим и приложим — независимо дали изграждаме финансова архитектура, риск модел или AI система.</p>
+          <p>Подходът ни е последователен, измерим и приложим — независимо дали изграждаме финансова архитектура, рисков модел или AI система.</p>
         </div>
       </div>
     </section>

@@ -12,20 +12,20 @@ type Card = {
 };
 
 const cards: readonly Card[] = [
-  { title: "Financial Data", meta: "P&L · Cash Flow · Budget", eyebrow: "SOURCE 01", statuses: ["Syncing", "Validated", "Modeled", "Live"], group: "finance" },
-  { title: "Operating Signals", meta: "Process · Capacity · KPI", eyebrow: "SOURCE 02", statuses: ["Reading", "Mapped", "Connected", "Live"], group: "operations" },
-  { title: "Business Context", meta: "Goals · Constraints · Priorities", eyebrow: "CONTEXT", statuses: ["Parsing", "Structured", "Aligned", "Ready"], group: "operations" },
-  { title: "Risk Factors", meta: "Exposure · Scenarios · Controls", eyebrow: "RISK CORE", statuses: ["Scanning", "Flagged", "Stress-tested", "Controlled"], group: "risk" },
-  { title: "Market Environment", meta: "Trends · Competition · Demand", eyebrow: "EXTERNAL", statuses: ["Tracking", "Compared", "Weighted", "Current"], group: "finance" },
-  { title: "Decision Criteria", meta: "Impact · Resilience · Velocity", eyebrow: "GOVERNANCE", statuses: ["Defining", "Scored", "Prioritized", "Approved"], group: "risk" },
+  { title: "Финансови данни", meta: "P&L · Парични потоци · Бюджет", eyebrow: "ИЗТОЧНИК 01", statuses: ["Синхронизиране", "Валидирано", "Моделирано", "Активно"], group: "finance" },
+  { title: "Оперативни сигнали", meta: "Процес · Капацитет · KPI", eyebrow: "ИЗТОЧНИК 02", statuses: ["Прочитане", "Картографирано", "Свързано", "Активно"], group: "operations" },
+  { title: "Бизнес контекст", meta: "Цели · Ограничения · Приоритети", eyebrow: "КОНТЕКСТ", statuses: ["Анализиране", "Структурирано", "Съгласувано", "Готово"], group: "operations" },
+  { title: "Рискови фактори", meta: "Експозиция · Сценарии · Контроли", eyebrow: "ЯДРО НА РИСКА", statuses: ["Сканиране", "Маркирано", "Стрес тествано", "Контролирано"], group: "risk" },
+  { title: "Пазарна среда", meta: "Тенденции · Конкуренция · Търсене", eyebrow: "ВЪНШНА СРЕДА", statuses: ["Проследяване", "Сравнено", "Претеглено", "Актуално"], group: "finance" },
+  { title: "Критерии за решение", meta: "Въздействие · Устойчивост · Скорост", eyebrow: "УПРАВЛЕНИЕ", statuses: ["Дефиниране", "Оценено", "Приоритизирано", "Одобрено"], group: "risk" },
 ] as const;
 
 const phaseLabels = [
-  "Connecting knowledge",
-  "Validating signals",
-  "Mapping dependencies",
-  "Building decision architecture",
-  "Executive decision ready",
+  "Свързване на знанието",
+  "Валидиране на сигналите",
+  "Картографиране на зависимостите",
+  "Изграждане на Decision Architecture",
+  "Управленското решение е готово",
 ] as const;
 
 const paths = [
@@ -39,9 +39,9 @@ const paths = [
 ] as const;
 
 const layers = [
-  ["01", "Trusted context", "Normalized inputs and shared definitions"],
-  ["02", "Decision models", "Dependencies, scenarios and trade-offs"],
-  ["03", "Governance logic", "Controls, ownership and measurable criteria"],
+  ["01", "Надежден контекст", "Нормализирани входни данни и общи дефиниции"],
+  ["02", "Модели за решения", "Зависимости, сценарии и компромиси"],
+  ["03", "Логика на управление", "Контроли, отговорности и измерими критерии"],
 ] as const;
 
 export default function DynamicArchitectureCanvas() {
@@ -115,7 +115,7 @@ export default function DynamicArchitectureCanvas() {
       onPointerEnter={() => { if (ref.current) pointerBounds.current = ref.current.getBoundingClientRect(); }}
       onPointerMove={updateParallax}
       onPointerLeave={resetParallax}
-      aria-label="Dynamic management architecture"
+      aria-label="Динамична управленска архитектура"
     >
       <div className={styles.grid} aria-hidden="true" />
       <div className={`${styles.glow} ${styles.glowPrimary}`} aria-hidden="true" />
@@ -154,11 +154,11 @@ export default function DynamicArchitectureCanvas() {
         </article>
       ))}
 
-      <section className={styles.architecture} aria-label="Management architecture">
+      <section className={styles.architecture} aria-label="Управленска архитектура">
         <header className={styles.architectureHeader}>
           <span className={styles.architectureIcon} aria-hidden="true"><i /><i /><i /></span>
-          <span><small>ENTIMEMA INTELLIGENCE</small><strong>Decision Architecture</strong></span>
-          <b>LIVE</b>
+          <span><small>УПРАВЛЕНСКА ИНТЕЛИГЕНТНОСТ</small><strong>Decision Architecture</strong></span>
+          <b>АКТИВНО</b>
         </header>
         <div className={styles.layers}>
           {layers.map(([number, title, description], index) => (
@@ -172,7 +172,7 @@ export default function DynamicArchitectureCanvas() {
 
       <div className={styles.decision}>
         <span className={styles.decisionIcon} aria-hidden="true">✓</span>
-        <span><small>OUTPUT / VERIFIED</small><strong>Executive Decision</strong><span>Clear, measurable and ready for action.</span></span>
+        <span><small>РЕЗУЛТАТ / ПОТВЪРДЕНО</small><strong>Управленско решение</strong><span>Ясно, измеримо и готово за действие.</span></span>
         <i className={styles.decisionSignal} aria-hidden="true" />
       </div>
     </div>

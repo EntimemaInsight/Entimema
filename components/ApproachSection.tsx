@@ -88,8 +88,8 @@ export default function ApproachSection() {
           }
         />
         <div className="approach-section__tiles reveal reveal--3">
-          <SystemCard kind="finance" title="Finance" href="/services/financial-architecture" />
-          <SystemCard kind="risk" title="Risk" href="/services/risk-management" />
+          <SystemCard kind="finance" title="Финанси" href="/services/financial-architecture" />
+          <SystemCard kind="risk" title="Риск" href="/services/risk-management" />
         </div>
       </div>
     </section>

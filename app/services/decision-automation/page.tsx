@@ -12,17 +12,17 @@ export const metadata: Metadata = {
 
 const capabilities = [
   ["Decision Architecture", "Проектиране на цялостната логика от входните данни и моделите до крайното бизнес решение."],
-  ["Business Rules", "Дефиниране на правила, критерии, cut-offs, политики и изключения."],
-  ["Model Integration", "Интегриране на скоринг модели, аналитични модели и външни източници на данни в процеса по вземане на решения."],
-  ["Decision Flows", "Автоматизирани decision flows за одобрение, отказ, допълнителен преглед, ескалация и routing."],
+  ["Бизнес правила", "Дефиниране на правила, критерии, cut-offs, политики и изключения."],
+  ["Интеграция на модели", "Интегриране на скоринг модели, аналитични модели и външни източници на данни в процеса по вземане на решения."],
+  ["Процеси на вземане на решения", "Автоматизирани процеси за одобрение, отказ, допълнителен преглед, ескалация и насочване."],
   ["Champion / Challenger", "Паралелно тестване и сравнение на различни модели, правила и стратегии за вземане на решения."],
-  ["Simulation & Optimization", "Симулация на промени в правилата и стратегиите преди внедряването им в production среда."],
+  ["Симулация и оптимизация", "Симулация на промени в правилата и стратегиите преди внедряването им в реална среда."],
 ];
 
 const process = [
   ["01", "Диагностика", "Анализираме текущите процеси, правила, модели и точки на вземане на решения."],
-  ["02", "Архитектура", "Проектираме единна decision architecture и логиката на автоматизираните решения."],
-  ["03", "Внедряване", "Интегрираме данните, моделите и бизнес правилата в автоматизирани decision flows."],
+  ["02", "Архитектура", "Проектираме единна Decision Architecture и логиката на автоматизираните решения."],
+  ["03", "Внедряване", "Интегрираме данните, моделите и бизнес правилата в автоматизирани процеси на вземане на решения."],
   ["04", "Оптимизация", "Тестваме, наблюдаваме и подобряваме стратегиите според реалните резултати."],
 ];
 
@@ -41,7 +41,7 @@ const useCases = [
 
 const related = [
   ["Кредитен риск", "Модели, политики и управление на портфейлния риск.", "/services/credit-risk"],
-  ["AML и съответствие", "AML контроли, мониторинг и compliance архитектура.", "/services/aml-compliance"],
+  ["AML и съответствие", "AML контроли, мониторинг и архитектура за регулаторно съответствие.", "/services/aml-compliance"],
   ["Рискови AI агенти", "Интелигентен слой за изпълнение и анализ над рисковите системи.", "/services/risk-ai-agents"],
 ];
 
@@ -60,7 +60,7 @@ export default function DecisionAutomationPage() {
           <span className={styles.category}>Риск</span>
           <h1 id="decision-automation-title">Автоматизация на решения</h1>
           <p className={styles.lead}>Архитектура за последователни и автоматизирани бизнес решения.</p>
-          <p className={styles.support}>Изграждаме decision engines, които обединяват данни, модели, бизнес правила и политики в единна логика за автоматизирано вземане на решения.</p>
+          <p className={styles.support}>Изграждаме платформи Decision Engine, които обединяват данни, модели, бизнес правила и политики в единна логика за автоматизирано вземане на решения.</p>
           <Link className={styles.primaryButton} href="/contact">Обсъдете своята decision architecture <span aria-hidden="true">→</span></Link>
         </div>
         <DecisionEngineDashboard />
@@ -72,12 +72,12 @@ export default function DecisionAutomationPage() {
       </div></section>
 
       <section className={`${styles.section} ${styles.tinted}`} aria-labelledby="process-title"><div className="site-container">
-        <SectionHeader label="Метод" title="Как изграждаме decision engine" intro="Работим поетапно — от картографиране на настоящата логика до внедряване, наблюдение и оптимизация на автоматизираните решения." />
+        <SectionHeader label="Метод" title="Как изграждаме Decision Engine" intro="Работим поетапно — от картографиране на настоящата логика до внедряване, наблюдение и оптимизация на автоматизираните решения." />
         <ol className={styles.timeline}>{process.map(([number, title, copy]) => <li key={number}><span>{number}</span><h3>{title}</h3><p>{copy}</p></li>)}</ol>
       </div></section>
 
       <section className={styles.section} aria-labelledby="outcomes-title"><div className="site-container">
-        <SectionHeader label="Резултати" title="Решения в реално време и под пълен контрол" intro="Единният decision layer прави изпълнението на бизнес логиката по-бързо, последователно, измеримо и проследимо." />
+        <SectionHeader label="Резултати" title="Решения в реално време и под пълен контрол" intro="Единният слой за изпълнение на решения прави бизнес логиката по-бърза, последователна, измерима и проследима." />
         <div className={styles.outcomeGrid}>{outcomes.map(([title, copy]) => <article key={title}><span aria-hidden="true">✓</span><div><h3>{title}</h3><p>{copy}</p></div></article>)}</div>
         <aside className={styles.caseExample} aria-labelledby="case-example-title">
           <div className={styles.caseExampleIntro}><span>Примерен сценарий</span><h3 id="case-example-title">Дружество за потребителско кредитиране</h3></div>
@@ -90,7 +90,7 @@ export default function DecisionAutomationPage() {
       </div></section>
 
       <section className={`${styles.section} ${styles.tinted}`} aria-labelledby="applications-title"><div className="site-container">
-        <SectionHeader label="Приложения" title="Къде се вписва системата" intro="Decision engine архитектурата се прилага там, където данни, модели и политики трябва да се превърнат в контролирано оперативно решение." />
+        <SectionHeader label="Приложения" title="Къде се вписва системата" intro="Архитектурата на платформата Decision Engine се прилага там, където данни, модели и политики трябва да се превърнат в контролирано оперативно решение." />
         <div className={styles.useCaseGrid}>{useCases.map(([title, copy]) => <article key={title}><h3>{title}</h3><p>{copy}</p></article>)}</div>
       </div></section>
 

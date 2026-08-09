@@ -11,18 +11,18 @@ export const metadata: Metadata = {
 };
 
 const capabilities = [
-  ["Risk Monitoring Agents", "Непрекъснато наблюдение на рискови показатели, портфейли, събития и отклонения."],
-  ["Credit Risk Agents", "AI агенти за анализ на кредитни заявки, портфейлно представяне и промени в рисковия профил."],
-  ["AML Investigation Agents", "AI агенти за предварителен анализ на сигнали, клиентска активност и AML случаи."],
-  ["Decision Support Agents", "Подготовка на структурирани анализи и препоръки за решения, изискващи човешка преценка."],
-  ["Exception Management", "Идентифициране, анализ и ескалация на случаи извън стандартната decision logic."],
-  ["Risk Workflow Agents", "Автоматизирано изпълнение на контролирани рискови процеси между данни, модели, системи и човешки екипи."],
+  ["Агенти за рисков мониторинг", "Непрекъснато наблюдение на рискови показатели, портфейли, събития и отклонения."],
+  ["Агенти за кредитен риск", "AI агенти за анализ на кредитни заявки, портфейлно представяне и промени в рисковия профил."],
+  ["AML агенти за разследване", "AI агенти за предварителен анализ на сигнали, клиентска активност и AML случаи."],
+  ["Агенти за подкрепа при вземане на решения", "Подготовка на структурирани анализи и препоръки за решения, изискващи човешка преценка."],
+  ["Управление на изключения", "Идентифициране, анализ и ескалация на случаи извън стандартната логика за вземане на решения."],
+  ["Агенти за рискови работни процеси", "Автоматизирано изпълнение на контролирани рискови процеси между данни, модели, системи и човешки екипи."],
 ];
 
 const process = [
   ["01", "Диагностика", "Определяме процесите, в които AI агентите могат да създадат измерима стойност при приемливо ниво на контрол."],
   ["02", "Архитектура", "Дефинираме ролята, достъпа, правилата, ограниченията и точките за човешка намеса."],
-  ["03", "Внедряване", "Интегрираме агентите с данните, рисковите модели, decision engines и работните процеси."],
+  ["03", "Внедряване", "Интегрираме агентите с данните, рисковите модели, платформите Decision Engine и работните процеси."],
   ["04", "Управление", "Наблюдаваме действията, качеството и ефективността на агентите и развиваме техните възможности."],
 ];
 
@@ -41,7 +41,7 @@ const useCases = [
 
 const related = [
   ["Кредитен риск", "Модели, политики и управление на портфейлния риск.", "/services/credit-risk"],
-  ["AML и съответствие", "AML контроли, мониторинг и compliance архитектура.", "/services/aml-compliance"],
+  ["AML и съответствие", "AML контроли, мониторинг и архитектура за регулаторно съответствие.", "/services/aml-compliance"],
   ["Автоматизация на решения", "Данни, модели и политики, превърнати в проследими автоматизирани решения.", "/services/decision-automation"],
 ];
 
@@ -67,7 +67,7 @@ export default function RiskAiAgentsPage() {
       </div></section>
 
       <section className={styles.section} aria-labelledby="capabilities-title"><div className="site-container">
-        <SectionHeader label="Обхват" title="AI агенти за контролирани рискови процеси" intro="AI изпълнение, бизнес правила, права, проследимост и човешки контрол в единна операционна архитектура." />
+        <SectionHeader label="Обхват" title="AI агенти за контролирани рискови процеси" intro="Контролирано изпълнение чрез AI, бизнес правила, права, проследимост и човешки контрол в единна оперативна архитектура." />
         <div className={styles.capabilityGrid}>{capabilities.map(([title, copy], index) => <article className={styles.capability} key={title}><span>0{index + 1}</span><h3>{title}</h3><p>{copy}</p></article>)}</div>
       </div></section>
 
@@ -99,7 +99,7 @@ export default function RiskAiAgentsPage() {
         <div className={styles.relatedGrid}>{related.map(([title, copy, href]) => <Link href={href} key={title}><span><strong>{title}</strong><small>{copy}</small></span><b aria-hidden="true">↗</b></Link>)}</div>
       </div></section>
 
-      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>Рискови AI агенти</span><h2 id="cta-title">Автоматизирайте контролираните рискови процеси.</h2><p>Свържете AI изпълнението с рисковите модели, бизнес правилата, правата, проследимостта и човешкия контрол.</p><Link className={styles.ctaButton} href="/contact">Обсъдете своите рискови AI агенти <span aria-hidden="true">→</span></Link></div></div></section>
+      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>Рискови AI агенти</span><h2 id="cta-title">Автоматизирайте контролираните рискови процеси.</h2><p>Свържете контролираното изпълнение чрез AI с рисковите модели, бизнес правилата, правата, проследимостта и човешкия контрол.</p><Link className={styles.ctaButton} href="/contact">Обсъдете своите рискови AI агенти <span aria-hidden="true">→</span></Link></div></div></section>
     </main>
   );
 }

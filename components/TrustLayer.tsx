@@ -10,7 +10,7 @@ export default function TrustLayer() {
     <section className="trust-layer" aria-label="Защо Entimema">
       <div className="site-container trust-layer__inner">
         <div className="trust-layer__heading">
-          <h2>Строгостта на финансовата функция.<br /><em>Скоростта на технологичен продукт.</em></h2>
+          <h2>Строгостта на финансовата функция.<br /><em>Динамиката на технологичния продукт.</em></h2>
         </div>
         <div className="trust-layer__grid">
           {principles.map((item) => (
