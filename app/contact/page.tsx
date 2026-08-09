@@ -27,17 +27,19 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
 
           <article className={styles.officeCard}>
             <Image
-              alt="Съвременен градски изглед към София и Витоша"
+              alt="Храм-паметник Александър Невски в София"
               className={styles.officeImage}
               fill
-              sizes="(max-width: 680px) calc(100vw - 40px), 420px"
-              src="/sofia-office.webp"
+              sizes="(max-width: 680px) calc(100vw - 40px), 520px"
+              src="/entimema-sofia-office.webp"
             />
-            <span className={styles.locationLabel}>София</span>
-            <div className={styles.addressOverlay}>
-              <p>бул. Черни връх 192а</p>
-              <a href="https://www.google.com/maps/search/?api=1&amp;query=%D0%B1%D1%83%D0%BB.%20%D0%A7%D0%B5%D1%80%D0%BD%D0%B8%20%D0%B2%D1%80%D1%8A%D1%85%20192%D0%B0%2C%20%D0%A1%D0%BE%D1%84%D0%B8%D1%8F">Вижте в Google Maps</a>
-            </div>
+            <a
+              aria-label="Вижте бул. Черни връх 192А, София 1404, България в Google Maps"
+              className={styles.mapsLink}
+              href="https://www.google.com/maps/search/?api=1&amp;query=%D0%B1%D1%83%D0%BB.%20%D0%A7%D0%B5%D1%80%D0%BD%D0%B8%20%D0%B2%D1%80%D1%8A%D1%85%20192%D0%90%2C%20%D0%A1%D0%BE%D1%84%D0%B8%D1%8F%201404%2C%20%D0%91%D1%8A%D0%BB%D0%B3%D0%B0%D1%80%D0%B8%D1%8F"
+              rel="noopener noreferrer"
+              target="_blank"
+            />
           </article>
         </div>
       </section>

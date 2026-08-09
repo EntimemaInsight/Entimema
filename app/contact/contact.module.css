@@ -243,11 +243,11 @@
 
 .officeCard {
   position: relative;
-  width: min(100%, 420px);
-  aspect-ratio: 4 / 5;
+  width: min(100%, 520px);
+  aspect-ratio: 991 / 1417;
   margin: clamp(40px, 4vw, 56px) auto 0;
   overflow: hidden;
-  border-radius: var(--radius-card);
+  border-radius: clamp(18px, 2.2vw, 24px);
   background: var(--brand-navy-900);
 }
 
@@ -256,56 +256,18 @@
   object-position: center;
 }
 
-.locationLabel {
+.mapsLink {
   position: absolute;
-  top: 24px;
-  left: 24px;
-  padding: 8px 13px;
-  border-radius: var(--radius-pill);
-  background: rgba(255, 255, 255, 0.9);
-  color: var(--brand-navy-950);
-  font-size: 12px;
-  font-weight: var(--font-weight-semibold);
-  line-height: 1.2;
-  letter-spacing: 0.04em;
-}
-
-.addressOverlay {
-  position: absolute;
-  left: 28px;
-  right: 28px;
-  bottom: 28px;
-  color: #fff;
-  text-shadow: 0 1px 3px rgba(4, 19, 63, 0.72);
-}
-
-.addressOverlay p {
-  margin: 0;
-  font-size: clamp(22px, 2vw, 27px);
-  font-weight: var(--font-weight-semibold);
-  line-height: 1.22;
-  letter-spacing: -0.025em;
-}
-
-.addressOverlay a {
+  left: 5.4%;
+  bottom: 3.5%;
+  width: 45%;
+  height: 7%;
   min-height: 44px;
-  display: inline-flex;
-  align-items: center;
-  margin-top: 4px;
-  color: #fff;
-  font-size: 13px;
-  font-weight: var(--font-weight-medium);
-  line-height: 1.4;
-  text-decoration: underline;
-  text-decoration-color: rgba(255, 255, 255, 0.72);
-  text-underline-offset: 4px;
+  border-radius: 8px;
+  cursor: pointer;
 }
 
-.addressOverlay a:hover {
-  text-decoration-color: #fff;
-}
-
-.addressOverlay a:focus-visible {
+.mapsLink:focus-visible {
   outline: 3px solid var(--brand-blue-200);
   outline-offset: 4px;
 }
@@ -443,17 +405,6 @@
 
   .officeCard {
     margin-top: 36px;
-  }
-
-  .locationLabel {
-    top: 20px;
-    left: 20px;
-  }
-
-  .addressOverlay {
-    left: 22px;
-    right: 22px;
-    bottom: 20px;
   }
 
 }
