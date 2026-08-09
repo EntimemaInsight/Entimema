@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import BrandLogo from "@/components/BrandLogo";
 import Navbar from "@/components/Navbar";
 import styles from "./privacy.module.css";
 
@@ -82,13 +80,6 @@ export default function PrivacyPage() {
         </div>
       </article>
 
-      <footer className={styles.footer}>
-        <div className={`site-container ${styles.footerInner}`}>
-          <BrandLogo compact />
-          <span className={styles.footerCopyright}>© 2026 Entimema</span>
-          <Link className={styles.footerLink} href="/privacy" aria-current="page">Поверителност</Link>
-        </div>
-      </footer>
     </main>
   );
 }

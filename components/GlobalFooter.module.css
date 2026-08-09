@@ -1,0 +1,152 @@
+.footer {
+  padding: clamp(64px, 6vw, 88px) 0 clamp(52px, 5vw, 72px);
+  border-top: 1px solid color-mix(in srgb, var(--brand-navy-900) 13%, transparent);
+  background: #fff;
+  color: var(--brand-navy-950);
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: minmax(210px, 0.75fr) minmax(0, 2.75fr);
+  gap: clamp(56px, 7vw, 112px);
+  align-items: stretch;
+}
+
+.brandZone {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 48px;
+}
+
+.brandLink {
+  display: inline-flex;
+  border-radius: 4px;
+}
+
+.brandLink:focus-visible,
+.column a:focus-visible {
+  outline: 3px solid var(--brand-blue-200);
+  outline-offset: 4px;
+}
+
+.copyright {
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+}
+
+.navigation {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 0.72fr 0.78fr;
+  gap: clamp(32px, 4vw, 68px);
+}
+
+.column {
+  min-width: 0;
+}
+
+.column h2 {
+  margin: 0 0 20px;
+  color: var(--brand-navy-950);
+  font-size: 11px;
+  font-weight: var(--font-weight-bold);
+  line-height: 1.35;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.column ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.column li + li {
+  margin-top: 2px;
+}
+
+.column a {
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  padding-block: 8px;
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: var(--font-weight-medium);
+  line-height: 1.45;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 4px;
+  transition: color 180ms var(--ease-standard), text-decoration-color 180ms var(--ease-standard);
+}
+
+.column a:hover {
+  color: var(--brand-navy-950);
+  text-decoration-color: color-mix(in srgb, var(--brand-navy-900) 45%, transparent);
+}
+
+@media (max-width: 1100px) {
+  .inner {
+    grid-template-columns: 1fr;
+    gap: 52px;
+  }
+
+  .brandZone {
+    flex-direction: row;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .copyright {
+    margin-left: auto;
+  }
+
+  .navigation {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 44px clamp(48px, 8vw, 88px);
+  }
+}
+
+@media (max-width: 640px) {
+  .footer {
+    padding-block: 52px 44px;
+  }
+
+  .inner {
+    gap: 44px;
+  }
+
+  .brandZone {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 22px;
+  }
+
+  .copyright {
+    margin-left: 0;
+  }
+
+  .navigation {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .column h2 {
+    margin-bottom: 14px;
+  }
+
+  .column a {
+    min-height: 44px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .column a {
+    transition: none;
+  }
+}
