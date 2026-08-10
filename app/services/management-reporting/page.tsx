@@ -6,43 +6,43 @@ import ManagementDashboard from "./ManagementDashboard";
 import styles from "./management-reporting.module.css";
 
 export const metadata: Metadata = {
-  title: "Управленска отчетност | Entimema",
-  description: "Система за управленска информация, изградена около начина, по който се управлява бизнесът.",
+  title: "Management Reporting | Entimema",
+  description: "Build management reporting around the decisions your business needs to make, connecting financial performance, operational drivers and management action in one view.",
 };
 
 const capabilities = [
-  ["Управленски KPI", "Ясно определени показатели, съобразени с начина, по който се управлява бизнесът."],
-  ["Управленско табло", "Информация за ръководството, организирана около решенията, а не около счетоводните отчети."],
-  ["Финансов анализ", "Анализ на отклоненията, тенденциите и факторите зад финансовите резултати."],
-  ["Оперативна отчетност", "Свързване на финансовите резултати с производството, продажбите и операциите."],
-  ["Рамка за управленска отчетност", "Стандартизирани отчети, ритъм на публикуване и единна структура на информацията."],
-  ["Автоматизация и AI", "Автоматизирано събиране, проверка и разпространение на управленската информация."],
+  ["MANAGEMENT KPIs", "Metrics defined around how the business is actually managed."],
+  ["EXECUTIVE DASHBOARDS", "Management views organised around decisions, not accounting statements."],
+  ["FINANCIAL ANALYSIS", "Variance, trend and driver analysis that explains what is behind the result."],
+  ["OPERATIONAL REPORTING", "Connect financial outcomes with production, sales and operational performance."],
+  ["REPORTING FRAMEWORK", "Standard reports, clear ownership, publication rhythm and one information structure."],
+  ["AUTOMATION & AI", "Automate data collection, validation and distribution where it improves reliability and speed."],
 ];
 const process = [
-  ["01", "Диагностика", "Анализираме как се използва информацията при управленските решения."],
-  ["02", "Архитектура", "Проектираме KPI рамката, отчетите и информационните потоци."],
-  ["03", "Внедряване", "Изграждаме управленски табла, отчети и автоматизирани процеси за актуализация."],
-  ["04", "Управление", "Развиваме системата според новите бизнес нужди и управленски решения."],
+  ["01", "DIAGNOSE", "We assess how management uses information today and where visibility breaks down."],
+  ["02", "DESIGN", "We define KPIs, reporting logic and the information flows behind them."],
+  ["03", "IMPLEMENT", "We build dashboards, reports and automated update processes."],
+  ["04", "EVOLVE", "We refine the reporting system as the business and its decision needs change."],
 ];
 const outcomes = [
-  ["Единна управленска информация", "Всички ключови показатели са организирани в последователна управленска структура."],
-  ["Навременни решения", "Информацията достига до ръководството в правилния момент."],
-  ["Обективен анализ", "Финансовите резултати се разглеждат заедно с оперативните фактори."],
-  ["По-малко ръчна работа", "Автоматизирано генериране и разпространение на управленската отчетност."],
+  ["ONE MANAGEMENT VIEW", "Key financial and operational measures within one consistent structure."],
+  ["TIMELIER DECISIONS", "The right information reaches management when it can still change the outcome."],
+  ["STRONGER ANALYSIS", "Financial results are interpreted together with the operational drivers behind them."],
+  ["LESS MANUAL WORK", "Reduce repetitive reporting work through automation and standardisation."],
 ];
 const useCases = [
-  ["Растящи компании", "За бизнеси, при които информацията вече не може да се управлява чрез множество Excel файлове."],
-  ["Производство", "За организации с комплексни производствени процеси и необходимост от оперативна финансова видимост."],
-  ["Холдингови структури", "За групи компании, които консолидират управленска информация от множество дружества."],
-  ["Компании в трансформация", "За организации, които внедряват ERP, променят организационната структура или изграждат нов управленски модел."],
+  ["REPORTING LIVES IN MULTIPLE FILES", "When management depends on multiple Excel files and KPI definitions vary across teams."],
+  ["FINANCE AND OPERATIONS DISAGREE", "When finance and operations report different versions of performance."],
+  ["REPORTING ARRIVES TOO LATE", "When reporting arrives after the decision window has passed."],
+  ["MORE DATA HAS NOT CREATED MORE CLARITY", "When ERP implementation has increased data, but not clarity, or group companies need one reporting logic across entities."],
 ];
 const related = [
-  ["CFO функция", "Финансова архитектура, роли и управленски процеси.", "/services/cfo-function"],
-  ["Бюджети и прогнози", "Планиране, основано на бизнес драйвери и сценарии.", "/services/budgets-and-forecasting"],
-  ["Финансови данни", "Единна основа за отчетност, анализ и автоматизация.", "/services/financial-data"],
+  ["CFO Advisory", "The financial structure, management information and decision processes behind a CFO function.", "/services/cfo-function"],
+  ["Planning & Forecasting", "Budgets, forecasts and scenarios connected to the drivers of the business.", "/services/budgets-and-forecasting"],
+  ["Financial Data", "One reliable foundation for reporting, analysis and financial control.", "/services/financial-data"],
 ];
 
-function SectionHeader({ label, title, intro }: { label: string; title: string; intro?: string }) {
+function SectionHeader({ label, title, intro }: { label: string; title: React.ReactNode; intro?: string }) {
   return <header className={styles.sectionHeader}><span>{label}</span><h2>{title}</h2>{intro && <p>{intro}</p>}</header>;
 }
 
@@ -53,22 +53,22 @@ export default function ManagementReportingPage() {
       <Navbar active="services" />
       <section className={styles.hero} aria-labelledby="management-reporting-title"><div className={`site-container ${styles.heroInner}`}>
         <div className={styles.heroCopy}>
-          <nav className={styles.breadcrumb} aria-label="Навигационна пътека"><Link href="/">Начало</Link><span>/</span><span>Финанси</span><span>/</span><span aria-current="page">Управленска отчетност</span></nav>
-          <span className={styles.category}>Финанси</span>
-          <h1 id="management-reporting-title">Управленска отчетност</h1>
-          <p className={styles.lead}>Система за управленска информация, изградена около начина, по който се управлява бизнесът.</p>
-          <p className={styles.support}>Изграждаме управленска отчетност, която свързва финансовите и оперативните показатели в последователна система за анализ, контрол и вземане на решения.</p>
-          <Link className={styles.primaryButton} href="/contact?topic=management-reporting">Обсъдете управленската си отчетност <span aria-hidden="true">→</span></Link>
+          <nav className={styles.breadcrumb} aria-label="Breadcrumb"><Link href="/">Home</Link><span>/</span><span>Finance</span><span>/</span><span aria-current="page">Management Reporting</span></nav>
+          <span className={styles.category}>MANAGEMENT REPORTING</span>
+          <h1 id="management-reporting-title">More reports don&apos;t mean more clarity.</h1>
+          <p className={styles.lead}>See the business the way management needs to see it.</p>
+          <p className={styles.support}>Build management reporting around the decisions your business needs to make — connecting financial performance, operational drivers and management action in one consistent view.</p>
+          <Link className={styles.primaryButton} href="/contact?topic=management-reporting">Discuss Your Management Reporting <span aria-hidden="true">→</span></Link>
         </div>
         <ManagementDashboard />
       </div></section>
 
-      <section className={styles.section} aria-labelledby="capabilities-title"><div className="site-container"><SectionHeader label="Обхват" title="Какво включва" intro="Управленската отчетност свързва показателите, анализа и информационните потоци в единна система за решения." /><div className={styles.capabilityGrid}>{capabilities.map(([title, copy], index) => <article className={styles.capability} key={title}><span>0{index + 1}</span><h3>{title}</h3><p>{copy}</p></article>)}</div></div></section>
-      <section className={`${styles.section} ${styles.tinted}`} aria-labelledby="process-title"><div className="site-container"><SectionHeader label="Метод" title="Как работим" intro="Системата се изгражда поетапно — от начина, по който се вземат решения, до работещ ритъм на управленска информация." /><ol className={styles.timeline}>{process.map(([number, title, copy]) => <li key={number}><span>{number}</span><h3>{title}</h3><p>{copy}</p></li>)}</ol></div></section>
-      <section className={styles.section} aria-labelledby="outcomes-title"><div className="site-container"><SectionHeader label="Резултати" title="Какво получавате" intro="Резултатът е надеждна управленска система, която дава видимост, контрол и ясна основа за решения." /><div className={styles.outcomeGrid}>{outcomes.map(([title, copy]) => <article key={title}><span aria-hidden="true">✓</span><div><h3>{title}</h3><p>{copy}</p></div></article>)}</div><aside className={styles.caseExample} aria-labelledby="case-example-title"><div className={styles.caseExampleIntro}><span>Примерен сценарий</span><h3 id="case-example-title">Производствена компания</h3></div><dl><div><dt>Контекст</dt><dd>Финансовата и оперативната информация се изготвят отделно, без единна KPI рамка и с ограничена възможност за анализ на отклоненията.</dd></div><div><dt>Подход</dt><dd>Изградена е система за управленска отчетност, която свързва ERP данните, KPI показателите и executive dashboard-ите в единна структура.</dd></div><div><dt>Резултат</dt><dd>Навременна, последователна и надеждна управленска информация за ежедневните решения.</dd></div></dl></aside></div></section>
-      <section className={`${styles.section} ${styles.tinted}`} aria-labelledby="applications-title"><div className="site-container"><SectionHeader label="Приложения" title="Къде е приложима системата" intro="Моделът се адаптира към мащаба, оперативната сложност и информационните нужди на бизнеса." /><div className={styles.useCaseGrid}>{useCases.map(([title, copy]) => <article key={title}><h3>{title}</h3><p>{copy}</p></article>)}</div></div></section>
-      <section className={styles.section} aria-labelledby="related-title"><div className="site-container"><SectionHeader label="Следваща стъпка" title="Свързани услуги" /><div className={styles.relatedGrid}>{related.map(([title, copy, href]) => <Link href={href} key={title}><span><strong>{title}</strong><small>{copy}</small></span><b aria-hidden="true">↗</b></Link>)}</div></div></section>
-      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>Оценка на управленската информация</span><h2 id="cta-title">Система за решения около начина, по който управлявате бизнеса.</h2><p>Фокусът е върху показателите, информационните потоци и ритъма, които дават на ръководството навременна и надеждна картина.</p><Link className={styles.ctaButton} href="/contact?topic=management-reporting">Обсъдете управленската си отчетност <span aria-hidden="true">→</span></Link></div></div></section>
+      <section className={styles.section} aria-labelledby="capabilities-title"><div className="site-container"><SectionHeader label="WHAT IT INCLUDES" title="Reporting works when the structure matches the decisions." /><div className={styles.capabilityGrid}>{capabilities.map(([title, copy], index) => <article className={styles.capability} key={title}><span>0{index + 1}</span><h3>{title}</h3><p>{copy}</p></article>)}</div></div></section>
+      <section className={`${styles.section} ${styles.tinted}`} aria-labelledby="process-title"><div className="site-container"><SectionHeader label="HOW WE WORK" title={<>Start with the decisions.<br />Build the information around them.</>} /><ol className={styles.timeline}>{process.map(([number, title, copy]) => <li key={number}><span>{number}</span><h3>{title}</h3><p>{copy}</p></li>)}</ol></div></section>
+      <section className={styles.section} aria-labelledby="outcomes-title"><div className="site-container"><SectionHeader label="WHAT YOU GET" title={<>Less reporting friction.<br />More management visibility.</>} /><div className={styles.outcomeGrid}>{outcomes.map(([title, copy]) => <article key={title}><span aria-hidden="true">✓</span><div><h3>{title}</h3><p>{copy}</p></div></article>)}</div><aside className={styles.caseExample} aria-labelledby="case-example-title"><div className={styles.caseExampleIntro}><span>ILLUSTRATIVE SCENARIO</span><h3 id="case-example-title">When finance and operations tell different stories, management loses the picture.</h3></div><dl><div><dt>SCENARIO</dt><dd>A manufacturing company prepares financial and operational reporting separately, with no shared KPI framework and limited ability to explain variances.</dd></div><div><dt>ENTIMEMA APPROACH</dt><dd>We connect ERP data, management KPIs and executive dashboards into one reporting structure.</dd></div><div><dt>RESULT</dt><dd>Management gets a timely, consistent and reliable view of performance for day-to-day decisions.</dd></div></dl></aside></div></section>
+      <section className={`${styles.section} ${styles.tinted}`} aria-labelledby="applications-title"><div className="site-container"><SectionHeader label="WHERE IT APPLIES" title="When does reporting stop supporting management?" intro="If management has to reconcile the reports before it can use them, the reporting system is already too slow." /><div className={styles.useCaseGrid}>{useCases.map(([title, copy]) => <article key={title}><h3>{title}</h3><p>{copy}</p></article>)}</div></div></section>
+      <section className={styles.section} aria-labelledby="related-title"><div className="site-container"><SectionHeader label="NEXT STEP" title="Related services" /><div className={styles.relatedGrid}>{related.map(([title, copy, href]) => <Link href={href} key={title}><span><strong>{title}</strong><small>{copy}</small></span><b aria-hidden="true">↗</b></Link>)}</div></div></section>
+      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>MANAGEMENT REPORTING</span><h2 id="cta-title">Your reporting should answer the question before management has to ask twice.</h2><p>Build a management information system around the decisions, KPIs and reporting rhythm your business actually needs.</p><Link className={styles.ctaButton} href="/contact?topic=management-reporting">Discuss Your Management Reporting <span aria-hidden="true">→</span></Link></div></div></section>
     </main>
   );
 }
