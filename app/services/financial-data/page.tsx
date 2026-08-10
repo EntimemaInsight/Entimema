@@ -6,48 +6,48 @@ import FinancialDataDashboard from "./FinancialDataDashboard";
 import styles from "./financial-data.module.css";
 
 export const metadata: Metadata = {
-  title: "Финансови данни | Entimema",
-  description: "Система за надеждни финансови данни.",
+  title: "Financial Data | Entimema",
+  description: "Build one trusted financial data foundation across ERP, reporting, planning and analytics with consistent structures, validation and traceability.",
 };
 
 const capabilities = [
-  ["ERP интеграция", "Свързване на финансовите данни с ERP и останалите бизнес системи."],
-  ["Модел на данните", "Изграждане на единен модел на финансовите данни."],
-  ["Качество на данните", "Проверка, стандартизация и контрол на качеството на информацията."],
-  ["Master Data", "Управление на основните финансови и организационни структури."],
-  ["Автоматизация на данните", "Автоматизирано събиране, трансформиране и синхронизиране на данните."],
-  ["Данни, готови за AI", "Подготовка на надеждни финансови данни за AI анализи и автоматизация."],
+  ["ERP INTEGRATION", "Connect financial data across ERP and the business systems that feed it."],
+  ["FINANCIAL DATA MODEL", "Create one consistent structure for accounts, entities, cost centres and management dimensions."],
+  ["DATA QUALITY", "Validate, standardise and control the information before it reaches reporting or analysis."],
+  ["MASTER DATA GOVERNANCE", "Keep financial and organisational structures consistent across systems and processes."],
+  ["DATA AUTOMATION", "Automate collection, transformation and synchronisation to reduce manual handling."],
+  ["AI-READY DATA", "Prepare trusted financial data for AI analysis, agents and automated decision workflows."],
 ];
 
 const process = [
-  ["01", "Диагностика", "Анализираме източниците на финансови данни и информационните потоци."],
-  ["02", "Архитектура", "Проектираме единния модел на финансовите данни."],
-  ["03", "Интеграция", "Свързваме ERP, файлове и външни системи."],
-  ["04", "Управление", "Поддържаме качеството, проследимостта и развитието на данните."],
+  ["01", "MAP", "We trace financial data from source systems through reporting, planning and analysis."],
+  ["02", "STRUCTURE", "We define one financial data model, common definitions and clear ownership."],
+  ["03", "CONNECT", "We integrate ERP, files and external systems into consistent information flows."],
+  ["04", "GOVERN", "We establish validation, traceability and controls that keep the data reliable over time."],
 ];
 
 const outcomes = [
-  ["Единен източник на информация", "Една последователна основа за всички финансови процеси."],
-  ["Последователни финансови данни", "Еднакви дефиниции, структури и правила в цялата организация."],
-  ["По-малко ръчни обработки", "Автоматизирани потоци заменят повтарящото се събиране и преобразуване."],
-  ["Надеждна основа за управленски решения", "Проверима информация, на която ръководството може да разчита."],
+  ["ONE SOURCE OF TRUTH", "A consistent financial foundation for reporting, planning and analysis."],
+  ["CONSISTENT DEFINITIONS", "Accounts, entities, dimensions and business rules mean the same thing across the organisation."],
+  ["LESS MANUAL HANDLING", "Reduce repetitive extraction, reconciliation and transformation work."],
+  ["TRUSTED DECISION INPUTS", "Give management information it can use without first questioning the source."],
 ];
 
 const useCases = [
-  ["ERP трансформация", "За компании, които внедряват, сменят или надграждат своята ERP среда."],
-  ["Холдингови структури", "За групи с различни дружества, системи и финансови структури."],
-  ["Компании с множество информационни системи", "За организации, които трябва да свържат разпокъсани източници на данни."],
-  ["Организации, които изграждат AI автоматизация", "За бизнеси, които се нуждаят от надеждна информационна основа за AI."],
+  ["ERP TRANSFORMATION", "When a new or upgraded ERP changes structures, mappings and information flows."],
+  ["MULTI-ENTITY GROUPS", "When companies use different systems, charts of accounts and management dimensions."],
+  ["FRAGMENTED SYSTEM LANDSCAPES", "When finance depends on multiple disconnected sources and manual reconciliation."],
+  ["AI & AUTOMATION READINESS", "When AI agents and automation require trusted, structured and traceable financial data."],
 ];
 
 const related = [
-  ["Управленска отчетност", "Информация за ръководството, организирана около решенията.", "/services/management-reporting"],
-  ["Бюджети и прогнози", "Планиране, основано на бизнес драйвери и сценарии.", "/services/budgets-and-forecasting"],
-  ["Себестойност и рентабилност", "Модели за разбиране на икономиката на бизнеса.", "/services/cost-and-profitability"],
-  ["Финансови AI агенти", "AI агенти за изпълнение на повтаряеми финансови процеси.", "/services/financial-ai-agents"],
+  ["Management Reporting", "Clear management information built around the decisions that need to be made.", "/services/management-reporting"],
+  ["Planning & Forecasting", "Budgets, forecasts and scenarios connected to the drivers of the business.", "/services/budgets-and-forecasting"],
+  ["Cost & Margin Management", "Transparent cost models and margin analysis across the economics of the business.", "/services/cost-and-profitability"],
+  ["Finance AI Agents", "AI agents for recurring financial analysis, reporting and operational workflows.", "/services/financial-ai-agents"],
 ];
 
-function SectionHeader({ label, title, intro }: { label: string; title: string; intro?: string }) {
+function SectionHeader({ label, title, intro }: { label: string; title: React.ReactNode; intro?: React.ReactNode }) {
   return <header className={styles.sectionHeader}><span>{label}</span><h2>{title}</h2>{intro && <p>{intro}</p>}</header>;
 }
 
@@ -58,22 +58,22 @@ export default function FinancialDataPage() {
       <Navbar active="services" />
       <section className={styles.hero} aria-labelledby="financial-data-title"><div className={`site-container ${styles.heroInner}`}>
         <div className={styles.heroCopy}>
-          <nav className={styles.breadcrumb} aria-label="Навигационна пътека"><Link href="/">Начало</Link><span>/</span><span>Финанси</span><span>/</span><span aria-current="page">Финансови данни</span></nav>
-          <span className={styles.category}>Финанси</span>
-          <h1 id="financial-data-title">Финансови данни</h1>
-          <p className={styles.lead}>Система за надеждни финансови данни.</p>
-          <p className={styles.support}>Изграждаме единна основа от финансови данни, която свързва ERP системите, управленската отчетност, бюджетите и анализа в последователна информационна среда.</p>
-          <Link className={styles.primaryButton} href="/contact?topic=financial-data">Обсъдете финансовите си данни <span aria-hidden="true">→</span></Link>
+          <nav className={styles.breadcrumb} aria-label="Breadcrumb"><Link href="/">Home</Link><span>/</span><span>Finance</span><span>/</span><span aria-current="page">Financial Data</span></nav>
+          <span className={styles.category}>FINANCIAL DATA</span>
+          <h1 id="financial-data-title">More data doesn&apos;t mean better decisions.<br />Trusted data does.</h1>
+          <p className={styles.lead}>If the numbers don&apos;t reconcile, the decision shouldn&apos;t start yet.</p>
+          <p className={styles.support}>Build one reliable financial data foundation across ERP, reporting, planning and analytics — so every decision starts from the same version of the truth.</p>
+          <Link className={styles.primaryButton} href="/contact?topic=financial-data">Discuss Your Financial Data <span aria-hidden="true">→</span></Link>
         </div>
         <FinancialDataDashboard />
       </div></section>
 
-      <section className={styles.section} aria-labelledby="capabilities-title"><div className="site-container"><SectionHeader label="Обхват" title="Какво включва" intro="Изграждаме свързана финансова информационна среда — от източниците и структурите до качеството, автоматизацията и използването на данните." /><div className={styles.capabilityGrid}>{capabilities.map(([title, copy], index) => <article className={styles.capability} key={title}><span>0{index + 1}</span><h3>{title}</h3><p>{copy}</p></article>)}</div></div></section>
-      <section className={`${styles.section} ${styles.tinted}`} aria-labelledby="process-title"><div className="site-container"><SectionHeader label="Метод" title="Как работим" intro="Финансовата основа се изгражда поетапно — от картата на източниците до устойчиво управление на качеството и проследимостта." /><ol className={styles.timeline}>{process.map(([number, title, copy]) => <li key={number}><span>{number}</span><h3>{title}</h3><p>{copy}</p></li>)}</ol></div></section>
-      <section className={styles.section} aria-labelledby="outcomes-title"><div className="site-container"><SectionHeader label="Резултати" title="Какво получавате" intro="Последователна и проверима информационна основа за финансовите процеси в цялата компания." /><div className={styles.outcomeGrid}>{outcomes.map(([title, copy]) => <article key={title}><span aria-hidden="true">✓</span><div><h3>{title}</h3><p>{copy}</p></div></article>)}</div><aside className={styles.caseExample} aria-labelledby="scenario-title"><div className={styles.caseExampleIntro}><span>Примерен сценарий</span><h3 id="scenario-title">Производствена компания</h3></div><dl><div><dt>Контекст</dt><dd>Финансовата информация се извлича от множество системи и Excel файлове, без единен модел и с ограничена проследимост.</dd></div><div><dt>Подход</dt><dd>Изградена е единна архитектура на финансовите данни, интегрираща ERP, управленска отчетност и аналитични модели.</dd></div><div><dt>Резултат</dt><dd>Надеждна основа за автоматизация, анализ и последователни управленски решения.</dd></div></dl></aside></div></section>
-      <section className={`${styles.section} ${styles.tinted}`} aria-labelledby="applications-title"><div className="site-container"><SectionHeader label="Приложения" title="Къде е приложима системата" intro="Подходът е приложим там, където финансовата информация трябва да остане надеждна през различни системи, дружества и процеси." /><div className={styles.useCaseGrid}>{useCases.map(([title, copy]) => <article key={title}><h3>{title}</h3><p>{copy}</p></article>)}</div></div></section>
-      <section className={styles.section} aria-labelledby="related-title"><div className="site-container"><SectionHeader label="Следваща стъпка" title="Свързани услуги" /><div className={styles.relatedGrid}>{related.map(([title, copy, href]) => <Link href={href} key={title}><span><strong>{title}</strong><small>{copy}</small></span><b aria-hidden="true">↗</b></Link>)}</div></div></section>
-      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>Оценка на финансовите данни</span><h2 id="cta-title">Една надеждна основа за финансовата информация в цялата компания.</h2><p>Фокусът е върху връзката между системите, последователността на данните и контрола, който ги прави използваеми за отчетност, планиране и автоматизация.</p><Link className={styles.ctaButton} href="/contact?topic=financial-data">Обсъдете финансовите си данни <span aria-hidden="true">→</span></Link></div></div></section>
+      <section className={styles.section} aria-labelledby="capabilities-title"><div className="site-container"><SectionHeader label="WHAT IT INCLUDES" title="Reliable decisions begin with reliable data." /><div className={styles.capabilityGrid}>{capabilities.map(([title, copy], index) => <article className={styles.capability} key={title}><span>0{index + 1}</span><h3>{title}</h3><p>{copy}</p></article>)}</div></div></section>
+      <section className={`${styles.section} ${styles.tinted}`} aria-labelledby="process-title"><div className="site-container"><SectionHeader label="HOW WE WORK" title={<>Trace the data.<br />Define the structure.<br />Control the truth.</>} /><ol className={styles.timeline}>{process.map(([number, title, copy]) => <li key={number}><span>{number}</span><h3>{title}</h3><p>{copy}</p></li>)}</ol></div></section>
+      <section className={styles.section} aria-labelledby="outcomes-title"><div className="site-container"><SectionHeader label="WHAT YOU GET" title={<>One financial truth.<br />Across every decision.</>} /><div className={styles.outcomeGrid}>{outcomes.map(([title, copy]) => <article key={title}><span aria-hidden="true">✓</span><div><h3>{title}</h3><p>{copy}</p></div></article>)}</div><aside className={styles.caseExample} aria-labelledby="scenario-title"><div className={styles.caseExampleIntro}><span>ILLUSTRATIVE SCENARIO</span><h3 id="scenario-title">When every report starts with reconciliation, the data architecture is the problem.</h3></div><dl><div><dt>SCENARIO</dt><dd>A manufacturing company pulls financial information from ERP, spreadsheets and operational systems with inconsistent structures and limited traceability.</dd></div><div><dt>ENTIMEMA APPROACH</dt><dd>We connect the sources, define one financial data model and establish validation rules across reporting, planning and analytics.</dd></div><div><dt>RESULT</dt><dd>Management works from a consistent, traceable information foundation ready for reporting, automation and AI.</dd></div></dl></aside></div></section>
+      <section className={`${styles.section} ${styles.tinted}`} aria-labelledby="applications-title"><div className="site-container"><SectionHeader label="WHERE IT APPLIES" title="When does financial data become a management problem?" intro={<>If every report needs a different reconciliation, you don&apos;t have a reporting problem.<br />You have a data problem.</>} /><div className={styles.useCaseGrid}>{useCases.map(([title, copy]) => <article key={title}><h3>{title}</h3><p>{copy}</p></article>)}</div></div></section>
+      <section className={styles.section} aria-labelledby="related-title"><div className="site-container"><SectionHeader label="NEXT STEP" title="Related services" /><div className={styles.relatedGrid}>{related.map(([title, copy, href]) => <Link href={href} key={title}><span><strong>{title}</strong><small>{copy}</small></span><b aria-hidden="true">↗</b></Link>)}</div></div></section>
+      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>FINANCIAL DATA</span><h2 id="cta-title">Your financial system is only as reliable as the data underneath it.</h2><p>Build one trusted data foundation for reporting, planning, analysis and AI.</p><Link className={styles.ctaButton} href="/contact?topic=financial-data">Discuss Your Financial Data <span aria-hidden="true">→</span></Link></div></div></section>
     </main>
   );
 }
