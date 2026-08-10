@@ -6622,3 +6622,195 @@ main section div[class*="ctaBlock"] > p {
   main section div[class*="ctaBlock"] > h2 { max-width: 17ch; font-size: clamp(2.25rem, 10vw, 3rem); }
   main section div[class*="ctaBlock"] > p { max-width: 36ch; font-size: 1rem; }
 }
+
+/* =========================================================
+   SPRINT 6C — ANALYTICAL SYSTEM VISUAL LANGUAGE
+   ========================================================= */
+:root {
+  --system-surface: #f8faff;
+  --system-panel: #fff;
+  --system-edge: rgba(16, 43, 112, .11);
+  --system-edge-strong: rgba(16, 43, 112, .18);
+  --system-ink: #102b70;
+  --system-muted: #65779a;
+  --system-radius: 10px;
+  --system-radius-panel: 7px;
+  --system-shadow: 0 18px 48px rgba(4, 19, 63, .07);
+}
+
+/* Every route dashboard inherits this hierarchy without page-specific markup. */
+main [aria-label*="dashboard" i] {
+  border: 1px solid var(--system-edge-strong);
+  border-radius: var(--system-radius);
+  background: var(--system-surface);
+  box-shadow: var(--system-shadow);
+  color: var(--system-ink);
+  font-variant-numeric: tabular-nums lining-nums;
+}
+main [aria-label*="dashboard" i] [class*="dashboardTop"] {
+  align-items: center;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--system-edge);
+}
+main [aria-label*="dashboard" i] [class*="dashboardEyebrow"] {
+  color: var(--system-muted);
+  font-size: 10px;
+  letter-spacing: .1em;
+}
+main [aria-label*="dashboard" i] [class*="dashboardTop"] h2 {
+  margin-top: 6px;
+  line-height: 1.15;
+  letter-spacing: -.025em;
+}
+main [aria-label*="dashboard" i] [class*="Badge"],
+main [aria-label*="dashboard" i] [class*="badge"] {
+  min-height: 26px;
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 8px;
+  border: 1px solid var(--system-edge-strong);
+  border-radius: 4px;
+  background: var(--system-panel);
+  color: var(--system-muted);
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: .065em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+main [aria-label*="dashboard" i] [class*="metrics"] {
+  gap: 8px;
+  margin-block: 16px 10px;
+}
+main [aria-label*="dashboard" i] [class*="metrics"] > [class*="metric"] {
+  min-height: 78px;
+  padding: 12px;
+  border: 1px solid var(--system-edge);
+  border-radius: var(--system-radius-panel);
+  background: var(--system-panel);
+  box-shadow: none;
+}
+main [aria-label*="dashboard" i] [class*="metrics"] > [class*="metric"] > span {
+  color: var(--system-muted);
+  font-size: 10px;
+  line-height: 1.3;
+  letter-spacing: .035em;
+  text-transform: uppercase;
+}
+main [aria-label*="dashboard" i] [class*="metrics"] > [class*="metric"] > strong {
+  margin-block: 7px 4px;
+  color: var(--system-ink);
+  font-size: clamp(17px, 1.35vw, 21px);
+  font-weight: 680;
+  line-height: 1;
+  letter-spacing: -.025em;
+}
+main [aria-label*="dashboard" i] [class*="metrics"] > [class*="metric"] > small {
+  color: var(--system-muted);
+  font-size: 9px;
+  line-height: 1.35;
+}
+main [aria-label*="dashboard" i] :is(
+  [class*="chartPanel"],
+  [class*="cashPanel"],
+  [class*="matrixPanel"],
+  [class*="funnelPanel"],
+  [class*="strategyPanel"]
+) {
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid var(--system-edge);
+  border-radius: var(--system-radius-panel);
+  background: var(--system-panel);
+  box-shadow: none;
+}
+main [aria-label*="dashboard" i] [class*="chartHeading"] {
+  min-height: 35px;
+  align-items: flex-start;
+  padding-bottom: 9px;
+  border-bottom: 1px solid rgba(16, 43, 112, .07);
+}
+main [aria-label*="dashboard" i] [class*="chartHeading"] span {
+  color: var(--system-muted);
+  font-size: 9px;
+  line-height: 1.25;
+  letter-spacing: .045em;
+  text-transform: uppercase;
+}
+main [aria-label*="dashboard" i] [class*="chartHeading"] h3 {
+  margin-top: 4px;
+  color: var(--system-ink);
+  font-size: 13px;
+  line-height: 1.25;
+  letter-spacing: -.01em;
+}
+main [aria-label*="dashboard" i] svg [class*="gridLines"] { opacity: .72; }
+main [aria-label*="dashboard" i] :is(
+  [class*="axis"],
+  [class*="legend"],
+  [class*="miniLegend"],
+  [class*="matrix"],
+  [class*="funnel"],
+  [class*="scoreBands"],
+  [class*="dashboardFooter"]
+) { font-size: 8px; }
+main [aria-label*="dashboard" i] :is(
+  [class*="matrix"],
+  [class*="funnel"],
+  [class*="scoreBands"],
+  [class*="dashboardFooter"]
+) :is(span, small, strong, b, i) { font-size: 8px; }
+main [aria-label*="dashboard" i] :is([class*="Row"], [class*="row"]) {
+  min-height: 30px;
+  align-items: center;
+}
+main [aria-label*="dashboard" i] :is([class*="Row"], [class*="row"]) > :last-child {
+  text-align: right;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+main [aria-label*="dashboard" i] [class*="dashboardFooter"] {
+  gap: 1px;
+  margin-top: 10px;
+  border: 1px solid var(--system-edge);
+  border-radius: 5px;
+  overflow: hidden;
+  background: var(--system-edge);
+}
+main [aria-label*="dashboard" i] [class*="dashboardFooter"] > span {
+  min-height: 30px;
+  display: grid;
+  place-items: center;
+  padding: 6px;
+  border: 0;
+  background: var(--system-panel);
+  color: var(--system-muted);
+  font-size: 8px;
+  font-weight: 650;
+  line-height: 1.25;
+  letter-spacing: .045em;
+  text-align: center;
+  text-transform: uppercase;
+}
+main [aria-label*="dashboard" i] :is(button, a):focus-visible {
+  outline: 2px solid var(--brand-orange-500);
+  outline-offset: 2px;
+}
+
+@media (max-width: 760px) {
+  main [aria-label*="dashboard" i] {
+    border-radius: 8px;
+    box-shadow: 0 12px 32px rgba(4, 19, 63, .06);
+  }
+  main [aria-label*="dashboard" i] [class*="dashboardTop"] { align-items: flex-start; padding-bottom: 13px; }
+  main [aria-label*="dashboard" i] [class*="metrics"] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  main [aria-label*="dashboard" i] [class*="metrics"] > [class*="metric"] { min-height: 74px; padding: 11px 10px; }
+  main [aria-label*="dashboard" i] :is(
+    [class*="chartPanel"],
+    [class*="cashPanel"],
+    [class*="matrixPanel"],
+    [class*="funnelPanel"],
+    [class*="strategyPanel"]
+  ) { padding: 12px; }
+  main [aria-label*="dashboard" i] [class*="dashboardFooter"] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
