@@ -88,6 +88,7 @@ type WhatWeDoMegaMenuProps = {
 export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMegaMenuProps) {
   const isMounted = useSyncExternalStore(subscribeToClientMount, () => true, () => false);
   const [isOpen, setIsOpen] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
   const [isPinned, setIsPinned] = useState(false);
   const [mobileCategory, setMobileCategory] = useState(0);
   const [menuTop, setMenuTop] = useState(0);
@@ -97,6 +98,7 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
   const menuRef = useRef<HTMLElement>(null);
   const openTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const exitTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const menuId = `what-we-do-${useId().replaceAll(":", "")}`;
 
   const clearCloseTimer = useCallback(() => {
@@ -113,6 +115,19 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
     }
   }, []);
 
+  const clearExitTimer = useCallback(() => {
+    if (exitTimerRef.current) {
+      clearTimeout(exitTimerRef.current);
+      exitTimerRef.current = null;
+    }
+  }, []);
+
+  const open = useCallback(() => {
+    clearExitTimer();
+    setIsClosing(false);
+    setIsOpen(true);
+  }, [clearExitTimer]);
+
   const isDesktopPointer = useCallback(
     () => !mobile && window.matchMedia("(hover: hover) and (pointer: fine)").matches,
     [mobile],
@@ -122,9 +137,13 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
     clearOpenTimer();
     clearCloseTimer();
     setIsOpen(false);
+    setIsClosing(true);
     setIsPinned(false);
     setMobileCategory(0);
-  }, [clearCloseTimer, clearOpenTimer]);
+    clearExitTimer();
+    const exitDuration = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 180;
+    exitTimerRef.current = setTimeout(() => setIsClosing(false), exitDuration);
+  }, [clearCloseTimer, clearExitTimer, clearOpenTimer]);
 
   const updateMenuPosition = useCallback(() => {
     const header = triggerRef.current?.closest("header");
@@ -196,8 +215,9 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
     () => () => {
       clearOpenTimer();
       clearCloseTimer();
+      clearExitTimer();
     },
-    [clearCloseTimer, clearOpenTimer],
+    [clearCloseTimer, clearExitTimer, clearOpenTimer],
   );
 
   const handlePointerEnter = () => {
@@ -205,7 +225,7 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
     clearCloseTimer();
     if (!isOpen) {
       clearOpenTimer();
-      openTimerRef.current = setTimeout(() => setIsOpen(true), 150);
+      openTimerRef.current = setTimeout(open, 150);
     }
   };
 
@@ -213,7 +233,7 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
     if (!isDesktopPointer() || isPinned) return;
     clearOpenTimer();
     clearCloseTimer();
-    closeTimerRef.current = setTimeout(() => setIsOpen(false), 150);
+    closeTimerRef.current = setTimeout(close, 150);
   };
 
   const handleTriggerClick = () => {
@@ -224,7 +244,7 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
       return;
     }
     updateMenuPosition();
-    setIsOpen(true);
+    open();
     setIsPinned(true);
   };
 
@@ -236,7 +256,7 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
     document.getElementById(`${menuId}-tab-${nextIndex}`)?.focus();
   };
 
-  const portalContent = isMounted && isOpen ? createPortal(
+  const portalContent = isMounted && (isOpen || isClosing) ? createPortal(
     <>
       <button
         aria-label="Close menu"
@@ -248,7 +268,7 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
       />
       <nav
         aria-label="Solutions"
-        className={styles.menu}
+        className={`${styles.menu} ${isClosing ? styles.menuClosing : ""}`}
         id={menuId}
         onPointerEnter={handlePointerEnter}
         onPointerLeave={handlePointerLeave}

@@ -70,6 +70,11 @@
   animation: reveal 240ms var(--ease-standard) both;
 }
 
+.menuClosing {
+  pointer-events: none;
+  animation: conceal 180ms ease-out both;
+}
+
 .inner {
   padding-top: clamp(28px, 2.8vw, 40px);
   padding-bottom: clamp(10px, calc(3.2vw - 24px), 22px);
@@ -136,7 +141,7 @@
   justify-content: flex-start;
   color: inherit;
   cursor: pointer;
-  transition: color 160ms ease-out, transform 220ms var(--ease-standard);
+  transition: color 160ms ease-out, transform 160ms var(--ease-standard);
 }
 
 .itemTitle {
@@ -187,7 +192,7 @@
     margin: -7px -10px;
     padding: 7px 10px;
     border-radius: 4px;
-    transition: background-color 180ms ease-out, color 160ms ease-out, transform 220ms var(--ease-standard);
+    transition: background-color 160ms ease-out, color 160ms ease-out, transform 160ms var(--ease-standard);
   }
 
   .item:hover {
@@ -204,6 +209,17 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes conceal {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-6px);
   }
 }
 
