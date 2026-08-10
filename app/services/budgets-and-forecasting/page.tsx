@@ -6,43 +6,43 @@ import PlanningDashboard from "./PlanningDashboard";
 import styles from "./budgets-and-forecasting.module.css";
 
 export const metadata: Metadata = {
-  title: "Бюджети и прогнози | Entimema",
-  description: "Система за планиране, която свързва финансовите цели, оперативните допускания и паричните потоци.",
+  title: "Planning & Forecasting | Entimema",
+  description: "Build driver-based budgets, rolling forecasts and scenarios that connect operational assumptions, financial outcomes and cash.",
 };
 
 const capabilities = [
-  ["Бюджетна архитектура", "Структура, отговорности, календар и правила за целия бюджетен процес."],
-  ["Модели, основани на драйвери", "Планиране чрез конкретните фактори, които определят приходите, разходите и маржовете."],
-  ["Rolling Forecast", "Регулярно актуализиране на очакванията спрямо реалното развитие на бизнеса."],
-  ["Сценарно планиране", "Моделиране на различни бизнес сценарии и тяхното отражение върху резултатите."],
-  ["Парични потоци", "Свързване на оперативния план с ликвидността и бъдещите финансови потребности."],
-  ["Автоматизация и AI", "Автоматизирано събиране на входни данни, актуализация на прогнозите и анализ на отклоненията."],
+  ["BUDGET ARCHITECTURE", "A clear planning structure, ownership, calendar and rules for the entire budget cycle."],
+  ["DRIVER-BASED MODELS", "Forecast revenue, costs and margins through the business drivers that actually move them."],
+  ["ROLLING FORECASTS", "Update expectations as actual performance changes — not once a year."],
+  ["SCENARIO PLANNING", "Test how different assumptions change performance, liquidity and decision options."],
+  ["CASH FLOW PLANNING", "Connect operational plans to future cash requirements and funding needs."],
+  ["PLANNING AUTOMATION & AI", "Automate data collection, forecast updates and variance analysis where it adds real value."],
 ];
 const process = [
-  ["01", "Диагностика", "Оценяваме настоящия бюджетен процес, източниците на данни, допусканията и отговорностите."],
-  ["02", "Моделиране", "Определяме ключовите драйвери, структурата на модела и връзките между оперативните и финансовите показатели."],
-  ["03", "Внедряване", "Изграждаме бюджетите, прогнозите, сценариите и правилата за актуализация."],
-  ["04", "Управление", "Въвеждаме ритъм за анализ на отклоненията и регулярна актуализация на прогнозите."],
+  ["01", "DIAGNOSE", "We assess the current planning process, data sources, assumptions and ownership."],
+  ["02", "MODEL", "We define the key business drivers and connect operational assumptions to financial outcomes."],
+  ["03", "IMPLEMENT", "We build budgets, forecasts, scenarios and update rules into one working planning system."],
+  ["04", "RUN", "We establish a recurring rhythm for variance analysis, forecast updates and management decisions."],
 ];
 const outcomes = [
-  ["Свързан бюджетен процес", "Финансовите и оперативните планове работят в една последователна структура."],
-  ["Проследими допускания", "Ясно е кои фактори стоят зад прогнозата и как промените им влияят върху резултатите."],
-  ["Актуална прогноза", "Очакванията се обновяват спрямо реалното развитие на бизнеса."],
-  ["Видимост върху ликвидността", "Планът показва бъдещите парични нужди и чувствителността им към различни сценарии."],
+  ["ONE CONNECTED PLANNING PROCESS", "Financial and operational plans work within one consistent structure."],
+  ["TRACEABLE ASSUMPTIONS", "See which drivers sit behind the forecast and how changes affect the outcome."],
+  ["A CURRENT VIEW OF THE FUTURE", "Update expectations as the business changes."],
+  ["LIQUIDITY VISIBILITY", "See future cash requirements and how sensitive they are to different scenarios."],
 ];
 const useCases = [
-  ["Бързо растящ бизнес", "За компании, при които темпът на развитие изпреварва съществуващия процес на планиране."],
-  ["Оперативно сложни компании", "За бизнеси с множество продукти, звена, пазари и взаимосвързани финансови драйвери."],
-  ["Компании с висока несигурност", "За организации, при които цените, обемите или пазарните условия изискват сценарно планиране."],
-  ["Холдингови структури", "За групи компании, които консолидират планове, допускания и парични потоци."],
+  ["GROWTH OUTRUNS THE PLAN", "When growth moves faster than the planning process."],
+  ["COMPLEXITY OUTGROWS STATIC BUDGETS", "When products, units and markets make the model too complex for static budgets."],
+  ["ASSUMPTIONS CHANGE TOO SLOWLY", "When prices, volumes or market conditions change faster than assumptions are updated."],
+  ["THE GROUP NEEDS ONE PLANNING LOGIC", "When group companies need one planning logic across multiple entities."],
 ];
 const related = [
-  ["CFO функция", "Финансова архитектура, роли и управленски процеси.", "/services/cfo-function"],
-  ["Управленска отчетност", "Управленска информация за ежедневни решения.", "/services/management-reporting"],
-  ["Финансови данни", "Единна основа за отчетност, анализ и автоматизация.", "/services/financial-data"],
+  ["CFO Advisory", "The financial structure, management information and decision processes behind a CFO function.", "/services/cfo-function"],
+  ["Management Reporting", "Clear management information built around the decisions that need to be made.", "/services/management-reporting"],
+  ["Financial Data", "One reliable foundation for reporting, analysis and financial control.", "/services/financial-data"],
 ];
 
-function SectionHeader({ label, title, intro }: { label: string; title: string; intro?: string }) {
+function SectionHeader({ label, title, intro }: { label: string; title: React.ReactNode; intro?: string }) {
   return <header className={styles.sectionHeader}><span>{label}</span><h2>{title}</h2>{intro && <p>{intro}</p>}</header>;
 }
 
@@ -53,50 +53,50 @@ export default function BudgetsAndForecastingPage() {
       <Navbar active="services" />
       <section className={styles.hero} aria-labelledby="budgets-title"><div className={`site-container ${styles.heroInner}`}>
         <div className={styles.heroCopy}>
-          <nav className={styles.breadcrumb} aria-label="Навигационна пътека"><Link href="/">Начало</Link><span>/</span><span>Финанси</span><span>/</span><span aria-current="page">Бюджети и прогнози</span></nav>
-          <span className={styles.category}>Финанси</span>
-          <h1 id="budgets-title">Бюджети и прогнози</h1>
-          <p className={styles.lead}>Система за планиране, свързана с реалните двигатели на бизнеса.</p>
-          <p className={styles.support}>Изграждаме бюджетни и прогнозни модели, които свързват финансовите цели, оперативните допускания и паричните потоци в последователен управленски процес.</p>
-          <Link className={styles.primaryButton} href="/contact?topic=budgets-and-forecasting">Обсъдете системата си за планиране <span aria-hidden="true">→</span></Link>
+          <nav className={styles.breadcrumb} aria-label="Breadcrumb"><Link href="/">Home</Link><span>/</span><span>Finance</span><span>/</span><span aria-current="page">Planning &amp; Forecasting</span></nav>
+          <span className={styles.category}>PLANNING &amp; FORECASTING</span>
+          <h1 id="budgets-title">A budget is a snapshot.</h1>
+          <p className={styles.lead}>Your business isn&apos;t.</p>
+          <p className={styles.support}>Build a planning system that moves with the business — connecting operational drivers, financial outcomes and cash before reality makes the plan obsolete.</p>
+          <Link className={styles.primaryButton} href="/contact?topic=budgets-and-forecasting">Discuss Your Planning System <span aria-hidden="true">→</span></Link>
         </div>
         <PlanningDashboard />
       </div></section>
 
       <section className={styles.section} aria-labelledby="capabilities-title"><div className="site-container">
-        <SectionHeader label="Обхват" title="Какво включва" intro="Финансовото планиране свързва бизнес драйверите, допусканията и отговорностите в един работещ процес." />
+        <SectionHeader label="WHAT IT INCLUDES" title="Planning works when the assumptions are visible." />
         <div className={styles.capabilityGrid}>{capabilities.map(([title, copy], index) => <article className={styles.capability} key={title}><span>0{index + 1}</span><h3>{title}</h3><p>{copy}</p></article>)}</div>
       </div></section>
 
       <section className={`${styles.section} ${styles.tinted}`} aria-labelledby="process-title"><div className="site-container">
-        <SectionHeader label="Метод" title="Как работим" intro="Системата се изгражда поетапно — от оценка на настоящия процес до редовно управление на прогнозата." />
+        <SectionHeader label="HOW WE WORK" title={<>Start with the drivers.<br />Build the forecast around them.</>} />
         <ol className={styles.timeline}>{process.map(([number, title, copy]) => <li key={number}><span>{number}</span><h3>{title}</h3><p>{copy}</p></li>)}</ol>
       </div></section>
 
       <section className={styles.section} aria-labelledby="outcomes-title"><div className="site-container">
-        <SectionHeader label="Резултати" title="Какво получавате" intro="Резултатът е работеща система за планиране с проследими допускания, актуални очаквания и видимост върху ликвидността." />
+        <SectionHeader label="WHAT YOU GET" title={<>A forecast you can explain.<br />A plan you can still use.</>} />
         <div className={styles.outcomeGrid}>{outcomes.map(([title, copy]) => <article key={title}><span aria-hidden="true">✓</span><div><h3>{title}</h3><p>{copy}</p></div></article>)}</div>
         <aside className={styles.caseExample} aria-labelledby="case-example-title">
-          <div className={styles.caseExampleIntro}><span>Примерен сценарий</span><h3 id="case-example-title">Производствена компания</h3></div>
+          <div className={styles.caseExampleIntro}><span>ILLUSTRATIVE SCENARIO</span><h3 id="case-example-title">When the plan is built on history, the future stays hidden.</h3></div>
           <dl>
-            <div><dt>Контекст</dt><dd>Годишен бюджет, изготвян основно чрез исторически стойности, ограничена връзка с производствените драйвери и липса на регулярна актуализация.</dd></div>
-            <div><dt>Подход</dt><dd>Модел, основан на драйвери, свързващ обеми, капацитет, материали, цени, разходи и парични потоци, допълнен със сценарии и Rolling Forecast.</dd></div>
-            <div><dt>Резултат</dt><dd>Актуална прогноза и проследима връзка между оперативните допускания, финансовия резултат и ликвидността.</dd></div>
+            <div><dt>SCENARIO</dt><dd>A manufacturing company builds its annual budget mainly from historical values, with limited connection to production drivers and no regular forecast refresh.</dd></div>
+            <div><dt>ENTIMEMA APPROACH</dt><dd>We build a driver-based model connecting volumes, capacity, materials, prices, costs and cash flows — supported by scenarios and rolling forecasts.</dd></div>
+            <div><dt>RESULT</dt><dd>Management gains a current view of expected performance and a traceable link between operational assumptions, financial results and liquidity.</dd></div>
           </dl>
         </aside>
       </div></section>
 
       <section className={`${styles.section} ${styles.tinted}`} aria-labelledby="applications-title"><div className="site-container">
-        <SectionHeader label="Приложения" title="Къде е приложима системата" intro="Моделът се адаптира към темпа на растеж, оперативната сложност и несигурността в бизнеса." />
+        <SectionHeader label="WHERE IT APPLIES" title="When does planning stop being useful?" intro="If the plan changes slower than the business, it stops being a management tool." />
         <div className={styles.useCaseGrid}>{useCases.map(([title, copy]) => <article key={title}><h3>{title}</h3><p>{copy}</p></article>)}</div>
       </div></section>
 
       <section className={styles.section} aria-labelledby="related-title"><div className="site-container">
-        <SectionHeader label="Следваща стъпка" title="Свързани услуги" />
+        <SectionHeader label="NEXT STEP" title="Related services" />
         <div className={styles.relatedGrid}>{related.map(([title, copy, href]) => <Link href={href} key={title}><span><strong>{title}</strong><small>{copy}</small></span><b aria-hidden="true">↗</b></Link>)}</div>
       </div></section>
 
-      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>Оценка на процеса за планиране</span><h2 id="cta-title">Система за планиране около реалните двигатели на бизнеса.</h2><p>Фокусът е върху връзката между допусканията, оперативните планове, финансовите резултати и бъдещата ликвидност.</p><Link className={styles.ctaButton} href="/contact?topic=budgets-and-forecasting">Обсъдете системата си за планиране <span aria-hidden="true">→</span></Link></div></div></section>
+      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>PLANNING &amp; FORECASTING</span><h2 id="cta-title">Your forecast should change before the business forces it to.</h2><p>Build a planning system around the drivers, scenarios and cash decisions that matter now.</p><Link className={styles.ctaButton} href="/contact?topic=budgets-and-forecasting">Discuss Your Planning System <span aria-hidden="true">→</span></Link></div></div></section>
     </main>
   );
 }
