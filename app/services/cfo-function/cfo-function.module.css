@@ -904,15 +904,15 @@
 
 @media (max-width: 760px) {
   .page {
-    --cfo-space-section-mobile: 80px;
+    --cfo-space-section-mobile: 72px;
   }
 
   .hero {
-    padding-block: 56px 88px;
+    padding-block: 48px 72px;
   }
 
   .heroInner {
-    gap: 56px;
+    gap: 44px;
   }
 
   .dashboard {
@@ -923,13 +923,17 @@
     margin-block: 28px 12px;
   }
 
+  .metricPrimary {
+    order: -1;
+  }
+
   .chartPanel,
   .cashPanel {
     padding: 18px;
   }
 
   .sectionHeader {
-    margin-bottom: 52px;
+    margin-bottom: 44px;
   }
 
   .sectionHeader > span {
@@ -968,7 +972,7 @@
   }
 
   .timeline li {
-    padding: 8px 0 48px 40px;
+    padding: 8px 0 40px 36px;
   }
 
   .timeline li:not(:last-child) {

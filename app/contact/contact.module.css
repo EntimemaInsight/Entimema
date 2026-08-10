@@ -392,12 +392,27 @@
 
   .paths {
     grid-template-columns: 1fr;
-    margin-top: 40px;
+    gap: 14px;
+    margin-top: 32px;
   }
 
   .path {
-    min-height: 258px;
-    padding: 30px 28px;
+    min-height: 184px;
+    padding: 24px;
+  }
+
+  .iconFrame {
+    width: 42px;
+    height: 42px;
+  }
+
+  .icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .emailFallback {
+    margin-top: 24px;
   }
 
   .formPanel {
@@ -432,6 +447,18 @@
     margin-top: 36px;
   }
 
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .path:hover,
+  .path:hover .arrow,
+  .path:hover .icon {
+    transform: none;
+  }
+
+  .path:active {
+    background: var(--brand-navy-800);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

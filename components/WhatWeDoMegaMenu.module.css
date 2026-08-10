@@ -251,9 +251,11 @@
 
   .inner {
     max-height: calc(100vh - 78px);
+    max-height: calc(100dvh - 78px);
     padding-top: 26px;
-    padding-bottom: 10px;
+    padding-bottom: max(18px, env(safe-area-inset-bottom));
     overflow-y: auto;
+    overscroll-behavior: contain;
   }
 
   .proposition {
