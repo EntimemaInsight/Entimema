@@ -38,10 +38,6 @@ export default function Navbar({ active = "home" }: { active?: NavKey }) {
           <Link className="primary-cta primary-cta--compact header-cta" href="/contact">
             CONTACT US <span aria-hidden="true">→</span>
           </Link>
-          <button className="language-switch" type="button" aria-label="Language selection">
-            <span>BG</span>
-            <span className="language-switch__chevron" aria-hidden="true" />
-          </button>
         </div>
       </div>
     </header>
