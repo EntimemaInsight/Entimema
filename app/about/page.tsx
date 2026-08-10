@@ -1,34 +1,36 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import AboutHeader from "@/components/AboutHeader";
 import styles from "./about.module.css";
 import AboutMotion from "./AboutMotion";
 
+export const metadata: Metadata = {
+  title: "About Entimema | Financial Architecture & Decision Science",
+  description: "Entimema connects finance, risk, data, models and technology to build clearer decision systems for real business environments.",
+};
+
 const pillars = [
-  {
-    title: "Финансово управление",
-    subtitle: "Контролинг, счетоводство и управленска отчетност",
-    text: "Практическа перспектива към планирането, измерването и финансовата дисциплина в реална бизнес среда.",
-    icon: "pie",
-  },
-  {
-    title: "Риск и модели",
-    subtitle: "Кредитен риск и количествен анализ",
-    text: "Свързване на моделите с управленския контекст, вместо изолирането им като отделна аналитична функция.",
-    icon: "chart",
-  },
-  {
-    title: "Системи и данни",
-    subtitle: "SAP, ERP и производствена среда",
-    text: "Разбиране как финансовата логика, операциите и данните трябва да работят заедно в една система.",
-    icon: "data",
-  },
-  {
-    title: "AI и автоматизация",
-    subtitle: "Интеграции и работни процеси",
-    text: "Използване на AI там, където той намалява ръчната работа и прави анализа по-последователен.",
-    icon: "ai",
-  },
+  { title: "FINANCIAL MANAGEMENT", subtitle: "Controlling, accounting and management reporting.", text: "Financial disciplines connected to the decisions and operating environment they support.", icon: "pie" },
+  { title: "RISK & MODELS", subtitle: "Credit risk and quantitative analysis.", text: "Models interpreted within the policy, operational and management context where decisions are made.", icon: "chart" },
+  { title: "SYSTEMS & DATA", subtitle: "SAP, ERP and operational environments.", text: "Financial logic, operations and data structured to work together as one practical system.", icon: "data" },
+  { title: "AI & AUTOMATION", subtitle: "Integrations, agents and controlled workflows.", text: "Technology used to reduce complexity while human judgement and accountability remain in control.", icon: "ai" },
+];
+
+const principles = [
+  ["CONTEXT BEFORE TOOLS", "Start with the business question. Choose the model, technology or method only after the problem is understood."],
+  ["ANALYSIS MUST LEAD TO ACTION", "A model creates value when it changes a real management decision."],
+  ["FINANCE AND RISK BELONG TO OPERATIONS", "They work best when connected to how the business actually runs."],
+  ["TECHNOLOGY SHOULD REDUCE COMPLEXITY", "AI and automation should make decisions clearer and execution more consistent — not simply add another layer of technology."],
+];
+
+const workSteps = [
+  "UNDERSTAND THE CONTEXT — We begin with the business environment, the decision and the people who depend on it.",
+  "STRUCTURE THE PROBLEM — We separate symptoms from causes and define the variables, constraints and relationships that matter.",
+  "BUILD THE MODEL — We translate the problem into financial logic, analytical models, decision rules or system architecture.",
+  "TEST IN THE REAL ENVIRONMENT — We test assumptions against actual data, operational constraints and real decision scenarios.",
+  "EMBED THE SOLUTION — We connect the model to reporting, workflows, systems or decision processes where it creates practical value.",
+  "IMPROVE THROUGH FEEDBACK — We observe outcomes, challenge assumptions and refine the system as new evidence emerges.",
 ];
 
 function PillarIcon({ type }: { type: string }) {
@@ -51,99 +53,93 @@ export default function AboutPage() {
             </g>
             <g className="about-network__nodes">
               {["235,95","315,275","140,330","375,440","650,355","520,155","485,220","520,610","210,665"].map((p) => {
-                const [cx,cy]=p.split(','); return <circle key={p} cx={cx} cy={cy} r="5" />;
+                const [cx, cy] = p.split(","); return <circle key={p} cx={cx} cy={cy} r="5" />;
               })}
             </g>
           </svg>
         </div>
 
         <AboutMotion>
-        <div className="about-shell">
-          <div className={`about-intro ${styles.heroReveal}`} data-about-reveal="hero">
-            <p className="about-eyebrow">ЗА ENTIMEMA</p>
-            <h1>Управлението започва там, <br/>където данните придобиват смисъл.</h1>
-            <span className="about-accent-rule" />
-            <p className="about-lead">
-              Entimema свързва финансовото управление, риска, данните и технологиите в системи, които могат да се използват всеки ден. <br/>
-              Подходът ни започва с разбиране на бизнеса и завършва с работещ начин за вземане на решения.
-            </p>
+          <div className="about-shell">
+            <div className={`about-intro ${styles.heroReveal}`} data-about-reveal="hero">
+              <p className="about-eyebrow">ABOUT ENTIMEMA</p>
+              <h1>Better decisions need more than data.<br />They need structure.</h1>
+              <span className="about-accent-rule" />
+              <p className="about-lead">Entimema connects finance, risk, data and technology into decision systems built for real business environments.</p>
+            </div>
+
+            <section className={styles.narrativeSection} aria-labelledby="about-why-title" data-about-reveal="section">
+              <p className={styles.narrativeLabel}>WHY ENTIMEMA</p>
+              <div className={styles.narrativeGrid}>
+                <h2 id="about-why-title">More information does not create more control.<br />Better structure does.</h2>
+                <div className={styles.narrativeCopy}>
+                  <p>Most organisations already have data, models and systems. The problem is that they often operate with different definitions, different logic and different decision paths.</p>
+                  <p>Entimema connects them into one practical architecture — from evidence to action.</p>
+                </div>
+              </div>
+            </section>
+
+            <section className={styles.narrativeSection} aria-labelledby="about-thinking-title" data-about-reveal="section">
+              <p className={styles.narrativeLabel}>WAY OF THINKING</p>
+              <div className={styles.narrativeGrid}>
+                <h2 id="about-thinking-title">A model matters only when it changes the decision.</h2>
+                <ol className={styles.principles}>
+                  {principles.map(([title, copy]) => <li key={title}><strong>{title}</strong><span>{copy}</span></li>)}
+                </ol>
+              </div>
+            </section>
+
+            <section className={styles.narrativeSection} aria-labelledby="about-work-title" data-about-reveal="section">
+              <p className={styles.narrativeLabel}>HOW WE WORK</p>
+              <div className={styles.narrativeGrid}>
+                <h2 id="about-work-title">From the real problem to a system that works.</h2>
+                <ol className={styles.workSequence}>
+                  {workSteps.map((step, index) => <li key={step}><span>{String(index + 1).padStart(2, "0")}</span><strong>{step}</strong></li>)}
+                </ol>
+              </div>
+            </section>
+
+            <article className={`founder-card ${styles.experienceReveal}`} data-about-reveal="experience">
+              <div className="founder-card__portrait">
+                <Image src="/aleksandar-about.png" alt="Aleksandar Dimitrov, Founder of Entimema" fill priority sizes="(max-width: 900px) 100vw, 34vw" />
+              </div>
+              <div className="founder-card__content">
+                <div className="founder-card__bio">
+                  <p className="founder-card__label">FOUNDER</p>
+                  <h2>Built from practice, not theory alone.</h2>
+                  <p>Entimema is shaped by experience across financial management, controlling, accounting, SAP and ERP environments, credit risk, quantitative analysis and automation.</p>
+                  <p>That perspective matters because models do not operate in isolation. They have to work inside real reporting cycles, operational constraints, systems and management decisions.</p>
+                  <p><strong>Aleksandar Dimitrov</strong><br />Founder, Entimema</p>
+                  <p className={styles.personalStatement}>“The best model is not the most complex one. It is the one an organisation can understand, use and improve.”</p>
+                </div>
+                <div className="founder-pillars">
+                  {pillars.map((pillar) => (
+                    <section className="founder-pillar" key={pillar.title}>
+                      <div className="founder-pillar__title"><PillarIcon type={pillar.icon} /><h3>{pillar.title}</h3></div>
+                      <p className="founder-pillar__subtitle">{pillar.subtitle}</p>
+                      <p>{pillar.text}</p>
+                    </section>
+                  ))}
+                </div>
+              </div>
+            </article>
+
+            <section className={`about-labs-seed ${styles.futureSection}`} aria-labelledby="about-future-title" data-about-reveal="emphasis">
+              <span>ENTIMEMA LABS</span>
+              <div>
+                <h2 id="about-future-title">Expertise should become repeatable.</h2>
+                <p>Entimema Labs is where financial and risk expertise becomes reusable models, AI-assisted workflows and decision tools — while human judgement remains in control.</p>
+                <p>It is the bridge from individual advisory projects to repeatable systems and technology-enabled solutions.</p>
+              </div>
+            </section>
+
+            <section className={styles.conversation} aria-labelledby="about-conversation-title" data-about-reveal="section">
+              <p className={styles.narrativeLabel}>NEXT STEP</p>
+              <h2 id="about-conversation-title">Every strong model starts with the right question.</h2>
+              <p>Bring us the decision, process or system you are trying to improve. We will start by understanding the structure behind it.</p>
+              <Link href="/contact">Discuss Your Challenge <span aria-hidden="true">→</span></Link>
+            </section>
           </div>
-
-          <section className={styles.narrativeSection} aria-labelledby="about-why-title" data-about-reveal="section">
-            <p className={styles.narrativeLabel}>ЗАЩО ENTIMEMA</p>
-            <div className={styles.narrativeGrid}>
-              <h2 id="about-why-title">Повече данни не означават по-добро управление.</h2>
-              <div className={styles.narrativeCopy}>
-                <p>Организациите рядко страдат от липса на информация. По-често финансите, рискът и операциите работят с различна логика, а важните зависимости остават между системите и екипите.</p>
-                <p>Entimema съществува, за да свърже тези части в практичен управленски модел — с общи определения, измерими зависимости и ясен път от анализа до действието.</p>
-              </div>
-            </div>
-          </section>
-
-          <section className={styles.narrativeSection} aria-labelledby="about-thinking-title" data-about-reveal="section">
-            <p className={styles.narrativeLabel}>НАЧИНЪТ НА МИСЛЕНЕ</p>
-            <div className={styles.narrativeGrid}>
-              <h2 id="about-thinking-title">Решението има стойност само ако работи в реална среда.</h2>
-              <ol className={styles.principles}>
-                <li><strong>Първо разбираме контекста.</strong><span>Инструментът идва след въпроса, не преди него.</span></li>
-                <li><strong>Анализът трябва да води до действие.</strong><span>Моделът е полезен, когато променя конкретно управленско решение.</span></li>
-                <li><strong>Финансите и рискът са част от операциите.</strong><span>Те работят най-добре като обща система, а не като отделни функции.</span></li>
-                <li><strong>Технологията трябва да намалява сложността.</strong><span>AI и автоматизацията са средства за по-последователна работа, не само етикети.</span></li>
-              </ol>
-            </div>
-          </section>
-
-          <section className={styles.narrativeSection} aria-labelledby="about-work-title" data-about-reveal="section">
-            <p className={styles.narrativeLabel}>КАК РАБОТИМ</p>
-            <div className={styles.narrativeGrid}>
-              <h2 id="about-work-title">От реалния казус до работещата система.</h2>
-              <ol className={styles.workSequence}>
-                {["Разбираме контекста", "Структурираме проблема", "Изграждаме модела", "Тестваме в реална среда", "Предаваме работещо решение", "Подобряваме чрез резултатите"].map((step, index) => (
-                  <li key={step}><span>{String(index + 1).padStart(2, "0")}</span><strong>{step}</strong></li>
-                ))}
-              </ol>
-            </div>
-          </section>
-
-          <article className={`founder-card ${styles.experienceReveal}`} data-about-reveal="experience">
-            <div className="founder-card__portrait">
-              <Image src="/aleksandar-about.png" alt="Александър Димитров, основател на Entimema" fill priority sizes="(max-width: 900px) 100vw, 34vw" />
-            </div>
-            <div className="founder-card__content">
-              <div className="founder-card__bio">
-                <p className="founder-card__label">ОПИТЪТ ЗАД ПОДХОДА</p>
-                <h2>Александър Димитров</h2>
-                <p>Подходът на Entimema е формиран от работа във финансово управление, контролинг, счетоводство, SAP и ERP среди, кредитен риск, количествен анализ и автоматизация.</p>
-                <p>Тази перспектива свързва управленската отчетност с реалните операции — включително в производствена среда — и позволява моделите, данните и AI интеграциите да бъдат оценявани според това как работят на практика.</p>
-                <p className={styles.personalStatement}>Създадох Entimema, защото доброто решение не е най-сложният модел, а този, който организацията може да разбере, използва и подобрява.</p>
-              </div>
-              <div className="founder-pillars">
-                {pillars.map((pillar) => (
-                  <section className="founder-pillar" key={pillar.title}>
-                    <div className="founder-pillar__title"><PillarIcon type={pillar.icon} /><h3>{pillar.title}</h3></div>
-                    <p className="founder-pillar__subtitle">{pillar.subtitle}</p>
-                    <p>{pillar.text}</p>
-                  </section>
-                ))}
-              </div>
-            </div>
-          </article>
-
-          <section className={`about-labs-seed ${styles.futureSection}`} aria-labelledby="about-future-title" data-about-reveal="emphasis">
-            <span>КАКВО ИЗГРАЖДАМЕ</span>
-            <div>
-              <h2 id="about-future-title">Експертиза, превърната в повторяеми системи.</h2>
-              <p>Entimema Labs е развойното направление на компанията — среда, в която финансовата и рисковата експертиза се превръща в AI-подпомогнати модели, автоматизации и управленски инструменти, а човешката преценка остава водеща.</p>
-              <p>Чрез Entimema Labs изграждаме пътя от индивидуалния консултантски проект към повторяеми системи и технологични решения.</p>
-            </div>
-          </section>
-
-          <section className={styles.conversation} aria-labelledby="about-conversation-title" data-about-reveal="section">
-            <p className={styles.narrativeLabel}>СЛЕДВАЩАТА СТЪПКА</p>
-            <h2 id="about-conversation-title">Всеки устойчив модел започва с точно разбиране на конкретния казус.</h2>
-            <Link href="/contact">Обсъдете вашия казус <span aria-hidden="true">→</span></Link>
-          </section>
-        </div>
         </AboutMotion>
       </section>
     </main>
