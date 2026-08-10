@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import Link from "next/link";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
@@ -6,46 +7,46 @@ import CreditRiskDashboard from "./CreditRiskDashboard";
 import styles from "./credit-risk.module.css";
 
 export const metadata: Metadata = {
-  title: "Кредитен риск | Entimema",
-  description: "Модели, политики и автоматизирани решения за управление на кредитния риск.",
+  title: "Credit Risk | Entimema",
+  description: "Build credit risk models, decision strategies and portfolio controls that connect scoring, policy and portfolio behaviour across the credit lifecycle.",
 };
 
 const capabilities = [
-  ["Application Scoring", "Модели за оценка на нови кредитни кандидати и автоматизирани кредитни решения."],
-  ["Behavioural Scoring", "Модели за периодична преоценка на риска въз основа на поведението на клиента."],
-  ["Портфейлен мониторинг", "Наблюдение на портфейла чрез анализ на просрочията по DPD групи, vintage анализ, roll rates и ключови показатели."],
-  ["Стратегии за вземане на решения", "Политики, cut-offs, champion/challenger стратегии и автоматизирани процеси на вземане на решения."],
-  ["Симулация на портфейла", "Стрес тестване, матрици на прехода, стохастични матрици, сценарии и анализ на очакваните портфейлни резултати."],
-  ["AI Risk Automation", "AI агенти за анализ, мониторинг и автоматизация на кредитните процеси."],
+  ["APPLICATION SCORING", "Assess new applicants through models built around risk differentiation and credit policy."],
+  ["BEHAVIOURAL SCORING", "Reassess customers as behaviour, exposure and repayment patterns change."],
+  ["PORTFOLIO MONITORING", "Track DPD migration, vintage performance, roll rates and portfolio quality over time."],
+  ["DECISION STRATEGIES", "Translate models and policy into cut-offs, rules, champion/challenger strategies and automated decisions."],
+  ["PORTFOLIO SIMULATION", "Test transition matrices, stress scenarios and expected portfolio outcomes before changing policy."],
+  ["AI RISK AUTOMATION", "Use governed AI agents to analyse, monitor and support recurring credit-risk workflows."],
 ];
 
 const process = [
-  ["01", "Диагностика", "Оценяваме текущите модели, политики и процеси за кредитен риск."],
-  ["02", "Архитектура", "Проектираме скоринг модели, стратегии за вземане на решения и кредитна архитектура."],
-  ["03", "Внедряване", "Интегрираме моделите с платформата Decision Engine и портфейлния мониторинг."],
-  ["04", "Оптимизация", "Наблюдаваме представянето на моделите и адаптираме стратегиите спрямо резултатите."],
+  ["01", "DIAGNOSE", "We assess existing models, policies, data and credit decision processes."],
+  ["02", "MODEL", "We build or refine scoring models, risk segmentation and decision logic around the portfolio."],
+  ["03", "IMPLEMENT", "We connect models, policy and decision rules to operational workflows and portfolio monitoring."],
+  ["04", "OPTIMISE", "We monitor model performance, portfolio behaviour and strategy outcomes and adjust where evidence supports change."],
 ];
 
 const outcomes = [
-  ["По-добро качество на кредитните решения", "Решенията следват единна оценка на риска, политика и контрол."],
-  ["По-ниски кредитни загуби", "Рискът се разпознава и управлява по-рано през целия жизнен цикъл."],
-  ["Последователни автоматизирани решения", "Процесите на вземане на решения прилагат политиките бързо, проследимо и в мащаб."],
-  ["Пълна видимост върху кредитния портфейл", "Показателите свързват качеството при входа с поведението и портфейлния резултат."],
+  ["CONSISTENT CREDIT DECISIONS", "Apply the same risk logic, policy and control framework across comparable cases."],
+  ["EARLIER RISK VISIBILITY", "Detect deterioration through application quality, behavioural signals and portfolio movement."],
+  ["TRACEABLE AUTOMATION", "Automate decisions through explicit rules, models and approval logic."],
+  ["PORTFOLIO CONTROL", "Connect origination quality, customer behaviour and portfolio outcomes in one monitoring framework."],
 ];
 
 const useCases = [
-  ["Банки", "За банки, които изграждат и развиват модели за кредитен риск, автоматизирани кредитни решения и портфейлен мониторинг."],
-  ["Лизингови компании", "За финансови институции, които оценяват и управляват кредитния риск по целия жизнен цикъл на финансирането."],
-  ["Дружества за потребителско кредитиране", "За организации, които предоставят небанково потребителско кредитиране и развиват скоринг модели, кредитни политики и управление на кредитния портфейл."],
+  ["BANKS", "Where multiple products, policies and regulatory expectations require consistent credit-risk decisions."],
+  ["LEASING COMPANIES", "Where risk must be assessed and monitored across the full financing lifecycle."],
+  ["CONSUMER LENDERS", "Where high decision volumes require robust scoring, policy automation and portfolio monitoring."],
 ];
 
 const related = [
-  ["Кредитен риск", "Модели, политики и автоматизирани решения за управление на кредитния риск.", "/services/credit-risk"],
-  ["AML и съответствие", "Политики, сценарии и модели за управление на AML процесите.", "/services/aml-compliance"],
-  ["Автоматизация на решения", "Данни, модели и политики, превърнати в проследими автоматизирани решения.", "/services/decision-automation"],
+  ["Credit Risk", "Models, policy and portfolio controls connected across the full credit lifecycle.", "/services/credit-risk"],
+  ["AML & Compliance", "Policies, scenarios and models for controlled, traceable AML processes.", "/services/aml-compliance"],
+  ["Decision Intelligence", "Data, models and policy translated into traceable automated decisions.", "/services/decision-automation"],
 ];
 
-function SectionHeader({ label, title, intro }: { label: string; title: string; intro?: string }) {
+function SectionHeader({ label, title, intro }: { label: string; title: ReactNode; intro?: string }) {
   return <header className={styles.sectionHeader}><span>{label}</span><h2>{title}</h2>{intro && <p>{intro}</p>}</header>;
 }
 
@@ -56,50 +57,50 @@ export default function CreditRiskPage() {
       <Navbar active="services" />
       <section className={styles.hero} aria-labelledby="credit-risk-title"><div className={`site-container ${styles.heroInner}`}>
         <div className={styles.heroCopy}>
-          <nav className={styles.breadcrumb} aria-label="Навигационна пътека"><Link href="/">Начало</Link><span>/</span><span>Риск</span><span>/</span><Link href="/services/credit-risk" aria-current="page">Кредитен риск</Link></nav>
-          <span className={styles.category}>Риск</span>
-          <h1 id="credit-risk-title">Кредитен риск</h1>
-          <p className={styles.lead}>Модели, политики и автоматизирани решения за управление на кредитния риск.</p>
-          <p className={styles.support}>Изграждаме цялостни системи за кредитен риск – от application и behavioural scoring до стратегии за вземане на решения, портфейлен мониторинг и AI автоматизация.</p>
-          <Link className={styles.primaryButton} href="/contact?topic=credit-risk">Обсъдете кредитната си архитектура <span aria-hidden="true">→</span></Link>
+          <nav className={styles.breadcrumb} aria-label="Breadcrumb"><Link href="/">Home</Link><span>/</span><span>Decision Science</span><span>/</span><Link href="/services/credit-risk" aria-current="page">Credit Risk</Link></nav>
+          <span className={styles.category}>CREDIT RISK</span>
+          <h1 id="credit-risk-title">Risk is expensive when you see it too late.</h1>
+          <p className={styles.lead}>Build credit risk models, decision strategies and portfolio controls that identify risk earlier, apply policy consistently and make every credit decision traceable.</p>
+          <p className={styles.support}><strong>A score is not a decision. It is one input into one.</strong> Connect scoring, policy, cut-offs, portfolio behaviour and decision logic into one credit architecture — so risk is measured consistently from application to portfolio performance.</p>
+          <Link className={styles.primaryButton} href="/contact?topic=credit-risk">Discuss Your Credit Risk Architecture <span aria-hidden="true">→</span></Link>
         </div>
         <CreditRiskDashboard />
       </div></section>
 
       <section className={styles.section} aria-labelledby="capabilities-title"><div className="site-container">
-        <SectionHeader label="Обхват" title="Цялата система за кредитни решения" intro="Свързваме моделите, политиките, decision engine и портфейлното управление в една работеща архитектура." />
+        <SectionHeader label="WHAT IT INCLUDES" title={<>One risk architecture.<br />Across the full credit lifecycle.</>} />
         <div className={styles.capabilityGrid}>{capabilities.map(([title, copy], index) => <article className={styles.capability} key={title}><span>0{index + 1}</span><h3>{title}</h3><p>{copy}</p></article>)}</div>
       </div></section>
 
       <section className={`${styles.section} ${styles.tinted}`} aria-labelledby="process-title"><div className="site-container">
-        <SectionHeader label="Метод" title="Как изграждаме кредитната платформа" intro="Работим поетапно – от оценка на настоящата среда до внедряване и постоянно подобрение." />
+        <SectionHeader label="HOW WE WORK" title={<>Measure the risk.<br />Define the policy.<br />Control the decision.</>} />
         <ol className={styles.timeline}>{process.map(([number, title, copy]) => <li key={number}><span>{number}</span><h3>{title}</h3><p>{copy}</p></li>)}</ol>
       </div></section>
 
       <section className={styles.section} aria-labelledby="outcomes-title"><div className="site-container">
-        <SectionHeader label="Резултати" title="Контрол върху всяко кредитно решение" intro="Една платформа превръща рисковата стратегия в последователни решения и измеримо портфейлно представяне." />
+        <SectionHeader label="WHAT YOU GET" title="Every credit decision should be measurable, explainable and controlled." />
         <div className={styles.outcomeGrid}>{outcomes.map(([title, copy]) => <article key={title}><span aria-hidden="true">✓</span><div><h3>{title}</h3><p>{copy}</p></div></article>)}</div>
         <aside className={styles.caseExample} aria-labelledby="case-example-title">
-          <div className={styles.caseExampleIntro}><span>Примерен сценарий</span><h3 id="case-example-title">Дружество за микрокредитиране</h3></div>
+          <div className={styles.caseExampleIntro}><span>ILLUSTRATIVE SCENARIO</span><h3 id="case-example-title">When models, policy and portfolio monitoring are disconnected, risk becomes inconsistent.</h3></div>
           <dl>
-            <div><dt>Контекст</dt><dd>Различни скоринг модели, ръчни кредитни политики и ограничена видимост върху представянето на портфейла.</dd></div>
-            <div><dt>Подход</dt><dd>Изградена е единна архитектура за application scoring, behavioural scoring, стратегии за вземане на решения и портфейлен мониторинг, интегрирана с платформата Decision Engine.</dd></div>
-            <div><dt>Резултат</dt><dd>По-бързи кредитни решения, по-добро управление на риска и последователно развитие на кредитния портфейл.</dd></div>
+            <div><dt>SCENARIO</dt><dd>A consumer lender uses different scoring models, manual credit policies and fragmented portfolio monitoring, making it difficult to understand how origination decisions affect later portfolio performance.</dd></div>
+            <div><dt>ENTIMEMA APPROACH</dt><dd>We connect application scoring, behavioural scoring, decision strategies and portfolio monitoring into one credit-risk architecture.</dd></div>
+            <div><dt>RESULT</dt><dd>Management can trace how risk enters the portfolio, how it develops and how policy changes affect credit decisions over time.</dd></div>
           </dl>
         </aside>
       </div></section>
 
       <section className={`${styles.section} ${styles.tinted}`} aria-labelledby="applications-title"><div className="site-container">
-        <SectionHeader label="Приложения" title="Къде е приложима системата" intro="Архитектурата се адаптира към продуктовия модел, регулацията и скоростта на кредитните решения." />
+        <SectionHeader label="WHERE IT APPLIES" title="Where does credit risk architecture create the most value?" intro="If you can explain the score but not the decision, the architecture is incomplete." />
         <div className={styles.useCaseGrid}>{useCases.map(([title, copy]) => <article key={title}><h3>{title}</h3><p>{copy}</p></article>)}</div>
       </div></section>
 
       <section className={styles.section} aria-labelledby="related-title"><div className="site-container">
-        <SectionHeader label="Продуктова навигация" title="Свързани услуги" />
+        <SectionHeader label="NEXT STEP" title="Related services" />
         <div className={styles.relatedGrid}>{related.map(([title, copy, href]) => <Link href={href} key={title}><span><strong>{title}</strong><small>{copy}</small></span><b aria-hidden="true">↗</b></Link>)}</div>
       </div></section>
 
-      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>Оценка на кредитната архитектура</span><h2 id="cta-title">Изградете цялата си платформа за кредитни решения.</h2><p>Фокусът е върху връзката между моделите, политиките, автоматизираните решения и портфейлното представяне.</p><Link className={styles.ctaButton} href="/contact?topic=credit-risk">Обсъдете кредитната си архитектура <span aria-hidden="true">→</span></Link></div></div></section>
+      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>CREDIT RISK</span><h2 id="cta-title">A credit model should do more than rank risk.<br />It should shape the decision.</h2><p>Build one credit architecture around models, policy, automation and portfolio performance.</p><Link className={styles.ctaButton} href="/contact?topic=credit-risk">Discuss Your Credit Risk Architecture <span aria-hidden="true">→</span></Link></div></div></section>
     </main>
   );
 }
