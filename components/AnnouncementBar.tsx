@@ -24,7 +24,7 @@ export default function AnnouncementBar() {
   return (
     <aside className="announcement" aria-label="Current announcement">
       <div className="site-container announcement__inner">
-        <p>Better decisions start with better systems. Finance, risk and AI are changing how businesses understand performance and act on it.</p>
+        <p>Where finance, risk and AI become one decision system.</p>
         <a href="#analyses">Explore Resources <span aria-hidden="true">→</span></a>
       </div>
       <button

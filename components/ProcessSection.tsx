@@ -11,9 +11,9 @@ export default function ProcessSection() {
           subtitleClassName="process-quote"
           title={
             <>
-              Every better decision
+              Before you decide,
               <br />
-              <em>starts with understanding.</em>
+              <em>understand what moves the outcome.</em>
             </>
           }
           subtitle={<>The context changes.<br />The logic shouldn&apos;t.</>}
