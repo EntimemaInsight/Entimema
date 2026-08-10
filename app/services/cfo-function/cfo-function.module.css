@@ -960,6 +960,12 @@
     padding-inline: 0;
   }
 
+  .relatedGrid span {
+    min-width: 0;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
   .ctaSection {
     padding-block: 8px var(--cfo-space-section-mobile);
   }
