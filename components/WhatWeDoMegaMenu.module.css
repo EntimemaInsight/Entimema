@@ -67,7 +67,7 @@
   border-bottom: 1px solid var(--hairline);
   background: var(--surface);
   box-shadow: 0 8px 18px rgba(4, 19, 63, 0.035);
-  animation: reveal 180ms var(--ease-standard) both;
+  animation: reveal 240ms var(--ease-standard) both;
 }
 
 .inner {
@@ -136,7 +136,7 @@
   justify-content: flex-start;
   color: inherit;
   cursor: pointer;
-  transition: color 150ms ease-out;
+  transition: color 160ms ease-out, transform 220ms var(--ease-standard);
 }
 
 .itemTitle {
@@ -187,11 +187,12 @@
     margin: -7px -10px;
     padding: 7px 10px;
     border-radius: 4px;
-    transition: background-color 180ms ease-out, color 180ms ease-out;
+    transition: background-color 180ms ease-out, color 160ms ease-out, transform 220ms var(--ease-standard);
   }
 
   .item:hover {
     background: rgba(4, 19, 63, 0.025);
+    transform: translate3d(3px, 0, 0);
   }
 }
 

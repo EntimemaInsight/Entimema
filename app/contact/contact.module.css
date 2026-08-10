@@ -299,6 +299,7 @@
   stroke-width: 1.75;
   stroke-linecap: round;
   stroke-linejoin: round;
+  transition: transform 220ms var(--ease-standard);
 }
 
 .title {
@@ -328,8 +329,10 @@
 }
 
 .path:hover .arrow {
-  transform: translateX(3px);
+  transform: translateX(4px);
 }
+
+.path:hover .icon { transform: translateY(-1px); }
 
 .path:focus-visible {
   outline: 3px solid var(--brand-blue-200);
@@ -433,13 +436,15 @@
 @media (prefers-reduced-motion: reduce) {
   .path,
   .arrow,
+  .icon,
   .formPanel {
     transition-duration: 0.01ms;
     animation-duration: 0.01ms;
   }
 
   .path:hover,
-  .path:hover .arrow {
+  .path:hover .arrow,
+  .path:hover .icon {
     transform: none;
   }
 }
