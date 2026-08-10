@@ -1,5 +1,6 @@
 import Link from "next/link";
 import BrandLogo from "./BrandLogo";
+import WhatWeDoMegaMenu from "./WhatWeDoMegaMenu";
 
 export default function AboutHeader() {
   return (
@@ -16,6 +17,7 @@ export default function AboutHeader() {
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19 19 5M8 5h11v11" /></svg>
           </Link>
         </nav>
+        <WhatWeDoMegaMenu mobile />
       </div>
     </header>
   );

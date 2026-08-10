@@ -5844,8 +5844,12 @@ html.is-scrolled .primary-cta,
   .primary-cta--compact { padding-inline: 16px; }
 }
 @media (max-width: 900px) {
-  .header-cta { display: inline-flex; }
+  .header-cta { display: none; }
   .site-header__actions { gap: 0; }
+}
+
+@media (max-width: 900px) {
+  .about-header__nav { display: none; }
 }
 @media (max-width: 700px) {
   .case-cta { padding: 88px 0; }

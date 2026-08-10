@@ -211,6 +211,16 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
     };
   }, [close, isOpen]);
 
+  useEffect(() => {
+    if (!mobile || !isOpen) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [isOpen, mobile]);
+
   useEffect(
     () => () => {
       clearOpenTimer();
@@ -267,7 +277,7 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
         type="button"
       />
       <nav
-        aria-label="Solutions"
+        aria-label={mobile ? "Main navigation" : "Solutions"}
         className={`${styles.menu} ${isClosing ? styles.menuClosing : ""}`}
         id={menuId}
         onPointerEnter={handlePointerEnter}
@@ -276,6 +286,11 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
         style={{ top: menuTop }}
       >
         <div className={`site-container ${styles.inner}`}>
+          {mobile ? (
+            <div className={styles.mobileMenuHeader}>
+              <span>MENU</span>
+            </div>
+          ) : null}
           <p className={styles.proposition}>We build financial and decision systems for control, clarity and action.</p>
           {mobile ? (
             <div className={styles.mobileSelector} role="tablist" aria-label="Solution area">
@@ -320,6 +335,15 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
               </section>
             ))}
           </div>
+          {mobile ? (
+            <div className={styles.mobilePrimaryNav} aria-label="Primary pages">
+              <Link href="/#analyses" onClick={close}>RESOURCES</Link>
+              <Link href="/about" onClick={close}>ABOUT</Link>
+              <Link className={styles.mobileContact} href="/contact" onClick={close}>
+                CONTACT US <span aria-hidden="true">→</span>
+              </Link>
+            </div>
+          ) : null}
         </div>
       </nav>
     </>,
@@ -335,6 +359,7 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
         ref={rootRef}
       >
         <button
+          aria-label={mobile ? (isOpen ? "Close main menu" : "Open main menu") : undefined}
           aria-controls={menuId}
           aria-expanded={isOpen}
           aria-haspopup="true"
@@ -343,8 +368,11 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
           ref={triggerRef}
           type="button"
         >
-          SOLUTIONS
-          <span className={styles.chevron} aria-hidden="true" />
+          {mobile ? (
+            <span className={styles.menuIcon} aria-hidden="true"><i /><i /><i /></span>
+          ) : (
+            <>SOLUTIONS <span className={styles.chevron} aria-hidden="true" /></>
+          )}
         </button>
       </div>
       {portalContent}
