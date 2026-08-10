@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import Link from "next/link";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
@@ -6,46 +7,46 @@ import DecisionEngineDashboard from "./DecisionEngineDashboard";
 import styles from "./decision-automation.module.css";
 
 export const metadata: Metadata = {
-  title: "Автоматизация на решения | Entimema",
-  description: "Архитектура за последователни и автоматизирани бизнес решения.",
+  title: "Decision Intelligence | Entimema",
+  description: "Build decision engines that connect data, analytical models, business rules and policy into traceable operational decision flows.",
 };
 
 const capabilities = [
-  ["Decision Architecture", "Проектиране на цялостната логика от входните данни и моделите до крайното бизнес решение."],
-  ["Бизнес правила", "Дефиниране на правила, критерии, cut-offs, политики и изключения."],
-  ["Интеграция на модели", "Интегриране на скоринг модели, аналитични модели и външни източници на данни в процеса по вземане на решения."],
-  ["Процеси на вземане на решения", "Автоматизирани процеси за одобрение, отказ, допълнителен преглед, ескалация и насочване."],
-  ["Champion / Challenger", "Паралелно тестване и сравнение на различни модели, правила и стратегии за вземане на решения."],
-  ["Симулация и оптимизация", "Симулация на промени в правилата и стратегиите преди внедряването им в реална среда."],
+  ["DECISION ARCHITECTURE", "Design the full logic from input data and analytical models to the final operational decision."],
+  ["BUSINESS RULES", "Define rules, thresholds, cut-offs, policies and exception logic in one controlled framework."],
+  ["MODEL INTEGRATION", "Connect scoring, analytical models and external data sources directly into the decision flow."],
+  ["DECISION FLOWS", "Automate approve, decline, refer, escalate and routing logic through explicit operational paths."],
+  ["CHAMPION / CHALLENGER", "Test alternative models, rules and strategies in parallel before changing the live decision policy."],
+  ["SIMULATION & OPTIMISATION", "Simulate decision strategies and policy changes before deployment and refine them using observed outcomes."],
 ];
 
 const process = [
-  ["01", "Диагностика", "Анализираме текущите процеси, правила, модели и точки на вземане на решения."],
-  ["02", "Архитектура", "Проектираме единна Decision Architecture и логиката на автоматизираните решения."],
-  ["03", "Внедряване", "Интегрираме данните, моделите и бизнес правилата в автоматизирани процеси на вземане на решения."],
-  ["04", "Оптимизация", "Тестваме, наблюдаваме и подобряваме стратегиите според реалните резултати."],
+  ["01", "DIAGNOSE", "We map the existing decisions, rules, models, data sources and exception paths."],
+  ["02", "ARCHITECT", "We design one executable decision architecture with clear ownership, logic and control points."],
+  ["03", "IMPLEMENT", "We connect data, models and business rules into operational decision flows."],
+  ["04", "OPTIMISE", "We test, monitor and improve strategies using feedback from real outcomes, simulations and challenger approaches."],
 ];
 
 const outcomes = [
-  ["Последователни решения", "Еднакви правила и политики се прилагат последователно във всеки процес."],
-  ["По-бързи процеси", "Рутинните решения се изпълняват автоматично и в реално време."],
-  ["Контрол върху логиката", "Правилата, моделите и изключенията са структурирани и проследими."],
-  ["По-бърза оптимизация", "Новите стратегии могат да бъдат симулирани и тествани преди внедряване."],
+  ["CONSISTENT EXECUTION", "Apply the same decision logic and policy across comparable cases."],
+  ["REAL-TIME DECISIONS", "Execute routine decisions automatically where rules, models, policy and controls provide sufficient confidence, while exceptions remain reviewable."],
+  ["TRACEABLE LOGIC", "See which data, model, rule or exception influenced each decision."],
+  ["FASTER STRATEGY TESTING", "Simulate and compare alternative policies before changing production logic."],
 ];
 
 const useCases = [
-  ["Кредитиране", "За автоматизация на кредитни политики, скоринг модели, лимити и решения за одобрение."],
-  ["AML и съответствие", "За автоматизация на правила, рискови оценки, ескалации и процеси за допълнителен преглед."],
-  ["Оперативен риск", "За процеси, в които решенията зависят от комбинация от данни, модели, политики и бизнес правила."],
+  ["CREDIT DECISIONS", "Where scoring, policy, limits and approval logic need to work as one controlled process."],
+  ["AML & COMPLIANCE", "Where risk scores, rules, escalation and review logic need to be executed consistently."],
+  ["OPERATIONAL RISK", "Where decisions depend on a combination of data, models, policy and business rules."],
 ];
 
 const related = [
-  ["Кредитен риск", "Модели, политики и управление на портфейлния риск.", "/services/credit-risk"],
-  ["AML и съответствие", "AML контроли, мониторинг и архитектура за регулаторно съответствие.", "/services/aml-compliance"],
-  ["Рискови AI агенти", "Интелигентен слой за изпълнение и анализ над рисковите системи.", "/services/risk-ai-agents"],
+  ["Credit Risk", "Models, policy and portfolio controls connected across the full credit lifecycle.", "/services/credit-risk"],
+  ["AML & Compliance", "KYC, monitoring, investigations and evidence connected in one control architecture.", "/services/aml-compliance"],
+  ["Risk AI Agents", "Governed agents supporting risk analysis, monitoring and controlled execution.", "/services/risk-ai-agents"],
 ];
 
-function SectionHeader({ label, title, intro }: { label: string; title: string; intro?: string }) {
+function SectionHeader({ label, title, intro }: { label: string; title: ReactNode; intro?: string }) {
   return <header className={styles.sectionHeader}><span>{label}</span><h2>{title}</h2>{intro && <p>{intro}</p>}</header>;
 }
 
@@ -56,50 +57,50 @@ export default function DecisionAutomationPage() {
       <Navbar active="services" />
       <section className={styles.hero} aria-labelledby="decision-automation-title"><div className={`site-container ${styles.heroInner}`}>
         <div className={styles.heroCopy}>
-          <nav className={styles.breadcrumb} aria-label="Навигационна пътека"><Link href="/">Начало</Link><span>/</span><span>Риск</span><span>/</span><Link href="/services/decision-automation" aria-current="page">Автоматизация на решения</Link></nav>
-          <span className={styles.category}>Риск</span>
-          <h1 id="decision-automation-title">Автоматизация на решения</h1>
-          <p className={styles.lead}>Архитектура за последователни и автоматизирани бизнес решения.</p>
-          <p className={styles.support}>Изграждаме платформи Decision Engine, които обединяват данни, модели, бизнес правила и политики в единна логика за автоматизирано вземане на решения.</p>
-          <Link className={styles.primaryButton} href="/contact?topic=decision-automation">Обсъдете своята decision architecture <span aria-hidden="true">→</span></Link>
+          <nav className={styles.breadcrumb} aria-label="Breadcrumb"><Link href="/">Home</Link><span>/</span><span>Decision Science</span><span>/</span><Link href="/services/decision-automation" aria-current="page">Decision Intelligence</Link></nav>
+          <span className={styles.category}>DECISION INTELLIGENCE</span>
+          <h1 id="decision-automation-title">A model can recommend.<br />A decision engine can execute.</h1>
+          <p className={styles.lead}>Turn data, models, rules and policy into one traceable execution layer that makes consistent business decisions in real time.</p>
+          <p className={styles.support}><strong>The decision is only as good as the logic behind it.</strong> Connect data, models, business rules, exceptions and policy into one controlled flow — from input to final decision.</p>
+          <Link className={styles.primaryButton} href="/contact?topic=decision-automation">Discuss Your Decision Architecture <span aria-hidden="true">→</span></Link>
         </div>
         <DecisionEngineDashboard />
       </div></section>
 
       <section className={styles.section} aria-labelledby="capabilities-title"><div className="site-container">
-        <SectionHeader label="Обхват" title="Логиката зад всяко решение" intro="Свързваме данните, моделите, правилата и политиките в единен изпълним слой между аналитичните системи и оперативните процеси." />
+        <SectionHeader label="WHAT IT INCLUDES" title={<>One decision architecture.<br />From signal to action.</>} />
         <div className={styles.capabilityGrid}>{capabilities.map(([title, copy], index) => <article className={styles.capability} key={title}><span>0{index + 1}</span><h3>{title}</h3><p>{copy}</p></article>)}</div>
       </div></section>
 
       <section className={`${styles.section} ${styles.tinted}`} aria-labelledby="process-title"><div className="site-container">
-        <SectionHeader label="Метод" title="Как изграждаме Decision Engine" intro="Работим поетапно — от картографиране на настоящата логика до внедряване, наблюдение и оптимизация на автоматизираните решения." />
+        <SectionHeader label="HOW WE WORK" title={<>Map the logic.<br />Build the engine.<br />Control the outcome.</>} />
         <ol className={styles.timeline}>{process.map(([number, title, copy]) => <li key={number}><span>{number}</span><h3>{title}</h3><p>{copy}</p></li>)}</ol>
       </div></section>
 
       <section className={styles.section} aria-labelledby="outcomes-title"><div className="site-container">
-        <SectionHeader label="Резултати" title="Решения в реално време и под пълен контрол" intro="Единният слой за изпълнение на решения прави бизнес логиката по-бърза, последователна, измерима и проследима." />
+        <SectionHeader label="WHAT YOU GET" title={<>Faster decisions.<br />Without losing control of the logic.</>} />
         <div className={styles.outcomeGrid}>{outcomes.map(([title, copy]) => <article key={title}><span aria-hidden="true">✓</span><div><h3>{title}</h3><p>{copy}</p></div></article>)}</div>
         <aside className={styles.caseExample} aria-labelledby="case-example-title">
-          <div className={styles.caseExampleIntro}><span>Примерен сценарий</span><h3 id="case-example-title">Дружество за потребителско кредитиране</h3></div>
+          <div className={styles.caseExampleIntro}><span>ILLUSTRATIVE SCENARIO</span><h3 id="case-example-title">When decision logic lives across multiple systems, consistency disappears.</h3></div>
           <dl>
-            <div><dt>Контекст</dt><dd>Кредитните решения се основават на множество правила, проверки и източници на информация, разпределени между различни системи и процеси.</dd></div>
-            <div><dt>Подход</dt><dd>Изградена е единна decision architecture, която обединява данните, скоринг моделите, кредитните политики и бизнес правилата в автоматизиран decision flow.</dd></div>
-            <div><dt>Резултат</dt><dd>По-бързи и последователни кредитни решения, ясна проследимост на приложената логика и възможност за бързо тестване и оптимизация на стратегиите.</dd></div>
+            <div><dt>SCENARIO</dt><dd>A consumer lender uses scoring models, policy rules, manual checks and external data across separate systems, making decisions harder to trace and change.</dd></div>
+            <div><dt>ENTIMEMA APPROACH</dt><dd>We connect models, policy, business rules and data into one executable decision flow with clear review and escalation paths.</dd></div>
+            <div><dt>RESULT</dt><dd>Management can trace how each decision was made, test alternative strategies and change policy without rebuilding the full process.</dd></div>
           </dl>
         </aside>
       </div></section>
 
       <section className={`${styles.section} ${styles.tinted}`} aria-labelledby="applications-title"><div className="site-container">
-        <SectionHeader label="Приложения" title="Къде се вписва системата" intro="Архитектурата на платформата Decision Engine се прилага там, където данни, модели и политики трябва да се превърнат в контролирано оперативно решение." />
+        <SectionHeader label="WHERE IT APPLIES" title="Where does decision architecture create the most value?" intro="If the logic exists but cannot be executed consistently, you don't yet have a decision system." />
         <div className={styles.useCaseGrid}>{useCases.map(([title, copy]) => <article key={title}><h3>{title}</h3><p>{copy}</p></article>)}</div>
       </div></section>
 
       <section className={styles.section} aria-labelledby="related-title"><div className="site-container">
-        <SectionHeader label="Продуктова навигация" title="Свързани услуги" />
+        <SectionHeader label="NEXT STEP" title="Related services" />
         <div className={styles.relatedGrid}>{related.map(([title, copy, href]) => <Link href={href} key={title}><span><strong>{title}</strong><small>{copy}</small></span><b aria-hidden="true">↗</b></Link>)}</div>
       </div></section>
 
-      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>Оценка на decision architecture</span><h2 id="cta-title">Превърнете бизнес логиката си в работеща система за решения.</h2><p>Свързваме данните, моделите, правилата и политиките в проследим execution layer, който взема последователни решения в реално време.</p><Link className={styles.ctaButton} href="/contact?topic=decision-automation">Обсъдете автоматизацията на решения <span aria-hidden="true">→</span></Link></div></div></section>
+      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>DECISION INTELLIGENCE</span><h2 id="cta-title">Business logic becomes valuable when it can execute.</h2><p>Build a decision engine that turns models, rules and policy into controlled operational decisions.</p><Link className={styles.ctaButton} href="/contact?topic=decision-automation">Discuss Your Decision Architecture <span aria-hidden="true">→</span></Link></div></div></section>
     </main>
   );
 }
