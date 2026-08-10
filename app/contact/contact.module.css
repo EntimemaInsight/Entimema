@@ -17,7 +17,8 @@
 }
 
 .hero p {
-  margin: var(--space-heading-copy) 0 0;
+  max-width: 42ch;
+  margin: var(--space-heading-copy) auto 0;
   color: var(--text-secondary);
   font-size: var(--type-section-subtitle);
   line-height: var(--leading-subtitle);
@@ -209,7 +210,7 @@
 }
 
 .emailFallback {
-  margin: 18px 0 0;
+  margin: 20px 0 0;
   color: var(--text-secondary);
   text-align: center;
   font-size: 14px;
@@ -396,7 +397,7 @@
 
   .path {
     min-height: 258px;
-    padding: 28px;
+    padding: 30px 28px;
   }
 
   .formPanel {

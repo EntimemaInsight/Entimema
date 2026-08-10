@@ -65,7 +65,7 @@
 }
 
 .page :global(.about-intro) {
-  width: min(100%, 60rem);
+  width: min(100%, 65rem);
   max-width: none;
   margin-inline: auto;
 }
@@ -79,7 +79,7 @@
 }
 
 .page :global(.about-intro h1) {
-  max-width: 14.5em;
+  max-width: 18em;
   font-size: var(--about-type-display);
   line-height: var(--about-leading-display);
   letter-spacing: var(--about-tracking-display);
@@ -355,6 +355,7 @@
 }
 
 .personalStatement {
+  max-width: 54ch;
   margin-top: var(--about-space-heading-copy) !important;
   padding-left: 1rem;
   border-left: 2px solid #2446df;
@@ -378,6 +379,7 @@
   border-top: 1px solid rgba(8,26,66,.13);
 }
 .conversation h2 { max-width: 26ch; }
+.conversation > p:not(.narrativeLabel) { max-width: 58ch; line-height: var(--about-leading-body); text-wrap: pretty; }
 .conversation a {
   display: inline-flex;
   align-items: center;

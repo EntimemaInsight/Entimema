@@ -6518,3 +6518,107 @@ main div[class*="relatedGrid"] a:active > b { transform: translate3d(1px, 0, 0);
   main a[class*="ctaButton"] > span,
   main div[class*="relatedGrid"] a > b { transition: none !important; }
 }
+
+/* =========================================================
+   SPRINT 6B — TYPOGRAPHY & SPATIAL RHYTHM
+   ========================================================= */
+:root {
+  --rhythm-label-heading: clamp(12px, 1vw, 16px);
+  --rhythm-heading-copy: clamp(18px, 1.7vw, 26px);
+  --rhythm-copy-action: clamp(28px, 2.6vw, 38px);
+  --rhythm-intro-content: clamp(44px, 5vw, 72px);
+  --measure-body: 62ch;
+  --measure-supporting: 54ch;
+  --measure-section-heading: 20ch;
+}
+
+.hero__copy--editorial { max-width: 74rem !important; }
+.hero__title--editorial { max-width: 12.4ch !important; }
+.hero__description--editorial { max-width: 46ch; margin-top: var(--rhythm-heading-copy); }
+.approach-section--tiles .approach-section__intro,
+.process-heading { max-width: 68rem; }
+.approach-section--tiles .approach-section__intro p,
+.process-heading p { max-width: var(--measure-body); }
+.case-cta__inner { row-gap: var(--rhythm-heading-copy); }
+
+main > section[class*="hero"] > .site-container > div[class*="heroInner"] { column-gap: clamp(52px, 5vw, 84px); }
+main > section[class*="hero"] div[class*="heroCopy"] { max-width: 42rem; }
+main > section[class*="hero"] div[class*="heroCopy"] > [class*="category"] { display: inline-block; margin-bottom: var(--rhythm-label-heading); }
+main > section[class*="hero"] div[class*="heroCopy"] > h1 {
+  max-width: 15ch;
+  margin-block: 0 var(--rhythm-heading-copy);
+  font-size: clamp(3rem, 3.9vw, 3.75rem);
+  line-height: 1;
+  letter-spacing: -.052em;
+  text-wrap: balance;
+}
+main > section[class*="hero"] div[class*="heroCopy"] > [class*="lead"] { max-width: 22ch; line-height: 1.2; text-wrap: balance; }
+main > section[class*="hero"] div[class*="heroCopy"] > [class*="support"] {
+  max-width: var(--measure-supporting);
+  margin-block: var(--rhythm-heading-copy) var(--rhythm-copy-action);
+  line-height: 1.65;
+  text-wrap: pretty;
+}
+main section div[class*="sectionHeader"] { margin-bottom: var(--rhythm-intro-content); }
+main section div[class*="sectionHeader"] > span { margin-bottom: var(--rhythm-label-heading); }
+main section div[class*="sectionHeader"] > h2 { max-width: var(--measure-section-heading); line-height: 1.04; text-wrap: balance; }
+main section div[class*="sectionHeader"] > p { max-width: var(--measure-body); line-height: 1.62; text-wrap: pretty; }
+main section article[class*="capability"] { padding: clamp(30px, 3vw, 44px); }
+main section article[class*="capability"] h3 {
+  margin-block: clamp(34px, 3.5vw, 48px) 12px;
+  line-height: 1.18;
+  text-wrap: balance;
+}
+main section article[class*="capability"] p,
+main section [class*="useCaseGrid"] p,
+main section [class*="outcomeGrid"] p,
+main section ol[class*="timeline"] p { max-width: 48ch; line-height: 1.62; text-wrap: pretty; }
+main section ol[class*="timeline"] h3 { margin-block: 32px 12px; line-height: 1.2; text-wrap: balance; }
+main section div[class*="relatedGrid"] a { min-height: 108px; }
+main section div[class*="relatedGrid"] strong { line-height: 1.25; }
+main section div[class*="relatedGrid"] small { max-width: var(--measure-supporting); line-height: 1.55; }
+main section div[class*="ctaBlock"] { padding: clamp(48px, 6vw, 84px); }
+main section div[class*="ctaBlock"] > h2 {
+  max-width: 18ch;
+  margin-block: var(--rhythm-label-heading) var(--rhythm-heading-copy);
+  line-height: 1.04;
+  text-wrap: balance;
+}
+main section div[class*="ctaBlock"] > p {
+  max-width: 58ch;
+  margin-bottom: var(--rhythm-copy-action);
+  line-height: 1.62;
+  text-wrap: pretty;
+}
+
+@media (max-width: 1100px) {
+  main > section[class*="hero"] div[class*="heroCopy"] { max-width: 46rem; }
+  main > section[class*="hero"] div[class*="heroCopy"] > h1 { max-width: 16ch; font-size: clamp(3rem, 6.4vw, 4.25rem); }
+  main section div[class*="sectionHeader"] > h2 { max-width: 22ch; }
+}
+
+@media (max-width: 760px) {
+  :root {
+    --rhythm-label-heading: 12px;
+    --rhythm-heading-copy: 18px;
+    --rhythm-copy-action: 28px;
+    --rhythm-intro-content: 40px;
+  }
+  .hero__title--editorial { max-width: 10.8ch !important; font-size: clamp(2.75rem, 13vw, 4rem); line-height: 1; }
+  .hero__description--editorial { max-width: 32ch; line-height: 1.62; }
+  main > section[class*="hero"] div[class*="heroCopy"] > h1 {
+    max-width: 16ch;
+    font-size: clamp(2.5rem, 11.5vw, 3.25rem);
+    line-height: 1.02;
+  }
+  main > section[class*="hero"] div[class*="heroCopy"] > [class*="lead"] { max-width: 24ch; font-size: clamp(1.4rem, 6.5vw, 1.75rem); }
+  main > section[class*="hero"] div[class*="heroCopy"] > [class*="support"] { max-width: 36ch; font-size: 1rem; line-height: 1.62; }
+  main section div[class*="sectionHeader"] > h2 { max-width: 19ch; font-size: clamp(2.25rem, 10vw, 3rem); line-height: 1.04; }
+  main section div[class*="sectionHeader"] > p { max-width: 38ch; font-size: 1rem; }
+  main section article[class*="capability"] { padding: 28px 24px 30px; }
+  main section ol[class*="timeline"] h3 { margin-block: 16px 10px; }
+  main section div[class*="relatedGrid"] a { min-height: 0; padding-block: 24px; }
+  main section div[class*="ctaBlock"] { padding: 46px 28px 50px; }
+  main section div[class*="ctaBlock"] > h2 { max-width: 17ch; font-size: clamp(2.25rem, 10vw, 3rem); }
+  main section div[class*="ctaBlock"] > p { max-width: 36ch; font-size: 1rem; }
+}
