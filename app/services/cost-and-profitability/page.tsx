@@ -5,57 +5,57 @@ import Navbar from "@/components/Navbar";
 import CostDashboard from "./CostDashboard";
 import styles from "./cost-and-profitability.module.css";
 
-export const metadata: Metadata = { title: "Себестойност и рентабилност | Entimema", description: "Система за разбиране на икономиката на бизнеса." };
+export const metadata: Metadata = { title: "Cost & Margin Management | Entimema", description: "Understand cost and profitability across products, customers and processes through transparent cost models, margin analysis and business drivers." };
 
 const capabilities = [
-  ["Модели за себестойност", "Изграждане на прозрачни модели за калкулиране на себестойността."],
-  ["Рентабилност", "Анализ на печалбата по продукти, клиенти, процеси и бизнес звена."],
-  ["Драйвери на разходите", "Идентифициране на факторите, които определят разходите и маржовете."],
-  ["Маржин анализ", "Проследяване на брутни, оперативни и нетни маржове."],
-  ["Симулации", "Оценка на влиянието на цените, производствените разходи и продуктовия микс."],
-  ["Автоматизация и AI", "Автоматизиран анализ на себестойността, отклоненията и рентабилността."],
+  ["COST MODELS", "Build transparent cost models that show how resources, processes and allocations become unit cost."],
+  ["PROFITABILITY ANALYSIS", "See profitability across products, customers, processes and business units."],
+  ["COST DRIVERS", "Identify the operational and financial factors that actually move cost and margin."],
+  ["MARGIN ANALYSIS", "Trace gross, contribution and operating margins — and understand what changes them."],
+  ["SCENARIO MODELLING", "Test how price, volume, input costs and product mix change profitability."],
+  ["AUTOMATION & AI", "Automate cost calculations, variance detection and profitability analysis where it improves speed and control."],
 ];
 const process = [
-  ["01", "Диагностика", "Анализираме начина, по който се формира себестойността и как се оценява рентабилността."],
-  ["02", "Архитектура", "Проектираме моделите за себестойност, драйверите на разходите и правилата за разпределение."],
-  ["03", "Внедряване", "Изграждаме моделите, анализите и автоматизираните изчисления."],
-  ["04", "Управление", "Развиваме моделите според промените в бизнеса и новите управленски въпроси."],
+  ["01", "DIAGNOSE", "We trace how costs are created, allocated and reflected in current profitability reporting."],
+  ["02", "MODEL", "We define cost drivers, allocation logic and profitability dimensions around the economics of the business."],
+  ["03", "IMPLEMENT", "We connect the model to financial and operational data and build the required calculations and analysis."],
+  ["04", "CONTROL", "We establish recurring variance, margin and profitability analysis as part of the management process."],
 ];
 const outcomes = [
-  ["Прозрачна себестойност", "Ясно разбиране как се формира себестойността."],
-  ["Рентабилност по измерения", "Печалбата може да се анализира по продукти, клиенти, процеси и бизнес звена."],
-  ["По-добри решения", "Ценообразуването и продуктовият микс се основават на реални икономически данни."],
-  ["Постоянен контрол", "Автоматизиран анализ на отклоненията и факторите зад финансовия резултат."],
+  ["TRANSPARENT COST", "See how materials, labour, overheads and processes build the true economics of a product or service."],
+  ["PROFITABILITY BY DIMENSION", "Analyse contribution across products, customers, processes and business units."],
+  ["BETTER COMMERCIAL DECISIONS", "Give pricing, product mix and cost decisions a consistent economic basis."],
+  ["CONTINUOUS CONTROL", "See how cost drivers and variances change financial performance over time."],
 ];
 const useCases = [
-  ["Производство", "За организации със сложни производствени процеси и многостепенна себестойност."],
-  ["Компании с богато продуктово портфолио", "За бизнеси с множество продукти и различни маржове."],
-  ["Растящи компании", "За организации, които изграждат по-прецизен модел за управление на печалбата."],
-  ["Холдингови структури", "За групи компании, които анализират рентабилността на множество дружества и бизнес линии."],
+  ["COMPLEX PRODUCTION", "When multiple stages, materials and allocation layers make true product cost difficult to trace."],
+  ["BROAD PRODUCT PORTFOLIOS", "When aggregate profitability hides large differences between products or customers."],
+  ["GROWING BUSINESSES", "When increasing complexity makes simple costing and margin analysis unreliable."],
+  ["MULTI-ENTITY GROUPS", "When profitability needs to be understood across companies, business lines and shared resources."],
 ];
 const related = [
-  ["CFO функция", "Финансова архитектура, роли и управленски процеси.", "/services/cfo-function"],
-  ["Бюджети и прогнози", "Планиране, основано на бизнес драйвери и сценарии.", "/services/budgets-and-forecasting"],
-  ["Управленска отчетност", "Информация за ръководството, организирана около решенията.", "/services/management-reporting"],
-  ["Финансови данни", "Единна основа за отчетност, анализ и автоматизация.", "/services/financial-data"],
+  ["CFO Advisory", "The financial structure, management information and decision processes behind a CFO function.", "/services/cfo-function"],
+  ["Planning & Forecasting", "Budgets, forecasts and scenarios connected to the drivers of the business.", "/services/budgets-and-forecasting"],
+  ["Management Reporting", "Clear management information built around the decisions that need to be made.", "/services/management-reporting"],
+  ["Financial Data", "One reliable foundation for reporting, analysis and financial control.", "/services/financial-data"],
 ];
 
-function SectionHeader({ label, title, intro }: { label: string; title: string; intro?: string }) { return <header className={styles.sectionHeader}><span>{label}</span><h2>{title}</h2>{intro && <p>{intro}</p>}</header>; }
+function SectionHeader({ label, title, intro }: { label: string; title: React.ReactNode; intro?: string }) { return <header className={styles.sectionHeader}><span>{label}</span><h2>{title}</h2>{intro && <p>{intro}</p>}</header>; }
 
 export default function CostAndProfitabilityPage() {
   return <main className={styles.page}>
     <AnnouncementBar /><Navbar active="services" />
     <section className={styles.hero} aria-labelledby="cost-title"><div className={`site-container ${styles.heroInner}`}><div className={styles.heroCopy}>
-      <nav className={styles.breadcrumb} aria-label="Навигационна пътека"><Link href="/">Начало</Link><span>/</span><span>Финанси</span><span>/</span><span aria-current="page">Себестойност и рентабилност</span></nav>
-      <span className={styles.category}>Финанси</span><h1 id="cost-title">Себестойност и рентабилност</h1><p className={styles.lead}>Система за разбиране на икономиката на бизнеса.</p><p className={styles.support}>Изграждаме модели за себестойност и анализ на рентабилността, които свързват разходите, процесите и финансовите резултати в единна управленска система.</p><Link className={styles.primaryButton} href="/contact?topic=cost-profitability">Обсъдете икономиката на бизнеса си <span aria-hidden="true">→</span></Link>
+      <nav className={styles.breadcrumb} aria-label="Breadcrumb"><Link href="/">Home</Link><span>/</span><span>Finance</span><span>/</span><span aria-current="page">Cost &amp; Margin Management</span></nav>
+      <span className={styles.category}>COST &amp; MARGIN MANAGEMENT</span><h1 id="cost-title">Revenue tells you what you sold.<br />Margin tells you what was worth selling.</h1><p className={styles.lead}>Profitability is an outcome. Understand what drives it.</p><p className={styles.support}>Build a clear view of cost and profitability — across products, customers, processes and business units — and understand what actually creates or destroys value.</p><Link className={styles.primaryButton} href="/contact?topic=cost-profitability">Discuss Your Cost &amp; Margin Model <span aria-hidden="true">→</span></Link>
     </div><CostDashboard /></div></section>
-    <section className={styles.section}><div className="site-container"><SectionHeader label="Обхват" title="Какво включва" intro="Системата свързва себестойността, маржовете и факторите зад тях в единна икономическа картина." /><div className={styles.capabilityGrid}>{capabilities.map(([title, copy], i) => <article className={styles.capability} key={title}><span>0{i + 1}</span><h3>{title}</h3><p>{copy}</p></article>)}</div></div></section>
-    <section className={`${styles.section} ${styles.tinted}`}><div className="site-container"><SectionHeader label="Метод" title="Как работим" intro="Моделът се изгражда поетапно — от диагностиката на разходите до постоянен контрол върху рентабилността." /><ol className={styles.timeline}>{process.map(([n, title, copy]) => <li key={n}><span>{n}</span><h3>{title}</h3><p>{copy}</p></li>)}</ol></div></section>
-    <section className={styles.section}><div className="site-container"><SectionHeader label="Резултати" title="Какво получавате" intro="Ясна икономическа основа за ценообразуване, продуктов микс и управление на разходите." /><div className={styles.outcomeGrid}>{outcomes.map(([title, copy]) => <article key={title}><span aria-hidden="true">✓</span><div><h3>{title}</h3><p>{copy}</p></div></article>)}</div>
-      <aside className={styles.caseExample} aria-labelledby="scenario-title"><div className={styles.caseExampleIntro}><span>Примерен сценарий</span><h3 id="scenario-title">Производствена компания</h3></div><dl><div><dt>Контекст</dt><dd>Ограничена видимост върху факторите, които формират себестойността, и липса на последователен анализ на рентабилността по продукти.</dd></div><div><dt>Подход</dt><dd>Изграден е модел за себестойност, свързан с ERP данните, драйверите на разходите и анализ на рентабилността по ключови бизнес измерения.</dd></div><div><dt>Резултат</dt><dd>Последователна основа за ценообразуване, оптимизация на разходите и управленски решения.</dd></div></dl></aside>
+    <section className={styles.section}><div className="site-container"><SectionHeader label="WHAT IT INCLUDES" title={<>Know the cost.<br />Understand the economics behind it.</>} /><div className={styles.capabilityGrid}>{capabilities.map(([title, copy], i) => <article className={styles.capability} key={title}><span>0{i + 1}</span><h3>{title}</h3><p>{copy}</p></article>)}</div></div></section>
+    <section className={`${styles.section} ${styles.tinted}`}><div className="site-container"><SectionHeader label="HOW WE WORK" title="Follow the cost until you find the margin." /><ol className={styles.timeline}>{process.map(([n, title, copy]) => <li key={n}><span>{n}</span><h3>{title}</h3><p>{copy}</p></li>)}</ol></div></section>
+    <section className={styles.section}><div className="site-container"><SectionHeader label="WHAT YOU GET" title={<>Know what makes money.<br />Know what doesn&apos;t.</>} /><div className={styles.outcomeGrid}>{outcomes.map(([title, copy]) => <article key={title}><span aria-hidden="true">✓</span><div><h3>{title}</h3><p>{copy}</p></div></article>)}</div>
+      <aside className={styles.caseExample} aria-labelledby="scenario-title"><div className={styles.caseExampleIntro}><span>ILLUSTRATIVE SCENARIO</span><h3 id="scenario-title">A profitable company can still sell unprofitable products.</h3></div><dl><div><dt>SCENARIO</dt><dd>A manufacturing company is profitable overall, but management cannot reliably see which products create margin and which absorb it.</dd></div><div><dt>ENTIMEMA APPROACH</dt><dd>We connect ERP data, material consumption, production costs, allocation logic and commercial data into a cost and profitability model by product and other key business dimensions.</dd></div><div><dt>RESULT</dt><dd>Management can see where value is created, where margin is being absorbed and which drivers require action.</dd></div></dl></aside>
     </div></section>
-    <section className={`${styles.section} ${styles.tinted}`}><div className="site-container"><SectionHeader label="Приложения" title="Къде е приложима системата" intro="Моделът се адаптира към продуктовата сложност, структурата на разходите и управленските нужди на бизнеса." /><div className={styles.useCaseGrid}>{useCases.map(([title, copy]) => <article key={title}><h3>{title}</h3><p>{copy}</p></article>)}</div></div></section>
-    <section className={styles.section}><div className="site-container"><SectionHeader label="Следваща стъпка" title="Свързани услуги" /><div className={styles.relatedGrid}>{related.map(([title, copy, href]) => <Link href={href} key={title}><span><strong>{title}</strong><small>{copy}</small></span><b aria-hidden="true">↗</b></Link>)}</div></div></section>
-    <section className={styles.ctaSection}><div className="site-container"><div className={styles.ctaBlock}><span>Оценка на икономиката на бизнеса</span><h2>Ясна картина къде се създава стойност и къде се губи рентабилност.</h2><p>Фокусът е върху връзката между разходите, процесите, продуктите и реалния финансов резултат.</p><Link className={styles.ctaButton} href="/contact?topic=cost-profitability">Обсъдете икономиката на бизнеса си <span aria-hidden="true">→</span></Link></div></div></section>
+    <section className={`${styles.section} ${styles.tinted}`}><div className="site-container"><SectionHeader label="WHERE IT APPLIES" title="When does profitability become difficult to see?" intro="If you know the total profit but not where it came from, you don&apos;t yet have profitability visibility." /><div className={styles.useCaseGrid}>{useCases.map(([title, copy]) => <article key={title}><h3>{title}</h3><p>{copy}</p></article>)}</div></div></section>
+    <section className={styles.section}><div className="site-container"><SectionHeader label="NEXT STEP" title="Related services" /><div className={styles.relatedGrid}>{related.map(([title, copy, href]) => <Link href={href} key={title}><span><strong>{title}</strong><small>{copy}</small></span><b aria-hidden="true">↗</b></Link>)}</div></div></section>
+    <section className={styles.ctaSection}><div className="site-container"><div className={styles.ctaBlock}><span>COST &amp; MARGIN MANAGEMENT</span><h2>You know the profit.<br />Now find out what created it.</h2><p>Build a cost and margin model that shows where value is created, where profitability is lost and what management can do about it.</p><Link className={styles.ctaButton} href="/contact?topic=cost-profitability">Discuss Your Cost &amp; Margin Model <span aria-hidden="true">→</span></Link></div></div></section>
   </main>;
 }
