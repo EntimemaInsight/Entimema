@@ -110,7 +110,7 @@ export default function AboutPage() {
                   <p>Entimema is shaped by experience across financial management, controlling, accounting, SAP and ERP environments, credit risk, quantitative analysis and automation.</p>
                   <p>That perspective matters because models do not operate in isolation. They have to work inside real reporting cycles, operational constraints, systems and management decisions.</p>
                   <p><strong>Aleksandar Dimitrov</strong><br />Founder, Entimema</p>
-                  <p className={styles.personalStatement}>“The best model is not the most complex one. It is the one an organisation can understand, use and improve.”</p>
+                  <p className={styles.personalStatement}>The best model is not the most complex one. It is the one an organisation can understand, use and improve.</p>
                 </div>
                 <div className="founder-pillars">
                   {pillars.map((pillar) => (
@@ -142,6 +142,12 @@ export default function AboutPage() {
           </div>
         </AboutMotion>
       </section>
+      <footer className={styles.minimalFooter}>
+        <div className={styles.minimalFooterInner}>
+          <span>© 2026 Entimema</span>
+          <Link href="/privacy">Privacy</Link>
+        </div>
+      </footer>
     </main>
   );
 }
