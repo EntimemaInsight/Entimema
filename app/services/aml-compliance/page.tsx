@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import Link from "next/link";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
@@ -6,46 +7,46 @@ import AmlOperationsDashboard from "./AmlOperationsDashboard";
 import styles from "../credit-risk/credit-risk.module.css";
 
 export const metadata: Metadata = {
-  title: "AML и съответствие | Entimema",
-  description: "Политики, сценарии и модели за управление на AML процесите.",
+  title: "AML & Compliance | Entimema",
+  description: "Build a traceable AML control architecture connecting KYC, screening, transaction monitoring, investigations, escalation and regulatory evidence.",
 };
 
 const capabilities = [
-  ["KYC и Customer Due Diligence (CDD)", "Политики и процеси за идентификация, оценка и периодичен преглед на клиентите."],
-  ["Санкционен и PEP скрининг", "Автоматизирани проверки срещу санкционни списъци, PEP и други рискови източници."],
-  ["Transaction Monitoring", "Сценарии и правила за наблюдение на транзакции и откриване на подозрителна активност."],
-  ["Case Management", "Структуриран процес за анализ, ескалация и управление на AML случаи."],
-  ["AML анализи", "Анализи, показатели и модели за наблюдение на ефективността на AML процесите."],
-  ["AML AI агенти", "AI агенти за анализ, мониторинг и автоматизация на AML дейности."],
+  ["KYC & CUSTOMER DUE DILIGENCE", "Define identification, risk assessment and periodic review processes around customer risk."],
+  ["SANCTIONS & PEP SCREENING", "Structure screening rules, escalation logic and evidence around sanctions and PEP exposure."],
+  ["TRANSACTION MONITORING", "Design scenarios, thresholds and controls that detect behaviour requiring investigation."],
+  ["CASE MANAGEMENT", "Move alerts through a traceable process from analyst review to escalation and regulatory filing."],
+  ["AML ANALYTICS", "Measure alert quality, false-positive rates, investigation flow and control effectiveness."],
+  ["AML AI AGENTS", "Use governed AI agents within defined roles, rules and authorised systems to support screening, investigation and monitoring, with validation, escalation and human review."],
 ];
 
 const process = [
-  ["01", "Диагностика", "Оценяваме текущите AML процеси, политики и контролни механизми."],
-  ["02", "Архитектура", "Проектираме сценарии, правила, модели и AML архитектура."],
-  ["03", "Внедряване", "Интегрираме AML процесите с данните, системите и работните потоци."],
-  ["04", "Оптимизация", "Калибрираме сценариите, подобряваме ефективността и намаляваме фалшивите сигнали."],
+  ["01", "DIAGNOSE", "We assess existing AML policies, scenarios, data, controls and investigation workflows."],
+  ["02", "DESIGN", "We define scenarios, thresholds, escalation logic and the control architecture around the business model."],
+  ["03", "IMPLEMENT", "We connect AML rules and workflows to systems, data and operational responsibilities."],
+  ["04", "OPTIMISE", "We calibrate scenarios, review outcomes and improve control effectiveness where evidence supports change."],
 ];
 
 const outcomes = [
-  ["По-високо ниво на регулаторно съответствие", "Политиките, контролите и доказателствата работят в единна проследима архитектура."],
-  ["По-малко фалшиви сигнали", "Сценариите и праговете се калибрират спрямо реалния риск и оперативните резултати."],
-  ["По-бързо управление на AML случаи", "Сигналите преминават през ясен процес за анализ, ескалация и решение."],
-  ["Повече прозрачност върху AML процесите", "Показателите свързват рисковите събития, разследванията и ефективността на контролите."],
+  ["TRACEABLE COMPLIANCE", "Policies, controls and evidence operate within one auditable architecture."],
+  ["BETTER ALERT QUALITY", "Scenarios and thresholds are calibrated around actual risk and operational outcomes."],
+  ["CLEARER CASE FLOW", "Alerts move through defined review, escalation and decision paths."],
+  ["CONTROL VISIBILITY", "Management can see how risk events, investigations and control effectiveness connect."],
 ];
 
 const useCases = [
-  ["Банки", "За банки, които изграждат и развиват модерни AML процеси и контролни механизми."],
-  ["Дружества за потребителско кредитиране", "За организации, които въвеждат KYC, санкционен контрол и мониторинг на транзакции."],
-  ["Лизингови компании", "За финансови институции, които изграждат AML процеси в съответствие с регулаторните изисквания."],
+  ["BANKS", "Where customer risk, transaction monitoring and regulatory expectations require a consistent control model."],
+  ["CONSUMER LENDERS", "Where KYC, sanctions screening and transaction monitoring must scale with high-volume onboarding and servicing."],
+  ["LEASING COMPANIES", "Where AML controls need to operate consistently across customer onboarding, transactions and regulatory obligations."],
 ];
 
 const related = [
-  ["Кредитен риск", "Модели, политики и автоматизирани решения за управление на кредитния риск.", "/services/credit-risk"],
-  ["AML и съответствие", "Политики, сценарии и модели за управление на AML процесите.", "/services/aml-compliance"],
-  ["Автоматизация на решения", "Данни, модели и политики, превърнати в проследими автоматизирани решения.", "/services/decision-automation"],
+  ["Credit Risk", "Models, policy and portfolio controls connected across the full credit lifecycle.", "/services/credit-risk"],
+  ["AML & Compliance", "KYC, monitoring, investigations and evidence connected in one control architecture.", "/services/aml-compliance"],
+  ["Decision Intelligence", "Data, models and policy translated into traceable automated decisions.", "/services/decision-automation"],
 ];
 
-function SectionHeader({ label, title, intro }: { label: string; title: string; intro?: string }) {
+function SectionHeader({ label, title, intro }: { label: string; title: ReactNode; intro?: string }) {
   return <header className={styles.sectionHeader}><span>{label}</span><h2>{title}</h2>{intro && <p>{intro}</p>}</header>;
 }
 
@@ -56,50 +57,50 @@ export default function AmlCompliancePage() {
       <Navbar active="services" />
       <section className={styles.hero} aria-labelledby="aml-compliance-title"><div className={`site-container ${styles.heroInner}`}>
         <div className={styles.heroCopy}>
-          <nav className={styles.breadcrumb} aria-label="Навигационна пътека"><Link href="/">Начало</Link><span>/</span><span>Риск</span><span>/</span><Link href="/services/aml-compliance" aria-current="page">AML и съответствие</Link></nav>
-          <span className={styles.category}>Риск</span>
-          <h1 id="aml-compliance-title">AML и съответствие</h1>
-          <p className={styles.lead}>Политики, сценарии и модели за управление на AML процесите.</p>
-          <p className={styles.support}>Изграждаме цялостни AML архитектури, които интегрират KYC, санкционен контрол, транзакционен мониторинг, управление на случаи и регулаторно съответствие.</p>
-          <Link className={styles.primaryButton} href="/contact?topic=aml-compliance">Обсъдете своята AML архитектура <span aria-hidden="true">→</span></Link>
+          <nav className={styles.breadcrumb} aria-label="Breadcrumb"><Link href="/">Home</Link><span>/</span><span>Decision Science</span><span>/</span><Link href="/services/aml-compliance" aria-current="page">AML & Compliance</Link></nav>
+          <span className={styles.category}>AML & COMPLIANCE</span>
+          <h1 id="aml-compliance-title">Compliance is not the goal.<br />Control is.</h1>
+          <p className={styles.lead}>Build an AML operating system that connects KYC, screening, transaction monitoring, case management and regulatory evidence into one traceable control architecture.</p>
+          <p className={styles.support}><strong>An alert is not a finding. It is the start of an investigation.</strong> Connect risk signals, scenarios, escalation and regulatory action so every alert follows a clear, defensible path.</p>
+          <Link className={styles.primaryButton} href="/contact?topic=aml-compliance">Discuss Your AML Architecture <span aria-hidden="true">→</span></Link>
         </div>
         <AmlOperationsDashboard />
       </div></section>
 
       <section className={styles.section} aria-labelledby="capabilities-title"><div className="site-container">
-        <SectionHeader label="Обхват" title="Цялата AML операционна система" intro="Свързваме политиките, сценариите, данните, разследванията и регулаторния контрол в една работеща архитектура." />
+        <SectionHeader label="WHAT IT INCLUDES" title={<>One AML architecture.<br />Across the full control lifecycle.</>} />
         <div className={styles.capabilityGrid}>{capabilities.map(([title, copy], index) => <article className={styles.capability} key={title}><span>0{index + 1}</span><h3>{title}</h3><p>{copy}</p></article>)}</div>
       </div></section>
 
       <section className={`${styles.section} ${styles.tinted}`} aria-labelledby="process-title"><div className="site-container">
-        <SectionHeader label="Метод" title="Как изграждаме AML функцията" intro="Работим поетапно – от диагностика на настоящата среда до внедряване и постоянно подобрение." />
+        <SectionHeader label="HOW WE WORK" title={<>Define the risk.<br />Design the control.<br />Prove the process.</>} />
         <ol className={styles.timeline}>{process.map(([number, title, copy]) => <li key={number}><span>{number}</span><h3>{title}</h3><p>{copy}</p></li>)}</ol>
       </div></section>
 
       <section className={styles.section} aria-labelledby="outcomes-title"><div className="site-container">
-        <SectionHeader label="Резултати" title="Контрол върху цялата AML среда" intro="Една оперативна архитектура превръща регулаторните изисквания в проследими процеси, измерими контроли и по-бързи решения." />
+        <SectionHeader label="WHAT YOU GET" title={<>Fewer blind spots.<br />More defensible control.</>} />
         <div className={styles.outcomeGrid}>{outcomes.map(([title, copy]) => <article key={title}><span aria-hidden="true">✓</span><div><h3>{title}</h3><p>{copy}</p></div></article>)}</div>
         <aside className={styles.caseExample} aria-labelledby="case-example-title">
-          <div className={styles.caseExampleIntro}><span>Примерен сценарий</span><h3 id="case-example-title">Оператор на онлайн хазарт</h3></div>
+          <div className={styles.caseExampleIntro}><span>ILLUSTRATIVE SCENARIO</span><h3 id="case-example-title">When AML controls operate separately, risk falls between them.</h3></div>
           <dl>
-            <div><dt>Контекст</dt><dd>AML процесите се основават на множество независими правила, ръчни проверки и ограничена видимост върху рисковите събития.</dd></div>
-            <div><dt>Подход</dt><dd>Изградена е единна AML архитектура, която интегрира KYC, санкционен скрининг, Transaction Monitoring, Case Management и аналитични модели.</dd></div>
-            <div><dt>Резултат</dt><dd>По-бързо идентифициране на рискови събития, по-нисък дял на фалшивите сигнали и по-ефективно управление на AML процесите.</dd></div>
+            <div><dt>SCENARIO</dt><dd>An online gaming operator relies on multiple independent rules, manual reviews and fragmented visibility across customer and transaction risk.</dd></div>
+            <div><dt>ENTIMEMA APPROACH</dt><dd>We connect KYC, sanctions screening, transaction monitoring, case management and AML analytics into one operating architecture.</dd></div>
+            <div><dt>RESULT</dt><dd>Risk events move through a clearer, traceable process from detection to investigation, escalation and regulatory action.</dd></div>
           </dl>
         </aside>
       </div></section>
 
       <section className={`${styles.section} ${styles.tinted}`} aria-labelledby="applications-title"><div className="site-container">
-        <SectionHeader label="Приложения" title="Къде се вписва системата" intro="AML архитектурата се адаптира към бизнес модела, клиентския риск, транзакционната среда и регулаторните изисквания." />
+        <SectionHeader label="WHERE IT APPLIES" title="Where does AML architecture create the most value?" intro="If you can detect the alert but cannot trace the decision, the control is incomplete." />
         <div className={styles.useCaseGrid}>{useCases.map(([title, copy]) => <article key={title}><h3>{title}</h3><p>{copy}</p></article>)}</div>
       </div></section>
 
       <section className={styles.section} aria-labelledby="related-title"><div className="site-container">
-        <SectionHeader label="Продуктова навигация" title="Свързани услуги" />
+        <SectionHeader label="NEXT STEP" title="Related services" />
         <div className={styles.relatedGrid}>{related.map(([title, copy, href]) => <Link href={href} key={title}><span><strong>{title}</strong><small>{copy}</small></span><b aria-hidden="true">↗</b></Link>)}</div>
       </div></section>
 
-      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>Оценка на AML операционния модел</span><h2 id="cta-title">Изградете и модернизирайте цялата си AML функция.</h2><p>Фокусът е върху връзката между политиките, сценариите, данните, контролите, разследванията и регулаторното съответствие.</p><Link className={styles.ctaButton} href="/contact?topic=aml-compliance">Обсъдете своята AML архитектура <span aria-hidden="true">→</span></Link></div></div></section>
+      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>AML & COMPLIANCE</span><h2 id="cta-title">AML should do more than detect risk.<br />It should control what happens next.</h2><p>Build one AML architecture around policy, scenarios, investigations, evidence and regulatory action.</p><Link className={styles.ctaButton} href="/contact?topic=aml-compliance">Discuss Your AML Architecture <span aria-hidden="true">→</span></Link></div></div></section>
     </main>
   );
 }
