@@ -22,15 +22,15 @@ export default function AnnouncementBar() {
   }, [isDismissed]);
 
   return (
-    <aside className="announcement" aria-label="Актуално съобщение">
+    <aside className="announcement" aria-label="Current announcement">
       <div className="site-container announcement__inner">
-        <p>Финансовите системи се променят. AI, данните и анализът на риска създават ново поколение управленски решения.</p>
-        <a href="#analyses">Разгледайте анализите <span aria-hidden="true">→</span></a>
+        <p>Better decisions start with better systems. Finance, risk and AI are changing how businesses understand performance and act on it.</p>
+        <a href="#analyses">Explore Resources <span aria-hidden="true">→</span></a>
       </div>
       <button
         className="announcement__close"
         type="button"
-        aria-label="Затвори съобщението"
+        aria-label="Close announcement"
         onClick={() => {
           window.sessionStorage.setItem("entimema-announcement-dismissed", "1");
           setIsDismissed(true);

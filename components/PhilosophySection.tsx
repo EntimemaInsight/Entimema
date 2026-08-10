@@ -5,22 +5,16 @@ import { SectionHeader } from "./ui";
 
 const metrics = [
   {
-    value: "98%+",
-    start: 97.9,
-    end: 98,
-    title: "По-бързи решения",
-    description: "чрез интегрирани данни",
+    title: "Connected Data",
+    description: "Faster decisions through a shared information structure",
     href: "#about",
-    ariaLabel: "Към секцията за финансова архитектура и интегрирани данни",
+    ariaLabel: "Go to the financial architecture and connected data section",
   },
   {
-    value: "95%+",
-    start: 94.8,
-    end: 95,
-    title: "По-малко ръчна работа",
-    description: "чрез автоматизация",
+    title: "Intelligent Automation",
+    description: "Less manual work across financial and risk processes",
     href: "#approach",
-    ariaLabel: "Към секцията за автоматизация и управленска архитектура",
+    ariaLabel: "Go to the automation and decision architecture section",
   },
 ] as const;
 
@@ -84,8 +78,8 @@ export default function PhilosophySection() {
           className="philosophy-section__title philosophy-reveal philosophy-reveal--1"
           title={
             <>
-              <span>Начинът на мислене определя</span>
-              <span className="philosophy-section__accent">качеството на решенията.</span>
+              <span>Better decisions require</span>
+              <span className="philosophy-section__accent">more than better data.</span>
             </>
           }
         />
@@ -94,21 +88,19 @@ export default function PhilosophySection() {
           <blockquote className="philosophy-quote-card">
             <ArchitectureBlueprint className="philosophy-quote-card__blueprint" />
             <span className="philosophy-quote-card__mark" aria-hidden="true">“</span>
-            <div className="philosophy-quote-card__principle"><i /><span>ПРИНЦИП</span></div>
+            <div className="philosophy-quote-card__principle"><i /><span>PRINCIPLE</span></div>
             <p>
-              <span>Организациите рядко се провалят</span>
-              <span className="philosophy-quote-card__muted">поради липса на информация.</span>
-              <span>По-често липсва <em>структурата</em>, която превръща информацията</span>
-              <span>в <strong>последователни решения.</strong></span>
+              <span>The numbers are rarely the problem.</span>
+              <span className="philosophy-quote-card__muted">The structure behind them is.</span>
+              <span>Businesses rarely lack information.</span>
+              <span>What they often lack is the <em>structure</em> to turn that information into</span>
+              <span><strong>clear, consistent and defensible decisions.</strong></span>
             </p>
           </blockquote>
 
-          <div className="philosophy-metrics" aria-label="Резултати от интегрирани управленски системи">
+          <div className="philosophy-metrics" aria-label="Outcomes from integrated management systems">
             {metrics.map((metric) => (
-              <article className="philosophy-metric-card" key={metric.value}>
-                <strong aria-label={metric.value}>
-                  {metric.value}
-                </strong>
+              <article className="philosophy-metric-card" key={metric.title}>
                 <div className="philosophy-metric-card__copy">
                   <span>{metric.title}</span>
                   <small>{metric.description}</small>

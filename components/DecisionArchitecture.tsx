@@ -235,9 +235,9 @@ export default function DecisionArchitecture() {
             <span className="executive-intelligence__progress" aria-hidden="true"><i style={{ transform: `scaleX(${(activeStep + 1) / 4})` }} /></span>
           </div>
 
-          <div className="executive-intelligence__switch" role="group" aria-label="Смяна на профил">
-            <button className={mode === "finance" ? "is-active" : ""} onClick={() => requestMode("finance")} aria-label="Покажи CFO профил">Finance</button>
-            <button className={mode === "risk" ? "is-active" : ""} onClick={() => requestMode("risk")} aria-label="Покажи Risk Manager профил">Risk</button>
+          <div className="executive-intelligence__switch" role="group" aria-label="Change profile">
+            <button className={mode === "finance" ? "is-active" : ""} onClick={() => requestMode("finance")} aria-label="Show CFO profile">Finance</button>
+            <button className={mode === "risk" ? "is-active" : ""} onClick={() => requestMode("risk")} aria-label="Show Risk Manager profile">Risk</button>
           </div>
         </div>
       </div>

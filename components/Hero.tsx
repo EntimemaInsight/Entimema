@@ -13,19 +13,21 @@ export default function Hero() {
           subtitleClassName="hero__description hero__description--editorial"
           title={
             <>
-              <span>Структурата превръща</span>
-              <span className="hero__accent">стратегията в резултати.</span>
+              <span>See the decision</span>
+              <span className="hero__accent">before you make it.</span>
             </>
           }
           subtitle={
             <>
-              Най-силните организации не управляват отделни функции. Те свързват финансите,
-              риска, данните и технологиите в една последователна управленска архитектура.
+              Model the numbers.<br />
+              Measure the risk.<br />
+              Understand the consequences.<br />
+              Then decide.
             </>
           }
         >
           <Link className="primary-cta hero__cta" href="/contact">
-            <span>Обсъдете вашия казус</span><b aria-hidden="true">→</b>
+            <span>Discuss Your Challenge</span><b aria-hidden="true">→</b>
           </Link>
         </SectionHeader>
       </div>

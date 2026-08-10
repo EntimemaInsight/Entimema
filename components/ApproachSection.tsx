@@ -75,21 +75,22 @@ export default function ApproachSection() {
           subtitleClassName="approach-section__lead reveal reveal--2"
           title={
             <>
-              <span>Финанси и риск,</span>
-              <span className="approach-section__accent">мислени като една система.</span>
+              <span>Your numbers are connected.</span>
+              <span className="approach-section__accent">Your decisions should be too.</span>
             </>
           }
           subtitle={
             <>
-              Финансовата архитектура и управлението на риска създават най-голяма стойност,
-              когато споделят обща логика, данни и методология. Различни дисциплини — една
-              система за по-добри решения.
+              Margins affect cash.<br />
+              Cash changes risk.<br />
+              Risk changes decisions.<br />
+              We connect the system behind them.
             </>
           }
         />
         <div className="approach-section__tiles reveal reveal--3">
-          <SystemCard kind="finance" title="Финанси" href="/services/financial-architecture" />
-          <SystemCard kind="risk" title="Риск" href="/services/risk-management" />
+          <SystemCard kind="finance" title="Financial Architecture →" href="/services/financial-architecture" />
+          <SystemCard kind="risk" title="Decision Science →" href="/services/risk-management" />
         </div>
       </div>
     </section>

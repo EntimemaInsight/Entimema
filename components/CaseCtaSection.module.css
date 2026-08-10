@@ -26,6 +26,13 @@
   word-break: normal;
 }
 
+.support.support {
+  display: block;
+  margin: 0;
+  opacity: 1;
+  transform: none;
+}
+
 .noBreak {
   white-space: nowrap;
 }

@@ -11,12 +11,12 @@ export default function ProcessSection() {
           subtitleClassName="process-quote"
           title={
             <>
-              Всяко решение
+              Every better decision
               <br />
-              <em>започва с разбиране.</em>
+              <em>starts with understanding.</em>
             </>
           }
-          subtitle="Променя се контекстът, а не логиката."
+          subtitle={<>The context changes.<br />The logic shouldn&apos;t.</>}
         />
 
         <DynamicArchitectureCanvas />

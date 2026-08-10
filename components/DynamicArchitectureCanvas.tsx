@@ -39,9 +39,9 @@ const paths = [
 ] as const;
 
 const layers = [
-  ["01", "Trusted context", "Normalized inputs and shared definitions"],
-  ["02", "Decision models", "Dependencies, scenarios and trade-offs"],
-  ["03", "Governance logic", "Controls, ownership and measurable criteria"],
+  ["01", "Trusted Context", "Normalized inputs. Shared definitions. One source of truth."],
+  ["02", "Decision Models", "Dependencies, scenarios and trade-offs made visible."],
+  ["03", "Governance Logic", "Clear controls, ownership and measurable decision criteria."],
 ] as const;
 
 export default function DynamicArchitectureCanvas() {
@@ -172,7 +172,7 @@ export default function DynamicArchitectureCanvas() {
 
       <div className={styles.decision}>
         <span className={styles.decisionIcon} aria-hidden="true">✓</span>
-        <span><small>OUTPUT / VERIFIED</small><strong>Executive Decision</strong><span>Clear, measurable and ready for action.</span></span>
+        <span><small>OUTPUT / VERIFIED</small><strong>Decision Ready</strong><span>Clear.<br />Measurable.<br />Ready for action.</span></span>
         <i className={styles.decisionSignal} aria-hidden="true" />
       </div>
     </div>
