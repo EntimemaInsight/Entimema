@@ -17,61 +17,63 @@ const subscribeToClientMount = () => () => {};
 
 const serviceGroups = [
   {
-    category: "Финанси",
+    category: "FINANCIAL ARCHITECTURE",
+    description: "Build the financial system behind better business decisions.",
     items: [
       {
-        title: "CFO функция",
-        description: "Финансова архитектура, планиране и управленски контрол за компании без изградена CFO функция.",
+        title: "CFO Advisory",
+        description: "Financial architecture, planning and management control for companies building or strengthening the CFO function.",
         href: "/services/cfo-function",
       },
       {
-        title: "Бюджети и прогнози",
-        description: "Финансово планиране, основано на данни и бизнес сценарии.",
+        title: "Planning & Forecasting",
+        description: "Data-driven financial planning built around business drivers and scenarios.",
         href: "/services/budgets-and-forecasting",
       },
       {
-        title: "Управленска отчетност",
-        description: "Управленска информация за ежедневни решения.",
+        title: "Management Reporting",
+        description: "Management information structured for timely, evidence-based decisions.",
         href: "/services/management-reporting",
       },
       {
-        title: "Себестойност и рентабилност",
-        description: "Разходи, маржове и фактори за рентабилност.",
+        title: "Cost & Margin Management",
+        description: "Cost structures, margins and profitability drivers made visible and controllable.",
         href: "/services/cost-and-profitability",
       },
       {
-        title: "Финансови данни",
-        description: "Единна основа за отчетност, анализ и автоматизация.",
+        title: "Financial Data",
+        description: "A unified data foundation for reporting, analysis and automation.",
         href: "/services/financial-data",
       },
       {
-        title: "Финансови AI агенти",
-        description: "Автоматизиран анализ и изпълнение във финансовите процеси.",
+        title: "Finance AI Agents",
+        description: "Automated analysis and execution across recurring finance processes.",
         href: "/services/financial-ai-agents",
       },
     ],
   },
   {
-    category: "Риск",
+    category: "DECISION SCIENCE",
+    description: "Measure uncertainty. Understand risk. Make decisions you can defend.",
     items: [
       {
-        title: "Кредитен риск",
-        description: "Скоринг, политики и модели за кредитни решения.",
+        title: "Credit Risk",
+        description: "Scoring, policies and models for consistent credit decisions.",
         href: "/services/credit-risk",
       },
       {
-        title: "AML и съответствие",
-        description: "AML архитектура, клиентски проверки и транзакционен мониторинг за последователен регулаторен контрол.",
+        title: "AML & Compliance",
+        description: "AML architecture, customer due diligence and transaction monitoring for consistent regulatory control.",
         href: "/services/aml-compliance",
       },
       {
-        title: "Автоматизация на решения",
-        description: "Модели, правила и Decision Engine за последователно и контролируемо изпълнение на решения.",
+        title: "Decision Intelligence",
+        description: "Models, rules and Decision Engine capabilities for consistent, controlled decision execution.",
         href: "/services/decision-automation",
       },
       {
-        title: "Рискови AI агенти",
-        description: "AI агенти за наблюдение, анализ и контролирано изпълнение на рискови процеси.",
+        title: "Risk AI Agents",
+        description: "AI agents for monitoring, analysis and controlled execution across risk processes.",
         href: "/services/risk-ai-agents",
       },
     ],
@@ -237,7 +239,7 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
   const portalContent = isMounted && isOpen ? createPortal(
     <>
       <button
-        aria-label="Затвори менюто"
+        aria-label="Close menu"
         className={styles.backdrop}
         onClick={close}
         style={{ top: menuTop }}
@@ -245,7 +247,7 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
         type="button"
       />
       <nav
-        aria-label="Услуги"
+        aria-label="Solutions"
         className={styles.menu}
         id={menuId}
         onPointerEnter={handlePointerEnter}
@@ -254,9 +256,9 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
         style={{ top: menuTop }}
       >
         <div className={`site-container ${styles.inner}`}>
-          <p className={styles.proposition}>Изграждаме финансови и рискови системи за управление, решения и автоматизация.</p>
+          <p className={styles.proposition}>We build financial and decision systems for control, clarity and action.</p>
           {mobile ? (
-            <div className={styles.mobileSelector} role="tablist" aria-label="Област на услугите">
+            <div className={styles.mobileSelector} role="tablist" aria-label="Solution area">
               {serviceGroups.map((group, index) => (
                 <button
                   aria-controls={`${menuId}-panel-${index}`}
@@ -286,6 +288,7 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
                 role={mobile ? "tabpanel" : undefined}
               >
                 <h2 className={styles.category}>{group.category}</h2>
+                <p className={styles.categoryDescription}>{group.description}</p>
                 <div className={styles.items}>
                   {group.items.map((item) => (
                     <Link className={styles.item} href={item.href} key={item.href} onClick={close}>
@@ -320,7 +323,7 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
           ref={triggerRef}
           type="button"
         >
-          Какво правим
+          SOLUTIONS
           <span className={styles.chevron} aria-hidden="true" />
         </button>
       </div>
