@@ -20,44 +20,44 @@ function ClientIcon({ className }: IconProps) {
 }
 
 const paths = [
-  { intent: "project" as const, title: "Нов проект", Icon: ProjectIcon },
-  { intent: "partnership" as const, title: "Партньорства", Icon: PartnershipIcon },
-  { intent: "client" as const, title: "Текущи клиенти", Icon: ClientIcon },
+  { intent: "project" as const, title: "New Project", Icon: ProjectIcon },
+  { intent: "partnership" as const, title: "Partnerships", Icon: PartnershipIcon },
+  { intent: "client" as const, title: "Existing Clients", Icon: ClientIcon },
 ];
 
 const partnershipTypes = [
-  "Технологичен партньор",
-  "Доставчик на данни или софтуер",
-  "Консултантски партньор",
-  "Академично / изследователско партньорство",
-  "Development партньор — Entimema Labs",
-  "Affiliate партньор",
-  "Друго",
+  "Technology partner",
+  "Data or software provider",
+  "Consulting partner",
+  "Academic or research partnership",
+  "Development partner — Entimema Labs",
+  "Affiliate partner",
+  "Other",
 ];
 
 const clientInquiryTypes = [
-  "Технически въпрос",
-  "Данни / модел",
-  "Промяна по текущ проект",
-  "Достъп / документация",
-  "Друго",
+  "Technical question",
+  "Data or model",
+  "Change to an existing project",
+  "Access or documentation",
+  "Other",
 ];
 
 const formContent = {
   project: {
-    heading: "Разкажете ни за проекта",
-    copy: "Опишете накратко контекста и проблема, който искате да решите. Ще се свържем с вас, за да обсъдим подходящата следваща стъпка.",
-    submit: "Изпратете запитването",
+    heading: "Tell us about your project",
+    copy: "Briefly describe the context and the problem you want to solve. We will contact you to discuss the appropriate next step.",
+    submit: "Send inquiry",
   },
   partnership: {
-    heading: "Предложете партньорство",
-    copy: "Разкажете накратко за организацията си и начина, по който виждате възможност за съвместна работа.",
-    submit: "Изпратете предложението",
+    heading: "Propose a partnership",
+    copy: "Tell us briefly about your organisation and how you see an opportunity to work together.",
+    submit: "Send proposal",
   },
   client: {
-    heading: "Запитване по текущ проект",
-    copy: "За въпроси, промени и съдействие по активни проекти и решения на Entimema.",
-    submit: "Изпратете запитването",
+    heading: "Existing project inquiry",
+    copy: "For questions, changes and support related to active Entimema projects and solutions.",
+    submit: "Send inquiry",
   },
 };
 
@@ -105,7 +105,7 @@ export default function ContactExperience({ initialTopic }: { initialTopic?: str
 
   return (
     <>
-      <div className={styles.paths} aria-label="Вид запитване">
+      <div className={styles.paths} aria-label="Inquiry type">
         {paths.map(({ intent: pathIntent, title, Icon }) => (
           <button
             aria-expanded={intent === pathIntent}
@@ -124,11 +124,11 @@ export default function ContactExperience({ initialTopic }: { initialTopic?: str
 
       {intent && (
         <section className={styles.formPanel} aria-labelledby="inquiry-heading">
-          <button aria-label="Затворете формата" className={styles.closeButton} onClick={closeForm} type="button">×</button>
+          <button aria-label="Close form" className={styles.closeButton} onClick={closeForm} type="button">×</button>
           {status === "success" ? (
             <div className={styles.result} aria-live="polite">
-              <h2 id="inquiry-heading" ref={panelHeading} tabIndex={-1}>Благодарим.</h2>
-              <p>Получихме запитването ви. Ще го разгледаме и ще се свържем с вас относно следващата стъпка.</p>
+              <h2 id="inquiry-heading" ref={panelHeading} tabIndex={-1}>Thank you.</h2>
+              <p>We received your inquiry. We will review it and contact you about the next step.</p>
             </div>
           ) : (
             <>
@@ -139,27 +139,27 @@ export default function ContactExperience({ initialTopic }: { initialTopic?: str
               <form className={styles.form} onSubmit={submitForm}>
                 <input name="intent" type="hidden" value={intent} />
                 <input name="topic" type="hidden" value={validTopic ?? ""} />
-                <div className={styles.honeypot} aria-hidden="true"><label htmlFor="website">Уебсайт</label><input autoComplete="off" id="website" name="website" tabIndex={-1} /></div>
-                <Field id="name" label="Име" required />
-                <Field id="email" label="Служебен e-mail" required type="email" />
-                <Field id="company" label="Компания" required={intent !== "project"} />
-                {intent !== "client" && <Field id="role" label="Длъжност" />}
+                <div className={styles.honeypot} aria-hidden="true"><label htmlFor="website">Website</label><input autoComplete="off" id="website" name="website" tabIndex={-1} /></div>
+                <Field id="name" label="Name" required />
+                <Field id="email" label="Work email" required type="email" />
+                <Field id="company" label="Company" required={intent !== "project"} />
+                {intent !== "client" && <Field id="role" label="Role" />}
                 {intent === "project" && (
-                  <label className={styles.field} htmlFor="topicName"><span>Тема / услуга</span><select defaultValue={validTopic ?? ""} id="topicName" name="topicName"><option value="">Изберете тема</option>{Object.entries(topicOptions).map(([key, label]) => <option key={key} value={key}>{label}</option>)}</select></label>
+                  <label className={styles.field} htmlFor="topicName"><span>Topic or service</span><select defaultValue={validTopic ?? ""} id="topicName" name="topicName"><option value="">Select a topic</option>{Object.entries(topicOptions).map(([key, label]) => <option key={key} value={key}>{label}</option>)}</select></label>
                 )}
-                {intent === "partnership" && <SelectField id="partnershipType" label="Тип партньорство" options={partnershipTypes} />}
-                {intent === "client" && <><Field id="project" label="Проект / услуга" /><SelectField id="inquiryType" label="Тип запитване" options={clientInquiryTypes} /></>}
-                <label className={`${styles.field} ${styles.fullWidth}`} htmlFor="message"><span>{intent === "project" ? "Какъв проблем искате да решите?" : intent === "partnership" ? "Разкажете накратко за предложението" : "Описание"} *</span><textarea id="message" maxLength={4000} name="message" required rows={6} /></label>
-                <p className={styles.privacy}>Използваме предоставената информация единствено, за да отговорим на запитването ви.</p>
-                {status === "error" && <p className={styles.error} role="alert">Не успяхме да изпратим запитването. Опитайте отново или ни пишете на <a href="mailto:office@entimema.net">office@entimema.net</a>.</p>}
-                <button className={styles.submitButton} disabled={status === "sending"} type="submit">{status === "sending" ? "Изпращане…" : formContent[intent].submit}</button>
+                {intent === "partnership" && <SelectField id="partnershipType" label="Partnership type" options={partnershipTypes} />}
+                {intent === "client" && <><Field id="project" label="Project or service" /><SelectField id="inquiryType" label="Inquiry type" options={clientInquiryTypes} /></>}
+                <label className={`${styles.field} ${styles.fullWidth}`} htmlFor="message"><span>{intent === "project" ? "What problem do you want to solve?" : intent === "partnership" ? "Briefly describe your proposal" : "Description"} *</span><textarea id="message" maxLength={4000} name="message" required rows={6} /></label>
+                <p className={styles.privacy}>We use the information provided only to respond to your inquiry.</p>
+                {status === "error" && <p className={styles.error} role="alert">We could not send your inquiry. Try again or email us at <a href="mailto:office@entimema.net">office@entimema.net</a>.</p>}
+                <button className={styles.submitButton} disabled={status === "sending"} type="submit">{status === "sending" ? "Sending…" : formContent[intent].submit}</button>
               </form>
             </>
           )}
         </section>
       )}
 
-      <p className={styles.emailFallback}>Предпочитате e-mail? Пишете ни на <a href="mailto:office@entimema.net">office@entimema.net</a>.</p>
+      <p className={styles.emailFallback}>Prefer email? Write to us at <a href="mailto:office@entimema.net">office@entimema.net</a>.</p>
     </>
   );
 }
@@ -169,5 +169,5 @@ function Field({ id, label, required = false, type = "text" }: { id: string; lab
 }
 
 function SelectField({ id, label, options }: { id: string; label: string; options: string[] }) {
-  return <label className={styles.field} htmlFor={id}><span>{label} *</span><select defaultValue="" id={id} name={id} required><option disabled value="">Изберете</option>{options.map((option) => <option key={option} value={option}>{option}</option>)}</select></label>;
+  return <label className={styles.field} htmlFor={id}><span>{label} *</span><select defaultValue="" id={id} name={id} required><option disabled value="">Select</option>{options.map((option) => <option key={option} value={option}>{option}</option>)}</select></label>;
 }

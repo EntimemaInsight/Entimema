@@ -1,14 +1,14 @@
 export const topicOptions = {
-  "cfo-function": "CFO функция",
-  "budgets-and-forecasting": "Бюджети и прогнози",
-  "management-reporting": "Управленска отчетност",
-  "cost-profitability": "Себестойност и рентабилност",
-  "financial-data": "Финансови данни",
-  "financial-ai-agents": "Финансови AI агенти",
-  "credit-risk": "Кредитен риск",
-  "aml-compliance": "AML и съответствие",
-  "decision-automation": "Автоматизация на решения",
-  "risk-ai-agents": "Рискови AI агенти",
+  "cfo-function": "CFO Advisory",
+  "budgets-and-forecasting": "Planning & Forecasting",
+  "management-reporting": "Management Reporting",
+  "cost-profitability": "Cost & Margin Management",
+  "financial-data": "Financial Data",
+  "financial-ai-agents": "Finance AI Agents",
+  "credit-risk": "Credit Risk",
+  "aml-compliance": "AML & Compliance",
+  "decision-automation": "Decision Intelligence",
+  "risk-ai-agents": "Risk AI Agents",
 } as const;
 
 export type TopicKey = keyof typeof topicOptions;
