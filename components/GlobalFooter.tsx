@@ -4,35 +4,35 @@ import styles from "./GlobalFooter.module.css";
 
 const columns = [
   {
-    title: "Финансова архитектура",
+    title: "FINANCIAL ARCHITECTURE",
     links: [
-      ["CFO функция", "/services/cfo-function"],
-      ["Бюджети и прогнози", "/services/budgets-and-forecasting"],
-      ["Управленска отчетност", "/services/management-reporting"],
-      ["Себестойност и рентабилност", "/services/cost-and-profitability"],
-      ["Финансови данни", "/services/financial-data"],
-      ["Финансови AI агенти", "/services/financial-ai-agents"],
+      ["CFO Advisory", "/services/cfo-function"],
+      ["Planning & Forecasting", "/services/budgets-and-forecasting"],
+      ["Management Reporting", "/services/management-reporting"],
+      ["Cost & Margin Management", "/services/cost-and-profitability"],
+      ["Financial Data", "/services/financial-data"],
+      ["Finance AI Agents", "/services/financial-ai-agents"],
     ],
   },
   {
-    title: "Наука за решенията",
+    title: "DECISION SCIENCE",
     links: [
-      ["Кредитен риск", "/services/credit-risk"],
-      ["AML и съответствие", "/services/aml-compliance"],
-      ["Автоматизация на решения", "/services/decision-automation"],
-      ["Рискови AI агенти", "/services/risk-ai-agents"],
+      ["Credit Risk", "/services/credit-risk"],
+      ["AML & Compliance", "/services/aml-compliance"],
+      ["Decision Intelligence", "/services/decision-automation"],
+      ["Risk AI Agents", "/services/risk-ai-agents"],
     ],
   },
   {
-    title: "Ресурси",
-    links: [["Всички услуги", "/services"]],
+    title: "RESOURCES",
+    links: [["All Services", "/services"]],
   },
   {
-    title: "Компания",
+    title: "COMPANY",
     links: [
-      ["За Entimema", "/about"],
-      ["Контакти", "/contact"],
-      ["Поверителност", "/privacy"],
+      ["About Entimema", "/about"],
+      ["Contact", "/contact"],
+      ["Privacy", "/privacy"],
     ],
   },
 ] as const;
