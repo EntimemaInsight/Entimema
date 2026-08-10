@@ -90,7 +90,7 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
   const [isOpen, setIsOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const [isPinned, setIsPinned] = useState(false);
-  const [mobileCategory, setMobileCategory] = useState(0);
+  const [mobileSolutionsOpen, setMobileSolutionsOpen] = useState(false);
   const [menuTop, setMenuTop] = useState(0);
   const menuTopRef = useRef(0);
   const rootRef = useRef<HTMLDivElement>(null);
@@ -139,7 +139,7 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
     setIsOpen(false);
     setIsClosing(true);
     setIsPinned(false);
-    setMobileCategory(0);
+    setMobileSolutionsOpen(false);
     clearExitTimer();
     const exitDuration = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 180;
     exitTimerRef.current = setTimeout(() => setIsClosing(false), exitDuration);
@@ -258,14 +258,6 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
     setIsPinned(true);
   };
 
-  const handleMobileCategoryKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>, index: number) => {
-    if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
-    event.preventDefault();
-    const nextIndex = event.key === "Home" ? 0 : event.key === "End" ? serviceGroups.length - 1 : event.key === "ArrowRight" ? (index + 1) % serviceGroups.length : (index - 1 + serviceGroups.length) % serviceGroups.length;
-    setMobileCategory(nextIndex);
-    document.getElementById(`${menuId}-tab-${nextIndex}`)?.focus();
-  };
-
   const portalContent = isMounted && (isOpen || isClosing) ? createPortal(
     <>
       <button
@@ -287,63 +279,65 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
       >
         <div className={`site-container ${styles.inner}`}>
           {mobile ? (
-            <div className={styles.mobileMenuHeader}>
-              <span>MENU</span>
-            </div>
-          ) : null}
-          <p className={styles.proposition}>We build financial and decision systems for control, clarity and action.</p>
-          {mobile ? (
-            <div className={styles.mobileSelector} role="tablist" aria-label="Solution area">
-              {serviceGroups.map((group, index) => (
+            <>
+              <div className={styles.mobileMenuHeader}><span>MENU</span></div>
+              <div className={styles.mobileSiteNav}>
                 <button
-                  aria-controls={`${menuId}-panel-${index}`}
-                  aria-selected={mobileCategory === index}
-                  className={mobileCategory === index ? styles.mobileSelectorActive : undefined}
-                  id={`${menuId}-tab-${index}`}
-                  key={group.category}
-                  onClick={() => setMobileCategory(index)}
-                  onKeyDown={(event) => handleMobileCategoryKeyDown(event, index)}
-                  role="tab"
-                  tabIndex={mobileCategory === index ? 0 : -1}
+                  aria-controls={`${menuId}-mobile-solutions`}
+                  aria-expanded={mobileSolutionsOpen}
+                  className={styles.mobileTopLevel}
+                  onClick={() => setMobileSolutionsOpen((current) => !current)}
                   type="button"
                 >
-                  {group.category}
+                  <span>SOLUTIONS</span>
+                  <span aria-hidden="true">{mobileSolutionsOpen ? "−" : "+"}</span>
                 </button>
-              ))}
-            </div>
-          ) : null}
-          <div className={styles.panels}>
-            {serviceGroups.map((group, groupIndex) => (
-              <section
-                aria-labelledby={mobile ? `${menuId}-tab-${groupIndex}` : undefined}
-                className={styles.panel}
-                hidden={mobile && mobileCategory !== groupIndex}
-                id={`${menuId}-panel-${groupIndex}`}
-                key={group.category}
-                role={mobile ? "tabpanel" : undefined}
-              >
-                <h2 className={styles.category}>{group.category}</h2>
-                <p className={styles.categoryDescription}>{group.description}</p>
-                <div className={styles.items}>
-                  {group.items.map((item) => (
-                    <Link className={styles.item} href={item.href} key={item.href} onClick={close}>
-                      <span className={styles.itemTitle}>{item.title}</span>
-                      <span className={styles.itemDescription}>{item.description}</span>
-                    </Link>
+                <div className={styles.mobileSolutions} hidden={!mobileSolutionsOpen} id={`${menuId}-mobile-solutions`}>
+                  {serviceGroups.map((group) => (
+                    <section className={styles.mobileGroup} key={group.category}>
+                      <h2>{group.category}</h2>
+                      <div>
+                        {group.items.map((item) => (
+                          <Link className={styles.mobileServiceLink} href={item.href} key={item.href} onClick={close}>
+                            {item.title}
+                          </Link>
+                        ))}
+                      </div>
+                    </section>
                   ))}
                 </div>
-              </section>
-            ))}
-          </div>
-          {mobile ? (
-            <div className={styles.mobilePrimaryNav} aria-label="Primary pages">
-              <Link href="/#analyses" onClick={close}>RESOURCES</Link>
-              <Link href="/about" onClick={close}>ABOUT</Link>
-              <Link className={styles.mobileContact} href="/contact" onClick={close}>
-                CONTACT US <span aria-hidden="true">→</span>
-              </Link>
-            </div>
-          ) : null}
+                <Link className={styles.mobileTopLevel} href="/#analyses" onClick={close}>
+                  <span>RESOURCES</span><span aria-hidden="true">→</span>
+                </Link>
+                <Link className={styles.mobileTopLevel} href="/about" onClick={close}>
+                  <span>ABOUT</span><span aria-hidden="true">→</span>
+                </Link>
+                <Link className={`${styles.mobileTopLevel} ${styles.mobileContact}`} href="/contact" onClick={close}>
+                  <span>CONTACT US</span><span aria-hidden="true">→</span>
+                </Link>
+              </div>
+            </>
+          ) : (
+            <>
+              <p className={styles.proposition}>We build financial and decision systems for control, clarity and action.</p>
+              <div className={styles.panels}>
+                {serviceGroups.map((group) => (
+                  <section className={styles.panel} key={group.category}>
+                    <h2 className={styles.category}>{group.category}</h2>
+                    <p className={styles.categoryDescription}>{group.description}</p>
+                    <div className={styles.items}>
+                      {group.items.map((item) => (
+                        <Link className={styles.item} href={item.href} key={item.href} onClick={close}>
+                          <span className={styles.itemTitle}>{item.title}</span>
+                          <span className={styles.itemDescription}>{item.description}</span>
+                        </Link>
+                      ))}
+                    </div>
+                  </section>
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </nav>
     </>,

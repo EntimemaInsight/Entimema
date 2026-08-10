@@ -183,12 +183,8 @@
   display: none;
 }
 
-.mobileSelector {
-  display: none;
-}
-
 .mobileMenuHeader,
-.mobilePrimaryNav {
+.mobileSiteNav {
   display: none;
 }
 
@@ -314,125 +310,94 @@
   .trigger[aria-expanded="true"] .menuIcon i:nth-child(2) { opacity: 0; }
   .trigger[aria-expanded="true"] .menuIcon i:last-child { transform: translateY(-5.5px) rotate(-45deg); }
 
-  .proposition {
-    margin-bottom: 22px;
-  }
-
-  .mobileSelector {
-    display: flex;
-    align-items: stretch;
-    gap: 28px;
-    margin-bottom: 26px;
-    border-bottom: 1px solid var(--hairline);
-  }
-
-  .mobileSelector button {
-    position: relative;
-    min-height: 48px;
-    padding: 0;
-    border: 0;
-    background: transparent;
-    color: rgba(36, 44, 62, 0.58);
-    font: inherit;
-    font-size: 15px;
-    font-weight: 560;
-    cursor: pointer;
-    transition: color 180ms ease-out;
-  }
-
-  .mobileSelector button::after {
-    position: absolute;
-    right: 0;
-    bottom: -1px;
-    left: 0;
-    height: 2px;
-    background: var(--brand-orange-500);
-    content: "";
-    opacity: 0;
-    transition: opacity 180ms ease-out;
-  }
-
-  .mobileSelector button:hover,
-  .mobileSelector button:focus-visible,
-  .mobileSelectorActive {
-    color: var(--brand-navy-950) !important;
-  }
-
-  .mobileSelectorActive::after {
-    opacity: 1 !important;
-  }
-
-  .mobileSelector button:focus-visible {
-    outline: 2px solid var(--brand-navy-800);
-    outline-offset: 4px;
-  }
-
-  .panels {
-    grid-template-columns: 1fr;
-  }
-
-  .panel + .panel {
-    margin: 30px 0 0;
-    padding: 30px 0 0;
-    border-top: 1px solid var(--hairline);
-    border-left: 0;
-  }
-
-  .mobilePrimaryNav {
+  .mobileSiteNav {
     display: grid;
-    margin-top: 30px;
-    padding-top: 12px;
-    border-top: 1px solid var(--hairline);
   }
 
-  .mobilePrimaryNav > a {
-    min-height: 54px;
+  .mobileTopLevel {
+    width: 100%;
+    min-height: 60px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 0;
+    border: 0;
     border-bottom: 1px solid var(--hairline);
+    background: transparent;
     color: var(--brand-navy-950);
-    font-size: 14px;
+    font: inherit;
+    font-size: 15px;
     font-weight: 650;
     letter-spacing: .035em;
+    cursor: pointer;
   }
 
-  .mobilePrimaryNav > a:focus-visible {
+  .mobileTopLevel > span:last-child {
+    color: var(--brand-orange-600);
+    font-size: 21px;
+    font-weight: 500;
+  }
+
+  .mobileTopLevel:hover,
+  .mobileTopLevel:focus-visible {
+    color: var(--brand-navy-800);
+  }
+
+  .mobileTopLevel:focus-visible,
+  .mobileServiceLink:focus-visible {
     outline: 2px solid var(--brand-navy-800);
     outline-offset: -2px;
   }
 
-  .mobilePrimaryNav .mobileContact {
+  .mobileContact {
     color: var(--brand-navy-800);
   }
 
-  .mobileContact span {
-    color: var(--brand-orange-600);
-    font-size: 20px;
+  .mobileSolutions {
+    padding: 8px 0 22px;
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .mobileGroup {
+    padding-top: 22px;
+  }
+
+  .mobileGroup + .mobileGroup {
+    margin-top: 12px;
+    border-top: 1px solid rgba(4, 19, 63, .07);
+  }
+
+  .mobileGroup h2 {
+    margin: 0 0 8px;
+    color: rgba(36, 44, 62, .58);
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: .1em;
+  }
+
+  .mobileGroup > div {
+    display: grid;
+  }
+
+  .mobileServiceLink {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    color: var(--brand-navy-950);
+    font-size: 15px;
+    font-weight: 560;
+    line-height: 1.35;
+  }
+
+  .mobileServiceLink:hover,
+  .mobileServiceLink:focus-visible {
+    color: var(--brand-navy-800);
   }
 }
 
 @media (max-width: 680px) {
-  .mobileSelector {
-    gap: 16px;
-  }
-
-  .mobileSelector button {
-    min-width: 0;
-    flex: 1;
-    font-size: 12px;
-    line-height: 1.25;
-    white-space: normal;
-  }
-
-  .items {
-    grid-template-columns: 1fr;
-    row-gap: 18px;
-  }
-
-  .item {
-    min-height: 64px;
-  }
+  .mobileTopLevel { min-height: 58px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -443,6 +408,8 @@
   .trigger,
   .chevron,
   .menuIcon i,
+  .mobileTopLevel,
+  .mobileServiceLink,
   .item,
   .itemTitle,
   .itemDescription {
