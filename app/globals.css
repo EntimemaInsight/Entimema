@@ -6420,10 +6420,29 @@ main a[class*="primaryButton"]:active > span,
 main a[class*="ctaButton"]:active > span,
 main div[class*="relatedGrid"] a:active > b { transform: translate3d(1px, 0, 0); }
 
-.motion-service-hero { transform: translate3d(0, 12px, 0); }
-.motion-service-dashboard { transform: translate3d(0, 16px, 0); }
-.motion-service-section { transform: translate3d(0, 18px, 0); }
-.motion-service-step { transform: translate3d(0, 10px, 0); transition-delay: calc(var(--motion-order, 0) * 65ms); }
+.motion-service-hero,
+.motion-service-heading,
+.motion-service-body,
+.motion-service-section,
+.motion-service-card,
+.motion-service-step,
+.motion-service-outcome,
+.motion-service-story,
+.motion-service-related,
+.motion-service-cta {
+  transform: translate3d(0, 20px, 0);
+  transition-duration: 560ms;
+  transition-timing-function: var(--interaction-ease);
+}
+.motion-service-hero { transform: translate3d(0, 12px, 0); transition-delay: calc(var(--motion-order, 0) * 55ms); }
+.motion-service-dashboard { transform: translate3d(0, 20px, 0); transition-duration: 620ms; transition-delay: 90ms; }
+.motion-service-body { transition-delay: 90ms; }
+.motion-service-card { transform: translate3d(0, 16px, 0); transition-delay: calc(110ms + var(--motion-order, 0) * 60ms); }
+.motion-service-step { transform: translate3d(0, 16px, 0); transition-delay: calc(100ms + var(--motion-order, 0) * 70ms); }
+.motion-service-outcome { transform: translate3d(0, 12px, 0); transition-delay: calc(100ms + var(--motion-order, 0) * 55ms); }
+.motion-service-story { transform: translate3d(0, 14px, 0); transition-delay: calc(var(--motion-order, 0) * 75ms); }
+.motion-service-related { transform: translate3d(0, 12px, 0); transition-delay: calc(70ms + var(--motion-order, 0) * 50ms); }
+.motion-service-cta { transform: translate3d(0, 16px, 0); transition-delay: calc(var(--motion-order, 0) * 80ms); }
 .site-header__inner--editorial,
 .site-header__actions,
 .site-nav--editorial { align-items: center; }
@@ -6455,6 +6474,21 @@ main div[class*="relatedGrid"] a:active > b { transform: translate3d(1px, 0, 0);
   .language-switch { min-height: 48px; }
   .case-cta { overflow: visible; }
   .philosophy-metric-card { padding-inline: 24px; }
+  .motion-service-hero,
+  .motion-service-heading,
+  .motion-service-body,
+  .motion-service-section,
+  .motion-service-card,
+  .motion-service-step,
+  .motion-service-outcome,
+  .motion-service-story,
+  .motion-service-related,
+  .motion-service-cta,
+  .motion-service-dashboard { transform: translate3d(0, 10px, 0); }
+  .motion-service-card,
+  .motion-service-step,
+  .motion-service-outcome,
+  .motion-service-related { transition-delay: calc(var(--motion-order, 0) * 35ms); }
 }
 @media (prefers-reduced-motion: reduce) {
   .skip-link,
@@ -6470,7 +6504,14 @@ main div[class*="relatedGrid"] a:active > b { transform: translate3d(1px, 0, 0);
   .motion-service-hero,
   .motion-service-dashboard,
   .motion-service-section,
-  .motion-service-step { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .motion-service-heading,
+  .motion-service-body,
+  .motion-service-card,
+  .motion-service-step,
+  .motion-service-outcome,
+  .motion-service-story,
+  .motion-service-related,
+  .motion-service-cta { opacity: 1 !important; transform: none !important; transition: none !important; }
   main a[class*="primaryButton"],
   main a[class*="ctaButton"],
   main a[class*="primaryButton"] > span,
