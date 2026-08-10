@@ -1,4 +1,5 @@
 .contact {
+  min-height: calc(100svh - var(--header-height-v2));
   padding: clamp(28px, 2.5vw, 36px) 0 clamp(28px, 2.5vw, 36px);
 }
 
@@ -352,6 +353,26 @@
 
   .offices {
     padding-top: 56px;
+  }
+}
+
+@media (min-width: 901px) {
+  .contact {
+    display: flex;
+  }
+
+  .contact > :global(.site-container) {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .paths {
+    margin-block: auto;
+    padding-block: clamp(24px, 3vw, 40px);
+  }
+
+  .emailFallback {
+    margin-top: 0;
   }
 }
 
