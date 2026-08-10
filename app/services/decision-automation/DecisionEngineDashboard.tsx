@@ -7,16 +7,22 @@ const metrics = [
   ["Average Decision Time", "1.8s", "−0.6s"],
 ];
 
-const flow = ["Input Data", "Data Enrichment", "Model Score", "Business Rules", "Decision"];
+const flow = [
+  ["DATA", "Input Data"],
+  ["MODEL", "Model Score"],
+  ["RULE", "Business Rules"],
+  ["POLICY", "Policy Gate"],
+  ["DECISION", "Decision"],
+];
 
 export default function DecisionEngineDashboard() {
   return (
     <div className={styles.dashboard} aria-label="Illustrative decision engine dashboard">
       <div className={styles.dashboardTop}><div><span className={styles.dashboardEyebrow}>DECISION ENGINE</span><h2>Decision Management</h2></div><span className={styles.demoBadge}>Active Strategy</span></div>
-      <div className={styles.metrics}>{metrics.map(([label, value, note]) => <div className={styles.metric} key={label}><span>{label}</span><strong>{value}</strong><small>{note}</small></div>)}</div>
+      <div className={styles.metrics}>{metrics.map(([label, value, note], index) => <div className={`${styles.metric} ${index === 2 ? styles.metricPrimary : ""}`} key={label}><span>{label}</span><strong>{value}</strong><small>{note}</small></div>)}</div>
       <section className={styles.flowPanel} aria-labelledby="decision-flow-title">
         <div className={styles.chartHeading}><div><span>EXECUTION LAYER</span><h3 id="decision-flow-title">Decision Flow</h3></div><span className={styles.executionBadge}>EXECUTING</span></div>
-        <div className={styles.flow}>{flow.map((step, index) => <div className={index === flow.length - 1 ? styles.flowDecision : ""} key={step}><i>{index < 4 ? `0${index + 1}` : "✓"}</i><span>{step}</span></div>)}</div>
+        <div className={styles.flow}>{flow.map(([layer, step], index) => <div className={index === flow.length - 1 ? styles.flowDecision : ""} key={layer}><i>{layer}</i><span>{step}</span></div>)}</div>
         <div className={styles.outcomeRail}><span className={styles.approve}>Approve <b>64.8%</b></span><span className={styles.review}>Human Review <b>11.6%</b></span><span className={styles.reject}>Decline <b>20.9%</b></span><span className={styles.escalate}>Escalate <b>2.7%</b></span></div>
       </section>
       <div className={styles.moduleGrid}>

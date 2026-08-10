@@ -17,12 +17,12 @@ const agents = [
 
 export default function RiskAgentOperations() {
   return (
-    <div className={styles.dashboard} aria-label="Illustrative risk AI agent operations dashboard">
+    <div className={`${styles.dashboard} ${styles.agentDashboard}`} aria-label="Illustrative risk AI agent operations dashboard">
       <div className={styles.dashboardTop}><div><span className={styles.dashboardEyebrow}>CONTROLLED RISK EXECUTION</span><h2>Risk Agent Operations</h2></div><span className={styles.demoBadge}>Agents Active</span></div>
-      <div className={styles.metrics}>{metrics.map(([label, value, note]) => <div className={styles.metric} key={label}><span>{label}</span><strong>{value}</strong><small>{note}</small></div>)}</div>
+      <div className={styles.metrics}>{metrics.map(([label, value, note], index) => <div className={`${styles.metric} ${index === 2 ? styles.metricPrimary : ""}`} key={label}><span>{label}</span><strong>{value}</strong><small>{note}</small></div>)}</div>
       <section className={styles.flowPanel} aria-labelledby="agent-activity-title">
         <div className={styles.chartHeading}><div><span>RULES · PERMISSIONS · AUDIT TRAIL</span><h3 id="agent-activity-title">Agent Activity</h3></div><span className={styles.executionBadge}>HUMAN OVERSIGHT</span></div>
-        <div className={styles.flow}>{agents.map(([agent, status], index) => <div className={index === agents.length - 1 ? styles.flowDecision : ""} key={agent}><i>{index === agents.length - 1 ? "✓" : `0${index + 1}`}</i><span>{agent}<small>{status}</small></span></div>)}</div>
+        <div className={styles.flow}>{agents.map(([agent, status], index) => <div className={`${index === agents.length - 1 ? styles.flowDecision : ""} ${status === "Escalated" ? styles.flowException : ""}`} key={agent}><i>{index === agents.length - 1 ? "✓" : `0${index + 1}`}</i><span>{agent}<small>{status}</small></span></div>)}</div>
         <div className={styles.outcomeRail}><span className={styles.approve}>Monitoring <b>8</b></span><span className={styles.review}>Analysing <b>3</b></span><span className={styles.escalate}>Escalated <b>1</b></span><span className={styles.reject}>Completed <b>142</b></span></div>
       </section>
       <div className={styles.moduleGrid}>

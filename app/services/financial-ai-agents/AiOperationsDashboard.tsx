@@ -15,7 +15,7 @@ export default function AiOperationsDashboard() {
         <span className={styles.demoBadge}>Live execution</span>
       </div>
       <div className={styles.metrics}>
-        {metrics.map(([label, value, note]) => <div className={styles.metric} key={label}><span>{label}</span><strong>{value}</strong><small>{note}</small></div>)}
+        {metrics.map(([label, value, note], index) => <div className={`${styles.metric} ${index === 1 ? styles.metricPrimary : ""}`} key={label}><span>{label}</span><strong>{value}</strong><small>{note}</small></div>)}
       </div>
       <div className={styles.charts}>
         <section className={styles.chartPanel} aria-labelledby="automation-trend-title">
@@ -36,13 +36,13 @@ export default function AiOperationsDashboard() {
         <section className={styles.chartPanel} aria-labelledby="agent-activity-title">
           <div className={styles.chartHeading}><div><span>Agent Activity</span><h3 id="agent-activity-title">Recent Finance Operations</h3></div></div>
           <div className={styles.activityList}>
-            <div className={styles.activityRow}><i /><span>Margin variance analysis</span><strong>Completed</strong></div>
-            <div className={styles.activityRow}><i /><span>Management report update</span><strong>In Progress</strong></div>
+            <div className={styles.activityRow}><i /><span><small>Analysis task</small>Margin variance analysis</span><strong className={styles.statusComplete}>Completed</strong></div>
+            <div className={styles.activityRow}><i /><span><small>Reporting task</small>Management report update</span><strong className={styles.statusProgress}>In Progress</strong></div>
           </div>
         </section>
         <section className={styles.cashPanel} aria-labelledby="execution-queue-title">
           <div className={styles.chartHeading}><div><span>Execution Queue</span><h3 id="execution-queue-title">Next Operations</h3></div></div>
-          <div className={styles.queueList}><div className={styles.queueRow}><span>Cash validation</span><strong>09:30</strong></div><div className={styles.queueRow}><span>ERP close</span><strong>10:00</strong></div></div>
+          <div className={styles.queueList} aria-label="Scheduled finance agent operations"><div className={styles.queueRow}><span><small>Validation</small>Cash validation</span><strong>09:30</strong></div><div className={styles.queueRow}><span><small>Close process</small>ERP close</span><strong>10:00</strong></div></div>
         </section>
       </div>
     </div>

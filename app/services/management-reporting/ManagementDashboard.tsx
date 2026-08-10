@@ -22,10 +22,10 @@ export default function ManagementDashboard() {
         <span className={styles.demoBadge}>Current period</span>
       </div>
       <div className={styles.metrics}>
-        {metrics.map(([label, value, note]) => <div className={styles.metric} key={label}><span>{label}</span><strong>{value}</strong><small>{note}</small></div>)}
+        {metrics.map(([label, value, note], index) => <div className={`${styles.metric} ${index === 0 || index === 3 ? styles.metricPrimary : ""}`} key={label}><span>{label}</span><strong>{value}</strong><small>{note}</small></div>)}
       </div>
       <div className={styles.charts}>
-        <section className={styles.chartPanel} aria-labelledby="revenue-trend-title">
+        <section className={`${styles.chartPanel} ${styles.attentionPanel}`} aria-labelledby="revenue-trend-title">
           <div className={styles.chartHeading}><div><span>Growth</span><h3 id="revenue-trend-title">Revenue Trend</h3></div><div className={styles.legend}><i />Actual <i />Budget</div></div>
           <svg className={styles.lineChart} viewBox="0 0 420 150" role="img" aria-label="Revenue trend against budget over six months">
             <g className={styles.gridLines}><path d="M10 25H410M10 75H410M10 125H410" /></g>

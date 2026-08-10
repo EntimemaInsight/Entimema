@@ -22,18 +22,18 @@ export default function PlanningDashboard() {
         <span className={styles.demoBadge}>Base scenario</span>
       </div>
       <div className={styles.metrics}>
-        {metrics.map(([label, value, note]) => <div className={styles.metric} key={label}><span>{label}</span><strong>{value}</strong><small>{note}</small></div>)}
+        {metrics.map(([label, value, note], index) => <div className={`${styles.metric} ${index === 0 || index === 2 ? styles.metricPrimary : ""}`} key={label}><span>{label}</span><strong>{value}</strong><small>{note}</small></div>)}
       </div>
       <div className={styles.charts}>
-        <section className={styles.chartPanel} aria-labelledby="plan-chart-title">
+        <section className={`${styles.chartPanel} ${styles.planPanel}`} aria-labelledby="plan-chart-title">
           <div className={styles.chartHeading}>
             <div><span>Performance Plan</span><h3 id="plan-chart-title">Actual vs Budget &amp; Forecast</h3></div>
-            <div className={styles.legend}><i />Actual <i />Forecast</div>
+            <div className={styles.legend}><i />Actual <i className={styles.budgetKey} />Budget <i className={styles.forecastKey} />Forecast</div>
           </div>
           <svg className={styles.lineChart} viewBox="0 0 420 150" role="img" aria-label="Actual result, budget and forecast over six months">
             <g className={styles.gridLines}><path d="M10 25H410M10 75H410M10 125H410" /></g>
-            <path className={styles.forecastLine} d="M12 118C70 104 100 96 145 88S230 72 275 64S354 52 408 39" />
-            <path className={styles.forecastLine} strokeDasharray="2 7" d="M12 123C62 112 105 105 145 96S224 78 275 72S348 57 408 49" />
+            <path className={styles.budgetLine} d="M12 118C70 104 100 96 145 88S230 72 275 64S354 52 408 39" />
+            <path className={styles.forecastLine} d="M12 123C62 112 105 105 145 96S224 78 275 72S348 57 408 49" />
             <path className={styles.actualLine} d="M12 126C61 116 103 101 145 104S220 80 275 77" />
           </svg>
           <div className={styles.axis}><span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span></div>

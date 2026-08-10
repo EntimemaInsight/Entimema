@@ -59,6 +59,24 @@
   background: var(--brand-orange-500);
 }
 
+.planPanel { grid-column: span 1; border-color: rgba(16, 43, 112, .18); }
+
+.budgetLine {
+  fill: none;
+  stroke: rgba(16, 43, 112, .42);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.budgetKey { background: rgba(16, 43, 112, .42) !important; }
+.forecastKey { background: var(--brand-orange-500) !important; }
+
+.planPanel .legend { gap: 3px; justify-content: flex-end; font-size: 7px; }
+.planPanel .legend i + i { margin-left: 2px; }
+.planPanel .forecastLine { stroke-dasharray: 3 5; }
+
 @media (max-width: 430px) {
+  .planPanel .chartHeading { display: grid; }
+  .planPanel .legend { flex-wrap: wrap; justify-content: flex-start; margin-top: 8px; }
   .driverRow { grid-template-columns: 48px 1fr 30px; gap: 7px; }
 }

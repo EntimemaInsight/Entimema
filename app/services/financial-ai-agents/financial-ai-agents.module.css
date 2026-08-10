@@ -40,6 +40,29 @@
   grid-template-columns: minmax(0, 1fr) auto;
 }
 
+.activityRow span small,
+.queueRow span small {
+  display: block;
+  margin-bottom: 3px;
+  color: #7b89a5;
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+
+.activityRow > strong {
+  padding: 4px 6px;
+  border: 1px solid rgba(16, 43, 112, .12);
+  border-radius: 3px;
+  background: #f8f9fc;
+  font-size: 8px;
+  text-transform: uppercase;
+}
+
+.statusComplete { color: #236d53; }
+.statusProgress { color: #9a5c13; }
+
 .statusTrack {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -59,4 +82,6 @@
 
 @media (max-width: 520px) {
   .operationsGrid { grid-template-columns: 1fr; }
+  .activityRow { grid-template-columns: 8px minmax(0, 1fr); }
+  .activityRow > strong { grid-column: 2; justify-self: start; }
 }

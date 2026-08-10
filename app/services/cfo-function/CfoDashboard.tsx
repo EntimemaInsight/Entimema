@@ -18,14 +18,14 @@ export default function CfoDashboard() {
         <span className={styles.demoBadge}>Demo data</span>
       </div>
       <div className={styles.metrics}>
-        {metrics.map(([label, value, note]) => (
-          <div className={styles.metric} key={label}>
+        {metrics.map(([label, value, note], index) => (
+          <div className={`${styles.metric} ${index === 0 || index === 2 ? styles.metricPrimary : ""}`} key={label}>
             <span>{label}</span><strong>{value}</strong><small>{note}</small>
           </div>
         ))}
       </div>
       <div className={styles.charts}>
-        <section className={styles.chartPanel} aria-labelledby="forecast-chart-title">
+        <section className={`${styles.chartPanel} ${styles.primaryPanel}`} aria-labelledby="forecast-chart-title">
           <div className={styles.chartHeading}>
             <div><span>Performance</span><h3 id="forecast-chart-title">Actual vs Forecast</h3></div>
             <div className={styles.legend}><i />Actual <i />Forecast</div>

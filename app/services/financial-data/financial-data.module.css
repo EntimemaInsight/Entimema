@@ -21,6 +21,40 @@
   font-weight: 700;
 }
 
+.flowPanel {
+  grid-column: 1 / -1;
+  border-color: rgba(16, 43, 112, .18);
+  background: linear-gradient(180deg, #fff 0%, rgba(248, 250, 255, .88) 100%);
+}
+
+.dataFlow span {
+  min-height: 48px;
+  align-content: center;
+  gap: 3px;
+}
+
+.dataFlow span small {
+  display: block;
+  color: var(--system-muted);
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.dataFlow i { position: relative; }
+.dataFlow i::after {
+  position: absolute;
+  top: -3px;
+  right: 0;
+  width: 6px;
+  height: 6px;
+  border-top: 1px solid rgba(16, 43, 112, .35);
+  border-right: 1px solid rgba(16, 43, 112, .35);
+  content: "";
+  transform: rotate(45deg);
+}
+
 .dataFlow span:nth-of-type(2) { border-color: rgba(255, 74, 18, .32); background: rgba(255, 74, 18, .06); color: var(--brand-orange-600); }
 .dataFlow i { height: 1px; background: rgba(16, 43, 112, .22); }
 
@@ -41,7 +75,8 @@
 .systemList > div { display: grid; grid-template-columns: 8px 1fr auto; gap: 7px; }
 
 @media (max-width: 430px) {
+  .flowPanel { grid-column: auto; }
   .dataFlow { gap: 5px; }
-  .dataFlow span { min-width: 44px; }
+  .dataFlow span { min-width: 44px; padding-inline: 4px; }
   .mappingRow { grid-template-columns: 66px 1fr 26px; gap: 5px; }
 }
