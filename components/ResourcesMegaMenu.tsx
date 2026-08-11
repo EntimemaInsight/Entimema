@@ -8,7 +8,7 @@ import styles from "./ResourcesMegaMenu.module.css";
 
 const subscribeToClientMount = () => () => undefined;
 const featured = publishedResources.find((resource) => resource.featured) ?? publishedResources[0];
-const latest = publishedResources.filter((resource) => resource.slug !== featured?.slug).slice(0, 2);
+const latest = publishedResources.filter((resource) => resource.slug !== featured?.slug).slice(0, 3);
 const publishedTopics = [...new Set(publishedResources.map((resource) => resource.topic))]
   .map((slug) => getTopic(slug))
   .filter((topic): topic is NonNullable<typeof topic> => Boolean(topic));

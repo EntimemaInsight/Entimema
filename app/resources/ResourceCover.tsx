@@ -4,6 +4,13 @@ import styles from "./resources.module.css";
 type ResourceCoverProps = { cover: ResourceCoverModel };
 
 export default function ResourceCover({ cover }: ResourceCoverProps) {
+  if (cover.variant === "credit-vintage") return (
+    <div className={`${styles.resourceCover} ${styles.cover_creditVintage}`} role="img" aria-label={cover.accessibleLabel}>
+      <div className={styles.coverHeader} aria-hidden="true"><span>ENTIMEMA FRAMEWORK 04</span><span>CREDIT VINTAGE ARCHITECTURE</span></div>
+      <div className={styles.vintageCover} aria-hidden="true"><span>PERFORMANCE</span><svg viewBox="0 0 360 180" preserveAspectRatio="none"><path d="M20 140 L125 105 L230 78 L335 64"/><path d="M20 136 L125 101 L230 70 L335 54"/><path d="M20 128 L125 82 L230 42 L335 18"/><path d="M20 116 L125 68 L230 24"/></svg><div><small>JAN</small><small>FEB</small><small>MAR</small><small>APR</small></div></div>
+      <div className={styles.coverFooter} aria-hidden="true"><span>COHORT / MOB</span><i /><span>RISK SIGNAL</span></div>
+    </div>
+  );
   if (cover.variant === "operational-forecast") return (
     <div className={`${styles.resourceCover} ${styles.cover_operationalForecast}`} role="img" aria-label={cover.accessibleLabel}>
       <div className={styles.coverHeader} aria-hidden="true"><span>ENTIMEMA FRAMEWORK 03</span><span>OPERATIONAL-DRIVER FORECASTING</span></div>

@@ -13,7 +13,7 @@ export type ResourceStatus = "draft" | "published";
 
 export type ResourceCover = {
   type: "analytical-flow";
-  variant: "manufacturing-cost" | "working-capital" | "operational-forecast";
+  variant: "manufacturing-cost" | "working-capital" | "operational-forecast" | "credit-vintage";
   accessibleLabel: string;
   stages: readonly string[];
 };
@@ -130,6 +130,26 @@ export const resources: ResourceRecord[] = [
     status: "published",
     indexable: true,
     cover: { type: "analytical-flow", variant: "operational-forecast", accessibleLabel: "Operating drivers flowing through a business model into financial statements, scenarios and management decisions", stages: ["Drivers", "Business model", "P&L / BS / Cash", "Scenario", "Decision"] },
+  },
+  {
+    title: "Credit Vintage Analysis",
+    slug: "credit-vintage-analysis",
+    deck: "Portfolio averages describe the book today; vintage analysis reveals how origination cohorts develop at comparable stages of credit age.",
+    author: authors.aleksandar,
+    publishedAt: "2026-08-11",
+    readingMinutes: 12,
+    topic: "credit-risk",
+    featured: false,
+    seoTitle: "Credit Vintage Analysis | Entimema",
+    metaDescription: "A practitioner framework for comparing credit cohorts by months on book, investigating vintage divergence and connecting risk signals to validated decisions.",
+    canonicalPath: "/resources/credit-vintage-analysis",
+    openGraphTitle: "Credit Vintage Analysis",
+    openGraphDescription: "Understand how credit cohorts develop through time and how vintage divergence becomes a signal for investigation—not an automatic diagnosis.",
+    relatedCapability: { label: "Credit Risk", href: "/services/credit-risk", description: "Connect portfolio behaviour, models and policy evidence to controlled credit decisions." },
+    relatedResourceSlugs: ["operational-driver-forecasting"],
+    status: "published",
+    indexable: true,
+    cover: { type: "analytical-flow", variant: "credit-vintage", accessibleLabel: "Four credit cohort curves aligned by months on book, with newer cohorts diverging as they age", stages: ["Cohort", "Credit age", "Performance", "Signal", "Decision"] },
   },
 ];
 
