@@ -10,7 +10,7 @@ export type ArticleSection = { id: string; label: string };
 export default function ResourceArticle({ resource, sections, children }: { resource: ResourceRecord; sections?: ArticleSection[]; children: ReactNode }) {
   const topic = getTopic(resource.topic);
   const related = getPublishedRelatedResources(resource);
-  const published = resource.publishedAt ? new Intl.DateTimeFormat("en", { day: "numeric", month: "long", year: "numeric" }).format(new Date(resource.publishedAt)) : null;
+  const published = resource.publishedAt ? new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric" }).format(new Date(resource.publishedAt)) : null;
 
   return (
     <main className="site-page">
@@ -27,7 +27,7 @@ export default function ResourceArticle({ resource, sections, children }: { reso
             <p className={styles.deck}>{resource.deck}</p>
             <div className={styles.byline}>
               <div><span>Written by</span>{resource.author.profilePath ? <Link href={resource.author.profilePath}>{resource.author.name}</Link> : <strong>{resource.author.name}</strong>}<small>{resource.author.affiliation}</small></div>
-              <div><span>Published</span><strong>{published}</strong>{resource.updatedAt ? <small>Updated {new Intl.DateTimeFormat("en", { day: "numeric", month: "short", year: "numeric" }).format(new Date(resource.updatedAt))}</small> : null}</div>
+              <div><span>Published</span><strong>{published}</strong>{resource.updatedAt ? <small>Updated {new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", year: "numeric" }).format(new Date(resource.updatedAt))}</small> : null}</div>
               <div><span>Reading time</span><strong>{resource.readingMinutes} min</strong></div>
             </div>
           </div>

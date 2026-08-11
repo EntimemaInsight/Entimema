@@ -1,8 +1,8 @@
 # Resource 01 Brief — Building a Manufacturing Cost Architecture
 
-Status: internal editorial and implementation brief; not approved for publication
+Status: implementation brief; intellectual framework approved in Sprint 7D.0 and published through Sprint 7D
 
-Public article status: draft, non-indexable, absent from `/resources`, related-content results, static generation, and sitemap
+Public article status: published and indexable at `/resources/building-a-manufacturing-cost-architecture`
 
 Primary cluster: Cost & Profitability
 

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ResourceArticle from "../ResourceArticle";
+import ManufacturingCostArticle, { manufacturingCostSections } from "../ManufacturingCostArticle";
 import { getPublishedResource, getTopic, publishedResources } from "../resource-data";
 
 export const dynamicParams = false;
@@ -70,8 +71,8 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema).replace(/</g, "\\u003c") }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema).replace(/</g, "\\u003c") }} />
-      <ResourceArticle resource={resource}>
-        <p>Published Resource content is registered separately from metadata and must pass editorial review before this route can be generated.</p>
+      <ResourceArticle resource={resource} sections={[...manufacturingCostSections]}>
+        <ManufacturingCostArticle />
       </ResourceArticle>
     </>
   );
