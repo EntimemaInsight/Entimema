@@ -5,7 +5,7 @@ import styles from "./contact.module.css";
 
 export const metadata: Metadata = {
   title: "Contact us | Entimema",
-  description: "We’re here to help answer your questions.",
+  description: "Tell us the financial, risk, reporting or data problem you are trying to solve.",
 };
 
 export default async function ContactPage({ searchParams }: { searchParams: Promise<{ topic?: string }> }) {
@@ -17,8 +17,8 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
       <section className={styles.contact} aria-labelledby="contact-title">
         <div className="site-container">
           <header className={styles.hero}>
-            <h1 id="contact-title">Contact us</h1>
-            <p>We’re here to help answer your questions.</p>
+            <h1 id="contact-title">Tell us the problem.</h1>
+            <p>Start with the decision, model or system you are trying to improve.</p>
           </header>
           <ContactExperience initialTopic={topic} />
         </div>

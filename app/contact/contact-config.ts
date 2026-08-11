@@ -29,6 +29,14 @@ export const clientInquiryTypes = [
   "Other",
 ] as const;
 
+export const problemAreas = [
+  "Financial performance",
+  "Risk & forecasting",
+  "Management reporting",
+  "ERP & data",
+  "Other",
+] as const;
+
 export type TopicKey = keyof typeof topicOptions;
 
 export function isTopicKey(value: string): value is TopicKey {

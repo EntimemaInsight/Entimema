@@ -1,0 +1,41 @@
+.system { background: #fff; color: var(--brand-navy-950); }
+.section { padding-block: clamp(5.5rem, 8vw, 8rem); border-top: 1px solid rgba(8, 26, 66, .12); }
+.inner { display: grid; gap: clamp(3rem, 5vw, 5rem); }
+.header { display: grid; grid-template-columns: minmax(9rem, .55fr) minmax(0, 1.45fr); gap: clamp(2rem, 5vw, 5rem); align-items: start; }
+.header > p { margin: .45rem 0 0; color: var(--brand-blue-700); font-size: .75rem; font-weight: 650; line-height: 1.25; letter-spacing: .105em; }
+.header h2 { max-width: 21ch; margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(2rem, 3vw, 3rem); font-weight: 400; line-height: 1.08; letter-spacing: -.035em; text-wrap: balance; }
+.capabilityGrid, .problemGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid rgba(8, 26, 66, .14); }
+.capability, .problem { min-width: 0; padding: clamp(1.75rem, 3vw, 2.75rem) clamp(1.5rem, 3vw, 3rem); border-bottom: 1px solid rgba(8, 26, 66, .12); }
+.capability:nth-child(odd), .problem:nth-child(odd) { padding-left: 0; border-right: 1px solid rgba(8, 26, 66, .12); }
+.capability h3, .problem h3, .stages h3 { margin: 0; font-size: clamp(1.05rem, 1.3vw, 1.25rem); line-height: 1.3; letter-spacing: -.02em; }
+.capability ul { display: grid; gap: .55rem; margin: 1.25rem 0 0; padding: 0; list-style: none; color: var(--text-secondary); font-size: .95rem; line-height: 1.5; }
+.capability li::before { content: "—"; margin-right: .65rem; color: var(--brand-blue-700); }
+.evidence { background: #f8f8fb; }
+.problem p { max-width: 49ch; margin: 1rem 0 1.5rem; color: var(--text-secondary); font-size: .95rem; line-height: 1.65; }
+.problem > span { color: var(--brand-navy-900); font-size: .72rem; font-weight: 650; letter-spacing: .08em; text-transform: uppercase; }
+.problem i { margin-inline: .45rem; color: var(--brand-blue-700); font-style: normal; }
+.engagement { background: var(--brand-navy-950); color: #fff; }
+.engagement .header > p { color: #aebcff; }
+.stages { display: grid; margin: 0; padding: 0; border-top: 1px solid rgba(255, 255, 255, .2); list-style: none; }
+.stages li { display: grid; grid-template-columns: minmax(4rem, .3fr) minmax(0, 1.7fr); gap: clamp(1.5rem, 4vw, 4rem); padding-block: clamp(1.5rem, 2.4vw, 2.25rem); border-bottom: 1px solid rgba(255, 255, 255, .2); }
+.stages li > span { color: #aebcff; font-size: .8rem; font-weight: 650; letter-spacing: .1em; }
+.stages p { max-width: 62ch; margin: .65rem 0 0; color: rgba(255, 255, 255, .7); font-size: .95rem; line-height: 1.6; }
+.link { width: fit-content; color: #fff; font-size: .95rem; font-weight: 650; text-decoration: none; }
+.link span { display: inline-block; margin-left: .35rem; transition: transform 180ms var(--ease-standard); }
+.link:hover span, .link:focus-visible span { transform: translateX(4px); }
+.link:focus-visible { outline: 2px solid #aebcff; outline-offset: 6px; }
+
+@media (max-width: 43.75rem) {
+  .section { padding-block: 5rem; }
+  .header { grid-template-columns: 1fr; gap: 1rem; }
+  .header > p { margin: 0; }
+  .capabilityGrid, .problemGrid { grid-template-columns: 1fr; }
+  .capability, .problem,
+  .capability:nth-child(odd), .capability:nth-child(even),
+  .problem:nth-child(odd), .problem:nth-child(even) { padding: 1.75rem 0; border-right: 0; }
+  .stages li { grid-template-columns: 2.5rem minmax(0, 1fr); gap: 1rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link span { transition: none; }
+}

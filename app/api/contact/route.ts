@@ -1,9 +1,10 @@
 import { Resend } from "resend";
-import { clientInquiryTypes, isTopicKey, partnershipTypes, topicOptions } from "@/app/contact/contact-config";
+import { clientInquiryTypes, isTopicKey, partnershipTypes, problemAreas, topicOptions } from "@/app/contact/contact-config";
 
 const allowedPartnershipTypes = new Set<string>(partnershipTypes);
 const allowedInquiryTypes = new Set<string>(clientInquiryTypes);
-const allowedKeys = new Set(["intent", "topic", "topicName", "name", "email", "company", "role", "partnershipType", "project", "inquiryType", "message", "website"]);
+const allowedProblemAreas = new Set<string>(problemAreas);
+const allowedKeys = new Set(["intent", "topic", "topicName", "problemArea", "name", "email", "company", "role", "partnershipType", "project", "inquiryType", "message", "website"]);
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function text(value: unknown, max: number) {
@@ -42,6 +43,7 @@ export async function POST(request: Request) {
   const message = text(body.message, 4000);
   const topic = text(body.topic, 80);
   const topicName = text(body.topicName, 80);
+  const problemArea = text(body.problemArea, 80);
   const partnershipType = text(body.partnershipType, 160);
   const project = text(body.project, 160);
   const inquiryType = text(body.inquiryType, 160);
@@ -52,10 +54,11 @@ export async function POST(request: Request) {
   let subject: string;
   let html: string;
   if (intent === "project") {
+    if (!problemArea || !allowedProblemAreas.has(problemArea)) return Response.json({ ok: false }, { status: 400 });
     if (topicName && !isTopicKey(topicName)) return Response.json({ ok: false }, { status: 400 });
     const selectedTopic = topicName && isTopicKey(topicName) ? topicOptions[topicName] : topic && isTopicKey(topic) ? topicOptions[topic] : null;
     subject = `[Entimema] Нов проект${selectedTopic ? ` — ${selectedTopic}` : ""}`;
-    html = row("Тип", "Нов проект") + row("Тема / услуга", selectedTopic) + row("Име", name) + row("E-mail", email) + row("Компания", company) + row("Длъжност", role) + row("Проблем / контекст", message);
+    html = row("Type", "New project") + row("Problem area", problemArea) + row("Topic / service", selectedTopic) + row("Name", name) + row("E-mail", email) + row("Company", company) + row("Role", role) + row("Problem / context", message);
   } else if (intent === "partnership") {
     if (!company || !partnershipType || !allowedPartnershipTypes.has(partnershipType)) return Response.json({ ok: false }, { status: 400 });
     subject = `[Entimema] Партньорство — ${company}`;
