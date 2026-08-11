@@ -13,7 +13,7 @@ const scoreBands = [["A", "86%"], ["B", "72%"], ["C", "54%"], ["D", "31%"]];
 export default function CreditRiskDashboard() {
   return (
     <div className={styles.dashboard} aria-label="Illustrative credit risk management dashboard">
-      <div className={styles.dashboardTop}><div><span className={styles.dashboardEyebrow}>CREDIT RISK PLATFORM</span><h2>Portfolio Management</h2></div><span className={styles.demoBadge}>Active Strategy</span></div>
+      <div className={styles.dashboardTop}><div><span className={styles.dashboardEyebrow}>CREDIT RISK PLATFORM</span><h2>Portfolio Management</h2></div><span className={styles.demoBadge}>Illustrative data</span></div>
       <div className={styles.metrics}>{metrics.map(([label, value, note], index) => <div className={`${styles.metric} ${index === 1 || index === 2 ? styles.metricPrimary : ""}`} key={label}><span>{label}</span><strong>{value}</strong><small>{note}</small></div>)}</div>
       <div className={styles.riskGrid}>
         <section className={styles.funnelPanel} aria-labelledby="funnel-title"><div className={styles.chartHeading}><div><span>ORIGINATION</span><h3 id="funnel-title">Application Funnel</h3></div></div><div className={styles.funnel}>{[["Applications", "100%"], ["Eligible", "78%"], ["Approved", "62%"], ["Disbursed", "51%"]].map(([label, width]) => <div key={label}><span>{label}</span><i style={{ "--width": width } as CSSProperties} /><b>{width}</b></div>)}</div></section>

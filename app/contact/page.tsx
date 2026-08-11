@@ -6,6 +6,7 @@ import styles from "./contact.module.css";
 export const metadata: Metadata = {
   title: "Contact us | Entimema",
   description: "Tell us the financial, risk, reporting or data problem you are trying to solve.",
+  alternates: { canonical: "/contact" },
 };
 
 export default async function ContactPage({ searchParams }: { searchParams: Promise<{ topic?: string }> }) {

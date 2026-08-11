@@ -9,6 +9,7 @@ import styles from "./decision-automation.module.css";
 export const metadata: Metadata = {
   title: "Decision Intelligence | Entimema",
   description: "Build decision engines that connect data, analytical models, business rules and policy into traceable operational decision flows.",
+  alternates: { canonical: "/services/decision-automation" },
 };
 
 const capabilities = [

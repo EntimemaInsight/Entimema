@@ -5,6 +5,8 @@ import ServicesSection from "@/components/ServicesSection";
 
 export const metadata: Metadata = {
   title: "Services | Entimema",
+  description: "Financial architecture and decision science across CFO advisory, planning, reporting, financial data, AI agents, credit risk, AML and decision intelligence.",
+  alternates: { canonical: "/services" },
 };
 
 export default function ServicesPage() {

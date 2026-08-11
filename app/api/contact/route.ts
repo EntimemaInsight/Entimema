@@ -57,16 +57,16 @@ export async function POST(request: Request) {
     if (!problemArea || !allowedProblemAreas.has(problemArea)) return Response.json({ ok: false }, { status: 400 });
     if (topicName && !isTopicKey(topicName)) return Response.json({ ok: false }, { status: 400 });
     const selectedTopic = topicName && isTopicKey(topicName) ? topicOptions[topicName] : topic && isTopicKey(topic) ? topicOptions[topic] : null;
-    subject = `[Entimema] Нов проект${selectedTopic ? ` — ${selectedTopic}` : ""}`;
+    subject = `[Entimema] New project${selectedTopic ? ` — ${selectedTopic}` : ""}`;
     html = row("Type", "New project") + row("Problem area", problemArea) + row("Topic / service", selectedTopic) + row("Name", name) + row("E-mail", email) + row("Company", company) + row("Role", role) + row("Problem / context", message);
   } else if (intent === "partnership") {
     if (!company || !partnershipType || !allowedPartnershipTypes.has(partnershipType)) return Response.json({ ok: false }, { status: 400 });
-    subject = `[Entimema] Партньорство — ${company}`;
-    html = row("Тип", "Партньорство") + row("Име", name) + row("E-mail", email) + row("Компания", company) + row("Длъжност", role) + row("Тип партньорство", partnershipType) + row("Предложение", message);
+    subject = `[Entimema] Partnership — ${company}`;
+    html = row("Type", "Partnership") + row("Name", name) + row("E-mail", email) + row("Company", company) + row("Role", role) + row("Partnership type", partnershipType) + row("Proposal", message);
   } else if (intent === "client") {
     if (!company || !inquiryType || !allowedInquiryTypes.has(inquiryType)) return Response.json({ ok: false }, { status: 400 });
-    subject = `[Entimema] Текущ клиент — ${inquiryType}`;
-    html = row("Тип", "Текущ клиент") + row("Име", name) + row("E-mail", email) + row("Компания", company) + row("Проект / услуга", project) + row("Тип запитване", inquiryType) + row("Описание", message);
+    subject = `[Entimema] Existing client — ${inquiryType}`;
+    html = row("Type", "Existing client") + row("Name", name) + row("E-mail", email) + row("Company", company) + row("Project / service", project) + row("Inquiry type", inquiryType) + row("Description", message);
   } else {
     return Response.json({ ok: false }, { status: 400 });
   }

@@ -9,6 +9,7 @@ import styles from "./credit-risk.module.css";
 export const metadata: Metadata = {
   title: "Credit Risk | Entimema",
   description: "Build credit risk models, decision strategies and portfolio controls that connect scoring, policy and portfolio behaviour across the credit lifecycle.",
+  alternates: { canonical: "/services/credit-risk" },
 };
 
 const capabilities = [

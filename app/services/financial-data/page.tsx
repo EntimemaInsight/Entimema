@@ -8,6 +8,7 @@ import styles from "./financial-data.module.css";
 export const metadata: Metadata = {
   title: "Financial Data | Entimema",
   description: "Build one trusted financial data foundation across ERP, reporting, planning and analytics with consistent structures, validation and traceability.",
+  alternates: { canonical: "/services/financial-data" },
 };
 
 const capabilities = [

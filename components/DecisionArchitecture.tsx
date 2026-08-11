@@ -29,10 +29,10 @@ type Scene = {
 const scenes: Record<Mode, Scene> = {
   finance: {
     mode: "finance",
-    name: "Elena Angelova",
+    name: "Illustrative CFO Workspace",
     role: "Chief Financial Officer",
     image: "/elena-angelova.webp",
-    company: "Industrial Group",
+    company: "Example Scenario",
     industry: "Manufacturing",
     period: "FY 2026",
     topTags: ["P&L", "Balance Sheet", "Cash Flow", "Budget", "KPI"],
@@ -54,10 +54,10 @@ const scenes: Record<Mode, Scene> = {
   },
   risk: {
     mode: "risk",
-    name: "Elisaveta Geneva",
+    name: "Illustrative Risk Workspace",
     role: "Risk Manager",
     image: "/elisaveta-geneva.webp",
-    company: "Financial Group",
+    company: "Example Scenario",
     industry: "Banking & Finance",
     period: "FY 2026",
     topTags: ["Credit Risk", "Market Risk", "Liquidity Risk", "Operational Risk", "Compliance"],

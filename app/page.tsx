@@ -12,6 +12,7 @@ import CaseCtaSection from "@/components/CaseCtaSection";
 export const metadata: Metadata = {
   title: "Entimema | Financial Architecture, Decision Science & AI",
   description: "Financial architecture, decision science and AI agents for better financial, risk and management decisions.",
+  alternates: { canonical: "/" },
 };
 
 export default function Home() {

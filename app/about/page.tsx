@@ -8,6 +8,7 @@ import AboutMotion from "./AboutMotion";
 export const metadata: Metadata = {
   title: "About Entimema | Financial Architecture & Decision Science",
   description: "Entimema connects finance, risk, data, models and technology to build clearer decision systems for real business environments.",
+  alternates: { canonical: "/about" },
 };
 
 const pillars = [

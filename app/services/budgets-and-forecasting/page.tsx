@@ -8,6 +8,7 @@ import styles from "./budgets-and-forecasting.module.css";
 export const metadata: Metadata = {
   title: "Planning & Forecasting | Entimema",
   description: "Build driver-based budgets, rolling forecasts and scenarios that connect operational assumptions, financial outcomes and cash.",
+  alternates: { canonical: "/services/budgets-and-forecasting" },
 };
 
 const capabilities = [

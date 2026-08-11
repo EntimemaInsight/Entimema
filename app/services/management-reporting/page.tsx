@@ -8,6 +8,7 @@ import styles from "./management-reporting.module.css";
 export const metadata: Metadata = {
   title: "Management Reporting | Entimema",
   description: "Build management reporting around the decisions your business needs to make, connecting financial performance, operational drivers and management action in one view.",
+  alternates: { canonical: "/services/management-reporting" },
 };
 
 const capabilities = [

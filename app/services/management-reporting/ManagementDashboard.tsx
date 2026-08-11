@@ -19,7 +19,7 @@ export default function ManagementDashboard() {
     <div className={styles.dashboard} aria-label="Demonstration management reporting dashboard">
       <div className={styles.dashboardTop}>
         <div><span className={styles.dashboardEyebrow}>MANAGEMENT INFORMATION</span><h2>Management View</h2></div>
-        <span className={styles.demoBadge}>Current period</span>
+        <span className={styles.demoBadge}>Illustrative data</span>
       </div>
       <div className={styles.metrics}>
         {metrics.map(([label, value, note], index) => <div className={`${styles.metric} ${index === 0 || index === 3 ? styles.metricPrimary : ""}`} key={label}><span>{label}</span><strong>{value}</strong><small>{note}</small></div>)}

@@ -18,7 +18,7 @@ const flow = [
 export default function DecisionEngineDashboard() {
   return (
     <div className={styles.dashboard} aria-label="Illustrative decision engine dashboard">
-      <div className={styles.dashboardTop}><div><span className={styles.dashboardEyebrow}>DECISION ENGINE</span><h2>Decision Management</h2></div><span className={styles.demoBadge}>Active Strategy</span></div>
+      <div className={styles.dashboardTop}><div><span className={styles.dashboardEyebrow}>DECISION ENGINE</span><h2>Decision Management</h2></div><span className={styles.demoBadge}>Illustrative data</span></div>
       <div className={styles.metrics}>{metrics.map(([label, value, note], index) => <div className={`${styles.metric} ${index === 2 ? styles.metricPrimary : ""}`} key={label}><span>{label}</span><strong>{value}</strong><small>{note}</small></div>)}</div>
       <section className={styles.flowPanel} aria-labelledby="decision-flow-title">
         <div className={styles.chartHeading}><div><span>EXECUTION LAYER</span><h3 id="decision-flow-title">Decision Flow</h3></div><span className={styles.executionBadge}>EXECUTING</span></div>

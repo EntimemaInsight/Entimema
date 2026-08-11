@@ -9,6 +9,7 @@ import styles from "../credit-risk/credit-risk.module.css";
 export const metadata: Metadata = {
   title: "AML & Compliance | Entimema",
   description: "Build a traceable AML control architecture connecting KYC, screening, transaction monitoring, investigations, escalation and regulatory evidence.",
+  alternates: { canonical: "/services/aml-compliance" },
 };
 
 const capabilities = [

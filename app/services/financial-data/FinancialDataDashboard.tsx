@@ -11,7 +11,7 @@ const metrics = [
 export default function FinancialDataDashboard() {
   return (
     <div className={styles.dashboard} aria-label="Demonstration dashboard for financial data reliability and integration">
-      <div className={styles.dashboardTop}><div><span className={styles.dashboardEyebrow}>FINANCIAL DATA FOUNDATION</span><h2>Data Reliability Control</h2></div><span className={styles.demoBadge}>Synchronised</span></div>
+      <div className={styles.dashboardTop}><div><span className={styles.dashboardEyebrow}>FINANCIAL DATA FOUNDATION</span><h2>Data Reliability Control</h2></div><span className={styles.demoBadge}>Illustrative data</span></div>
       <div className={styles.metrics}>{metrics.map(([label, value, note], index) => <div className={`${styles.metric} ${index === 1 || index === 3 ? styles.metricPrimary : ""}`} key={label}><span>{label}</span><strong>{value}</strong><small>{note}</small></div>)}</div>
       <div className={styles.charts}>
         <section className={`${styles.chartPanel} ${styles.flowPanel}`} aria-labelledby="data-flow-title"><div className={styles.chartHeading}><div><span>Data Lineage</span><h3 id="data-flow-title">Integrated Financial Flow</h3></div></div><div className={styles.dataFlow} aria-label="ERP source mapped through the financial model to finance output"><span><small>Source</small>ERP</span><i aria-hidden="true" /><span><small>Transform</small>Model</span><i aria-hidden="true" /><span><small>Output</small>Finance</span></div></section>

@@ -5,7 +5,7 @@ import Navbar from "@/components/Navbar";
 import CostDashboard from "./CostDashboard";
 import styles from "./cost-and-profitability.module.css";
 
-export const metadata: Metadata = { title: "Cost & Margin Management | Entimema", description: "Understand cost and profitability across products, customers and processes through transparent cost models, margin analysis and business drivers." };
+export const metadata: Metadata = { title: "Cost & Margin Management | Entimema", description: "Understand cost and profitability across products, customers and processes through transparent cost models, margin analysis and business drivers.", alternates: { canonical: "/services/cost-and-profitability" } };
 
 const capabilities = [
   ["COST MODELS", "Build transparent cost models that show how resources, processes and allocations become unit cost."],

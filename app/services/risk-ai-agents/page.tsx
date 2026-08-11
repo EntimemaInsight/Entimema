@@ -9,6 +9,7 @@ import styles from "../decision-automation/decision-automation.module.css";
 export const metadata: Metadata = {
   title: "Risk AI Agents | Entimema",
   description: "Build governed AI agents for credit, AML and risk operations with defined roles, explicit controls, escalation and human oversight.",
+  alternates: { canonical: "/services/risk-ai-agents" },
 };
 
 const capabilities = [

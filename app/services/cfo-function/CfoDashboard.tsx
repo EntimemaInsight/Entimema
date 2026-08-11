@@ -15,7 +15,7 @@ export default function CfoDashboard() {
           <span className={styles.dashboardEyebrow}>MANAGEMENT REPORTING</span>
           <h2>Financial Overview</h2>
         </div>
-        <span className={styles.demoBadge}>Demo data</span>
+        <span className={styles.demoBadge}>Illustrative data</span>
       </div>
       <div className={styles.metrics}>
         {metrics.map(([label, value, note], index) => (

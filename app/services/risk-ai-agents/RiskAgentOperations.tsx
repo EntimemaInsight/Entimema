@@ -18,7 +18,7 @@ const agents = [
 export default function RiskAgentOperations() {
   return (
     <div className={`${styles.dashboard} ${styles.agentDashboard}`} aria-label="Illustrative risk AI agent operations dashboard">
-      <div className={styles.dashboardTop}><div><span className={styles.dashboardEyebrow}>CONTROLLED RISK EXECUTION</span><h2>Risk Agent Operations</h2></div><span className={styles.demoBadge}>Agents Active</span></div>
+      <div className={styles.dashboardTop}><div><span className={styles.dashboardEyebrow}>CONTROLLED RISK EXECUTION</span><h2>Risk Agent Operations</h2></div><span className={styles.demoBadge}>Illustrative data</span></div>
       <div className={styles.metrics}>{metrics.map(([label, value, note], index) => <div className={`${styles.metric} ${index === 2 ? styles.metricPrimary : ""}`} key={label}><span>{label}</span><strong>{value}</strong><small>{note}</small></div>)}</div>
       <section className={styles.flowPanel} aria-labelledby="agent-activity-title">
         <div className={styles.chartHeading}><div><span>RULES · PERMISSIONS · AUDIT TRAIL</span><h3 id="agent-activity-title">Agent Activity</h3></div><span className={styles.executionBadge}>HUMAN OVERSIGHT</span></div>

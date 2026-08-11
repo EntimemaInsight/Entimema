@@ -8,6 +8,7 @@ import styles from "./cfo-function.module.css";
 export const metadata: Metadata = {
   title: "CFO Advisory | Entimema",
   description: "Build the financial structure, management information and decision processes your business needs without building a full CFO organisation from day one.",
+  alternates: { canonical: "/services/cfo-function" },
 };
 
 const capabilities = [

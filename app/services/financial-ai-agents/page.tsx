@@ -8,6 +8,7 @@ import styles from "./financial-ai-agents.module.css";
 export const metadata: Metadata = {
   title: "Finance AI Agents | Entimema",
   description: "Build governed finance AI agents for reporting, planning, controlling and ERP workflows with trusted data, defined rules and human oversight.",
+  alternates: { canonical: "/services/financial-ai-agents" },
 };
 
 const capabilities = [

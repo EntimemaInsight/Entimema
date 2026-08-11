@@ -11,7 +11,7 @@ const metrics = [
 export default function CostDashboard() {
   return (
     <div className={styles.dashboard} aria-label="Demonstration cost and profitability dashboard">
-      <div className={styles.dashboardTop}><div><span className={styles.dashboardEyebrow}>BUSINESS ECONOMICS</span><h2>Profitability Overview</h2></div><span className={styles.demoBadge}>Current period</span></div>
+      <div className={styles.dashboardTop}><div><span className={styles.dashboardEyebrow}>BUSINESS ECONOMICS</span><h2>Profitability Overview</h2></div><span className={styles.demoBadge}>Illustrative data</span></div>
       <div className={styles.metrics}>{metrics.map(([label, value, note], index) => <div className={`${styles.metric} ${index === 0 || index === 3 ? styles.metricPrimary : ""}`} key={label}><span>{label}</span><strong>{value}</strong><small>{note}</small></div>)}</div>
       <div className={styles.charts}>
         <section className={styles.chartPanel} aria-labelledby="product-profitability"><div className={styles.chartHeading}><div><span>Products</span><h3 id="product-profitability">Product Profitability</h3></div></div><div className={styles.productBars}>{[["Alpha", "86%", "31%"], ["Beta", "64%", "22%"], ["Gamma", "47%", "16%"]].map(([label, width, value]) => <div className={styles.productRow} key={label}><span>{label}</span><span className={styles.productTrack}><i style={{ "--width": width } as CSSProperties} /></span><strong>{value}</strong></div>)}</div></section>

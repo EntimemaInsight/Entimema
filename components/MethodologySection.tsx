@@ -3,11 +3,11 @@
 import { useEffect, useRef } from "react";
 
 const steps = [
-  { no: "01", title: "Разбиране", text: "Започваме с контекста — целите, ограниченията, данните и начина, по който решенията се вземат днес.", icon: "eye" },
-  { no: "02", title: "Структуриране", text: "Подреждаме проблема в ясна логика — процеси, зависимости, показатели и точки на управленско въздействие.", icon: "structure" },
-  { no: "03", title: "Моделиране", text: "Превръщаме логиката в работещ модел — финансов, рисков или оперативен, който може да бъде измерван и тестван.", icon: "model" },
-  { no: "04", title: "Автоматизация", text: "Вграждаме модела в процесите чрез данни, системи и AI, така че решенията да бъдат по-бързи и последователни.", icon: "automation" },
-  { no: "05", title: "Развитие", text: "Следим резултатите, валидираме допусканията и развиваме системата заедно с бизнеса.", icon: "growth" },
+  { no: "01", title: "Understand", text: "Start with the context — objectives, constraints, data and the way decisions are made today.", icon: "eye" },
+  { no: "02", title: "Structure", text: "Organise the problem into clear logic — processes, dependencies, measures and points of management intervention.", icon: "structure" },
+  { no: "03", title: "Model", text: "Translate the logic into a financial, risk or operating model that can be measured and tested.", icon: "model" },
+  { no: "04", title: "Automate", text: "Embed the model through data, systems and AI so decisions become faster and more consistent.", icon: "automation" },
+  { no: "05", title: "Evolve", text: "Observe outcomes, validate assumptions and develop the system as the business changes.", icon: "growth" },
 ];
 
 function StepIcon({ type }: { type: string }) {
@@ -38,7 +38,7 @@ export default function MethodologySection() {
       <div className="methodology__dots" aria-hidden="true" />
       <div className="site-container methodology__inner">
         <header className="methodology__header methodology-reveal">
-          <h2>Променя се контекстът,<br/><em>а не логиката.</em></h2>
+          <h2>The context changes,<br/><em>the logic should not.</em></h2>
         </header>
 
         <div className="methodology__steps">
@@ -55,7 +55,7 @@ export default function MethodologySection() {
 
         <div className="methodology__statement methodology-reveal methodology-reveal--6">
           <span className="methodology__statement-mark">✦</span>
-          <p>Подходът ни е последователен, измерим и приложим — независимо дали изграждаме финансова архитектура, рисков модел или AI система.</p>
+          <p>The approach remains consistent, measurable and applicable — whether the system concerns financial architecture, a risk model or controlled AI.</p>
         </div>
       </div>
     </section>

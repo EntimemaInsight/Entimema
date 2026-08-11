@@ -19,7 +19,7 @@ export default function PlanningDashboard() {
     <div className={styles.dashboard} aria-label="Demonstration financial planning dashboard">
       <div className={styles.dashboardTop}>
         <div><span className={styles.dashboardEyebrow}>PLANNING ENVIRONMENT</span><h2>Forecast Overview</h2></div>
-        <span className={styles.demoBadge}>Base scenario</span>
+        <span className={styles.demoBadge}>Illustrative data</span>
       </div>
       <div className={styles.metrics}>
         {metrics.map(([label, value, note], index) => <div className={`${styles.metric} ${index === 0 || index === 2 ? styles.metricPrimary : ""}`} key={label}><span>{label}</span><strong>{value}</strong><small>{note}</small></div>)}
