@@ -7,6 +7,18 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://entimema.net"),
   title: "Entimema | Financial Architecture, Decision Science & AI",
   description: "Financial architecture, decision science and AI agents for better financial, risk and management decisions.",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName: "Entimema",
+    title: "Entimema | Financial Architecture, Decision Science & AI",
+    description: "Financial architecture, decision science and AI agents for better financial, risk and management decisions.",
+  },
+  twitter: {
+    card: "summary",
+    title: "Entimema | Financial Architecture, Decision Science & AI",
+    description: "Financial architecture, decision science and AI agents for better financial, risk and management decisions.",
+  },
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
