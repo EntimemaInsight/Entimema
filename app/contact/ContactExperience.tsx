@@ -3,6 +3,7 @@
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { clientInquiryTypes, isTopicKey, partnershipTypes, problemAreaForTopic, topicOptions } from "./contact-config";
 import styles from "./contact.module.css";
+import { ANALYTICS_READY_EVENT, previousInternalPath, trackAnalyticsEvent } from "@/lib/analytics";
 
 type Intent = "project" | "partnership" | "client";
 type IconProps = { className?: string };
@@ -54,6 +55,19 @@ export default function ContactExperience({ initialTopic }: { initialTopic?: str
     if (intent) panelHeading.current?.focus();
   }, [intent]);
 
+  useEffect(() => {
+    let sent = false;
+    const send = () => {
+      if (sent) return;
+      sent = trackAnalyticsEvent("contact_view", {
+        previous_internal_path: previousInternalPath(),
+      });
+    };
+    send();
+    window.addEventListener(ANALYTICS_READY_EVENT, send);
+    return () => window.removeEventListener(ANALYTICS_READY_EVENT, send);
+  }, []);
+
   function openForm(nextIntent: Intent) {
     setStatus("idle");
     setIntent(nextIntent);
@@ -68,7 +82,7 @@ export default function ContactExperience({ initialTopic }: { initialTopic?: str
 
   async function submitForm(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (status === "sending") return;
+    if (status === "sending" || !intent) return;
     const form = event.currentTarget;
     if (!form.reportValidity()) return;
     setStatus("sending");
@@ -83,7 +97,14 @@ export default function ContactExperience({ initialTopic }: { initialTopic?: str
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
-      setStatus(response.ok ? "success" : "error");
+      if (response.ok) {
+        setStatus("success");
+        if (response.headers.get("X-Entimema-Submission") === "accepted") {
+          trackAnalyticsEvent("contact_submit_success", { inquiry_type: intent });
+        }
+      } else {
+        setStatus("error");
+      }
     } catch {
       setStatus("error");
     }

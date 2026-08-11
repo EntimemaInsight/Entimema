@@ -97,6 +97,23 @@
   outline-offset: 4px;
 }
 
+.preferencesButton {
+  margin-top: 18px;
+  padding: 11px 15px;
+  border: 1px solid var(--brand-navy-900);
+  background: transparent;
+  color: var(--brand-navy-950);
+  font: inherit;
+  font-size: 14px;
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+}
+
+.preferencesButton:focus-visible {
+  outline: 3px solid var(--brand-blue-200);
+  outline-offset: 4px;
+}
+
 .pending {
   padding-left: 16px;
   border-left: 2px solid var(--brand-blue-600);

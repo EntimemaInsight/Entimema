@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import { getPublishedRelatedResources, getTopic, type ResourceRecord } from "./resource-data";
 import styles from "./resources.module.css";
+import { RelatedCapabilityLink, ResourceViewAnalytics } from "@/components/ResourceAnalytics";
 
 export type ArticleSection = { id: string; label: string };
 
@@ -16,6 +17,7 @@ export default function ResourceArticle({ resource, sections, children }: { reso
     <main className="site-page">
       <AnnouncementBar />
       <Navbar active="resources" />
+      <ResourceViewAnalytics resourceSlug={resource.slug} resourceTitle={resource.title} resourceTopic={topic?.label ?? resource.topic} />
       <article className={styles.article}>
         <header className={styles.articleHeader}>
           <div className={styles.readingContainer}>
@@ -40,7 +42,7 @@ export default function ResourceArticle({ resource, sections, children }: { reso
 
         <aside className={styles.capability} aria-labelledby="related-capability-title">
           <div><span>RELATED CAPABILITY</span><h2 id="related-capability-title">{resource.relatedCapability.label}</h2><p>{resource.relatedCapability.description}</p></div>
-          <Link href={resource.relatedCapability.href}>Explore the capability <span aria-hidden="true">→</span></Link>
+          <RelatedCapabilityLink href={resource.relatedCapability.href} resourceSlug={resource.slug}>Explore the capability <span aria-hidden="true">→</span></RelatedCapabilityLink>
         </aside>
 
         {related.length ? <section className={styles.related} aria-labelledby="related-resources-title"><div className={styles.wideContainer}><header><span>CONTINUE THE ANALYSIS</span><h2 id="related-resources-title">Related Resources</h2></header><div>{related.map((item) => <Link href={item.canonicalPath} key={item.slug}><span>{getTopic(item.topic)?.label}</span><strong>{item.title}</strong><small>{item.readingMinutes} min read</small></Link>)}</div></div></section> : null}

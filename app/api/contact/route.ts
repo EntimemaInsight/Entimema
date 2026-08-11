@@ -83,7 +83,7 @@ export async function POST(request: Request) {
       html,
     });
     if (error) return Response.json({ ok: false }, { status: 502 });
-    return Response.json({ ok: true });
+    return Response.json({ ok: true }, { headers: { "X-Entimema-Submission": "accepted" } });
   } catch {
     return Response.json({ ok: false }, { status: 502 });
   }
