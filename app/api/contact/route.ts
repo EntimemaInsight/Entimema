@@ -1,8 +1,8 @@
 import { Resend } from "resend";
-import { isTopicKey, topicOptions } from "@/app/contact/contact-config";
+import { clientInquiryTypes, isTopicKey, partnershipTypes, topicOptions } from "@/app/contact/contact-config";
 
-const partnershipTypes = new Set(["Технологичен партньор", "Доставчик на данни или софтуер", "Консултантски партньор", "Академично / изследователско партньорство", "Development партньор — Entimema Labs", "Affiliate партньор", "Друго"]);
-const inquiryTypes = new Set(["Технически въпрос", "Данни / модел", "Промяна по текущ проект", "Достъп / документация", "Друго"]);
+const allowedPartnershipTypes = new Set<string>(partnershipTypes);
+const allowedInquiryTypes = new Set<string>(clientInquiryTypes);
 const allowedKeys = new Set(["intent", "topic", "topicName", "name", "email", "company", "role", "partnershipType", "project", "inquiryType", "message", "website"]);
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -57,11 +57,11 @@ export async function POST(request: Request) {
     subject = `[Entimema] Нов проект${selectedTopic ? ` — ${selectedTopic}` : ""}`;
     html = row("Тип", "Нов проект") + row("Тема / услуга", selectedTopic) + row("Име", name) + row("E-mail", email) + row("Компания", company) + row("Длъжност", role) + row("Проблем / контекст", message);
   } else if (intent === "partnership") {
-    if (!company || !partnershipType || !partnershipTypes.has(partnershipType)) return Response.json({ ok: false }, { status: 400 });
+    if (!company || !partnershipType || !allowedPartnershipTypes.has(partnershipType)) return Response.json({ ok: false }, { status: 400 });
     subject = `[Entimema] Партньорство — ${company}`;
     html = row("Тип", "Партньорство") + row("Име", name) + row("E-mail", email) + row("Компания", company) + row("Длъжност", role) + row("Тип партньорство", partnershipType) + row("Предложение", message);
   } else if (intent === "client") {
-    if (!company || !inquiryType || !inquiryTypes.has(inquiryType)) return Response.json({ ok: false }, { status: 400 });
+    if (!company || !inquiryType || !allowedInquiryTypes.has(inquiryType)) return Response.json({ ok: false }, { status: 400 });
     subject = `[Entimema] Текущ клиент — ${inquiryType}`;
     html = row("Тип", "Текущ клиент") + row("Име", name) + row("E-mail", email) + row("Компания", company) + row("Проект / услуга", project) + row("Тип запитване", inquiryType) + row("Описание", message);
   } else {

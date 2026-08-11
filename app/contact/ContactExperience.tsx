@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useRef, useState } from "react";
-import { isTopicKey, topicOptions } from "./contact-config";
+import { clientInquiryTypes, isTopicKey, partnershipTypes, topicOptions } from "./contact-config";
 import styles from "./contact.module.css";
 
 type Intent = "project" | "partnership" | "client";
@@ -23,24 +23,6 @@ const paths = [
   { intent: "project" as const, title: "New Project", Icon: ProjectIcon },
   { intent: "partnership" as const, title: "Partnerships", Icon: PartnershipIcon },
   { intent: "client" as const, title: "Existing Clients", Icon: ClientIcon },
-];
-
-const partnershipTypes = [
-  "Technology partner",
-  "Data or software provider",
-  "Consulting partner",
-  "Academic or research partnership",
-  "Development partner — Entimema Labs",
-  "Affiliate partner",
-  "Other",
-];
-
-const clientInquiryTypes = [
-  "Technical question",
-  "Data or model",
-  "Change to an existing project",
-  "Access or documentation",
-  "Other",
 ];
 
 const formContent = {
@@ -168,6 +150,6 @@ function Field({ id, label, required = false, type = "text" }: { id: string; lab
   return <label className={styles.field} htmlFor={id}><span>{label}{required ? " *" : ""}</span><input id={id} maxLength={id === "email" ? 254 : 160} name={id} required={required} type={type} /></label>;
 }
 
-function SelectField({ id, label, options }: { id: string; label: string; options: string[] }) {
+function SelectField({ id, label, options }: { id: string; label: string; options: readonly string[] }) {
   return <label className={styles.field} htmlFor={id}><span>{label} *</span><select defaultValue="" id={id} name={id} required><option disabled value="">Select</option>{options.map((option) => <option key={option} value={option}>{option}</option>)}</select></label>;
 }

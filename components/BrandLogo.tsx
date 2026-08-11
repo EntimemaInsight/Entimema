@@ -4,8 +4,8 @@ export default function BrandLogo({ compact = false }: { compact?: boolean }) {
       <svg
         className="site-brand__mark"
         viewBox="0 0 64 64"
-        role="img"
-        aria-label="Entimema"
+        aria-hidden="true"
+        focusable="false"
       >
         <rect x="3" y="3" width="58" height="58" rx="14" fill="#071B52" />
         <path

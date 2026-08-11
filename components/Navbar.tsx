@@ -19,7 +19,7 @@ export default function Navbar({ active = "home" }: { active?: NavKey }) {
 
           <Link
             className={active === "analyses" ? "is-active" : undefined}
-            href="/insights"
+            href="/#analyses"
             aria-current={active === "analyses" ? "page" : undefined}
           >
             RESOURCES

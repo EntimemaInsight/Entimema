@@ -175,7 +175,7 @@ export default function DecisionArchitecture() {
   const output = scene.outputStates[activeStep];
 
   return (
-    <section className={`decision-architecture executive-intelligence is-${mode} ${visible ? "is-visible" : ""} ${transitioning ? "is-transitioning" : ""}`} ref={ref} aria-label="Interactive executive intelligence">
+    <section className={`decision-architecture executive-intelligence is-${mode} ${visible ? "is-visible" : ""} ${transitioning ? "is-transitioning" : ""}`} id="analyses" ref={ref} aria-label="Interactive executive intelligence">
       <div className="site-container executive-intelligence__inner">
         <div className="executive-intelligence__canvas">
           <div className="executive-intelligence__dots" aria-hidden="true" />
@@ -229,7 +229,7 @@ export default function DecisionArchitecture() {
             {scene.orbitTags.map((tag, index) => <span className={`executive-orbit-tag executive-orbit-tag--${index + 1}`} style={{ "--tag": index } as React.CSSProperties} key={tag}>{tag}</span>)}
           </div>
 
-          <div className="executive-intelligence__output" aria-live="polite">
+          <div className="executive-intelligence__output">
             <span className="executive-intelligence__check">{activeStep === 3 ? "✓" : "·"}</span>
             <div><strong>{output.title}</strong><small>{output.text}</small></div>
             <span className="executive-intelligence__progress" aria-hidden="true"><i style={{ transform: `scaleX(${(activeStep + 1) / 4})` }} /></span>

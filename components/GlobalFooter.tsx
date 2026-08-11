@@ -42,13 +42,13 @@ export default function GlobalFooter() {
     <footer className={styles.footer}>
       <div className={`site-container ${styles.inner}`}>
         <div className={styles.brandZone}>
-          <Link className={styles.brandLink} href="/" aria-label="Entimema – начало">
+          <Link className={styles.brandLink} href="/" aria-label="Entimema — home">
             <BrandLogo compact />
           </Link>
           <span className={styles.copyright}>© 2026 Entimema</span>
         </div>
 
-        <nav className={styles.navigation} aria-label="Навигация в долната част на сайта">
+        <nav className={styles.navigation} aria-label="Footer navigation">
           {columns.map((column) => (
             <section className={styles.column} key={column.title}>
               <h2>{column.title}</h2>

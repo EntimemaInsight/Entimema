@@ -4,8 +4,9 @@ import ScrollExperience from "@/components/ScrollExperience";
 import GlobalFooter from "@/components/GlobalFooter";
 
 export const metadata: Metadata = {
-  title: "Entimema | Финансови системи, риск и AI",
-  description: "Финансова архитектура, кредитен риск, трансформация, данни, AI и CFO функция.",
+  metadataBase: new URL("https://entimema.net"),
+  title: "Entimema | Financial Architecture, Decision Science & AI",
+  description: "Financial architecture, decision science and AI agents for better financial, risk and management decisions.",
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="bg">
+    <html lang="en">
       <body><ScrollExperience />{children}<GlobalFooter /></body>
     </html>
   );

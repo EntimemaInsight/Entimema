@@ -173,19 +173,11 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
       attributeFilter: ["class"],
     });
 
-    let animationFrame = 0;
-    const trackHeaderPosition = () => {
-      updateMenuPosition();
-      animationFrame = window.requestAnimationFrame(trackHeaderPosition);
-    };
-    animationFrame = window.requestAnimationFrame(trackHeaderPosition);
-
     return () => {
       window.removeEventListener("resize", updateMenuPosition);
       window.removeEventListener("scroll", updateMenuPosition, true);
       resizeObserver?.disconnect();
       classObserver.disconnect();
-      window.cancelAnimationFrame(animationFrame);
     };
   }, [isOpen, updateMenuPosition]);
 
