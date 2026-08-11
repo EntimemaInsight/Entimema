@@ -4,7 +4,7 @@ import ScrollExperience from "@/components/ScrollExperience";
 import GlobalFooter from "@/components/GlobalFooter";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://entimema.net"),
+  metadataBase: new URL("https://www.entimema.net"),
   title: "Entimema | Financial Architecture, Decision Science & AI",
   description: "Financial architecture, decision science and AI agents for better financial, risk and management decisions.",
   openGraph: {

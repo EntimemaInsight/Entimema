@@ -48,7 +48,7 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
   if (!resource) notFound();
 
   const topic = getTopic(resource.topic);
-  const baseUrl = "https://entimema.net";
+  const baseUrl = "https://www.entimema.net";
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",

@@ -21,9 +21,9 @@ const routes = [
 ] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const coreRoutes = routes.map((route) => ({ url: `https://entimema.net${route}` }));
+  const coreRoutes = routes.map((route) => ({ url: `https://www.entimema.net${route}` }));
   const resourceRoutes = publishedResources.map((resource) => ({
-    url: `https://entimema.net${resource.canonicalPath}`,
+    url: `https://www.entimema.net${resource.canonicalPath}`,
     lastModified: resource.updatedAt ?? resource.publishedAt,
   }));
 
