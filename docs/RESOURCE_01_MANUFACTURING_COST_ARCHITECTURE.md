@@ -4,6 +4,12 @@ Status: implementation brief; intellectual framework approved in Sprint 7D.0 and
 
 Public article status: published and indexable at `/resources/building-a-manufacturing-cost-architecture`
 
+## Sprint 7D.1 cover decision
+
+The simplified Manufacturing Cost Architecture cover is used on the Resources index only. The article page retains the detailed Entimema Framework 01 as its opening analytical visual, avoiding redundant visual hierarchy and preserving the distinction between editorial identity and analytical explanation.
+
+No Open Graph image was added in Sprint 7D.1. The native HTML/CSS cover is intentionally responsive and accessible, while a dependable social-image rendering pipeline would require a separate static or generated asset. The composition is ready to inform that later asset without introducing a low-quality placeholder.
+
 Primary cluster: Cost & Profitability
 
 Primary capability: `/services/cost-and-profitability`

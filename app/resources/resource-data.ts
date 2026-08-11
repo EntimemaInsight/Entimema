@@ -11,6 +11,13 @@ export const resourceTopics = [
 export type ResourceTopicSlug = (typeof resourceTopics)[number]["slug"];
 export type ResourceStatus = "draft" | "published";
 
+export type ResourceCover = {
+  type: "analytical-flow";
+  variant: "manufacturing-cost";
+  accessibleLabel: string;
+  stages: readonly string[];
+};
+
 export type ResourceAuthor = {
   name: string;
   affiliation: string;
@@ -43,6 +50,7 @@ export type ResourceRecord = {
   relatedResourceSlugs: string[];
   status: ResourceStatus;
   indexable: boolean;
+  cover: ResourceCover;
 };
 
 const authors = {
@@ -76,6 +84,12 @@ export const resources: ResourceRecord[] = [
     relatedResourceSlugs: [],
     status: "published",
     indexable: true,
+    cover: {
+      type: "analytical-flow",
+      variant: "manufacturing-cost",
+      accessibleLabel: "Manufacturing cost architecture from inputs through production economics to management decision",
+      stages: ["Inputs", "Intermediates", "Conversion", "Production", "Capacity", "Product economics", "Decision"],
+    },
   },
 ];
 
