@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import ResourceArticle from "../ResourceArticle";
 import ManufacturingCostArticle, { manufacturingCostSections } from "../ManufacturingCostArticle";
 import WorkingCapitalArticle, { workingCapitalSections } from "../WorkingCapitalArticle";
+import OperationalDriverForecastingArticle, { operationalForecastSections } from "../OperationalDriverForecastingArticle";
 import { getPublishedResource, getTopic, publishedResources } from "../resource-data";
 
 export const dynamicParams = false;
@@ -68,13 +69,14 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
     ],
   };
   const isWorkingCapital = resource.slug === "working-capital-as-a-system";
+  const isOperationalForecast = resource.slug === "operational-driver-forecasting";
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema).replace(/</g, "\\u003c") }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema).replace(/</g, "\\u003c") }} />
-      <ResourceArticle resource={resource} sections={isWorkingCapital ? [...workingCapitalSections] : [...manufacturingCostSections]}>
-        {isWorkingCapital ? <WorkingCapitalArticle /> : <ManufacturingCostArticle />}
+      <ResourceArticle resource={resource} sections={isOperationalForecast ? [...operationalForecastSections] : isWorkingCapital ? [...workingCapitalSections] : [...manufacturingCostSections]}>
+        {isOperationalForecast ? <OperationalDriverForecastingArticle /> : isWorkingCapital ? <WorkingCapitalArticle /> : <ManufacturingCostArticle />}
       </ResourceArticle>
     </>
   );

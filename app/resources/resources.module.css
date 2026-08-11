@@ -90,6 +90,14 @@
 .workingCapitalCover strong { font-size: clamp(8px,.8vw,11px); line-height: 1.2; text-transform: uppercase; }
 .workingCapitalCover > b { color: var(--brand-orange-500); font-size: 15px; text-align: center; }
 .workingCapitalCover > div + b + strong { padding-block: 24px; border-block: 1px solid rgba(196,217,235,.5); text-align: center; }
+.forecastCover { min-height:285px; display:grid; grid-template-columns:repeat(5,1fr); align-items:center; gap:9px; margin-top:25px; }
+.forecastCover span { position:relative; display:grid; align-content:center; gap:9px; min-height:110px; padding:12px; border-block:1px solid rgba(196,217,235,.35); background:rgba(255,255,255,.035); }
+.forecastCover span:not(:last-child)::after { content:"→"; position:absolute; right:-8px; color:var(--brand-orange-500); }
+.forecastCover span:nth-child(2) { min-height:150px; }
+.forecastCover span:nth-child(3) { min-height:190px; }
+.forecastCover span:nth-child(4) { min-height:150px; }
+.forecastCover i { color:var(--brand-orange-500); font-size:8px; font-style:normal; }
+.forecastCover strong { font-size:clamp(8px,.8vw,11px); line-height:1.2; text-transform:uppercase; }
 
 .selected header { display: grid; grid-template-columns: 1fr minmax(0, 2fr); gap: 56px; align-items: start; }
 .selected h2,
@@ -260,6 +268,27 @@
 .kpiAction span { position:relative; padding:11px 8px; border-bottom:1px solid var(--hairline); font-size:9px; text-align:center; }
 .kpiAction div:not(.kpiHeaders) span:not(:last-child)::after { content:"→"; position:absolute; right:-4px; color:var(--brand-orange-500); }
 .kpiHeaders span { color:var(--text-secondary); font-size:8px; font-weight:750; text-transform:uppercase; }
+.forecastSource { display:grid; gap:5px; padding:15px 18px; border:1px solid var(--brand-blue-200); background:#fff; }
+.forecastSource small { color:var(--brand-orange-500); font-size:8px; font-weight:750; letter-spacing:.12em; }
+.forecastSource strong { font-size:15px; }
+.driverCloud { display:grid; grid-template-columns:repeat(7,1fr); gap:5px; margin-top:14px; }
+.driverCloud span { padding:9px 4px; border-bottom:1px solid var(--brand-blue-200); font-size:8px; font-weight:700; text-align:center; }
+.driverEngines { display:grid; grid-template-columns:repeat(3,1fr); gap:9px; margin-top:14px; }
+.driverEngines strong { padding:12px; border-block:1px solid var(--hairline); background:#fff; font-size:10px; text-align:center; text-transform:uppercase; }
+.financialModelFlow { display:grid; justify-items:center; gap:8px; margin-top:16px; }
+.financialModelFlow > span { width:100%; padding:10px; border-block:1px solid var(--brand-navy-900); font-size:9px; font-weight:750; text-align:center; }
+.financialModelFlow > b { color:var(--brand-orange-500); }
+.financialModelFlow > div { width:100%; display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+.financialModelFlow > div strong { padding:10px; background:var(--brand-navy-950); color:#fff; font-size:9px; text-align:center; }
+.ebitdaBridge { width:100%; display:grid; grid-template-columns:repeat(7,1fr); border-block:1px solid var(--brand-navy-900); }
+.ebitdaBridge article { min-width:0; padding:16px 7px; border-right:1px solid var(--hairline); }
+.ebitdaBridge small { display:block; min-height:25px; color:var(--text-secondary); font-size:7px; font-weight:750; text-transform:uppercase; }
+.ebitdaBridge strong { display:block; margin-top:8px; font-size:13px; }
+.positiveEffect strong { color:#18624b; }.negativeEffect strong { color:#9b3b2b; }
+.scenarioGrid { width:100%; display:grid; grid-template-columns:repeat(2,1fr); gap:10px; }
+.scenarioGrid article { display:grid; gap:8px; padding:16px; border-top:1px solid var(--brand-navy-900); background:#fff; }
+.scenarioGrid small { color:var(--brand-orange-500); font-size:8px; font-weight:750; letter-spacing:.1em; }
+.scenarioGrid strong { font-size:15px; }.scenarioGrid span { color:var(--text-secondary); font-size:10px; }
 
 .capability { display: grid; grid-template-columns: minmax(0, 1fr) max-content; gap: 64px; align-items: end; width: min(970px, calc(100% - 48px)); margin: 0 auto clamp(80px, 9vw, 130px); padding: 38px 0; border-block: 1px solid var(--brand-navy-900); }
 .capability > div > span { color: var(--brand-orange-500); font-size: 10px; font-weight: 750; letter-spacing: .14em; }
@@ -299,6 +328,8 @@
   .principles article { grid-template-columns: 1fr; gap: 8px; }
   .engineGrid { grid-template-columns:1fr; }
   .convergence { display:grid; grid-template-columns:1fr; text-align:center; }
+  .ebitdaBridge { grid-template-columns:repeat(2,1fr); }
+  .driverCloud { grid-template-columns:repeat(4,1fr); }
   .resourceGrid { grid-template-columns: 1fr; }
   .resourceCover { min-height: 390px; }
 }
@@ -338,9 +369,16 @@
   .workingCapitalCover > b { transform:rotate(90deg); }
   .workingCapitalCover > div span { padding:7px 10px; }
   .workingCapitalCover > div + b + strong { padding-block:8px; }
+  .forecastCover { min-height:250px; grid-template-columns:1fr; gap:0; }
+  .forecastCover span:nth-child(n) { min-height:0; grid-template-columns:28px 1fr; padding:8px 10px; }
+  .forecastCover span:not(:last-child)::after { content:"↓"; right:12px; bottom:-8px; }
   .wcDecisionFlow,.kpiAction > div { grid-template-columns:1fr; }
   .wcDecisionFlow span:not(:last-child)::after,.kpiAction div:not(.kpiHeaders) span:not(:last-child)::after { content:"↓"; right:10px; bottom:-8px; }
   .kpiHeaders { display:none !important; }
+  .driverCloud,.driverEngines,.financialModelFlow > div,.scenarioGrid { grid-template-columns:1fr; }
+  .ebitdaBridge { grid-template-columns:1fr; }
+  .ebitdaBridge article { display:flex; justify-content:space-between; align-items:center; padding:10px; border-right:0; border-bottom:1px solid var(--hairline); }
+  .ebitdaBridge small { min-height:0; }.ebitdaBridge strong { margin:0; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -13,7 +13,7 @@ export type ResourceStatus = "draft" | "published";
 
 export type ResourceCover = {
   type: "analytical-flow";
-  variant: "manufacturing-cost" | "working-capital";
+  variant: "manufacturing-cost" | "working-capital" | "operational-forecast";
   accessibleLabel: string;
   stages: readonly string[];
 };
@@ -81,7 +81,7 @@ export const resources: ResourceRecord[] = [
       href: "/services/cost-and-profitability",
       description: "Build cost and margin systems that show where value is created, lost and changed by management action.",
     },
-    relatedResourceSlugs: ["working-capital-as-a-system"],
+    relatedResourceSlugs: ["working-capital-as-a-system", "operational-driver-forecasting"],
     status: "published",
     indexable: true,
     cover: {
@@ -106,10 +106,30 @@ export const resources: ResourceRecord[] = [
     openGraphTitle: "Working Capital as a System",
     openGraphDescription: "A practitioner framework for understanding how operations become working-capital positions, cash effects and financing decisions.",
     relatedCapability: { label: "Planning & Forecasting", href: "/services/budgets-and-forecasting", description: "Connect operational drivers, cash mechanics and scenarios to a planning system management can use." },
-    relatedResourceSlugs: ["building-a-manufacturing-cost-architecture"],
+    relatedResourceSlugs: ["building-a-manufacturing-cost-architecture", "operational-driver-forecasting"],
     status: "published",
     indexable: true,
     cover: { type: "analytical-flow", variant: "working-capital", accessibleLabel: "Receivables, inventory and payables converging into cash, financing and management decision", stages: ["Receivables", "Inventory", "Payables", "Cash", "Financing", "Decision"] },
+  },
+  {
+    title: "Operational-Driver Forecasting",
+    slug: "operational-driver-forecasting",
+    deck: "Financial forecasts become more decision-useful when outcomes can be traced back to the operating assumptions, business relationships and constraints that created them.",
+    author: authors.aleksandar,
+    publishedAt: "2026-08-11",
+    readingMinutes: 12,
+    topic: "planning-and-forecasting",
+    featured: false,
+    seoTitle: "Operational-Driver Forecasting | Entimema",
+    metaDescription: "A practitioner framework connecting operating drivers, financial statements, scenarios and management decisions in an integrated forecast model.",
+    canonicalPath: "/resources/operational-driver-forecasting",
+    openGraphTitle: "Operational-Driver Forecasting",
+    openGraphDescription: "Forecast the operating causes first, then trace their effects through financial statements, scenarios and management decisions.",
+    relatedCapability: { label: "Planning & Forecasting", href: "/services/budgets-and-forecasting", description: "Build integrated forecasts that connect operating assumptions, financial outcomes, cash and management decisions." },
+    relatedResourceSlugs: ["working-capital-as-a-system", "building-a-manufacturing-cost-architecture"],
+    status: "published",
+    indexable: true,
+    cover: { type: "analytical-flow", variant: "operational-forecast", accessibleLabel: "Operating drivers flowing through a business model into financial statements, scenarios and management decisions", stages: ["Drivers", "Business model", "P&L / BS / Cash", "Scenario", "Decision"] },
   },
 ];
 
