@@ -57,7 +57,7 @@ export default function ResourcesPage() {
 
       <section className={styles.topics} aria-labelledby="topics-title"><div className={styles.wideContainer}>
         <header><span>TOPIC DISCOVERY</span><h2 id="topics-title">One analytical system.<br />Seven connected territories.</h2></header>
-        <div className={styles.topicList}>{resourceTopics.map((topic, index) => <article key={topic.slug}><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{topic.label}</h3><p>{topic.description}</p></div></article>)}</div>
+        <div className={styles.topicList}>{resourceTopics.map((topic, index) => <article id={`topic-${topic.slug}`} key={topic.slug}><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{topic.label}</h3><p>{topic.description}</p></div></article>)}</div>
       </div></section>
     </main>
   );

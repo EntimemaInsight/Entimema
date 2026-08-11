@@ -1,0 +1,34 @@
+.root { height: 100%; display: flex; align-items: center; }
+.trigger { height: 100%; display: inline-flex; align-items: center; gap: 9px; padding: 0; border: 0; background: transparent; color: rgba(4,19,63,.82); font: inherit; font-size: var(--type-navigation); font-weight: 560; letter-spacing: var(--tracking-action); cursor: pointer; }
+.trigger:hover,.trigger:focus-visible,.active { color: var(--brand-navy-950); }
+.trigger:focus-visible { outline: 2px solid var(--brand-navy-800); outline-offset: 5px; }
+.trigger > span { width: 7px; height: 7px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg) translateY(-2px); transition: transform 180ms var(--ease-standard); }
+.trigger[aria-expanded="true"] > span { transform: rotate(225deg) translate(-1px,-1px); }
+.backdrop { position: fixed; z-index: 1000; inset-inline: 0; bottom: 0; padding: 0; border: 0; background: rgba(4,19,63,.055); }
+.menu { position: fixed; z-index: 1001; left: 0; width: 100vw; border-bottom: 1px solid var(--hairline); background: var(--surface); box-shadow: 0 8px 18px rgba(4,19,63,.035); animation: reveal 240ms var(--ease-standard) both; }
+.closing { pointer-events: none; animation: conceal 180ms ease-out both; }
+.inner { display: grid; grid-template-columns: minmax(0,1.3fr) minmax(320px,.7fr); gap: clamp(52px,7vw,104px); padding-top: 34px; padding-bottom: 36px; }
+.label { color: var(--brand-orange-500); font-size: 9px; font-weight: 750; letter-spacing: .14em; }
+.featuredLink { display: grid; grid-template-columns: 188px minmax(0,1fr); gap: 28px; align-items: stretch; margin-top: 17px; }
+.featuredLink:focus-visible,.topicLinks a:focus-visible,.allResources:focus-visible { outline: 2px solid var(--brand-navy-800); outline-offset: 5px; }
+.miniCover { min-height: 128px; display: flex; align-items: end; gap: 3px; padding: 18px; border: 1px solid #c9d9e7; background: var(--brand-navy-950); }
+.miniCover i { flex: 1; border-top: 1px solid var(--brand-orange-500); border-bottom: 1px solid rgba(196,217,235,.25); background: rgba(255,255,255,.05); }
+.featuredCopy { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; }
+.featuredCopy small { color: var(--text-secondary); font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.featuredCopy strong { max-width: 480px; margin-top: 12px; color: var(--brand-navy-950); font-size: clamp(23px,2.1vw,31px); line-height: 1.08; letter-spacing: -.035em; }
+.featuredCopy > span { margin-top: 15px; color: var(--brand-navy-800); font-size: 12px; font-weight: 700; }
+.featuredCopy b { margin-left: 6px; color: var(--brand-orange-500); }
+.discovery { padding-left: clamp(34px,4vw,58px); border-left: 1px solid rgba(4,19,63,.07); }
+.topicLinks { margin-top: 17px; border-top: 1px solid var(--hairline); }
+.topicLinks a { display: flex; justify-content: space-between; gap: 20px; padding: 15px 0; border-bottom: 1px solid var(--hairline); color: var(--brand-navy-950); font-size: 14px; font-weight: 640; }
+.topicLinks a span { color: var(--brand-orange-500); }
+.allResources { display: flex; justify-content: space-between; align-items: center; gap: 24px; margin-top: 26px; }
+.allResources span { display: grid; gap: 6px; }
+.allResources small { color: var(--brand-orange-500); font-size: 9px; font-weight: 750; letter-spacing: .14em; }
+.allResources strong { color: var(--brand-navy-950); font-size: 16px; }
+.allResources > b { color: var(--brand-orange-500); font-size: 21px; }
+@keyframes reveal { from { opacity:0; transform:translateY(-6px); } to { opacity:1; transform:translateY(0); } }
+@keyframes conceal { from { opacity:1; transform:translateY(0); } to { opacity:0; transform:translateY(-6px); } }
+@media (max-width: 1100px) { .inner { grid-template-columns: minmax(0,1.2fr) minmax(290px,.8fr); gap: 42px; } .featuredLink { grid-template-columns: 150px 1fr; } }
+@media (max-width: 900px) { .root { display:none; } }
+@media (prefers-reduced-motion:reduce) { .menu,.closing { animation:none; } .trigger > span { transition:none; } }

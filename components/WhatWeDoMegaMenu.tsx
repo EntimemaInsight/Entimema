@@ -12,8 +12,13 @@ import {
   useSyncExternalStore,
 } from "react";
 import styles from "./WhatWeDoMegaMenu.module.css";
+import { getTopic, publishedResources } from "@/app/resources/resource-data";
 
 const subscribeToClientMount = () => () => {};
+const featuredResource = publishedResources.find((resource) => resource.featured) ?? publishedResources[0];
+const mobileResourceTopics = [...new Set(publishedResources.map((resource) => resource.topic))]
+  .map((slug) => getTopic(slug))
+  .filter((topic): topic is NonNullable<typeof topic> => Boolean(topic));
 
 const serviceGroups = [
   {
@@ -91,6 +96,7 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
   const [isClosing, setIsClosing] = useState(false);
   const [isPinned, setIsPinned] = useState(false);
   const [mobileSolutionsOpen, setMobileSolutionsOpen] = useState(false);
+  const [mobileResourcesOpen, setMobileResourcesOpen] = useState(false);
   const [menuTop, setMenuTop] = useState(0);
   const menuTopRef = useRef(0);
   const rootRef = useRef<HTMLDivElement>(null);
@@ -140,6 +146,7 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
     setIsClosing(true);
     setIsPinned(false);
     setMobileSolutionsOpen(false);
+    setMobileResourcesOpen(false);
     clearExitTimer();
     const exitDuration = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 180;
     exitTimerRef.current = setTimeout(() => setIsClosing(false), exitDuration);
@@ -298,9 +305,20 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
                     </section>
                   ))}
                 </div>
-                <Link className={styles.mobileTopLevel} href="/resources" onClick={close}>
-                  <span>RESOURCES</span><span aria-hidden="true">→</span>
-                </Link>
+                <button aria-controls={`${menuId}-mobile-resources`} aria-expanded={mobileResourcesOpen} className={styles.mobileTopLevel} onClick={() => setMobileResourcesOpen((current) => !current)} type="button">
+                  <span>RESOURCES</span><span aria-hidden="true">{mobileResourcesOpen ? "−" : "+"}</span>
+                </button>
+                <div className={styles.mobileResources} hidden={!mobileResourcesOpen} id={`${menuId}-mobile-resources`}>
+                  {featuredResource ? <section className={styles.mobileResourceGroup}>
+                    <h2>FEATURED ANALYSIS</h2>
+                    <Link className={styles.mobileFeaturedResource} href={featuredResource.canonicalPath} onClick={close}>
+                      <span aria-hidden="true">{featuredResource.cover.stages.map((stage, index) => <i key={stage} style={{ height: `${30 + index * 7}%` }} />)}</span>
+                      <strong>{featuredResource.title}</strong><small>{getTopic(featuredResource.topic)?.label} · {featuredResource.readingMinutes} min read</small>
+                    </Link>
+                  </section> : null}
+                  {mobileResourceTopics.length ? <section className={styles.mobileResourceGroup}><h2>TOPIC DISCOVERY</h2>{mobileResourceTopics.map((topic) => <Link className={styles.mobileServiceLink} href={`/resources#topic-${topic.slug}`} key={topic.slug} onClick={close}>{topic.label}</Link>)}</section> : null}
+                  <Link className={styles.mobileAllResources} href="/resources" onClick={close}><span>ALL RESOURCES</span><span aria-hidden="true">→</span></Link>
+                </div>
                 <Link className={styles.mobileTopLevel} href="/about" onClick={close}>
                   <span>ABOUT</span><span aria-hidden="true">→</span>
                 </Link>

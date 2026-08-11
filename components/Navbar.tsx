@@ -3,6 +3,7 @@
 import Link from "next/link";
 import BrandLogo from "./BrandLogo";
 import WhatWeDoMegaMenu from "./WhatWeDoMegaMenu";
+import ResourcesMegaMenu from "./ResourcesMegaMenu";
 
 type NavKey = "home" | "services" | "about" | "resources" | "contact";
 
@@ -17,13 +18,7 @@ export default function Navbar({ active = "home" }: { active?: NavKey }) {
         <nav className="site-nav site-nav--editorial" aria-label="Main navigation">
           <WhatWeDoMegaMenu active={active === "services"} />
 
-          <Link
-            className={active === "resources" ? "is-active" : undefined}
-            href="/resources"
-            aria-current={active === "resources" ? "page" : undefined}
-          >
-            RESOURCES
-          </Link>
+          <ResourcesMegaMenu active={active === "resources"} />
           <Link
             className={active === "about" ? "is-active" : undefined}
             href="/about"
