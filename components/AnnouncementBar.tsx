@@ -26,7 +26,7 @@ export default function AnnouncementBar() {
     <aside className="announcement" aria-label="Current announcement">
       <div className="site-container announcement__inner">
         <p>Where finance, risk and AI become better decisions.</p>
-        <Link href="/#analyses">Explore Resources <span aria-hidden="true">→</span></Link>
+        <Link href="/resources">Explore Resources <span aria-hidden="true">→</span></Link>
       </div>
       <button
         className="announcement__close"

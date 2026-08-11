@@ -298,7 +298,7 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
                     </section>
                   ))}
                 </div>
-                <Link className={styles.mobileTopLevel} href="/#analyses" onClick={close}>
+                <Link className={styles.mobileTopLevel} href="/resources" onClick={close}>
                   <span>RESOURCES</span><span aria-hidden="true">→</span>
                 </Link>
                 <Link className={styles.mobileTopLevel} href="/about" onClick={close}>

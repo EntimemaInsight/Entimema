@@ -25,7 +25,7 @@ const columns = [
   },
   {
     title: "RESOURCES",
-    links: [["All Services", "/services"]],
+    links: [["All Resources", "/resources"]],
   },
   {
     title: "COMPANY",

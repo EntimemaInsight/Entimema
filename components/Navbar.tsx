@@ -4,7 +4,7 @@ import Link from "next/link";
 import BrandLogo from "./BrandLogo";
 import WhatWeDoMegaMenu from "./WhatWeDoMegaMenu";
 
-type NavKey = "home" | "services" | "about" | "analyses" | "contact";
+type NavKey = "home" | "services" | "about" | "resources" | "contact";
 
 export default function Navbar({ active = "home" }: { active?: NavKey }) {
   return (
@@ -18,9 +18,9 @@ export default function Navbar({ active = "home" }: { active?: NavKey }) {
           <WhatWeDoMegaMenu active={active === "services"} />
 
           <Link
-            className={active === "analyses" ? "is-active" : undefined}
-            href="/#analyses"
-            aria-current={active === "analyses" ? "page" : undefined}
+            className={active === "resources" ? "is-active" : undefined}
+            href="/resources"
+            aria-current={active === "resources" ? "page" : undefined}
           >
             RESOURCES
           </Link>
