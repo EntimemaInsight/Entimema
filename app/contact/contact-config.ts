@@ -42,3 +42,11 @@ export type TopicKey = keyof typeof topicOptions;
 export function isTopicKey(value: string): value is TopicKey {
   return Object.prototype.hasOwnProperty.call(topicOptions, value);
 }
+
+export function problemAreaForTopic(value: string | undefined): typeof problemAreas[number] {
+  if (!value || !isTopicKey(value)) return "Other";
+  if (value === "management-reporting") return "Management reporting";
+  if (value === "financial-data" || value === "financial-ai-agents") return "ERP & data";
+  if (value === "credit-risk" || value === "aml-compliance" || value === "decision-automation" || value === "risk-ai-agents") return "Risk & forecasting";
+  return "Financial performance";
+}

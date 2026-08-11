@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useRef, useState } from "react";
-import { clientInquiryTypes, isTopicKey, partnershipTypes, problemAreas, topicOptions } from "./contact-config";
+import { clientInquiryTypes, isTopicKey, partnershipTypes, problemAreaForTopic, topicOptions } from "./contact-config";
 import styles from "./contact.module.css";
 
 type Intent = "project" | "partnership" | "client";
@@ -20,16 +20,16 @@ function ClientIcon({ className }: IconProps) {
 }
 
 const paths = [
-  { intent: "project" as const, title: "Start with a problem", Icon: ProjectIcon },
+  { intent: "project" as const, title: "New Project", Icon: ProjectIcon },
   { intent: "partnership" as const, title: "Partnerships", Icon: PartnershipIcon },
   { intent: "client" as const, title: "Existing Clients", Icon: ClientIcon },
 ];
 
 const formContent = {
   project: {
-    heading: "What are you trying to solve?",
-    copy: "Choose the closest area, then give us enough context to understand the decision behind it.",
-    submit: "Start the conversation",
+    heading: "Tell us about your project",
+    copy: "Briefly describe the context and the problem you want to solve. We will contact you to discuss the appropriate next step.",
+    submit: "Send inquiry",
   },
   partnership: {
     heading: "Propose a partnership",
@@ -73,6 +73,10 @@ export default function ContactExperience({ initialTopic }: { initialTopic?: str
     if (!form.reportValidity()) return;
     setStatus("sending");
     const payload = Object.fromEntries(new FormData(form).entries());
+    if (payload.intent === "project") {
+      const selectedTopic = typeof payload.topicName === "string" && payload.topicName ? payload.topicName : validTopic;
+      payload.problemArea = problemAreaForTopic(selectedTopic);
+    }
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
@@ -127,10 +131,7 @@ export default function ContactExperience({ initialTopic }: { initialTopic?: str
                 <Field id="company" label="Company" required={intent !== "project"} />
                 {intent !== "client" && <Field id="role" label="Role" />}
                 {intent === "project" && (
-                  <>
-                    <SelectField id="problemArea" label="Problem area" options={problemAreas} />
-                    <label className={styles.field} htmlFor="topicName"><span>Relevant service (optional)</span><select defaultValue={validTopic ?? ""} id="topicName" name="topicName"><option value="">Select a service</option>{Object.entries(topicOptions).map(([key, label]) => <option key={key} value={key}>{label}</option>)}</select></label>
-                  </>
+                  <label className={styles.field} htmlFor="topicName"><span>Topic or service</span><select defaultValue={validTopic ?? ""} id="topicName" name="topicName"><option value="">Select a topic</option>{Object.entries(topicOptions).map(([key, label]) => <option key={key} value={key}>{label}</option>)}</select></label>
                 )}
                 {intent === "partnership" && <SelectField id="partnershipType" label="Partnership type" options={partnershipTypes} />}
                 {intent === "client" && <><Field id="project" label="Project or service" /><SelectField id="inquiryType" label="Inquiry type" options={clientInquiryTypes} /></>}
