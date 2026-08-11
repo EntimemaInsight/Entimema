@@ -8,6 +8,7 @@ import styles from "./ResourcesMegaMenu.module.css";
 
 const subscribeToClientMount = () => () => undefined;
 const featured = publishedResources.find((resource) => resource.featured) ?? publishedResources[0];
+const latest = publishedResources.filter((resource) => resource.slug !== featured?.slug).slice(0, 2);
 const publishedTopics = [...new Set(publishedResources.map((resource) => resource.topic))]
   .map((slug) => getTopic(slug))
   .filter((topic): topic is NonNullable<typeof topic> => Boolean(topic));
@@ -82,6 +83,7 @@ export default function ResourcesMegaMenu({ active = false }: { active?: boolean
             <span className={styles.miniCover} aria-hidden="true">{featured.cover.stages.map((stage, index) => <i key={stage} style={{ height: `${28 + index * 6}%` }} />)}</span>
             <span className={styles.featuredCopy}><small>{getTopic(featured.topic)?.label} · {featured.readingMinutes} min read</small><strong>{featured.title}</strong><span>Read analysis <b aria-hidden="true">→</b></span></span>
           </Link>
+          {latest.length ? <div className={styles.latest}><span className={styles.label}>LATEST ANALYSIS</span>{latest.map((resource) => <Link href={resource.canonicalPath} key={resource.slug} onClick={hide}><span><small>{getTopic(resource.topic)?.label}</small><strong>{resource.title}</strong></span><b aria-hidden="true">→</b></Link>)}</div> : null}
         </section>
         <section className={styles.discovery}>
           <span className={styles.label}>TOPIC DISCOVERY</span>

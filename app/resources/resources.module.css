@@ -83,6 +83,13 @@
 .coverStage strong { font-size: clamp(8px, .82vw, 11px); line-height: 1.25; text-transform: uppercase; }
 .coverFooter { display: grid; grid-template-columns: max-content 1fr max-content; gap: 14px; align-items: center; margin-top: 23px; color: rgba(255, 255, 255, .62); font-size: 8px; font-weight: 750; letter-spacing: .14em; }
 .coverFooter i { height: 1px; background: linear-gradient(90deg, rgba(196, 217, 235, .35), var(--brand-orange-500)); }
+.workingCapitalCover { min-height: 285px; display: grid; grid-template-columns: minmax(0,1.8fr) 20px minmax(74px,.65fr) 20px minmax(74px,.65fr) 20px minmax(74px,.65fr); gap: 8px; align-items: center; margin-top: 25px; }
+.workingCapitalCover > div { display: grid; gap: 10px; }
+.workingCapitalCover > div span { display: grid; grid-template-columns: 28px 1fr; gap: 10px; align-items: center; padding: 13px; border-block: 1px solid rgba(196,217,235,.26); background: rgba(255,255,255,.035); }
+.workingCapitalCover i { color: var(--brand-orange-500); font-size: 8px; font-style: normal; }
+.workingCapitalCover strong { font-size: clamp(8px,.8vw,11px); line-height: 1.2; text-transform: uppercase; }
+.workingCapitalCover > b { color: var(--brand-orange-500); font-size: 15px; text-align: center; }
+.workingCapitalCover > div + b + strong { padding-block: 24px; border-block: 1px solid rgba(196,217,235,.5); text-align: center; }
 
 .selected header { display: grid; grid-template-columns: 1fr minmax(0, 2fr); gap: 56px; align-items: start; }
 .selected h2,
@@ -226,6 +233,34 @@
 .references ol { color: var(--text-secondary); font-size: 12px; line-height: 1.55; }
 .references li { margin-bottom: 10px; }
 
+.framework02 { width:100%; }
+.engineGrid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+.engineGrid article { padding:16px 12px; border-top:1px solid var(--brand-navy-900); background:#fff; }
+.engineGrid article > strong { color:var(--brand-navy-950); font-size:11px; text-transform:uppercase; }
+.engineGrid article div { display:grid; gap:0; margin-top:12px; }
+.engineGrid article span { padding:6px 0; border-top:1px solid var(--hairline); color:var(--text-secondary); font-size:9px; }
+.convergence { display:flex; align-items:center; justify-content:center; gap:9px; margin-top:18px; padding:15px 8px; border-block:1px solid var(--hairline); }
+.convergence span { font-size:8px; font-weight:750; letter-spacing:.06em; text-align:center; }
+.convergence b { color:var(--brand-orange-500); }
+.wcDecisionFlow { display:grid; grid-template-columns:repeat(5,1fr); margin-top:20px; border-block:1px solid var(--brand-navy-900); }
+.wcDecisionFlow span { position:relative; padding:10px 5px; font-size:8px; font-weight:750; text-align:center; text-transform:uppercase; }
+.wcDecisionFlow span:not(:last-child)::after { content:"→"; position:absolute; right:-4px; color:var(--brand-orange-500); }
+.cashReleaseVisual { width:100%; }
+.cashReleaseVisual > span { color:var(--brand-orange-500); font-size:9px; font-weight:750; letter-spacing:.13em; }
+.cycleComparison,.releaseComponents { display:grid; grid-template-columns:1fr 30px 1fr; align-items:center; margin-top:16px; }
+.cycleComparison article,.releaseComponents article { padding:16px; border-block:1px solid var(--hairline); background:#fff; }
+.cycleComparison small,.releaseComponents small,.releaseTotal small { color:var(--text-secondary); font-size:8px; font-weight:750; letter-spacing:.09em; }
+.cycleComparison strong,.releaseComponents strong,.releaseTotal strong { display:block; margin-top:7px; color:var(--brand-navy-950); font-size:25px; letter-spacing:-.04em; }
+.cycleComparison p { margin:7px 0 0; font-size:9px; }
+.cycleComparison > b,.releaseComponents > b { color:var(--brand-orange-500); text-align:center; }
+.releaseTotal { display:flex; justify-content:space-between; align-items:center; margin-top:18px; padding:18px; border-block:1px solid var(--brand-navy-900); }
+.releaseTotal strong { margin:0; color:var(--brand-orange-500); font-size:30px; }
+.kpiAction { width:100%; border-top:1px solid var(--brand-navy-900); }
+.kpiAction > div { display:grid; grid-template-columns:repeat(5,1fr); }
+.kpiAction span { position:relative; padding:11px 8px; border-bottom:1px solid var(--hairline); font-size:9px; text-align:center; }
+.kpiAction div:not(.kpiHeaders) span:not(:last-child)::after { content:"→"; position:absolute; right:-4px; color:var(--brand-orange-500); }
+.kpiHeaders span { color:var(--text-secondary); font-size:8px; font-weight:750; text-transform:uppercase; }
+
 .capability { display: grid; grid-template-columns: minmax(0, 1fr) max-content; gap: 64px; align-items: end; width: min(970px, calc(100% - 48px)); margin: 0 auto clamp(80px, 9vw, 130px); padding: 38px 0; border-block: 1px solid var(--brand-navy-900); }
 .capability > div > span { color: var(--brand-orange-500); font-size: 10px; font-weight: 750; letter-spacing: .14em; }
 .capability h2 { margin: 14px 0 10px; font-size: clamp(28px, 3vw, 42px); letter-spacing: -.04em; }
@@ -262,6 +297,8 @@
   .framework li:not(:last-child)::after { content: "↓"; }
   .related .wideContainer > div a { grid-template-columns: 1fr; gap: 8px; }
   .principles article { grid-template-columns: 1fr; gap: 8px; }
+  .engineGrid { grid-template-columns:1fr; }
+  .convergence { display:grid; grid-template-columns:1fr; text-align:center; }
   .resourceGrid { grid-template-columns: 1fr; }
   .resourceCover { min-height: 390px; }
 }
@@ -297,6 +334,13 @@
   .coverStage:not(:last-child)::after { top: auto; right: auto; bottom: -4px; left: 20px; width: 7px; border-top-color: var(--brand-orange-500); transform: rotate(90deg); }
   .coverStage strong { font-size: 9px; }
   .featuredFooter { align-items: center; }
+  .workingCapitalCover { min-height:250px; grid-template-columns:1fr; gap:4px; }
+  .workingCapitalCover > b { transform:rotate(90deg); }
+  .workingCapitalCover > div span { padding:7px 10px; }
+  .workingCapitalCover > div + b + strong { padding-block:8px; }
+  .wcDecisionFlow,.kpiAction > div { grid-template-columns:1fr; }
+  .wcDecisionFlow span:not(:last-child)::after,.kpiAction div:not(.kpiHeaders) span:not(:last-child)::after { content:"↓"; right:10px; bottom:-8px; }
+  .kpiHeaders { display:none !important; }
 }
 
 @media (prefers-reduced-motion: reduce) {

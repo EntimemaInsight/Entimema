@@ -16,6 +16,7 @@ import { getTopic, publishedResources } from "@/app/resources/resource-data";
 
 const subscribeToClientMount = () => () => {};
 const featuredResource = publishedResources.find((resource) => resource.featured) ?? publishedResources[0];
+const latestResources = publishedResources.filter((resource) => resource.slug !== featuredResource?.slug).slice(0, 2);
 const mobileResourceTopics = [...new Set(publishedResources.map((resource) => resource.topic))]
   .map((slug) => getTopic(slug))
   .filter((topic): topic is NonNullable<typeof topic> => Boolean(topic));
@@ -315,6 +316,7 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
                       <span aria-hidden="true">{featuredResource.cover.stages.map((stage, index) => <i key={stage} style={{ height: `${30 + index * 7}%` }} />)}</span>
                       <strong>{featuredResource.title}</strong><small>{getTopic(featuredResource.topic)?.label} · {featuredResource.readingMinutes} min read</small>
                     </Link>
+                    {latestResources.map((resource) => <Link className={styles.mobileLatestResource} href={resource.canonicalPath} key={resource.slug} onClick={close}><span><small>{getTopic(resource.topic)?.label}</small><strong>{resource.title}</strong></span><b aria-hidden="true">→</b></Link>)}
                   </section> : null}
                   {mobileResourceTopics.length ? <section className={styles.mobileResourceGroup}><h2>TOPIC DISCOVERY</h2>{mobileResourceTopics.map((topic) => <Link className={styles.mobileServiceLink} href={`/resources#topic-${topic.slug}`} key={topic.slug} onClick={close}>{topic.label}</Link>)}</section> : null}
                   <Link className={styles.mobileAllResources} href="/resources" onClick={close}><span>ALL RESOURCES</span><span aria-hidden="true">→</span></Link>

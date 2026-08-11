@@ -370,6 +370,12 @@
   .mobileAllResources { min-height: 50px; display: flex; align-items: center; justify-content: space-between; margin-top: 17px; border-top: 1px solid var(--hairline); color: var(--brand-navy-950); font-size: 13px; font-weight: 700; letter-spacing: .04em; }
   .mobileAllResources span:last-child { color: var(--brand-orange-500); font-size: 19px; }
   .mobileFeaturedResource:focus-visible,.mobileAllResources:focus-visible { outline: 2px solid var(--brand-navy-800); outline-offset: 2px; }
+  .mobileLatestResource { display:flex; justify-content:space-between; align-items:center; gap:16px; margin-top:10px; padding-top:12px; border-top:1px solid var(--hairline); }
+  .mobileLatestResource > span { display:grid; gap:3px; }
+  .mobileLatestResource small { color:var(--text-secondary); font-size:8px; text-transform:uppercase; }
+  .mobileLatestResource strong { color:var(--brand-navy-950); font-size:13px; }
+  .mobileLatestResource > b { color:var(--brand-orange-500); }
+  .mobileLatestResource:focus-visible { outline:2px solid var(--brand-navy-800); outline-offset:2px; }
 
   .mobileGroup {
     padding-top: 22px;
