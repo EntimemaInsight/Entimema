@@ -5,6 +5,7 @@ import ManufacturingCostArticle, { manufacturingCostSections } from "../Manufact
 import WorkingCapitalArticle, { workingCapitalSections } from "../WorkingCapitalArticle";
 import OperationalDriverForecastingArticle, { operationalForecastSections } from "../OperationalDriverForecastingArticle";
 import CreditVintageAnalysisArticle, { creditVintageSections } from "../CreditVintageAnalysisArticle";
+import ErpManagementIntelligenceArticle, { erpIntelligenceSections } from "../ErpManagementIntelligenceArticle";
 import { getPublishedResource, getTopic, publishedResources } from "../resource-data";
 
 export const dynamicParams = false;
@@ -72,13 +73,14 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
   const isWorkingCapital = resource.slug === "working-capital-as-a-system";
   const isOperationalForecast = resource.slug === "operational-driver-forecasting";
   const isCreditVintage = resource.slug === "credit-vintage-analysis";
+  const isErpIntelligence = resource.slug === "from-erp-data-to-management-intelligence";
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema).replace(/</g, "\\u003c") }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema).replace(/</g, "\\u003c") }} />
-      <ResourceArticle resource={resource} sections={isCreditVintage ? [...creditVintageSections] : isOperationalForecast ? [...operationalForecastSections] : isWorkingCapital ? [...workingCapitalSections] : [...manufacturingCostSections]}>
-        {isCreditVintage ? <CreditVintageAnalysisArticle /> : isOperationalForecast ? <OperationalDriverForecastingArticle /> : isWorkingCapital ? <WorkingCapitalArticle /> : <ManufacturingCostArticle />}
+      <ResourceArticle resource={resource} sections={isErpIntelligence ? [...erpIntelligenceSections] : isCreditVintage ? [...creditVintageSections] : isOperationalForecast ? [...operationalForecastSections] : isWorkingCapital ? [...workingCapitalSections] : [...manufacturingCostSections]}>
+        {isErpIntelligence ? <ErpManagementIntelligenceArticle /> : isCreditVintage ? <CreditVintageAnalysisArticle /> : isOperationalForecast ? <OperationalDriverForecastingArticle /> : isWorkingCapital ? <WorkingCapitalArticle /> : <ManufacturingCostArticle />}
       </ResourceArticle>
     </>
   );

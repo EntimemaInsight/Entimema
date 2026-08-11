@@ -16,7 +16,7 @@ import { getTopic, publishedResources } from "@/app/resources/resource-data";
 
 const subscribeToClientMount = () => () => {};
 const featuredResource = publishedResources.find((resource) => resource.featured) ?? publishedResources[0];
-const latestResources = publishedResources.filter((resource) => resource.slug !== featuredResource?.slug).slice(0, 3);
+const latestResources = publishedResources.filter((resource) => resource.slug !== featuredResource?.slug).slice(0, 4);
 const mobileResourceTopics = [...new Set(publishedResources.map((resource) => resource.topic))]
   .map((slug) => getTopic(slug))
   .filter((topic): topic is NonNullable<typeof topic> => Boolean(topic));

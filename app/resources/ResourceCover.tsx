@@ -4,6 +4,7 @@ import styles from "./resources.module.css";
 type ResourceCoverProps = { cover: ResourceCoverModel };
 
 export default function ResourceCover({ cover }: ResourceCoverProps) {
+  if(cover.variant==="erp-intelligence") return <div className={`${styles.resourceCover} ${styles.cover_erpIntelligence}`} role="img" aria-label={cover.accessibleLabel}><div className={styles.coverHeader} aria-hidden="true"><span>ENTIMEMA FRAMEWORK 05</span><span>ERP → MANAGEMENT INTELLIGENCE</span></div><div className={styles.erpCover} aria-hidden="true"><div>{["GL","MM","SD","PP"].map(x=><i key={x}>{x}</i>)}</div>{cover.stages.slice(1).map((x,i)=><span key={x}><b>{String(i+2).padStart(2,"0")}</b><strong>{x}</strong></span>)}</div><div className={styles.coverFooter} aria-hidden="true"><span>RECORD</span><i/><span>DECIDE / LEARN</span></div></div>;
   if (cover.variant === "credit-vintage") return (
     <div className={`${styles.resourceCover} ${styles.cover_creditVintage}`} role="img" aria-label={cover.accessibleLabel}>
       <div className={styles.coverHeader} aria-hidden="true"><span>ENTIMEMA FRAMEWORK 04</span><span>CREDIT VINTAGE ARCHITECTURE</span></div>

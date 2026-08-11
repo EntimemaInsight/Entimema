@@ -13,7 +13,7 @@ export type ResourceStatus = "draft" | "published";
 
 export type ResourceCover = {
   type: "analytical-flow";
-  variant: "manufacturing-cost" | "working-capital" | "operational-forecast" | "credit-vintage";
+  variant: "manufacturing-cost" | "working-capital" | "operational-forecast" | "credit-vintage" | "erp-intelligence";
   accessibleLabel: string;
   stages: readonly string[];
 };
@@ -150,6 +150,18 @@ export const resources: ResourceRecord[] = [
     status: "published",
     indexable: true,
     cover: { type: "analytical-flow", variant: "credit-vintage", accessibleLabel: "Four credit cohort curves aligned by months on book, with newer cohorts diverging as they age", stages: ["Cohort", "Credit age", "Performance", "Signal", "Decision"] },
+  },
+  {
+    title:"From ERP Data to Management Intelligence",slug:"from-erp-data-to-management-intelligence",
+    deck:"ERP data becomes decision-useful only after transactions are reconciled, given consistent business meaning and connected to analytical models and management decisions.",
+    author:authors.aleksandar,publishedAt:"2026-08-11",readingMinutes:12,topic:"financial-data-and-erp",featured:false,
+    seoTitle:"From ERP Data to Management Intelligence | Entimema",
+    metaDescription:"A practitioner framework connecting ERP transactions, reconciliation, business semantics, analytical models and management decisions.",
+    canonicalPath:"/resources/from-erp-data-to-management-intelligence",openGraphTitle:"From ERP Data to Management Intelligence",
+    openGraphDescription:"How reconciled ERP transactions become structured business meaning, analytical models and management decisions.",
+    relatedCapability:{label:"Financial Data",href:"/services/financial-data",description:"Build reconciled financial-data foundations that connect ERP transactions to management analysis and decisions."},
+    relatedResourceSlugs:["building-a-manufacturing-cost-architecture","working-capital-as-a-system","operational-driver-forecasting"],status:"published",indexable:true,
+    cover:{type:"analytical-flow",variant:"erp-intelligence",accessibleLabel:"ERP transaction blocks passing through structured analytical layers into a management decision node",stages:["Transactions","Reconcile","Semantics","Model","Decision"]},
   },
 ];
 
