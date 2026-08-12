@@ -6,8 +6,8 @@ import PlanningDashboard from "./PlanningDashboard";
 import styles from "./budgets-and-forecasting.module.css";
 
 export const metadata: Metadata = {
-  title: "Planning & Forecasting | Entimema",
-  description: "Build driver-based budgets, rolling forecasts and scenarios that connect operational assumptions, financial outcomes and cash.",
+  title: "Financial Forecasting Consulting | Entimema",
+  description: "Replace static plans with driver-based forecasting, rolling updates and scenarios that connect operations, financial outcomes and cash decisions.",
   alternates: { canonical: "/services/budgets-and-forecasting" },
 };
 
@@ -56,8 +56,8 @@ export default function BudgetsAndForecastingPage() {
         <div className={styles.heroCopy}>
           <nav className={styles.breadcrumb} aria-label="Breadcrumb"><Link href="/">Home</Link><span>/</span><span>Finance</span><span>/</span><span aria-current="page">Planning &amp; Forecasting</span></nav>
           <span className={styles.category}>PLANNING &amp; FORECASTING</span>
-          <h1 id="budgets-title">A budget is a snapshot.</h1>
-          <p className={styles.lead}>Your business isn&apos;t.</p>
+          <h1 id="budgets-title">Financial forecasting built around how the business moves.</h1>
+          <p className={styles.lead}>A budget is a snapshot. Your business isn&apos;t.</p>
           <p className={styles.support}>Build a planning system that moves with the business — connecting operational drivers, financial outcomes and cash before reality makes the plan obsolete.</p>
           <Link className={styles.primaryButton} href="/contact?topic=budgets-and-forecasting">Discuss Your Planning System <span aria-hidden="true">→</span></Link>
         </div>
@@ -82,7 +82,7 @@ export default function BudgetsAndForecastingPage() {
           <dl>
             <div><dt>SCENARIO</dt><dd>A manufacturing company builds its annual budget mainly from historical values, with limited connection to production drivers and no regular forecast refresh.</dd></div>
             <div><dt>ENTIMEMA APPROACH</dt><dd>We build a driver-based model connecting volumes, capacity, materials, prices, costs and cash flows — supported by scenarios and rolling forecasts.</dd></div>
-            <div><dt>RESULT</dt><dd>Management gains a current view of expected performance and a traceable link between operational assumptions, financial results and liquidity.</dd></div>
+            <div><dt>RESULT</dt><dd>Management gains a current view of expected performance and a traceable link between operational assumptions, financial results and liquidity. See how the model works in our <Link href="/resources/operational-driver-forecasting">operational-driver forecasting framework</Link>.</dd></div>
           </dl>
         </aside>
       </div></section>

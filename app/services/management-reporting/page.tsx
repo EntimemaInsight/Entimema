@@ -6,8 +6,8 @@ import ManagementDashboard from "./ManagementDashboard";
 import styles from "./management-reporting.module.css";
 
 export const metadata: Metadata = {
-  title: "Management Reporting | Entimema",
-  description: "Build management reporting around the decisions your business needs to make, connecting financial performance, operational drivers and management action in one view.",
+  title: "Management Reporting Consulting | Entimema",
+  description: "Turn fragmented financial and operational reporting into timely management information, clear KPIs and decision-ready performance analysis.",
   alternates: { canonical: "/services/management-reporting" },
 };
 
@@ -56,8 +56,8 @@ export default function ManagementReportingPage() {
         <div className={styles.heroCopy}>
           <nav className={styles.breadcrumb} aria-label="Breadcrumb"><Link href="/">Home</Link><span>/</span><span>Finance</span><span>/</span><span aria-current="page">Management Reporting</span></nav>
           <span className={styles.category}>MANAGEMENT REPORTING</span>
-          <h1 id="management-reporting-title">More reports don&apos;t mean more clarity.</h1>
-          <p className={styles.lead}>See the business the way management needs to see it.</p>
+          <h1 id="management-reporting-title">Management reporting built for decisions, not volume.</h1>
+          <p className={styles.lead}>More reports don&apos;t mean more clarity.</p>
           <p className={styles.support}>Build management reporting around the decisions your business needs to make — connecting financial performance, operational drivers and management action in one consistent view.</p>
           <Link className={styles.primaryButton} href="/contact?topic=management-reporting">Discuss Your Management Reporting <span aria-hidden="true">→</span></Link>
         </div>

@@ -6,8 +6,8 @@ import CfoDashboard from "./CfoDashboard";
 import styles from "./cfo-function.module.css";
 
 export const metadata: Metadata = {
-  title: "CFO Advisory | Entimema",
-  description: "Build the financial structure, management information and decision processes your business needs without building a full CFO organisation from day one.",
+  title: "Fractional CFO Services & Advisory | Entimema",
+  description: "Build senior finance capability, management information and decision processes without committing to a full CFO organisation from day one.",
   alternates: { canonical: "/services/cfo-function" },
 };
 
@@ -57,8 +57,8 @@ export default function CfoFunctionPage() {
           <div className={styles.heroCopy}>
             <nav className={styles.breadcrumb} aria-label="Breadcrumb"><Link href="/">Home</Link><span>/</span><span>Finance</span><span>/</span><span aria-current="page">CFO Advisory</span></nav>
             <span className={styles.category}>CFO ADVISORY</span>
-            <h1 id="cfo-title">You don&apos;t always need a CFO.</h1>
-            <p className={styles.lead}>You need the financial system behind one.</p>
+            <h1 id="cfo-title">Fractional CFO services built around the system behind the role.</h1>
+            <p className={styles.lead}>You don&apos;t always need a full CFO organisation.</p>
             <p className={styles.support}>Build the financial structure, management information and decision processes your business needs — without building a full CFO organisation from day one.</p>
             <Link className={styles.primaryButton} href="/contact?topic=cfo-function">Discuss Your Challenge <span aria-hidden="true">→</span></Link>
           </div>

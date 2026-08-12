@@ -7,8 +7,8 @@ import CreditRiskDashboard from "./CreditRiskDashboard";
 import styles from "./credit-risk.module.css";
 
 export const metadata: Metadata = {
-  title: "Credit Risk | Entimema",
-  description: "Build credit risk models, decision strategies and portfolio controls that connect scoring, policy and portfolio behaviour across the credit lifecycle.",
+  title: "Credit Risk Consulting & Modelling | Entimema",
+  description: "Strengthen credit decisions with specialist consulting across risk models, policy, portfolio analytics and controlled implementation.",
   alternates: { canonical: "/services/credit-risk" },
 };
 
@@ -60,7 +60,7 @@ export default function CreditRiskPage() {
         <div className={styles.heroCopy}>
           <nav className={styles.breadcrumb} aria-label="Breadcrumb"><Link href="/">Home</Link><span>/</span><span>Decision Science</span><span>/</span><Link href="/services/credit-risk" aria-current="page">Credit Risk</Link></nav>
           <span className={styles.category}>CREDIT RISK</span>
-          <h1 id="credit-risk-title">Risk is expensive when you see it too late.</h1>
+          <h1 id="credit-risk-title">Credit risk consulting that sees risk before it becomes expensive.</h1>
           <p className={styles.lead}>Build credit risk models, decision strategies and portfolio controls that identify risk earlier, apply policy consistently and make every credit decision traceable.</p>
           <p className={styles.support}><strong>A score is not a decision. It is one input into one.</strong> Connect scoring, policy, cut-offs, portfolio behaviour and decision logic into one credit architecture — so risk is measured consistently from application to portfolio performance.</p>
           <Link className={styles.primaryButton} href="/contact?topic=credit-risk">Discuss Your Credit Risk Architecture <span aria-hidden="true">→</span></Link>
@@ -86,7 +86,7 @@ export default function CreditRiskPage() {
           <dl>
             <div><dt>SCENARIO</dt><dd>A consumer lender uses different scoring models, manual credit policies and fragmented portfolio monitoring, making it difficult to understand how origination decisions affect later portfolio performance.</dd></div>
             <div><dt>ENTIMEMA APPROACH</dt><dd>We connect application scoring, behavioural scoring, decision strategies and portfolio monitoring into one credit-risk architecture.</dd></div>
-            <div><dt>RESULT</dt><dd>Management can trace how risk enters the portfolio, how it develops and how policy changes affect credit decisions over time.</dd></div>
+            <div><dt>RESULT</dt><dd>Management can trace how risk enters the portfolio, how it develops and how policy changes affect credit decisions over time. Our <Link href="/resources/credit-vintage-analysis">credit vintage analysis framework</Link> explains how comparable origination cohorts reveal changes hidden by portfolio averages.</dd></div>
           </dl>
         </aside>
       </div></section>
