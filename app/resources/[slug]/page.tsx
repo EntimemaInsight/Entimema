@@ -7,6 +7,7 @@ import OperationalDriverForecastingArticle, { operationalForecastSections } from
 import CreditVintageAnalysisArticle, { creditVintageSections } from "../CreditVintageAnalysisArticle";
 import ErpManagementIntelligenceArticle, { erpIntelligenceSections } from "../ErpManagementIntelligenceArticle";
 import { getPublishedResource, getTopic, publishedResources } from "../resource-data";
+import { createBreadcrumbSchema } from "@/lib/structured-data";
 
 export const dynamicParams = false;
 
@@ -61,15 +62,10 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
     publisher: { "@type": "Organization", name: "Entimema", url: baseUrl },
     articleSection: topic?.label,
   };
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Resources", item: `${baseUrl}/resources` },
-      { "@type": "ListItem", position: 2, name: topic?.label },
-      { "@type": "ListItem", position: 3, name: resource.title, item: `${baseUrl}${resource.canonicalPath}` },
-    ],
-  };
+  const breadcrumbSchema = createBreadcrumbSchema([
+    { name: "Resources", item: `${baseUrl}/resources` },
+    { name: resource.title, item: `${baseUrl}${resource.canonicalPath}` },
+  ]);
   const isWorkingCapital = resource.slug === "working-capital-as-a-system";
   const isOperationalForecast = resource.slug === "operational-driver-forecasting";
   const isCreditVintage = resource.slug === "credit-vintage-analysis";
