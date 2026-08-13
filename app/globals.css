@@ -44,6 +44,7 @@ button { font: inherit; }
   background: linear-gradient(90deg, #061746 0%, #061a55 76%, #04143f 100%);
   color: #fff;
 }
+.announcement__link { display: block; height: 100%; }
 .announcement__inner {
   height: 100%;
   display: flex;
@@ -53,7 +54,7 @@ button { font: inherit; }
   padding-right: 38px;
 }
 .announcement p,
-.announcement a {
+.announcement__inner > span {
   margin: 0;
   font-size: clamp(12px, .92vw, 17px);
   line-height: 1;
@@ -61,15 +62,16 @@ button { font: inherit; }
   white-space: nowrap;
 }
 .announcement p { font-weight: 650; }
-.announcement a {
+.announcement__inner > span {
   display: inline-flex;
   align-items: center;
   gap: 10px;
   font-weight: 650;
 }
-.announcement a span {
+.announcement__inner > span b {
   color: var(--brand-orange-500);
   font-size: 22px;
+  font-weight: inherit;
   line-height: 1;
 }
 html.announcement-collapsed .announcement {
@@ -657,8 +659,8 @@ body {
 html { --announcement-height: var(--announcement-height-v2); }
 .announcement { height: var(--announcement-height-v2); }
 .announcement p,
-.announcement a { font-size: clamp(11px, .76vw, 13px); letter-spacing: -.008em; }
-.announcement a span { font-size: 17px; }
+.announcement__inner > span { font-size: clamp(11px, .76vw, 13px); letter-spacing: -.008em; }
+.announcement__inner > span b { font-size: 17px; }
 .announcement__close { right: 14px; width: 22px; height: 22px; font-size: 21px; }
 .announcement__inner { padding-right: 30px; }
 
@@ -2116,9 +2118,9 @@ html.is-scrolled .header-cta { min-height: 36px; padding-inline: 16px; }
 .service-row.motion-reveal { transform: translateX(16px); }
 .service-row.motion-reveal.is-in-view { transform: none; }
 
-.announcement a span,
+.announcement__inner > span b,
 .header-cta span { transition: transform var(--motion-fast) var(--motion-ease); }
-.announcement a:hover span { transform: translateX(4px); }
+.announcement__inner:hover > span b { transform: translateX(4px); }
 
 .process-connector span {
   transition: transform var(--motion-fast) var(--motion-ease), border-color var(--motion-fast) ease, color var(--motion-fast) ease;
@@ -2590,7 +2592,7 @@ html.is-scrolled .primary-cta,
 .case-cta__link:hover,
 .language-switch,
 .announcement p,
-.announcement a {
+.announcement__inner > span {
   font-size: var(--type-navigation);
   font-weight: 560;
   line-height: 1;
@@ -6052,7 +6054,7 @@ html.is-scrolled .primary-cta,
 .case-cta__link:hover,
 .language-switch,
 .announcement p,
-.announcement a {
+.announcement__inner > span {
   font-size: var(--type-navigation);
   font-weight: 560;
   line-height: 1;
@@ -6380,7 +6382,7 @@ html.is-scrolled .primary-cta,
   text-underline-offset: .3em;
   transition: color var(--interaction-fast) ease-out, text-decoration-color var(--interaction-fast) ease-out;
 }
-.announcement a:hover,
+.announcement a:hover .announcement__inner > span,
 .mega-menu__links a:hover,
 .approach-card__link:hover { text-decoration-line: underline; text-decoration-color: var(--interaction-underline); }
 .mega-menu__links a span,
@@ -6468,7 +6470,7 @@ main div[class*="relatedGrid"] a:active > b { transform: translate3d(1px, 0, 0);
   main a[class*="primaryButton"]:hover > span,
   main a[class*="ctaButton"]:hover > span,
   main div[class*="relatedGrid"] a:hover > b { transform: none; }
-  .announcement a:hover,
+  .announcement a:hover .announcement__inner > span,
   .mega-menu__links a:hover,
   .approach-card__link:hover { text-decoration-line: none; }
 }

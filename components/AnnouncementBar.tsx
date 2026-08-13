@@ -24,10 +24,12 @@ export default function AnnouncementBar() {
 
   return (
     <aside className="announcement" aria-label="Current announcement">
-      <div className="site-container announcement__inner">
-        <p>Where finance, risk and AI become better decisions.</p>
-        <Link href="/resources">Explore Resources <span aria-hidden="true">→</span></Link>
-      </div>
+      <Link className="announcement__link" href="/resources">
+        <span className="site-container announcement__inner">
+          <p>Where finance, risk and AI become better decisions.</p>
+          <span>Explore Resources <b aria-hidden="true">→</b></span>
+        </span>
+      </Link>
       <button
         className="announcement__close"
         type="button"
