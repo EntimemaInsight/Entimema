@@ -1,16 +1,16 @@
-import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Link from "next/link";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
 import DecisionEngineDashboard from "./DecisionEngineDashboard";
 import styles from "./decision-automation.module.css";
+import { createServiceMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Decision Intelligence | Entimema",
+export const metadata = createServiceMetadata({
+  title: "Decision Intelligence Consulting | Entimema",
   description: "Build decision engines that connect data, analytical models, business rules and policy into traceable operational decision flows.",
-  alternates: { canonical: "/services/decision-automation" },
-};
+  path: "/services/decision-automation",
+});
 
 const capabilities = [
   ["DECISION ARCHITECTURE", "Design the full logic from input data and analytical models to the final operational decision."],

@@ -1,15 +1,15 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
 import FinancialDataDashboard from "./FinancialDataDashboard";
 import styles from "./financial-data.module.css";
+import { createServiceMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = createServiceMetadata({
   title: "Financial Data Analytics & Architecture | Entimema",
   description: "Turn fragmented ERP and finance data into reconciled, traceable analytics for reporting, planning, modelling and management decisions.",
-  alternates: { canonical: "/services/financial-data" },
-};
+  path: "/services/financial-data",
+});
 
 const capabilities = [
   ["ERP INTEGRATION", "Connect financial data across ERP and the business systems that feed it."],

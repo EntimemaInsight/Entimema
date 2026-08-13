@@ -1,11 +1,15 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
 import CostDashboard from "./CostDashboard";
 import styles from "./cost-and-profitability.module.css";
+import { createServiceMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = { title: "Cost & Profitability Analysis | Entimema", description: "Understand where value is created or lost through transparent cost models, manufacturing cost analysis, margin drivers and product profitability.", alternates: { canonical: "/services/cost-and-profitability" } };
+export const metadata = createServiceMetadata({
+  title: "Cost & Profitability Analysis | Entimema",
+  description: "Understand where value is created or lost through transparent cost models, manufacturing cost analysis, margin drivers and product profitability.",
+  path: "/services/cost-and-profitability",
+});
 
 const capabilities = [
   ["COST MODELS", "Build transparent cost models that show how resources, processes and allocations become unit cost."],
