@@ -73,61 +73,88 @@
   overflow: hidden;
   background: #eef3f6;
   isolation: isolate;
-  transition: transform .7s cubic-bezier(.2,.7,.2,1), box-shadow .7s ease;
+  container-type: inline-size;
+  transition: transform .75s cubic-bezier(.2,.7,.2,1), box-shadow .75s ease;
 }
-.resourceCover::after { content: ""; position: absolute; inset: 0; pointer-events: none; border: 1px solid rgba(7,27,82,.12); box-shadow: inset 0 0 80px rgba(7,27,82,.025); }
+.resourceCover::after { content: ""; position: absolute; z-index: 8; inset: 0; pointer-events: none; border: 1px solid rgba(7,27,82,.12); box-shadow: inset 0 0 90px rgba(7,27,82,.035); }
 .coverLink:hover .resourceCover,
-.coverLink:focus-visible .resourceCover { transform: translateY(-4px); box-shadow: 0 24px 55px rgba(7,27,82,.11); }
-.editorialCanvas { width: 100%; height: 100%; min-height: inherit; display: block; overflow: hidden; }
-.editorialCanvas text { fill: currentColor; font-size: 9px; font-weight: 750; letter-spacing: .18em; }
-.coverNumeral { font-size: 70px !important; font-weight: 610 !important; letter-spacing: -.06em !important; opacity: .12; }
-.coverCreditVintage { color: #14305f; background: #dfeaf0; }
-.coverCreditVintage::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 80% 20%, rgba(255,255,255,.8), transparent 29%), linear-gradient(120deg, transparent 55%, rgba(255,255,255,.45)); }
-.vintageBands path { fill: none; stroke: #16376a; stroke-width: calc(18px - var(--i) * 2px); opacity: calc(.15 + var(--i) * .11); transform-origin: 50% 50%; transition: transform 1.2s cubic-bezier(.2,.7,.2,1); }
-.vintageBands path:nth-child(4) { stroke: #ee5b31; opacity: .8; }
-.vintageSun { fill: #fff; opacity: .52; mix-blend-mode: screen; }
-.coverLink:hover .vintageBands path { transform: translateY(calc((var(--i) - 2) * -3px)); }
+.coverLink:focus-visible .resourceCover { transform: translateY(-4px); box-shadow: 0 26px 58px rgba(7,27,82,.12); }
+.coverKicker,
+.coverFolio { position: absolute; z-index: 6; font-size: clamp(7px, 2.1cqi, 10px); font-weight: 750; letter-spacing: .18em; text-transform: uppercase; }
+.coverKicker { top: 7%; left: 6%; }
+.coverFolio { right: 6%; bottom: 6%; }
 
-.coverWorkingCapital { color: #102b58; background: #e9e4d7; }
-.coverWorkingCapital::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 49% 50%, rgba(255,255,255,.85), transparent 35%); }
-.liquidityRings circle { fill: none; stroke: #183864; stroke-width: 1; opacity: .2; }
-.liquidityRibbon,.liquidityRibbonAlt { fill: none; stroke: #153768; stroke-width: 24; opacity: .73; }
-.liquidityRibbonAlt { stroke: #ef653b; stroke-width: 9; opacity: .85; }
-.liquidityDiscs circle { fill: #f7f2e7; stroke: #153768; stroke-width: 2; }
-.liquidityDiscs circle:nth-child(2) { fill: #ef653b; stroke: none; }
-.coverLink:hover .liquidityRings { transform: rotate(8deg); transform-origin: 290px 150px; transition: transform 1.4s cubic-bezier(.2,.7,.2,1); }
+/* Lead cover: an editorial material sculpture rather than a process diagram. */
+.coverManufacturingCost { color: #0b2853; background: #dedbd3; }
+.coverManufacturingCost::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 74% 27%, rgba(255,255,255,.9), transparent 26%), linear-gradient(125deg, rgba(255,255,255,.62), transparent 48%); }
+.manufacturingArtwork { position: absolute; inset: 0; }
+.sculpture { position: absolute; top: 6%; right: 2%; width: 62%; height: 88%; perspective: 900px; transform: rotate(-7deg); transition: transform 1.2s cubic-bezier(.2,.7,.2,1); }
+.sculpture i { position: absolute; top: calc(16% + var(--layer, 0) * 10%); right: calc(8% + var(--layer, 0) * 5%); width: 74%; height: 35%; border: 1px solid rgba(7,27,82,.28); background: rgba(240,244,241,.7); box-shadow: 0 20px 36px rgba(7,27,82,.12); transform: rotateX(62deg) rotateZ(-22deg); }
+.sculpture i:nth-child(1) { --layer: 0; }
+.sculpture i:nth-child(2) { --layer: 1; background: rgba(157,181,191,.63); }
+.sculpture i:nth-child(3) { --layer: 2; background: rgba(75,112,139,.68); }
+.sculpture i:nth-child(4) { --layer: 3; background: rgba(11,40,83,.82); }
+.sculpture b { position: absolute; top: 34%; right: 13%; width: 25%; aspect-ratio: 1; border-radius: 50%; background: #f2663f; box-shadow: 0 15px 35px rgba(88,31,18,.2); }
+.sculpture b:last-child { top: 55%; right: 53%; width: 10%; background: rgba(255,255,255,.82); }
+.manufacturingWord { position: absolute; z-index: 5; left: 6%; bottom: 8%; font-size: clamp(30px, 10cqi, 76px); font-weight: 680; letter-spacing: -.07em; line-height: .78; }
+.manufacturingWord em { color: #f05c34; font-style: normal; }
+.coverLink:hover .sculpture { transform: rotate(-4deg) translate3d(3px,-5px,0); }
 
-.coverOperationalForecast { color: #e8f0f5; background: #0b2853; }
-.forecastField { fill: transparent; }
-.observedLine,.futureLines path { fill: none; stroke: #d9e7ef; stroke-width: 2.2; }
-.futureLines path { opacity: .26; stroke-dasharray: 520; transition: opacity .7s ease; }
-.futureLines path:nth-child(2) { stroke: #ff7148; opacity: .95; stroke-width: 3; }
-.futureLines path:nth-child(3) { stroke-dasharray: 5 7; }
-.forecastPivot { fill: #ff7148; }
-.coverLink:hover .futureLines path { opacity: .72; }
+/* A type-led cover: scale and a single tactile form carry the cash idea. */
+.coverWorkingCapital { color: #f4f0e7; background: #102d50; }
+.coverWorkingCapital::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 76% 43%, rgba(91,132,145,.5), transparent 30%); }
+.liquidityArtwork { position: absolute; inset: 0; }
+.cashWord { position: absolute; z-index: 4; left: 5%; bottom: 5%; font-family: Georgia, serif; font-size: clamp(68px, 27cqi, 170px); font-weight: 400; letter-spacing: -.095em; line-height: .8; }
+.liquidityOrb { position: absolute; top: 11%; right: 9%; width: 43%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 32% 26%, #f7eee1, #d77a52 36%, #6f3028 72%, #172744); box-shadow: -24px 35px 65px rgba(1,13,35,.48), inset -14px -18px 32px rgba(4,13,30,.34); transition: transform 1.2s cubic-bezier(.2,.7,.2,1); }
+.liquidityOrb i { position: absolute; inset: 13%; border: 1px solid rgba(255,255,255,.38); border-radius: 50%; }
+.liquidityOrb i:nth-child(2) { inset: 29%; }.liquidityOrb i:nth-child(3) { inset: 45%; background: rgba(255,255,255,.32); border: 0; }
+.liquidityAside { position: absolute; top: 16%; left: 6%; font-family: Georgia, serif; font-size: clamp(13px, 4cqi, 22px); font-style: italic; line-height: 1.15; }
+.coverLink:hover .liquidityOrb { transform: translate3d(-5px,4px,0) rotate(4deg); }
 
-.coverManufacturingCost { color: #1a315a; background: #ded9d0; }
-.coverManufacturingCost::before { content: ""; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,.6), transparent 53%); }
-.materialSheets path { fill: #f3f0e9; stroke: #173665; stroke-width: 1.2; transition: transform 1s cubic-bezier(.2,.7,.2,1); }
-.materialSheets path:nth-child(2) { fill: #c0d0d8; }.materialSheets path:nth-child(3) { fill: #7895a8; }
-.materialCuts path { fill: #ef6338; opacity: .87; }.materialCuts path:last-child { fill: #173665; opacity: .9; }
-.coverLink:hover .materialSheets path:first-child { transform: translateY(-7px); }.coverLink:hover .materialSheets path:last-child { transform: translateY(7px); }
+/* Scenario paths are treated as atmospheric data art, not a labelled chart. */
+.coverOperationalForecast { color: #e7edf0; background: #071d42; }
+.coverOperationalForecast::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 28% 72%, rgba(240,91,52,.2), transparent 30%); }
+.forecastArtwork { position: absolute; inset: 0; }
+.futureWord { position: absolute; z-index: 2; top: 9%; left: 5%; color: rgba(230,239,241,.94); font-size: clamp(46px, 16cqi, 112px); letter-spacing: -.075em; line-height: .82; }
+.scenarioFan { position: absolute; inset: 24% -10% -18% 16%; transform: rotate(-4deg); }
+.scenarioFan i { position: absolute; left: 3%; top: 52%; width: 98%; height: 48%; border-top: 1px solid rgba(211,229,233,.36); border-radius: 50%; transform: rotate(calc((var(--i) - 3) * 8deg)) scaleY(calc(.36 + var(--i) * .09)); transform-origin: 0 0; }
+.scenarioFan i:nth-child(5) { border-color: #f56a43; border-width: 3px; box-shadow: 0 -7px 24px rgba(245,106,67,.15); }
+.scenarioFan b { position: absolute; top: calc(52% - 6px); left: calc(3% - 6px); width: 12px; height: 12px; border-radius: 50%; background: #f56a43; box-shadow: 0 0 28px #f56a43; }
+.forecastNote { position: absolute; z-index: 5; left: 6%; bottom: 8%; font-family: Georgia, serif; font-size: clamp(12px, 3.7cqi, 19px); font-style: italic; line-height: 1.25; }
+.coverLink:hover .scenarioFan { transform: rotate(-2deg) scale(1.015); transition: transform 1.3s cubic-bezier(.2,.7,.2,1); }
 
-.coverErpIntelligence { color: #112f5b; background: #dce8e4; }
-.coverErpIntelligence::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 72% 50%, rgba(255,255,255,.75), transparent 36%); }
-.dataFragments rect { fill: #193c67; opacity: calc(.18 + (var(--i) % 6) * .1); }
-.intelligenceField circle { fill: #173665; opacity: .62; }
-.intelligenceField circle:nth-child(4n) { fill: #ed633a; opacity: 1; }
-.dataVeil { fill: none; stroke: rgba(255,255,255,.8); stroke-width: 35; }
+/* Cohort behaviour becomes a woven field: analytical in origin, illustrative in form. */
+.coverCreditVintage { color: #102e57; background: #e2eaeb; }
+.coverCreditVintage::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 74% 26%, rgba(255,255,255,.92), transparent 27%); }
+.vintageArtwork { position: absolute; inset: 0; }
+.vintageWord { position: absolute; z-index: 3; left: 5%; bottom: 5%; font-size: clamp(52px, 20cqi, 130px); letter-spacing: -.085em; line-height: .8; }
+.cohortField { position: absolute; top: 10%; right: 5%; width: 58%; height: 72%; display: grid; grid-template-columns: repeat(7, 1fr); gap: 4%; align-items: center; transform: rotate(-9deg); }
+.cohortField i { display: block; width: calc(7px + var(--mod5) * 3px); aspect-ratio: 1; justify-self: center; border-radius: 50%; background: #163b65; opacity: calc(.16 + var(--mod6) * .13); box-shadow: 0 calc(var(--mod4) * 5px) 13px rgba(7,27,82,.13); transition: transform .8s cubic-bezier(.2,.7,.2,1); }
+.cohortField i:nth-child(9n),.cohortField i:nth-child(13n) { background: #f0643c; opacity: .92; }
+.vintageIndex { position: absolute; z-index: 4; top: 15%; left: 6%; color: #f0643c; font-size: clamp(35px, 10cqi, 64px); font-weight: 680; letter-spacing: -.06em; line-height: .55; }
+.vintageIndex small { color: #102e57; font-size: 9px; letter-spacing: .13em; text-transform: uppercase; }
+.coverLink:hover .cohortField i { transform: translateY(calc(var(--mod3) * -3px)); }
+
+/* Fragmented records resolve into a confident typographic signal. */
+.coverErpIntelligence { color: #153152; background: #d9e2dc; }
+.coverErpIntelligence::before { content: ""; position: absolute; inset: 0; background: linear-gradient(112deg, rgba(255,255,255,.66), transparent 47%), radial-gradient(circle at 78% 38%, rgba(255,255,255,.75), transparent 28%); }
+.intelligenceArtwork { position: absolute; inset: 0; }
+.fragmentField { position: absolute; top: 14%; left: 6%; width: 43%; height: 61%; }
+.fragmentField i { position: absolute; left: calc(var(--column) * 14%); top: calc(var(--row) * 21%); width: calc(4px + var(--column) * 1px); height: calc(3px + var(--row) * 2px); background: #173a60; opacity: calc(.25 + var(--row) * .16); transform: rotate(calc(var(--column) * 5deg - 16deg)); }
+.fragmentField i:nth-child(6n) { background: #ed6139; opacity: .9; }
+.signalWord { position: absolute; z-index: 4; right: 4%; bottom: 7%; font-family: Georgia, serif; font-size: clamp(56px, 19cqi, 124px); font-weight: 400; letter-spacing: -.08em; line-height: .8; }
+.intelligenceNote { position: absolute; z-index: 4; top: 14%; right: 7%; font-family: Georgia, serif; font-size: clamp(13px, 4cqi, 20px); font-style: italic; line-height: 1.22; }
+.coverLink:hover .fragmentField { transform: translate3d(5px,-3px,0); transition: transform 1.2s cubic-bezier(.2,.7,.2,1); }
+
 .imageCover { aspect-ratio: 4 / 3; }
 .imageCover img { object-fit: cover; transition: transform 1.2s cubic-bezier(.2,.7,.2,1); }
 .imageWash { position: absolute; inset: 0; background: linear-gradient(145deg, transparent 45%, rgba(7,27,82,.24)); mix-blend-mode: multiply; }
 .photoCover::before { content: ""; position: absolute; z-index: 1; inset: 18px; border: 1px solid rgba(255,255,255,.55); pointer-events: none; }
 .coverLink:hover .imageCover img { transform: scale(1.025); }
-[data-motion="trace"] .futureLines path { animation: editorialTrace 8s ease-in-out infinite alternate; }
-[data-motion="drift"] .editorialCanvas { animation: editorialDrift 11s ease-in-out infinite alternate; }
-@keyframes editorialTrace { from { stroke-dashoffset: 520; } 55%,to { stroke-dashoffset: 0; } }
-@keyframes editorialDrift { from { transform: scale(1.005) translate3d(-2px,1px,0); } to { transform: scale(1.025) translate3d(3px,-2px,0); } }
+.resourceCover[data-motion="drift"] > div { animation: editorialDrift 13s ease-in-out infinite alternate; }
+.resourceCover[data-motion="trace"] .scenarioFan { animation: scenarioBreath 10s ease-in-out infinite alternate; }
+@keyframes editorialDrift { from { transform: scale(1.002) translate3d(-1px,1px,0); } to { transform: scale(1.012) translate3d(2px,-2px,0); } }
+@keyframes scenarioBreath { from { transform: rotate(-4deg) scale(.995); } to { transform: rotate(-2deg) scale(1.012); } }
 
 .selected header { display: grid; grid-template-columns: 1fr minmax(0, 2fr); gap: 56px; align-items: start; }
 .selected h2,
@@ -451,8 +478,6 @@
   .topicList article { transition: none; }
   .resourceCover,
   .resourceCover::before,
-  .resourceCover img { transition: none; }
-  .editorialCanvas,
-  .editorialCanvas * { animation: none !important; transition: none !important; }
-  .futureLines path { stroke-dashoffset: 0; }
+  .resourceCover img,
+  .resourceCover * { animation: none !important; transition: none !important; }
 }
