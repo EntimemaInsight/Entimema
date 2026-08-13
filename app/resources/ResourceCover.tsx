@@ -9,7 +9,6 @@ type ResourceCoverProps = {
 
 export default function ResourceCover({ cover, featured = false }: ResourceCoverProps) {
   const isPhotography = cover.type === "photography";
-  const src = cover.type === "editorial-artwork" ? `${cover.src}?v=7j-z` : cover.src;
 
   return (
     <div
@@ -17,7 +16,7 @@ export default function ResourceCover({ cover, featured = false }: ResourceCover
       data-motion={cover.motion ?? "none"}
     >
       <Image
-        src={src}
+        src={cover.src}
         alt={cover.alt}
         fill
         sizes="(max-width: 800px) 100vw, 50vw"
