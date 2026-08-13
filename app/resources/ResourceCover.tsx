@@ -1,67 +1,76 @@
-import type { CSSProperties } from "react";
+import Image from "next/image";
+import type { CSSProperties, ReactNode } from "react";
 import type { ResourceCover as ResourceCoverModel } from "./resource-data";
 import styles from "./resources.module.css";
 
 type ResourceCoverProps = { cover: ResourceCoverModel };
 
-const nodes = (points: readonly [number, number][], className = "") => points.map(([cx, cy], index) => (
-  <circle className={className} cx={cx} cy={cy} r={index % 3 === 0 ? 4 : 2.5} key={`${cx}-${cy}`} style={{ "--node-index": index } as CSSProperties} />
-));
-
-function Grid() {
-  return <g className={styles.analysisGrid}><path d="M40 80H560M40 140H560M40 200H560M120 42V258M240 42V258M360 42V258M480 42V258" /></g>;
-}
-
 function Vintage() {
-  const paths = [
-    "M58 218 C122 214 132 184 198 178 S285 138 354 146 S453 102 538 94",
-    "M58 232 C126 225 146 200 210 194 S302 157 366 164 S458 130 538 124",
-    "M92 244 C150 235 167 217 228 211 S326 181 389 192 S478 166 538 158",
-    "M142 252 C194 244 215 226 270 226 S364 211 424 218 S494 201 538 194",
-  ];
-  return <><Grid /><g className={styles.trajectories}>{paths.map((d, index) => <path d={d} key={d} style={{ "--path-index": index } as CSSProperties} />)}</g>{nodes([[58,218],[198,178],[354,146],[538,94],[58,232],[210,194],[366,164],[538,124],[92,244],[228,211],[389,192],[538,158]], styles.dataNode)}</>;
+  return <>
+    <g className={styles.vintageBands}>{[0, 1, 2, 3, 4].map((index) => <path key={index} style={{ "--i": index } as CSSProperties} d={`M-30 ${285 - index * 29} C110 ${250 - index * 18}, 158 ${302 - index * 29}, 286 ${210 - index * 21} S486 ${175 - index * 15}, 650 ${66 - index * 8}`} />)}</g>
+    <circle className={styles.vintageSun} cx="478" cy="83" r="74" />
+    <text x="42" y="63">COHORT / TIME</text><text className={styles.coverNumeral} x="38" y="124">08</text>
+  </>;
 }
 
 function WorkingCapital() {
-  return <><g className={styles.orbits}><ellipse cx="300" cy="150" rx="202" ry="91" /><ellipse cx="300" cy="150" rx="143" ry="129" transform="rotate(23 300 150)" /><path d="M101 150C145 64 232 44 300 63C382 86 402 211 501 150" /></g><g className={styles.capitalNodes}>{nodes([[99,150],[199,64],[340,48],[493,132],[430,226],[260,246],[139,202]])}</g><g className={styles.core}><circle cx="300" cy="150" r="29" /><circle cx="300" cy="150" r="7" /></g></>;
+  return <>
+    <g className={styles.liquidityRings}><circle cx="290" cy="150" r="111"/><circle cx="290" cy="150" r="73"/><circle cx="290" cy="150" r="34"/></g>
+    <path className={styles.liquidityRibbon} d="M-20 181C80 45 197 54 289 151s212 107 335-18" />
+    <path className={styles.liquidityRibbonAlt} d="M-35 236C101 130 187 257 290 150S489 39 639 98" />
+    <g className={styles.liquidityDiscs}><circle cx="89" cy="92" r="12"/><circle cx="290" cy="150" r="19"/><circle cx="516" cy="204" r="10"/></g>
+    <text x="432" y="65">LIQUIDITY / MOTION</text>
+  </>;
 }
 
 function Forecast() {
-  return <><Grid /><path className={styles.history} d="M42 207 C89 192 103 216 145 181 S202 191 245 143 S291 164 323 129" /><g className={styles.scenarios}><path d="M323 129 C374 105 405 70 558 52" /><path d="M323 129 C393 122 444 133 558 101" /><path d="M323 129 C387 155 467 176 558 211" /><path d="M323 129 C375 139 430 118 558 151" /></g>{nodes([[42,207],[104,203],[145,181],[201,180],[245,143],[288,153],[323,129]], styles.observationNode)}<circle className={styles.pivotNode} cx="323" cy="129" r="6" /></>;
+  return <>
+    <rect className={styles.forecastField} x="0" y="0" width="600" height="300" />
+    <path className={styles.observedLine} d="M-20 235C45 205 87 224 137 184s89-19 140-61"/>
+    <g className={styles.futureLines}><path d="M277 123C350 93 430 31 640 18"/><path d="M277 123C386 116 479 119 640 78"/><path d="M277 123C390 152 474 218 640 199"/><path d="M277 123C354 170 433 262 620 287"/></g>
+    <circle className={styles.forecastPivot} cx="277" cy="123" r="10"/>
+    <text x="37" y="61">OBSERVED</text><text x="438" y="266">POSSIBLE / 04</text>
+  </>;
 }
 
 function Manufacturing() {
-  return <><g className={styles.inputStreams}><path d="M42 75 C150 75 175 120 256 137" /><path d="M42 135 C145 135 178 140 256 145" /><path d="M42 207 C149 207 176 169 256 153" /></g><g className={styles.materialNodes}>{nodes([[48,75],[82,75],[118,85],[48,135],[92,135],[138,137],[48,207],[86,207],[124,195]])}</g><g className={styles.transformCore}><path d="M258 105L335 105L369 150L335 195L258 195L224 150Z" /><path d="M265 150H328M296 119V181" /></g><g className={styles.outputFlow}><path d="M369 150C429 150 438 103 504 103" /><path d="M369 150C429 150 438 197 504 197" /><circle cx="520" cy="103" r="16" /><circle cx="520" cy="197" r="16" /></g></>;
+  return <>
+    <g className={styles.materialSheets}><path d="M52 63h309l-66 46H-14z"/><path d="M84 121h354l-79 55H4z"/><path d="M131 190h411l-96 68H30z"/></g>
+    <g className={styles.materialCuts}><path d="M361 63l77 58-79 55-64-67z"/><path d="M438 121l104 69-96 68-87-82z"/></g>
+    <text x="47" y="278">MATERIAL / CONVERSION / VALUE</text><text className={styles.coverNumeral} x="469" y="92">03</text>
+  </>;
 }
 
 function Erp() {
-  const points: [number, number][] = [[48,62],[83,91],[52,126],[104,151],[58,194],[121,226],[157,76],[168,130],[176,199]];
-  return <><g className={styles.transactionNodes}>{nodes(points)}</g><g className={styles.erpConnections}>{points.map(([x,y]) => <path d={`M${x + 5} ${y} C210 ${y} 195 150 260 150`} key={`${x}-${y}`} />)}<path d="M260 150H365" /><path d="M365 150C425 150 426 105 483 105M365 150C425 150 426 195 483 195" /></g><g className={styles.structure}><rect x="241" y="112" width="38" height="76" rx="19" /><rect x="346" y="124" width="38" height="52" rx="19" /></g><g className={styles.insight}><circle cx="505" cy="105" r="20"/><circle cx="505" cy="195" r="20"/><path d="M498 105L504 111L514 98M498 195L504 201L514 188" /></g></>;
+  const fragments = Array.from({ length: 34 }, (_, index) => ({ x: 32 + (index % 7) * 31, y: 43 + Math.floor(index / 7) * 49, size: 3 + (index % 4) * 2 }));
+  return <>
+    <g className={styles.dataFragments}>{fragments.map(({x,y,size}, index) => <rect key={index} x={x} y={y} width={size * 1.7} height={size} style={{ "--i": index } as CSSProperties}/>)}</g>
+    <g className={styles.intelligenceField}>{Array.from({length: 6}, (_, row) => Array.from({length: 7}, (_, column) => <circle key={`${row}-${column}`} cx={352 + column * 34} cy={58 + row * 34} r={2 + ((row + column) % 3)} />))}</g>
+    <path className={styles.dataVeil} d="M224 12C276 63 264 113 312 151s28 85 81 145"/>
+    <text x="354" y="275">SIGNAL / STRUCTURE</text>
+  </>;
 }
 
-const graphics = {
-  "credit-vintage": <Vintage />,
-  "working-capital": <WorkingCapital />,
-  "operational-forecast": <Forecast />,
-  "manufacturing-cost": <Manufacturing />,
-  "erp-intelligence": <Erp />,
+const artwork: Record<Extract<ResourceCoverModel, { type: "custom-artwork" }>["variant"], ReactNode> = {
+  "credit-vintage": <Vintage />, "working-capital": <WorkingCapital />, "operational-forecast": <Forecast />,
+  "manufacturing-cost": <Manufacturing />, "erp-intelligence": <Erp />,
 };
 
-const variantClasses = {
-  "credit-vintage": styles.coverCreditVintage,
-  "working-capital": styles.coverWorkingCapital,
-  "operational-forecast": styles.coverOperationalForecast,
-  "manufacturing-cost": styles.coverManufacturingCost,
+const variantClasses: Record<Extract<ResourceCoverModel, { type: "custom-artwork" }>["variant"], string> = {
+  "credit-vintage": styles.coverCreditVintage, "working-capital": styles.coverWorkingCapital,
+  "operational-forecast": styles.coverOperationalForecast, "manufacturing-cost": styles.coverManufacturingCost,
   "erp-intelligence": styles.coverErpIntelligence,
 };
 
 export default function ResourceCover({ cover }: ResourceCoverProps) {
-  return (
-    <div className={`${styles.resourceCover} ${variantClasses[cover.variant]}`} role="img" aria-label={cover.accessibleLabel}>
-      <div className={styles.coverSignal} aria-hidden="true"><span /><i /><i /><i /></div>
-      <svg className={styles.analyticalCanvas} viewBox="0 0 600 300" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
-        {graphics[cover.variant]}
-      </svg>
+  if (cover.type === "image" || cover.type === "photography") return (
+    <div className={`${styles.resourceCover} ${styles.imageCover} ${cover.type === "photography" ? styles.photoCover : ""}`} data-motion={cover.motion ?? "none"}>
+      <Image src={cover.src} alt={cover.alt} fill sizes="(max-width: 800px) 100vw, 50vw" style={{ objectPosition: cover.focalPoint ?? "50% 50%" }} />
+      <span className={styles.imageWash} aria-hidden="true" />
     </div>
   );
+
+  return <div className={`${styles.resourceCover} ${variantClasses[cover.variant]}`} data-motion={cover.motion ?? "none"}>
+    <svg className={styles.editorialCanvas} viewBox="0 0 600 300" aria-hidden="true" focusable="false" preserveAspectRatio="xMidYMid slice">{artwork[cover.variant]}</svg>
+  </div>;
 }

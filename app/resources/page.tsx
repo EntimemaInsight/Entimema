@@ -53,7 +53,7 @@ export default async function ResourcesPage({ searchParams }: { searchParams: Pr
           <Link className={styles.coverLink} href={resource.canonicalPath} aria-label={`Read ${resource.title}`}><ResourceCover cover={resource.cover} /></Link>
           <div className={styles.cardMeta}><span>{getTopic(resource.topic)?.label}</span><span>{resource.readingMinutes} MIN READ</span></div>
           <h3><Link href={resource.canonicalPath}>{resource.title}</Link></h3><p>{resource.deck}</p>
-          <time dateTime={resource.publishedAt}>{formatDate(resource.publishedAt)}</time>
+          <div className={styles.cardFooter}><time dateTime={resource.publishedAt}>{formatDate(resource.publishedAt)}</time><Link href={resource.canonicalPath}>Read analysis <b aria-hidden="true">→</b></Link></div>
         </article>)}</div> : <div className={styles.emptyState}><p>The first Entimema analyses are being developed under practitioner review.</p><span>Publication begins with depth, not volume.</span></div>}
       </div></section>
 
