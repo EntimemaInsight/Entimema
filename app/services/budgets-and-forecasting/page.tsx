@@ -1,15 +1,15 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
 import PlanningDashboard from "./PlanningDashboard";
 import styles from "./budgets-and-forecasting.module.css";
+import { createServiceMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = createServiceMetadata({
   title: "Financial Forecasting Consulting | Entimema",
   description: "Replace static plans with driver-based forecasting, rolling updates and scenarios that connect operations, financial outcomes and cash decisions.",
-  alternates: { canonical: "/services/budgets-and-forecasting" },
-};
+  path: "/services/budgets-and-forecasting",
+});
 
 const capabilities = [
   ["BUDGET ARCHITECTURE", "A clear planning structure, ownership, calendar and rules for the entire budget cycle."],

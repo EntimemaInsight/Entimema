@@ -42,7 +42,7 @@ export default function ResourceArticle({ resource, sections, children }: { reso
 
         <aside className={styles.capability} aria-labelledby="related-capability-title">
           <div><span>RELATED CAPABILITY</span><h2 id="related-capability-title">{resource.relatedCapability.label}</h2><p>{resource.relatedCapability.description}</p></div>
-          <RelatedCapabilityLink href={resource.relatedCapability.href} resourceSlug={resource.slug}>Explore the capability <span aria-hidden="true">→</span></RelatedCapabilityLink>
+          <RelatedCapabilityLink href={resource.relatedCapability.href} resourceSlug={resource.slug}>{resource.relatedCapability.label} service <span aria-hidden="true">→</span></RelatedCapabilityLink>
         </aside>
 
         {related.length ? <section className={styles.related} aria-labelledby="related-resources-title"><div className={styles.wideContainer}><header><span>CONTINUE THE ANALYSIS</span><h2 id="related-resources-title">Related Resources</h2></header><div>{related.map((item) => <Link href={item.canonicalPath} key={item.slug}><span>{getTopic(item.topic)?.label}</span><strong>{item.title}</strong><small>{item.readingMinutes} min read</small></Link>)}</div></div></section> : null}

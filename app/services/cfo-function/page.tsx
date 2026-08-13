@@ -1,15 +1,15 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
 import CfoDashboard from "./CfoDashboard";
 import styles from "./cfo-function.module.css";
+import { createServiceMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = createServiceMetadata({
   title: "Fractional CFO Services & Advisory | Entimema",
   description: "Build senior finance capability, management information and decision processes without committing to a full CFO organisation from day one.",
-  alternates: { canonical: "/services/cfo-function" },
-};
+  path: "/services/cfo-function",
+});
 
 const capabilities = [
   ["FINANCIAL PLANNING", "Budgets, forecasts and scenarios connected to the drivers of the business."],
@@ -84,7 +84,7 @@ export default function CfoFunctionPage() {
           <dl>
             <div><dt>SCENARIO</dt><dd>A manufacturing company sees revenue growing, while margins continue to weaken. Accounting, production and management reports tell different versions of the same business.</dd></div>
             <div><dt>ENTIMEMA APPROACH</dt><dd>We connect production volumes, material consumption, cost allocation, margins and financial reporting into one management view.</dd></div>
-            <div><dt>RESULT</dt><dd>Management can see what is changing, why it is changing and where action is required.</dd></div>
+            <div><dt>RESULT</dt><dd>Management can see what is changing, why it is changing and where action is required. The practical mechanics are developed further in our research on <Link href="/resources/working-capital-as-a-system">working capital as an operating system</Link>.</dd></div>
           </dl>
         </aside>
       </div></section>

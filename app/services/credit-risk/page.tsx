@@ -1,16 +1,16 @@
-import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Link from "next/link";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
 import CreditRiskDashboard from "./CreditRiskDashboard";
 import styles from "./credit-risk.module.css";
+import { createServiceMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = createServiceMetadata({
   title: "Credit Risk Consulting & Modelling | Entimema",
   description: "Strengthen credit decisions with specialist consulting across risk models, policy, portfolio analytics and controlled implementation.",
-  alternates: { canonical: "/services/credit-risk" },
-};
+  path: "/services/credit-risk",
+});
 
 const capabilities = [
   ["APPLICATION SCORING", "Assess new applicants through models built around risk differentiation and credit policy."],

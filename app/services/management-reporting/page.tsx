@@ -1,15 +1,15 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
 import ManagementDashboard from "./ManagementDashboard";
 import styles from "./management-reporting.module.css";
+import { createServiceMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = createServiceMetadata({
   title: "Management Reporting Consulting | Entimema",
   description: "Turn fragmented financial and operational reporting into timely management information, clear KPIs and decision-ready performance analysis.",
-  alternates: { canonical: "/services/management-reporting" },
-};
+  path: "/services/management-reporting",
+});
 
 const capabilities = [
   ["MANAGEMENT KPIs", "Metrics defined around how the business is actually managed."],
@@ -66,7 +66,7 @@ export default function ManagementReportingPage() {
 
       <section className={styles.section} aria-labelledby="capabilities-title"><div className="site-container"><SectionHeader label="WHAT IT INCLUDES" title="Reporting works when the structure matches the decisions." /><div className={styles.capabilityGrid}>{capabilities.map(([title, copy], index) => <article className={styles.capability} key={title}><span>0{index + 1}</span><h3>{title}</h3><p>{copy}</p></article>)}</div></div></section>
       <section className={`${styles.section} ${styles.tinted}`} aria-labelledby="process-title"><div className="site-container"><SectionHeader label="HOW WE WORK" title={<>Start with the decisions.<br />Build the information around them.</>} /><ol className={styles.timeline}>{process.map(([number, title, copy]) => <li key={number}><span>{number}</span><h3>{title}</h3><p>{copy}</p></li>)}</ol></div></section>
-      <section className={styles.section} aria-labelledby="outcomes-title"><div className="site-container"><SectionHeader label="WHAT YOU GET" title={<>Less reporting friction.<br />More management visibility.</>} /><div className={styles.outcomeGrid}>{outcomes.map(([title, copy]) => <article key={title}><span aria-hidden="true">✓</span><div><h3>{title}</h3><p>{copy}</p></div></article>)}</div><aside className={styles.caseExample} aria-labelledby="case-example-title"><div className={styles.caseExampleIntro}><span>ILLUSTRATIVE SCENARIO</span><h3 id="case-example-title">When finance and operations tell different stories, management loses the picture.</h3></div><dl><div><dt>SCENARIO</dt><dd>A manufacturing company prepares financial and operational reporting separately, with no shared KPI framework and limited ability to explain variances.</dd></div><div><dt>ENTIMEMA APPROACH</dt><dd>We connect ERP data, management KPIs and executive dashboards into one reporting structure.</dd></div><div><dt>RESULT</dt><dd>Management gets a timely, consistent and reliable view of performance for day-to-day decisions.</dd></div></dl></aside></div></section>
+      <section className={styles.section} aria-labelledby="outcomes-title"><div className="site-container"><SectionHeader label="WHAT YOU GET" title={<>Less reporting friction.<br />More management visibility.</>} /><div className={styles.outcomeGrid}>{outcomes.map(([title, copy]) => <article key={title}><span aria-hidden="true">✓</span><div><h3>{title}</h3><p>{copy}</p></div></article>)}</div><aside className={styles.caseExample} aria-labelledby="case-example-title"><div className={styles.caseExampleIntro}><span>ILLUSTRATIVE SCENARIO</span><h3 id="case-example-title">When finance and operations tell different stories, management loses the picture.</h3></div><dl><div><dt>SCENARIO</dt><dd>A manufacturing company prepares financial and operational reporting separately, with no shared KPI framework and limited ability to explain variances.</dd></div><div><dt>ENTIMEMA APPROACH</dt><dd>We connect ERP data, management KPIs and executive dashboards into one reporting structure.</dd></div><div><dt>RESULT</dt><dd>Management gets a timely, consistent and reliable view of performance for day-to-day decisions. Our research on <Link href="/resources/from-erp-data-to-management-intelligence">ERP data for management intelligence</Link> explains the information layers beneath that reporting view.</dd></div></dl></aside></div></section>
       <section className={`${styles.section} ${styles.tinted}`} aria-labelledby="applications-title"><div className="site-container"><SectionHeader label="WHERE IT APPLIES" title="When does reporting stop supporting management?" intro="If management has to reconcile the reports before it can use them, the reporting system is already too slow." /><div className={styles.useCaseGrid}>{useCases.map(([title, copy]) => <article key={title}><h3>{title}</h3><p>{copy}</p></article>)}</div></div></section>
       <section className={styles.section} aria-labelledby="related-title"><div className="site-container"><SectionHeader label="NEXT STEP" title="Related services" /><div className={styles.relatedGrid}>{related.map(([title, copy, href]) => <Link href={href} key={title}><span><strong>{title}</strong><small>{copy}</small></span><b aria-hidden="true">↗</b></Link>)}</div></div></section>
       <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>MANAGEMENT REPORTING</span><h2 id="cta-title">Your reporting should answer the question before management has to ask twice.</h2><p>Build a management information system around the decisions, KPIs and reporting rhythm your business actually needs.</p><Link className={styles.ctaButton} href="/contact?topic=management-reporting">Discuss Your Management Reporting <span aria-hidden="true">→</span></Link></div></div></section>
