@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-labelledby="t d">
+<title id="t">Industrial editorial sculpture</title><desc id="d">Machined translucent planes suspended around a precision-cut industrial core.</desc>
+<defs>
+ <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#e9e7e0"/><stop offset=".52" stop-color="#cbd3d3"/><stop offset="1" stop-color="#8296a3"/></linearGradient>
+ <radialGradient id="light"><stop stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+ <linearGradient id="steel" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f9fbf8"/><stop offset=".23" stop-color="#9fb1b8"/><stop offset=".48" stop-color="#304c64"/><stop offset=".7" stop-color="#dce3df"/><stop offset="1" stop-color="#102846"/></linearGradient>
+ <linearGradient id="edge"><stop stop-color="#1e3f60"/><stop offset=".48" stop-color="#071b34"/><stop offset="1" stop-color="#52758c"/></linearGradient>
+ <pattern id="grain" width="7" height="7" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".55" fill="#0b2948" opacity=".18"/></pattern>
+ <filter id="shadow" x="-50%" y="-50%" width="200%" height="220%"><feGaussianBlur in="SourceAlpha" stdDeviation="18"/><feOffset dy="28"/><feColorMatrix values="0 0 0 0 0.02 0 0 0 0 0.08 0 0 0 0 0.15 0 0 0 .4 0"/><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+ <filter id="blur"><feGaussianBlur stdDeviation="30"/></filter>
+</defs>
+<rect width="1200" height="900" fill="url(#bg)"/><ellipse cx="900" cy="160" rx="390" ry="300" fill="url(#light)"/>
+<path d="M0 762L1200 452v448H0z" fill="#102b46" opacity=".08"/><rect x="55" y="63" width="370" height="250" fill="url(#grain)" opacity=".45"/>
+<g fill="#173854" font-family="Arial,sans-serif"><text x="62" y="86" font-size="14" letter-spacing="5">MATERIAL STUDY / 01</text><text x="62" y="826" font-size="90" font-weight="700" letter-spacing="-5">TOLERANCE</text><text x="974" y="834" font-size="13" letter-spacing="3">± 0.01</text></g>
+<ellipse cx="796" cy="700" rx="300" ry="76" fill="#071b34" opacity=".27" filter="url(#blur)"/>
+<g filter="url(#shadow)">
+ <path d="M470 407L753 245l330 191-286 166z" fill="url(#steel)" stroke="#f7faf8" stroke-opacity=".7"/>
+ <path d="M470 407v103l327 190V602z" fill="#173750"/><path d="M797 602v98l286-164V436z" fill="url(#edge)"/>
+ <path d="M548 407l207-118 240 139-210 122z" fill="#c9d5d5" fill-opacity=".58" stroke="#fff" stroke-opacity=".55"/>
+ <path d="M613 408l144-82 166 96-146 85z" fill="#09213d"/><path d="M664 405l94-53 108 62-95 56z" fill="#f0643d"/>
+ <path d="M474 344L752 184l327 189-44 26-283-163-235 135z" fill="#fff" fill-opacity=".35" stroke="#fff" stroke-opacity=".64"/>
+ <path d="M493 298L750 150l302 174" fill="none" stroke="#fff" stroke-opacity=".54" stroke-width="2"/>
+</g>
+<g stroke="#12324e" opacity=".35"><path d="M440 257h130M505 221v124"/><circle cx="505" cy="257" r="6" fill="#f0643d" stroke="none"/></g>
+</svg>

@@ -19,9 +19,10 @@ type ResourceVisualBase = {
 };
 
 export type ResourceCover = ResourceVisualBase & {
-  type: "custom-artwork";
-  variant: "manufacturing-cost" | "working-capital" | "operational-forecast" | "credit-vintage" | "erp-intelligence";
-  accessibleLabel: string;
+  type: "editorial-artwork";
+  src: `/resources/covers/${string}.svg`;
+  alt: string;
+  focalPoint?: `${number}% ${number}%`;
 } | ResourceVisualBase & {
   type: "image";
   src: string;
@@ -101,10 +102,10 @@ export const resources: ResourceRecord[] = [
     status: "published",
     indexable: true,
     cover: {
-      type: "custom-artwork",
+      type: "editorial-artwork",
+      src: "/resources/covers/manufacturing-cost.svg",
       motion: "drift",
-      variant: "manufacturing-cost",
-      accessibleLabel: "Manufacturing cost architecture from inputs through production economics to management decision",
+      alt: "Machined translucent planes suspended around a precision-cut industrial core",
       stages: ["Inputs", "Intermediates", "Conversion", "Production", "Capacity", "Product economics", "Decision"],
     },
   },
@@ -126,7 +127,7 @@ export const resources: ResourceRecord[] = [
     relatedResourceSlugs: ["building-a-manufacturing-cost-architecture", "operational-driver-forecasting"],
     status: "published",
     indexable: true,
-    cover: { type: "custom-artwork", variant: "working-capital", motion: "drift", accessibleLabel: "An abstract study of circulation and liquidity", stages: ["Receivables", "Inventory", "Payables", "Cash", "Financing", "Decision"] },
+    cover: { type: "editorial-artwork", src: "/resources/covers/working-capital.svg", motion: "drift", alt: "A luminous continuous ribbon held in fluid tension", stages: ["Receivables", "Inventory", "Payables", "Cash", "Financing", "Decision"] },
   },
   {
     title: "Operational-Driver Forecasting",
@@ -146,7 +147,7 @@ export const resources: ResourceRecord[] = [
     relatedResourceSlugs: ["working-capital-as-a-system", "building-a-manufacturing-cost-architecture"],
     status: "published",
     indexable: true,
-    cover: { type: "custom-artwork", variant: "operational-forecast", motion: "trace", accessibleLabel: "Observed reality opening into several possible futures", stages: ["Drivers", "Business model", "P&L / BS / Cash", "Scenario", "Decision"] },
+    cover: { type: "editorial-artwork", src: "/resources/covers/operational-forecast.svg", motion: "trace", alt: "Luminous planes receding toward an uncertain blue horizon", stages: ["Drivers", "Business model", "P&L / BS / Cash", "Scenario", "Decision"] },
   },
   {
     title: "Credit Vintage Analysis",
@@ -166,7 +167,7 @@ export const resources: ResourceRecord[] = [
     relatedResourceSlugs: ["operational-driver-forecasting"],
     status: "published",
     indexable: true,
-    cover: { type: "custom-artwork", variant: "credit-vintage", motion: "trace", accessibleLabel: "Layered credit cohorts evolving through time", stages: ["Cohort", "Credit age", "Performance", "Signal", "Decision"] },
+    cover: { type: "editorial-artwork", src: "/resources/covers/credit-vintage.svg", motion: "trace", alt: "A sequence of translucent credit-memory strata advancing through time", stages: ["Cohort", "Credit age", "Performance", "Signal", "Decision"] },
   },
   {
     title:"From ERP Data to Management Intelligence",slug:"from-erp-data-to-management-intelligence",
@@ -178,7 +179,7 @@ export const resources: ResourceRecord[] = [
     openGraphDescription:"How reconciled ERP transactions become structured business meaning, analytical models and management decisions.",
     relatedCapability:{label:"Financial Data",href:"/services/financial-data",description:"Build reconciled financial-data foundations that connect ERP transactions to management analysis and decisions."},
     relatedResourceSlugs:["building-a-manufacturing-cost-architecture","working-capital-as-a-system","operational-driver-forecasting"],status:"published",indexable:true,
-    cover:{type:"custom-artwork",variant:"erp-intelligence",motion:"drift",accessibleLabel:"Fragmented information resolving into a field of structured intelligence",stages:["Transactions","Reconcile","Semantics","Model","Decision"]},
+    cover:{type:"editorial-artwork",src:"/resources/covers/erp-intelligence.svg",motion:"drift",alt:"Scattered data fragments resolving into a precise illuminated monolith",stages:["Transactions","Reconcile","Semantics","Model","Decision"]},
   },
 ];
 
