@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import type { MouseEvent } from "react";
 import BrandLogo from "./BrandLogo";
 import WhatWeDoMegaMenu from "./WhatWeDoMegaMenu";
 import ResourcesMegaMenu from "./ResourcesMegaMenu";
@@ -8,10 +9,17 @@ import ResourcesMegaMenu from "./ResourcesMegaMenu";
 type NavKey = "home" | "services" | "about" | "resources" | "contact";
 
 export default function Navbar({ active = "home" }: { active?: NavKey }) {
+  function handleBrandClick(event: MouseEvent<HTMLAnchorElement>) {
+    if (window.location.pathname === "/") {
+      event.preventDefault();
+      window.scrollTo(0, 0);
+    }
+  }
+
   return (
     <header className="site-header">
       <div className="site-container site-header__inner site-header__inner--editorial">
-        <Link className="site-header__brand" href="/" aria-label="Entimema – home">
+        <Link className="site-header__brand" href="/" aria-label="Entimema – home" onClick={handleBrandClick}>
           <BrandLogo />
         </Link>
 
