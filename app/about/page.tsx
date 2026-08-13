@@ -4,6 +4,7 @@ import Link from "next/link";
 import AboutHeader from "@/components/AboutHeader";
 import styles from "./about.module.css";
 import AboutMotion from "./AboutMotion";
+import { createFounderSchema, serializeJsonLd } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
   title: "About Entimema | Financial Architecture & Decision Science",
@@ -44,6 +45,7 @@ function PillarIcon({ type }: { type: string }) {
 export default function AboutPage() {
   return (
     <main className={`about-page ${styles.page}`}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(createFounderSchema()) }} />
       <AboutHeader />
       <section className="about-hero">
         <div className="about-network" aria-hidden="true">
