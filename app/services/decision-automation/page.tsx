@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import DecisionEngineDashboard from "./DecisionEngineDashboard";
 import styles from "./decision-automation.module.css";
 import { createServiceMetadata } from "@/lib/seo";
+import { createServicePageSchema, serializeJsonLd } from "@/lib/structured-data";
 
 export const metadata = createServiceMetadata({
   title: "Decision Intelligence Consulting | Entimema",
@@ -54,6 +55,7 @@ function SectionHeader({ label, title, intro }: { label: string; title: ReactNod
 export default function DecisionAutomationPage() {
   return (
     <main className={styles.page}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(createServicePageSchema({ path: "/services/decision-automation", name: "Decision Intelligence Consulting", description: "Build decision engines that connect data, analytical models, business rules and policy into traceable operational decision flows.", breadcrumbSection: "Decision Science", breadcrumbName: "Decision Intelligence" })) }} />
       <AnnouncementBar />
       <Navbar active="services" />
       <section className={styles.hero} aria-labelledby="decision-automation-title"><div className={`site-container ${styles.heroInner}`}>

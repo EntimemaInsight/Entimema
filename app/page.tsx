@@ -8,6 +8,7 @@ import PhilosophySection from "@/components/PhilosophySection";
 import ConversionTrustSection from "@/components/ConversionTrustSection";
 import ProcessSection from "@/components/ProcessSection";
 import CaseCtaSection from "@/components/CaseCtaSection";
+import { createHomeSchema, serializeJsonLd } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
   title: "Entimema | Financial Architecture, Decision Science & AI",
@@ -15,36 +16,10 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
 
-const organizationSchema = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "Entimema",
-  url: "https://www.entimema.net",
-  logo: "https://www.entimema.net/entimema-logo.png",
-  founder: {
-    "@type": "Person",
-    name: "Aleksandar Dimitrov",
-    url: "https://www.entimema.net/about",
-  },
-};
-
-const websiteSchema = {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  name: "Entimema",
-  url: "https://www.entimema.net",
-  publisher: {
-    "@type": "Organization",
-    name: "Entimema",
-    url: "https://www.entimema.net",
-  },
-};
-
 export default function Home() {
   return (
     <main className="site-page">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema).replace(/</g, "\\u003c") }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema).replace(/</g, "\\u003c") }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(createHomeSchema()) }} />
       <a className="skip-link" href="#home">Skip to main content</a>
       <AnnouncementBar />
       <Navbar />

@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import CfoDashboard from "./CfoDashboard";
 import styles from "./cfo-function.module.css";
 import { createServiceMetadata } from "@/lib/seo";
+import { createServicePageSchema, serializeJsonLd } from "@/lib/structured-data";
 
 export const metadata = createServiceMetadata({
   title: "Fractional CFO Services & Advisory | Entimema",
@@ -50,6 +51,7 @@ function SectionHeader({ label, title, intro }: { label: string; title: React.Re
 export default function CfoFunctionPage() {
   return (
     <main className={styles.page}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(createServicePageSchema({ path: "/services/cfo-function", name: "Fractional CFO Services & Advisory", description: "Build senior finance capability, management information and decision processes without committing to a full CFO organisation from day one.", breadcrumbSection: "Finance", breadcrumbName: "CFO Advisory" })) }} />
       <AnnouncementBar />
       <Navbar active="services" />
       <section className={styles.hero} aria-labelledby="cfo-title">

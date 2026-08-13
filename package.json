@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "audit:structured-data": "node scripts/audit-structured-data.mjs",
     "start": "next start",
     "lint": "eslint"
   },

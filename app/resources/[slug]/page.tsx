@@ -7,7 +7,7 @@ import OperationalDriverForecastingArticle, { operationalForecastSections } from
 import CreditVintageAnalysisArticle, { creditVintageSections } from "../CreditVintageAnalysisArticle";
 import ErpManagementIntelligenceArticle, { erpIntelligenceSections } from "../ErpManagementIntelligenceArticle";
 import { getPublishedResource, getTopic, publishedResources } from "../resource-data";
-import { createBreadcrumbSchema } from "@/lib/structured-data";
+import { FOUNDER_ID, ORGANIZATION_ID, SITE_URL, WEBSITE_ID, createBreadcrumbSchema, serializeJsonLd } from "@/lib/structured-data";
 
 export const dynamicParams = false;
 
@@ -49,23 +49,41 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
   if (!resource) notFound();
 
   const topic = getTopic(resource.topic);
-  const baseUrl = "https://www.entimema.net";
+  const pageUrl = `${SITE_URL}${resource.canonicalPath}`;
   const articleSchema = {
     "@context": "https://schema.org",
-    "@type": "Article",
-    headline: resource.title,
-    description: resource.deck,
-    datePublished: resource.publishedAt,
-    dateModified: resource.updatedAt ?? resource.publishedAt,
-    mainEntityOfPage: `${baseUrl}${resource.canonicalPath}`,
-    author: { "@type": "Person", name: resource.author.name, url: resource.author.profilePath ? `${baseUrl}${resource.author.profilePath}` : undefined },
-    publisher: { "@type": "Organization", name: "Entimema", url: baseUrl },
-    articleSection: topic?.label,
+    "@graph": [
+      {
+        "@type": "Article",
+        "@id": `${pageUrl}#article`,
+        headline: resource.title,
+        description: resource.deck,
+        url: pageUrl,
+        datePublished: resource.publishedAt,
+        ...(resource.updatedAt ? { dateModified: resource.updatedAt } : {}),
+        mainEntityOfPage: { "@id": `${pageUrl}#webpage` },
+        author: { "@id": FOUNDER_ID },
+        publisher: { "@id": ORGANIZATION_ID },
+        isPartOf: { "@id": WEBSITE_ID },
+        articleSection: topic?.label,
+      },
+      {
+        "@type": "WebPage",
+        "@id": `${pageUrl}#webpage`,
+        url: pageUrl,
+        isPartOf: { "@id": WEBSITE_ID },
+        mainEntity: { "@id": `${pageUrl}#article` },
+        breadcrumb: { "@id": `${pageUrl}#breadcrumb` },
+      },
+      createBreadcrumbSchema(
+        [
+          { name: "Resources", item: `${SITE_URL}/resources` },
+          { name: topic?.label ?? resource.topic },
+        ],
+        `${pageUrl}#breadcrumb`,
+      ),
+    ],
   };
-  const breadcrumbSchema = createBreadcrumbSchema([
-    { name: "Resources", item: `${baseUrl}/resources` },
-    { name: resource.title, item: `${baseUrl}${resource.canonicalPath}` },
-  ]);
   const isWorkingCapital = resource.slug === "working-capital-as-a-system";
   const isOperationalForecast = resource.slug === "operational-driver-forecasting";
   const isCreditVintage = resource.slug === "credit-vintage-analysis";
@@ -73,8 +91,7 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema).replace(/</g, "\\u003c") }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema).replace(/</g, "\\u003c") }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(articleSchema) }} />
       <ResourceArticle resource={resource} sections={isErpIntelligence ? [...erpIntelligenceSections] : isCreditVintage ? [...creditVintageSections] : isOperationalForecast ? [...operationalForecastSections] : isWorkingCapital ? [...workingCapitalSections] : [...manufacturingCostSections]}>
         {isErpIntelligence ? <ErpManagementIntelligenceArticle /> : isCreditVintage ? <CreditVintageAnalysisArticle /> : isOperationalForecast ? <OperationalDriverForecastingArticle /> : isWorkingCapital ? <WorkingCapitalArticle /> : <ManufacturingCostArticle />}
       </ResourceArticle>

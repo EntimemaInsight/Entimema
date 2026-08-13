@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import FinancialDataDashboard from "./FinancialDataDashboard";
 import styles from "./financial-data.module.css";
 import { createServiceMetadata } from "@/lib/seo";
+import { createServicePageSchema, serializeJsonLd } from "@/lib/structured-data";
 
 export const metadata = createServiceMetadata({
   title: "Financial Data Analytics & Architecture | Entimema",
@@ -55,6 +56,7 @@ function SectionHeader({ label, title, intro }: { label: string; title: React.Re
 export default function FinancialDataPage() {
   return (
     <main className={styles.page}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(createServicePageSchema({ path: "/services/financial-data", name: "Financial Data Analytics & Architecture", description: "Turn fragmented ERP and finance data into reconciled, traceable analytics for reporting, planning, modelling and management decisions.", breadcrumbSection: "Finance", breadcrumbName: "Financial Data" })) }} />
       <AnnouncementBar />
       <Navbar active="services" />
       <section className={styles.hero} aria-labelledby="financial-data-title"><div className={`site-container ${styles.heroInner}`}>

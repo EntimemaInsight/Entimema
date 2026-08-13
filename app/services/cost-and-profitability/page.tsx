@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import CostDashboard from "./CostDashboard";
 import styles from "./cost-and-profitability.module.css";
 import { createServiceMetadata } from "@/lib/seo";
+import { createServicePageSchema, serializeJsonLd } from "@/lib/structured-data";
 
 export const metadata = createServiceMetadata({
   title: "Cost & Profitability Analysis | Entimema",
@@ -48,6 +49,7 @@ function SectionHeader({ label, title, intro }: { label: string; title: React.Re
 
 export default function CostAndProfitabilityPage() {
   return <main className={styles.page}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(createServicePageSchema({ path: "/services/cost-and-profitability", name: "Cost & Profitability Analysis", description: "Understand where value is created or lost through transparent cost models, manufacturing cost analysis, margin drivers and product profitability.", breadcrumbSection: "Finance", breadcrumbName: "Cost & Margin Management" })) }} />
     <AnnouncementBar /><Navbar active="services" />
     <section className={styles.hero} aria-labelledby="cost-title"><div className={`site-container ${styles.heroInner}`}><div className={styles.heroCopy}>
       <nav className={styles.breadcrumb} aria-label="Breadcrumb"><Link href="/">Home</Link><span>/</span><span>Finance</span><span>/</span><span aria-current="page">Cost &amp; Margin Management</span></nav>
