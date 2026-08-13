@@ -95,7 +95,6 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
   const isMounted = useSyncExternalStore(subscribeToClientMount, () => true, () => false);
   const [isOpen, setIsOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
-  const [isPinned, setIsPinned] = useState(false);
   const [mobileSolutionsOpen, setMobileSolutionsOpen] = useState(false);
   const [mobileResourcesOpen, setMobileResourcesOpen] = useState(false);
   const [menuTop, setMenuTop] = useState(0);
@@ -103,24 +102,8 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
   const rootRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLElement>(null);
-  const openTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const exitTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const menuId = `what-we-do-${useId().replaceAll(":", "")}`;
-
-  const clearCloseTimer = useCallback(() => {
-    if (closeTimerRef.current) {
-      clearTimeout(closeTimerRef.current);
-      closeTimerRef.current = null;
-    }
-  }, []);
-
-  const clearOpenTimer = useCallback(() => {
-    if (openTimerRef.current) {
-      clearTimeout(openTimerRef.current);
-      openTimerRef.current = null;
-    }
-  }, []);
 
   const clearExitTimer = useCallback(() => {
     if (exitTimerRef.current) {
@@ -135,23 +118,15 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
     setIsOpen(true);
   }, [clearExitTimer]);
 
-  const isDesktopPointer = useCallback(
-    () => !mobile && window.matchMedia("(hover: hover) and (pointer: fine)").matches,
-    [mobile],
-  );
-
   const close = useCallback(() => {
-    clearOpenTimer();
-    clearCloseTimer();
     setIsOpen(false);
     setIsClosing(true);
-    setIsPinned(false);
     setMobileSolutionsOpen(false);
     setMobileResourcesOpen(false);
     clearExitTimer();
     const exitDuration = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 180;
     exitTimerRef.current = setTimeout(() => setIsClosing(false), exitDuration);
-  }, [clearCloseTimer, clearExitTimer, clearOpenTimer]);
+  }, [clearExitTimer]);
 
   const updateMenuPosition = useCallback(() => {
     const header = triggerRef.current?.closest("header");
@@ -223,39 +198,18 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
 
   useEffect(
     () => () => {
-      clearOpenTimer();
-      clearCloseTimer();
       clearExitTimer();
     },
-    [clearCloseTimer, clearExitTimer, clearOpenTimer],
+    [clearExitTimer],
   );
 
-  const handlePointerEnter = () => {
-    if (!isDesktopPointer()) return;
-    clearCloseTimer();
-    if (!isOpen) {
-      clearOpenTimer();
-      openTimerRef.current = setTimeout(open, 150);
-    }
-  };
-
-  const handlePointerLeave = () => {
-    if (!isDesktopPointer() || isPinned) return;
-    clearOpenTimer();
-    clearCloseTimer();
-    closeTimerRef.current = setTimeout(close, 150);
-  };
-
   const handleTriggerClick = () => {
-    clearOpenTimer();
-    clearCloseTimer();
-    if (isPinned) {
+    if (isOpen) {
       close();
       return;
     }
     updateMenuPosition();
     open();
-    setIsPinned(true);
   };
 
   const portalContent = isMounted && (isOpen || isClosing) ? createPortal(
@@ -272,8 +226,6 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
         aria-label={mobile ? "Main navigation" : "Solutions"}
         className={`${styles.menu} ${isClosing ? styles.menuClosing : ""}`}
         id={menuId}
-        onPointerEnter={handlePointerEnter}
-        onPointerLeave={handlePointerLeave}
         ref={menuRef}
         style={{ top: menuTop }}
       >
@@ -360,8 +312,6 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
     <>
       <div
         className={`${styles.root} ${mobile ? styles.mobileRoot : styles.desktopRoot}`}
-        onPointerEnter={handlePointerEnter}
-        onPointerLeave={handlePointerLeave}
         ref={rootRef}
       >
         <button

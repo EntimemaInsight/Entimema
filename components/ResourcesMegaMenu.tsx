@@ -17,21 +17,16 @@ export default function ResourcesMegaMenu({ active = false }: { active?: boolean
   const mounted = useSyncExternalStore(subscribeToClientMount, () => true, () => false);
   const [open, setOpen] = useState(false);
   const [closing, setClosing] = useState(false);
-  const [pinned, setPinned] = useState(false);
   const [menuTop, setMenuTop] = useState(0);
   const rootRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLElement>(null);
-  const openTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const exitTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const menuId = `resources-menu-${useId().replaceAll(":", "")}`;
 
   const clearTimers = useCallback(() => {
-    if (openTimer.current) clearTimeout(openTimer.current);
-    if (closeTimer.current) clearTimeout(closeTimer.current);
     if (exitTimer.current) clearTimeout(exitTimer.current);
-    openTimer.current = closeTimer.current = exitTimer.current = null;
+    exitTimer.current = null;
   }, []);
   const position = useCallback(() => {
     const header = triggerRef.current?.closest("header");
@@ -39,21 +34,10 @@ export default function ResourcesMegaMenu({ active = false }: { active?: boolean
   }, []);
   const show = useCallback(() => { if (exitTimer.current) clearTimeout(exitTimer.current); position(); setClosing(false); setOpen(true); }, [position]);
   const hide = useCallback(() => {
-    clearTimers(); setOpen(false); setClosing(true); setPinned(false);
+    clearTimers(); setOpen(false); setClosing(true);
     const duration = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 180;
     exitTimer.current = setTimeout(() => setClosing(false), duration);
   }, [clearTimers]);
-  const enter = () => {
-    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
-    if (closeTimer.current) clearTimeout(closeTimer.current);
-    if (!open) openTimer.current = setTimeout(show, 150);
-  };
-  const leave = () => {
-    if (pinned || !window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
-    if (openTimer.current) clearTimeout(openTimer.current);
-    closeTimer.current = setTimeout(hide, 150);
-  };
-
   useLayoutEffect(() => {
     if (!open) return;
     position();
@@ -75,7 +59,7 @@ export default function ResourcesMegaMenu({ active = false }: { active?: boolean
 
   const portal = mounted && (open || closing) && featured ? createPortal(<>
     <button aria-label="Close Resources menu" className={styles.backdrop} onClick={hide} style={{ top: menuTop }} tabIndex={-1} type="button" />
-    <nav aria-label="Resources discovery" className={`${styles.menu} ${closing ? styles.closing : ""}`} id={menuId} onPointerEnter={enter} onPointerLeave={leave} ref={menuRef} style={{ top: menuTop }}>
+    <nav aria-label="Resources discovery" className={`${styles.menu} ${closing ? styles.closing : ""}`} id={menuId} ref={menuRef} style={{ top: menuTop }}>
       <div className={`site-container ${styles.inner}`}>
         <section className={styles.featured}>
           <span className={styles.label}>FEATURED ANALYSIS</span>
@@ -94,5 +78,5 @@ export default function ResourcesMegaMenu({ active = false }: { active?: boolean
     </nav>
   </>, document.body) : null;
 
-  return <><div className={styles.root} onPointerEnter={enter} onPointerLeave={leave} ref={rootRef}><button aria-controls={menuId} aria-current={active ? "page" : undefined} aria-expanded={open} aria-haspopup="true" className={`${styles.trigger} ${active ? styles.active : ""}`} onClick={() => { clearTimers(); if (pinned) hide(); else { show(); setPinned(true); } }} ref={triggerRef} type="button">RESOURCES <span aria-hidden="true" /></button></div>{portal}</>;
+  return <><div className={styles.root} ref={rootRef}><button aria-controls={menuId} aria-current={active ? "page" : undefined} aria-expanded={open} aria-haspopup="true" className={`${styles.trigger} ${active ? styles.active : ""}`} onClick={() => { clearTimers(); if (open) hide(); else show(); }} ref={triggerRef} type="button">RESOURCES <span aria-hidden="true" /></button></div>{portal}</>;
 }

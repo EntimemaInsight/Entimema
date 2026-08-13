@@ -56,8 +56,8 @@ export default function BudgetsAndForecastingPage() {
         <div className={styles.heroCopy}>
           <nav className={styles.breadcrumb} aria-label="Breadcrumb"><Link href="/">Home</Link><span>/</span><span>Finance</span><span>/</span><span aria-current="page">Planning &amp; Forecasting</span></nav>
           <span className={styles.category}>PLANNING &amp; FORECASTING</span>
-          <h1 id="budgets-title">Financial forecasting built around how the business moves.</h1>
-          <p className={styles.lead}>A budget is a snapshot. Your business isn&apos;t.</p>
+          <h1 id="budgets-title">A budget is a snapshot.</h1>
+          <p className={styles.lead}>Your business isn&apos;t.</p>
           <p className={styles.support}>Build a planning system that moves with the business — connecting operational drivers, financial outcomes and cash before reality makes the plan obsolete.</p>
           <Link className={styles.primaryButton} href="/contact?topic=budgets-and-forecasting">Discuss Your Planning System <span aria-hidden="true">→</span></Link>
         </div>
