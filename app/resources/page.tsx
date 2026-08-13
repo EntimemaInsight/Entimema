@@ -37,7 +37,7 @@ export default async function ResourcesPage({ searchParams }: { searchParams: Pr
       {featured ? <section className={styles.featured} aria-labelledby="featured-title"><div className={styles.wideContainer}>
         <header><span>FEATURED ANALYSIS</span></header>
         <article className={styles.featuredEntry}>
-          <Link className={styles.coverLink} href={featured.canonicalPath} aria-label={`Read ${featured.title}`}><ResourceCover cover={featured.cover} /></Link>
+          <Link className={styles.coverLink} href={featured.canonicalPath} aria-label={`Read ${featured.title}`}><ResourceCover cover={featured.cover} featured /></Link>
           <div className={styles.featuredCopy}>
             <div className={styles.featuredMeta}><span>{getTopic(featured.topic)?.label}</span><span>{featured.readingMinutes} MIN READ</span></div>
             <h2 id="featured-title"><Link href={featured.canonicalPath}>{featured.title}</Link></h2>

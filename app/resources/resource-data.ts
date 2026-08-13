@@ -20,7 +20,7 @@ type ResourceVisualBase = {
 
 export type ResourceCover = ResourceVisualBase & {
   type: "editorial-artwork";
-  src: `/resources/covers/${string}.svg`;
+  src: `/resources/covers/${string}.${"png" | "jpg" | "jpeg" | "webp" | "avif"}`;
   alt: string;
   focalPoint?: `${number}% ${number}%`;
 } | ResourceVisualBase & {
@@ -103,9 +103,10 @@ export const resources: ResourceRecord[] = [
     indexable: true,
     cover: {
       type: "editorial-artwork",
-      src: "/resources/covers/manufacturing-cost.svg",
-      motion: "drift",
-      alt: "Machined translucent planes suspended around a precision-cut industrial core",
+      src: "/resources/covers/manufacturing-cost-architecture.png",
+      motion: "none",
+      alt: "Editorial artwork for Building a Manufacturing Cost Architecture showing layered industrial materials in a cinematic material study.",
+      focalPoint: "0% 50%",
       stages: ["Inputs", "Intermediates", "Conversion", "Production", "Capacity", "Product economics", "Decision"],
     },
   },
@@ -127,7 +128,7 @@ export const resources: ResourceRecord[] = [
     relatedResourceSlugs: ["building-a-manufacturing-cost-architecture", "operational-driver-forecasting"],
     status: "published",
     indexable: true,
-    cover: { type: "editorial-artwork", src: "/resources/covers/working-capital.svg", motion: "drift", alt: "A luminous continuous ribbon held in fluid tension", stages: ["Receivables", "Inventory", "Payables", "Cash", "Financing", "Decision"] },
+    cover: { type: "editorial-artwork", src: "/resources/covers/working-capital-system.png", motion: "none", alt: "Editorial artwork for Working Capital as a System showing a continuous translucent glass sculpture representing liquidity and operating flow.", stages: ["Receivables", "Inventory", "Payables", "Cash", "Financing", "Decision"] },
   },
   {
     title: "Operational-Driver Forecasting",
@@ -147,7 +148,7 @@ export const resources: ResourceRecord[] = [
     relatedResourceSlugs: ["working-capital-as-a-system", "building-a-manufacturing-cost-architecture"],
     status: "published",
     indexable: true,
-    cover: { type: "editorial-artwork", src: "/resources/covers/operational-forecast.svg", motion: "trace", alt: "Luminous planes receding toward an uncertain blue horizon", stages: ["Drivers", "Business model", "P&L / BS / Cash", "Scenario", "Decision"] },
+    cover: { type: "editorial-artwork", src: "/resources/covers/operational-driver-forecasting.png", motion: "none", alt: "Editorial artwork for Operational-Driver Forecasting showing multiple luminous future trajectories across a cinematic landscape.", stages: ["Drivers", "Business model", "P&L / BS / Cash", "Scenario", "Decision"] },
   },
   {
     title: "Credit Vintage Analysis",
@@ -167,7 +168,7 @@ export const resources: ResourceRecord[] = [
     relatedResourceSlugs: ["operational-driver-forecasting"],
     status: "published",
     indexable: true,
-    cover: { type: "editorial-artwork", src: "/resources/covers/credit-vintage.svg", motion: "trace", alt: "A sequence of translucent credit-memory strata advancing through time", stages: ["Cohort", "Credit age", "Performance", "Signal", "Decision"] },
+    cover: { type: "editorial-artwork", src: "/resources/covers/credit-vintage-analysis.png", motion: "none", alt: "Editorial artwork for Credit Vintage Analysis showing layered credit vintage performance panels evolving through time.", stages: ["Cohort", "Credit age", "Performance", "Signal", "Decision"] },
   },
   {
     title:"From ERP Data to Management Intelligence",slug:"from-erp-data-to-management-intelligence",
@@ -179,7 +180,7 @@ export const resources: ResourceRecord[] = [
     openGraphDescription:"How reconciled ERP transactions become structured business meaning, analytical models and management decisions.",
     relatedCapability:{label:"Financial Data",href:"/services/financial-data",description:"Build reconciled financial-data foundations that connect ERP transactions to management analysis and decisions."},
     relatedResourceSlugs:["building-a-manufacturing-cost-architecture","working-capital-as-a-system","operational-driver-forecasting"],status:"published",indexable:true,
-    cover:{type:"editorial-artwork",src:"/resources/covers/erp-intelligence.svg",motion:"drift",alt:"Scattered data fragments resolving into a precise illuminated monolith",stages:["Transactions","Reconcile","Semantics","Model","Decision"]},
+    cover:{type:"editorial-artwork",src:"/resources/covers/erp-management-intelligence.png",motion:"none",alt:"Editorial artwork showing fragmented ERP transaction data resolving into a structured analytical intelligence installation.",stages:["Transactions","Reconcile","Semantics","Model","Decision"]},
   },
 ];
 
