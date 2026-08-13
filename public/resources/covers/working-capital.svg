@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-labelledby="t d">
+<title id="t">Liquidity held in tension</title><desc id="d">A luminous continuous ribbon curves through a midnight field.</desc><defs>
+<radialGradient id="bg" cx="72%" cy="47%" r="75%"><stop stop-color="#315d72"/><stop offset=".5" stop-color="#102f50"/><stop offset="1" stop-color="#06162d"/></radialGradient>
+<linearGradient id="ribbon" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#dff9f5" stop-opacity=".92"/><stop offset=".2" stop-color="#5ec8df" stop-opacity=".75"/><stop offset=".45" stop-color="#116d9b" stop-opacity=".5"/><stop offset=".65" stop-color="#f0784d" stop-opacity=".88"/><stop offset="1" stop-color="#7c2e31" stop-opacity=".5"/></linearGradient>
+<linearGradient id="shine"><stop stop-color="#fff" stop-opacity=".8"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/></linearGradient>
+<pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#c9e9ee" opacity=".25"/></pattern>
+<filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="14" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+<filter id="shadow"><feGaussianBlur in="SourceAlpha" stdDeviation="25"/><feOffset dy="30"/><feComponentTransfer><feFuncA type="linear" slope=".45"/></feComponentTransfer><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs><rect width="1200" height="900" fill="url(#bg)"/><rect x="720" width="480" height="900" fill="url(#dots)"/>
+<text x="65" y="98" fill="#d6e9e9" font-family="Arial,sans-serif" font-size="14" letter-spacing="5">CONTINUITY / TENSION</text><text x="60" y="805" fill="#e7f0eb" font-family="Georgia,serif" font-size="128" letter-spacing="-8">FLOW</text>
+<path d="M131 493C239 169 512 160 655 351c99 132 56 303 181 352 111 43 224-44 303-189" fill="none" stroke="#021024" stroke-opacity=".58" stroke-width="170" filter="url(#shadow)"/>
+<path d="M131 493C239 169 512 160 655 351c99 132 56 303 181 352 111 43 224-44 303-189" fill="none" stroke="url(#ribbon)" stroke-width="142" stroke-linecap="round" filter="url(#glow)"/>
+<path d="M145 466C271 213 482 210 625 372c104 118 69 267 202 310" fill="none" stroke="url(#shine)" stroke-width="8" stroke-linecap="round" opacity=".75"/>
+<ellipse cx="662" cy="542" rx="89" ry="171" fill="#071a32" fill-opacity=".46" transform="rotate(-23 662 542)"/>
+<g fill="#b9d3d7" font-family="Arial,sans-serif" font-size="12" letter-spacing="3"><text x="924" y="101">LIQUID / 02</text><text x="965" y="830">∞ OPERATING FORM</text></g>
+</svg>
