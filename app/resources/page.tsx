@@ -18,9 +18,11 @@ const formatDate = (publishedAt: string) => new Intl.DateTimeFormat("en-GB", {
   day: "numeric", month: "long", year: "numeric", timeZone: "UTC",
 }).format(new Date(`${publishedAt}T00:00:00Z`));
 
-export default function ResourcesPage() {
+export default async function ResourcesPage({ searchParams }: { searchParams: Promise<{ topic?: string | string[] }> }) {
+  const topic = (await searchParams).topic;
+  const selectedTopic = typeof topic === "string" && resourceTopics.some((item) => item.slug === topic) ? topic : undefined;
   const featured = publishedResources.find((resource) => resource.featured);
-  const selected = publishedResources.filter((resource) => resource.slug !== featured?.slug);
+  const selected = publishedResources.filter((resource) => selectedTopic ? resource.topic === selectedTopic : resource.slug !== featured?.slug);
 
   return (
     <main className={`site-page ${styles.resourcesPage}`}>
@@ -45,7 +47,7 @@ export default function ResourcesPage() {
         </article>
       </div></section> : null}
 
-      <section className={styles.selected} aria-labelledby="selected-title"><div className={styles.wideContainer}>
+      <section className={styles.selected} id="selected-resources" aria-labelledby="selected-title"><div className={styles.wideContainer}>
         <header><span>SELECTED RESOURCES</span><h2 id="selected-title">Analytical work, organised by problem.</h2></header>
         {selected.length ? <div className={styles.resourceGrid}>{selected.map((resource) => <article key={resource.slug}>
           <Link className={styles.coverLink} href={resource.canonicalPath} aria-label={`Read ${resource.title}`}><ResourceCover cover={resource.cover} /></Link>

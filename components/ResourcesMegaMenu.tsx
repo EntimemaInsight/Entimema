@@ -71,7 +71,7 @@ export default function ResourcesMegaMenu({ active = false }: { active?: boolean
         </section>
         <section className={styles.discovery}>
           <span className={styles.label}>TOPIC DISCOVERY</span>
-          <div className={styles.topicLinks}>{publishedTopics.map((topic) => <Link href={`/resources#topic-${topic.slug}`} key={topic.slug} onClick={hide}>{topic.label}<span aria-hidden="true">→</span></Link>)}</div>
+          <div className={styles.topicLinks}>{publishedTopics.map((topic) => <Link href={`/resources?topic=${topic.slug}#selected-resources`} key={topic.slug} onClick={hide}>{topic.label}<span aria-hidden="true">→</span></Link>)}</div>
           <Link className={styles.allResources} href="/resources" onClick={hide}><span><small>ALL RESOURCES</small><strong>Explore the analytical library</strong></span><b aria-hidden="true">→</b></Link>
         </section>
       </div>
