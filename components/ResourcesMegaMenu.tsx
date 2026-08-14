@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { createPortal } from "react-dom";
 import { useCallback, useEffect, useId, useLayoutEffect, useRef, useState, useSyncExternalStore } from "react";
-import { resourceStreams } from "@/app/resources/resource-data";
+import { getResourceThemeHref, resourceStreams } from "@/app/resources/resource-data";
 import styles from "./ResourcesMegaMenu.module.css";
 
 const subscribeToClientMount = () => () => undefined;
@@ -93,9 +93,11 @@ export default function ResourcesMegaMenu({ active = false }: { active?: boolean
                 <h3>{stream.label}</h3>
                 <p>{stream.description}</p>
                 <ul aria-label={`${stream.label} themes`}>
-                  {stream.themes.map((theme) => <li key={theme}>{theme}</li>)}
+                  {stream.themes.map((theme) => {
+                    const href = getResourceThemeHref(theme);
+                    return <li key={theme}>{href ? <Link href={href} onClick={hide}><span>{theme}</span><b aria-hidden="true">→</b></Link> : theme}</li>;
+                  })}
                 </ul>
-                <Link href={stream.href} onClick={hide}>Explore {stream.label} <span aria-hidden="true">→</span></Link>
               </section>
             ))}
           </div>

@@ -210,6 +210,22 @@ export const publishedResources = resources.filter(
     resource.status === "published" && resource.indexable === true && Boolean(resource.publishedAt),
 );
 
+const resourceThemeTopicSlugs: Partial<Record<(typeof resourceStreams.insights.themes)[number], ResourceTopicSlug>> = {
+  "Credit Risk": "credit-risk",
+  "CFO & Finance": "financial-architecture",
+  Forecasting: "planning-and-forecasting",
+  "Cost & Profitability": "cost-and-profitability",
+  "Financial Data & ERP": "financial-data-and-erp",
+  "Decision Intelligence": "decision-intelligence",
+};
+
+export function getResourceThemeHref(theme: string) {
+  const topic = resourceThemeTopicSlugs[theme as keyof typeof resourceThemeTopicSlugs];
+  return topic && publishedResources.some((resource) => resource.topic === topic)
+    ? `/resources?topic=${topic}`
+    : undefined;
+}
+
 export function getPublishedResource(slug: string) {
   return publishedResources.find((resource) => resource.slug === slug);
 }
