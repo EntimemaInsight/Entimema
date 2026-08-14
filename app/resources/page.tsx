@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
 import ResourcesDiscovery from "./ResourcesDiscovery";
@@ -22,9 +23,10 @@ export default async function ResourcesPage({ searchParams }: { searchParams: Pr
       <Navbar active="resources" />
       <ResourcesDiscovery initialTopic={selectedTopic} />
 
-      <section className={styles.topics} aria-labelledby="topics-title"><div className={styles.wideContainer}>
-        <header><span>TOPIC DISCOVERY</span><h2 id="topics-title">One analytical system.<br />Seven connected territories.</h2></header>
-        <div className={styles.topicList}>{resourceTopics.map((topic, index) => <article id={`topic-${topic.slug}`} key={topic.slug}><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{topic.label}</h3><p>{topic.description}</p></div></article>)}</div>
+      <section className={styles.demoCta} aria-labelledby="demo-cta-title"><div className={styles.demoCtaInner}>
+        <h2 id="demo-cta-title">See Entimema AI Agents in action.</h2>
+        <p>Explore how AI agents can support financial analysis, risk assessment and decision workflows.</p>
+        <Link href="/contact?topic=financial-ai-agents">Request a demo <span aria-hidden="true">→</span></Link>
       </div></section>
     </main>
   );
