@@ -235,8 +235,35 @@ export function getTopic(topic: ResourceTopicSlug) {
 }
 
 export function getPublishedRelatedResources(resource: ResourceRecord) {
-  return resource.relatedResourceSlugs
-    .map((slug) => getPublishedResource(slug))
-    .filter((item): item is NonNullable<typeof item> => Boolean(item))
-    .slice(0, 3);
+  const curatedOrder = new Map(resource.relatedResourceSlugs.map((slug, index) => [slug, index]));
+  const topicDescription = getTopic(resource.topic)?.description ?? "";
+  const sourceTerms = getRecommendationTerms(`${resource.title} ${resource.deck} ${topicDescription}`);
+
+  return publishedResources
+    .filter((candidate) => candidate.slug !== resource.slug)
+    .map((candidate, index) => {
+      const candidateTopic = getTopic(candidate.topic)?.description ?? "";
+      const candidateTerms = getRecommendationTerms(`${candidate.title} ${candidate.deck} ${candidateTopic}`);
+      const sharedTerms = [...sourceTerms].filter((term) => candidateTerms.has(term)).length;
+      const curatedIndex = curatedOrder.get(candidate.slug);
+      const score = (curatedIndex === undefined ? 0 : 100 - curatedIndex)
+        + (candidate.topic === resource.topic ? 40 : 0)
+        + (candidate.stream === resource.stream ? 10 : 0)
+        + sharedTerms;
+
+      return { candidate, index, score };
+    })
+    .sort((left, right) => right.score - left.score || left.index - right.index)
+    .slice(0, 3)
+    .map(({ candidate }) => candidate);
+}
+
+const recommendationStopWords = new Set([
+  "and", "are", "becomes", "business", "decisions", "financial", "from", "how", "into", "management", "the", "their", "through", "when", "with",
+]);
+
+function getRecommendationTerms(value: string) {
+  return new Set(
+    value.toLocaleLowerCase().match(/[a-z]+/g)?.filter((term) => term.length > 3 && !recommendationStopWords.has(term)) ?? [],
+  );
 }
