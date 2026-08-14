@@ -12,15 +12,9 @@ import {
   useSyncExternalStore,
 } from "react";
 import styles from "./WhatWeDoMegaMenu.module.css";
-import { getTopic, publishedResources } from "@/app/resources/resource-data";
+import { resourceStreams } from "@/app/resources/resource-data";
 
 const subscribeToClientMount = () => () => {};
-const featuredResource = publishedResources.find((resource) => resource.featured) ?? publishedResources[0];
-const latestResources = publishedResources.filter((resource) => resource.slug !== featuredResource?.slug).slice(0, 4);
-const mobileResourceTopics = [...new Set(publishedResources.map((resource) => resource.topic))]
-  .map((slug) => getTopic(slug))
-  .filter((topic): topic is NonNullable<typeof topic> => Boolean(topic));
-
 const serviceGroups = [
   {
     category: "FINANCIAL ARCHITECTURE",
@@ -262,16 +256,12 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
                   <span>RESOURCES</span><span aria-hidden="true">{mobileResourcesOpen ? "−" : "+"}</span>
                 </button>
                 <div className={styles.mobileResources} hidden={!mobileResourcesOpen} id={`${menuId}-mobile-resources`}>
-                  {featuredResource ? <section className={styles.mobileResourceGroup}>
-                    <h2>FEATURED ANALYSIS</h2>
-                    <Link className={styles.mobileFeaturedResource} href={featuredResource.canonicalPath} onClick={close}>
-                      <span aria-hidden="true">{featuredResource.cover.stages.map((stage, index) => <i key={stage} style={{ height: `${30 + index * 7}%` }} />)}</span>
-                      <strong>{featuredResource.title}</strong><small>{getTopic(featuredResource.topic)?.label} · {featuredResource.readingMinutes} min read</small>
+                  {Object.entries(resourceStreams).map(([key, stream]) => (
+                    <Link className={styles.mobileResourceDestination} href={stream.href} key={key} onClick={close}>
+                      <span><strong>{stream.label}</strong><small>{stream.description}</small></span>
+                      <b aria-hidden="true">→</b>
                     </Link>
-                    {latestResources.map((resource) => <Link className={styles.mobileLatestResource} href={resource.canonicalPath} key={resource.slug} onClick={close}><span><small>{getTopic(resource.topic)?.label}</small><strong>{resource.title}</strong></span><b aria-hidden="true">→</b></Link>)}
-                  </section> : null}
-                  {mobileResourceTopics.length ? <section className={styles.mobileResourceGroup}><h2>TOPIC DISCOVERY</h2>{mobileResourceTopics.map((topic) => <Link className={styles.mobileServiceLink} href={`/resources#topic-${topic.slug}`} key={topic.slug} onClick={close}>{topic.label}</Link>)}</section> : null}
-                  <Link className={styles.mobileAllResources} href="/resources" onClick={close}><span>ALL RESOURCES</span><span aria-hidden="true">→</span></Link>
+                  ))}
                 </div>
                 <Link className={styles.mobileTopLevel} href="/about" onClick={close}>
                   <span>ABOUT</span><span aria-hidden="true">→</span>

@@ -10,6 +10,22 @@ export const resourceTopics = [
 
 export type ResourceTopicSlug = (typeof resourceTopics)[number]["slug"];
 export type ResourceStatus = "draft" | "published";
+export type ResourceStream = "insights" | "engineering";
+
+export const resourceStreams = {
+  insights: {
+    label: "Insights",
+    href: "/resources",
+    description: "Practitioner research for finance, risk and management decisions.",
+    themes: ["Credit Risk", "CFO & Finance", "Forecasting", "Cost & Profitability", "Financial Data & ERP", "Decision Intelligence"],
+  },
+  engineering: {
+    label: "Engineering & Research",
+    href: "/resources/engineering",
+    description: "Technical research, modelling and analytical implementation.",
+    themes: ["Credit Risk Modelling", "Data Science", "Model Validation", "Decision Engines", "Analytical Automation"],
+  },
+} as const satisfies Record<ResourceStream, { label: string; href: string; description: string; themes: readonly string[] }>;
 
 type ResourceVisualBase = {
   /** Controls the restrained treatment used by the listing-page artwork. */
@@ -56,6 +72,7 @@ export type ResourceRecord = {
   updatedAt?: string;
   readingMinutes: number;
   topic: ResourceTopicSlug;
+  stream: ResourceStream;
   featured: boolean;
   seoTitle: string;
   metaDescription: string;
@@ -87,6 +104,7 @@ export const resources: ResourceRecord[] = [
     publishedAt: "2026-08-11",
     readingMinutes: 12,
     topic: "cost-and-profitability",
+    stream: "insights",
     featured: true,
     seoTitle: "Building a Manufacturing Cost Architecture | Entimema",
     metaDescription: "A practitioner framework connecting manufacturing cost, production stages, capacity, economic drivers, variance and management decisions.",
@@ -118,6 +136,7 @@ export const resources: ResourceRecord[] = [
     publishedAt: "2026-08-11",
     readingMinutes: 12,
     topic: "planning-and-forecasting",
+    stream: "insights",
     featured: false,
     seoTitle: "Working Capital as a System | Entimema",
     metaDescription: "A practitioner framework connecting working-capital drivers, operating processes, cash conversion, financing requirements and management decisions.",
@@ -138,6 +157,7 @@ export const resources: ResourceRecord[] = [
     publishedAt: "2026-08-11",
     readingMinutes: 12,
     topic: "planning-and-forecasting",
+    stream: "insights",
     featured: false,
     seoTitle: "Operational-Driver Forecasting | Entimema",
     metaDescription: "A practitioner framework connecting operating drivers, financial statements, scenarios and management decisions in an integrated forecast model.",
@@ -158,6 +178,7 @@ export const resources: ResourceRecord[] = [
     publishedAt: "2026-08-11",
     readingMinutes: 12,
     topic: "credit-risk",
+    stream: "insights",
     featured: false,
     seoTitle: "Credit Vintage Analysis | Entimema",
     metaDescription: "A practitioner framework for comparing credit cohorts by months on book, investigating vintage divergence and connecting risk signals to validated decisions.",
@@ -173,7 +194,7 @@ export const resources: ResourceRecord[] = [
   {
     title:"From ERP Data to Management Intelligence",slug:"from-erp-data-to-management-intelligence",
     deck:"ERP data becomes decision-useful only after transactions are reconciled, given consistent business meaning and connected to analytical models and management decisions.",
-    author:authors.aleksandar,publishedAt:"2026-08-11",readingMinutes:12,topic:"financial-data-and-erp",featured:false,
+    author:authors.aleksandar,publishedAt:"2026-08-11",readingMinutes:12,topic:"financial-data-and-erp",stream:"insights",featured:false,
     seoTitle:"From ERP Data to Management Intelligence | Entimema",
     metaDescription:"A practitioner framework connecting ERP transactions, reconciliation, business semantics, analytical models and management decisions.",
     canonicalPath:"/resources/from-erp-data-to-management-intelligence",openGraphTitle:"From ERP Data to Management Intelligence",
