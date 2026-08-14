@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import Navbar from "@/components/Navbar";
 import AnnouncementBar from "@/components/AnnouncementBar";
-import { getTopic, type ResourceRecord } from "./resource-data";
+import { getPublishedRelatedResources, getTopic, type ResourceRecord } from "./resource-data";
 import styles from "./resources.module.css";
 import { ResourceViewAnalytics } from "@/components/ResourceAnalytics";
 import ResourceCover from "./ResourceCover";
@@ -14,6 +14,7 @@ export type ArticleSection = { id: string; label: string };
 export default function ResourceArticle({ resource, sections, children }: { resource: ResourceRecord; sections?: ArticleSection[]; children: ReactNode }) {
   const topic = getTopic(resource.topic);
   const published = resource.publishedAt ? new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric" }).format(new Date(resource.publishedAt)) : null;
+  const relatedResources = getPublishedRelatedResources(resource);
 
   return (
     <main className="site-page">
@@ -42,6 +43,33 @@ export default function ResourceArticle({ resource, sections, children }: { reso
           <div className={styles.prose}>{children}</div>
         </div>
       </article>
+
+      {relatedResources.length ? (
+        <section className={styles.articleContinuation} aria-labelledby="more-from-entimema">
+          <h2 id="more-from-entimema">More from Entimema</h2>
+          <div className={styles.resourceGrid}>
+            {relatedResources.map((relatedResource) => {
+              const relatedTopic = getTopic(relatedResource.topic);
+              const relatedPublished = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(`${relatedResource.publishedAt}T00:00:00Z`));
+
+              return (
+                <article className={styles.resourceCard} key={relatedResource.slug}>
+                  <Link className={styles.coverLink} href={relatedResource.canonicalPath} aria-label={`Read ${relatedResource.title}`}>
+                    <ResourceCover cover={relatedResource.cover} />
+                  </Link>
+                  <div className={styles.cardMeta}><span>{relatedTopic?.label}</span><span>{relatedResource.readingMinutes} MIN READ</span></div>
+                  <h3><Link href={relatedResource.canonicalPath}>{relatedResource.title}</Link></h3>
+                  <p>{relatedResource.deck}</p>
+                  <div className={styles.cardFooter}>
+                    <time dateTime={relatedResource.publishedAt}>{relatedPublished}</time>
+                    <Link href={relatedResource.canonicalPath}>Read analysis <b aria-hidden="true">→</b></Link>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </section>
+      ) : null}
     </main>
   );
 }
