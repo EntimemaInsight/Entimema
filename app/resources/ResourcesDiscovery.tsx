@@ -1,19 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { FormEvent, useMemo, useState } from "react";
+import { useState } from "react";
 import ResourceCover from "./ResourceCover";
 import { getTopic, publishedResources, resourceTopics, type ResourceRecord } from "./resource-data";
 import styles from "./resources.module.css";
 
-type NewsletterStatus = "idle" | "submitting" | "success" | "error";
 const formatDate = (publishedAt: string) => new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(`${publishedAt}T00:00:00Z`));
-
-// Provider-neutral integration boundary: until it is replaced, no address is persisted.
-async function submitNewsletterEmail(email: string): Promise<{ ok: boolean }> {
-  void email;
-  return { ok: false };
-}
 
 function ResourceCard({ resource }: { resource: ResourceRecord & { publishedAt: string } }) {
   return <article>
@@ -25,62 +18,33 @@ function ResourceCard({ resource }: { resource: ResourceRecord & { publishedAt: 
 }
 
 export default function ResourcesDiscovery({ initialTopic }: { initialTopic?: string }) {
-  const [email, setEmail] = useState("");
-  const [newsletterStatus, setNewsletterStatus] = useState<NewsletterStatus>("idle");
-  const [newsletterMessage, setNewsletterMessage] = useState("");
   const [query, setQuery] = useState("");
   const [topic, setTopic] = useState(initialTopic ?? "");
   const featured = publishedResources.find((resource) => resource.featured);
   const availableTopics = resourceTopics.filter((item) => publishedResources.some((resource) => resource.topic === item.slug));
-  const matches = useMemo(() => {
-    const search = query.trim().toLocaleLowerCase();
-    return publishedResources.filter((resource) => {
-      const category = getTopic(resource.topic)?.label ?? "";
-      return (!topic || resource.topic === topic) && (!search || [resource.title, resource.deck, category].some((value) => value.toLocaleLowerCase().includes(search)));
-    });
-  }, [query, topic]);
+  const search = query.trim().toLocaleLowerCase();
+  const matches = publishedResources.filter((resource) => {
+    const category = getTopic(resource.topic)?.label ?? "";
+    return (!topic || resource.topic === topic) && (!search || [resource.title, resource.deck, category].some((value) => value.toLocaleLowerCase().includes(search)));
+  });
   const visibleFeatured = featured && matches.some((resource) => resource.slug === featured.slug) ? featured : undefined;
   const selected = matches.filter((resource) => resource.slug !== featured?.slug);
 
-  async function submitNewsletter(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const form = event.currentTarget;
-    setNewsletterMessage("");
-    setNewsletterStatus("idle");
-    if (!form.reportValidity()) return;
-    setNewsletterStatus("submitting");
-    const result = await submitNewsletterEmail(email);
-    if (result.ok) {
-      setNewsletterStatus("success");
-      setNewsletterMessage("Your subscription has been confirmed.");
-    } else {
-      setNewsletterStatus("error");
-      setNewsletterMessage("Online subscriptions are not available yet. No email address has been submitted or stored.");
-    }
-  }
-
   return <>
-    <header className={styles.indexHero}><div className={styles.wideContainer}>
-      <p className={styles.eyebrow}>ENTIMEMA INSIGHTS</p>
-      <h1>Research for better<br /><em>financial decisions.</em></h1>
-      <p className={styles.heroCopy}>Practitioner research across finance, credit risk, forecasting, profitability and decision intelligence — built to connect analytical methods with real management decisions.</p>
-      <div className={styles.newsletter}>
-        <form noValidate onSubmit={submitNewsletter}>
-          <label htmlFor="insights-email">Email address</label>
-          <div className={styles.newsletterControls}>
-            <input aria-describedby="newsletter-note newsletter-status" autoComplete="email" id="insights-email" maxLength={254} name="email" onChange={(event) => { setEmail(event.target.value); setNewsletterStatus("idle"); setNewsletterMessage(""); }} placeholder="Email address" required type="email" value={email} />
-            <button disabled={newsletterStatus === "submitting"} type="submit">{newsletterStatus === "submitting" ? "Checking…" : "Subscribe to Entimema Insights"}</button>
-          </div>
-        </form>
-        <p id="newsletter-note">New research, analytical frameworks and practical finance and risk insights. <Link href="/privacy">Privacy</Link></p>
-        <p className={styles.newsletterStatus} id="newsletter-status" role={newsletterStatus === "error" ? "alert" : "status"}>{newsletterMessage}</p>
-      </div>
-    </div></header>
+    <div className={styles.aboveFold}>
+      <header className={styles.indexHero}><div className={styles.wideContainer}>
+        <p className={styles.eyebrow}>ENTIMEMA INSIGHTS</p>
+        <h1>Decisions rarely fail<br /><em>for lack of data.</em></h1>
+        <p className={styles.tensionLine}>They fail when the signal is buried in it.</p>
+        <p className={styles.heroCopy}>Research across finance, risk and decision science — built to turn analytical complexity into decisions that can be understood, challenged and acted on.</p>
+        <Link className={styles.newsletterCta} href="/newsletter">SUBSCRIBE TO ENTIMEMA INSIGHTS <span aria-hidden="true">→</span></Link>
+      </div></header>
 
-    <section className={styles.discovery} aria-label="Find research"><div className={styles.wideContainer}>
-      <label className={styles.searchField} htmlFor="resource-search"><span className={styles.visuallyHidden}>Search research</span><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5" /><path d="m16 16 4 4" /></svg><input id="resource-search" onChange={(event) => setQuery(event.target.value)} placeholder="Search research" type="search" value={query} /></label>
-      <label className={styles.categoryField} htmlFor="resource-category"><span className={styles.visuallyHidden}>Filter by category</span><select id="resource-category" onChange={(event) => setTopic(event.target.value)} value={topic}><option value="">All categories</option>{availableTopics.map((item) => <option key={item.slug} value={item.slug}>{item.label}</option>)}</select></label>
-    </div></section>
+      <section className={styles.discovery} aria-label="Find research"><div className={styles.wideContainer}>
+        <label className={styles.searchField} htmlFor="resource-search"><span className={styles.visuallyHidden}>Search research</span><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5" /><path d="m16 16 4 4" /></svg><input id="resource-search" onChange={(event) => setQuery(event.target.value)} placeholder="Search research" type="search" value={query} /></label>
+        <label className={styles.categoryField} htmlFor="resource-category"><span className={styles.visuallyHidden}>Filter by category</span><select id="resource-category" onChange={(event) => setTopic(event.target.value)} value={topic}><option value="">All categories</option>{availableTopics.map((item) => <option key={item.slug} value={item.slug}>{item.label}</option>)}</select></label>
+      </div></section>
+    </div>
 
     {visibleFeatured ? <section className={styles.featured} aria-labelledby="featured-title"><div className={styles.wideContainer}>
       <header><span>FEATURED ANALYSIS</span></header>
