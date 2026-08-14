@@ -5,17 +5,17 @@
   margin-inline: auto;
 }
 
-.profile { padding: clamp(72px, 8vw, 112px) 0; border-bottom: 1px solid var(--hairline); }
-.profile .container { display: grid; grid-template-columns: minmax(260px, .6fr) minmax(0, 1fr); gap: clamp(64px, 8vw, 128px); align-items: center; }
+.profile { padding: clamp(72px, 8vw, 112px) 0 clamp(64px, 7vw, 96px); }
+.profile .container { display: grid; grid-template-columns: minmax(260px, .72fr) minmax(0, 1fr); gap: clamp(64px, 8vw, 112px); align-items: start; }
 .mark { display: flex; justify-content: center; }
 .mark img { width: clamp(164px, 17vw, 224px); height: auto; }
-.statement { max-width: 720px; }
-.statement > span { color: var(--brand-orange-500); font-size: 11px; font-weight: 750; letter-spacing: .16em; }
-.statement h1 { max-width: 16ch; margin: 20px 0 24px; color: var(--brand-navy-950); font-size: clamp(40px, 4vw, 58px); font-weight: 650; line-height: 1.04; letter-spacing: -.048em; text-wrap: balance; }
-.statement p { max-width: 650px; margin: 0; color: var(--text-secondary); font-size: clamp(16px, 1.3vw, 19px); line-height: 1.65; }
+.statement { max-width: 620px; }
+.statement h1 { margin: 0 0 28px; color: var(--brand-navy-950); font-size: clamp(36px, 3.2vw, 48px); font-weight: 650; line-height: 1.08; letter-spacing: -.04em; }
+.statement p { margin: 0; color: var(--brand-navy-950); font-size: clamp(16px, 1.2vw, 18px); font-weight: 400; line-height: 1.72; }
+.statement p + p { margin-top: 22px; }
 
-.research { padding: clamp(72px, 8vw, 112px) 0 clamp(92px, 10vw, 144px); }
-.research h2 { margin: 0 0 clamp(48px, 6vw, 72px); color: var(--brand-navy-950); font-size: clamp(38px, 4vw, 56px); line-height: 1.05; letter-spacing: -.046em; }
+.research { padding: 0 0 clamp(92px, 10vw, 144px); }
+.research h2 { margin: 0 0 clamp(48px, 6vw, 72px); color: var(--brand-navy-950); font-size: clamp(34px, 3.4vw, 46px); line-height: 1.08; letter-spacing: -.04em; }
 
 @media (max-width: 800px) {
   .container { width: min(100% - 48px, 680px); }
@@ -29,5 +29,5 @@
   .profile .container { grid-template-columns: 1fr; gap: 40px; }
   .mark { justify-content: flex-start; }
   .mark img { width: 112px; }
-  .statement h1 { font-size: clamp(36px, 11vw, 46px); }
+  .statement h1 { font-size: clamp(34px, 10vw, 42px); }
 }
