@@ -33,11 +33,9 @@ export default function ResourcesDiscovery({ initialTopic }: { initialTopic?: st
   return <>
     <div className={styles.aboveFold}>
       <header className={styles.indexHero}><div className={styles.wideContainer}>
-        <p className={styles.eyebrow}>ENTIMEMA INSIGHTS</p>
         <h1>Decisions rarely fail<br /><em>for lack of data.</em></h1>
         <p className={styles.tensionLine}>They fail when the signal is buried in it.</p>
-        <p className={styles.heroCopy}>Research across finance, risk and decision science — built to turn analytical complexity into decisions that can be understood, challenged and acted on.</p>
-        <Link className={styles.newsletterCta} href="/newsletter">SUBSCRIBE TO ENTIMEMA INSIGHTS <span aria-hidden="true">→</span></Link>
+        <Link className={styles.newsletterCta} href="/newsletter"><span>Subscribe to our newsletter</span><b aria-hidden="true">→</b></Link>
       </div></header>
 
       <section className={styles.discovery} aria-label="Find research"><div className={styles.wideContainer}>

@@ -11,7 +11,6 @@
   margin-inline: auto;
 }
 
-.eyebrow,
 .featured header > span,
 .selected header > span,
 .topics header > span,
@@ -28,7 +27,6 @@
   min-height: calc(100svh - var(--announcement-height) - 104px);
   display: flex;
   flex-direction: column;
-  border-bottom: 1px solid var(--hairline);
   background: #fff;
 }
 
@@ -57,21 +55,21 @@
 
 .indexHero h1 em { color: var(--brand-orange-500); font-style: normal; }
 .tensionLine { margin: clamp(18px, 2.3vh, 25px) 0 0; color: var(--brand-navy-900); font-size: clamp(19px, 1.5vw, 23px); font-weight: 650; line-height: 1.35; letter-spacing: -.022em; }
-.heroCopy { max-width: 770px; margin: clamp(12px, 1.8vh, 18px) 0 0; color: var(--text-secondary); font-size: clamp(16px, 1.22vw, 19px); line-height: 1.52; letter-spacing: -.015em; text-wrap: balance; }
-.newsletterCta { min-height: 50px; display: inline-flex; align-items: center; justify-content: center; gap: 12px; margin-top: clamp(22px, 3vh, 32px); padding: 0 23px; color: #fff; background: var(--brand-navy-950); font-size: 12px; font-weight: 750; letter-spacing: .035em; }
-.newsletterCta span { color: var(--brand-orange-500); font-size: 18px; transition: transform 180ms ease; }
-.newsletterCta:hover span { transform: translateX(3px); }
+.newsletterCta { min-height: var(--primary-cta-height); display: inline-flex; align-items: center; justify-content: center; gap: 10px; margin-top: clamp(22px, 3vh, 32px); padding: 0 var(--primary-cta-padding); border: 1px solid #0b2c68; border-radius: var(--primary-cta-radius); color: #fff; background: #0b2c68; box-shadow: var(--primary-cta-shadow); font-size: 15px; font-weight: var(--primary-cta-weight); line-height: 1; letter-spacing: -.012em; transition: transform var(--primary-cta-transition), background-color var(--primary-cta-transition), border-color var(--primary-cta-transition), box-shadow var(--primary-cta-transition); }
+.newsletterCta b { color: currentColor; font-size: 1.16em; font-weight: 500; transition: transform var(--primary-cta-transition); }
+.newsletterCta:hover { border-color: #123978; background: #123978; box-shadow: var(--primary-cta-shadow-hover); transform: translateY(-2px); }
+.newsletterCta:hover b { transform: translateX(6px); }
 .newsletterCta:focus-visible,
 .searchField:focus-within,
 .categoryField:focus-within { position: relative; z-index: 1; outline: 3px solid rgba(255, 74, 18, .28); outline-offset: 3px; }
 
-.discovery { padding: clamp(21px, 3vh, 30px) 0; border-top: 1px solid var(--hairline); background: #fbfcfe; }
-.discovery .wideContainer { display: grid; grid-template-columns: minmax(0, 1fr) minmax(220px, 310px); gap: 16px; }
+.discovery { padding: clamp(18px, 2.5vh, 26px) 0 clamp(24px, 3.5vh, 34px); }
+.discovery .wideContainer { display: grid; grid-template-columns: minmax(280px, 390px) minmax(220px, 280px); justify-content: space-between; gap: 48px; }
 .searchField,
 .categoryField { position: relative; display: block; }
 .searchField svg { position: absolute; top: 50%; left: 17px; width: 19px; height: 19px; transform: translateY(-50%); fill: none; stroke: var(--brand-navy-800); stroke-width: 1.5; }
 .searchField input,
-.categoryField select { width: 100%; min-height: 52px; border: 1px solid var(--hairline); border-radius: 0; color: var(--brand-navy-950); background: #fff; font: inherit; font-size: 14px; }
+.categoryField select { width: 100%; min-height: 48px; border: 1px solid var(--hairline); border-radius: 0; color: var(--brand-navy-950); background: transparent; font: inherit; font-size: 14px; }
 .searchField input { padding: 0 16px 0 50px; }
 .categoryField select { padding: 0 42px 0 16px; cursor: pointer; }
 .visuallyHidden { position: absolute; width: 1px; height: 1px; overflow: hidden; margin: -1px; padding: 0; border: 0; clip: rect(0 0 0 0); white-space: nowrap; }
@@ -392,7 +390,6 @@
   .articleLayout,
   .capability { width: calc(100% - 36px); }
   .indexHero h1 { font-size: clamp(44px, 14vw, 58px); }
-  .heroCopy { font-size: 17px; }
   .newsletterCta { width: 100%; margin-top: 30px; padding-inline: 14px; }
   .byline { grid-template-columns: 1fr; gap: 18px; }
   .breadcrumbs { margin-bottom: 48px; }
