@@ -11,19 +11,10 @@ import BrandLogo from "@/components/BrandLogo";
 
 export type ArticleSection = { id: string; label: string };
 
-const titleEmphasis: Record<string, { lead: string; emphasis: string }> = {
-  "building-a-manufacturing-cost-architecture": { lead: "Building a ", emphasis: "Manufacturing Cost Architecture" },
-  "working-capital-as-a-system": { lead: "Working Capital ", emphasis: "as a System" },
-  "operational-driver-forecasting": { lead: "Operational-Driver ", emphasis: "Forecasting" },
-  "credit-vintage-analysis": { lead: "Credit Vintage ", emphasis: "Analysis" },
-  "from-erp-data-to-management-intelligence": { lead: "From ERP Data ", emphasis: "to Management Intelligence" },
-};
-
 export default function ResourceArticle({ resource, sections, children }: { resource: ResourceRecord; sections?: ArticleSection[]; children: ReactNode }) {
   const topic = getTopic(resource.topic);
   const related = getPublishedRelatedResources(resource);
   const published = resource.publishedAt ? new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric" }).format(new Date(resource.publishedAt)) : null;
-  const semanticTitle = titleEmphasis[resource.slug];
 
   return (
     <main className="site-page">
@@ -34,7 +25,7 @@ export default function ResourceArticle({ resource, sections, children }: { reso
         <header className={styles.articleHeader}>
           <div className={styles.readingContainer}>
             <div className={styles.articleMeta}><span>{topic?.label}</span><span>{resource.readingMinutes} min read</span></div>
-            <h1>{semanticTitle ? <><span>{semanticTitle.lead}</span><span className={styles.titleEmphasis}>{semanticTitle.emphasis}</span></> : resource.title}</h1>
+            <h1>{resource.title}</h1>
             <p className={styles.deck}>{resource.deck}</p>
             <div className={styles.publicationIdentity}>
               <BrandLogo compact />
