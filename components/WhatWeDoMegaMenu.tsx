@@ -12,7 +12,7 @@ import {
   useSyncExternalStore,
 } from "react";
 import styles from "./WhatWeDoMegaMenu.module.css";
-import { getResourceThemeHref, resourceStreams } from "@/app/resources/resource-data";
+import { resourceStreams } from "@/app/resources/resource-data";
 
 const subscribeToClientMount = () => () => {};
 const serviceGroups = [
@@ -256,20 +256,13 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
                   <span>RESOURCES</span><span aria-hidden="true">{mobileResourcesOpen ? "−" : "+"}</span>
                 </button>
                 <div className={styles.mobileResources} hidden={!mobileResourcesOpen} id={`${menuId}-mobile-resources`}>
+                  <Link className={styles.mobileResourceDestination} href="/resources" onClick={close}>
+                    <span><strong>View all research</strong><small>Browse the complete research library.</small></span><b aria-hidden="true">→</b>
+                  </Link>
                   {Object.entries(resourceStreams).map(([key, stream]) => (
-                    <section className={styles.mobileGroup} key={key}>
-                      <h2>{stream.label}</h2>
-                      <div>
-                        {stream.themes.map((theme) => {
-                          const href = getResourceThemeHref(theme);
-                          return href ? (
-                            <Link className={styles.mobileServiceLink} href={href} key={theme} onClick={close}>
-                              <span>{theme}</span><b aria-hidden="true">→</b>
-                            </Link>
-                          ) : <span className={styles.mobileTaxonomyLabel} key={theme}>{theme}</span>;
-                        })}
-                      </div>
-                    </section>
+                    <Link className={styles.mobileResourceDestination} href={stream.href} key={key} onClick={close}>
+                      <span><strong>{stream.label}</strong><small>{stream.description}</small></span><b aria-hidden="true">→</b>
+                    </Link>
                   ))}
                 </div>
                 <Link className={styles.mobileTopLevel} href="/about" onClick={close}>
