@@ -20,15 +20,12 @@ function ResourceCard({ resource }: { resource: ResourceRecord & { publishedAt: 
 export default function ResourcesDiscovery({ initialTopic }: { initialTopic?: string }) {
   const [query, setQuery] = useState("");
   const [topic, setTopic] = useState(initialTopic ?? "");
-  const featured = publishedResources.find((resource) => resource.featured);
   const availableTopics = resourceTopics.filter((item) => publishedResources.some((resource) => resource.topic === item.slug));
   const search = query.trim().toLocaleLowerCase();
   const matches = publishedResources.filter((resource) => {
     const category = getTopic(resource.topic)?.label ?? "";
     return (!topic || resource.topic === topic) && (!search || [resource.title, resource.deck, category].some((value) => value.toLocaleLowerCase().includes(search)));
   });
-  const visibleFeatured = featured && matches.some((resource) => resource.slug === featured.slug) ? featured : undefined;
-  const selected = matches.filter((resource) => resource.slug !== featured?.slug);
 
   return <>
     <div className={styles.aboveFold}>
@@ -44,17 +41,8 @@ export default function ResourcesDiscovery({ initialTopic }: { initialTopic?: st
       </div></section>
     </div>
 
-    {visibleFeatured ? <section className={styles.featured} aria-labelledby="featured-title"><div className={styles.wideContainer}>
-      <header className={styles.featuredHeader}><span>FEATURED ANALYSIS</span><span aria-hidden="true">LEAD STORY</span></header>
-      <article className={styles.featuredEntry}>
-        <Link className={styles.coverLink} href={visibleFeatured.canonicalPath} aria-label={`Read ${visibleFeatured.title}`}><ResourceCover cover={visibleFeatured.cover} featured /></Link>
-        <div className={styles.featuredCopy}><div className={styles.featuredMeta}><span>{getTopic(visibleFeatured.topic)?.label}</span><span>{visibleFeatured.readingMinutes} MIN READ</span></div><h2 id="featured-title"><Link href={visibleFeatured.canonicalPath}>{visibleFeatured.title}</Link></h2><p>{visibleFeatured.deck}</p><div className={styles.featuredFooter}><time dateTime={visibleFeatured.publishedAt}>{formatDate(visibleFeatured.publishedAt)}</time><Link href={visibleFeatured.canonicalPath}>Read analysis <b aria-hidden="true">→</b></Link></div></div>
-      </article>
-    </div></section> : null}
-
-    <section className={styles.selected} id="selected-resources" aria-labelledby="selected-title"><div className={styles.wideContainer}>
-      <header><span>ALL RESEARCH</span><h2 id="selected-title">Analytical work, organised by problem.</h2></header>
-      {selected.length ? <div className={styles.resourceGrid}>{selected.map((resource) => <ResourceCard key={resource.slug} resource={resource} />)}</div> : !visibleFeatured ? <div className={styles.emptyState}><p>No research matches your search.</p></div> : null}
+    <section className={styles.library} id="article-library" aria-label="Research articles"><div className={styles.wideContainer}>
+      {matches.length ? <div className={styles.resourceGrid}>{matches.map((resource) => <ResourceCard key={resource.slug} resource={resource} />)}</div> : <div className={styles.emptyState}><p>No research matches your search.</p></div>}
     </div></section>
   </>;
 }
