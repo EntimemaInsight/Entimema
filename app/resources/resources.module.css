@@ -7,7 +7,7 @@
 }
 
 .readingContainer {
-  width: min(780px, calc(100% - 48px));
+  width: min(740px, calc(100% - 48px));
   margin-inline: auto;
 }
 
@@ -141,19 +141,19 @@
 .demoCta a:hover span { transform: translateX(5px); }
 .demoCta a:focus-visible { outline: 3px solid rgba(255,74,18,.45); outline-offset: 4px; }
 
-.articleHeader { padding: clamp(18px, 2.4vh, 26px) 0 clamp(12px, 1.5vh, 16px); }
-.articleMeta { display: flex; justify-content: space-between; gap: 24px; margin-bottom: clamp(7px, .9vh, 10px); color: var(--brand-orange-500); font-size: 10px; font-weight: 750; letter-spacing: .14em; text-transform: uppercase; }
-.articleHeader h1 { max-width: 20ch; margin: 0; color: var(--brand-navy-950); font-size: clamp(40px, 3.25vw, 52px); line-height: .96; letter-spacing: -.05em; text-wrap: balance; }
+.articleHeader { padding: clamp(14px, 1.8vh, 20px) 0 clamp(8px, 1vh, 11px); }
+.articleMeta { display: flex; justify-content: space-between; gap: 24px; margin-bottom: clamp(6px, .7vh, 8px); color: var(--brand-orange-500); font-size: 10px; font-weight: 750; letter-spacing: .14em; text-transform: uppercase; }
+.articleHeader h1 { max-width: 18ch; margin: 0; color: var(--brand-navy-950); font-size: clamp(36px, 2.8vw, 46px); line-height: .94; letter-spacing: -.048em; text-wrap: balance; }
 .titleEmphasis { color: var(--brand-orange-500); }
-.deck { max-width: 740px; margin: clamp(9px, 1.2vh, 13px) 0 0; color: var(--text-secondary); font-size: clamp(17px, 1.2vw, 18px); line-height: 1.36; letter-spacing: -.018em; }
-.publicationIdentity { display: flex; align-items: center; gap: 16px; margin-top: clamp(10px, 1.3vh, 14px); }
+.deck { max-width: 700px; margin: clamp(7px, .9vh, 10px) 0 0; color: var(--text-secondary); font-size: clamp(16px, 1.1vw, 17px); line-height: 1.32; letter-spacing: -.018em; }
+.publicationIdentity { display: flex; align-items: center; gap: 13px; margin-top: clamp(8px, 1vh, 11px); }
 .publicationIdentity :global(.site-brand) { gap: 8px; }
-.publicationIdentity :global(.site-brand__mark) { width: 26px; height: 26px; }
-.publicationIdentity :global(.site-brand__word) { font-size: 14px; font-weight: 700; }
-.publicationIdentity time { padding-left: 16px; border-left: 1px solid var(--hairline); color: var(--text-secondary); font-size: 12px; }
+.publicationIdentity :global(.site-brand__mark) { width: 23px; height: 23px; }
+.publicationIdentity :global(.site-brand__word) { font-size: 13px; font-weight: 700; }
+.publicationIdentity time { padding-left: 13px; border-left: 1px solid var(--hairline); color: var(--text-secondary); font-size: 11px; }
 
 .articleCover {
-  width: min(1080px, calc((100svh - 350px) * 1.5), calc(100% - 96px));
+  width: min(1210px, calc(100% - 96px));
   margin: 0 auto;
 }
 .articleCover .resourceCover { min-height: 0; aspect-ratio: 3 / 2; }
@@ -367,11 +367,11 @@
   .related header { grid-template-columns: 1fr; gap: 26px; }
   .resourceList article { grid-template-columns: 1fr; gap: 10px; }
   .articleLayout { display: block; width: min(100% - 48px, 720px); }
-  .articleHeader { padding: 38px 0 34px; }
-  .articleMeta { margin-bottom: 16px; }
-  .articleHeader h1 { max-width: 14ch; font-size: clamp(44px, 8vw, 58px); line-height: 1; }
-  .deck { margin-top: 20px; font-size: 18px; line-height: 1.5; }
-  .publicationIdentity { margin-top: 24px; }
+  .articleHeader { padding: 28px 0 18px; }
+  .articleMeta { margin-bottom: 10px; }
+  .articleHeader h1 { max-width: 17ch; font-size: clamp(36px, 6.5vw, 46px); line-height: .97; }
+  .deck { margin-top: 13px; font-size: 17px; line-height: 1.4; }
+  .publicationIdentity { margin-top: 15px; }
   .articleCover { width: min(100% - 48px, 720px); min-width: 0; }
   .toc { display: none; }
   .mobileToc { position: sticky; z-index: 5; top: 92px; display: block; margin-bottom: 48px; border-block: 1px solid var(--hairline); background: rgba(255,255,255,.97); }
@@ -412,9 +412,9 @@
   .demoCta p { margin-top: 22px; font-size: 16px; }
   .demoCta a { width: 100%; margin-top: 32px; }
   .byline { grid-template-columns: 1fr; gap: 18px; }
-  .articleHeader h1 { font-size: clamp(42px, 13vw, 60px); }
+  .articleHeader h1 { font-size: clamp(34px, 10.5vw, 44px); }
   .articleCover { width: calc(100% - 36px); }
-  .deck { font-size: 18px; }
+  .deck { font-size: 16px; }
   .toc ol { grid-template-columns: 1fr; }
   .framework,
   .observation,
