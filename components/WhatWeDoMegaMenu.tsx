@@ -12,7 +12,7 @@ import {
   useSyncExternalStore,
 } from "react";
 import styles from "./WhatWeDoMegaMenu.module.css";
-import { resourceStreams } from "@/app/resources/resource-data";
+import { getResourceThemeHref, resourceStreams } from "@/app/resources/resource-data";
 
 const subscribeToClientMount = () => () => {};
 const serviceGroups = [
@@ -245,7 +245,7 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
                       <div>
                         {group.items.map((item) => (
                           <Link className={styles.mobileServiceLink} href={item.href} key={item.href} onClick={close}>
-                            {item.title}
+                            <span>{item.title}</span><b aria-hidden="true">→</b>
                           </Link>
                         ))}
                       </div>
@@ -257,10 +257,19 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
                 </button>
                 <div className={styles.mobileResources} hidden={!mobileResourcesOpen} id={`${menuId}-mobile-resources`}>
                   {Object.entries(resourceStreams).map(([key, stream]) => (
-                    <Link className={styles.mobileResourceDestination} href={stream.href} key={key} onClick={close}>
-                      <span><strong>{stream.label}</strong><small>{stream.description}</small></span>
-                      <b aria-hidden="true">→</b>
-                    </Link>
+                    <section className={styles.mobileGroup} key={key}>
+                      <h2>{stream.label}</h2>
+                      <div>
+                        {stream.themes.map((theme) => {
+                          const href = getResourceThemeHref(theme);
+                          return href ? (
+                            <Link className={styles.mobileServiceLink} href={href} key={theme} onClick={close}>
+                              <span>{theme}</span><b aria-hidden="true">→</b>
+                            </Link>
+                          ) : <span className={styles.mobileTaxonomyLabel} key={theme}>{theme}</span>;
+                        })}
+                      </div>
+                    </section>
                   ))}
                 </div>
                 <Link className={styles.mobileTopLevel} href="/about" onClick={close}>
@@ -285,12 +294,9 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
                     <p className={styles.categoryDescription}>{group.description}</p>
                     <ul className={styles.items} aria-label={`${group.category} capabilities`}>
                       {group.items.map((item) => (
-                        <li key={item.href}><Link className={styles.item} href={item.href} onClick={close}>{item.title}</Link></li>
+                        <li key={item.href}><Link className={styles.item} href={item.href} onClick={close}><span>{item.title}</span><b aria-hidden="true">→</b></Link></li>
                       ))}
                     </ul>
-                    <Link className={styles.explore} href="/services" onClick={close}>
-                      Explore {group.category} <span aria-hidden="true">→</span>
-                    </Link>
                   </section>
                 ))}
               </div>
