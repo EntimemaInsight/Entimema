@@ -33,9 +33,6 @@ export default function ResourceArticle({ resource, sections, children }: { reso
       <article className={styles.article}>
         <header className={styles.articleHeader}>
           <div className={styles.readingContainer}>
-            <nav className={styles.breadcrumbs} aria-label="Breadcrumb">
-              <Link href="/resources">Resources</Link><span aria-hidden="true">/</span><span>{topic?.label}</span>
-            </nav>
             <div className={styles.articleMeta}><span>{topic?.label}</span><span>{resource.readingMinutes} min read</span></div>
             <h1>{semanticTitle ? <><span>{semanticTitle.lead}</span><span className={styles.titleEmphasis}>{semanticTitle.emphasis}</span></> : resource.title}</h1>
             <p className={styles.deck}>{resource.deck}</p>

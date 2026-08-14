@@ -43,7 +43,7 @@ export default function ArticleContents({ sections }: { sections: ArticleSection
   return (
     <>
       <nav className={styles.toc} aria-label="Article contents">
-        <span>CONTENTS</span>
+        <span>Contents</span>
         <ContentsList sections={sections} activeId={activeId} />
       </nav>
       <details className={styles.mobileToc}>
