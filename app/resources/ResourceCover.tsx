@@ -19,7 +19,7 @@ export default function ResourceCover({ cover, featured = false }: ResourceCover
         src={cover.src}
         alt={cover.alt}
         fill
-        sizes="(max-width: 800px) 100vw, 50vw"
+        sizes={featured ? "(max-width: 800px) calc(100vw - 48px), (max-width: 1400px) calc(100vw - 96px), 1280px" : "(max-width: 800px) 100vw, 50vw"}
         quality={90}
         loading={featured ? "eager" : "lazy"}
         style={{ objectPosition: cover.focalPoint ?? "50% 50%" }}
