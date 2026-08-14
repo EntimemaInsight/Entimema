@@ -25,11 +25,9 @@
 }
 
 .indexHero {
-  padding: clamp(88px, 10vw, 150px) 0 clamp(84px, 9vw, 130px);
+  padding: clamp(88px, 10vw, 142px) 0 clamp(76px, 8vw, 112px);
   border-bottom: 1px solid var(--hairline);
-  background:
-    radial-gradient(circle at 82% 28%, rgba(219, 232, 244, .62), transparent 31%),
-    linear-gradient(180deg, #fff, #fbfdff);
+  background: #fff;
 }
 
 .indexHero h1 {
@@ -43,7 +41,36 @@
 }
 
 .indexHero h1 em { color: var(--brand-orange-500); font-style: normal; }
-.indexHero > div > p:last-child { max-width: 680px; margin: 34px 0 0; color: var(--text-secondary); font-size: clamp(18px, 1.55vw, 23px); line-height: 1.58; letter-spacing: -.02em; }
+.heroCopy { max-width: 760px; margin: 34px 0 0; color: var(--text-secondary); font-size: clamp(18px, 1.55vw, 23px); line-height: 1.58; letter-spacing: -.02em; }
+
+.newsletter { max-width: 790px; margin-top: clamp(48px, 5vw, 68px); padding-top: 25px; border-top: 1px solid var(--brand-navy-900); }
+.newsletter form > label { display: block; margin-bottom: 10px; color: var(--brand-navy-950); font-size: 12px; font-weight: 750; }
+.newsletterControls { display: grid; grid-template-columns: minmax(240px, 1fr) max-content; }
+.newsletterControls input,
+.newsletterControls button { min-height: 54px; border: 1px solid var(--brand-navy-900); border-radius: 0; font: inherit; }
+.newsletterControls input { min-width: 0; padding: 0 17px; border-right: 0; color: var(--brand-navy-950); background: #fff; font-size: 15px; }
+.newsletterControls input::placeholder { color: var(--text-secondary); }
+.newsletterControls button { padding: 0 24px; color: #fff; background: var(--brand-navy-950); font-size: 13px; font-weight: 750; cursor: pointer; }
+.newsletterControls button:disabled { cursor: wait; opacity: .72; }
+.newsletterControls input:focus-visible,
+.newsletterControls button:focus-visible,
+.searchField:focus-within,
+.categoryField:focus-within { position: relative; z-index: 1; outline: 3px solid rgba(255, 74, 18, .28); outline-offset: 3px; }
+.newsletterControls input:user-invalid { border-color: #9b3b2b; box-shadow: inset 0 0 0 1px #9b3b2b; }
+.newsletter > p { margin: 12px 0 0; color: var(--text-secondary); font-size: 12px; line-height: 1.55; }
+.newsletter > p a { color: var(--brand-navy-950); text-decoration: underline; text-underline-offset: 3px; }
+.newsletter .newsletterStatus { min-height: 19px; margin-top: 6px; color: #8b3428; }
+
+.discovery { padding: 34px 0; border-bottom: 1px solid var(--hairline); background: #fbfcfe; }
+.discovery .wideContainer { display: grid; grid-template-columns: minmax(0, 1fr) minmax(220px, 310px); gap: 16px; }
+.searchField,
+.categoryField { position: relative; display: block; }
+.searchField svg { position: absolute; top: 50%; left: 17px; width: 19px; height: 19px; transform: translateY(-50%); fill: none; stroke: var(--brand-navy-800); stroke-width: 1.5; }
+.searchField input,
+.categoryField select { width: 100%; min-height: 52px; border: 1px solid var(--hairline); border-radius: 0; color: var(--brand-navy-950); background: #fff; font: inherit; font-size: 14px; }
+.searchField input { padding: 0 16px 0 50px; }
+.categoryField select { padding: 0 42px 0 16px; cursor: pointer; }
+.visuallyHidden { position: absolute; width: 1px; height: 1px; overflow: hidden; margin: -1px; padding: 0; border: 0; clip: rect(0 0 0 0); white-space: nowrap; }
 
 .featured,
 .selected,
@@ -323,6 +350,7 @@
 @media (max-width: 800px) {
   .wideContainer { width: min(100% - 48px, 680px); }
   .indexHero { padding-block: 72px 76px; }
+  .discovery .wideContainer { grid-template-columns: 1fr; }
   .featuredEntry,
   .selected header,
   .topics header,
@@ -358,7 +386,11 @@
   .articleLayout,
   .capability { width: calc(100% - 36px); }
   .indexHero h1 { font-size: clamp(44px, 14vw, 58px); }
-  .indexHero > div > p:last-child { font-size: 17px; }
+  .heroCopy { font-size: 17px; }
+  .newsletter { margin-top: 42px; }
+  .newsletterControls { grid-template-columns: 1fr; gap: 10px; }
+  .newsletterControls input { border-right: 1px solid var(--brand-navy-900); }
+  .newsletterControls button { padding-inline: 16px; }
   .byline { grid-template-columns: 1fr; gap: 18px; }
   .breadcrumbs { margin-bottom: 48px; }
   .articleHeader h1 { font-size: clamp(42px, 13vw, 60px); }
