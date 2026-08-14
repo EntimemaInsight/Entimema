@@ -30,7 +30,7 @@ export default function EntimemaPublicationPage() {
       <header className={styles.profile}>
         <div className={styles.container}>
           <div className={styles.mark}>
-            <Image src="/entimema-mark.svg" alt="" width={224} height={224} priority />
+            <Image src="/entimema-gmail-logo.png" alt="" width={1024} height={1024} priority />
           </div>
           <div className={styles.statement}>
             <h1>Entimema</h1>
