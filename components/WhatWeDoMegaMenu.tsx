@@ -17,8 +17,8 @@ import { resourceStreams } from "@/app/resources/resource-data";
 const subscribeToClientMount = () => () => {};
 const serviceGroups = [
   {
-    category: "FINANCIAL ARCHITECTURE",
-    description: "Build the financial system behind better business decisions.",
+    category: "Financial Architecture",
+    description: "Build the financial system behind control, planning and performance.",
     items: [
       {
         title: "CFO Advisory",
@@ -53,8 +53,8 @@ const serviceGroups = [
     ],
   },
   {
-    category: "DECISION SCIENCE",
-    description: "Measure uncertainty. Understand risk. Make decisions you can defend.",
+    category: "Decision Science",
+    description: "Measure uncertainty and build controlled decision systems.",
     items: [
       {
         title: "Credit Risk",
@@ -273,20 +273,24 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
             </>
           ) : (
             <>
-              <p className={styles.proposition}>We build financial and decision systems for control, clarity and action.</p>
+              <header className={styles.intro}>
+                <span>SOLUTIONS</span>
+                <h2>Systems for better<br />financial decisions.</h2>
+              </header>
               <div className={styles.panels}>
-                {serviceGroups.map((group) => (
+                {serviceGroups.map((group, index) => (
                   <section className={styles.panel} key={group.category}>
+                    <span className={styles.number}>0{index + 1}</span>
                     <h2 className={styles.category}>{group.category}</h2>
                     <p className={styles.categoryDescription}>{group.description}</p>
-                    <div className={styles.items}>
+                    <ul className={styles.items} aria-label={`${group.category} capabilities`}>
                       {group.items.map((item) => (
-                        <Link className={styles.item} href={item.href} key={item.href} onClick={close}>
-                          <span className={styles.itemTitle}>{item.title}</span>
-                          <span className={styles.itemDescription}>{item.description}</span>
-                        </Link>
+                        <li key={item.href}><Link className={styles.item} href={item.href} onClick={close}>{item.title}</Link></li>
                       ))}
-                    </div>
+                    </ul>
+                    <Link className={styles.explore} href="/services" onClick={close}>
+                      Explore {group.category} <span aria-hidden="true">→</span>
+                    </Link>
                   </section>
                 ))}
               </div>
