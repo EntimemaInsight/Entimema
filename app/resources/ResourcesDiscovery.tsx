@@ -9,7 +9,7 @@ import styles from "./resources.module.css";
 const formatDate = (publishedAt: string) => new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(`${publishedAt}T00:00:00Z`));
 
 function ResourceCard({ resource }: { resource: ResourceRecord & { publishedAt: string } }) {
-  return <article>
+  return <article className={styles.resourceCard}>
     <Link className={styles.coverLink} href={resource.canonicalPath} aria-label={`Read ${resource.title}`}><ResourceCover cover={resource.cover} /></Link>
     <div className={styles.cardMeta}><span>{getTopic(resource.topic)?.label}</span><span>{resource.readingMinutes} MIN READ</span></div>
     <h3><Link href={resource.canonicalPath}>{resource.title}</Link></h3><p>{resource.deck}</p>
@@ -45,7 +45,7 @@ export default function ResourcesDiscovery({ initialTopic }: { initialTopic?: st
     </div>
 
     {visibleFeatured ? <section className={styles.featured} aria-labelledby="featured-title"><div className={styles.wideContainer}>
-      <header><span>FEATURED ANALYSIS</span></header>
+      <header className={styles.featuredHeader}><span>FEATURED ANALYSIS</span><span aria-hidden="true">LEAD STORY</span></header>
       <article className={styles.featuredEntry}>
         <Link className={styles.coverLink} href={visibleFeatured.canonicalPath} aria-label={`Read ${visibleFeatured.title}`}><ResourceCover cover={visibleFeatured.cover} featured /></Link>
         <div className={styles.featuredCopy}><div className={styles.featuredMeta}><span>{getTopic(visibleFeatured.topic)?.label}</span><span>{visibleFeatured.readingMinutes} MIN READ</span></div><h2 id="featured-title"><Link href={visibleFeatured.canonicalPath}>{visibleFeatured.title}</Link></h2><p>{visibleFeatured.deck}</p><div className={styles.featuredFooter}><time dateTime={visibleFeatured.publishedAt}>{formatDate(visibleFeatured.publishedAt)}</time><Link href={visibleFeatured.canonicalPath}>Read analysis <b aria-hidden="true">→</b></Link></div></div>
@@ -53,7 +53,7 @@ export default function ResourcesDiscovery({ initialTopic }: { initialTopic?: st
     </div></section> : null}
 
     <section className={styles.selected} id="selected-resources" aria-labelledby="selected-title"><div className={styles.wideContainer}>
-      <header><span>SELECTED RESOURCES</span><h2 id="selected-title">Analytical work, organised by problem.</h2></header>
+      <header><span>ALL RESEARCH</span><h2 id="selected-title">Analytical work, organised by problem.</h2></header>
       {selected.length ? <div className={styles.resourceGrid}>{selected.map((resource) => <ResourceCard key={resource.slug} resource={resource} />)}</div> : !visibleFeatured ? <div className={styles.emptyState}><p>No research matches your search.</p></div> : null}
     </div></section>
   </>;
