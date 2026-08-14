@@ -45,8 +45,7 @@ export default function ResourceArticle({ resource, sections, children }: { reso
       </article>
 
       {relatedResources.length ? (
-        <section className={styles.articleContinuation} aria-labelledby="more-from-entimema">
-          <h2 id="more-from-entimema">More from Entimema</h2>
+        <div className={styles.articleContinuation}>
           <div className={styles.resourceGrid}>
             {relatedResources.map((relatedResource) => {
               const relatedTopic = getTopic(relatedResource.topic);
@@ -68,7 +67,7 @@ export default function ResourceArticle({ resource, sections, children }: { reso
               );
             })}
           </div>
-        </section>
+        </div>
       ) : null}
     </main>
   );

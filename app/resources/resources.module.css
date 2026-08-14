@@ -113,8 +113,7 @@
 .resourceCard:hover h3 a { color: var(--brand-navy-800); }
 .resourceCard:hover .cardFooter b { transform: translateX(3px); }
 
-.articleContinuation { width: min(1210px, calc(100% - 96px)); margin: 0 auto; padding: 0 0 clamp(104px, 10vw, 144px); }
-.articleContinuation > h2 { margin: 0 0 clamp(44px, 5vw, 64px); color: var(--brand-navy-950); font-size: clamp(34px, 3.4vw, 46px); line-height: 1.08; letter-spacing: -.04em; }
+.articleContinuation { width: min(1210px, calc(100% - 96px)); margin: clamp(-24px, -1.7vw, -16px) auto 0; padding: 0 0 clamp(104px, 10vw, 144px); }
 
 .emptyState { margin-top: 64px; padding: 34px 0; border-top: 1px solid var(--brand-navy-900); border-bottom: 1px solid var(--hairline); }
 .emptyState p { max-width: 680px; margin: 0; font-size: clamp(24px, 2.7vw, 38px); line-height: 1.2; letter-spacing: -.035em; }
