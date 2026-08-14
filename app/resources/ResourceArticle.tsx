@@ -7,13 +7,23 @@ import styles from "./resources.module.css";
 import { RelatedCapabilityLink, ResourceViewAnalytics } from "@/components/ResourceAnalytics";
 import ResourceCover from "./ResourceCover";
 import ArticleContents from "./ArticleContents";
+import BrandLogo from "@/components/BrandLogo";
 
 export type ArticleSection = { id: string; label: string };
+
+const titleEmphasis: Record<string, { lead: string; emphasis: string }> = {
+  "building-a-manufacturing-cost-architecture": { lead: "Building a ", emphasis: "Manufacturing Cost Architecture" },
+  "working-capital-as-a-system": { lead: "Working Capital ", emphasis: "as a System" },
+  "operational-driver-forecasting": { lead: "Operational-Driver ", emphasis: "Forecasting" },
+  "credit-vintage-analysis": { lead: "Credit Vintage ", emphasis: "Analysis" },
+  "from-erp-data-to-management-intelligence": { lead: "From ERP Data ", emphasis: "to Management Intelligence" },
+};
 
 export default function ResourceArticle({ resource, sections, children }: { resource: ResourceRecord; sections?: ArticleSection[]; children: ReactNode }) {
   const topic = getTopic(resource.topic);
   const related = getPublishedRelatedResources(resource);
   const published = resource.publishedAt ? new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric" }).format(new Date(resource.publishedAt)) : null;
+  const semanticTitle = titleEmphasis[resource.slug];
 
   return (
     <main className="site-page">
@@ -27,11 +37,11 @@ export default function ResourceArticle({ resource, sections, children }: { reso
               <Link href="/resources">Resources</Link><span aria-hidden="true">/</span><span>{topic?.label}</span>
             </nav>
             <div className={styles.articleMeta}><span>{topic?.label}</span><span>{resource.readingMinutes} min read</span></div>
-            <h1>{resource.title}</h1>
+            <h1>{semanticTitle ? <><span>{semanticTitle.lead}</span><span className={styles.titleEmphasis}>{semanticTitle.emphasis}</span></> : resource.title}</h1>
             <p className={styles.deck}>{resource.deck}</p>
-            <div className={styles.byline}>
-              <div className={styles.authorIdentity}><span>Published by</span>{resource.author.profilePath ? <Link href={resource.author.profilePath}>{resource.author.name}</Link> : <strong>{resource.author.name}</strong>}<small>{resource.author.affiliation}</small></div>
-              <div><span>Published</span><strong>{published}</strong>{resource.updatedAt ? <small>Updated {new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", year: "numeric" }).format(new Date(resource.updatedAt))}</small> : null}</div>
+            <div className={styles.publicationIdentity}>
+              <BrandLogo compact />
+              {published ? <time dateTime={resource.publishedAt}>{published}</time> : null}
             </div>
           </div>
         </header>
