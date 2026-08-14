@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { createPortal } from "react-dom";
 import { useCallback, useEffect, useId, useLayoutEffect, useRef, useState, useSyncExternalStore } from "react";
-import { getResourceThemeHref, resourceStreams } from "@/app/resources/resource-data";
+import { resourceStreams } from "@/app/resources/resource-data";
 import styles from "./ResourcesMegaMenu.module.css";
 
 const subscribeToClientMount = () => () => undefined;
@@ -85,19 +85,14 @@ export default function ResourcesMegaMenu({ active = false }: { active?: boolean
           <header className={styles.intro}>
             <span>RESOURCES</span>
             <h2 id={headingId}>Research for decisions.<br />Methods for implementation.</h2>
+            <Link className={styles.allResearch} href="/resources" onClick={hide}>View all research <b aria-hidden="true">→</b></Link>
           </header>
           <div className={styles.streams}>
             {Object.entries(resourceStreams).map(([key, stream], index) => (
               <section className={styles.stream} key={key}>
                 <span className={styles.number}>0{index + 1}</span>
-                <h3>{stream.label}</h3>
+                <h3><Link href={stream.href} onClick={hide}><span>{stream.label}</span><b aria-hidden="true">→</b></Link></h3>
                 <p>{stream.description}</p>
-                <ul aria-label={`${stream.label} themes`}>
-                  {stream.themes.map((theme) => {
-                    const href = getResourceThemeHref(theme);
-                    return <li key={theme}>{href ? <Link href={href} onClick={hide}><span>{theme}</span><b aria-hidden="true">→</b></Link> : theme}</li>;
-                  })}
-                </ul>
               </section>
             ))}
           </div>
