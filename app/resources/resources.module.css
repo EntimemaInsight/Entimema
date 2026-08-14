@@ -59,9 +59,9 @@
 }
 
 .indexHero h1 em { color: var(--brand-orange-500); font-style: normal; }
-.tensionLine { margin: clamp(18px, 2.3vh, 25px) 0 0; color: var(--brand-navy-900); font-size: clamp(19px, 1.5vw, 23px); font-weight: 420; line-height: 1.35; letter-spacing: -.022em; }
-.newsletterCta { min-height: var(--primary-cta-height); display: inline-flex; align-items: center; justify-content: center; gap: 10px; margin-top: clamp(22px, 3vh, 32px); padding: 0 var(--primary-cta-padding); border: 1px solid #0b2c68; border-radius: var(--primary-cta-radius); color: #fff; background: #0b2c68; box-shadow: var(--primary-cta-shadow); font-size: 15px; font-weight: var(--primary-cta-weight); line-height: 1; letter-spacing: -.012em; transition: transform var(--primary-cta-transition), background-color var(--primary-cta-transition), border-color var(--primary-cta-transition), box-shadow var(--primary-cta-transition); }
-.newsletterCta b { color: currentColor; font-size: 1.16em; font-weight: 500; transition: transform var(--primary-cta-transition); }
+.tensionLine { margin: clamp(18px, 2.3vh, 25px) 0 0; color: #26385f; font-family: var(--font-sans); font-size: var(--type-section-subtitle); font-weight: 420; line-height: var(--leading-subtitle); letter-spacing: var(--tracking-copy); }
+.newsletterCta { min-height: var(--primary-cta-height); display: inline-flex; align-items: center; justify-content: center; gap: 10px; margin-top: clamp(22px, 3vh, 32px); padding: 0 var(--primary-cta-padding); border: 1px solid #0b2c68; border-radius: var(--primary-cta-radius); color: #fff; background: #0b2c68; box-shadow: var(--primary-cta-shadow); font-family: var(--font-sans); font-size: var(--type-navigation); font-weight: 560; line-height: 1; letter-spacing: var(--tracking-action); text-align: center; transition: transform var(--primary-cta-transition), background-color var(--primary-cta-transition), border-color var(--primary-cta-transition), box-shadow var(--primary-cta-transition); }
+.newsletterCta b { color: currentColor; font-size: 1.16em; font-weight: 500; line-height: 1; transform: translate3d(0, 0, 0); transition: transform var(--primary-cta-transition); }
 .newsletterCta:hover { border-color: #123978; background: #123978; box-shadow: var(--primary-cta-shadow-hover); transform: translateY(-2px); }
 .newsletterCta:hover b { transform: translateX(6px); }
 .newsletterCta:focus-visible,
