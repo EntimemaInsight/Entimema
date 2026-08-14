@@ -91,8 +91,10 @@ export default function ResourcesMegaMenu({ active = false }: { active?: boolean
             {Object.entries(resourceStreams).map(([key, stream], index) => (
               <section className={styles.stream} key={key}>
                 <span className={styles.number}>0{index + 1}</span>
-                <h3><Link href={stream.href} onClick={hide}><span>{stream.label}</span><b aria-hidden="true">→</b></Link></h3>
-                <p>{stream.description}</p>
+                <Link className={styles.streamLink} href={stream.href} onClick={hide}>
+                  <h3><span>{stream.label}</span><b aria-hidden="true">→</b></h3>
+                  <p>{stream.description}</p>
+                </Link>
               </section>
             ))}
           </div>
