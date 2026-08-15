@@ -28,7 +28,6 @@ export default function ResourceArticle({ resource, sections, children }: { reso
           <div className={styles.readingContainer}>
             <div className={styles.articleMeta}><span>{topic?.label}</span><span>{resource.readingMinutes} min read</span></div>
             <h1><ResourceSemanticText text={resource.headline} emphasis={resource.headlineEmphasis} className={styles.headlineEmphasis} /></h1>
-            <p className={styles.deck}><ResourceSemanticText text={resource.slogan} emphasis={resource.sloganEmphasis} className={styles.sloganEmphasis} /></p>
             <div className={styles.publicationIdentity}>
               <Link className={styles.publicationLink} href="/resources/entimema" aria-label="Entimema publication profile">
                 <BrandLogo compact />
