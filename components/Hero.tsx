@@ -1,6 +1,6 @@
-import Link from "next/link";
 import { SectionHeader } from "./ui";
 import { PRIMARY_COMMERCIAL_CTA } from "@/lib/cta-labels";
+import { DemoTrigger } from "./DemoDiscovery";
 
 export default function Hero() {
   return (
@@ -27,9 +27,9 @@ export default function Hero() {
             </>
           }
         >
-          <Link className="primary-cta hero__cta" href="/contact">
+          <DemoTrigger className="primary-cta hero__cta">
             <span>{PRIMARY_COMMERCIAL_CTA}</span>
-          </Link>
+          </DemoTrigger>
         </SectionHeader>
       </div>
     </section>

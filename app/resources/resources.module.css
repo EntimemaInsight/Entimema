@@ -125,11 +125,9 @@
 .demoCtaInner { width: min(900px, 100%); margin-inline: auto; text-align: center; }
 .demoCta h2 { max-width: 16ch; margin: 0 auto; font-size: clamp(44px, 5.4vw, 72px); font-weight: 600; line-height: 1.02; letter-spacing: -.052em; text-wrap: balance; }
 .demoCta p { max-width: 610px; margin: 28px auto 0; color: rgba(255,255,255,.72); font-size: clamp(17px, 1.5vw, 20px); line-height: 1.6; text-wrap: balance; }
-.demoCta a { min-height: var(--primary-cta-height); display: inline-flex; align-items: center; justify-content: center; gap: 10px; margin-top: 40px; padding: 0 var(--primary-cta-padding); border: 1px solid rgba(255,255,255,.78); border-radius: var(--primary-cta-radius); color: #fff; font-size: var(--type-navigation); font-weight: 560; letter-spacing: var(--tracking-action); transition: transform var(--primary-cta-transition), background-color var(--primary-cta-transition), border-color var(--primary-cta-transition); }
-.demoCta a span { font-size: 1.16em; transition: transform var(--primary-cta-transition); }
-.demoCta a:hover { border-color: #fff; background: rgba(255,255,255,.08); transform: translateY(-2px); }
-.demoCta a:hover span { transform: translateX(5px); }
-.demoCta a:focus-visible { outline: 3px solid rgba(255,74,18,.45); outline-offset: 4px; }
+.demoButton { min-height: var(--primary-cta-height); display: inline-flex; align-items: center; justify-content: center; margin-top: 40px; padding: 0 var(--primary-cta-padding); border: 1px solid rgba(255,255,255,.78); border-radius: var(--primary-cta-radius); color: #fff; background: transparent; font-size: var(--type-navigation); font-weight: 560; letter-spacing: var(--tracking-action); cursor: pointer; transition: transform var(--primary-cta-transition), background-color var(--primary-cta-transition), border-color var(--primary-cta-transition); }
+.demoButton:hover { border-color: #fff; background: rgba(255,255,255,.08); transform: translateY(-2px); }
+.demoButton:focus-visible { outline: 3px solid rgba(255,74,18,.45); outline-offset: 4px; }
 
 .articleHeader { padding: clamp(18px, 2.2vh, 24px) 0 0; }
 .articleMeta { display: flex; justify-content: center; gap: 0; margin-bottom: clamp(9px, 1.1vh, 12px); color: var(--brand-orange-500); font-size: 10px; font-weight: 750; letter-spacing: .14em; text-transform: uppercase; }

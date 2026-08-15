@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
-import { PRIMARY_COMMERCIAL_CTA } from "@/lib/cta-labels";
+import { DemoTrigger } from "@/components/DemoDiscovery";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
 import CreditRiskDashboard from "./CreditRiskDashboard";
@@ -66,7 +66,7 @@ export default function CreditRiskPage() {
           <h1 id="credit-risk-title">Credit risk consulting that sees risk before it becomes expensive.</h1>
           <p className={styles.lead}>Build credit risk models, decision strategies and portfolio controls that identify risk earlier, apply policy consistently and make every credit decision traceable.</p>
           <p className={styles.support}><strong>A score is not a decision. It is one input into one.</strong> Connect scoring, policy, cut-offs, portfolio behaviour and decision logic into one credit architecture — so risk is measured consistently from application to portfolio performance.</p>
-          <Link className={styles.primaryButton} href="/contact?topic=credit-risk">{PRIMARY_COMMERCIAL_CTA}</Link>
+          <DemoTrigger className={styles.primaryButton} initialInterest="Credit Risk" />
         </div>
         <CreditRiskDashboard />
       </div></section>
@@ -104,7 +104,7 @@ export default function CreditRiskPage() {
         <div className={styles.relatedGrid}>{related.map(([title, copy, href]) => <Link href={href} key={title}><span><strong>{title}</strong><small>{copy}</small></span><b aria-hidden="true">↗</b></Link>)}</div>
       </div></section>
 
-      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>CREDIT RISK</span><h2 id="cta-title">A credit model should do more than rank risk.<br />It should shape the decision.</h2><p>Build one credit architecture around models, policy, automation and portfolio performance.</p><Link className={styles.ctaButton} href="/contact?topic=credit-risk">{PRIMARY_COMMERCIAL_CTA}</Link></div></div></section>
+      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>CREDIT RISK</span><h2 id="cta-title">A credit model should do more than rank risk.<br />It should shape the decision.</h2><p>Build one credit architecture around models, policy, automation and portfolio performance.</p><DemoTrigger className={styles.ctaButton} initialInterest="Credit Risk" /></div></div></section>
     </main>
   );
 }

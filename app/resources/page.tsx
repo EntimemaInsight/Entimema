@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { PRIMARY_COMMERCIAL_CTA } from "@/lib/cta-labels";
+import { DemoTrigger } from "@/components/DemoDiscovery";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
 import ResourcesDiscovery from "./ResourcesDiscovery";
@@ -27,7 +26,7 @@ export default async function ResourcesPage({ searchParams }: { searchParams: Pr
       <section className={styles.demoCta} aria-labelledby="demo-cta-title"><div className={styles.demoCtaInner}>
         <h2 id="demo-cta-title">Ready to see Entimema AI Agents in action?</h2>
         <p>Explore how AI agents can support financial analysis, risk assessment and decision workflows.</p>
-        <Link href="/contact?topic=financial-ai-agents">{PRIMARY_COMMERCIAL_CTA}</Link>
+        <DemoTrigger className={styles.demoButton} initialInterest="AI Agents" />
       </div></section>
     </main>
   );

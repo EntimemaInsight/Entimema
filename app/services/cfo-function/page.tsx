@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { PRIMARY_COMMERCIAL_CTA } from "@/lib/cta-labels";
+import { DemoTrigger } from "@/components/DemoDiscovery";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
 import CfoDashboard from "./CfoDashboard";
@@ -63,7 +63,7 @@ export default function CfoFunctionPage() {
             <h1 id="cfo-title">You don&apos;t always need a CFO.</h1>
             <p className={styles.lead}>You need the financial system behind one.</p>
             <p className={styles.support}>Build the financial structure, management information and decision processes your business needs — without building a full CFO organisation from day one.</p>
-            <Link className={styles.primaryButton} href="/contact?topic=cfo-function">{PRIMARY_COMMERCIAL_CTA}</Link>
+            <DemoTrigger className={styles.primaryButton} initialInterest="CFO & Financial Management" />
           </div>
           <CfoDashboard />
         </div>
@@ -102,7 +102,7 @@ export default function CfoFunctionPage() {
         <div className={styles.relatedGrid}>{related.map(([title, copy, href]) => <Link href={href} key={title}><span><strong>{title}</strong><small>{copy}</small></span><b aria-hidden="true">↗</b></Link>)}</div>
       </div></section>
 
-      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>CFO ADVISORY</span><h2 id="cta-title">Your finance function doesn&apos;t have to grow all at once.</h2><p>Start with the decisions, processes and information your business needs now. Build from there.</p><Link className={styles.ctaButton} href="/contact?topic=cfo-function">{PRIMARY_COMMERCIAL_CTA}</Link></div></div></section>
+      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>CFO ADVISORY</span><h2 id="cta-title">Your finance function doesn&apos;t have to grow all at once.</h2><p>Start with the decisions, processes and information your business needs now. Build from there.</p><DemoTrigger className={styles.ctaButton} initialInterest="CFO & Financial Management" /></div></div></section>
     </main>
   );
 }
