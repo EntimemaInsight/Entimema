@@ -68,6 +68,7 @@ export type RelatedCapability = {
  * - `technicalTitle` preserves the subject's stable technical and SEO identity.
  * - `headline` creates analytical tension and implies a change in understanding.
  * - `slogan` develops that tension through a mechanism to its decision value.
+ * - emphasis fields identify exact semantic phrases for the shared orange treatment.
  *
  * New Resources must define all three layers; an expressive headline never replaces
  * the technical terminology carried by search, metadata, headings and body content.
@@ -77,9 +78,13 @@ export type ResourceRecord = {
   technicalTitle: string;
   /** Editorial H1: introduces a tension and implies a transformation in understanding. */
   headline: string;
+  /** Exact phrase within `headline` that marks its semantic pivot. */
+  headlineEmphasis: string;
   slug: string;
   /** Supporting slogan: connects the tension to an analytical mechanism and decision value. */
   slogan: string;
+  /** Optional exact phrase within `slogan` that receives restrained secondary emphasis. */
+  sloganEmphasis?: string;
   author: ResourceAuthor;
   publishedAt?: string;
   updatedAt?: string;
@@ -112,8 +117,10 @@ export const resources: ResourceRecord[] = [
   {
     technicalTitle: "Manufacturing Cost Architecture",
     headline: "When Manufacturing Cost Stops Explaining the Business",
+    headlineEmphasis: "Explaining the Business",
     slug: "building-a-manufacturing-cost-architecture",
     slogan: "Manufacturing cost becomes decision-useful when accounting values are connected to production stages, economic drivers and management decisions.",
+    sloganEmphasis: "decision-useful",
     author: authors.aleksandar,
     publishedAt: "2026-08-11",
     readingMinutes: 12,
@@ -145,8 +152,10 @@ export const resources: ResourceRecord[] = [
   {
     technicalTitle: "Working Capital Management",
     headline: "Working Capital Is an Operating System, Not a Balance-Sheet Number",
+    headlineEmphasis: "Operating System",
     slug: "working-capital-as-a-system",
     slogan: "Receivables, inventory and payables reveal their cash and financing consequences only when KPI movements are traced through operating drivers, process owners and responsible actions.",
+    sloganEmphasis: "operating drivers",
     author: authors.aleksandar,
     publishedAt: "2026-08-11",
     readingMinutes: 12,
@@ -167,8 +176,10 @@ export const resources: ResourceRecord[] = [
   {
     technicalTitle: "Operational-Driver Forecasting",
     headline: "A Forecast Can Balance and Still Misread the Business",
+    headlineEmphasis: "Misread the Business",
     slug: "operational-driver-forecasting",
     slogan: "Tracing operating drivers, constraints and financial relationships through the P&L, balance sheet and cash flow turns a coherent projection into a model management can interrogate.",
+    sloganEmphasis: "a model management can interrogate",
     author: authors.aleksandar,
     publishedAt: "2026-08-11",
     readingMinutes: 12,
@@ -189,8 +200,10 @@ export const resources: ResourceRecord[] = [
   {
     technicalTitle: "Credit Vintage Analysis",
     headline: "The Portfolio Average Can Hide the Risk Already Emerging",
+    headlineEmphasis: "Risk Already Emerging",
     slug: "credit-vintage-analysis",
     slogan: "Aligning origination cohorts by credit age exposes vintage divergence early, while segmentation and validation determine whether the signal warrants a credit-policy response.",
+    sloganEmphasis: "segmentation and validation",
     author: authors.aleksandar,
     publishedAt: "2026-08-11",
     readingMinutes: 12,
@@ -209,8 +222,9 @@ export const resources: ResourceRecord[] = [
     cover: { type: "editorial-artwork", src: "/resources/covers/credit-vintage-analysis.png", motion: "none", alt: "Editorial artwork for Credit Vintage Analysis showing layered credit vintage performance panels evolving through time.", stages: ["Cohort", "Credit age", "Performance", "Signal", "Decision"] },
   },
   {
-    technicalTitle:"ERP Data and Management Intelligence",headline:"ERP Records the Business. It Does Not Explain It.",slug:"from-erp-data-to-management-intelligence",
+    technicalTitle:"ERP Data and Management Intelligence",headline:"ERP Records the Business. It Does Not Explain It.",headlineEmphasis:"Does Not Explain It.",slug:"from-erp-data-to-management-intelligence",
     slogan:"Reconciliation and consistent business semantics connect technical transactions to analytical models, giving management evidence it can use without confusing system accuracy with decision completeness.",
+    sloganEmphasis:"decision completeness",
     author:authors.aleksandar,publishedAt:"2026-08-11",readingMinutes:12,topic:"financial-data-and-erp",stream:"insights",featured:false,
     seoTitle:"From ERP Data to Management Intelligence | Entimema",
     metaDescription:"A practitioner framework connecting ERP transactions, reconciliation, business semantics, analytical models and management decisions.",
