@@ -1,5 +1,6 @@
 import Link from "next/link";
 import styles from "./ConversionTrustSection.module.css";
+import { PRIMARY_COMMERCIAL_CTA } from "@/lib/cta-labels";
 
 const capabilities = [
   {
@@ -86,7 +87,7 @@ export default function ConversionTrustSection() {
               </li>
             ))}
           </ol>
-          <Link className={styles.link} href="/contact">Explore an engagement <span aria-hidden="true">→</span></Link>
+          <Link className={styles.link} href="/contact">{PRIMARY_COMMERCIAL_CTA}</Link>
         </div>
       </section>
     </div>

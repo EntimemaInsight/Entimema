@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { PRIMARY_COMMERCIAL_CTA } from "@/lib/cta-labels";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
 import AiOperationsDashboard from "./AiOperationsDashboard";
@@ -58,7 +59,7 @@ export default function FinancialAiAgentsPage() {
           <span className={styles.category}>FINANCE AI AGENTS</span><h1 id="financial-ai-agents-title">Models explain.<br />Agents act.</h1>
           <p className={styles.lead}>Automation handles tasks. Agents handle workflows.</p>
           <p className={styles.support}>Build finance AI agents that work across reporting, planning, controlling and ERP processes — analysing data, executing recurring tasks and preparing management information for human review.</p>
-          <Link className={styles.primaryButton} href="/contact?topic=financial-ai-agents">Discuss Your Finance AI Agents <span aria-hidden="true">→</span></Link>
+          <Link className={styles.primaryButton} href="/contact?topic=financial-ai-agents">{PRIMARY_COMMERCIAL_CTA}</Link>
         </div><AiOperationsDashboard />
       </div></section>
 
@@ -67,7 +68,7 @@ export default function FinancialAiAgentsPage() {
       <section className={styles.section} aria-labelledby="outcomes-title"><div className="site-container"><SectionHeader label="WHAT YOU GET" title={<>Less execution.<br />More judgement.</>} /><div className={styles.outcomeGrid}>{outcomes.map(([title, copy]) => <article key={title}><span aria-hidden="true">✓</span><div><h3>{title}</h3><p>{copy}</p></div></article>)}</div><aside className={styles.caseExample} aria-labelledby="case-example-title"><div className={styles.caseExampleIntro}><span>ILLUSTRATIVE SCENARIO</span><h3 id="case-example-title">When finance repeats the same analysis every month, the process is asking to be automated.</h3></div><dl><div><dt>SCENARIO</dt><dd>A manufacturing finance team repeatedly prepares margin analysis, ERP checks and management reports through manual steps across multiple systems.</dd></div><div><dt>ENTIMEMA APPROACH</dt><dd>We deploy finance AI agents connected to ERP, trusted financial data and reporting workflows, with defined rules and human review points.</dd></div><div><dt>RESULT</dt><dd>Recurring finance work is prepared more consistently, while the team spends more time reviewing exceptions, interpreting results and supporting decisions.</dd></div></dl></aside></div></section>
       <section className={`${styles.section} ${styles.tinted}`} aria-labelledby="applications-title"><div className="site-container"><SectionHeader label="WHERE IT APPLIES" title="Where do finance AI agents create the most value?" intro="If the same financial process is repeated the same way every month, it may no longer need to be manual." /><div className={styles.useCaseGrid}>{useCases.map(([title, copy]) => <article key={title}><h3>{title}</h3><p>{copy}</p></article>)}</div></div></section>
       <section className={styles.section} aria-labelledby="related-title"><div className="site-container"><SectionHeader label="NEXT STEP" title="Related services" /><div className={styles.relatedGrid}>{related.map(([title, copy, href]) => <Link href={href} key={title}><span><strong>{title}</strong><small>{copy}</small></span><b aria-hidden="true">↗</b></Link>)}</div></div></section>
-      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>FINANCE AI AGENTS</span><h2 id="cta-title">Don&apos;t add AI to finance.<br />Give AI a defined financial role.</h2><p>Start with one recurring process, clear controls and trusted data. Build autonomy from there.</p><Link className={styles.ctaButton} href="/contact?topic=financial-ai-agents">Discuss Your Finance AI Agents <span aria-hidden="true">→</span></Link></div></div></section>
+      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>FINANCE AI AGENTS</span><h2 id="cta-title">Don&apos;t add AI to finance.<br />Give AI a defined financial role.</h2><p>Start with one recurring process, clear controls and trusted data. Build autonomy from there.</p><Link className={styles.ctaButton} href="/contact?topic=financial-ai-agents">{PRIMARY_COMMERCIAL_CTA}</Link></div></div></section>
     </main>
   );
 }

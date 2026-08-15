@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { PRIMARY_COMMERCIAL_CTA } from "@/lib/cta-labels";
 import AboutHeader from "@/components/AboutHeader";
 import styles from "./about.module.css";
 import AboutMotion from "./AboutMotion";
@@ -140,7 +141,7 @@ export default function AboutPage() {
               <p className={styles.narrativeLabel}>NEXT STEP</p>
               <h2 id="about-conversation-title">Every strong model starts with the right question.</h2>
               <p>Bring us the decision, process or system you are trying to improve. We will start by understanding the structure behind it.</p>
-              <Link href="/contact">Discuss Your Challenge <span aria-hidden="true">→</span></Link>
+              <Link href="/contact">{PRIMARY_COMMERCIAL_CTA}</Link>
             </section>
           </div>
         </AboutMotion>

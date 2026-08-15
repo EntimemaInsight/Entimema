@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Link from "next/link";
+import { PRIMARY_COMMERCIAL_CTA } from "@/lib/cta-labels";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
 import AmlOperationsDashboard from "./AmlOperationsDashboard";
@@ -63,7 +64,7 @@ export default function AmlCompliancePage() {
           <h1 id="aml-compliance-title">Compliance is not the goal.<br />Control is.</h1>
           <p className={styles.lead}>Build an AML operating system that connects KYC, screening, transaction monitoring, case management and regulatory evidence into one traceable control architecture.</p>
           <p className={styles.support}><strong>An alert is not a finding. It is the start of an investigation.</strong> Connect risk signals, scenarios, escalation and regulatory action so every alert follows a clear, defensible path.</p>
-          <Link className={styles.primaryButton} href="/contact?topic=aml-compliance">Discuss Your AML Architecture <span aria-hidden="true">→</span></Link>
+          <Link className={styles.primaryButton} href="/contact?topic=aml-compliance">{PRIMARY_COMMERCIAL_CTA}</Link>
         </div>
         <AmlOperationsDashboard />
       </div></section>
@@ -101,7 +102,7 @@ export default function AmlCompliancePage() {
         <div className={styles.relatedGrid}>{related.map(([title, copy, href]) => <Link href={href} key={title}><span><strong>{title}</strong><small>{copy}</small></span><b aria-hidden="true">↗</b></Link>)}</div>
       </div></section>
 
-      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>AML & COMPLIANCE</span><h2 id="cta-title">AML should do more than detect risk.<br />It should control what happens next.</h2><p>Build one AML architecture around policy, scenarios, investigations, evidence and regulatory action.</p><Link className={styles.ctaButton} href="/contact?topic=aml-compliance">Discuss Your AML Architecture <span aria-hidden="true">→</span></Link></div></div></section>
+      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>AML & COMPLIANCE</span><h2 id="cta-title">AML should do more than detect risk.<br />It should control what happens next.</h2><p>Build one AML architecture around policy, scenarios, investigations, evidence and regulatory action.</p><Link className={styles.ctaButton} href="/contact?topic=aml-compliance">{PRIMARY_COMMERCIAL_CTA}</Link></div></div></section>
     </main>
   );
 }

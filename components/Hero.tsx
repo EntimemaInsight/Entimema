@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { SectionHeader } from "./ui";
+import { PRIMARY_COMMERCIAL_CTA } from "@/lib/cta-labels";
 
 export default function Hero() {
   return (
@@ -27,7 +28,7 @@ export default function Hero() {
           }
         >
           <Link className="primary-cta hero__cta" href="/contact">
-            <span>Discuss Your Challenge</span><b aria-hidden="true">→</b>
+            <span>{PRIMARY_COMMERCIAL_CTA}</span>
           </Link>
         </SectionHeader>
       </div>

@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
+import { PRIMARY_COMMERCIAL_CTA } from "@/lib/cta-labels";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
 import DecisionEngineDashboard from "./DecisionEngineDashboard";
@@ -65,7 +66,7 @@ export default function DecisionAutomationPage() {
           <h1 id="decision-automation-title">A model can recommend.<br />A decision engine can execute.</h1>
           <p className={styles.lead}>Turn data, models, rules and policy into one traceable execution layer that makes consistent business decisions in real time.</p>
           <p className={styles.support}><strong>The decision is only as good as the logic behind it.</strong> Connect data, models, business rules, exceptions and policy into one controlled flow — from input to final decision.</p>
-          <Link className={styles.primaryButton} href="/contact?topic=decision-automation">Discuss Your Decision Architecture <span aria-hidden="true">→</span></Link>
+          <Link className={styles.primaryButton} href="/contact?topic=decision-automation">{PRIMARY_COMMERCIAL_CTA}</Link>
         </div>
         <DecisionEngineDashboard />
       </div></section>
@@ -103,7 +104,7 @@ export default function DecisionAutomationPage() {
         <div className={styles.relatedGrid}>{related.map(([title, copy, href]) => <Link href={href} key={title}><span><strong>{title}</strong><small>{copy}</small></span><b aria-hidden="true">↗</b></Link>)}</div>
       </div></section>
 
-      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>DECISION INTELLIGENCE</span><h2 id="cta-title">Business logic becomes valuable when it can execute.</h2><p>Build a decision engine that turns models, rules and policy into controlled operational decisions.</p><Link className={styles.ctaButton} href="/contact?topic=decision-automation">Discuss Your Decision Architecture <span aria-hidden="true">→</span></Link></div></div></section>
+      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>DECISION INTELLIGENCE</span><h2 id="cta-title">Business logic becomes valuable when it can execute.</h2><p>Build a decision engine that turns models, rules and policy into controlled operational decisions.</p><Link className={styles.ctaButton} href="/contact?topic=decision-automation">{PRIMARY_COMMERCIAL_CTA}</Link></div></div></section>
     </main>
   );
 }

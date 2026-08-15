@@ -235,7 +235,7 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
                   onClick={() => setMobileSolutionsOpen((current) => !current)}
                   type="button"
                 >
-                  <span>SOLUTIONS</span>
+                  <span>Solutions</span>
                   <span aria-hidden="true">{mobileSolutionsOpen ? "−" : "+"}</span>
                 </button>
                 <div className={styles.mobileSolutions} hidden={!mobileSolutionsOpen} id={`${menuId}-mobile-solutions`}>
@@ -253,7 +253,7 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
                   ))}
                 </div>
                 <button aria-controls={`${menuId}-mobile-resources`} aria-expanded={mobileResourcesOpen} className={styles.mobileTopLevel} onClick={() => setMobileResourcesOpen((current) => !current)} type="button">
-                  <span>RESOURCES</span><span aria-hidden="true">{mobileResourcesOpen ? "−" : "+"}</span>
+                  <span>Resources</span><span aria-hidden="true">{mobileResourcesOpen ? "−" : "+"}</span>
                 </button>
                 <div className={styles.mobileResources} hidden={!mobileResourcesOpen} id={`${menuId}-mobile-resources`}>
                   <Link className={styles.mobileResourceDestination} href="/resources" onClick={close}>
@@ -266,10 +266,10 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
                   ))}
                 </div>
                 <Link className={styles.mobileTopLevel} href="/about" onClick={close}>
-                  <span>ABOUT</span><span aria-hidden="true">→</span>
+                  <span>About</span><span aria-hidden="true">→</span>
                 </Link>
                 <Link className={`${styles.mobileTopLevel} ${styles.mobileContact}`} href="/contact" onClick={close}>
-                  <span>CONTACT US</span><span aria-hidden="true">→</span>
+                  <span>Contact us</span><span aria-hidden="true">→</span>
                 </Link>
               </div>
             </>
@@ -320,7 +320,7 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
           {mobile ? (
             <span className={styles.menuIcon} aria-hidden="true"><i /><i /><i /></span>
           ) : (
-            <>SOLUTIONS <span className={styles.chevron} aria-hidden="true" /></>
+            <>Solutions <span className={styles.chevron} aria-hidden="true" /></>
           )}
         </button>
       </div>

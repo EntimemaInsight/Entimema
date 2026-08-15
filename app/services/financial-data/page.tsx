@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { PRIMARY_COMMERCIAL_CTA } from "@/lib/cta-labels";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
 import FinancialDataDashboard from "./FinancialDataDashboard";
@@ -66,7 +67,7 @@ export default function FinancialDataPage() {
           <h1 id="financial-data-title">Financial data analytics starts with trusted data.</h1>
           <p className={styles.lead}>If the numbers don&apos;t reconcile, the decision shouldn&apos;t start yet.</p>
           <p className={styles.support}>Build one reliable financial data foundation across ERP, reporting, planning and analytics — so every decision starts from the same version of the truth.</p>
-          <Link className={styles.primaryButton} href="/contact?topic=financial-data">Discuss Your Financial Data <span aria-hidden="true">→</span></Link>
+          <Link className={styles.primaryButton} href="/contact?topic=financial-data">{PRIMARY_COMMERCIAL_CTA}</Link>
         </div>
         <FinancialDataDashboard />
       </div></section>
@@ -76,7 +77,7 @@ export default function FinancialDataPage() {
       <section className={styles.section} aria-labelledby="outcomes-title"><div className="site-container"><SectionHeader label="WHAT YOU GET" title={<>One financial truth.<br />Across every decision.</>} /><div className={styles.outcomeGrid}>{outcomes.map(([title, copy]) => <article key={title}><span aria-hidden="true">✓</span><div><h3>{title}</h3><p>{copy}</p></div></article>)}</div><aside className={styles.caseExample} aria-labelledby="scenario-title"><div className={styles.caseExampleIntro}><span>ILLUSTRATIVE SCENARIO</span><h3 id="scenario-title">When every report starts with reconciliation, the data architecture is the problem.</h3></div><dl><div><dt>SCENARIO</dt><dd>A manufacturing company pulls financial information from ERP, spreadsheets and operational systems with inconsistent structures and limited traceability.</dd></div><div><dt>ENTIMEMA APPROACH</dt><dd>We connect the sources, define one financial data model and establish validation rules across reporting, planning and analytics.</dd></div><div><dt>RESULT</dt><dd>Management works from a consistent, traceable information foundation ready for reporting, automation and AI. The supporting <Link href="/resources/from-erp-data-to-management-intelligence">ERP-to-management intelligence framework</Link> explains the reconciliation and semantic layers behind that transition.</dd></div></dl></aside></div></section>
       <section className={`${styles.section} ${styles.tinted}`} aria-labelledby="applications-title"><div className="site-container"><SectionHeader label="WHERE IT APPLIES" title="When does financial data become a management problem?" intro={<>If every report needs a different reconciliation, you don&apos;t have a reporting problem.<br />You have a data problem.</>} /><div className={styles.useCaseGrid}>{useCases.map(([title, copy]) => <article key={title}><h3>{title}</h3><p>{copy}</p></article>)}</div></div></section>
       <section className={styles.section} aria-labelledby="related-title"><div className="site-container"><SectionHeader label="NEXT STEP" title="Related services" /><div className={styles.relatedGrid}>{related.map(([title, copy, href]) => <Link href={href} key={title}><span><strong>{title}</strong><small>{copy}</small></span><b aria-hidden="true">↗</b></Link>)}</div></div></section>
-      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>FINANCIAL DATA</span><h2 id="cta-title">Your financial system is only as reliable as the data underneath it.</h2><p>Build one trusted data foundation for reporting, planning, analysis and AI.</p><Link className={styles.ctaButton} href="/contact?topic=financial-data">Discuss Your Financial Data <span aria-hidden="true">→</span></Link></div></div></section>
+      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>FINANCIAL DATA</span><h2 id="cta-title">Your financial system is only as reliable as the data underneath it.</h2><p>Build one trusted data foundation for reporting, planning, analysis and AI.</p><Link className={styles.ctaButton} href="/contact?topic=financial-data">{PRIMARY_COMMERCIAL_CTA}</Link></div></div></section>
     </main>
   );
 }

@@ -5,6 +5,7 @@ import { useState } from "react";
 import ResourceCard from "./ResourceCard";
 import { getTopic, publishedResources, resourceTopics } from "./resource-data";
 import styles from "./resources.module.css";
+import { NEWSLETTER_CTA } from "@/lib/cta-labels";
 
 export default function ResourcesDiscovery({ initialTopic }: { initialTopic?: string }) {
   const [query, setQuery] = useState("");
@@ -21,7 +22,7 @@ export default function ResourcesDiscovery({ initialTopic }: { initialTopic?: st
       <header className={styles.indexHero}><div className={styles.wideContainer}>
         <h1>Decisions rarely fail<br /><em>for lack of data.</em></h1>
         <p className={styles.tensionLine}>They fail when the signal is buried in it.</p>
-        <Link className={styles.newsletterCta} href="/newsletter"><span>Subscribe to our newsletter</span><b aria-hidden="true">→</b></Link>
+        <Link className={styles.newsletterCta} href="/newsletter"><span>{NEWSLETTER_CTA}</span></Link>
       </div></header>
 
       <section className={styles.discovery} aria-label="Find research"><div className={styles.wideContainer}>

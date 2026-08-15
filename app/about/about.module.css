@@ -383,6 +383,7 @@
 .conversation a {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: .75rem;
   min-height: 44px;
   margin-top: var(--about-space-heading-copy);
@@ -394,6 +395,7 @@
   font-weight: 600;
   letter-spacing: -.01em;
   text-decoration: none;
+  text-align: center;
   text-transform: none;
 }
 .conversation a span { transition: transform 220ms cubic-bezier(.22,1,.36,1); }

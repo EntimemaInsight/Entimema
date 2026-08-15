@@ -104,5 +104,5 @@ export default function ResourcesMegaMenu({ active = false }: { active?: boolean
     document.body,
   ) : null;
 
-  return <><div className={styles.root} ref={rootRef}><button aria-controls={menuId} aria-current={active ? "page" : undefined} aria-expanded={open} aria-haspopup="true" className={`${styles.trigger} ${active ? styles.active : ""}`} onClick={() => { if (open) hide(); else show(); }} ref={triggerRef} type="button">RESOURCES <span aria-hidden="true" /></button></div>{portal}</>;
+  return <><div className={styles.root} ref={rootRef}><button aria-controls={menuId} aria-current={active ? "page" : undefined} aria-expanded={open} aria-haspopup="true" className={`${styles.trigger} ${active ? styles.active : ""}`} onClick={() => { if (open) hide(); else show(); }} ref={triggerRef} type="button">Resources <span aria-hidden="true" /></button></div>{portal}</>;
 }

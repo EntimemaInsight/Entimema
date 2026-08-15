@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { PRIMARY_COMMERCIAL_CTA } from "@/lib/cta-labels";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
 import PlanningDashboard from "./PlanningDashboard";
@@ -61,7 +62,7 @@ export default function BudgetsAndForecastingPage() {
           <h1 id="budgets-title">A budget is a snapshot.</h1>
           <p className={styles.lead}>Your business isn&apos;t.</p>
           <p className={styles.support}>Build a planning system that moves with the business — connecting operational drivers, financial outcomes and cash before reality makes the plan obsolete.</p>
-          <Link className={styles.primaryButton} href="/contact?topic=budgets-and-forecasting">Discuss Your Planning System <span aria-hidden="true">→</span></Link>
+          <Link className={styles.primaryButton} href="/contact?topic=budgets-and-forecasting">{PRIMARY_COMMERCIAL_CTA}</Link>
         </div>
         <PlanningDashboard />
       </div></section>
@@ -99,7 +100,7 @@ export default function BudgetsAndForecastingPage() {
         <div className={styles.relatedGrid}>{related.map(([title, copy, href]) => <Link href={href} key={title}><span><strong>{title}</strong><small>{copy}</small></span><b aria-hidden="true">↗</b></Link>)}</div>
       </div></section>
 
-      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>PLANNING &amp; FORECASTING</span><h2 id="cta-title">Your forecast should change before the business forces it to.</h2><p>Build a planning system around the drivers, scenarios and cash decisions that matter now.</p><Link className={styles.ctaButton} href="/contact?topic=budgets-and-forecasting">Discuss Your Planning System <span aria-hidden="true">→</span></Link></div></div></section>
+      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>PLANNING &amp; FORECASTING</span><h2 id="cta-title">Your forecast should change before the business forces it to.</h2><p>Build a planning system around the drivers, scenarios and cash decisions that matter now.</p><Link className={styles.ctaButton} href="/contact?topic=budgets-and-forecasting">{PRIMARY_COMMERCIAL_CTA}</Link></div></div></section>
     </main>
   );
 }

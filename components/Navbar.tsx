@@ -32,14 +32,14 @@ export default function Navbar({ active = "home" }: { active?: NavKey }) {
             href="/about"
             aria-current={active === "about" ? "page" : undefined}
           >
-            ABOUT
+            About
           </Link>
         </nav>
 
         <div className="site-header__actions">
           <WhatWeDoMegaMenu active={active === "services"} mobile />
           <Link className="primary-cta primary-cta--compact header-cta" href="/contact">
-            CONTACT US <span aria-hidden="true">→</span>
+            Contact us
           </Link>
         </div>
       </div>
