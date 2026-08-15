@@ -1,11 +1,13 @@
 "use client";
 
 import { FormEvent, useEffect, useRef, useState } from "react";
-import { clientInquiryTypes, isTopicKey, partnershipTypes, problemAreaForTopic, topicOptions } from "./contact-config";
+import { clientInquiryTypes, isTopicKey, partnershipTypes } from "./contact-config";
 import styles from "./contact.module.css";
 import { ANALYTICS_READY_EVENT, previousInternalPath, trackAnalyticsEvent } from "@/lib/analytics";
+import { useSalesModal } from "@/components/DemoDiscovery";
 
 type Intent = "project" | "partnership" | "client";
+type InlineIntent = Exclude<Intent, "project">;
 type IconProps = { className?: string };
 
 function ProjectIcon({ className }: IconProps) {
@@ -21,17 +23,12 @@ function ClientIcon({ className }: IconProps) {
 }
 
 const paths = [
-  { intent: "project" as const, title: "New Project", Icon: ProjectIcon },
+  { intent: "project" as const, title: "Start with a problem", Icon: ProjectIcon },
   { intent: "partnership" as const, title: "Partnerships", Icon: PartnershipIcon },
   { intent: "client" as const, title: "Existing Clients", Icon: ClientIcon },
 ];
 
 const formContent = {
-  project: {
-    heading: "Tell us about your project",
-    copy: "Briefly describe the context and the problem you want to solve. We will contact you to discuss the appropriate next step.",
-    submit: "Send inquiry",
-  },
   partnership: {
     heading: "Propose a partnership",
     copy: "Tell us briefly about your organisation and how you see an opportunity to work together.",
@@ -46,14 +43,22 @@ const formContent = {
 
 export default function ContactExperience({ initialTopic }: { initialTopic?: string }) {
   const validTopic = initialTopic && isTopicKey(initialTopic) ? initialTopic : undefined;
-  const [intent, setIntent] = useState<Intent | null>(validTopic ? "project" : null);
+  const [intent, setIntent] = useState<InlineIntent | null>(null);
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const openSales = useSalesModal();
+  const openedInitialTopic = useRef(false);
   const panelHeading = useRef<HTMLHeadingElement>(null);
   const triggerRefs = useRef<Record<Intent, HTMLButtonElement | null>>({ project: null, partnership: null, client: null });
 
   useEffect(() => {
     if (intent) panelHeading.current?.focus();
   }, [intent]);
+
+  useEffect(() => {
+    if (!validTopic || openedInitialTopic.current || !triggerRefs.current.project) return;
+    openedInitialTopic.current = true;
+    openSales(triggerRefs.current.project, validTopic);
+  }, [openSales, validTopic]);
 
   useEffect(() => {
     let sent = false;
@@ -68,7 +73,7 @@ export default function ContactExperience({ initialTopic }: { initialTopic?: str
     return () => window.removeEventListener(ANALYTICS_READY_EVENT, send);
   }, []);
 
-  function openForm(nextIntent: Intent) {
+  function openForm(nextIntent: InlineIntent) {
     setStatus("idle");
     setIntent(nextIntent);
   }
@@ -87,10 +92,6 @@ export default function ContactExperience({ initialTopic }: { initialTopic?: str
     if (!form.reportValidity()) return;
     setStatus("sending");
     const payload = Object.fromEntries(new FormData(form).entries());
-    if (payload.intent === "project") {
-      const selectedTopic = typeof payload.topicName === "string" && payload.topicName ? payload.topicName : validTopic;
-      payload.problemArea = problemAreaForTopic(selectedTopic);
-    }
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
@@ -115,10 +116,11 @@ export default function ContactExperience({ initialTopic }: { initialTopic?: str
       <div className={styles.paths} aria-label="Inquiry type">
         {paths.map(({ intent: pathIntent, title, Icon }) => (
           <button
-            aria-expanded={intent === pathIntent}
+            aria-expanded={pathIntent === "project" ? undefined : intent === pathIntent}
+            aria-haspopup={pathIntent === "project" ? "dialog" : undefined}
             className={styles.path}
             key={pathIntent}
-            onClick={() => openForm(pathIntent)}
+            onClick={(event) => pathIntent === "project" ? openSales(event.currentTarget, validTopic) : openForm(pathIntent)}
             ref={(element) => { triggerRefs.current[pathIntent] = element; }}
             type="button"
           >
@@ -149,14 +151,11 @@ export default function ContactExperience({ initialTopic }: { initialTopic?: str
                 <div className={styles.honeypot} aria-hidden="true"><label htmlFor="website">Website</label><input autoComplete="off" id="website" name="website" tabIndex={-1} /></div>
                 <Field id="name" label="Name" required />
                 <Field id="email" label="Work email" required type="email" />
-                <Field id="company" label="Company" required={intent !== "project"} />
+                <Field id="company" label="Company" required />
                 {intent !== "client" && <Field id="role" label="Role" />}
-                {intent === "project" && (
-                  <label className={styles.field} htmlFor="topicName"><span>Topic or service</span><select defaultValue={validTopic ?? ""} id="topicName" name="topicName"><option value="">Select a topic</option>{Object.entries(topicOptions).map(([key, label]) => <option key={key} value={key}>{label}</option>)}</select></label>
-                )}
                 {intent === "partnership" && <SelectField id="partnershipType" label="Partnership type" options={partnershipTypes} />}
                 {intent === "client" && <><Field id="project" label="Project or service" /><SelectField id="inquiryType" label="Inquiry type" options={clientInquiryTypes} /></>}
-                <label className={`${styles.field} ${styles.fullWidth}`} htmlFor="message"><span>{intent === "project" ? "What problem do you want to solve?" : intent === "partnership" ? "Briefly describe your proposal" : "Description"} *</span><textarea id="message" maxLength={4000} name="message" required rows={6} /></label>
+                <label className={`${styles.field} ${styles.fullWidth}`} htmlFor="message"><span>{intent === "partnership" ? "Briefly describe your proposal" : "Description"} *</span><textarea id="message" maxLength={4000} name="message" required rows={6} /></label>
                 <p className={styles.privacy}>We use the information provided only to respond to your inquiry.</p>
                 {status === "error" && <p className={styles.error} role="alert">We could not send your inquiry. Try again or email us at <a href="mailto:office@entimema.net">office@entimema.net</a>.</p>}
                 <button className={styles.submitButton} disabled={status === "sending"} type="submit">{status === "sending" ? "Sending…" : formContent[intent].submit}</button>
