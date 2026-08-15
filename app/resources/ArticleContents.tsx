@@ -10,8 +10,8 @@ function ContentsList({ sections, activeId, onNavigate }: { sections: ArticleSec
       {sections.map((section, index) => (
         <li key={section.id}>
           <a href={`#${section.id}`} aria-current={activeId === section.id ? "location" : undefined} onClick={onNavigate}>
-            <span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
-            {section.label}
+            <span className={styles.tocNumber} aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+            <span className={styles.tocLabel}>{section.label}</span>
           </a>
         </li>
       ))}
