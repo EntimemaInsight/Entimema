@@ -3,7 +3,7 @@ import { clientInquiryTypes, isTopicKey, partnershipTypes, problemAreaForTopic, 
 
 const allowedPartnershipTypes = new Set<string>(partnershipTypes);
 const allowedInquiryTypes = new Set<string>(clientInquiryTypes);
-const allowedKeys = new Set(["intent", "topic", "topicName", "problemArea", "name", "firstName", "lastName", "email", "companyEmail", "company", "companyName", "country", "phone", "phoneNumber", "referralSource", "marketingConsent", "role", "jobTitle", "partnershipType", "project", "inquiryType", "message", "website"]);
+const allowedKeys = new Set(["intent", "topic", "topicName", "problemArea", "firstName", "lastName", "email", "companyEmail", "company", "companyName", "country", "phone", "phoneNumber", "referralSource", "marketingConsent", "role", "jobTitle", "partnershipType", "project", "inquiryType", "message", "website"]);
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function text(value: unknown, max: number) {
@@ -35,7 +35,6 @@ export async function POST(request: Request) {
   if (text(body.website, 200)) return Response.json({ ok: true });
 
   const intent = text(body.intent, 20);
-  const name = text(body.name, 160);
   const firstName = text(body.firstName, 80);
   const lastName = text(body.lastName, 80);
   const email = text(body.email, 254);
@@ -55,7 +54,7 @@ export async function POST(request: Request) {
   const jobTitle = text(body.jobTitle, 160);
   const phoneNumber = text(body.phoneNumber, 80);
 
-  if (!intent || (intent !== "project" && (!email || !emailPattern.test(email)))) return Response.json({ ok: false }, { status: 400 });
+  if (!intent || (intent === "demo" && (!email || !emailPattern.test(email)))) return Response.json({ ok: false }, { status: 400 });
   if (topic && !isTopicKey(topic)) return Response.json({ ok: false }, { status: 400 });
 
   let subject: string;
@@ -71,18 +70,18 @@ export async function POST(request: Request) {
     subject = `[Entimema] New project${selectedTopic ? ` — ${selectedTopic}` : ""}`;
     html = row("Type", "Sales / Start with a problem") + row("Problem area", selectedProblemArea) + row("Topic / service", selectedTopic) + row("First name", firstName) + row("Last name", lastName) + row("E-mail", companyEmail) + row("Company", companyName) + row("Country", country) + row("Job title", jobTitle) + row("Phone number", phoneNumber) + row("How did you hear about Entimema?", referralSource) + row("Marketing communications consent", marketingConsent === "yes" ? "Yes" : "No") + row("Problem / context", message);
   } else if (intent === "partnership") {
-    if (!name || !message || !company || !partnershipType || !allowedPartnershipTypes.has(partnershipType)) return Response.json({ ok: false }, { status: 400 });
-    subject = `[Entimema] Partnership — ${company}`;
-    html = row("Type", "Partnership") + row("Name", name) + row("E-mail", email) + row("Company", company) + row("Role", role) + row("Partnership type", partnershipType) + row("Proposal", message);
+    if (!firstName || !lastName || !companyEmail || !emailPattern.test(companyEmail) || !companyName || !country || !jobTitle || !phoneNumber || !message || !partnershipType || !allowedPartnershipTypes.has(partnershipType) || (marketingConsent && marketingConsent !== "yes")) return Response.json({ ok: false }, { status: 400 });
+    subject = `[Entimema] Partnership — ${companyName}`;
+    html = row("Type", "Partnership") + row("First name", firstName) + row("Last name", lastName) + row("E-mail", companyEmail) + row("Company", companyName) + row("Country", country) + row("Job title", jobTitle) + row("Phone number", phoneNumber) + row("How did you hear about Entimema?", referralSource) + row("Marketing communications consent", marketingConsent === "yes" ? "Yes" : "No") + row("Partnership type", partnershipType) + row("Proposal", message);
   } else if (intent === "client") {
-    if (!name || !message || !company || !inquiryType || !allowedInquiryTypes.has(inquiryType)) return Response.json({ ok: false }, { status: 400 });
+    if (!firstName || !lastName || !companyEmail || !emailPattern.test(companyEmail) || !companyName || !phoneNumber || !message || !inquiryType || !allowedInquiryTypes.has(inquiryType)) return Response.json({ ok: false }, { status: 400 });
     subject = `[Entimema] Existing client — ${inquiryType}`;
-    html = row("Type", "Existing client") + row("Name", name) + row("E-mail", email) + row("Company", company) + row("Project / service", project) + row("Inquiry type", inquiryType) + row("Description", message);
+    html = row("Type", "Existing client") + row("First name", firstName) + row("Last name", lastName) + row("E-mail", companyEmail) + row("Company", companyName) + row("Phone number", phoneNumber) + row("Project / service", project) + row("Inquiry type", inquiryType) + row("Description", message);
   } else {
     return Response.json({ ok: false }, { status: 400 });
   }
 
-  const replyTo = intent === "project" ? companyEmail : email;
+  const replyTo = intent === "project" || intent === "partnership" || intent === "client" ? companyEmail : email;
   if (!replyTo) return Response.json({ ok: false }, { status: 400 });
 
   const apiKey = process.env.RESEND_API_KEY;

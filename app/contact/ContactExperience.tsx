@@ -1,13 +1,12 @@
 "use client";
 
-import { FormEvent, useEffect, useRef, useState } from "react";
-import { clientInquiryTypes, isTopicKey, partnershipTypes } from "./contact-config";
+import { useEffect, useRef } from "react";
+import { isTopicKey } from "./contact-config";
 import styles from "./contact.module.css";
 import { ANALYTICS_READY_EVENT, previousInternalPath, trackAnalyticsEvent } from "@/lib/analytics";
-import { useSalesModal } from "@/components/DemoDiscovery";
+import { useContactModal } from "@/components/DemoDiscovery";
 
 type Intent = "project" | "partnership" | "client";
-type InlineIntent = Exclude<Intent, "project">;
 type IconProps = { className?: string };
 
 function ProjectIcon({ className }: IconProps) {
@@ -28,37 +27,17 @@ const paths = [
   { intent: "client" as const, title: "Existing Clients", Icon: ClientIcon },
 ];
 
-const formContent = {
-  partnership: {
-    heading: "Propose a partnership",
-    copy: "Tell us briefly about your organisation and how you see an opportunity to work together.",
-    submit: "Send proposal",
-  },
-  client: {
-    heading: "Existing project inquiry",
-    copy: "For questions, changes and support related to active Entimema projects and solutions.",
-    submit: "Send inquiry",
-  },
-};
-
 export default function ContactExperience({ initialTopic }: { initialTopic?: string }) {
   const validTopic = initialTopic && isTopicKey(initialTopic) ? initialTopic : undefined;
-  const [intent, setIntent] = useState<InlineIntent | null>(null);
-  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
-  const openSales = useSalesModal();
+  const openContact = useContactModal();
   const openedInitialTopic = useRef(false);
-  const panelHeading = useRef<HTMLHeadingElement>(null);
   const triggerRefs = useRef<Record<Intent, HTMLButtonElement | null>>({ project: null, partnership: null, client: null });
-
-  useEffect(() => {
-    if (intent) panelHeading.current?.focus();
-  }, [intent]);
 
   useEffect(() => {
     if (!validTopic || openedInitialTopic.current || !triggerRefs.current.project) return;
     openedInitialTopic.current = true;
-    openSales(triggerRefs.current.project, validTopic);
-  }, [openSales, validTopic]);
+    openContact("project", triggerRefs.current.project, validTopic);
+  }, [openContact, validTopic]);
 
   useEffect(() => {
     let sent = false;
@@ -73,54 +52,15 @@ export default function ContactExperience({ initialTopic }: { initialTopic?: str
     return () => window.removeEventListener(ANALYTICS_READY_EVENT, send);
   }, []);
 
-  function openForm(nextIntent: InlineIntent) {
-    setStatus("idle");
-    setIntent(nextIntent);
-  }
-
-  function closeForm() {
-    const previousIntent = intent;
-    setIntent(null);
-    setStatus("idle");
-    if (previousIntent) requestAnimationFrame(() => triggerRefs.current[previousIntent]?.focus());
-  }
-
-  async function submitForm(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    if (status === "sending" || !intent) return;
-    const form = event.currentTarget;
-    if (!form.reportValidity()) return;
-    setStatus("sending");
-    const payload = Object.fromEntries(new FormData(form).entries());
-    try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-      if (response.ok) {
-        setStatus("success");
-        if (response.headers.get("X-Entimema-Submission") === "accepted") {
-          trackAnalyticsEvent("contact_submit_success", { inquiry_type: intent });
-        }
-      } else {
-        setStatus("error");
-      }
-    } catch {
-      setStatus("error");
-    }
-  }
-
   return (
     <>
       <div className={styles.paths} aria-label="Inquiry type">
         {paths.map(({ intent: pathIntent, title, Icon }) => (
           <button
-            aria-expanded={pathIntent === "project" ? undefined : intent === pathIntent}
-            aria-haspopup={pathIntent === "project" ? "dialog" : undefined}
+            aria-haspopup="dialog"
             className={styles.path}
             key={pathIntent}
-            onClick={(event) => pathIntent === "project" ? openSales(event.currentTarget, validTopic) : openForm(pathIntent)}
+            onClick={(event) => openContact(pathIntent, event.currentTarget, validTopic)}
             ref={(element) => { triggerRefs.current[pathIntent] = element; }}
             type="button"
           >
@@ -130,49 +70,7 @@ export default function ContactExperience({ initialTopic }: { initialTopic?: str
         ))}
       </div>
 
-      {intent && (
-        <section className={styles.formPanel} aria-labelledby="inquiry-heading">
-          <button aria-label="Close form" className={styles.closeButton} onClick={closeForm} type="button">×</button>
-          {status === "success" ? (
-            <div className={styles.result} aria-live="polite">
-              <h2 id="inquiry-heading" ref={panelHeading} tabIndex={-1}>Thank you.</h2>
-              <p>We received your inquiry. We will review it and contact you about the next step.</p>
-            </div>
-          ) : (
-            <>
-              <header className={styles.formHeader}>
-                <h2 id="inquiry-heading" ref={panelHeading} tabIndex={-1}>{formContent[intent].heading}</h2>
-                <p>{formContent[intent].copy}</p>
-              </header>
-              <form className={styles.form} onSubmit={submitForm}>
-                <input name="intent" type="hidden" value={intent} />
-                <input name="topic" type="hidden" value={validTopic ?? ""} />
-                <div className={styles.honeypot} aria-hidden="true"><label htmlFor="website">Website</label><input autoComplete="off" id="website" name="website" tabIndex={-1} /></div>
-                <Field id="name" label="Name" required />
-                <Field id="email" label="Work email" required type="email" />
-                <Field id="company" label="Company" required />
-                {intent !== "client" && <Field id="role" label="Role" />}
-                {intent === "partnership" && <SelectField id="partnershipType" label="Partnership type" options={partnershipTypes} />}
-                {intent === "client" && <><Field id="project" label="Project or service" /><SelectField id="inquiryType" label="Inquiry type" options={clientInquiryTypes} /></>}
-                <label className={`${styles.field} ${styles.fullWidth}`} htmlFor="message"><span>{intent === "partnership" ? "Briefly describe your proposal" : "Description"} *</span><textarea id="message" maxLength={4000} name="message" required rows={6} /></label>
-                <p className={styles.privacy}>We use the information provided only to respond to your inquiry.</p>
-                {status === "error" && <p className={styles.error} role="alert">We could not send your inquiry. Try again or email us at <a href="mailto:office@entimema.net">office@entimema.net</a>.</p>}
-                <button className={styles.submitButton} disabled={status === "sending"} type="submit">{status === "sending" ? "Sending…" : formContent[intent].submit}</button>
-              </form>
-            </>
-          )}
-        </section>
-      )}
-
       <p className={styles.emailFallback}>Prefer email? Write to us at <a href="mailto:office@entimema.net">office@entimema.net</a>.</p>
     </>
   );
-}
-
-function Field({ id, label, required = false, type = "text" }: { id: string; label: string; required?: boolean; type?: string }) {
-  return <label className={styles.field} htmlFor={id}><span>{label}{required ? " *" : ""}</span><input id={id} maxLength={id === "email" ? 254 : 160} name={id} required={required} type={type} /></label>;
-}
-
-function SelectField({ id, label, options }: { id: string; label: string; options: readonly string[] }) {
-  return <label className={styles.field} htmlFor={id}><span>{label} *</span><select defaultValue="" id={id} name={id} required><option disabled value="">Select</option>{options.map((option) => <option key={option} value={option}>{option}</option>)}</select></label>;
 }
