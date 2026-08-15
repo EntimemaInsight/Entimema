@@ -76,6 +76,7 @@
   position: relative;
   min-height: 440px;
   overflow: hidden;
+  border-radius: 8px;
   background: #eef3f6;
   isolation: isolate;
   transition: opacity .6s ease;
