@@ -13,7 +13,7 @@ export default function ResourceCard({ resource }: { resource: ResourceRecord & 
         <ResourceCover cover={resource.cover} />
         <div className={styles.cardMeta}><span>{getTopic(resource.topic)?.label}</span><span>{resource.readingMinutes} MIN READ</span></div>
         <h3><ResourceSemanticText text={resource.headline} emphasis={resource.headlineEmphasis} className={styles.headlineEmphasis} /></h3>
-        <p><ResourceSemanticText text={resource.slogan} emphasis={resource.sloganEmphasis} className={styles.sloganEmphasis} /></p>
+        <p>{resource.slogan}</p>
         <div className={styles.cardFooter}><time dateTime={resource.publishedAt}>{formatDate(resource.publishedAt)}</time></div>
       </Link>
     </article>
