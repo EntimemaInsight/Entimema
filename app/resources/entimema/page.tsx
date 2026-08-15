@@ -46,15 +46,15 @@ export default function EntimemaPublicationPage() {
           <div className={resourceStyles.resourceGrid}>
             {publishedResources.map((resource) => (
               <article className={resourceStyles.resourceCard} key={resource.slug}>
-                <Link className={resourceStyles.coverLink} href={resource.canonicalPath} aria-label={`Read ${resource.title}`}>
+                <Link className={resourceStyles.coverLink} href={resource.canonicalPath} aria-label={`Read ${resource.headline}`}>
                   <ResourceCover cover={resource.cover} />
                 </Link>
                 <div className={resourceStyles.cardMeta}>
                   <span>{getTopic(resource.topic)?.label}</span>
                   <span>{resource.readingMinutes} MIN READ</span>
                 </div>
-                <h3><Link href={resource.canonicalPath}>{resource.title}</Link></h3>
-                <p>{resource.deck}</p>
+                <h3><Link href={resource.canonicalPath}>{resource.headline}</Link></h3>
+                <p>{resource.slogan}</p>
                 <div className={resourceStyles.cardFooter}>
                   <time dateTime={resource.publishedAt}>{formatDate(resource.publishedAt)}</time>
                   <Link href={resource.canonicalPath}>Read analysis <b aria-hidden="true">→</b></Link>

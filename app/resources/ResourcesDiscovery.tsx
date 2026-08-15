@@ -10,9 +10,9 @@ const formatDate = (publishedAt: string) => new Intl.DateTimeFormat("en-GB", { d
 
 function ResourceCard({ resource }: { resource: ResourceRecord & { publishedAt: string } }) {
   return <article className={styles.resourceCard}>
-    <Link className={styles.coverLink} href={resource.canonicalPath} aria-label={`Read ${resource.title}`}><ResourceCover cover={resource.cover} /></Link>
+    <Link className={styles.coverLink} href={resource.canonicalPath} aria-label={`Read ${resource.headline}`}><ResourceCover cover={resource.cover} /></Link>
     <div className={styles.cardMeta}><span>{getTopic(resource.topic)?.label}</span><span>{resource.readingMinutes} MIN READ</span></div>
-    <h3><Link href={resource.canonicalPath}>{resource.title}</Link></h3><p>{resource.deck}</p>
+    <h3><Link href={resource.canonicalPath}>{resource.headline}</Link></h3><p>{resource.slogan}</p>
     <div className={styles.cardFooter}><time dateTime={resource.publishedAt}>{formatDate(resource.publishedAt)}</time><Link href={resource.canonicalPath}>Read analysis <b aria-hidden="true">→</b></Link></div>
   </article>;
 }
@@ -24,7 +24,7 @@ export default function ResourcesDiscovery({ initialTopic }: { initialTopic?: st
   const search = query.trim().toLocaleLowerCase();
   const matches = publishedResources.filter((resource) => {
     const category = getTopic(resource.topic)?.label ?? "";
-    return (!topic || resource.topic === topic) && (!search || [resource.title, resource.deck, category].some((value) => value.toLocaleLowerCase().includes(search)));
+    return (!topic || resource.topic === topic) && (!search || [resource.technicalTitle, resource.headline, resource.slogan, category].some((value) => value.toLocaleLowerCase().includes(search)));
   });
 
   return <>

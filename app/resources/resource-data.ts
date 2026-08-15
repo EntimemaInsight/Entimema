@@ -63,10 +63,23 @@ export type RelatedCapability = {
   description: string;
 };
 
+/**
+ * Resource editorial standard:
+ * - `technicalTitle` preserves the subject's stable technical and SEO identity.
+ * - `headline` creates analytical tension and implies a change in understanding.
+ * - `slogan` develops that tension through a mechanism to its decision value.
+ *
+ * New Resources must define all three layers; an expressive headline never replaces
+ * the technical terminology carried by search, metadata, headings and body content.
+ */
 export type ResourceRecord = {
-  title: string;
+  /** Stable technical identity used for search, SEO alignment and topical architecture. */
+  technicalTitle: string;
+  /** Editorial H1: introduces a tension and implies a transformation in understanding. */
+  headline: string;
   slug: string;
-  deck: string;
+  /** Supporting slogan: connects the tension to an analytical mechanism and decision value. */
+  slogan: string;
   author: ResourceAuthor;
   publishedAt?: string;
   updatedAt?: string;
@@ -97,9 +110,10 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
-    title: "Building a Manufacturing Cost Architecture",
+    technicalTitle: "Manufacturing Cost Architecture",
+    headline: "When Manufacturing Cost Stops Explaining the Business",
     slug: "building-a-manufacturing-cost-architecture",
-    deck: "Manufacturing cost becomes decision-useful when accounting values can be connected to production stages, economic drivers and management decisions.",
+    slogan: "Manufacturing cost becomes decision-useful when accounting values are connected to production stages, economic drivers and management decisions.",
     author: authors.aleksandar,
     publishedAt: "2026-08-11",
     readingMinutes: 12,
@@ -129,9 +143,10 @@ export const resources: ResourceRecord[] = [
     },
   },
   {
-    title: "Working Capital as a System",
+    technicalTitle: "Working Capital Management",
+    headline: "Working Capital Is an Operating System, Not a Balance-Sheet Number",
     slug: "working-capital-as-a-system",
-    deck: "Working capital is the financial expression of operating processes: how commercial, inventory and supplier decisions become cash and financing requirements.",
+    slogan: "Receivables, inventory and payables reveal their cash and financing consequences only when KPI movements are traced through operating drivers, process owners and responsible actions.",
     author: authors.aleksandar,
     publishedAt: "2026-08-11",
     readingMinutes: 12,
@@ -150,9 +165,10 @@ export const resources: ResourceRecord[] = [
     cover: { type: "editorial-artwork", src: "/resources/covers/working-capital-system.png", motion: "none", alt: "Editorial artwork for Working Capital as a System showing a continuous translucent glass sculpture representing liquidity and operating flow.", stages: ["Receivables", "Inventory", "Payables", "Cash", "Financing", "Decision"] },
   },
   {
-    title: "Operational-Driver Forecasting",
+    technicalTitle: "Operational-Driver Forecasting",
+    headline: "A Forecast Can Balance and Still Misread the Business",
     slug: "operational-driver-forecasting",
-    deck: "Financial forecasts become more decision-useful when outcomes can be traced back to the operating assumptions, business relationships and constraints that created them.",
+    slogan: "Tracing operating drivers, constraints and financial relationships through the P&L, balance sheet and cash flow turns a coherent projection into a model management can interrogate.",
     author: authors.aleksandar,
     publishedAt: "2026-08-11",
     readingMinutes: 12,
@@ -171,9 +187,10 @@ export const resources: ResourceRecord[] = [
     cover: { type: "editorial-artwork", src: "/resources/covers/operational-driver-forecasting.png", motion: "none", alt: "Editorial artwork for Operational-Driver Forecasting showing multiple luminous future trajectories across a cinematic landscape.", stages: ["Drivers", "Business model", "P&L / BS / Cash", "Scenario", "Decision"] },
   },
   {
-    title: "Credit Vintage Analysis",
+    technicalTitle: "Credit Vintage Analysis",
+    headline: "The Portfolio Average Can Hide the Risk Already Emerging",
     slug: "credit-vintage-analysis",
-    deck: "Portfolio averages describe the book today; vintage analysis reveals how origination cohorts develop at comparable stages of credit age.",
+    slogan: "Aligning origination cohorts by credit age exposes vintage divergence early, while segmentation and validation determine whether the signal warrants a credit-policy response.",
     author: authors.aleksandar,
     publishedAt: "2026-08-11",
     readingMinutes: 12,
@@ -192,8 +209,8 @@ export const resources: ResourceRecord[] = [
     cover: { type: "editorial-artwork", src: "/resources/covers/credit-vintage-analysis.png", motion: "none", alt: "Editorial artwork for Credit Vintage Analysis showing layered credit vintage performance panels evolving through time.", stages: ["Cohort", "Credit age", "Performance", "Signal", "Decision"] },
   },
   {
-    title:"From ERP Data to Management Intelligence",slug:"from-erp-data-to-management-intelligence",
-    deck:"ERP data becomes decision-useful only after transactions are reconciled, given consistent business meaning and connected to analytical models and management decisions.",
+    technicalTitle:"ERP Data and Management Intelligence",headline:"ERP Records the Business. It Does Not Explain It.",slug:"from-erp-data-to-management-intelligence",
+    slogan:"Reconciliation and consistent business semantics connect technical transactions to analytical models, giving management evidence it can use without confusing system accuracy with decision completeness.",
     author:authors.aleksandar,publishedAt:"2026-08-11",readingMinutes:12,topic:"financial-data-and-erp",stream:"insights",featured:false,
     seoTitle:"From ERP Data to Management Intelligence | Entimema",
     metaDescription:"A practitioner framework connecting ERP transactions, reconciliation, business semantics, analytical models and management decisions.",
@@ -237,13 +254,13 @@ export function getTopic(topic: ResourceTopicSlug) {
 export function getPublishedRelatedResources(resource: ResourceRecord) {
   const curatedOrder = new Map(resource.relatedResourceSlugs.map((slug, index) => [slug, index]));
   const topicDescription = getTopic(resource.topic)?.description ?? "";
-  const sourceTerms = getRecommendationTerms(`${resource.title} ${resource.deck} ${topicDescription}`);
+  const sourceTerms = getRecommendationTerms(`${resource.technicalTitle} ${resource.headline} ${resource.slogan} ${topicDescription}`);
 
   return publishedResources
     .filter((candidate) => candidate.slug !== resource.slug)
     .map((candidate, index) => {
       const candidateTopic = getTopic(candidate.topic)?.description ?? "";
-      const candidateTerms = getRecommendationTerms(`${candidate.title} ${candidate.deck} ${candidateTopic}`);
+      const candidateTerms = getRecommendationTerms(`${candidate.technicalTitle} ${candidate.headline} ${candidate.slogan} ${candidateTopic}`);
       const sharedTerms = [...sourceTerms].filter((term) => candidateTerms.has(term)).length;
       const curatedIndex = curatedOrder.get(candidate.slug);
       const score = (curatedIndex === undefined ? 0 : 100 - curatedIndex)

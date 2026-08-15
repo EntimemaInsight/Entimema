@@ -20,13 +20,13 @@ export default function ResourceArticle({ resource, sections, children }: { reso
     <main className="site-page">
       <AnnouncementBar />
       <Navbar active="resources" />
-      <ResourceViewAnalytics resourceSlug={resource.slug} resourceTitle={resource.title} resourceTopic={topic?.label ?? resource.topic} />
+      <ResourceViewAnalytics resourceSlug={resource.slug} resourceTitle={resource.headline} resourceTopic={topic?.label ?? resource.topic} />
       <article className={styles.article}>
         <header className={styles.articleHeader}>
           <div className={styles.readingContainer}>
             <div className={styles.articleMeta}><span>{topic?.label}</span><span>{resource.readingMinutes} min read</span></div>
-            <h1>{resource.title}</h1>
-            <p className={styles.deck}>{resource.deck}</p>
+            <h1>{resource.headline}</h1>
+            <p className={styles.deck}>{resource.slogan}</p>
             <div className={styles.publicationIdentity}>
               <Link className={styles.publicationLink} href="/resources/entimema" aria-label="Entimema publication profile">
                 <BrandLogo compact />
@@ -53,12 +53,12 @@ export default function ResourceArticle({ resource, sections, children }: { reso
 
               return (
                 <article className={styles.resourceCard} key={relatedResource.slug}>
-                  <Link className={styles.coverLink} href={relatedResource.canonicalPath} aria-label={`Read ${relatedResource.title}`}>
+                  <Link className={styles.coverLink} href={relatedResource.canonicalPath} aria-label={`Read ${relatedResource.headline}`}>
                     <ResourceCover cover={relatedResource.cover} />
                   </Link>
                   <div className={styles.cardMeta}><span>{relatedTopic?.label}</span><span>{relatedResource.readingMinutes} MIN READ</span></div>
-                  <h3><Link href={relatedResource.canonicalPath}>{relatedResource.title}</Link></h3>
-                  <p>{relatedResource.deck}</p>
+                  <h3><Link href={relatedResource.canonicalPath}>{relatedResource.headline}</Link></h3>
+                  <p>{relatedResource.slogan}</p>
                   <div className={styles.cardFooter}>
                     <time dateTime={relatedResource.publishedAt}>{relatedPublished}</time>
                     <Link href={relatedResource.canonicalPath}>Read analysis <b aria-hidden="true">→</b></Link>

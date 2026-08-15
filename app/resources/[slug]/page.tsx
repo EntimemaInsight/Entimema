@@ -56,8 +56,8 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
       {
         "@type": "Article",
         "@id": `${pageUrl}#article`,
-        headline: resource.title,
-        description: resource.deck,
+        headline: resource.headline,
+        description: resource.slogan,
         url: pageUrl,
         datePublished: resource.publishedAt,
         ...(resource.updatedAt ? { dateModified: resource.updatedAt } : {}),
