@@ -2,20 +2,9 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import ResourceCover from "./ResourceCover";
-import { getTopic, publishedResources, resourceTopics, type ResourceRecord } from "./resource-data";
+import ResourceCard from "./ResourceCard";
+import { getTopic, publishedResources, resourceTopics } from "./resource-data";
 import styles from "./resources.module.css";
-
-const formatDate = (publishedAt: string) => new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(`${publishedAt}T00:00:00Z`));
-
-function ResourceCard({ resource }: { resource: ResourceRecord & { publishedAt: string } }) {
-  return <article className={styles.resourceCard}>
-    <Link className={styles.coverLink} href={resource.canonicalPath} aria-label={`Read ${resource.headline}`}><ResourceCover cover={resource.cover} /></Link>
-    <div className={styles.cardMeta}><span>{getTopic(resource.topic)?.label}</span><span>{resource.readingMinutes} MIN READ</span></div>
-    <h3><Link href={resource.canonicalPath}>{resource.headline}</Link></h3><p>{resource.slogan}</p>
-    <div className={styles.cardFooter}><time dateTime={resource.publishedAt}>{formatDate(resource.publishedAt)}</time><Link href={resource.canonicalPath}>Read analysis <b aria-hidden="true">→</b></Link></div>
-  </article>;
-}
 
 export default function ResourcesDiscovery({ initialTopic }: { initialTopic?: string }) {
   const [query, setQuery] = useState("");

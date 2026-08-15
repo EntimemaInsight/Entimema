@@ -8,17 +8,10 @@ import { ResourceViewAnalytics } from "@/components/ResourceAnalytics";
 import ResourceCover from "./ResourceCover";
 import ArticleContents from "./ArticleContents";
 import BrandLogo from "@/components/BrandLogo";
+import ResourceCard from "./ResourceCard";
+import ResourceSemanticText from "./ResourceSemanticText";
 
 export type ArticleSection = { id: string; label: string };
-
-function SemanticEmphasis({ text, emphasis, className }: { text: string; emphasis?: string; className: string }) {
-  if (!emphasis) return text;
-
-  const emphasisStart = text.indexOf(emphasis);
-  if (emphasisStart < 0) throw new Error(`Resource emphasis phrase "${emphasis}" is not present in "${text}".`);
-
-  return <>{text.slice(0, emphasisStart)}<span className={className}>{emphasis}</span>{text.slice(emphasisStart + emphasis.length)}</>;
-}
 
 export default function ResourceArticle({ resource, sections, children }: { resource: ResourceRecord; sections?: ArticleSection[]; children: ReactNode }) {
   const topic = getTopic(resource.topic);
@@ -34,8 +27,8 @@ export default function ResourceArticle({ resource, sections, children }: { reso
         <header className={styles.articleHeader}>
           <div className={styles.readingContainer}>
             <div className={styles.articleMeta}><span>{topic?.label}</span><span>{resource.readingMinutes} min read</span></div>
-            <h1><SemanticEmphasis text={resource.headline} emphasis={resource.headlineEmphasis} className={styles.headlineEmphasis} /></h1>
-            <p className={styles.deck}><SemanticEmphasis text={resource.slogan} emphasis={resource.sloganEmphasis} className={styles.sloganEmphasis} /></p>
+            <h1><ResourceSemanticText text={resource.headline} emphasis={resource.headlineEmphasis} className={styles.headlineEmphasis} /></h1>
+            <p className={styles.deck}><ResourceSemanticText text={resource.slogan} emphasis={resource.sloganEmphasis} className={styles.sloganEmphasis} /></p>
             <div className={styles.publicationIdentity}>
               <Link className={styles.publicationLink} href="/resources/entimema" aria-label="Entimema publication profile">
                 <BrandLogo compact />
@@ -56,25 +49,7 @@ export default function ResourceArticle({ resource, sections, children }: { reso
       {relatedResources.length ? (
         <div className={styles.articleContinuation}>
           <div className={styles.resourceGrid}>
-            {relatedResources.map((relatedResource) => {
-              const relatedTopic = getTopic(relatedResource.topic);
-              const relatedPublished = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(`${relatedResource.publishedAt}T00:00:00Z`));
-
-              return (
-                <article className={styles.resourceCard} key={relatedResource.slug}>
-                  <Link className={styles.coverLink} href={relatedResource.canonicalPath} aria-label={`Read ${relatedResource.headline}`}>
-                    <ResourceCover cover={relatedResource.cover} />
-                  </Link>
-                  <div className={styles.cardMeta}><span>{relatedTopic?.label}</span><span>{relatedResource.readingMinutes} MIN READ</span></div>
-                  <h3><Link href={relatedResource.canonicalPath}>{relatedResource.headline}</Link></h3>
-                  <p>{relatedResource.slogan}</p>
-                  <div className={styles.cardFooter}>
-                    <time dateTime={relatedResource.publishedAt}>{relatedPublished}</time>
-                    <Link href={relatedResource.canonicalPath}>Read analysis <b aria-hidden="true">→</b></Link>
-                  </div>
-                </article>
-              );
-            })}
+            {relatedResources.map((relatedResource) => <ResourceCard key={relatedResource.slug} resource={relatedResource} />)}
           </div>
         </div>
       ) : null}
