@@ -23,7 +23,7 @@ function ClientIcon({ className }: IconProps) {
 }
 
 const paths = [
-  { intent: "project" as const, title: "Start with a problem", Icon: ProjectIcon },
+  { intent: "project" as const, title: "New Project", Icon: ProjectIcon },
   { intent: "partnership" as const, title: "Partnerships", Icon: PartnershipIcon },
   { intent: "client" as const, title: "Existing Clients", Icon: ClientIcon },
 ];
@@ -126,7 +126,6 @@ export default function ContactExperience({ initialTopic }: { initialTopic?: str
           >
             <span className={styles.iconFrame} aria-hidden="true"><Icon className={styles.icon} /></span>
             <span className={styles.title}>{title}</span>
-            <span className={styles.arrow} aria-hidden="true">→</span>
           </button>
         ))}
       </div>
