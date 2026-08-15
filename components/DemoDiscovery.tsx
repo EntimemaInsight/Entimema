@@ -5,34 +5,20 @@ import { createContext, type FormEvent, type ReactNode, useContext, useEffect, u
 import { PRIMARY_COMMERCIAL_CTA } from "@/lib/cta-labels";
 import styles from "./DemoDiscovery.module.css";
 
-const exploreOptions = [
-  "AI Agents",
-  "Credit Risk",
-  "Decision Automation",
-  "CFO & Financial Management",
-  "Budgets & Forecasting",
-  "Cost & Profitability",
-  "Management Reporting",
-  "Financial Data & ERP",
-  "Other",
-] as const;
-
 type DemoContextValue = { open: (trigger: HTMLElement, initialInterest?: string) => void };
 const DemoContext = createContext<DemoContextValue | null>(null);
 type Status = "idle" | "sending" | "success" | "error";
-type Errors = Partial<Record<"firstName" | "lastName" | "email" | "company" | "country" | "explore", string>>;
+type Errors = Partial<Record<"firstName" | "lastName" | "email" | "company" | "country" | "phone", string>>;
 
 export function DemoDiscoveryProvider({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [initialInterest, setInitialInterest] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [errors, setErrors] = useState<Errors>({});
   const modalRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLElement | null>(null);
 
-  function open(trigger: HTMLElement, interest = "") {
+  function open(trigger: HTMLElement) {
     triggerRef.current = trigger;
-    setInitialInterest(exploreOptions.includes(interest as (typeof exploreOptions)[number]) ? interest : "");
     setErrors({});
     setStatus("idle");
     setIsOpen(true);
@@ -98,7 +84,7 @@ export function DemoDiscoveryProvider({ children }: { children: ReactNode }) {
     const form = event.currentTarget;
     const data = new FormData(form);
     const nextErrors: Errors = {};
-    const required = ["firstName", "lastName", "email", "company", "country", "explore"] as const;
+    const required = ["firstName", "lastName", "email", "company", "country", "phone"] as const;
     for (const key of required) if (!String(data.get(key) ?? "").trim()) nextErrors[key] = "This field is required.";
     const email = String(data.get("email") ?? "").trim();
     if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) nextErrors.email = "Enter a valid company email.";
@@ -140,7 +126,6 @@ export function DemoDiscoveryProvider({ children }: { children: ReactNode }) {
                 <header className={styles.header}>
                   <p className={styles.eyebrow}>PRODUCT &amp; SOLUTION DISCOVERY</p>
                   <h2 id="demo-discovery-title">Discover Entimema</h2>
-                  <p>Tell us what you would like to explore and we’ll prepare the right conversation.</p>
                 </header>
                 <form className={styles.form} noValidate onSubmit={submit}>
                   <input name="intent" type="hidden" value="demo" />
@@ -151,15 +136,9 @@ export function DemoDiscoveryProvider({ children }: { children: ReactNode }) {
                   <DemoField autoComplete="organization" error={errors.company} id="company" label="Company name" required />
                   <DemoField autoComplete="country-name" error={errors.country} id="country" label="Country" required />
                   <DemoField autoComplete="organization-title" id="role" label="Job title" />
-                  <label className={`${styles.field} ${styles.fullWidth}`} htmlFor="explore">
-                    <span>What would you like to explore? *</span>
-                    <select aria-describedby={errors.explore ? "explore-error" : undefined} aria-invalid={Boolean(errors.explore)} defaultValue={initialInterest} id="explore" name="explore">
-                      <option disabled value="">Select an area</option>
-                      {exploreOptions.map((option) => <option key={option} value={option}>{option}</option>)}
-                    </select>
-                    {errors.explore && <small className={styles.fieldError} id="explore-error">{errors.explore}</small>}
-                  </label>
-                  <label className={`${styles.field} ${styles.fullWidth}`} htmlFor="demo-message"><span>Tell us about your challenge</span><textarea id="demo-message" maxLength={4000} name="message" rows={4} /></label>
+                  <DemoField autoComplete="tel" error={errors.phone} id="phone" label="Phone number" required type="tel" />
+                  <DemoField id="referralSource" label="How did you hear about Entimema?" />
+                  <label className={`${styles.consent} ${styles.fullWidth}`}><input name="marketingConsent" type="checkbox" value="yes" /><span>I agree to receive other communications from Entimema.</span></label>
                   <p className={`${styles.privacy} ${styles.fullWidth}`}>By submitting this form, you agree that Entimema may process the information provided in order to respond to your enquiry. See our <Link href="/privacy">Privacy Policy</Link>.</p>
                   {status === "error" && <p className={`${styles.submitError} ${styles.fullWidth}`} role="alert">We could not send your request. Try again or email us at <a href="mailto:office@entimema.net">office@entimema.net</a>.</p>}
                   <button className={`${styles.submit} ${styles.fullWidth}`} disabled={status === "sending"} type="submit">{status === "sending" ? "Submitting…" : "Submit"}</button>

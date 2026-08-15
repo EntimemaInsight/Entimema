@@ -1,6 +1,6 @@
 # Sprint N — Executive Intelligence
 
-Implemented a light, Taktile-inspired interactive executive intelligence scene under the hero.
+Implemented a light, interactive executive intelligence scene under the hero.
 
 ## Included
 - Alternating Elena Angelova / CFO and Elisaveta Geneva / Risk Manager states.
