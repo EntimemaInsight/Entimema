@@ -9,10 +9,10 @@ import { clientInquiryTypes, partnershipTypes } from "@/app/contact/contact-conf
 import styles from "./DemoDiscovery.module.css";
 
 type ContactKind = "project" | "partnership" | "client";
-type ModalKind = "demo" | ContactKind;
-type ModalContextValue = { openDemo: (trigger: HTMLElement) => void; openContact: (kind: ContactKind, trigger: HTMLElement, initialTopic?: string) => void };
+type ModalKind = "demo" | "newsletter" | ContactKind;
+type ModalContextValue = { openDemo: (trigger: HTMLElement) => void; openNewsletter: (trigger: HTMLElement) => void; openContact: (kind: ContactKind, trigger: HTMLElement, initialTopic?: string) => void };
 type Status = "idle" | "sending" | "success" | "error";
-type FieldErrors = Partial<Record<"firstName" | "lastName" | "email" | "company" | "country" | "role" | "phone" | "partnershipType" | "inquiryType" | "message", string>>;
+type FieldErrors = Partial<Record<"firstName" | "lastName" | "email" | "company" | "country" | "role" | "phone" | "partnershipType" | "inquiryType" | "message" | "newsletterConsent", string>>;
 const ModalContext = createContext<ModalContextValue | null>(null);
 
 export function DemoDiscoveryProvider({ children }: { children: ReactNode }) {
@@ -84,9 +84,10 @@ export function DemoDiscoveryProvider({ children }: { children: ReactNode }) {
     project: { titleId: "sales-contact-title", closeLabel: "Close Start a new project" },
     partnership: { titleId: "partnership-contact-title", closeLabel: "Close Partner with Entimema" },
     client: { titleId: "client-contact-title", closeLabel: "Close Existing Client Support" },
+    newsletter: { titleId: "newsletter-subscription-title", closeLabel: "Close Subscribe to Entimema Insights" },
   }[modalKind ?? "demo"];
   return (
-    <ModalContext.Provider value={{ openDemo: (trigger) => open("demo", trigger), openContact: (kind, trigger, topic) => open(kind, trigger, topic) }}>
+    <ModalContext.Provider value={{ openDemo: (trigger) => open("demo", trigger), openNewsletter: (trigger) => open("newsletter", trigger), openContact: (kind, trigger, topic) => open(kind, trigger, topic) }}>
       {children}
       {modalKind && (
         <div className={styles.overlay} data-demo-overlay data-entimema-form-overlay role="presentation">
@@ -96,6 +97,7 @@ export function DemoDiscoveryProvider({ children }: { children: ReactNode }) {
             {modalKind === "project" && <SalesForm initialTopic={initialTopic} titleId={modalMeta.titleId} />}
             {modalKind === "partnership" && <PartnershipForm titleId={modalMeta.titleId} />}
             {modalKind === "client" && <ClientForm titleId={modalMeta.titleId} />}
+            {modalKind === "newsletter" && <NewsletterForm titleId={modalMeta.titleId} />}
           </div>
         </div>
       )}
@@ -113,6 +115,12 @@ export function useContactModal() {
   const context = useContext(ModalContext);
   if (!context) throw new Error("useContactModal must be used within DemoDiscoveryProvider.");
   return context.openContact;
+}
+
+export function NewsletterTrigger({ children, className }: { children: ReactNode; className?: string }) {
+  const context = useContext(ModalContext);
+  if (!context) throw new Error("NewsletterTrigger must be used within DemoDiscoveryProvider.");
+  return <button className={className} onClick={(event) => context.openNewsletter(event.currentTarget)} type="button">{children}</button>;
 }
 
 function DemoForm({ titleId }: { titleId: string }) {
@@ -193,15 +201,32 @@ function ClientForm({ titleId }: { titleId: string }) {
   return <><FormHeader title="Existing Client Support" titleId={titleId} /><form className={styles.form} noValidate onSubmit={submit}><input name="intent" type="hidden" value="client" /><Honeypot id="client-website" /><Field error={errors.firstName} id="client-firstName" label="First name" name="firstName" required /><Field error={errors.lastName} id="client-lastName" label="Last name" name="lastName" required /><Field autoComplete="email" error={errors.email} id="client-email" label="Company email" name="companyEmail" required type="email" /><Field autoComplete="organization" error={errors.company} id="client-company" label="Company name" name="companyName" required /><Field autoComplete="tel" error={errors.phone} id="client-phone" label="Phone number" name="phoneNumber" required type="tel" /><SelectField error={errors.inquiryType} id="client-inquiry-type" label="Inquiry type" name="inquiryType" options={clientInquiryTypes} /><MessageField error={errors.message} id="client-message" label="Description" /><ConsentAndPrivacy marketing={false} /><SubmitArea status={status} /></form></>;
 }
 
+function NewsletterForm({ titleId }: { titleId: string }) {
+  const [status, setStatus] = useState<Status>("idle");
+  const [errors, setErrors] = useState<FieldErrors>({});
+  async function submit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (status === "sending") return;
+    const form = event.currentTarget;
+    const data = new FormData(form);
+    const nextErrors = validate(data, [["firstName", "firstName"], ["lastName", "lastName"], ["role", "jobTitle"], ["email", "companyEmail"], ["company", "companyName"], ["newsletterConsent", "newsletterConsent"]]);
+    if (showErrors(form, nextErrors, setErrors)) return;
+    setStatus("sending");
+    setStatus(await send(data));
+  }
+  if (status === "success") return <Success kind="newsletter" titleId={titleId} />;
+  return <><FormHeader description="Monthly research and practical insights across finance, credit risk and decision intelligence." title="Subscribe to Entimema Insights" titleId={titleId} /><form className={styles.form} noValidate onSubmit={submit}><input name="intent" type="hidden" value="newsletter" /><Honeypot id="newsletter-website" /><Field error={errors.firstName} id="newsletter-firstName" label="First name" name="firstName" required /><Field error={errors.lastName} id="newsletter-lastName" label="Last name" name="lastName" required /><Field autoComplete="organization-title" error={errors.role} id="newsletter-role" label="Job title" name="jobTitle" required /><Field autoComplete="email" error={errors.email} id="newsletter-email" label="Company email" name="companyEmail" required type="email" /><Field autoComplete="organization" error={errors.company} id="newsletter-company" label="Company name" name="companyName" required /><div className={`${styles.consentArea} ${styles.fullWidth}`}><label className={styles.consent}><input aria-describedby={errors.newsletterConsent ? "newsletter-consent-error" : undefined} aria-invalid={Boolean(errors.newsletterConsent)} name="newsletterConsent" type="checkbox" value="yes" /><span>I want to receive Entimema Insights. *</span></label>{errors.newsletterConsent && <small className={styles.fieldError} id="newsletter-consent-error">{errors.newsletterConsent}</small>}<Privacy /></div><SubmitArea label="Subscribe" status={status} /></form></>;
+}
+
 function PersonAndCompanyFields({ errors, jobTitleRequired, namePrefix, salesPayload }: { errors: FieldErrors; jobTitleRequired: boolean; namePrefix: string; salesPayload: boolean }) {
   return <><Field error={errors.firstName} id={`${namePrefix}firstName`} label="First name" name="firstName" required /><Field error={errors.lastName} id={`${namePrefix}lastName`} label="Last name" name="lastName" required /><Field autoComplete="email" error={errors.email} id={`${namePrefix}email`} label="Company email" name={salesPayload ? "companyEmail" : "email"} required type="email" /><Field autoComplete="organization" error={errors.company} id={`${namePrefix}company`} label="Company name" name={salesPayload ? "companyName" : "company"} required /><SelectField autoComplete="country-name" error={errors.country} id={`${namePrefix}country`} label="Country" name="country" options={countryOptions} /><Field autoComplete="organization-title" error={errors.role} id={`${namePrefix}role`} label="Job title" name={salesPayload ? "jobTitle" : "role"} required={jobTitleRequired} /><Field autoComplete="tel" error={errors.phone} id={`${namePrefix}phone`} label="Phone number" name={salesPayload ? "phoneNumber" : "phone"} required type="tel" /><Field id={`${namePrefix}referralSource`} label="How did you hear about Entimema?" name="referralSource" /></>;
 }
 
-function FormHeader({ title, titleId }: { title: string; titleId: string }) { return <header className={styles.header}><h2 id={titleId}>{title}</h2></header>; }
+function FormHeader({ description, title, titleId }: { description?: string; title: string; titleId: string }) { return <header className={styles.header}><h2 id={titleId}>{title}</h2>{description && <p>{description}</p>}</header>; }
 function Privacy() { return <p className={styles.privacy}>By submitting this form, you agree that Entimema may process the information provided in order to respond to your enquiry. See our <Link href="/privacy">Privacy Policy</Link>.</p>; }
 function ConsentAndPrivacy({ marketing = true }: { marketing?: boolean }) { return <div className={`${styles.consentArea} ${styles.fullWidth}`}>{marketing && <label className={styles.consent}><input name="marketingConsent" type="checkbox" value="yes" /><span>I agree to receive other communications from Entimema.</span></label>}<Privacy /></div>; }
-function SubmitArea({ status }: { status: Status }) { return <>{status === "error" && <p className={`${styles.submitError} ${styles.fullWidth}`} role="alert">We could not send your request. Try again or email us at <a href="mailto:office@entimema.net">office@entimema.net</a>.</p>}<button className={`${styles.submit} ${styles.fullWidth}`} disabled={status === "sending"} type="submit">{status === "sending" ? "Submitting…" : "Submit"}</button></>; }
-function Success({ kind, titleId }: { kind: ModalKind; titleId: string }) { return <div aria-live="polite" className={styles.success}><p className={styles.eyebrow}>{kind === "demo" ? "DISCOVERY REQUEST" : "ENQUIRY RECEIVED"}</p><h2 id={titleId}>{kind === "demo" ? "Thank you" : "Thank you."}</h2><p>{kind === "demo" ? "We’ve received your request and will be in touch shortly." : "We received your inquiry. We will review it and contact you about the next step."}</p></div>; }
+function SubmitArea({ label = "Submit", status }: { label?: string; status: Status }) { return <>{status === "error" && <p className={`${styles.submitError} ${styles.fullWidth}`} role="alert">We could not send your request. Try again or email us at <a href="mailto:office@entimema.net">office@entimema.net</a>.</p>}<button className={`${styles.submit} ${styles.fullWidth}`} disabled={status === "sending"} type="submit">{status === "sending" ? "Submitting…" : label}</button></>; }
+function Success({ kind, titleId }: { kind: ModalKind; titleId: string }) { const newsletter = kind === "newsletter"; return <div aria-live="polite" className={styles.success}><p className={styles.eyebrow}>{newsletter ? "SUBSCRIPTION RECEIVED" : kind === "demo" ? "DISCOVERY REQUEST" : "ENQUIRY RECEIVED"}</p><h2 id={titleId}>{kind === "demo" ? "Thank you" : "Thank you."}</h2><p>{newsletter ? "You’re subscribed to Entimema Insights." : kind === "demo" ? "We’ve received your request and will be in touch shortly." : "We received your inquiry. We will review it and contact you about the next step."}</p></div>; }
 function Honeypot({ id }: { id: string }) { return <div className={styles.honeypot} aria-hidden="true"><label htmlFor={id}>Website</label><input autoComplete="off" id={id} name="website" tabIndex={-1} /></div>; }
 
 function Field({ autoComplete, error, id, label, name, required = false, type = "text" }: { autoComplete?: string; error?: string; id: string; label: string; name: string; required?: boolean; type?: string }) {

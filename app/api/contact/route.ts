@@ -3,7 +3,7 @@ import { clientInquiryTypes, isTopicKey, partnershipTypes, problemAreaForTopic, 
 
 const allowedPartnershipTypes = new Set<string>(partnershipTypes);
 const allowedInquiryTypes = new Set<string>(clientInquiryTypes);
-const allowedKeys = new Set(["intent", "topic", "topicName", "problemArea", "firstName", "lastName", "email", "companyEmail", "company", "companyName", "country", "phone", "phoneNumber", "referralSource", "marketingConsent", "role", "jobTitle", "partnershipType", "project", "inquiryType", "message", "website"]);
+const allowedKeys = new Set(["intent", "topic", "topicName", "problemArea", "firstName", "lastName", "email", "companyEmail", "company", "companyName", "country", "phone", "phoneNumber", "referralSource", "marketingConsent", "newsletterConsent", "role", "jobTitle", "partnershipType", "project", "inquiryType", "message", "website"]);
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function text(value: unknown, max: number) {
@@ -53,6 +53,7 @@ export async function POST(request: Request) {
   const companyName = text(body.companyName, 160);
   const jobTitle = text(body.jobTitle, 160);
   const phoneNumber = text(body.phoneNumber, 80);
+  const newsletterConsent = text(body.newsletterConsent, 3);
 
   if (!intent || (intent === "demo" && (!email || !emailPattern.test(email)))) return Response.json({ ok: false }, { status: 400 });
   if (topic && !isTopicKey(topic)) return Response.json({ ok: false }, { status: 400 });
@@ -77,11 +78,15 @@ export async function POST(request: Request) {
     if (!firstName || !lastName || !companyEmail || !emailPattern.test(companyEmail) || !companyName || !phoneNumber || !message || !inquiryType || !allowedInquiryTypes.has(inquiryType)) return Response.json({ ok: false }, { status: 400 });
     subject = `[Entimema] Existing client — ${inquiryType}`;
     html = row("Type", "Existing client") + row("First name", firstName) + row("Last name", lastName) + row("E-mail", companyEmail) + row("Company", companyName) + row("Phone number", phoneNumber) + row("Project / service", project) + row("Inquiry type", inquiryType) + row("Description", message);
+  } else if (intent === "newsletter") {
+    if (!firstName || !lastName || !companyEmail || !emailPattern.test(companyEmail) || !companyName || !jobTitle || newsletterConsent !== "yes") return Response.json({ ok: false }, { status: 400 });
+    subject = `[Entimema] Newsletter subscription — ${companyName}`;
+    html = row("Type", "Entimema Insights subscription") + row("First name", firstName) + row("Last name", lastName) + row("Job title", jobTitle) + row("E-mail", companyEmail) + row("Company", companyName) + row("Newsletter consent", "Yes");
   } else {
     return Response.json({ ok: false }, { status: 400 });
   }
 
-  const replyTo = intent === "project" || intent === "partnership" || intent === "client" ? companyEmail : email;
+  const replyTo = intent === "project" || intent === "partnership" || intent === "client" || intent === "newsletter" ? companyEmail : email;
   if (!replyTo) return Response.json({ ok: false }, { status: 400 });
 
   const apiKey = process.env.RESEND_API_KEY;

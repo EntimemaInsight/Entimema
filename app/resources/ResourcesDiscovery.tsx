@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
+import { NewsletterTrigger } from "@/components/DemoDiscovery";
 import ResourceCard from "./ResourceCard";
 import { getTopic, publishedResources, resourceTopics } from "./resource-data";
 import styles from "./resources.module.css";
@@ -22,7 +22,7 @@ export default function ResourcesDiscovery({ initialTopic }: { initialTopic?: st
       <header className={styles.indexHero}><div className={styles.wideContainer}>
         <h1>Decisions rarely fail<br /><em>for lack of data.</em></h1>
         <p className={styles.tensionLine}>They fail when the signal is buried in it.</p>
-        <Link className={styles.newsletterCta} href="/newsletter"><span>{NEWSLETTER_CTA}</span></Link>
+        <NewsletterTrigger className={styles.newsletterCta}><span>{NEWSLETTER_CTA}</span></NewsletterTrigger>
       </div></header>
 
       <section className={styles.discovery} aria-label="Find research"><div className={styles.wideContainer}>
