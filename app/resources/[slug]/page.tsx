@@ -9,6 +9,7 @@ import HighGiniCreditDecisionArticle, { highGiniCreditDecisionSections } from ".
 import PdModelCalibrationArticle, { pdModelCalibrationSections } from "../PdModelCalibrationArticle";
 import PdModelMonitoringArticle, { pdModelMonitoringSections } from "../PdModelMonitoringArticle";
 import PdModelRecalibrationArticle, { pdModelRecalibrationSections } from "../PdModelRecalibrationArticle";
+import PdModelTimeArchitectureArticle, { pdModelTimeArchitectureSections } from "../PdModelTimeArchitectureArticle";
 import ErpManagementIntelligenceArticle, { erpIntelligenceSections } from "../ErpManagementIntelligenceArticle";
 import { getPublishedResource, getTopic, publishedResources } from "../resource-data";
 import { FOUNDER_ID, ORGANIZATION_ID, SITE_URL, WEBSITE_ID, createBreadcrumbSchema, serializeJsonLd } from "@/lib/structured-data";
@@ -96,13 +97,14 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
   const isPdModelCalibration = resource.slug === "pd-model-ranking-calibration";
   const isPdModelMonitoring = resource.slug === "pd-model-monitoring";
   const isPdModelRecalibration = resource.slug === "pd-model-recalibration-vs-redevelopment";
+  const isPdModelTimeArchitecture = resource.slug === "pd-model-observation-performance-windows";
   const isErpIntelligence = resource.slug === "from-erp-data-to-management-intelligence";
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(articleSchema) }} />
-      <ResourceArticle resource={resource} sections={isPdModelRecalibration ? [...pdModelRecalibrationSections] : isPdModelMonitoring ? [...pdModelMonitoringSections] : isErpIntelligence ? [...erpIntelligenceSections] : isPdModelCalibration ? [...pdModelCalibrationSections] : isHighGiniCreditDecision ? [...highGiniCreditDecisionSections] : isCreditVintage ? [...creditVintageSections] : isOperationalForecast ? [...operationalForecastSections] : isWorkingCapital ? [...workingCapitalSections] : [...manufacturingCostSections]}>
-        {isPdModelRecalibration ? <PdModelRecalibrationArticle /> : isPdModelMonitoring ? <PdModelMonitoringArticle /> : isErpIntelligence ? <ErpManagementIntelligenceArticle /> : isPdModelCalibration ? <PdModelCalibrationArticle /> : isHighGiniCreditDecision ? <HighGiniCreditDecisionArticle /> : isCreditVintage ? <CreditVintageAnalysisArticle /> : isOperationalForecast ? <OperationalDriverForecastingArticle /> : isWorkingCapital ? <WorkingCapitalArticle /> : <ManufacturingCostArticle />}
+      <ResourceArticle resource={resource} sections={isPdModelTimeArchitecture ? [...pdModelTimeArchitectureSections] : isPdModelRecalibration ? [...pdModelRecalibrationSections] : isPdModelMonitoring ? [...pdModelMonitoringSections] : isErpIntelligence ? [...erpIntelligenceSections] : isPdModelCalibration ? [...pdModelCalibrationSections] : isHighGiniCreditDecision ? [...highGiniCreditDecisionSections] : isCreditVintage ? [...creditVintageSections] : isOperationalForecast ? [...operationalForecastSections] : isWorkingCapital ? [...workingCapitalSections] : [...manufacturingCostSections]}>
+        {isPdModelTimeArchitecture ? <PdModelTimeArchitectureArticle /> : isPdModelRecalibration ? <PdModelRecalibrationArticle /> : isPdModelMonitoring ? <PdModelMonitoringArticle /> : isErpIntelligence ? <ErpManagementIntelligenceArticle /> : isPdModelCalibration ? <PdModelCalibrationArticle /> : isHighGiniCreditDecision ? <HighGiniCreditDecisionArticle /> : isCreditVintage ? <CreditVintageAnalysisArticle /> : isOperationalForecast ? <OperationalDriverForecastingArticle /> : isWorkingCapital ? <WorkingCapitalArticle /> : <ManufacturingCostArticle />}
       </ResourceArticle>
     </>
   );
