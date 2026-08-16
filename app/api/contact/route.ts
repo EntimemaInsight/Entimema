@@ -81,7 +81,7 @@ export async function POST(request: Request) {
   } else if (intent === "newsletter") {
     if (!firstName || !lastName || !companyEmail || !emailPattern.test(companyEmail) || !companyName || !jobTitle || newsletterConsent !== "yes") return Response.json({ ok: false }, { status: 400 });
     subject = `[Entimema] Newsletter subscription — ${companyName}`;
-    html = row("Type", "Entimema Insights subscription") + row("First name", firstName) + row("Last name", lastName) + row("Job title", jobTitle) + row("E-mail", companyEmail) + row("Company", companyName) + row("Newsletter consent", "Yes");
+    html = row("Type", "Decision Signals subscription") + row("First name", firstName) + row("Last name", lastName) + row("Job title", jobTitle) + row("E-mail", companyEmail) + row("Company", companyName) + row("Newsletter consent", "Yes");
   } else {
     return Response.json({ ok: false }, { status: 400 });
   }
