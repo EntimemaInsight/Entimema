@@ -12,10 +12,14 @@ export default function ResourcesDiscovery({ initialTopic }: { initialTopic?: st
   const [topic, setTopic] = useState(initialTopic ?? "");
   const availableTopics = resourceTopics.filter((item) => publishedResources.some((resource) => resource.topic === item.slug));
   const search = query.trim().toLocaleLowerCase();
-  const matches = publishedResources.filter((resource) => {
-    const category = getTopic(resource.topic)?.label ?? "";
-    return (!topic || resource.topic === topic) && (!search || [resource.technicalTitle, resource.headline, resource.slogan, category].some((value) => value.toLocaleLowerCase().includes(search)));
-  });
+  const matches = publishedResources
+    .map((resource, publicationSequence) => ({ publicationSequence, resource }))
+    .filter(({ resource }) => {
+      const category = getTopic(resource.topic)?.label ?? "";
+      return (!topic || resource.topic === topic) && (!search || [resource.technicalTitle, resource.headline, resource.slogan, category].some((value) => value.toLocaleLowerCase().includes(search)));
+    })
+    .sort((left, right) => right.resource.publishedAt.localeCompare(left.resource.publishedAt) || right.publicationSequence - left.publicationSequence)
+    .map(({ resource }) => resource);
 
   return <>
     <div className={styles.aboveFold}>
