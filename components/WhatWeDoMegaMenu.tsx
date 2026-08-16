@@ -265,6 +265,9 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
                     </Link>
                   ))}
                 </div>
+                <Link className={styles.mobileTopLevel} href="/agents" onClick={close}>
+                  <span>Agent Library</span><span aria-hidden="true">→</span>
+                </Link>
                 <Link className={styles.mobileTopLevel} href="/about" onClick={close}>
                   <span>About</span><span aria-hidden="true">→</span>
                 </Link>

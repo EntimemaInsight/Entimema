@@ -3,6 +3,7 @@ import { publishedResources } from "./resources/resource-data";
 
 const routes = [
   "",
+  "/agents",
   "/about",
   "/contact",
   "/privacy",

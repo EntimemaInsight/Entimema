@@ -6,7 +6,7 @@ import BrandLogo from "./BrandLogo";
 import WhatWeDoMegaMenu from "./WhatWeDoMegaMenu";
 import ResourcesMegaMenu from "./ResourcesMegaMenu";
 
-type NavKey = "home" | "services" | "about" | "resources" | "contact";
+type NavKey = "home" | "services" | "about" | "resources" | "agents" | "contact";
 
 export default function Navbar({ active = "home" }: { active?: NavKey }) {
   function handleBrandClick(event: MouseEvent<HTMLAnchorElement>) {
@@ -27,6 +27,13 @@ export default function Navbar({ active = "home" }: { active?: NavKey }) {
           <WhatWeDoMegaMenu active={active === "services"} />
 
           <ResourcesMegaMenu active={active === "resources"} />
+          <Link
+            className={active === "agents" ? "is-active" : undefined}
+            href="/agents"
+            aria-current={active === "agents" ? "page" : undefined}
+          >
+            Agent Library
+          </Link>
           <Link
             className={active === "about" ? "is-active" : undefined}
             href="/about"
