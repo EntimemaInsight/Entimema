@@ -1,4 +1,5 @@
-import { EntimemaFramework, KeyObservation, ResourceTable } from "./ResourceElements";
+import { KeyObservation, ResourceFigure, ResourceTable } from "./ResourceElements";
+import styles from "./high-gini-credit-decision.module.css";
 
 export const highGiniCreditDecisionSections = [
   { id: "tension", label: "Discrimination can remain strong while decisions deteriorate" },
@@ -74,6 +75,27 @@ export default function HighGiniCreditDecisionArticle() {
         <p>Those are different questions.</p>
 
         <p>And lending requires both.</p>
+
+        <ResourceFigure
+          label="Comparison of credit-risk ranking and calibration. Ranking orders Borrowers A, B and C from lower to higher risk. Calibration compares predicted probability of default with observed default rate."
+          caption="Correctly ordering borrowers by relative risk does not establish that their absolute probabilities of default are accurate."
+        >
+          <div className={styles.rankingCalibration}>
+            <header><strong>RANKING</strong><span aria-hidden="true">≠</span><strong>CALIBRATION</strong></header>
+            <div className={styles.rankingPanel}>
+              <span className={styles.figureLabel}>RELATIVE ORDER</span>
+              <div className={styles.borrowers}>
+                <span>Borrower A</span><i aria-hidden="true">→</i><span>Borrower B</span><i aria-hidden="true">→</i><span>Borrower C</span>
+              </div>
+              <div className={styles.riskScale}><span>Lower risk</span><i aria-hidden="true" /><span>Higher risk</span></div>
+            </div>
+            <div className={styles.calibrationPanel}>
+              <span className={styles.figureLabel}>ABSOLUTE RISK</span>
+              <div className={styles.calibrationMeasure}><span>Predicted PD</span><i aria-hidden="true">↔</i><span>Observed Default Rate</span></div>
+              <small>Are predicted probabilities aligned with realised outcomes?</small>
+            </div>
+          </div>
+        </ResourceFigure>
       </section>
 
       <section id="transformation">
@@ -155,11 +177,21 @@ export default function HighGiniCreditDecisionArticle() {
 
         <p>A useful monitoring architecture therefore looks like this:</p>
 
-        <EntimemaFramework
-          title="Credit decision-system monitoring architecture"
-          description="Monitoring and feedback connect portfolio outcomes back to every upstream layer."
-          steps={["Population", "Score", "Risk ranking", "Probability of default", "Decision policy", "Credit decision", "Portfolio outcome", "Monitoring & feedback ↺"]}
-        />
+        <ResourceFigure
+          label="Credit decision system from portfolio through score, risk ranking, probability of default, decision policy, credit decision and portfolio outcome to monitoring and feedback. An agentic monitoring layer observes signals across the system and feeds insight back into it."
+          caption="The model is one component of a larger decision system. Monitoring and feedback connect portfolio outcomes back to upstream assumptions, models and policy."
+        >
+          <div className={styles.decisionSystem}>
+            <header><span>THE CREDIT DECISION SYSTEM</span><strong>Model performance is one signal within the whole</strong></header>
+            <ol>
+              {["Portfolio", "Score", "Risk ranking", "Probability of default", "Decision policy", "Credit decision", "Portfolio outcome"].map((step) => <li key={step}><span>{step}</span></li>)}
+            </ol>
+            <div className={styles.monitoringLayer}>
+              <div><small>AGENTIC MONITORING LAYER</small><strong>Monitoring &amp; feedback</strong><span>Observe · connect · investigate · escalate</span></div>
+              <i aria-hidden="true">↺</i>
+            </div>
+          </div>
+        </ResourceFigure>
 
         <p>The feedback loop is essential.</p>
 

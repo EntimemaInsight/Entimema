@@ -243,7 +243,7 @@ export const resources: ResourceRecord[] = [
     relatedResourceSlugs: ["credit-vintage-analysis", "operational-driver-forecasting"],
     status: "published",
     indexable: true,
-    cover: { type: "editorial-artwork", src: "/resources/covers/credit-vintage-analysis.png", motion: "none", alt: "Editorial artwork for A High Gini Does Not Make a Good Credit Decision showing layered credit-risk performance panels.", stages: ["Population", "Score", "Ranking", "PD", "Policy", "Decision", "Outcome"] },
+    cover: { type: "editorial-artwork", src: "/resources/covers/high-gini-credit-decision.png", motion: "none", alt: "Editorial artwork for A High Gini Does Not Make a Good Credit Decision showing precisely ranked risk objects whose projections diverge across an underlying calibration surface.", stages: ["Population", "Score", "Ranking", "PD", "Policy", "Decision", "Outcome"] },
   },
   {
     technicalTitle:"ERP Data and Management Intelligence",headline:"ERP Records the Business. It Does Not Explain It.",headlineEmphasis:"Does Not Explain It.",slug:"from-erp-data-to-management-intelligence",
