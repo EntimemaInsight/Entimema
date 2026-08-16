@@ -29,7 +29,7 @@ export function DemoDiscoveryProvider({ children }: { children: ReactNode }) {
 
   function close() {
     setModalKind(null);
-    requestAnimationFrame(() => triggerRef.current?.focus());
+    setTimeout(() => triggerRef.current?.focus(), 0);
   }
 
   useEffect(() => {
@@ -90,8 +90,8 @@ export function DemoDiscoveryProvider({ children }: { children: ReactNode }) {
     <ModalContext.Provider value={{ openDemo: (trigger) => open("demo", trigger), openNewsletter: (trigger) => open("newsletter", trigger), openContact: (kind, trigger, topic) => open(kind, trigger, topic) }}>
       {children}
       {modalKind && (
-        <div className={styles.overlay} data-demo-overlay data-entimema-form-overlay role="presentation">
-          <div aria-labelledby={modalMeta.titleId} aria-modal="true" className={styles.modal} ref={modalRef} role="dialog">
+        <div className={styles.overlay} data-demo-overlay data-entimema-form-overlay onClick={close} role="presentation">
+          <div aria-labelledby={modalMeta.titleId} aria-modal="true" className={styles.modal} onClick={(event) => event.stopPropagation()} ref={modalRef} role="dialog">
             <button aria-label={modalMeta.closeLabel} className={styles.close} onClick={close} type="button">×</button>
             {modalKind === "demo" && <DemoForm titleId={modalMeta.titleId} />}
             {modalKind === "project" && <SalesForm initialTopic={initialTopic} titleId={modalMeta.titleId} />}
