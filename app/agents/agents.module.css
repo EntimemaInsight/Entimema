@@ -67,16 +67,8 @@
   background: #fff;
 }
 
-.principleGrid article > span {
-  display: block;
-  color: var(--brand-orange-500);
-  font-size: 10px;
-  font-weight: 720;
-  letter-spacing: .12em;
-}
-
 .principleGrid h2 {
-  margin: 20px 0 10px;
+  margin: 0 0 10px;
   font-size: clamp(21px, 1.65vw, 26px);
   line-height: 1.1;
   letter-spacing: -.035em;

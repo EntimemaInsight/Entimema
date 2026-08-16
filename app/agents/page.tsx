@@ -20,9 +20,9 @@ export const metadata: Metadata = {
 };
 
 const principles = [
-  ["01", "Methodology first.", "Built from structured financial, risk and analytical frameworks — not generic prompting."],
-  ["02", "Designed for decisions.", "Agents are shaped around specific analytical questions, workflows and decision contexts."],
-  ["03", "Human judgement stays in the loop.", "AI accelerates analysis and structures evidence. Responsibility for consequential decisions remains with people."],
+  ["Methodology first.", "Built from structured financial, risk and analytical frameworks — not generic prompting."],
+  ["Designed for decisions.", "Agents are shaped around specific analytical questions, workflows and decision contexts."],
+  ["Human judgement stays in the loop.", "AI accelerates analysis and structures evidence. Responsibility for consequential decisions remains with people."],
 ] as const;
 
 export default function AgentsPage() {
@@ -41,9 +41,8 @@ export default function AgentsPage() {
               <DemoTrigger className={`primary-cta ${styles.primaryCta}`} />
             </div>
             <div className={styles.principleGrid} aria-label="Principles behind Entimema agents">
-              {principles.map(([number, title, copy]) => (
-                <article key={number}>
-                  <span>{number}</span>
+              {principles.map(([title, copy]) => (
+                <article key={title}>
                   <h2>{title}</h2>
                   <p>{copy}</p>
                 </article>
