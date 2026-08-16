@@ -1,3 +1,5 @@
+import AnnouncementBar from "@/components/AnnouncementBar";
+import Navbar from "@/components/Navbar";
 import ResourceCard from "../ResourceCard";
 import { publishedResources } from "../resource-data";
 import resourceStyles from "../resources.module.css";
@@ -27,6 +29,8 @@ export default function EngineeringResearchPage() {
 
   return (
     <main className={styles.main}>
+      <AnnouncementBar />
+      <Navbar active="resources" />
       <section className={styles.engineeringHero} aria-labelledby="engineering-title">
         <div className={styles.heroInner}>
           <div className={styles.titleFrame}>
