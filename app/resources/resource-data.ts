@@ -150,7 +150,7 @@ export const resources: ResourceRecord[] = [
     publishedAt: "2026-08-16",
     readingMinutes: 7,
     topic: "credit-risk",
-    stream: "insights",
+    stream: "engineering",
     featured: false,
     seoTitle: "PD Model Observation & Performance Windows | Entimema",
     metaDescription: "Design observation and performance windows for PD models. Control time zero, leakage, seasoning, censoring and development-sample representativeness.",

@@ -12,7 +12,7 @@ import PdModelRecalibrationArticle, { pdModelRecalibrationSections } from "../Pd
 import PdModelTimeArchitectureArticle, { pdModelTimeArchitectureSections } from "../PdModelTimeArchitectureArticle";
 import PdDefaultDefinitionArticle, { pdDefaultDefinitionSections } from "../PdDefaultDefinitionArticle";
 import ErpManagementIntelligenceArticle, { erpIntelligenceSections } from "../ErpManagementIntelligenceArticle";
-import { getPublishedResource, getTopic, publishedResources } from "../resource-data";
+import { getPublishedResource, getTopic, publishedResources, resourceStreams } from "../resource-data";
 import { FOUNDER_ID, ORGANIZATION_ID, SITE_URL, WEBSITE_ID, createBreadcrumbSchema, serializeJsonLd } from "@/lib/structured-data";
 
 export const dynamicParams = false;
@@ -55,6 +55,7 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
   if (!resource) notFound();
 
   const topic = getTopic(resource.topic);
+  const stream = resourceStreams[resource.stream];
   const pageUrl = `${SITE_URL}${resource.canonicalPath}`;
   const articleSchema = {
     "@context": "https://schema.org",
@@ -71,7 +72,11 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
         author: { "@id": FOUNDER_ID },
         publisher: { "@id": ORGANIZATION_ID },
         isPartOf: { "@id": WEBSITE_ID },
-        articleSection: topic?.label,
+        articleSection: stream.label,
+        about: [
+          { "@type": "Thing", name: topic?.label ?? resource.topic },
+          { "@type": "Thing", name: resource.technicalTitle },
+        ],
         image: `${SITE_URL}${resource.openGraphImage ?? resource.cover.src}`,
       },
       {
@@ -85,7 +90,8 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
       createBreadcrumbSchema(
         [
           { name: "Resources", item: `${SITE_URL}/resources` },
-          { name: topic?.label ?? resource.topic },
+          ...(resource.stream === "engineering" ? [{ name: stream.label, item: `${SITE_URL}${stream.href}` }] : []),
+          { name: resource.technicalTitle },
         ],
         `${pageUrl}#breadcrumb`,
       ),

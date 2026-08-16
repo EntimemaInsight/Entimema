@@ -1,9 +1,16 @@
+import type { Metadata } from "next";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
 import ResourceCard from "../ResourceCard";
 import { publishedResources } from "../resource-data";
 import resourceStyles from "../resources.module.css";
 import styles from "./engineering.module.css";
+
+export const metadata: Metadata = {
+  title: "Engineering & Research | Entimema",
+  description: "Technical research on credit risk modelling, model engineering, validation, decision engines and analytical automation.",
+  alternates: { canonical: "/resources/engineering" },
+};
 
 export default function EngineeringResearchPage() {
   const engineeringArticles = publishedResources.filter((resource) => resource.stream === "engineering");
