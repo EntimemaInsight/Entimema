@@ -8,7 +8,7 @@
 .subtitle { max-width:34ch; margin:clamp(22px,2vw,30px) auto 0; color:rgba(248,250,255,.9); font-size:clamp(27px,1.8vw,32px); font-weight:430; line-height:1.15; letter-spacing:-.03em; text-wrap:balance; }
 .articles { background:#fff; }
 .articleInner { padding-block:clamp(32px,2.8vw,44px) clamp(84px,9vw,132px); }
-.articles h2 { margin:0 0 clamp(24px,2.2vw,34px); color:var(--brand-navy-950); font-size:clamp(38px,3.6vw,56px); font-weight:620; line-height:1; letter-spacing:-.052em; text-align:center; }
+.articles h2 { margin:0 0 clamp(24px,2.2vw,34px); color:var(--brand-navy-950); font-size:clamp(1.65rem,2vw,2.125rem); font-weight:600; line-height:1.18; letter-spacing:-.052em; text-align:center; }
 @media (max-width:640px) {
   .heroInner { padding-block:44px 52px; }
   .titleFrame { padding:19px 22px 21px; border-radius:24px; }
@@ -16,5 +16,5 @@
   .titleFrame h1 span,.titleFrame h1 em { display:block; }
   .subtitle { margin-top:23px; font-size:23px; line-height:1.25; }
   .articleInner { padding-block:68px 88px; }
-  .articles h2 { margin-bottom:44px; font-size:43px; }
+  .articles h2 { margin-bottom:44px; }
 }
