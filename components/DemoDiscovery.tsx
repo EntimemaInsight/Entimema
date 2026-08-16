@@ -80,7 +80,7 @@ export function DemoDiscoveryProvider({ children }: { children: ReactNode }) {
 
   const modalMeta = {
     demo: { titleId: "demo-discovery-title", closeLabel: "Close Discover Entimema" },
-    project: { titleId: "sales-contact-title", closeLabel: "Close Start with a problem" },
+    project: { titleId: "sales-contact-title", closeLabel: "Close Start a new project" },
     partnership: { titleId: "partnership-contact-title", closeLabel: "Close Partner with Entimema" },
     client: { titleId: "client-contact-title", closeLabel: "Close Existing Client Support" },
   }[modalKind ?? "demo"];
@@ -128,7 +128,7 @@ function DemoForm({ titleId }: { titleId: string }) {
     setStatus(await send(data));
   }
   if (status === "success") return <Success kind="demo" titleId={titleId} />;
-  return <><FormHeader eyebrow="PRODUCT & SOLUTION DISCOVERY" title="Discover Entimema" titleId={titleId} /><form className={styles.form} noValidate onSubmit={submit}><input name="intent" type="hidden" value="demo" /><Honeypot id="demo-website" /><PersonAndCompanyFields errors={errors} jobTitleRequired={false} namePrefix="" salesPayload={false} /><ConsentAndPrivacy /><SubmitArea status={status} /></form></>;
+  return <><FormHeader title="Discover Entimema" titleId={titleId} /><form className={styles.form} noValidate onSubmit={submit}><input name="intent" type="hidden" value="demo" /><Honeypot id="demo-website" /><PersonAndCompanyFields errors={errors} jobTitleRequired={false} namePrefix="" salesPayload={false} /><ConsentAndPrivacy /><SubmitArea status={status} /></form></>;
 }
 
 function SalesForm({ initialTopic, titleId }: { initialTopic: string; titleId: string }) {
@@ -147,11 +147,11 @@ function SalesForm({ initialTopic, titleId }: { initialTopic: string; titleId: s
   if (status === "success") return <Success kind="project" titleId={titleId} />;
   return (
     <>
-      <FormHeader eyebrow="SALES ENQUIRY" title="Start with a problem" titleId={titleId} />
+      <FormHeader title="Start a new project" titleId={titleId} />
       <form className={styles.form} noValidate onSubmit={submit}>
         <input name="intent" type="hidden" value="project" /><input name="topic" type="hidden" value={initialTopic} /><Honeypot id="sales-website" />
         <PersonAndCompanyFields errors={errors} jobTitleRequired namePrefix="sales-" salesPayload />
-        <label className={`${styles.field} ${styles.fullWidth}`} htmlFor="sales-message"><span>What problem do you want to solve? *</span><textarea aria-describedby={errors.message ? "sales-message-error" : undefined} aria-invalid={Boolean(errors.message)} id="sales-message" maxLength={4000} name="message" rows={4} />{errors.message && <small className={styles.fieldError} id="sales-message-error">{errors.message}</small>}</label>
+        <label className={`${styles.field} ${styles.fullWidth}`} htmlFor="sales-message"><span>Tell us about your project and what you want to achieve *</span><textarea aria-describedby={errors.message ? "sales-message-error" : undefined} aria-invalid={Boolean(errors.message)} id="sales-message" maxLength={4000} name="message" rows={4} />{errors.message && <small className={styles.fieldError} id="sales-message-error">{errors.message}</small>}</label>
         <ConsentAndPrivacy /><SubmitArea status={status} />
       </form>
     </>
@@ -172,7 +172,7 @@ function PartnershipForm({ titleId }: { titleId: string }) {
     setStatus(await send(data, "partnership"));
   }
   if (status === "success") return <Success kind="partnership" titleId={titleId} />;
-  return <><FormHeader eyebrow="PARTNERSHIPS" title="Partner with Entimema" titleId={titleId} /><form className={styles.form} noValidate onSubmit={submit}><input name="intent" type="hidden" value="partnership" /><Honeypot id="partnership-website" /><PersonAndCompanyFields errors={errors} jobTitleRequired namePrefix="partnership-" salesPayload /><SelectField error={errors.partnershipType} id="partnership-type" label="Partnership type" name="partnershipType" options={partnershipTypes} /><MessageField error={errors.message} id="partnership-message" label="Briefly describe your proposal" /><ConsentAndPrivacy /><SubmitArea status={status} /></form></>;
+  return <><FormHeader title="Partner with Entimema" titleId={titleId} /><form className={styles.form} noValidate onSubmit={submit}><input name="intent" type="hidden" value="partnership" /><Honeypot id="partnership-website" /><PersonAndCompanyFields errors={errors} jobTitleRequired namePrefix="partnership-" salesPayload /><SelectField error={errors.partnershipType} id="partnership-type" label="Partnership type" name="partnershipType" options={partnershipTypes} /><MessageField error={errors.message} id="partnership-message" label="Briefly describe your proposal" /><ConsentAndPrivacy /><SubmitArea status={status} /></form></>;
 }
 
 function ClientForm({ titleId }: { titleId: string }) {
@@ -189,16 +189,16 @@ function ClientForm({ titleId }: { titleId: string }) {
     setStatus(await send(data, "client"));
   }
   if (status === "success") return <Success kind="client" titleId={titleId} />;
-  return <><FormHeader eyebrow="EXISTING CLIENTS" title="Existing Client Support" titleId={titleId} /><form className={styles.form} noValidate onSubmit={submit}><input name="intent" type="hidden" value="client" /><Honeypot id="client-website" /><Field error={errors.firstName} id="client-firstName" label="First name" name="firstName" required /><Field error={errors.lastName} id="client-lastName" label="Last name" name="lastName" required /><Field autoComplete="email" error={errors.email} id="client-email" label="Company email" name="companyEmail" required type="email" /><Field autoComplete="organization" error={errors.company} id="client-company" label="Company name" name="companyName" required /><Field autoComplete="tel" error={errors.phone} id="client-phone" label="Phone number" name="phoneNumber" required type="tel" /><Field id="client-project" label="Project or service" name="project" /><SelectField error={errors.inquiryType} id="client-inquiry-type" label="Inquiry type" name="inquiryType" options={clientInquiryTypes} /><MessageField error={errors.message} id="client-message" label="Description" /><Privacy /><SubmitArea status={status} /></form></>;
+  return <><FormHeader title="Existing Client Support" titleId={titleId} /><form className={styles.form} noValidate onSubmit={submit}><input name="intent" type="hidden" value="client" /><Honeypot id="client-website" /><Field error={errors.firstName} id="client-firstName" label="First name" name="firstName" required /><Field error={errors.lastName} id="client-lastName" label="Last name" name="lastName" required /><Field autoComplete="email" error={errors.email} id="client-email" label="Company email" name="companyEmail" required type="email" /><Field autoComplete="organization" error={errors.company} id="client-company" label="Company name" name="companyName" required /><Field autoComplete="tel" error={errors.phone} id="client-phone" label="Phone number" name="phoneNumber" required type="tel" /><Field id="client-project" label="Project or service" name="project" /><SelectField error={errors.inquiryType} id="client-inquiry-type" label="Inquiry type" name="inquiryType" options={clientInquiryTypes} /><MessageField error={errors.message} id="client-message" label="Description" /><ConsentAndPrivacy marketing={false} /><SubmitArea status={status} /></form></>;
 }
 
 function PersonAndCompanyFields({ errors, jobTitleRequired, namePrefix, salesPayload }: { errors: FieldErrors; jobTitleRequired: boolean; namePrefix: string; salesPayload: boolean }) {
   return <><Field error={errors.firstName} id={`${namePrefix}firstName`} label="First name" name="firstName" required /><Field error={errors.lastName} id={`${namePrefix}lastName`} label="Last name" name="lastName" required /><Field autoComplete="email" error={errors.email} id={`${namePrefix}email`} label="Company email" name={salesPayload ? "companyEmail" : "email"} required type="email" /><Field autoComplete="organization" error={errors.company} id={`${namePrefix}company`} label="Company name" name={salesPayload ? "companyName" : "company"} required /><Field autoComplete="country-name" error={errors.country} id={`${namePrefix}country`} label="Country" name="country" required /><Field autoComplete="organization-title" error={errors.role} id={`${namePrefix}role`} label="Job title" name={salesPayload ? "jobTitle" : "role"} required={jobTitleRequired} /><Field autoComplete="tel" error={errors.phone} id={`${namePrefix}phone`} label="Phone number" name={salesPayload ? "phoneNumber" : "phone"} required type="tel" /><Field id={`${namePrefix}referralSource`} label="How did you hear about Entimema?" name="referralSource" /></>;
 }
 
-function FormHeader({ eyebrow, title, titleId }: { eyebrow: string; title: string; titleId: string }) { return <header className={styles.header}><p className={styles.eyebrow}>{eyebrow}</p><h2 id={titleId}>{title}</h2></header>; }
-function Privacy() { return <p className={`${styles.privacy} ${styles.fullWidth}`}>By submitting this form, you agree that Entimema may process the information provided in order to respond to your enquiry. See our <Link href="/privacy">Privacy Policy</Link>.</p>; }
-function ConsentAndPrivacy() { return <><label className={`${styles.consent} ${styles.fullWidth}`}><input name="marketingConsent" type="checkbox" value="yes" /><span>I agree to receive other communications from Entimema.</span></label><Privacy /></>; }
+function FormHeader({ title, titleId }: { title: string; titleId: string }) { return <header className={styles.header}><h2 id={titleId}>{title}</h2></header>; }
+function Privacy() { return <p className={styles.privacy}>By submitting this form, you agree that Entimema may process the information provided in order to respond to your enquiry. See our <Link href="/privacy">Privacy Policy</Link>.</p>; }
+function ConsentAndPrivacy({ marketing = true }: { marketing?: boolean }) { return <div className={`${styles.consentArea} ${styles.fullWidth}`}>{marketing && <label className={styles.consent}><input name="marketingConsent" type="checkbox" value="yes" /><span>I agree to receive other communications from Entimema.</span></label>}<Privacy /></div>; }
 function SubmitArea({ status }: { status: Status }) { return <>{status === "error" && <p className={`${styles.submitError} ${styles.fullWidth}`} role="alert">We could not send your request. Try again or email us at <a href="mailto:office@entimema.net">office@entimema.net</a>.</p>}<button className={`${styles.submit} ${styles.fullWidth}`} disabled={status === "sending"} type="submit">{status === "sending" ? "Submitting…" : "Submit"}</button></>; }
 function Success({ kind, titleId }: { kind: ModalKind; titleId: string }) { return <div aria-live="polite" className={styles.success}><p className={styles.eyebrow}>{kind === "demo" ? "DISCOVERY REQUEST" : "ENQUIRY RECEIVED"}</p><h2 id={titleId}>{kind === "demo" ? "Thank you" : "Thank you."}</h2><p>{kind === "demo" ? "We’ve received your request and will be in touch shortly." : "We received your inquiry. We will review it and contact you about the next step."}</p></div>; }
 function Honeypot({ id }: { id: string }) { return <div className={styles.honeypot} aria-hidden="true"><label htmlFor={id}>Website</label><input autoComplete="off" id={id} name="website" tabIndex={-1} /></div>; }
