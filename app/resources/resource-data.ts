@@ -37,6 +37,8 @@ type ResourceVisualBase = {
 export type ResourceCover = ResourceVisualBase & {
   type: "generated-matrix";
   alt: string;
+  label?: string;
+  title?: string;
 } | ResourceVisualBase & {
   type: "editorial-artwork";
   src: `/resources/covers/${string}.${"png" | "jpg" | "jpeg" | "webp" | "avif"}`;
@@ -117,6 +119,25 @@ const authors = {
 } satisfies Record<string, ResourceAuthor>;
 
 export const resources: ResourceRecord[] = [
+  {
+    technicalTitle: "Credit Risk Model Validation: From Statistical Performance to Model Risk Control",
+    headline: "A High AUC Does Not Make a Credit Model Safe",
+    headlineEmphasis: "Does Not Make a Credit Model Safe",
+    slug: "credit-risk-model-validation",
+    slogan: "Model validation is an evidence architecture: a disciplined challenge of purpose, definition, data, structure, performance, implementation and decision use.",
+    sloganEmphasis: "evidence architecture",
+    author: authors.aleksandar, publishedAt: "2026-08-17", readingMinutes: 38,
+    topic: "credit-risk", stream: "insights", featured: true,
+    seoTitle: "Credit Risk Model Validation: Model Risk Control | Entimema",
+    metaDescription: "A practitioner framework for PD and credit scorecard validation across purpose, target, data, calibration, stability, implementation, use and remediation.",
+    canonicalPath: "/resources/credit-risk-model-validation",
+    openGraphTitle: "Credit Risk Model Validation: From Performance to Control",
+    openGraphDescription: "When is a credit-risk model sufficiently understood, challenged and controlled to support real decisions?",
+    relatedCapability: { label: "Credit Risk", href: "/services/credit-risk", description: "Connect model evidence, portfolio behaviour and decision use through controlled credit-risk architecture." },
+    relatedResourceSlugs: ["pd-default-definition-target-construction", "pd-model-observation-performance-windows", "pd-model-ranking-calibration", "pd-model-monitoring"],
+    status: "published", indexable: true,
+    cover: { type: "generated-matrix", motion: "trace", alt: "Seven-layer credit-risk model validation evidence architecture from purpose to controlled use.", label: "MODEL VALIDATION / EVIDENCE ARCHITECTURE", title: "PERFORMANCE × CONTROL", stages: ["Purpose", "Definition", "Evidence", "Structure", "Performance", "Implementation", "Use"] },
+  },
   {
     technicalTitle: "Credit Portfolio Monitoring Architecture: From Risk Signals to Automated Early-Warning Actions",
     headline: "A Risk Signal Is Not Yet an Early-Warning Action",
