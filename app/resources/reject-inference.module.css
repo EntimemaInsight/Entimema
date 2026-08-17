@@ -1,0 +1,9 @@
+.chain,.loop{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:1px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.1)}
+.chain span,.loop span{min-width:0;padding:1rem;background:#0b1015;display:flex;flex-direction:column;gap:.45rem;justify-content:center}
+.chain small{color:#c56e32;font-size:.7rem;letter-spacing:.12em}.chain strong,.loop span{font-size:.82rem;line-height:1.35}
+.loop{grid-template-columns:repeat(auto-fit,minmax(105px,1fr))}.loop span{text-align:center;position:relative}
+.loop span:not(:last-child)::after{content:"→";position:absolute;right:-.55rem;color:#c56e32;z-index:2}
+.support{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin:2rem 0;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.12)}
+.support article{background:#0b1015;padding:1.25rem}.support span{display:block;color:#c56e32;font-size:.68rem;letter-spacing:.15em;margin-bottom:.65rem}.support strong{display:block;font-family:var(--font-serif);font-size:1.1rem}.support p{font-size:.86rem;margin:.65rem 0 0;color:rgba(255,255,255,.68)}
+@media(max-width:900px){.frameworkFix :global(ol){min-width:0}.frameworkFix :global(li),.frameworkFix :global(li span){min-width:0;overflow-wrap:anywhere}}
+@media(max-width:760px){.chain{grid-template-columns:1fr}.chain span{flex-direction:row;align-items:center}.loop{grid-template-columns:1fr}.loop span:not(:last-child)::after{content:"↓";right:auto;bottom:-.7rem;left:50%}.support{grid-template-columns:1fr}}
