@@ -120,6 +120,25 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    technicalTitle: "From R-Based IFRS 9 ECL Calculation to an AI-Assisted Provisioning Engine",
+    headline: "From R-Based IFRS 9 ECL Calculation to an AI-Assisted Provisioning Engine",
+    headlineEmphasis: "AI-Assisted Provisioning Engine",
+    slug: "r-ifrs9-ecl-ai-assisted-provisioning",
+    slogan: "A practitioner engineering architecture for turning deterministic R-based expected credit loss calculation into controlled automation, investigation and evidence.",
+    sloganEmphasis: "controlled automation",
+    author: authors.aleksandar, publishedAt: "2026-08-17", readingMinutes: 34,
+    topic: "credit-risk", stream: "engineering", featured: true,
+    seoTitle: "R-Based IFRS 9 ECL & AI Provisioning Engine | Entimema",
+    metaDescription: "Build IFRS 9 ECL in R, then place deterministic calculation, reconciliation and movement analytics at the core of a controlled AI-assisted workflow.",
+    canonicalPath: "/resources/r-ifrs9-ecl-ai-assisted-provisioning",
+    openGraphTitle: "From R-Based IFRS 9 ECL to AI-Assisted Provisioning",
+    openGraphDescription: "What should remain deterministic in an IFRS 9 ECL process, and where can an AI Agent create genuine operational value?",
+    relatedCapability: { label: "Credit Risk", href: "/services/credit-risk", description: "Connect risk methodology, controlled computation and explainable provisioning workflows." },
+    relatedResourceSlugs: ["credit-portfolio-monitoring-architecture", "credit-risk-model-validation-pipeline", "pd-model-monitoring", "roll-rate-analysis-migration-matrices"],
+    status: "published", indexable: true,
+    cover: { type: "generated-matrix", motion: "none", alt: "Engineering publication cover for an R-based IFRS 9 ECL and AI-assisted provisioning architecture.", stages: ["Calculate", "Control", "Investigate", "Explain", "Approve"] },
+  },
+  {
     technicalTitle: "Credit Risk Model Validation Pipeline: Automating Reproducible Tests, Benchmarks and Monitoring",
     headline: "A Validation Metric Without Lineage Is Only an Observation",
     headlineEmphasis: "Without Lineage Is Only an Observation",
