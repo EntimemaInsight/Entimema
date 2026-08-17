@@ -120,6 +120,25 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    technicalTitle: "Model Calibration Drift: When a PD Model Still Ranks Risk Correctly but Predicts the Wrong Risk Level",
+    headline: "Model Calibration Drift: When a PD Model Still Ranks Risk Correctly but Predicts the Wrong Risk Level",
+    headlineEmphasis: "Wrong Risk Level",
+    slug: "model-calibration-drift-pd-risk-level",
+    slogan: "A PD model can preserve borrower ordering while becoming materially wrong about absolute risk. Calibration drift is where useful ranking and wrong probabilities coexist.",
+    sloganEmphasis: "useful ranking and wrong probabilities coexist",
+    author: authors.aleksandar, publishedAt: "2026-08-17", readingMinutes: 36, topic: "credit-risk", stream: "insights", featured: true,
+    seoTitle: "PD Model Calibration Drift & Recalibration",
+    metaDescription: "Diagnose PD calibration drift with O/E, calibration intercept and slope, segment and vintage evidence, PSI context, recalibration and redevelopment logic.",
+    canonicalPath: "/resources/model-calibration-drift-pd-risk-level",
+    openGraphTitle: "Model Calibration Drift: Correct Ranking, Wrong Risk Level",
+    openGraphDescription: "A practitioner framework for separating discrimination from calibration, diagnosing drift and governing recalibration or redevelopment.",
+    openGraphImage: "/resources/covers/model-calibration-drift.png",
+    relatedCapability: { label: "Credit Risk", href: "/services/credit-risk", description: "Validate, monitor, recalibrate and redevelop PD models with decision-useful evidence." },
+    relatedResourceSlugs: ["pd-model-ranking-calibration", "population-stability-index-credit-risk-model-monitoring", "pd-model-monitoring", "credit-scorecard-development-explainable-risk-ranking", "score-scaling-points-to-double-odds-credit-scores", "credit-vintage-analysis"],
+    status: "published", indexable: true,
+    cover: { type: "editorial-artwork", src: "/resources/covers/model-calibration-drift.png", motion: "none", alt: "Editorial artwork for Model Calibration Drift showing an ordered glass sequence intersected by a shifted luminous reference plane.", stages: ["Predicted PD", "Outcomes", "O/E", "Intercept", "Slope", "Segments", "Materiality", "Action"] },
+  },
+  {
     technicalTitle: "Population Stability Index: What Credit Risk Teams Think It Measures — and What It Actually Tells You",
     headline: "Population Stability Index: What Credit Risk Teams Think It Measures — and What It Actually Tells You",
     headlineEmphasis: "What It Actually Tells You",

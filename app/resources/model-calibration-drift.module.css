@@ -1,0 +1,3 @@
+.architecture{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:#dce3e8}.architecture span{min-width:0;background:#f8fafb;padding:1rem .55rem;display:grid;gap:.35rem}.architecture small{color:#b75c25;font-size:.6rem;letter-spacing:.1em}.architecture strong{font-size:.69rem;line-height:1.3;overflow-wrap:anywhere}.comparison{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:#dce3e8}.comparison div{background:#f8fafb;padding:1rem}.comparison small{display:block;color:#b75c25;text-transform:uppercase;font-size:.62rem;letter-spacing:.08em}.comparison strong{display:block;margin:.35rem 0}
+@media(max-width:900px){.architecture{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:560px){.architecture,.comparison{grid-template-columns:1fr}}
