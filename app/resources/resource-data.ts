@@ -120,6 +120,26 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    technicalTitle: "IFRS 9 Expected Credit Loss: From PD, LGD and EAD to a Decision-Useful ECL Architecture",
+    headline: "Expected Credit Loss Is a Measurement System, Not a Formula",
+    headlineEmphasis: "a Measurement System, Not a Formula",
+    slug: "ifrs-9-expected-credit-loss-architecture",
+    slogan: "Connect credit state, lifetime PD, recoveries, exposure, scenarios and discounting into one coherent allowance and an explanation management can use.",
+    sloganEmphasis: "one coherent allowance",
+    author: authors.aleksandar, publishedAt: "2026-08-17", readingMinutes: 47,
+    topic: "credit-risk", stream: "insights", featured: true,
+    seoTitle: "IFRS 9 Expected Credit Loss: ECL Architecture | Entimema",
+    metaDescription: "A practitioner IFRS 9 ECL framework connecting staging, marginal PD, LGD, EAD, scenarios, discounting, attribution, validation and reporting.",
+    canonicalPath: "/resources/ifrs-9-expected-credit-loss-architecture",
+    openGraphTitle: "IFRS 9 Expected Credit Loss: From Parameters to Decision-Useful ECL",
+    openGraphDescription: "Why coherent staging, time alignment, scenarios and attribution matter more than a simplified PD × LGD × EAD formula.",
+    openGraphImage: "/resources/covers/ifrs-9-expected-credit-loss-architecture.png",
+    relatedCapability: { label: "Credit Risk", href: "/services/credit-risk", description: "Connect IFRS 9 risk parameters, validation, portfolio diagnosis and impairment evidence." },
+    relatedResourceSlugs: ["pd-default-definition-target-construction", "credit-risk-model-validation", "model-calibration-drift-pd-risk-level", "credit-vintage-analysis", "pd-model-monitoring", "r-ifrs9-ecl-ai-assisted-provisioning"],
+    status: "published", indexable: true,
+    cover: { type: "editorial-artwork", src: "/resources/covers/ifrs-9-expected-credit-loss-architecture.png", motion: "none", alt: "Multiple translucent future credit-loss paths converge through one precise illuminated present-value measurement plane.", stages: ["Risk State", "Time", "Scenarios", "Expected Loss", "Attribution"] },
+  },
+  {
     technicalTitle: "Credit Risk Model Validation: From Performance Metrics to Evidence That a Model Is Fit for Decisioning",
     headline: "Passing Metrics Is Not the Same as Validating a Model",
     headlineEmphasis: "Not the Same as Validating a Model",
