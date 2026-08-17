@@ -141,8 +141,6 @@
 .engineeringArticleCover { width: min(1120px, calc(100% - 96px)); }
 .engineeringHeroCover { min-height: 0; aspect-ratio: 3 / 2; justify-content: flex-start; padding: clamp(42px, 6vw, 88px) clamp(42px, 6vw, 88px) clamp(108px, 11vw, 154px); }
 .engineeringHeroCover .engineeringCoverTitle { font-size: clamp(42px, 5.25vw, 76px); }
-.engineeringHeroTitleLong.engineeringHeroCover .engineeringCoverTitle { font-size: clamp(36px, 4.4vw, 62px); }
-.engineeringHeroTitleVeryLong.engineeringHeroCover .engineeringCoverTitle { font-size: clamp(30px, 3.6vw, 52px); line-height: 1.08; }
 .engineeringHeroCover .engineeringBrand { bottom: clamp(28px, 4vw, 58px); left: clamp(28px, 4vw, 64px); }
 .engineeringHeroCover .engineeringBrandMark { width: clamp(30px, 3vw, 42px); }
 .engineeringHeroCover .engineeringWordmark { font-size: clamp(17px, 1.8vw, 24px); }
@@ -483,8 +481,6 @@
 @media (max-width: 600px) {
   .engineeringHeroCover { aspect-ratio: 4 / 5; padding: 52px 28px 112px; }
   .engineeringHeroCover .engineeringCoverTitle { font-size: clamp(33px, 9vw, 38px); }
-  .engineeringHeroTitleLong.engineeringHeroCover .engineeringCoverTitle { font-size: clamp(29px, 8vw, 34px); }
-  .engineeringHeroTitleVeryLong.engineeringHeroCover .engineeringCoverTitle { font-size: clamp(25px, 7.2vw, 31px); line-height: 1.1; }
 }
 
 @media (prefers-reduced-motion: reduce) {

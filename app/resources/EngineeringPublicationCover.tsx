@@ -6,18 +6,8 @@ type EngineeringPublicationCoverProps = {
 };
 
 export default function EngineeringPublicationCover({ title, size }: EngineeringPublicationCoverProps) {
-  // Article covers retain their established responsive treatment. Card covers,
-  // however, deliberately have no content-dependent presentation: every title
-  // is rendered by the single Engineering card typography rule.
-  const heroTitleLength = size === "hero" ? Array.from(title.trim()).length : 0;
-  const heroTitleDensity = heroTitleLength > 76
-    ? styles.engineeringHeroTitleVeryLong
-    : heroTitleLength > 52
-      ? styles.engineeringHeroTitleLong
-      : "";
-
   return (
-    <div className={`${styles.engineeringCover} ${size === "hero" ? styles.engineeringHeroCover : styles.engineeringCardCover} ${heroTitleDensity}`}>
+    <div className={`${styles.engineeringCover} ${size === "hero" ? styles.engineeringHeroCover : styles.engineeringCardCover}`}>
       {size === "hero"
         ? <h1 className={styles.engineeringCoverTitle}>{title}</h1>
         : <p className={styles.engineeringCoverCardTitle}>{title}</p>}
