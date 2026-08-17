@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny-ps" viewBox="0 0 1024 1024">
+  <title>Entimema</title>
+  <rect x="48" y="48" width="928" height="928" rx="224" fill="#071b52"/>
+  <path fill="#fff" d="M272 288h480v96H400v64h288v96H400v96h352v96H272z"/>
+</svg>
