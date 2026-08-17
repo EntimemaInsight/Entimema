@@ -3,14 +3,13 @@ import { DecisionImplication, EntimemaFramework, Formula, KeyObservation, Resour
 import styles from "./early-warning-indicators.module.css";
 
 export const earlyWarningIndicatorsSections = [
-  { id: "meaning", label: "Signal, warning and action" }, { id: "time", label: "The temporal architecture" },
-  { id: "architecture", label: "Five-layer signal architecture" }, { id: "indicator-families", label: "Indicator families" },
-  { id: "thresholds", label: "Threshold and evidence logic" }, { id: "borrower", label: "Six-month borrower example" },
-  { id: "lead-time", label: "Accuracy and lead time" }, { id: "capacity", label: "Alert fatigue and priority" },
-  { id: "case", label: "From alert to case" }, { id: "actionability", label: "The actionability test" },
-  { id: "boundaries", label: "Analytical boundaries" }, { id: "portfolio", label: "Portfolio connections" },
-  { id: "monitoring", label: "Performance monitoring" }, { id: "diagnostic", label: "EWI diagnostic matrix" },
-  { id: "resolve", label: "Controlled decision intelligence" },
+  { id: "meaning", label: "Indicator to decision" }, { id: "time", label: "Level, change and acceleration" },
+  { id: "indicator-families", label: "Three warning layers" }, { id: "architecture", label: "Baselines and signal strength" },
+  { id: "thresholds", label: "Threshold architecture" }, { id: "portfolio-example", label: "150,000-borrower example" },
+  { id: "lead-time", label: "Lead time and error cost" }, { id: "capacity", label: "Alert fatigue and priority" },
+  { id: "portfolio", label: "Roll rates and vintages" }, { id: "system", label: "System architecture" },
+  { id: "monitoring", label: "Feedback and performance" }, { id: "failures", label: "Failure modes" },
+  { id: "automation", label: "Credit Early Warning Agent" },
 ] as const;
 
 const signalLayers = [
@@ -21,7 +20,7 @@ const signalLayers = [
 export default function EarlyWarningIndicatorsArticle() {
   return <>
     <p className={styles.lead}>Default is a late event. By the time severe delinquency makes deterioration obvious, much of the useful intervention window may already have disappeared. But reacting to every fluctuation creates false positives, customer friction, operating cost and analyst fatigue. The design problem is not simply to detect change. It is to distinguish <strong>signal from noise early enough to act</strong>.</p>
-    <KeyObservation>An early-warning system should not predict what is already obvious. Its value lies in identifying a meaningful change in risk while there is still time to act.</KeyObservation>
+    <KeyObservation>The purpose of an early-warning system is not to predict every default. It is to detect meaningful deterioration early enough for a different decision to still matter.</KeyObservation>
     <p>The transformation is operational as well as analytical: <strong>borrower or portfolio behaviour → indicator → change detection → severity → persistence → confirmation → alert → prioritisation → investigation → intervention → outcome</strong>. Each link prevents a measurement from being mistaken for a decision.</p>
 
     <ResourceFigure label="Early-warning timeline from normal behaviour to default, with an intervention window after confirmed warning." caption="The useful intervention window begins when evidence is strong enough to justify action and closes as default becomes unavoidable or already observed.">
@@ -35,11 +34,12 @@ export default function EarlyWarningIndicatorsArticle() {
       <h2>A measurement becomes valuable only through interpretation</h2>
       <p>An <strong>early-warning indicator (EWI)</strong> is a measurable condition or change associated with an increased probability of future credit deterioration. Association is not destiny, and an indicator is not itself an instruction.</p>
       <div className={styles.conceptGrid}>
-        <article><span>01</span><h3>Risk factor</h3><p>A structural source of vulnerability: for example, high leverage.</p></article>
-        <article><span>02</span><h3>Risk signal</h3><p>New information: leverage is rising rapidly relative to the borrower&apos;s baseline.</p></article>
-        <article><span>03</span><h3>Warning</h3><p>A judgement: persistent leverage deterioration is confirmed by liquidity stress.</p></article>
-        <article><span>04</span><h3>Action</h3><p>A governed response: enhanced monitoring or analyst review is initiated.</p></article>
+        <article><span>01</span><h3>Indicator</h3><p>A measurable variable, such as payment ratio or Current → 1–30 migration.</p></article>
+        <article><span>02</span><h3>Signal</h3><p>An observed change carrying potential information relative to a baseline.</p></article>
+        <article><span>03</span><h3>Trigger</h3><p>A predefined condition that opens investigation or escalation.</p></article>
+        <article><span>04</span><h3>Alert</h3><p>The operational output routed to a named decision owner.</p></article>
       </div>
+      <p>A <strong>decision</strong> is the accountable action—or explicit non-action—after evidence, economics and customer context are interpreted. A portfolio with hundreds of indicators but no trigger logic, owner or decision pathway does not have a functioning early-warning system.</p>
       <p>Collapsing these concepts produces brittle systems. A high-risk state may deserve monitoring without representing new deterioration. A signal may be statistically unusual but economically immaterial. A warning may be valid while no proportionate action exists.</p>
       <DecisionImplication>The strongest warning signal is often not the level of a variable, but a change in its trajectory, velocity or persistence.</DecisionImplication>
     </section>
@@ -47,6 +47,7 @@ export default function EarlyWarningIndicatorsArticle() {
     <section id="time">
       <h2>State and change answer different questions</h2>
       <Formula label="Borrower state and change over a lookback of k periods"><span>X<sub>i,t</sub> &nbsp;&nbsp; | &nbsp;&nbsp; ΔX<sub>i,t</sub> = X<sub>i,t</sub> − X<sub>i,t−k</sub></span></Formula>
+      <Formula label="Acceleration in the risk indicator"><span>Δ²X<sub>i,t</sub> = ΔX<sub>i,t</sub> − ΔX<sub>i,t−1</sub></span></Formula>
       <p><strong>X<sub>i,t</sub></strong> describes borrower i&apos;s current state at time t. <strong>ΔX<sub>i,t</sub></strong> describes its direction over a defined interval k. They are complementary, not interchangeable.</p>
       <div className={styles.dimensionGrid}>
         <article><b>LEVEL</b><p>Where is risk now? High utilisation, leverage, weak liquidity or delinquency matter because they describe current vulnerability. A high but long-stable level, however, may not be an early signal.</p></article>
@@ -58,7 +59,18 @@ export default function EarlyWarningIndicatorsArticle() {
     </section>
 
     <section id="architecture">
-      <h2>The Entimema Signal Architecture</h2>
+      <h2>Baselines turn observations into interpretable deviations</h2>
+      <Formula label="Observed deviation from a governed comparator"><span>Deviation<sub>i,t</sub> = X<sub>i,t</sub> − Baseline(X<sub>i</sub>)</span></Formula>
+      <ResourceTable caption="Baselines answer different diagnostic questions" headers={["Baseline","Comparison","Use"]} rows={[
+        ["Borrower","The borrower's own history","Detects departure from established behaviour"],
+        ["Segment","Economically similar borrowers","Controls for product and risk-profile differences"],
+        ["Portfolio","The broader managed book","Locates local versus broad movement"],
+        ["Vintage","Equivalent months on book","Separates seasoning from origination quality"],
+        ["Seasonal","Comparable calendar periods","Prevents recurring payment patterns becoming alerts"],
+      ]}/>
+      <h3>Signal strength is multidimensional</h3>
+      <Formula label="Entimema signal-strength architecture"><span>SignalStrength = f(Magnitude, Persistence, Acceleration, Breadth, Materiality)</span></Formula>
+      <p><strong>Magnitude</strong> measures distance from expectation; <strong>persistence</strong> asks whether it survives time; <strong>acceleration</strong> asks whether deterioration is becoming faster; <strong>breadth</strong> asks whether independent indicators or populations corroborate it; and <strong>materiality</strong> connects the evidence to meaningful borrowers, exposure and potential loss. No single dimension can substitute for the others.</p>
       <EntimemaFramework title="Signal → Severity → Persistence → Confirmation → Action" description="Five analytical gates keep observations separate from governed responses." steps={["Signal — what changed?", "Severity — how material is the change?", "Persistence — does it continue?", "Confirmation — is other evidence supportive?", "Action — what should happen next?"]}/>
       <ResourceFigure label="Vertical early-warning architecture moving from signal through severity, persistence, confirmation and priority to action." caption="Priority is the operational bridge: confirmed evidence must still be ranked against exposure, confidence and capacity.">
         <div className={styles.signalStack}>{signalLayers.map(([name,question], index)=><div key={name}><span>{index + 1}</span><p><b>{name}</b><small>{question}</small></p>{index < signalLayers.length - 1 ? <i>↓</i> : null}</div>)}</div>
@@ -67,7 +79,14 @@ export default function EarlyWarningIndicatorsArticle() {
     </section>
 
     <section id="indicator-families">
-      <h2>Indicators are mechanisms, not a catalogue</h2>
+      <h2>Three analytical layers should remain distinguishable</h2>
+      <div className={styles.threeLayers}>
+        <article><span>LAYER I</span><h3>Borrower behaviour</h3><p>Payment delays, failed attempts, utilisation, payment ratios, minimum payments and repeat short delinquency.</p></article>
+        <article><span>LAYER II</span><h3>Portfolio dynamics</h3><p>Roll-forward, cure, persistence, vintage curves, risk-grade migration and concentrated segment deterioration.</p></article>
+        <article><span>LAYER III</span><h3>External context</h3><p>Macroeconomic, rate, sector, regional and affordability stress where the data and use case justify them.</p></article>
+      </div>
+      <p>These layers operate at different frequencies and levels of specificity. Pooling them into one arbitrary score can disguise mechanism, double-count common drivers and make an alert impossible to explain. Use contextual evidence to change priors and diagnostic focus, not to impersonate borrower-specific facts.</p>
+      <h3>Indicators are mechanisms, not a catalogue</h3>
       <h3>Behavioural evidence can reveal cash constraint before formal default</h3>
       <p>Payment deterioration, repeated minimum payments, declining payment-to-balance ratios and failed payment attempts can indicate reduced repayment capacity or prioritisation of other obligations. Rising utilisation and repeated limit pressure can indicate shrinking liquidity headroom. Transaction decline may add context where the institution has a legitimate, stable view of relevant flows. Rising delinquency is stronger evidence, but progressively later.</p>
       <p>The mechanism matters. A one-off failed direct debit followed by immediate cure is unlike repeated failures combined with lower payments and rising balances. Product design also matters: minimum payment behaviour in revolving credit has no direct equivalent in an amortising loan.</p>
@@ -87,6 +106,32 @@ export default function EarlyWarningIndicatorsArticle() {
       <p>Combined logic can suppress stable high-level cases and small changes from benign levels. AND, OR, baseline-relative and segment-specific combinations answer different questions; none is universally best.</p>
       <Formula label="Evidence across k indicators"><span>Evidence<sub>i</sub> = f(Signal<sub>1i</sub>, Signal<sub>2i</sub>, …, Signal<sub>ki</sub>)</span></Formula>
       <p>An utilisation increase, payment deterioration and sector shock may provide stronger evidence together than alone—if they contain distinct information. Rising utilisation, lower available credit and higher balance-to-limit ratio are mostly three expressions of one balance/limit relationship. Counting alerts is not equivalent to accumulating independent evidence. Indicator lineage, correlation analysis and causal interpretation should identify clusters before aggregation.</p>
+      <ResourceTable caption="Threshold forms encode different assumptions" headers={["Threshold","Form","Strength and limitation"]} rows={[
+        ["Absolute","Xₜ > c","Transparent; ignores baseline and local volatility"],
+        ["Relative","Xₜ > Baseline + δ","Detects change; depends on baseline quality"],
+        ["Standardised","Zₜ = (Xₜ − μ) / σ","Scales unusualness; unstable σ can mislead"],
+        ["Percentile","Xₜ above historical percentile","Robust to units; history may represent another regime"],
+        ["Segment-specific","c = c(segment)","Improves comparability; sparse segments become unstable"],
+        ["Dynamic","cₜ changes with context","Adapts to regime; harder to govern and explain"],
+      ]}/>
+      <Formula label="Persistence over the last k observations"><span>Persistence<sub>i</sub>(k) = ∑<sub>h=0</sub><sup>k−1</sup> I(Signal<sub>i,t−h</sub> &gt; Threshold)</span></Formula>
+      <p>Requiring persistence can reduce false alerts, but it also spends lead time. The correct requirement depends on the indicator&apos;s volatility, observation cadence, contemplated intervention and cost of waiting. Thresholds therefore encode economics and operational capacity, not statistics alone.</p>
+    </section>
+
+    <section id="portfolio-example">
+      <h2>A stable headline can conceal concentrated upstream deterioration</h2>
+      <p>Consider an original fictional portfolio of <strong>150,000 active consumer-lending borrowers</strong>. Over four months, the reported default rate remains broadly stable because recoveries and write-offs still offset new entries. A static executive dashboard could conclude that portfolio quality is unchanged. The upstream evidence says otherwise.</p>
+      <ResourceTable caption="Original four-month early-warning example" headers={["Indicator","Month 1","Month 2","Month 3","Month 4","Warning interpretation"]} rows={[
+        ["Headline default rate","3.20%","3.18%","3.22%","3.24%","Broadly stable and late"],
+        ["Current → 1–30","3.8%","4.1%","4.8%","5.5%","Magnitude, persistence and acceleration"],
+        ["1–30 → Current cure","34%","32%","28%","24%","Recovery capacity is weakening"],
+        ["Median revolving utilisation","47%","48%","51%","55%","Liquidity headroom is compressing"],
+        ["Repeat short delinquency","6.2%","6.5%","7.4%","8.6%","Breadth across borrower histories"],
+        ["Recent vintages V7–V8: 30+ at MOB 6","4.9%","5.4%","6.3%","7.1%","Deterioration is concentrated"],
+      ]}/>
+      <div className={styles.portfolioVerdict}><article><span>STATIC DASHBOARD</span><b>Portfolio remains stable</b><p>Default stock moved by only four basis points.</p></article><article><span>EARLY-WARNING ARCHITECTURE</span><b>Upstream deterioration is emerging</b><p>Independent migration, cure, utilisation and repeat-delinquency evidence is persistent and concentrated in V7–V8.</p></article></div>
+      <p>The conclusion is an investigation hypothesis, not a causal verdict. First, reproduce transitions for V7–V8 at comparable months on book. Then split by product, channel, score band and policy version; reconcile growth and exposure; inspect treatment and payment-failure data; test seasonality; and determine whether the pattern survives account- and EAD-weighted views.</p>
+      <DecisionImplication>Default stability does not invalidate the warning. It defines the available lead time before upstream movement reaches the terminal stock.</DecisionImplication>
     </section>
 
     <section id="borrower">
@@ -110,6 +155,9 @@ export default function EarlyWarningIndicatorsArticle() {
       </ResourceFigure>
       <h3>Error costs are asymmetric</h3>
       <p>A <strong>false positive</strong> consumes analyst time, can create customer friction and collections cost, displaces other cases and contributes to fatigue. A <strong>false negative</strong> loses an intervention opportunity, delays collections or limit action and may increase eventual loss. Maximum detection is not a sensible objective without the costs of both errors and the economics of the proposed action.</p>
+      <ResourceTable caption="Early warning as a decision system" headers={["Decision","Deterioration occurs","No deterioration"]} rows={[["Alert","True positive","False positive"],["No alert","False negative","True negative"]]}/>
+      <Formula label="Simplified asymmetric error cost"><span>Expected Cost = C<sub>FP</sub>P(FP) + C<sub>FN</sub>P(FN)</span></Formula>
+      <p>The optimal threshold depends on intervention cost, exposure, severity, operational capacity, customer impact and the value of acting early. Predictive strength is not intervention value: a weaker signal with several weeks of usable lead time can be economically superior to excellent discrimination two days before default.</p>
     </section>
 
     <section id="capacity">
@@ -118,7 +166,9 @@ export default function EarlyWarningIndicatorsArticle() {
       <p>When incoming alerts materially exceed review capacity, even technically valid signals become operationally useless. Queues age, severe cases are obscured, review quality falls and staff learn to distrust the system. Alert volume is therefore a design constraint. Early warning requires <strong>detection + prioritisation</strong>.</p>
       <Formula label="Conceptual alert-priority function"><span>Priority<sub>i</sub> = f(Severity<sub>i</sub>, Persistence<sub>i</sub>, Exposure<sub>i</sub>, SignalConfidence<sub>i</sub>, ExpectedDeterioration<sub>i</sub>)</span></Formula>
       <Formula label="Simplified economic impact principle"><span>ExpectedImpact ≈ RiskChange × Exposure</span></Formula>
+      <Formula label="Conceptual alert-value ratio"><span>Alert Value ≈ Actionable Signals / Total Alerts</span></Formula>
       <p>These expressions organise judgement; they are not universal scoring formulae. A €1,000 exposure and a €5 million exposure can carry similar warning evidence but require different operational priority. Conversely, exposure should not erase customer-treatment standards or make a weak signal appear certain. Queue design should preserve both risk confidence and economic consequence.</p>
+      <p>Suppress exact duplicates, group correlated indicators into families, define cooldown periods for unchanged cases, and escalate only when severity or evidence changes. Fifty correlated indicators are not fifty independent confirmations. Hierarchical signals, carefully governed composites or dimensionality reduction can reduce redundancy, but explainability and mechanism should survive the compression.</p>
     </section>
 
     <section id="case">
@@ -153,14 +203,37 @@ export default function EarlyWarningIndicatorsArticle() {
     <section id="portfolio">
       <h2>Borrower warnings belong inside a portfolio lifecycle</h2>
       <h3>Migration reveals changing transition behaviour</h3>
-      <p><Link href="/resources/roll-rate-analysis-migration-matrices">Roll Rate Analysis and Migration Matrices</Link> can expose rising roll-forward rates, falling cure rates, increasing delinquency persistence and acceleration into deeper states before aggregate defaults fully respond. Migration analysis diagnoses a change in state-transition behaviour; EWI architecture converts it into <strong>migration → signal → alert → action</strong>.</p>
+      <p><Link href="/resources/roll-rate-analysis-migration-matrices">Roll Rate Analysis: How Credit Portfolios Deteriorate Before Default</Link> can expose rising roll-forward rates, falling cure rates, increasing delinquency persistence and acceleration into deeper states before aggregate defaults fully respond. Migration analysis diagnoses a change in state-transition behaviour; EWI architecture converts it into <strong>migration → baseline → deviation → persistent signal → alert → action</strong>.</p>
+      <Formula label="A transition deviation used as a portfolio signal"><span>Signal<sub>ij,t</sub> = RR<sub>ij,t</sub> − Baseline(RR<sub>ij</sub>)</span></Formula>
+      <p>Current → 1–30 usually offers more lead time than 61–90 → Default, but also more uncertainty. Cure deterioration and delinquency persistence can provide distinct evidence about resolution capacity. Warning horizon therefore belongs in every transition definition.</p>
       <h3>Vintage comparison controls for seasoning</h3>
       <Formula label="Illustrative same-seasoning vintage deterioration"><span>DR<sub>Vintage B</sub>(MOB<sub>6</sub>) &gt; DR<sub>Vintage A</sub>(MOB<sub>6</sub>)</span></Formula>
       <p><Link href="/resources/credit-vintage-analysis">Credit Vintage Analysis</Link> compares cohorts at equivalent months on book. Worse delinquency or migration at MOB 6 can signal underwriting, acquisition, product or environmental deterioration without confusing it with different seasoning. It identifies a portfolio hypothesis to investigate, not a cause by itself.</p>
+      <Formula label="Early-warning behaviour for vintage v at time t"><span>EWI<sub>v,t</sub> = f(Migration<sub>v,t</sub>, Cure<sub>v,t</sub>, Utilisation<sub>v,t</sub>, RepeatDelinquency<sub>v,t</sub>)</span></Formula>
+      <p>Vintage × EWI analysis distinguishes broad portfolio stress from a weak origination cohort, policy change, acquisition channel, scorecard shift or pricing regime. Further segmentation by product, risk grade, score band, customer type, exposure, justified geography and collections treatment adds resolution—but every split spends sample size. The control trade-off remains <strong>diagnostic resolution ↔ statistical stability</strong>.</p>
       <h3>Monitoring the model and monitoring risk are different</h3>
       <p><Link href="/resources/pd-model-monitoring">PD Model Monitoring</Link> asks whether a model remains discriminating, calibrated, stable and operationally sound. Early warning asks whether borrower or portfolio risk is changing. Drift can affect both, but neither conclusion proves the other.</p>
       <h3>Origination begins the lifecycle; warning continues it</h3>
       <p>A <Link href="/resources/credit-decision-engine-architecture">Credit Decision Engine</Link> asks whether to accept risk and under what terms. Early warning later asks whether accepted risk has changed enough to require action: <strong>origination → decision → monitoring → warning → intervention</strong>.</p>
+    </section>
+
+    <section id="system">
+      <h2>The Entimema Early Warning System Architecture</h2>
+      <p>The system must preserve an evidence trail from raw observation to outcome. Each stage narrows or enriches the population; none should silently convert correlation into causation or an alert into an adverse credit decision.</p>
+      <ResourceFigure label="Responsive twelve-stage early warning system architecture from data through outcome feedback." caption="The architecture separates measurement, comparison, prioritisation and accountable intervention so every alert remains traceable to evidence and outcome.">
+        <div className={styles.systemArchitecture}>{[
+          ["01","Data","Borrower, account, portfolio and context"], ["02","Indicators","Governed measurable variables"],
+          ["03","Baselines","Borrower, segment, portfolio, vintage, season"], ["04","Deviations","Level, change and acceleration"],
+          ["05","Persistence","Noise versus repeated departure"], ["06","Signal fusion","Independent evidence, redundancy controlled"],
+          ["07","Materiality","Exposure, population and loss consequence"], ["08","Prioritisation","Rank within operational capacity"],
+          ["09","Diagnosis","Locate mechanism and affected population"], ["10","Decision","Owned action or explicit non-action"],
+          ["11","Intervention","Proportionate, permitted treatment"], ["12","Outcome feedback","Effect, cost, customer impact, recalibration"],
+        ].map(([n,h,p])=><article key={n}><span>{n}</span><strong>{h}</strong><small>{p}</small></article>)}</div>
+      </ResourceFigure>
+      <EntimemaFramework title="Observe → Compare → Diagnose → Prioritise → Decide → Intervene → Learn" description="The operating logic that converts monitoring into a controlled portfolio-risk system." steps={["Observe", "Compare", "Diagnose", "Prioritise", "Decide", "Intervene", "Learn"]}/>
+      <h3>Decision ownership is part of the model</h3>
+      <p>Every warning needs an owner, interpretation logic, permitted actions, escalation route, review frequency and outcome record. Low-severity evidence may justify enhanced monitoring or a reminder; moderate evidence may justify diagnostic review, segmentation or targeted engagement; high-severity evidence may justify strategy escalation, exposure review or restructuring assessment. These are hypotheses, not universal rules: product, regulation, economics and customer context govern the response.</p>
+      <KeyObservation>A signal without an owner is information. A signal connected to an accountable decision is risk management.</KeyObservation>
     </section>
 
     <section id="monitoring">
@@ -178,6 +251,36 @@ export default function EarlyWarningIndicatorsArticle() {
       <p>If a flagged borrower cures after contact or restructuring, the original warning was not necessarily false: intervention may have changed the outcome. Naive precision labels successful treatment as error. Evaluation must separate <strong>prediction performance</strong> from <strong>intervention effectiveness</strong>, retain action timing and type, and—where feasible—use controlled or carefully designed causal comparisons.</p>
       <h3>Champion and challenger logic should compete on decision value</h3>
       <p>The champion is current warning logic. Challengers can vary thresholds, persistence requirements, indicator combinations or priority rules. Compare detection, false positives, lead time, operational load and eventual outcomes on the same eligible populations and event definitions. A challenger with slightly lower headline precision may be superior if it adds usable lead time without overwhelming capacity.</p>
+      <EntimemaFramework title="Signal → Alert → Decision → Intervention → Outcome → Evaluation → Recalibration" description="Warning logic earns its place by demonstrating useful outcomes, not by accumulating rules." steps={["Signal", "Alert", "Decision", "Intervention", "Outcome", "Evaluation", "Recalibration"]}/>
+      <p>Evaluation should track conversion to deterioration and default, cures and stabilisation, avoided loss where it can be credibly estimated, intervention cost, customer impact, false-alert rate, lead time and operational utilisation. Without this loop, rules accumulate while evidence of value does not.</p>
+    </section>
+
+    <section id="failures">
+      <h2>Failure modes that turn warning into noise</h2>
+      <ResourceTable caption="Fifteen design failures and their mechanisms" headers={["Failure mode","Why the system fails"]} rows={[
+        ["Too many indicators","Review capacity is consumed and redundant evidence masquerades as breadth"],
+        ["No baseline","Normal variation is indistinguishable from deterioration"],
+        ["Static thresholds","Borrower history, segment volatility and regime change are ignored"],
+        ["Seasonality ignored","Recurring calendar behaviour becomes a structural alert"],
+        ["Level confused with change","Stable high risk is mixed with newly accelerating risk"],
+        ["One-period reaction","Noise triggers cost and customer friction"],
+        ["Excessive persistence","False alerts fall, but actionable lead time is spent"],
+        ["Vintage effects ignored","Seasoning or one weak cohort distorts portfolio interpretation"],
+        ["Exposure ignored","Statistical change is prioritised without economic consequence"],
+        ["Correlated duplicates","One underlying driver generates repeated escalation"],
+        ["No decision owner","Alerts become unworked information"],
+        ["No intervention capacity","Queues age and valuable cases lose their lead time"],
+        ["No outcome feedback","Rules persist without evidence that action created value"],
+        ["Prediction optimised","Discrimination improves while intervention value deteriorates"],
+        ["Default monitored, not pathway","The system becomes accurate only after useful action is late"],
+      ]}/>
+    </section>
+
+    <section id="automation">
+      <h2>A Credit Early Warning Agent can support continuous monitoring—not autonomous adverse decisions</h2>
+      <p>A future <strong>Credit Early Warning Agent</strong> could ingest periodic portfolio data, calculate approved indicators, maintain borrower, segment and vintage baselines, detect deviations, test persistence, identify correlated evidence, assess exposure materiality, rank alerts and assemble diagnostic evidence for human review.</p>
+      <p>Its role is <strong>continuous monitoring + prioritisation + diagnostic decision support</strong>. Deterministic calculation, governed thresholds, permissions, human review and outcome lineage should remain explicit. The Agent should not autonomously make adverse credit decisions or infer causality from correlation.</p>
+      <p>This is a strong recurring use case because deterioration must be monitored continuously and the workflow is repetitive, data-intensive and capacity-constrained. Entimema&apos;s <Link href="/services/credit-risk">Credit Risk</Link> practice connects warning methodology, portfolio monitoring, treatment strategy and controlled automation.</p>
     </section>
 
     <section id="diagnostic">
