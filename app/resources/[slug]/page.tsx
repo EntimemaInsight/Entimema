@@ -15,6 +15,7 @@ import ErpManagementIntelligenceArticle, { erpIntelligenceSections } from "../Er
 import LogisticRegressionScorecardArticle, { logisticRegressionScorecardSections } from "../LogisticRegressionScorecardArticle";
 import CreditRiskCutOffArticle, { creditRiskCutOffSections } from "../CreditRiskCutOffArticle";
 import CreditDecisionEngineArticle, { creditDecisionEngineSections } from "../CreditDecisionEngineArticle";
+import RollRateMigrationArticle, { rollRateMigrationSections } from "../RollRateMigrationArticle";
 import { getPublishedResource, getTopic, publishedResources, resourceStreams } from "../resource-data";
 import { FOUNDER_ID, ORGANIZATION_ID, SITE_URL, WEBSITE_ID, createBreadcrumbSchema, serializeJsonLd } from "@/lib/structured-data";
 
@@ -80,7 +81,7 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
           { "@type": "Thing", name: topic?.label ?? resource.topic },
           { "@type": "Thing", name: resource.technicalTitle },
         ],
-        image: `${SITE_URL}${resource.openGraphImage ?? resource.cover.src}`,
+        ...("src" in resource.cover ? { image: `${SITE_URL}${resource.openGraphImage ?? resource.cover.src}` } : {}),
       },
       {
         "@type": "WebPage",
@@ -113,12 +114,13 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
   const isLogisticRegressionScorecard = resource.slug === "logistic-regression-credit-risk-scorecards";
   const isCreditRiskCutOff = resource.slug === "credit-risk-cut-off-strategy";
   const isCreditDecisionEngine = resource.slug === "credit-decision-engine-architecture";
+  const isRollRateMigration = resource.slug === "roll-rate-analysis-migration-matrices";
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(articleSchema) }} />
-      <ResourceArticle resource={resource} sections={isCreditDecisionEngine ? [...creditDecisionEngineSections] : isCreditRiskCutOff ? [...creditRiskCutOffSections] : isLogisticRegressionScorecard ? [...logisticRegressionScorecardSections] : isPdDefaultDefinition ? [...pdDefaultDefinitionSections] : isPdModelTimeArchitecture ? [...pdModelTimeArchitectureSections] : isPdModelRecalibration ? [...pdModelRecalibrationSections] : isPdModelMonitoring ? [...pdModelMonitoringSections] : isErpIntelligence ? [...erpIntelligenceSections] : isPdModelCalibration ? [...pdModelCalibrationSections] : isHighGiniCreditDecision ? [...highGiniCreditDecisionSections] : isCreditVintage ? [...creditVintageSections] : isOperationalForecast ? [...operationalForecastSections] : isWorkingCapital ? [...workingCapitalSections] : [...manufacturingCostSections]}>
-        {isCreditDecisionEngine ? <CreditDecisionEngineArticle /> : isCreditRiskCutOff ? <CreditRiskCutOffArticle /> : isLogisticRegressionScorecard ? <LogisticRegressionScorecardArticle /> : isPdDefaultDefinition ? <PdDefaultDefinitionArticle /> : isPdModelTimeArchitecture ? <PdModelTimeArchitectureArticle /> : isPdModelRecalibration ? <PdModelRecalibrationArticle /> : isPdModelMonitoring ? <PdModelMonitoringArticle /> : isErpIntelligence ? <ErpManagementIntelligenceArticle /> : isPdModelCalibration ? <PdModelCalibrationArticle /> : isHighGiniCreditDecision ? <HighGiniCreditDecisionArticle /> : isCreditVintage ? <CreditVintageAnalysisArticle /> : isOperationalForecast ? <OperationalDriverForecastingArticle /> : isWorkingCapital ? <WorkingCapitalArticle /> : <ManufacturingCostArticle />}
+      <ResourceArticle resource={resource} sections={isRollRateMigration ? [...rollRateMigrationSections] : isCreditDecisionEngine ? [...creditDecisionEngineSections] : isCreditRiskCutOff ? [...creditRiskCutOffSections] : isLogisticRegressionScorecard ? [...logisticRegressionScorecardSections] : isPdDefaultDefinition ? [...pdDefaultDefinitionSections] : isPdModelTimeArchitecture ? [...pdModelTimeArchitectureSections] : isPdModelRecalibration ? [...pdModelRecalibrationSections] : isPdModelMonitoring ? [...pdModelMonitoringSections] : isErpIntelligence ? [...erpIntelligenceSections] : isPdModelCalibration ? [...pdModelCalibrationSections] : isHighGiniCreditDecision ? [...highGiniCreditDecisionSections] : isCreditVintage ? [...creditVintageSections] : isOperationalForecast ? [...operationalForecastSections] : isWorkingCapital ? [...workingCapitalSections] : [...manufacturingCostSections]}>
+        {isRollRateMigration ? <RollRateMigrationArticle /> : isCreditDecisionEngine ? <CreditDecisionEngineArticle /> : isCreditRiskCutOff ? <CreditRiskCutOffArticle /> : isLogisticRegressionScorecard ? <LogisticRegressionScorecardArticle /> : isPdDefaultDefinition ? <PdDefaultDefinitionArticle /> : isPdModelTimeArchitecture ? <PdModelTimeArchitectureArticle /> : isPdModelRecalibration ? <PdModelRecalibrationArticle /> : isPdModelMonitoring ? <PdModelMonitoringArticle /> : isErpIntelligence ? <ErpManagementIntelligenceArticle /> : isPdModelCalibration ? <PdModelCalibrationArticle /> : isHighGiniCreditDecision ? <HighGiniCreditDecisionArticle /> : isCreditVintage ? <CreditVintageAnalysisArticle /> : isOperationalForecast ? <OperationalDriverForecastingArticle /> : isWorkingCapital ? <WorkingCapitalArticle /> : <ManufacturingCostArticle />}
       </ResourceArticle>
     </>
   );
