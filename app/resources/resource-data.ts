@@ -35,6 +35,9 @@ type ResourceVisualBase = {
 };
 
 export type ResourceCover = ResourceVisualBase & {
+  type: "generated-matrix";
+  alt: string;
+} | ResourceVisualBase & {
   type: "editorial-artwork";
   src: `/resources/covers/${string}.${"png" | "jpg" | "jpeg" | "webp" | "avif"}`;
   alt: string;
@@ -114,6 +117,25 @@ const authors = {
 } satisfies Record<string, ResourceAuthor>;
 
 export const resources: ResourceRecord[] = [
+  {
+    technicalTitle: "Roll Rate Analysis and Migration Matrices: How Credit Risk Moves Through a Portfolio",
+    headline: "A Delinquency Stock Is a Snapshot. A Migration Matrix Explains the Movement.",
+    headlineEmphasis: "Migration Matrix Explains the Movement",
+    slug: "roll-rate-analysis-migration-matrices",
+    slogan: "A practitioner framework for turning account-state transitions into evidence about deterioration, cure, cumulative default paths, portfolio forecasts and targeted intervention.",
+    sloganEmphasis: "account-state transitions",
+    author: authors.aleksandar, publishedAt: "2026-08-17", readingMinutes: 24,
+    topic: "credit-risk", stream: "insights", featured: true,
+    seoTitle: "Roll Rate Analysis and Migration Matrices | Entimema",
+    metaDescription: "Learn how credit roll rates, migration matrices, cure and deterioration flows reveal portfolio risk before final defaults become visible.",
+    canonicalPath: "/resources/roll-rate-analysis-migration-matrices",
+    openGraphTitle: "Roll Rate Analysis and Migration Matrices",
+    openGraphDescription: "How transition behaviour turns delinquency snapshots into forward-looking portfolio intelligence.",
+    relatedCapability: { label: "Credit Risk", href: "/services/credit-risk", description: "Connect portfolio behaviour, deterioration signals and transition evidence to controlled risk decisions." },
+    relatedResourceSlugs: ["credit-vintage-analysis", "pd-default-definition-target-construction", "pd-model-observation-performance-windows", "pd-model-monitoring"],
+    status: "published", indexable: true,
+    cover: { type: "generated-matrix", motion: "none", alt: "An analytical grid showing credit states migrating from current through delinquency to default.", stages: ["Current", "1–30", "31–60", "61–90", "Default"] },
+  },
   {
     technicalTitle: "Credit Decision Engine Architecture: From PD and Policy Rules to Automated Lending Decisions",
     headline: "A Credit Model Estimates Risk. A Decision Engine Determines the Action.",

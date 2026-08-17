@@ -8,6 +8,13 @@ type ResourceCoverProps = {
 };
 
 export default function ResourceCover({ cover, featured = false }: ResourceCoverProps) {
+  if (cover.type === "generated-matrix") {
+    return <div className={`${styles.resourceCover} ${styles.generatedMatrixCover} ${featured ? styles.featuredArtwork : ""}`} role="img" aria-label={cover.alt}>
+      <span className={styles.generatedCoverLabel}>PORTFOLIO MIGRATION / t → t+1</span>
+      <div className={styles.generatedCoverGrid} aria-hidden="true">{cover.stages.map((stage, index) => <span key={stage} data-index={index}><b>{stage}</b><i>{index === cover.stages.length - 1 ? "ABSORB" : index === 0 ? "STABLE" : "FLOW"}</i></span>)}</div>
+      <strong className={styles.generatedCoverTitle}>STATE × TRANSITION</strong>
+    </div>;
+  }
   const isPhotography = cover.type === "photography";
 
   return (
