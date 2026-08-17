@@ -141,7 +141,7 @@ export const resources: ResourceRecord[] = [
     relatedResourceSlugs: ["credit-risk-cut-off-strategy", "credit-vintage-analysis", "pd-default-definition-target-construction", "automating-credit-vintage-analysis-r-ai-portfolio-analyst"],
     status: "published",
     indexable: true,
-    cover: { type: "generated-matrix", motion: "trace", alt: "Conceptual matrix tracing applications through score bands, risk economics and portfolio contribution.", label: "FLAGSHIP RESEARCH · CREDIT RISK", title: "HIGH-RISK CONSUMER LENDING", stages: ["Select", "Price", "Observe", "Adapt"] },
+    cover: { type: "editorial-artwork", src: "/resources/covers/high-risk-consumer-lending.png", motion: "none", alt: "Editorial artwork for High-Risk Consumer Lending showing a controlled risk-economics frontier across a dark mineral landscape.", stages: ["Select", "Price", "Observe", "Adapt"] },
   },
   {
     technicalTitle: "AI Agents for Credit Risk: Designing Controlled Systems Around Deterministic Risk Models",
@@ -255,7 +255,7 @@ export const resources: ResourceRecord[] = [
     relatedCapability: { label: "Credit Risk", href: "/services/credit-risk", description: "Connect model evidence, portfolio behaviour and decision use through controlled credit-risk architecture." },
     relatedResourceSlugs: ["pd-default-definition-target-construction", "pd-model-observation-performance-windows", "pd-model-ranking-calibration", "pd-model-monitoring"],
     status: "published", indexable: true,
-    cover: { type: "generated-matrix", motion: "trace", alt: "Seven-layer credit-risk model validation evidence architecture from purpose to controlled use.", label: "MODEL VALIDATION / EVIDENCE ARCHITECTURE", title: "PERFORMANCE × CONTROL", stages: ["Purpose", "Definition", "Evidence", "Structure", "Performance", "Implementation", "Use"] },
+    cover: { type: "editorial-artwork", src: "/resources/covers/credit-risk-model-validation.png", motion: "none", alt: "Editorial artwork for Credit Risk Model Validation showing a seven-layer analytical core inspected as one aligned evidence architecture.", stages: ["Purpose", "Definition", "Evidence", "Structure", "Performance", "Implementation", "Use"] },
   },
   {
     technicalTitle: "Credit Portfolio Monitoring Architecture: From Risk Signals to Automated Early-Warning Actions",
@@ -303,7 +303,7 @@ export const resources: ResourceRecord[] = [
     relatedResourceSlugs: ["roll-rate-analysis-migration-matrices", "credit-vintage-analysis", "pd-model-monitoring", "pd-default-definition-target-construction"],
     status: "published",
     indexable: true,
-    cover: { type: "generated-matrix", motion: "trace", alt: "A staged early-warning path moving from normal behaviour through confirmed warning to intervention before default.", stages: ["Normal", "Change", "Persist", "Confirm", "Prioritise", "Act"] },
+    cover: { type: "editorial-artwork", src: "/resources/covers/early-warning-indicators.png", motion: "none", alt: "Editorial artwork for Early Warning Indicators in Credit Risk showing a subtle deformation confirmed before reaching a fractured default boundary.", stages: ["Normal", "Change", "Persist", "Confirm", "Prioritise", "Act"] },
   },
   {
     technicalTitle: "Roll Rate Analysis and Migration Matrices: How Credit Risk Moves Through a Portfolio",
@@ -322,7 +322,7 @@ export const resources: ResourceRecord[] = [
     relatedCapability: { label: "Credit Risk", href: "/services/credit-risk", description: "Connect portfolio behaviour, deterioration signals and transition evidence to controlled risk decisions." },
     relatedResourceSlugs: ["credit-vintage-analysis", "pd-default-definition-target-construction", "pd-model-observation-performance-windows", "pd-model-monitoring"],
     status: "published", indexable: true,
-    cover: { type: "generated-matrix", motion: "none", alt: "An analytical grid showing credit states migrating from current through delinquency to default.", stages: ["Current", "1–30", "31–60", "61–90", "Default"] },
+    cover: { type: "editorial-artwork", src: "/resources/covers/roll-rate-migration-matrices.png", motion: "none", alt: "Editorial artwork for Roll Rate Analysis and Migration Matrices showing account movement and cure across a terraced risk-state landscape.", stages: ["Current", "1–30", "31–60", "61–90", "Default"] },
   },
   {
     technicalTitle: "Credit Decision Engine Architecture: From PD and Policy Rules to Automated Lending Decisions",
@@ -370,7 +370,7 @@ export const resources: ResourceRecord[] = [
     relatedResourceSlugs: ["pd-model-ranking-calibration", "logistic-regression-credit-risk-scorecards", "pd-default-definition-target-construction", "pd-model-observation-performance-windows"],
     status: "published",
     indexable: true,
-    cover: { type: "editorial-artwork", src: "/resources/covers/pd-model-ranking-calibration.png", motion: "none", alt: "Abstract Insights cover illustrating calibrated probability becoming a controlled credit decision boundary.", stages: ["Borrower", "Score", "PD", "Economics", "Policy", "Decision"] },
+    cover: { type: "editorial-artwork", src: "/resources/covers/credit-risk-cut-off-strategy.png", motion: "none", alt: "Editorial artwork for Credit Risk Cut-Off Strategy showing a controlled economic decision boundary between approval zones.", stages: ["Borrower", "Score", "PD", "Economics", "Policy", "Decision"] },
   },
   {
     technicalTitle: "Logistic Regression for Credit Risk Scorecards: From Risk Drivers to Probability of Default",
