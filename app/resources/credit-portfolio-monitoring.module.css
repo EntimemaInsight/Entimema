@@ -1,0 +1,50 @@
+.articleBody { color: #1c2a35; }
+.articleBody section { scroll-margin-top: 110px; }
+.articleBody h2 { color: #0b2239; font-size: clamp(28px, 3.3vw, 42px); line-height: 1.12; letter-spacing: -.035em; }
+.articleBody h3 { color: #173650; }
+.articleBody a { color: #225d82; font-weight: 650; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.lead { color: #163650; font-size: clamp(20px, 2.2vw, 27px); line-height: 1.48; }
+.formulaLine { display: block; overflow-wrap: anywhere; text-align: center; }
+.architecture { display: grid; gap: 9px; }
+.architecture article { position: relative; display: grid; grid-template-columns: 42px minmax(150px, .8fr) minmax(190px, 1.5fr); align-items: center; gap: 14px; padding: 14px 18px; border: 1px solid #d9e2e8; border-radius: 8px; background: #f8fafb; }
+.architecture article:not(:last-child)::after { content: "↓"; position: absolute; z-index: 2; bottom: -14px; left: 24px; color: #5c7282; font-weight: 800; }
+.architecture article > span { color: #607485; font: 700 12px/1 var(--font-sans); letter-spacing: .12em; }
+.architecture article > strong { color: #102d45; font-size: 13px; letter-spacing: .045em; }
+.architecture article > small { color: #526675; font-size: 13px; line-height: 1.4; }
+.architecture .data { border-left: 5px solid #3c7598; }
+.architecture .analysis { border-left: 5px solid #658da3; }
+.architecture .signal { border-left: 5px solid #d9a92d; }
+.architecture .workflow { border-left: 5px solid #345b73; }
+.architecture .control { border-left: 5px solid #94a4ad; }
+.fourUp, .comparison, .metricGrid, .testGrid, .framework { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 28px 0; }
+.fourUp { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.fourUp article, .comparison article, .framework article { padding: 20px; border: 1px solid #dce5ea; border-radius: 8px; background: #f7f9fa; }
+.fourUp h3, .comparison h3 { margin-top: 0; font-size: 18px; }
+.fourUp p, .comparison p { margin-bottom: 0; }
+.metricGrid, .testGrid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.metricGrid div, .testGrid div { display: flex; min-height: 92px; flex-direction: column; gap: 8px; padding: 16px; border-top: 3px solid #d3a528; background: #f4f7f8; }
+.metricGrid strong, .testGrid strong { color: #173650; }
+.metricGrid span, .testGrid span, .framework span { color: #586b79; font-size: 13px; line-height: 1.4; }
+.explanation { display: flex; flex-direction: column; gap: 10px; margin: 28px 0; padding: 24px; border-left: 5px solid #d3a528; background: #102b42; color: white; }
+.explanation span, .explanation small { color: #b9c8d2; font-size: 12px; letter-spacing: .1em; }
+.explanation strong { font-size: 19px; line-height: 1.45; }
+.stateFlow, .feedbackFlow, .lifecycle { display: flex; flex-wrap: wrap; gap: 20px; align-items: center; margin: 28px 0; }
+.stateFlow span, .feedbackFlow span, .lifecycle span { position: relative; padding: 12px 15px; border: 1px solid #cbd8df; border-radius: 5px; background: #f5f8f9; color: #193d56; font-size: 12px; font-weight: 750; letter-spacing: .04em; }
+.stateFlow span:not(:last-child)::after, .feedbackFlow span:not(:last-child)::after, .lifecycle span:not(:last-child)::after { content: "→"; position: absolute; right: -17px; color: #7e909c; }
+.stateFlow .escalated { border-color: #d3a528; background: #fff9e8; }
+.schema { max-width: 100%; overflow-x: auto; padding: 22px; border-radius: 7px; background: #10283b; color: #eef5f8; font-size: 13px; line-height: 1.65; }
+.framework { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.framework article { display: flex; min-height: 110px; flex-direction: column; gap: 12px; border-top: 4px solid #d3a528; }
+.framework strong { color: #11324b; letter-spacing: .06em; }
+@media (max-width: 900px) {
+  .fourUp, .metricGrid, .testGrid, .framework { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .architecture article { grid-template-columns: 34px minmax(125px, .8fr) minmax(0, 1.2fr); }
+}
+@media (max-width: 600px) {
+  .fourUp, .comparison, .metricGrid, .testGrid, .framework { grid-template-columns: 1fr; }
+  .architecture article { grid-template-columns: 30px minmax(0, 1fr); gap: 7px 10px; padding: 13px; }
+  .architecture article > small { grid-column: 2; }
+  .stateFlow, .feedbackFlow, .lifecycle { align-items: stretch; flex-direction: column; }
+  .stateFlow span, .feedbackFlow span, .lifecycle span { width: 100%; text-align: center; }
+  .stateFlow span:not(:last-child)::after, .feedbackFlow span:not(:last-child)::after, .lifecycle span:not(:last-child)::after { right: 50%; bottom: -19px; transform: translateX(50%) rotate(90deg); }
+}
