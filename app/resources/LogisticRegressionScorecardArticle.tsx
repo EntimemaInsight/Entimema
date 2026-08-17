@@ -32,7 +32,7 @@ const failureRows = [
 ];
 
 export default function LogisticRegressionScorecardArticle() {
-  return <>
+  return <div className={styles.articleBody}>
     <p className={styles.lead}>A credit scorecard is not the regression equation. It is a controlled translation of borrower information into an estimate of risk that must survive validation, implementation and real credit decisions.</p>
     <p>A logistic regression can be statistically valid yet unusable as a credit-risk system. A poorly defined target, leaked feature, unstable coefficient, incorrect probability transform or changed production bin can each preserve the appearance of a model while breaking its meaning. The engineering problem is not merely to estimate coefficients. It is to make the entire modelling chain reproducible.</p>
     <KeyObservation title="The completion criterion"><p><strong>Model development is complete only when the analytical logic can be reproduced consistently outside the development environment.</strong></p></KeyObservation>
@@ -40,7 +40,7 @@ export default function LogisticRegressionScorecardArticle() {
     <section id="modelling-chain">
       <h2>The controlled modelling chain starts before regression</h2>
       <p>The target must first say who can default, what default means and within which future horizon it is observed. Entimema&apos;s work on <Link href="/resources/pd-default-definition-target-construction">default definition</Link> establishes the event boundary; <Link href="/resources/pd-model-observation-performance-windows">observation and performance windows</Link> establishes the prediction clock. Regression inherits both. It cannot correct them.</p>
-      <EntimemaFramework title="Credit scorecard engineering chain" description="Methodology becomes an executable risk signal through a sequence of controlled translations." steps={["Default definition", "Observation / performance architecture", "Development population", "Raw variables", "Binning / WoE", "Feature matrix", "Logistic regression", "Log-odds", "Raw PD", "Ranking", "Calibration", "Scorecard", "Production", "Monitoring"]} />
+      <div className={styles.frameworkWrap}><EntimemaFramework title="Credit scorecard engineering chain" description="Methodology becomes an executable risk signal through a sequence of controlled translations." steps={["Default definition", "Observation / performance architecture", "Development population", "Raw variables", "Binning / WoE", "Feature matrix", "Logistic regression", "Log-odds", "Raw PD", "Ranking", "Calibration", "Scorecard", "Production", "Monitoring"]} /></div>
       <h3>What the model actually receives</h3>
       <p>Source systems must reproduce a historical snapshot at a declared observation date. Eligibility rules then select the correct unit—borrower or facility—and predictor extraction must use information available at that instant. Multiple facilities require an explicit aggregation or row-selection rule; duplicated borrowers cannot quietly become independent observations. Exclusions, missing values, category definitions and temporal joins are model specifications, not data-cleaning footnotes.</p>
       <p>The resulting feature matrix needs lineage back to source fields, extract timestamp, rules and model population. A categorical value not known in development needs an approved fallback. A currency, percentage or day count needs a stable unit. Rebuilding the same snapshot should produce the same eligible rows and features.</p>
@@ -148,5 +148,5 @@ export default function LogisticRegressionScorecardArticle() {
       <div className={styles.bridge}><article><span>ENGINEERING PROBLEM → MODEL RISK</span><h3>Turn approved methodology into a controlled implementation.</h3><p>Entimema Credit Risk connects target architecture, modelling evidence, validation and production controls to the decision use.</p><Link href="/services/credit-risk">Explore Credit Risk consulting →</Link></article><article><span>RISK SIGNAL → DECISION IMPACT</span><h3>Connect model output to governed decision automation.</h3><p>Decision Automation provides the architectural context for combining model signals with policy and operational rules.</p><Link href="/services/decision-automation">Explore Decision Automation →</Link></article></div>
       <KeyObservation title="The engineering resolve"><p><strong>A scorecard becomes a decision component only when target, data, transformations, coefficients, calibration, score scaling and production execution remain one governed model.</strong> The regression equation is central—but it is not the system.</p></KeyObservation>
     </section>
-  </>;
+  </div>;
 }
