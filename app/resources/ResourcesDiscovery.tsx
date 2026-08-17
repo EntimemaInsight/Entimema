@@ -18,7 +18,7 @@ export default function ResourcesDiscovery({ initialTopic }: { initialTopic?: st
       const category = getTopic(resource.topic)?.label ?? "";
       return (!topic || resource.topic === topic) && (!search || [resource.technicalTitle, resource.headline, resource.slogan, category].some((value) => value.toLocaleLowerCase().includes(search)));
     })
-    .sort((left, right) => right.resource.publishedAt.localeCompare(left.resource.publishedAt) || right.publicationSequence - left.publicationSequence)
+    .sort((left, right) => right.resource.publishedAt.localeCompare(left.resource.publishedAt) || left.publicationSequence - right.publicationSequence)
     .map(({ resource }) => resource);
 
   return <>
