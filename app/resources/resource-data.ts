@@ -120,6 +120,25 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    technicalTitle: "Automating Credit Vintage Analysis: From R Cohort Calculations to an AI Portfolio Analyst",
+    headline: "Automating Credit Vintage Analysis: From R Cohort Calculations to an AI Portfolio Analyst",
+    headlineEmphasis: "AI Portfolio Analyst",
+    slug: "automating-credit-vintage-analysis-r-ai-portfolio-analyst",
+    slogan: "A controlled build pattern for turning reproducible R cohorts into deterministic diagnostics and evidence-led AI portfolio investigation.",
+    sloganEmphasis: "deterministic diagnostics",
+    author: authors.aleksandar, publishedAt: "2026-08-17", readingMinutes: 31,
+    topic: "credit-risk", stream: "engineering", featured: true,
+    seoTitle: "Automating Credit Vintage Analysis in R & AI | Entimema",
+    metaDescription: "Build credit vintage cohorts in R, detect persistent and material deviation deterministically, and give an AI Portfolio Analyst controlled analytical tools.",
+    canonicalPath: "/resources/automating-credit-vintage-analysis-r-ai-portfolio-analyst",
+    openGraphTitle: "Automating Credit Vintage Analysis: R to AI Portfolio Analyst",
+    openGraphDescription: "How deterministic cohort analytics become a controlled, recurring AI-assisted portfolio investigation workflow.",
+    relatedCapability: { label: "Credit Risk", href: "/services/credit-risk", description: "Connect reproducible portfolio calculation, deterioration diagnostics and controlled investigation." },
+    relatedResourceSlugs: ["credit-vintage-analysis", "credit-portfolio-monitoring-architecture", "r-ifrs9-ecl-ai-assisted-provisioning", "early-warning-indicators-credit-risk"],
+    status: "published", indexable: true,
+    cover: { type: "generated-matrix", motion: "none", alt: "Engineering publication cover for automated credit vintage analysis and an AI Portfolio Analyst.", stages: ["Cohort", "Season", "Compare", "Detect", "Investigate"] },
+  },
+  {
     technicalTitle: "From R-Based IFRS 9 ECL Calculation to an AI-Assisted Provisioning Engine",
     headline: "From R-Based IFRS 9 ECL Calculation to an AI-Assisted Provisioning Engine",
     headlineEmphasis: "AI-Assisted Provisioning Engine",
