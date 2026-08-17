@@ -425,8 +425,11 @@ export function getPublishedRelatedResources(resource: ResourceRecord) {
   const curatedOrder = new Map(resource.relatedResourceSlugs.map((slug, index) => [slug, index]));
   const topicDescription = getTopic(resource.topic)?.description ?? "";
   const sourceTerms = getRecommendationTerms(`${resource.technicalTitle} ${resource.headline} ${resource.slogan} ${topicDescription}`);
+  const recommendationPool = resource.stream === "engineering"
+    ? getPublishedResourcesByStream(resource.stream)
+    : publishedResources;
 
-  return publishedResources
+  return recommendationPool
     .filter((candidate) => candidate.slug !== resource.slug)
     .map((candidate, index) => {
       const candidateTopic = getTopic(candidate.topic)?.description ?? "";
