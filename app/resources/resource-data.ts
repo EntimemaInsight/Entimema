@@ -120,6 +120,25 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    technicalTitle: "AI Agents for Credit Risk: Designing Controlled Systems Around Deterministic Risk Models",
+    headline: "AI Agents for Credit Risk: Designing Controlled Systems Around Deterministic Risk Models",
+    headlineEmphasis: "Controlled Systems",
+    slug: "ai-agents-credit-risk-controlled-deterministic-models",
+    slogan: "A flagship engineering architecture for combining deterministic financial computation, bounded AI reasoning, controlled tools and explicit human judgement.",
+    sloganEmphasis: "deterministic financial computation",
+    author: authors.aleksandar, publishedAt: "2026-08-17", readingMinutes: 32,
+    topic: "finance-and-risk-ai", stream: "engineering", featured: true,
+    seoTitle: "AI Agents for Credit Risk: Controlled Architecture | Entimema",
+    metaDescription: "Design controlled AI agents around deterministic credit-risk models, structured evidence, tool permissions, human review, audit trails and safe action.",
+    canonicalPath: "/resources/ai-agents-credit-risk-controlled-deterministic-models",
+    openGraphTitle: "AI Agents for Credit Risk: Controlled Systems Around Deterministic Models",
+    openGraphDescription: "Why deterministic tools should calculate risk while AI agents orchestrate evidence-led investigation, review and controlled action.",
+    relatedCapability: { label: "Credit Risk", href: "/services/credit-risk", description: "Connect deterministic risk computation, controlled investigation and explicit decision authority." },
+    relatedResourceSlugs: ["r-ifrs9-ecl-ai-assisted-provisioning", "automating-credit-vintage-analysis-r-ai-portfolio-analyst", "automating-roll-rate-migration-analysis-r-ai-collections-analyst", "credit-risk-model-validation-pipeline"],
+    status: "published", indexable: true,
+    cover: { type: "generated-matrix", motion: "none", alt: "Engineering publication cover for controlled AI agents around deterministic credit-risk models.", stages: ["Calculate", "Investigate", "Evidence", "Review", "Act", "Audit"] },
+  },
+  {
     technicalTitle: "Automating Roll Rate & Migration Analysis: From R Transition Matrices to an AI Collections Analyst",
     headline: "Automating Roll Rate & Migration Analysis: From R Transition Matrices to an AI Collections Analyst",
     headlineEmphasis: "AI Collections Analyst",
