@@ -120,6 +120,25 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    technicalTitle: "Credit Risk Model Validation Pipeline: Automating Reproducible Tests, Benchmarks and Monitoring",
+    headline: "A Validation Metric Without Lineage Is Only an Observation",
+    headlineEmphasis: "Without Lineage Is Only an Observation",
+    slug: "credit-risk-model-validation-pipeline",
+    slogan: "A controlled engineering architecture for turning versioned models, data, tests and configuration into reproducible evidence, findings and monitoring.",
+    sloganEmphasis: "reproducible evidence",
+    author: authors.aleksandar, publishedAt: "2026-08-17", readingMinutes: 36,
+    topic: "credit-risk", stream: "engineering", featured: true,
+    seoTitle: "Credit Risk Model Validation Pipeline | Entimema",
+    metaDescription: "Engineer automated credit risk model validation from versioned models and data through deterministic tests, benchmarks, parity, findings and monitoring.",
+    canonicalPath: "/resources/credit-risk-model-validation-pipeline",
+    openGraphTitle: "Credit Risk Model Validation Pipeline",
+    openGraphDescription: "How versioned models, data, test suites and configuration become controlled, repeatable and auditable validation evidence.",
+    relatedCapability: { label: "Credit Risk", href: "/services/credit-risk", description: "Connect model evidence, implementation control and decision impact across the credit lifecycle." },
+    relatedResourceSlugs: ["credit-risk-model-validation", "logistic-regression-credit-risk-scorecards", "pd-model-monitoring", "credit-decision-engine-architecture", "credit-portfolio-monitoring-architecture"],
+    status: "published", indexable: true,
+    cover: { type: "generated-matrix", motion: "none", alt: "Engineering publication cover for a reproducible credit risk model validation pipeline.", stages: ["Register", "Execute", "Compare", "Explain", "Control"] },
+  },
+  {
     technicalTitle: "Credit Risk Model Validation: From Statistical Performance to Model Risk Control",
     headline: "A High AUC Does Not Make a Credit Model Safe",
     headlineEmphasis: "Does Not Make a Credit Model Safe",
