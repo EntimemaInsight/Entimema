@@ -3,102 +3,140 @@ import { KeyObservation, ResourceFigure, ResourceTable } from "./ResourceElement
 import styles from "./pd-default-definition.module.css";
 
 export const pdDefaultDefinitionSections = [
-  { id: "target-construction", label: "The target is part of the model" },
-  { id: "default-signals", label: "From credit event to default" },
-  { id: "scope-and-time", label: "Scope, timing, cure and re-default" },
-  { id: "target-contamination", label: "When the target changes through history" },
-  { id: "design-sequence", label: "Define the event before the model" },
+  { id: "analytical-boundary", label: "The boundary before the model" },
+  { id: "event", label: "What is a default event?" },
+  { id: "architecture", label: "Seven-layer architecture" },
+  { id: "target", label: "Default as the target" },
+  { id: "example", label: "Two valid models, two questions" },
+  { id: "time-ranking", label: "Time, ranking and calibration" },
+  { id: "failure-modes", label: "Failure modes" },
+  { id: "monitoring", label: "Monitoring and validation" },
+  { id: "decisions", label: "From target to decision" },
 ] as const;
 
-const failureRows = [
-  ["DPD-only logic", "A measurable field is mistaken for the economic event", "Qualitative distress is labelled performing", "The model learns late recognition rather than intended default"],
-  ["Mixed scope", "Borrower and facility records are combined without propagation rules", "Default frequency and observation unit", "Coefficients reflect inconsistent contagion logic"],
-  ["Unstable default date", "Operational dates are used without event reconciliation", "Performance-window assignment and time to event", "Backtests compare differently timed outcomes"],
-  ["Changing restructuring treatment", "Policy or systems change mid-history", "Who is classified as default and when", "Drift can be target change rather than portfolio change"],
-  ["Inconsistent cure and re-default", "Statuses are reset or repeated mechanically", "Event counts, durations and subsequent eligibility", "Monitoring and calibration use incompatible populations"],
-];
+const layers = [
+  ["Event", "Which observable conditions constitute default?"],
+  ["Materiality", "When is deterioration economically meaningful?"],
+  ["Timing", "Which date fixes the event inside the prediction horizon?"],
+  ["Scope", "Does default attach to a facility, an obligor or a connected group?"],
+  ["Cure", "What sustained evidence permits return to non-default?"],
+  ["Re-default", "When is renewed deterioration a new event rather than continuation?"],
+  ["Data", "Can every rule be reconstructed consistently across history?"],
+] as const;
 
-const architecture = ["Credit event", "Default criteria", "Validity / materiality", "Borrower / facility scope", "Default date", "Target label", "Cure / re-default", "Modelling outcome"];
+const exampleRows: string[][] = [
+  ["Qualifying events", "90+ DPD above materiality; insolvency; write-off", "Definition A plus validated unlikely-to-pay and distressed forbearance"],
+  ["Defaulted borrowers", "360", "520"],
+  ["Observed default rate", "3.6%", "5.2%"],
+  ["Median recognition after first distress signal", "74 days", "31 days"],
+  ["Borrowers unique to definition", "20 late-payment cases excluded by B's validity rules", "180 qualitative / early-distress cases"],
+  ["Illustrative mean fitted 12-month PD", "3.6%", "5.2%"],
+  ["Calibration target", "Narrow realised-default frequency", "Broader realised-default frequency"],
+] as const;
+
+const failureRows: string[][] = [
+  ["Inconsistent historical flags", "A binary column combines different recognition policies across vintages.", "Coefficients and backtests treat policy change as borrower-risk change."],
+  ["Facility / obligor mixing", "One facility defaults while propagation varies by source or period.", "The unit of observation, default rate and dependency structure become incoherent."],
+  ["Incomplete unlikely-to-pay history", "Current qualitative triggers are unavailable in older systems.", "Earlier positives are systematically undercounted; time trends and calibration are biased."],
+  ["Missing means non-default", "Absence of an event feed is converted to zero rather than unknown.", "False negatives dilute signal and reward poorly observed portfolios."],
+  ["Cure inconsistency", "Operational closure, zero arrears and methodological cure are treated as equivalent.", "Default duration, eligible population and realised outcomes cease to reconcile."],
+  ["Re-default double counting", "Repeated status records become independent defaults without an at-risk reset.", "Incidence is overstated and frequent reporters dominate event counts."],
+  ["Temporal leakage", "Post-observation trigger or revised default date enters the information set.", "Discrimination is inflated and cannot be reproduced at decision time."],
+  ["Acquired portfolios", "Imported default histories use incompatible triggers, scope or dates.", "Portfolio effects are confounded with definition effects."],
+  ["Definition change without recalibration", "The target broadens while the deployed PD scale remains fixed.", "Ranking may look stable although expected default levels are materially wrong."],
+  ["Development / operations divergence", "Production rules implement a practical proxy for the approved methodology.", "The model is monitored against an outcome different from the one it learned."],
+] as const;
 
 export default function PdDefaultDefinitionArticle() {
-  return (
-    <>
-      <p className={styles.lead}><em>Two analysts can use the same borrowers, the same predictors and the same algorithm—and build materially different PD models. They need only disagree about which economic events are allowed to become “default.”</em></p>
+  return <>
+    <p className={styles.lead}><em>A PD model does not discover default independently. It learns the definition of default embedded in its target.</em></p>
 
-      <section id="target-construction">
-        <h2>The target is part of the model</h2>
-        <p>A probability-of-default model does not learn an abstract substance called credit risk. It learns the target label constructed from operational evidence. Change that construction and the number, identity and timing of defaults may change with it. Model coefficients, borrower ordering, discrimination, calibration, validation and downstream decisions can all move before the modelling algorithm changes at all.</p>
-        <p>This makes default definition a modelling decision, not a preliminary data-cleaning task. The relationship is direct:</p>
-        <KeyObservation title="The target-construction principle"><p><strong>Default definition → target construction → model learning.</strong> A model cannot be more methodologically coherent than the outcome it is trained to reproduce.</p></KeyObservation>
-        <p>The task is not to choose the broadest or narrowest possible definition. It is to define an economically meaningful event, align it with model purpose and applicable requirements, and reconstruct it consistently enough that every historical label means the same thing.</p>
+    <section id="analytical-boundary">
+      <h2>The most consequential model choice can occur before modelling begins</h2>
+      <p>Give two analysts the same borrowers, predictors, sample period and estimation technique. If one defines default as material 90-days-past-due, insolvency or write-off, while the other also recognises validated unlikely-to-pay and distressed restructuring events, they are not producing alternative estimates of one fixed quantity. They are estimating different conditional probabilities.</p>
+      <p>That distinction creates the central tension in default definition for credit risk. The label appears to sit upstream of model development, yet its consequences propagate through the full architecture:</p>
+      <ResourceFigure label="Default definition propagates through target construction, sample design, estimation, validation and credit decisions." caption="The default boundary is inherited by every downstream statistic and decision rule; it is not neutralised by a sophisticated modelling technique.">
+        <div className={styles.propagation}>{["Default definition","Target construction","Observation + performance windows","Development sample","Observed default rate","Model estimation","Ranking","Calibration","Validation + monitoring","Credit decision"].map((step, index)=><div key={step}><small>{String(index+1).padStart(2,"0")}</small><strong>{step}</strong></div>)}</div>
+      </ResourceFigure>
+      <p>The chain has no clean break. Change the event boundary and the identities of positives can change; change their dates and sample eligibility can change; change their frequency and calibration must change. Segmentation, IFRS 9 expected credit loss analytics, model validation and lending policy then inherit the revised meaning of PD.</p>
+      <KeyObservation title="The analytical boundary"><p><strong>Default definition is part of the estimand.</strong> A statistically correct model can only estimate the probability of the event encoded in <em>its</em> target—not an institution&apos;s unstated economic intuition about default.</p></KeyObservation>
+    </section>
 
-        <ResourceFigure label="The Entimema Default Target Architecture transforms raw credit events through criteria, validity and materiality, borrower or facility scope, default dating, target labelling, and cure or re-default logic before producing the modelling outcome." caption="Raw operational events do not become model labels automatically. Each transition requires an explicit, reviewable methodological rule.">
-          <div className={styles.targetArchitecture}>
-            <header><span>RAW OPERATIONAL EVIDENCE</span><strong>METHODOLOGICAL TRANSFORMATION</strong><span>MODEL-READY OUTCOME</span></header>
-            <ol>{architecture.map((step, index) => <li key={step} className={index === 0 || index === architecture.length - 1 ? styles.endpoint : undefined}><small>{String(index + 1).padStart(2, "0")}</small><strong>{step}</strong></li>)}</ol>
-            <footer><span>Consistency</span><span>Temporal alignment</span><span>Data quality</span><span>Business meaning</span></footer>
-          </div>
-        </ResourceFigure>
-        <p>The architecture shows why default definition is simultaneously a data, methodology and decision problem. A credit event may be observable, yet still require tests of validity, materiality, scope and timing before it can support a defensible target.</p>
-      </section>
+    <section id="event">
+      <h2>What is a default event?</h2>
+      <p>Contractual delinquency is a missed or incomplete payment under agreed terms. Days past due measures its duration. Material arrears add an economic threshold so immaterial or technical amounts do not automatically determine status. These are evidence about payment performance; they are not, by themselves, the entire economic concept of default.</p>
+      <p>Unlikely-to-pay indicators address cases in which full repayment is improbable without realisation of collateral or other intervention, potentially before a numerical arrears threshold is crossed. Distressed restructuring or forbearance can be evidence when a concession responds to financial difficulty, but not every term modification is default. Insolvency and bankruptcy events provide legal evidence; a write-off records an accounting or recovery conclusion. Their dates may lag the onset of economic deterioration and therefore cannot be substituted mechanically for the date of default.</p>
+      <div className={styles.concepts}>
+        <article><small>01</small><h3>Economic deterioration</h3><p>The borrower&apos;s capacity or willingness to repay has weakened. This latent condition may begin before any system flag exists.</p></article>
+        <article><small>02</small><h3>Operational trigger</h3><p>An observable DPD, restructuring, legal, collections or write-off event activates a rule and provides auditable evidence.</p></article>
+        <article><small>03</small><h3>Model target</h3><p>Approved rules transform valid triggers into a dated outcome at the chosen analytical unit and horizon.</p></article>
+      </div>
+      <p><strong>Default identification</strong> is the controlled inference connecting those three concepts. <strong>Cure</strong> is not merely removal of an operational flag: it is the point at which defined, sustained evidence supports exit from default. <strong>Re-default</strong> requires an intervening valid cure and renewed at-risk period; otherwise repeated records describe one continuing episode. The design objective is neither maximum trigger count nor minimum ambiguity. It is a coherent, purpose-aligned economic event that can be reproduced in data.</p>
+    </section>
 
-      <section id="default-signals">
-        <h2>Default is an economic state, not only a delinquency count</h2>
-        <p>Days past due is attractive because it is observable, systematic and operationally available. Delinquency can provide an important quantitative signal, and a 90-days-past-due concept is prominent in particular regulatory frameworks. But a number alone is not a complete universal default definition. Its application depends on purpose, jurisdiction and implementation—and on whether the underlying arrears are economically meaningful.</p>
-        <p>Materiality, technical arrears, payment-allocation logic, operational delays and data quality can all alter a mechanical DPD measure. Multiple facilities introduce another question: is delinquency assessed at account level, or does evidence on one obligation affect the borrower as a whole?</p>
-        <p>Qualitative evidence addresses the other side of identification. A borrower may become economically distressed before crossing a mechanical delinquency threshold. Distressed restructuring, insolvency evidence, material concessions, enforcement or write-off expectations may indicate unlikeliness to pay. The exact trigger set is implementation-specific; the methodological point is universal: <strong>default can be an economic state before it becomes a delinquency count.</strong></p>
+    <section id="architecture">
+      <h2>The Entimema seven-layer default-definition architecture</h2>
+      <p>A policy sentence is insufficient for modelling. The definition must be decomposed into interacting layers whose rules can be approved, implemented, tested and historically reconstructed.</p>
+      <div className={styles.layers}>{layers.map(([name, question], index)=><article key={name}><span>{String(index+1).padStart(2,"0")}</span><div><h3>{name} layer</h3><p>{question}</p></div></article>)}</div>
+      <p>The layers constrain one another. A materiality rule changes whether a delinquency trigger is valid. Scope rules determine whether one facility event propagates to the obligor. Timing rules determine whether that propagated event falls inside a performance window. Cure and re-default rules determine when the borrower becomes eligible for a new observation. The data layer is the proof: if the approved architecture cannot be reconstructed consistently, the historical target does not represent it.</p>
+      <p>Before modelling, governance should therefore approve a versioned rule specification, trigger hierarchy, analytical unit, event-date precedence, cure state machine, re-default eligibility rule, exception policy and source-to-target lineage. This turns default definition from prose into controlled data architecture.</p>
+    </section>
 
-        <ResourceFigure label="A synthetic portfolio of ten thousand borrowers produces 430 defaults under Definition A using a specified delinquency criterion and 510 defaults under Definition B after valid qualitative default events are also mapped. The same portfolio produces a different target population." caption="Target sensitivity, not a universal preference: broader recognition is appropriate only when the additional events are valid, economically meaningful and aligned with the model purpose.">
-          <div className={styles.targetSensitivity}>
-            <header><span>SAME PORTFOLIO</span><strong>10,000 synthetic borrowers</strong><span>SAME PREDICTORS</span></header>
-            <div className={styles.definitions}>
-              <article><small>DEFINITION A</small><h3>Delinquency criterion</h3><strong>430</strong><span>observed defaults · 4.3%</span></article>
-              <div aria-hidden="true">≠</div>
-              <article><small>DEFINITION B</small><h3>Delinquency + valid qualitative events</h3><strong>510</strong><span>observed defaults · 5.1%</span></article>
-            </div>
-            <footer>Same portfolio + different target construction = different model estimation and validation evidence</footer>
-          </div>
-        </ResourceFigure>
-        <p>Consider one synthetic borrower who remains below the delinquency threshold but enters a distressed restructuring during the performance window. A delinquency-only target labels the borrower good. A target that recognises a valid qualitative default event labels the same borrower default. Neither classification is a trivial database choice: each tells the model to learn a different economic boundary.</p>
-      </section>
+    <section id="target">
+      <h2>Default becomes the dependent variable</h2>
+      <div className={styles.equation} aria-label="Y sub i equals one if borrower i defaults during the performance window, and zero otherwise"><span>Y<sub>i</sub> =</span><span className={styles.brace}>{`{`}</span><span><b>1,</b> if borrower <i>i</i> defaults during the performance window<br/><b>0,</b> otherwise</span></div>
+      <p>For borrower information <em>X<sub>i</sub></em> available at the observation date, a PD model estimates:</p>
+      <div className={styles.formula} aria-label="PD sub i equals probability that Y sub i equals one conditional on X sub i">PD<sub>i</sub> = P(Y<sub>i</sub> = 1 | X<sub>i</sub>)</div>
+      <p>The notation exposes the methodological issue. Changing what qualifies as <em>Y = 1</em>, the unit <em>i</em>, the event date or the horizon changes the statistical problem. “A 4% PD” is incomplete without the event definition, forecast horizon, population and calibration basis. A probability cannot be interpreted independently of the outcome whose probability it expresses.</p>
+      <p>Target construction also determines negatives. A borrower without a captured default is not automatically a demonstrated non-default: its horizon may be immature, its event feed may be missing or it may have exited before outcome ascertainment. Eligibility, censoring and unknown states must be explicit so that zero means “observed without qualifying default,” not “no evidence found.”</p>
+    </section>
 
-      <section id="scope-and-time">
-        <h2>Scope determines who defaults; time determines when</h2>
-        <p>The unit of default may be a borrower or a facility. Facility-level construction isolates an account; borrower-level construction can propagate qualifying distress across obligations according to defined contagion logic. The choice changes the unit of observation, default frequency, target interpretation and portfolio monitoring. Mixing both units without explicit rules creates labels whose meaning depends on how the source system happened to record the event.</p>
-        <p>Default also has a lifecycle. When does it begin? Which evidence establishes the default date? Under what conditions can an exposure cure? Is a probation concept required before performing status is restored? How is a subsequent default treated? There is no arbitrary cure or probation duration that is universally correct. There is, however, a universal need for consistent first-default, cure, re-default and repeated-event logic.</p>
+    <section id="example">
+      <h2>Analytical example: two valid models, two different risk questions</h2>
+      <p>Consider 10,000 synthetic borrowers observed at the same date with complete 12-month outcomes. Definition A is narrow: material 90+ DPD, insolvency or write-off. Definition B applies the same validity rules but also recognises documented unlikely-to-pay and distressed-forbearance events. The figures are hypothetical and illustrate target sensitivity, not a preferred universal definition.</p>
+      <ResourceTable caption="Target sensitivity in a hypothetical 10,000-borrower portfolio" headers={["Measure","Definition A — narrow","Definition B — broader"]} rows={exampleRows} />
+      <p>Definition B adds 180 earlier qualitative or restructuring defaults but excludes 20 Definition A records whose arrears fail its event-validity tests. The net increase is 160 defaults, yet the effect is not a simple uplift. Borrower identities, recognition dates and class composition change. Predictors associated with early financial distress may gain relevance; predictors of late arrears may weaken. Segments with richer qualitative-event capture may appear riskier even when their underlying economics are unchanged.</p>
+      <p>If each model&apos;s average fitted PD reconciles to its own 3.6% or 5.2% calibration target and validates on outcomes constructed identically, both may be statistically correct. Definition A answers “who will reach the narrow realised-default boundary?” Definition B answers “who will reach the broader validated distress boundary?” Applying Model A&apos;s scale to Definition B outcomes creates underprediction by construction, not necessarily model decay.</p>
+      <KeyObservation title="Interpretation"><p><strong>The model may be statistically correct under both definitions while answering two different risk questions.</strong> Comparisons are meaningful only after the target semantics are aligned.</p></KeyObservation>
+    </section>
 
-        <ResourceFigure label="The default event inside the PD prediction clock. Historical information ends at time zero. A default event occurs inside the future performance window, followed by optional cure and re-default states after the initial event." caption="Target definition and time architecture cannot be designed independently: the event must be valid, correctly dated and located inside the intended performance logic.">
-          <div className={styles.eventClock}>
-            <header><span>INFORMATION AVAILABLE</span><span>OUTCOME OBSERVED</span></header>
-            <div className={styles.eventClockBody}>
-              <div className={styles.history}><strong>Observation window</strong><i /></div>
-              <div className={styles.zero}><small>TIME ZERO</small><strong>Prediction</strong></div>
-              <div className={styles.horizon}><strong>Performance window</strong><i /><b>DEFAULT EVENT</b><em>Cure</em><em>Re-default</em></div>
-            </div>
-          </div>
-        </ResourceFigure>
-        <p>The preceding research on <Link href="/resources/pd-model-observation-performance-windows">observation and performance windows</Link> established the prediction clock. Default definition supplies the event placed inside it. Post-window events must not be pulled backward into the target; immature observations must not be labelled good; event dates must not drift with batch-processing dates. Time architecture and target architecture are one design problem viewed from opposite sides.</p>
-      </section>
+    <section id="time-ranking">
+      <h2>Default definition and the prediction clock are one design problem</h2>
+      <ResourceFigure label="Observation date leads from the borrower information set into the performance window and a qualifying default event." caption="The information boundary determines what the model may know; the event boundary determines what it must predict.">
+        <div className={styles.clock}>{["Observation date","Borrower information set","Performance window","Qualifying default event"].map((item,index)=><div key={item}><small>{index===0?"t₀":index===2?"t₀ → t₁":""}</small><strong>{item}</strong></div>)}</div>
+      </ResourceFigure>
+      <p>The framework in <Link href="/resources/pd-model-observation-performance-windows">PD Model Observation and Performance Windows</Link> defines the prediction clock. Default definition supplies the event inside it. If a distressed restructuring is dated when a committee records it rather than when valid evidence first existed, the same episode can move into or out of the horizon. If post-observation information is used to reconstruct a trigger as though it were known at time zero, leakage is created. If a borrower has not completed the horizon, labelling it non-default creates false negatives.</p>
+      <h3>Ranking changes when the positive class changes</h3>
+      <p>Discrimination depends on which borrowers are positives and how early their distress becomes observable. Adding qualitative early-distress events can reorder borrower pairs, alter variable relationships and change AUC or Gini. But ranking can also remain superficially stable when both definitions capture substantially overlapping risk order.</p>
+      <h3>Calibration changes when outcome frequency changes</h3>
+      <p>Calibration anchors predicted levels to the incidence of the defined event. A broadened definition can lift observed default frequency even when rank ordering barely moves. This is why stable discrimination can coexist with materially wrong PD levels. As explored in <Link href="/resources/pd-model-ranking-calibration">PD Model Ranking vs Calibration</Link>, ranking and probability accuracy are separate questions; a definition change can disturb either or both through different mechanisms.</p>
+    </section>
 
-      <section id="target-contamination">
-        <h2>A changing definition contaminates the historical target</h2>
-        <p>Suppose Period A uses one operational definition, Period B introduces new qualitative triggers and Period C changes restructuring treatment. A single target column may still contain zeros and ones, but “default” no longer means the same thing through history. The development sample now mixes target regimes.</p>
-        <p>The consequences propagate. Development estimates relationships against inconsistent outcomes. Calibration combines incompatible default rates. Validation may report deterioration caused by recognition change rather than model failure. Monitoring can mistake a new trigger or system migration for portfolio drift. Backtesting compares predictions and outcomes whose definitions do not align.</p>
-        <p>Historical reconciliation may require mapping legacy events to a common methodological definition, documenting irreducible gaps, segmenting periods or restricting the usable history. Simply appending more years can reduce comparability while appearing to strengthen sample size.</p>
-        <ResourceTable caption="High-impact default-target failure modes" headers={["Failure", "Why it happens", "What it changes", "How the model is distorted"]} rows={failureRows} />
-        <p>This is also why <Link href="/resources/pd-model-monitoring">PD model monitoring</Link>, <Link href="/resources/pd-model-ranking-calibration">ranking and calibration</Link>, and <Link href="/resources/credit-vintage-analysis">Credit Vintage Analysis</Link> all depend on stable target semantics. Observed default movement is interpretable only when recognition, timing and population scope remain comparable—or when their changes are explicitly isolated.</p>
-      </section>
+    <section id="failure-modes">
+      <h2>Failure modes: how target defects become model defects</h2>
+      <ResourceTable caption="Default-target failure modes and their analytical consequences" headers={["Failure mode","Mechanism","Analytical consequence"]} rows={failureRows} />
+      <p>The most dangerous failures are often internally consistent enough to pass routine checks. A complete binary field can conceal a regime change; a high Gini can conceal leakage; a well-calibrated portfolio average can conceal offsetting segment errors. Validation must test the provenance and semantics of the outcome, not merely its populatedness.</p>
+    </section>
 
-      <section id="design-sequence">
-        <h2>Define the economic event before optimizing the model</h2>
-        <div className={styles.sequence}>{[
-          "What economic event should the model predict?", "What constitutes default?", "Which signals identify it?", "What is the unit of default?", "When does default begin?", "How is materiality treated?", "How are cure and re-default handled?", "Is the definition consistent through history?", "Can it be reconstructed reliably from data?", "Only then: build the target.",
-        ].map((question, index) => <div key={question}><span>{String(index + 1).padStart(2, "0")}</span><strong>{question}</strong></div>)}</div>
-        <p>This sequence is the foundation for the next modelling questions. WoE and IV cannot rescue a contaminated dependent variable. Logistic-regression coefficients faithfully estimate the target supplied to them, not the target practitioners intended. Scorecard development, model validation and IFRS 9 or ECL implementation all require a defensible outcome before they can produce defensible risk measures.</p>
-        <p>Default identification is also a recurring controlled workflow: new portfolio data create new credit events, status changes, cures and re-defaults. Analytical automation can consolidate events, map qualitative evidence, test borrower/facility propagation, reconcile dates, track lifecycle states and flag historical exceptions. The <Link href="/agents">AI Agents Library</Link> provides the relevant operational context, while human governance remains responsible for economic meaning, materiality and methodological approval.</p>
-        <p>Implementation requires alignment across methodology, source data, model purpose, portfolio operations, validation and governance. Entimema&apos;s <Link href="/services/credit-risk">Credit Risk consulting</Link> connects those elements when a default policy must become a reproducible development and monitoring dataset.</p>
-        <KeyObservation title="The default-target principle"><p><strong>Define the economic event before optimizing its probability.</strong> The model learns exactly the boundary encoded in the target—even when that boundary is inconsistent, incomplete or wrong.</p></KeyObservation>
-      </section>
-    </>
-  );
+    <section id="monitoring">
+      <h2>Monitor the definition, not only the model</h2>
+      <p>A controlled monitoring framework separates borrower-risk movement from event-recognition movement. Its minimum diagnostic set should include:</p>
+      <div className={styles.monitorGrid}>
+        {[["Incidence","Default rate by portfolio, segment, vintage and event month; reconcile counts to source episodes."],["Trigger mix","Share and overlap of DPD, unlikely-to-pay, forbearance, insolvency and write-off triggers."],["Lifecycle","Cure rate, time in default, probation outcomes and re-default rate using episode-level denominators."],["Timing","Time from first distress evidence to identification, and migrations through delinquency and default states."],["Flag reconciliation","Operational versus modelling flags, propagation exceptions and event-date differences."],["Data integrity","Missing feeds, reconstructed events, rule-version coverage and unknown-outcome rates."]].map(([title,body])=><article key={title}><h3>{title}</h3><p>{body}</p></article>)}
+      </div>
+      <p>Diagnostics require control limits and attribution, not only time-series charts. A jump in defaults concentrated in a newly introduced unlikely-to-pay trigger, with unchanged arrears migration, suggests recognition change rather than proportionate deterioration in borrowers. Falling cure rates after a workflow change may reflect delayed status closure. A shorter time-to-default can signal earlier identification, not weaker model ranking.</p>
+      <p><Link href="/resources/pd-model-monitoring">PD Model Monitoring</Link> should therefore include a target-stability layer before performance escalation. <Link href="/resources/credit-vintage-analysis">Credit Vintage Analysis</Link> then helps distinguish origination-quality shifts from calendar effects and definition regimes, provided each vintage is measured against comparable outcomes. Validation should independently reperform rules on event-level data, sample flag disagreements, test sensitivity to plausible definitions, reconcile calibration denominators and confirm production parity.</p>
+      <p>This is also a credible recurring automation workflow—but not a substitute for methodological ownership. A future <strong>Default Definition Consistency &amp; Monitoring</strong> capability could reconcile operational and modelling flags, detect trigger-mix breaks, monitor cure and re-default episodes, flag lineage anomalies and generate diagnostics. Human governance must still approve economic meaning, materiality, exceptions and model use.</p>
+    </section>
+
+    <section id="decisions">
+      <h2>Target engineering becomes decision engineering</h2>
+      <p>The boundary eventually reaches customers and balance sheets. Approval cut-offs select against predicted instances of the defined event. Pricing and limits translate its estimated likelihood into risk appetite and economics. Collections timing depends on which deterioration states are recognised and when. Portfolio monitoring compares realised events with expectations built on the same target.</p>
+      <p>For IFRS 9 and expected credit loss analytics, PD meaning affects default-event forecasts, stage and lifetime-risk interpretations, calibration evidence and the point at which recovery assumptions become relevant. Capital and risk measurement require their own purpose-aligned definitions and documented bridges where concepts differ. Governance must prevent one familiar “PD” field from being reused across purposes without establishing semantic compatibility.</p>
+      <div className={styles.decisionLogic}><span>Approved default architecture</span><b>→</b><span>Interpretable PD</span><b>→</b><span>Consistent policy thresholds</span><b>→</b><span>Traceable portfolio decisions</span></div>
+      <p>The resolve is practical: treat default definition as a controlled modelling design decision and data architecture. Establish the event and its layers; version the rules; reconstruct comparable history; quantify sensitivity; validate implementation parity; monitor recognition alongside risk; and translate PDs into decisions only within the meaning of their target.</p>
+      <p>When organisations need to move from research principle to an operational model and decision framework, Entimema&apos;s <Link href="/services/credit-risk">Credit Risk capability</Link> connects default methodology to model development and review, portfolio analytics, validation, monitoring and governed credit decisions. The purpose is not to impose a generic boundary, but to make the chosen boundary economically defensible, statistically coherent and operationally reproducible.</p>
+      <KeyObservation title="The governing principle"><p><strong>Define the event before estimating its probability—and govern the definition for as long as that probability informs a decision.</strong></p></KeyObservation>
+    </section>
+  </>;
 }
