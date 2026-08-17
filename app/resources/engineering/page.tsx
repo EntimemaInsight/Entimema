@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
 import ResourceCard from "../ResourceCard";
-import { publishedResources } from "../resource-data";
+import { publishedEngineeringResources } from "../resource-data";
 import resourceStyles from "../resources.module.css";
 import styles from "./engineering.module.css";
 
@@ -13,8 +13,6 @@ export const metadata: Metadata = {
 };
 
 export default function EngineeringResearchPage() {
-  const engineeringArticles = publishedResources.filter((resource) => resource.stream === "engineering");
-
   return (
     <main className={styles.main}>
       <AnnouncementBar />
@@ -30,8 +28,8 @@ export default function EngineeringResearchPage() {
       <section className={styles.articles} aria-labelledby="latest-articles-title">
         <div className={styles.articleInner}>
           <h2 id="latest-articles-title">Latest Articles</h2>
-          {engineeringArticles.length > 0 && <div className={resourceStyles.resourceGrid}>
-            {engineeringArticles.map((resource) => <ResourceCard key={resource.slug} resource={resource} />)}
+          {publishedEngineeringResources.length > 0 && <div className={resourceStyles.resourceGrid}>
+            {publishedEngineeringResources.map((resource) => <ResourceCard key={resource.slug} resource={resource} />)}
           </div>}
         </div>
       </section>

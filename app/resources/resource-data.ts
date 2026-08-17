@@ -390,6 +390,13 @@ export const publishedResources = resources.filter(
     resource.status === "published" && resource.indexable === true && Boolean(resource.publishedAt),
 );
 
+export function getPublishedResourcesByStream(stream: ResourceStream) {
+  return publishedResources.filter((resource) => resource.stream === stream);
+}
+
+export const publishedInsightResources = getPublishedResourcesByStream("insights");
+export const publishedEngineeringResources = getPublishedResourcesByStream("engineering");
+
 const resourceThemeTopicSlugs: Partial<Record<(typeof resourceStreams.insights.themes)[number], ResourceTopicSlug>> = {
   "Credit Risk": "credit-risk",
   "CFO & Finance": "financial-architecture",
@@ -401,7 +408,7 @@ const resourceThemeTopicSlugs: Partial<Record<(typeof resourceStreams.insights.t
 
 export function getResourceThemeHref(theme: string) {
   const topic = resourceThemeTopicSlugs[theme as keyof typeof resourceThemeTopicSlugs];
-  return topic && publishedResources.some((resource) => resource.topic === topic)
+  return topic && publishedInsightResources.some((resource) => resource.topic === topic)
     ? `/resources?topic=${topic}`
     : undefined;
 }

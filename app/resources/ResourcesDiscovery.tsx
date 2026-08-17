@@ -3,16 +3,16 @@
 import { useState } from "react";
 import { NewsletterTrigger } from "@/components/DemoDiscovery";
 import ResourceCard from "./ResourceCard";
-import { getTopic, publishedResources, resourceTopics } from "./resource-data";
+import { getTopic, publishedInsightResources, resourceTopics } from "./resource-data";
 import styles from "./resources.module.css";
 import { NEWSLETTER_CTA } from "@/lib/cta-labels";
 
 export default function ResourcesDiscovery({ initialTopic }: { initialTopic?: string }) {
   const [query, setQuery] = useState("");
   const [topic, setTopic] = useState(initialTopic ?? "");
-  const availableTopics = resourceTopics.filter((item) => publishedResources.some((resource) => resource.topic === item.slug));
+  const availableTopics = resourceTopics.filter((item) => publishedInsightResources.some((resource) => resource.topic === item.slug));
   const search = query.trim().toLocaleLowerCase();
-  const matches = publishedResources
+  const matches = publishedInsightResources
     .map((resource, publicationSequence) => ({ publicationSequence, resource }))
     .filter(({ resource }) => {
       const category = getTopic(resource.topic)?.label ?? "";
