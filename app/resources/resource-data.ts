@@ -120,6 +120,25 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    technicalTitle: "Automating Roll Rate & Migration Analysis: From R Transition Matrices to an AI Collections Analyst",
+    headline: "Automating Roll Rate & Migration Analysis: From R Transition Matrices to an AI Collections Analyst",
+    headlineEmphasis: "AI Collections Analyst",
+    slug: "automating-roll-rate-migration-analysis-r-ai-collections-analyst",
+    slogan: "A controlled build pattern for turning reproducible R transition matrices into deterministic migration diagnostics and evidence-led collections investigation.",
+    sloganEmphasis: "deterministic migration diagnostics",
+    author: authors.aleksandar, publishedAt: "2026-08-17", readingMinutes: 34,
+    topic: "credit-risk", stream: "engineering", featured: true,
+    seoTitle: "Automating Roll Rate & Migration Analysis in R & AI | Entimema",
+    metaDescription: "Build roll-rate and migration analysis in R, monitor persistent EAD-material transition changes, and give an AI Collections Analyst controlled tools.",
+    canonicalPath: "/resources/automating-roll-rate-migration-analysis-r-ai-collections-analyst",
+    openGraphTitle: "Automating Roll Rate & Migration Analysis: R to AI Collections Analyst",
+    openGraphDescription: "How deterministic transition analytics become a controlled, recurring AI-assisted portfolio and collections investigation workflow.",
+    relatedCapability: { label: "Credit Risk", href: "/services/credit-risk", description: "Connect reproducible migration calculation, portfolio diagnostics and controlled collections investigation." },
+    relatedResourceSlugs: ["roll-rate-analysis-migration-matrices", "automating-credit-vintage-analysis-r-ai-portfolio-analyst", "credit-portfolio-monitoring-architecture", "early-warning-indicators-credit-risk"],
+    status: "published", indexable: true,
+    cover: { type: "generated-matrix", motion: "none", alt: "Engineering publication cover for automated roll-rate and migration analysis with an AI Collections Analyst.", stages: ["Pair", "Migrate", "Compare", "Prioritise", "Investigate"] },
+  },
+  {
     technicalTitle: "Automating Credit Vintage Analysis: From R Cohort Calculations to an AI Portfolio Analyst",
     headline: "Automating Credit Vintage Analysis: From R Cohort Calculations to an AI Portfolio Analyst",
     headlineEmphasis: "AI Portfolio Analyst",
