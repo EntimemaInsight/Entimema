@@ -120,6 +120,26 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    technicalTitle: "Lifetime PD Term Structures: From 12-Month Default Risk to Multi-Period Expected Loss",
+    headline: "Lifetime PD Is a Curve Through Time, Not 12-Month PD Multiplied by Maturity",
+    headlineEmphasis: "a Curve Through Time, Not 12-Month PD Multiplied by Maturity",
+    slug: "lifetime-pd-term-structures-ifrs-9",
+    slogan: "Convert conditional period risk through survival into marginal and cumulative default probabilities that preserve loss timing for lifetime ECL.",
+    sloganEmphasis: "preserve loss timing",
+    author: authors.aleksandar, publishedAt: "2026-08-18", readingMinutes: 46,
+    topic: "credit-risk", stream: "insights", featured: true,
+    seoTitle: "Lifetime PD Term Structures for IFRS 9 ECL | Entimema",
+    metaDescription: "Build IFRS 9 lifetime PD term structures through hazard, survival, marginal and cumulative PD, macro scenarios, censoring, tail estimation and validation.",
+    canonicalPath: "/resources/lifetime-pd-term-structures-ifrs-9",
+    openGraphTitle: "Lifetime PD: From 12-Month Risk to Multi-Period Expected Loss",
+    openGraphDescription: "A practitioner architecture for conditional PD, survival, marginal default timing, lifetime ECL integration and level-versus-shape validation.",
+    openGraphImage: "/resources/covers/lifetime-pd-term-structures.png",
+    relatedCapability: { label: "Credit Risk", href: "/services/credit-risk", description: "Develop, validate and monitor lifetime PD curves, staging evidence and IFRS 9 impairment models." },
+    relatedResourceSlugs: ["ifrs-9-expected-credit-loss-architecture", "significant-increase-credit-risk-ifrs-9-stage-2", "credit-vintage-analysis", "roll-rate-analysis-migration-matrices", "model-calibration-drift-pd-risk-level", "credit-risk-model-validation"],
+    status: "published", indexable: true,
+    cover: { type: "editorial-artwork", src: "/resources/covers/lifetime-pd-term-structures.png", motion: "none", alt: "Successive glass time planes receive many fine credit paths; some terminate while the surviving paths continue into a narrowing precision corridor.", stages: ["Hazard", "Survival", "Marginal PD", "Cumulative PD", "Lifetime ECL"] },
+  },
+  {
     technicalTitle: "Significant Increase in Credit Risk: Why IFRS 9 Stage 2 Is a Change-in-Risk Problem, Not a High-Risk Bucket",
     headline: "Stage 2 Is a Change-in-Risk State, Not a High-Risk Bucket",
     headlineEmphasis: "a Change-in-Risk State, Not a High-Risk Bucket",
