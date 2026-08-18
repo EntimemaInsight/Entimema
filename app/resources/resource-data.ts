@@ -120,6 +120,26 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    technicalTitle: "Affordability Decisioning: Why Ability to Pay Is Not the Same Thing as Probability of Default",
+    headline: "Affordability Decisioning: Ability to Pay Is Not Probability of Default",
+    headlineEmphasis: "Not Probability of Default",
+    slug: "affordability-decisioning-ability-to-pay",
+    slogan: "Separate borrower risk from capacity, reconstruct sustainable cash flow, stress the proposed obligation and optimise amount, tenor and price inside one governed lending decision.",
+    sloganEmphasis: "separate borrower risk from capacity",
+    author: authors.aleksandar, publishedAt: "2026-08-18", updatedAt: "2026-08-18", readingMinutes: 46,
+    topic: "credit-risk", stream: "insights", featured: true,
+    seoTitle: "Affordability Decisioning & Credit Assessment | Entimema",
+    metaDescription: "Build lending affordability assessment using verified income, obligations, essential expenditure, DTI, DSTI, residual income, stress and product simulation.",
+    canonicalPath: "/resources/affordability-decisioning-ability-to-pay",
+    openGraphTitle: "Affordability Decisioning: Ability to Pay Is Not PD",
+    openGraphDescription: "A practitioner architecture for income, obligations, essential costs, residual income, stress, alternative offers and risk integration.",
+    openGraphImage: "/resources/covers/affordability-decisioning.png",
+    relatedCapability: { label: "Decision Automation", href: "/services/decision-automation", description: "Build affordability engines, product simulations and controlled capacity assessment inside lending decision orchestration." },
+    relatedResourceSlugs: ["credit-decision-engine-architecture", "credit-policy-rules-lending-rulebook-governance", "credit-risk-cut-off-strategy", "credit-scorecard-development-explainable-risk-ranking", "reject-inference-credit-risk-rejected-applicants", "early-warning-indicators-credit-risk", "ifrs-9-ead-credit-conversion-factors"],
+    status: "published", indexable: true,
+    cover: { type: "editorial-artwork", src: "/resources/covers/affordability-decisioning.png", motion: "none", alt: "Entimema Insights cover showing a precision load-bearing structure carrying existing commitments and a new copper load while preserving a visible capacity margin, with a stressed structure behind.", stages: ["Verified income", "Income stability", "Obligations", "Essential expenditure", "Disposable income", "Proposed payment", "Stress", "Residual income", "Decision"] },
+  },
+  {
     technicalTitle: "Credit Policy Rules: How to Build a Lending Rulebook That Controls Risk Without Becoming a Rule Graveyard",
     headline: "Credit Policy Rules: How to Build a Lending Rulebook That Controls Risk Without Becoming a Rule Graveyard",
     headlineEmphasis: "Without Becoming a Rule Graveyard",
