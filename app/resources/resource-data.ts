@@ -120,6 +120,26 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    technicalTitle: "Credit Policy Rules: How to Build a Lending Rulebook That Controls Risk Without Becoming a Rule Graveyard",
+    headline: "Credit Policy Rules: How to Build a Lending Rulebook That Controls Risk Without Becoming a Rule Graveyard",
+    headlineEmphasis: "Without Becoming a Rule Graveyard",
+    slug: "credit-policy-rules-lending-rulebook-governance",
+    slogan: "Move from rule inventory to rule architecture by testing every control for purpose, precedence, unique decision contribution, outcome evidence and complexity cost.",
+    sloganEmphasis: "rule inventory to rule architecture",
+    author: authors.aleksandar, publishedAt: "2026-08-18", updatedAt: "2026-08-18", readingMinutes: 44,
+    topic: "credit-risk", stream: "insights", featured: true,
+    seoTitle: "Credit Policy Rules & Lending Rulebook Governance | Entimema",
+    metaDescription: "Build and govern credit policy rules through purpose, precedence, hit rates, unique contribution, overlap, outcome evidence, complexity and retirement.",
+    canonicalPath: "/resources/credit-policy-rules-lending-rulebook-governance",
+    openGraphTitle: "Credit Policy Rules: From Rule Inventory to Rule Architecture",
+    openGraphDescription: "A practitioner framework for credit rule purpose, precedence, overlap, shadowing, unique contribution, simplification, testing and governance.",
+    openGraphImage: "/resources/covers/credit-policy-rules-lending-rulebook-governance.png",
+    relatedCapability: { label: "Decision Automation", href: "/services/decision-automation", description: "Design, simplify and monitor executable policy rulebooks with controlled precedence, traceability and governance." },
+    relatedResourceSlugs: ["credit-decision-engine-architecture", "credit-risk-cut-off-strategy", "reject-inference-credit-risk-rejected-applicants", "credit-scorecard-development-explainable-risk-ranking", "credit-risk-model-validation", "early-warning-indicators-credit-risk", "credit-vintage-analysis"],
+    status: "published", indexable: true,
+    cover: { type: "editorial-artwork", src: "/resources/covers/credit-policy-rules-lending-rulebook-governance.png", motion: "none", alt: "Entimema Insights cover showing dense overlapping glass and steel gates resolving into a few essential controlled policy boundaries.", stages: ["Purpose", "Logic", "Precedence", "Hit Rate", "Unique Contribution", "Overlap", "Evidence", "Complexity", "Keep / Merge / Retire"] },
+  },
+  {
     technicalTitle: "Credit Decision Engine Architecture: How Risk Models, Policy Rules, Affordability and Strategy Become One Lending Decision",
     headline: "Credit Decision Engine Architecture: How Risk Models, Policy Rules, Affordability and Strategy Become One Lending Decision",
     headlineEmphasis: "One Lending Decision",
