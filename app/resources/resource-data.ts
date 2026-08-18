@@ -120,6 +120,26 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    technicalTitle: "Significant Increase in Credit Risk: Why IFRS 9 Stage 2 Is a Change-in-Risk Problem, Not a High-Risk Bucket",
+    headline: "Stage 2 Is a Change-in-Risk State, Not a High-Risk Bucket",
+    headlineEmphasis: "a Change-in-Risk State, Not a High-Risk Bucket",
+    slug: "significant-increase-credit-risk-ifrs-9-stage-2",
+    slogan: "Reconstruct initial risk, measure comparable lifetime deterioration and combine quantitative, behavioural, qualitative and forward-looking evidence into explainable Stage 2 migration.",
+    sloganEmphasis: "comparable lifetime deterioration",
+    author: authors.aleksandar, publishedAt: "2026-08-18", readingMinutes: 48,
+    topic: "credit-risk", stream: "insights", featured: true,
+    seoTitle: "Significant Increase in Credit Risk & IFRS 9 Stage 2 | Entimema",
+    metaDescription: "A practitioner SICR and IFRS 9 Stage 2 framework for initial-risk baselines, lifetime PD deterioration, triggers, migration, cure, backtesting and ECL impact.",
+    canonicalPath: "/resources/significant-increase-credit-risk-ifrs-9-stage-2",
+    openGraphTitle: "SICR: Why IFRS 9 Stage 2 Is About Change in Risk",
+    openGraphDescription: "A practitioner architecture for comparing initial and current lifetime risk, governing evidence, explaining Stage 2 flows and validating financial impact.",
+    openGraphImage: "/resources/covers/significant-increase-credit-risk-ifrs9-stage-2.png",
+    relatedCapability: { label: "Credit Risk", href: "/services/credit-risk", description: "Design, validate and monitor SICR, staging, lifetime-risk and impairment evidence." },
+    relatedResourceSlugs: ["ifrs-9-expected-credit-loss-architecture", "early-warning-indicators-credit-risk", "roll-rate-analysis-migration-matrices", "credit-vintage-analysis", "model-calibration-drift-pd-risk-level", "credit-risk-model-validation"],
+    status: "published", indexable: true,
+    cover: { type: "editorial-artwork", src: "/resources/covers/significant-increase-credit-risk-ifrs9-stage-2.png", motion: "none", focalPoint: "50% 50%", alt: "Two matched precision credit structures stand against an origination baseline; the current structure remains intact but is materially displaced from its initial state.", stages: ["Initial Risk", "Current Risk", "Deterioration", "Evidence", "Stage 2", "Lifetime ECL"] },
+  },
+  {
     technicalTitle: "IFRS 9 Expected Credit Loss: From PD, LGD and EAD to a Decision-Useful ECL Architecture",
     headline: "Expected Credit Loss Is a Measurement System, Not a Formula",
     headlineEmphasis: "a Measurement System, Not a Formula",
