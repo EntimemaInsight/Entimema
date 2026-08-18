@@ -120,6 +120,26 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    technicalTitle: "IFRS 9 EAD & Credit Conversion Factors: Why Exposure at Default Is a Behavioural Forecast, Not a Balance Snapshot",
+    headline: "Exposure at Default Is a Behavioural Forecast, Not a Balance Snapshot",
+    headlineEmphasis: "a Behavioural Forecast, Not a Balance Snapshot",
+    slug: "ifrs-9-ead-credit-conversion-factors",
+    slogan: "Connect contractual balances, utilisation, undrawn commitments, prepayment and default timing into an EAD term structure that can be challenged and backtested.",
+    sloganEmphasis: "an EAD term structure",
+    author: authors.aleksandar, publishedAt: "2026-08-18", readingMinutes: 56,
+    topic: "credit-risk", stream: "insights", featured: true,
+    seoTitle: "IFRS 9 EAD & Credit Conversion Factors (CCF) | Entimema",
+    metaDescription: "Build IFRS 9 EAD and CCF models for amortising loans, revolving facilities, undrawn commitments, prepayment, scenarios and exposure-at-default backtesting.",
+    canonicalPath: "/resources/ifrs-9-ead-credit-conversion-factors",
+    openGraphTitle: "IFRS 9 EAD & CCF: Exposure Is a Behavioural Forecast",
+    openGraphDescription: "A practitioner architecture for contractual exposure, utilisation run-up, CCF diagnostics, EAD term structures, scenarios and backtesting.",
+    openGraphImage: "/resources/covers/ifrs-9-ead-credit-conversion-factors.png",
+    relatedCapability: { label: "Credit Risk", href: "/services/credit-risk", description: "Develop, validate and monitor IFRS 9 EAD, CCF, utilisation and impairment architectures." },
+    relatedResourceSlugs: ["ifrs-9-expected-credit-loss-architecture", "lifetime-pd-term-structures-ifrs-9", "ifrs-9-lgd-recovery-cash-flows", "significant-increase-credit-risk-ifrs-9-stage-2", "credit-risk-model-validation", "early-warning-indicators-credit-risk"],
+    status: "published", indexable: true,
+    cover: { type: "editorial-artwork", src: "/resources/covers/ifrs-9-ead-credit-conversion-factors.png", motion: "none", focalPoint: "50% 50%", alt: "A dark glass and steel channel progressively fills with restrained amber material, representing unused credit capacity converting into exposure as default approaches.", stages: ["Current Exposure", "Contract", "Utilisation", "CCF", "Default Timing", "EAD"] },
+  },
+  {
     technicalTitle: "IFRS 9 LGD: From Recovery Cash Flows to Downturn-Sensitive Loss Severity",
     headline: "LGD Is a Discounted Recovery Process, Not One Minus a Recovery Rate",
     headlineEmphasis: "a Discounted Recovery Process, Not One Minus a Recovery Rate",
