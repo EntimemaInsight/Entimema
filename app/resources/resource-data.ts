@@ -120,6 +120,26 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    technicalTitle: "IFRS 9 LGD: From Recovery Cash Flows to Downturn-Sensitive Loss Severity",
+    headline: "LGD Is a Discounted Recovery Process, Not One Minus a Recovery Rate",
+    headlineEmphasis: "a Discounted Recovery Process, Not One Minus a Recovery Rate",
+    slug: "ifrs-9-lgd-recovery-cash-flows",
+    slogan: "Convert post-default cash flows, costs, cure, collateral and recovery timing into scenario-sensitive economic loss that can be backtested by level and timing.",
+    sloganEmphasis: "scenario-sensitive economic loss",
+    author: authors.aleksandar, publishedAt: "2026-08-18", readingMinutes: 54,
+    topic: "credit-risk", stream: "insights", featured: true,
+    seoTitle: "IFRS 9 LGD & Discounted Recovery Cash Flows | Entimema",
+    metaDescription: "Build IFRS 9 LGD from discounted net recovery cash flows, cure, collateral, recovery vintages, downturn scenarios, censoring and level-versus-timing backtesting.",
+    canonicalPath: "/resources/ifrs-9-lgd-recovery-cash-flows",
+    openGraphTitle: "IFRS 9 LGD: From Recovery Cash Flows to Loss Severity",
+    openGraphDescription: "A practitioner architecture for discounted recoveries, workout costs, cure, collateral, downturn-sensitive LGD and recovery-curve validation.",
+    openGraphImage: "/resources/covers/ifrs-9-lgd-recovery-cash-flows.png",
+    relatedCapability: { label: "Credit Risk", href: "/services/credit-risk", description: "Develop, validate and monitor recovery, LGD and IFRS 9 impairment architectures." },
+    relatedResourceSlugs: ["ifrs-9-expected-credit-loss-architecture", "lifetime-pd-term-structures-ifrs-9", "significant-increase-credit-risk-ifrs-9-stage-2", "credit-vintage-analysis", "model-calibration-drift-pd-risk-level", "credit-risk-model-validation"],
+    status: "published", indexable: true,
+    cover: { type: "editorial-artwork", src: "/resources/covers/ifrs-9-lgd-recovery-cash-flows.png", motion: "none", focalPoint: "50% 50%", alt: "A fractured graphite credit structure remains incomplete as glass and copper recovery streams return value along paths of different lengths.", stages: ["Default", "Recovery", "Costs", "Timing", "Discounting", "LGD"] },
+  },
+  {
     technicalTitle: "Lifetime PD Term Structures: From 12-Month Default Risk to Multi-Period Expected Loss",
     headline: "Lifetime PD Is a Curve Through Time, Not 12-Month PD Multiplied by Maturity",
     headlineEmphasis: "a Curve Through Time, Not 12-Month PD Multiplied by Maturity",
