@@ -120,6 +120,26 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    technicalTitle: "Forward-Looking Macroeconomic Scenarios in IFRS 9: From Forecasts to Probability-Weighted Credit Loss",
+    headline: "Forward-Looking IFRS 9 Is a Credit-Risk Transmission System, Not Three Forecasts Averaged Together",
+    headlineEmphasis: "a Credit-Risk Transmission System, Not Three Forecasts Averaged Together",
+    slug: "forward-looking-macroeconomic-scenarios-ifrs-9",
+    slogan: "Translate coherent economic paths into scenario-specific PD, LGD, EAD, staging and loss before weighting outcomes, testing sensitivity and governing judgement.",
+    sloganEmphasis: "scenario-specific PD, LGD, EAD, staging and loss",
+    author: authors.aleksandar, publishedAt: "2026-08-18", readingMinutes: 58,
+    topic: "credit-risk", stream: "insights", featured: true,
+    seoTitle: "IFRS 9 Macroeconomic Scenarios & Probability-Weighted ECL | Entimema",
+    metaDescription: "Build forward-looking IFRS 9 ECL through coherent macroeconomic scenarios, PD/LGD/EAD transmission, probability weighting, sensitivity, overlays and governance.",
+    canonicalPath: "/resources/forward-looking-macroeconomic-scenarios-ifrs-9",
+    openGraphTitle: "IFRS 9 Macroeconomic Scenarios: From Forecasts to Weighted ECL",
+    openGraphDescription: "A practitioner architecture for scenario coherence, nonlinear PD/LGD/EAD response, probability-weighted ECL, sensitivity, attribution and governance.",
+    openGraphImage: "/resources/covers/forward-looking-macroeconomic-scenarios-ifrs-9.png",
+    relatedCapability: { label: "Credit Risk", href: "/services/credit-risk", description: "Develop, validate and govern forward-looking IFRS 9 scenario, parameter and impairment architectures." },
+    relatedResourceSlugs: ["ifrs-9-expected-credit-loss-architecture", "lifetime-pd-term-structures-ifrs-9", "ifrs-9-lgd-recovery-cash-flows", "ifrs-9-ead-credit-conversion-factors", "significant-increase-credit-risk-ifrs-9-stage-2", "credit-risk-model-validation"],
+    status: "published", indexable: true,
+    cover: { type: "editorial-artwork", src: "/resources/covers/forward-looking-macroeconomic-scenarios-ifrs-9.png", motion: "none", focalPoint: "50% 50%", alt: "Three translucent macroeconomic pathways rise, continue and descend through glass and steel before converging into one illuminated probability-weighted expected-loss plane.", stages: ["Narrative", "Paths", "PD / LGD / EAD", "Scenario ECL", "Weighting", "Attribution"] },
+  },
+  {
     technicalTitle: "IFRS 9 EAD & Credit Conversion Factors: Why Exposure at Default Is a Behavioural Forecast, Not a Balance Snapshot",
     headline: "Exposure at Default Is a Behavioural Forecast, Not a Balance Snapshot",
     headlineEmphasis: "a Behavioural Forecast, Not a Balance Snapshot",

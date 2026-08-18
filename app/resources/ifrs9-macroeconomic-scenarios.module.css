@@ -1,0 +1,25 @@
+.formulaLine { font-family: var(--font-mono); font-size: clamp(.84rem, 1.5vw, 1.05rem); letter-spacing: -.02em; }
+.architecture { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: color-mix(in srgb, var(--color-border) 70%, transparent); }
+.architecture li { min-height: 8rem; padding: 1rem; background: #0d141d; display: flex; flex-direction: column; justify-content: space-between; }
+.architecture small, .transmission span, .contribution span, .matrix span { color: var(--color-accent); letter-spacing: .14em; font-size: .68rem; }
+.architecture strong { font-family: var(--font-serif); font-weight: 500; font-size: 1.02rem; }
+.criteriaGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; margin: 2rem 0; }
+.criteriaGrid article { border: 1px solid var(--color-border); padding: 1.1rem; background: rgba(16,24,34,.55); }
+.matrix { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; margin: 2rem 0; background: var(--color-border); }
+.matrix article { padding: 1.35rem; background: #101822; min-height: 8rem; }
+.matrix p { margin-bottom: 0; }
+.transmission, .agentFlow { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1px; background: var(--color-border); }
+.transmission article, .agentFlow article { padding: 1rem; background: #0d141d; min-height: 8rem; }
+.transmission p { font-size: .82rem; margin: .8rem 0 0; }
+.contribution { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--color-border); }
+.contribution article { padding: 1.35rem; background: linear-gradient(145deg, #111b27, #0b1119); display: grid; gap: .7rem; }
+.contribution strong { font-family: var(--font-serif); font-size: 1.4rem; }
+.contribution p, .contribution em { margin: 0; }
+.contribution em { color: #d79559; font-style: normal; }
+.overlayFlow { display: grid; grid-template-columns: repeat(6, 1fr); gap: .6rem; margin: 2rem 0; }
+.overlayFlow article { border-top: 2px solid #bb713d; padding: .9rem .35rem; display: grid; gap: .5rem; }
+.overlayFlow small { color: #c47b48; }
+.agentFlow { grid-template-columns: repeat(4, 1fr); }
+.agentFlow article { display: grid; place-items: center; text-align: center; min-height: 6rem; }
+@media (max-width: 900px) { .architecture { grid-template-columns: repeat(3, 1fr); } .transmission { grid-template-columns: repeat(3, 1fr); } .overlayFlow { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 640px) { .architecture, .criteriaGrid, .matrix, .transmission, .contribution, .agentFlow { grid-template-columns: 1fr; } .architecture li, .transmission article { min-height: auto; } .overlayFlow { grid-template-columns: repeat(2, 1fr); } }
