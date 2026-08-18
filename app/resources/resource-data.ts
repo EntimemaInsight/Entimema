@@ -120,6 +120,26 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    technicalTitle: "IFRS 9 ECL Validation & Backtesting: How to Test Whether Expected Credit Loss Deserves Trust",
+    headline: "Expected Credit Loss Deserves Trust Only When Prediction Survives Evidence",
+    headlineEmphasis: "Only When Prediction Survives Evidence",
+    slug: "ifrs-9-ecl-validation-backtesting",
+    slogan: "Reconstruct historical allowance, align mature outcomes, validate PD, LGD, EAD, SICR and scenarios, reconcile the engine and convert model error into financial materiality.",
+    sloganEmphasis: "convert model error into financial materiality",
+    author: authors.aleksandar, publishedAt: "2026-08-18", readingMinutes: 62,
+    topic: "credit-risk", stream: "insights", featured: true,
+    seoTitle: "IFRS 9 ECL Validation & Backtesting Framework | Entimema",
+    metaDescription: "Validate IFRS 9 ECL through historical reconstruction, PD, lifetime PD, LGD, EAD/CCF, SICR, macro scenarios, engine reconciliation and financial materiality.",
+    canonicalPath: "/resources/ifrs-9-ecl-validation-backtesting",
+    openGraphTitle: "IFRS 9 ECL Validation & Backtesting: From Prediction to Evidence",
+    openGraphDescription: "A practitioner framework for component backtesting, evidence maturity, static pools, compensating errors, ECL attribution, sensitivity and validation conclusions.",
+    openGraphImage: "/resources/covers/ifrs-9-ecl-validation-backtesting.png",
+    relatedCapability: { label: "Credit Risk", href: "/services/credit-risk", description: "Validate and govern connected IFRS 9 PD, LGD, EAD, SICR, macro and impairment architectures." },
+    relatedResourceSlugs: ["ifrs-9-expected-credit-loss-architecture", "significant-increase-credit-risk-ifrs-9-stage-2", "lifetime-pd-term-structures-ifrs-9", "ifrs-9-lgd-recovery-cash-flows", "ifrs-9-ead-credit-conversion-factors", "forward-looking-macroeconomic-scenarios-ifrs-9", "credit-risk-model-validation", "model-calibration-drift-pd-risk-level"],
+    status: "published", indexable: true,
+    cover: { type: "editorial-artwork", src: "/resources/covers/ifrs-9-ecl-validation-backtesting.png", motion: "none", focalPoint: "50% 50%", alt: "A translucent projected loss architecture and a solid observed-outcome structure diverge under a precise copper reveal beam, representing prediction confronted with evidence.", stages: ["Prediction", "Outcome", "Components", "Contradictions", "Attribution", "Materiality", "Trust"] },
+  },
+  {
     technicalTitle: "Forward-Looking Macroeconomic Scenarios in IFRS 9: From Forecasts to Probability-Weighted Credit Loss",
     headline: "Forward-Looking IFRS 9 Is a Credit-Risk Transmission System, Not Three Forecasts Averaged Together",
     headlineEmphasis: "a Credit-Risk Transmission System, Not Three Forecasts Averaged Together",
