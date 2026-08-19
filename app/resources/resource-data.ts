@@ -120,6 +120,25 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    technicalTitle: "Streaming Behavioural Features for Early Warning",
+    headline: "Streaming Behavioural Features for Early Warning: Building Risk Signals That Update as Borrower Behaviour Changes",
+    headlineEmphasis: "Building Risk Signals That Update as Borrower Behaviour Changes",
+    slug: "streaming-behavioural-features-early-warning",
+    slogan: "Update rolling behavioural risk features as state changes, then stabilise noisy signals through persistence, hysteresis, health gates and selective decision triggers.",
+    sloganEmphasis: "stabilise noisy signals",
+    author: authors.aleksandar, publishedAt: "2026-08-19", updatedAt: "2026-08-19", readingMinutes: 47,
+    topic: "credit-risk", stream: "engineering", featured: true,
+    seoTitle: "Streaming Behavioural Features for Credit Early Warning | Entimema",
+    metaDescription: "Engineer streaming behavioural credit features with rolling windows, late-event correction, utilisation velocity, persistence, hysteresis and EWS triggers.",
+    canonicalPath: "/resources/streaming-behavioural-features-early-warning",
+    openGraphTitle: "Streaming Behavioural Features for Early Warning",
+    openGraphDescription: "An engineering architecture for incremental behavioural features, stable early-warning signals, source-health controls and intervention lead time.",
+    relatedCapability: { label: "Decision Automation", href: "/services/decision-automation", description: "Connect material behavioural state changes to stable, freshness-aware early-warning decisions and controlled workflows." },
+    relatedResourceSlugs: ["batch-etl-event-driven-credit-risk-architecture", "point-in-time-correct-features-credit-models", "credit-risk-feature-store-respects-time", "building-reliable-dpd-engine", "reconstructing-account-state-financial-events"],
+    status: "published", indexable: true,
+    cover: { type: "generated-matrix", motion: "none", alt: "Entimema Engineering publication cover for Streaming Behavioural Features for Early Warning.", stages: ["Event", "State", "Window", "Feature", "Persistence", "Trigger", "Decision", "Monitoring"] },
+  },
+  {
     technicalTitle: "From Batch ETL to Event-Driven Credit Risk Architecture",
     headline: "From Batch ETL to Event-Driven Credit Risk Architecture: Designing the Path from Financial Events to Real-Time Decisions",
     headlineEmphasis: "Designing the Path from Financial Events to Real-Time Decisions",
