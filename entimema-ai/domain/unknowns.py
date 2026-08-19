@@ -11,5 +11,6 @@ class UnknownRecord(BaseModel):
     why_needed: str = Field(min_length=1)
     materiality: Materiality
     resolvable: bool
+    blocks_routing: bool | None = None
     acquisition_cost: float | None = Field(default=None, ge=0)
     hypotheses_affected: list[str] = Field(default_factory=list)

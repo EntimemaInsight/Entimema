@@ -14,17 +14,45 @@ TERMINAL_STATES = frozenset(
 )
 
 ALLOWED_TRANSITIONS: dict[StateTransition, frozenset[StateTransition]] = {
-    StateTransition.INTAKE: frozenset({StateTransition.CONTEXTUALISING}),
+    StateTransition.INTAKE: frozenset({StateTransition.INTAKE, StateTransition.CONTEXTUALISING}),
     StateTransition.CONTEXTUALISING: frozenset(
-        {StateTransition.REPAIR, StateTransition.PROBLEM_FORMATION}
+        {
+            StateTransition.CONTEXTUALISING,
+            StateTransition.REPAIR,
+            StateTransition.PROBLEM_FORMATION,
+            StateTransition.INSUFFICIENT_EVIDENCE,
+        }
     ),
-    StateTransition.REPAIR: frozenset({StateTransition.PROBLEM_FORMATION}),
-    StateTransition.PROBLEM_FORMATION: frozenset({StateTransition.HYPOTHESIS_DISCRIMINATION}),
+    StateTransition.REPAIR: frozenset(
+        {
+            StateTransition.REPAIR,
+            StateTransition.PROBLEM_FORMATION,
+            StateTransition.INSUFFICIENT_EVIDENCE,
+        }
+    ),
+    StateTransition.PROBLEM_FORMATION: frozenset(
+        {
+            StateTransition.PROBLEM_FORMATION,
+            StateTransition.HYPOTHESIS_DISCRIMINATION,
+            StateTransition.FORBIDDEN_INFERENCE,
+            StateTransition.INSUFFICIENT_EVIDENCE,
+        }
+    ),
     StateTransition.HYPOTHESIS_DISCRIMINATION: frozenset(
-        {StateTransition.EPISTEMIC_CHALLENGE, StateTransition.ROUTING_READY}
+        {
+            StateTransition.HYPOTHESIS_DISCRIMINATION,
+            StateTransition.EPISTEMIC_CHALLENGE,
+            StateTransition.ROUTING_READY,
+            StateTransition.INSUFFICIENT_EVIDENCE,
+            StateTransition.FORBIDDEN_INFERENCE,
+        }
     ),
     StateTransition.EPISTEMIC_CHALLENGE: frozenset(
-        {StateTransition.HYPOTHESIS_DISCRIMINATION, StateTransition.INSUFFICIENT_EVIDENCE}
+        {
+            StateTransition.EPISTEMIC_CHALLENGE,
+            StateTransition.HYPOTHESIS_DISCRIMINATION,
+            StateTransition.INSUFFICIENT_EVIDENCE,
+        }
     ),
     StateTransition.ROUTING_READY: frozenset({StateTransition.AGENT_RUNNING}),
     StateTransition.AGENT_RUNNING: frozenset({StateTransition.RESULT_VALIDATION}),

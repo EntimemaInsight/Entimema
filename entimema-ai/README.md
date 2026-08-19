@@ -34,3 +34,13 @@ python -m venv .venv
 
 The `app/main.py` module exposes only a typed `ProblemState` constructor. No server or agent
 execution framework is included in this sprint.
+
+## Sprint 2 — Concierge State Machine
+
+The runtime now supports deterministic, audited Module A transitions through `INTAKE`,
+`CONTEXTUALISING`, `REPAIR`, `PROBLEM_FORMATION`, `HYPOTHESIS_DISCRIMINATION`,
+`EPISTEMIC_CHALLENGE`, and `ROUTING_READY`. Repair precedence, forbidden-inference checks,
+routing gates, critical-unknown policy, and one-question deterministic selection are executable.
+
+There is still no LLM execution, persistence, or domain-agent execution. `ROUTING_READY` is the
+current successful terminal boundary for the Concierge layer.

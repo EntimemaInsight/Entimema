@@ -24,3 +24,5 @@ class HypothesisRecord(BaseModel):
     observable_implications: list[str] = Field(default_factory=list)
     falsification_condition: str | None = None
     source: str = Field(min_length=1)
+    testable: bool = True
+    forbidden_inference: bool = False

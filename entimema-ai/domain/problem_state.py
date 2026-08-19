@@ -2,6 +2,8 @@ from datetime import UTC, datetime
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
+from concierge.repair import RepairRecord
+from concierge.routing_gate import ProblemFormationReadiness
 from domain.assumptions import AssumptionRecord
 from domain.claims import ClaimRecord
 from domain.contradictions import ContradictionRecord
@@ -9,6 +11,7 @@ from domain.conversation import ConversationState
 from domain.enums import EpistemicVerdict
 from domain.evidence import EvidenceRecord
 from domain.hypotheses import HypothesisRecord
+from domain.transitions import StateTransition
 from domain.unknowns import UnknownRecord
 
 
@@ -38,6 +41,11 @@ class ProblemState(BaseModel):
     contradictions: list[ContradictionRecord] = Field(default_factory=list)
     constraints: list[str] = Field(default_factory=list)
     relevant_entities: list[str] = Field(default_factory=list)
+    lifecycle_state: StateTransition = StateTransition.INTAKE
+    repairs: list[RepairRecord] = Field(default_factory=list)
+    formation_readiness: ProblemFormationReadiness = Field(
+        default_factory=ProblemFormationReadiness
+    )
     conversation_state: ConversationState = Field(default_factory=ConversationState)
     next_best_question: str | None = None
     routing_ready: bool = False
@@ -56,6 +64,7 @@ class ProblemState(BaseModel):
             self.assumptions,
             self.hypotheses,
             self.contradictions,
+            self.repairs,
         ):
             ids = [item.id for item in collection]
             if len(ids) != len(set(ids)):
