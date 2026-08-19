@@ -120,6 +120,25 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    technicalTitle: "Event-Driven Decision Triggers in Lending Systems",
+    headline: "Event-Driven Decision Triggers in Lending Systems: When a State Change Should Actually Re-Run a Credit Decision",
+    headlineEmphasis: "When a State Change Should Actually Re-Run a Credit Decision",
+    slug: "event-driven-decision-triggers-lending-systems",
+    slogan: "Filter borrower-state changes through dependencies, materiality and causal deduplication before re-evaluating decisions or executing episode-aware actions.",
+    sloganEmphasis: "before re-evaluating decisions or executing episode-aware actions",
+    author: authors.aleksandar, publishedAt: "2026-08-19", updatedAt: "2026-08-19", readingMinutes: 47,
+    topic: "decision-intelligence", stream: "engineering", featured: true,
+    seoTitle: "Event-Driven Credit Decision Trigger Architecture | Entimema",
+    metaDescription: "Engineer lending decision triggers with dependency and materiality filters, coalescing, hysteresis, cooldown, stale-state guards and action idempotency.",
+    canonicalPath: "/resources/event-driven-decision-triggers-lending-systems",
+    openGraphTitle: "Event-Driven Decision Triggers in Lending Systems",
+    openGraphDescription: "An engineering architecture for deciding which state changes deserve credit re-evaluation and ensuring one economic trigger creates at most one intended action.",
+    relatedCapability: { label: "Decision Automation", href: "/services/decision-automation", description: "Build selective, versioned and idempotent trigger-to-decision-to-action orchestration for lending workflows." },
+    relatedResourceSlugs: ["real-time-utilisation-exposure-monitoring", "streaming-behavioural-features-early-warning", "batch-etl-event-driven-credit-risk-architecture", "credit-risk-feature-store-respects-time", "point-in-time-customer-state-reconstruction"],
+    status: "published", indexable: true,
+    cover: { type: "generated-matrix", motion: "none", alt: "Entimema Engineering publication cover for Event-Driven Decision Triggers in Lending Systems.", stages: ["Change", "Dependency", "Materiality", "Coalescing", "Decision", "Delta", "Action", "Cooldown"] },
+  },
+  {
     technicalTitle: "Real-Time Utilisation and Exposure Monitoring",
     headline: "Real-Time Utilisation and Exposure Monitoring: Keeping Credit Limits, Drawn Balances and Risk State Synchronized",
     headlineEmphasis: "Keeping Credit Limits, Drawn Balances and Risk State Synchronized",
