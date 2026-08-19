@@ -13,7 +13,7 @@ dependencies = ["pydantic>=2.0,<3"]
 dev = ["pytest>=8.0", "ruff>=0.6"]
 
 [tool.hatch.build.targets.wheel]
-packages = ["app", "concierge", "core", "domain", "epistemic", "problem_formation"]
+packages = ["app", "concierge", "core", "domain", "epistemic", "orchestrator", "problem_formation"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

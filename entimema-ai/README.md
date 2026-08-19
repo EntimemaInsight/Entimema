@@ -60,3 +60,18 @@ than owning dialogue transitions.
 Pre-routing validation is active. Post-agent and synthesis validation have typed, explicitly
 deferred contracts only. There is no agent execution, LLM execution, RAG, persistence, or
 production orchestration in this sprint.
+
+## Sprint 5 — Central Orchestrator & Agent Registry
+
+Module A constructs the shared problem state, Module B validates epistemic admissibility, and the
+Central Orchestrator deterministically decomposes, routes, translates, and prepares future
+cross-agent reconciliation. The registry contains typed Finance, Credit Risk, and Engineering
+capability contracts; there is no generic fallback agent.
+
+Routing uses explicit capabilities, compatible horizons/populations/methods, required structured
+inputs, and Module B's verdict. It does not use keyword proximity or raw conversation history.
+Cross-domain definition and translation records preserve semantic boundaries rather than treating
+related terms as synonyms. `NO_ADMISSIBLE_AGENT` is a valid, structured outcome.
+
+Agent tasks are plans only. Specialist agents, analytics, autonomous actions, and result
+reconciliation do not execute in this sprint.

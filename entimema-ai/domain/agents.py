@@ -24,12 +24,15 @@ class AgentDefinition(BaseModel):
     agent_id: str = Field(min_length=1)
     domain: AgentDomain
     capabilities: list[str]
+    accepted_problem_types: list[str] = Field(default_factory=lambda: ["*"])
     required_inputs: list[str]
     optional_inputs: list[str]
     supported_horizons: list[str]
     supported_populations: list[str]
+    supported_methods: list[str] = Field(default_factory=lambda: ["*"])
     output_schema: dict[str, Any]
     enabled: bool = True
+    version: str | None = None
 
 
 class AgentTask(BaseModel):
