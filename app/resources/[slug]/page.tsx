@@ -63,6 +63,7 @@ import ReliableDpdEngineArticle, { reliableDpdEngineSections } from "../Reliable
 import CreditDataModelArticle, { creditDataModelSections } from "../CreditDataModelArticle";
 import EntityResolutionArticle, { entityResolutionSections } from "../EntityResolutionArticle";
 import GoldenCustomerStateArticle, { goldenCustomerStateSections } from "../GoldenCustomerStateArticle";
+import ConnectedExposureArticle, { connectedExposureSections } from "../ConnectedExposureArticle";
 import { getPublishedResource, getTopic, publishedResources, resourceStreams } from "../resource-data";
 import { FOUNDER_ID, ORGANIZATION_ID, SITE_URL, WEBSITE_ID, createBreadcrumbSchema, serializeJsonLd } from "@/lib/structured-data";
 
@@ -209,6 +210,18 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
   const isCreditDataModel = resource.slug === "customer-facility-account-exposure-credit-data-model";
   const isEntityResolution = resource.slug === "why-customer-id-is-not-enough-entity-resolution-lending";
   const isGoldenCustomerState = resource.slug === "building-golden-customer-record-without-data-silo";
+  const isConnectedExposure = resource.slug === "joint-borrowers-multiple-facilities-connected-exposures";
+
+  if (isConnectedExposure) {
+    return (
+      <>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(articleSchema) }} />
+        <ResourceArticle resource={resource} sections={[...connectedExposureSections]}>
+          <ConnectedExposureArticle />
+        </ResourceArticle>
+      </>
+    );
+  }
 
   if (isGoldenCustomerState) {
     return (

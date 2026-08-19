@@ -120,6 +120,25 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    technicalTitle: "Handling Joint Borrowers, Multiple Facilities and Connected Exposures",
+    headline: "Handling Joint Borrowers, Multiple Facilities and Connected Exposures: Designing Relationship-Aware Credit State",
+    headlineEmphasis: "Designing Relationship-Aware Credit State",
+    slug: "joint-borrowers-multiple-facilities-connected-exposures",
+    slogan: "Represent party roles and shared facilities explicitly, attribute exposure for each decision and preserve one canonical economic total across customers, groups and the portfolio.",
+    sloganEmphasis: "preserve one canonical economic total",
+    author: authors.aleksandar, publishedAt: "2026-08-19", updatedAt: "2026-08-19", readingMinutes: 45,
+    topic: "financial-data-and-erp", stream: "engineering", featured: true,
+    seoTitle: "Joint Borrowers & Connected Credit Exposure Architecture | Entimema",
+    metaDescription: "Model joint borrowers, guarantors and connected exposures with temporal roles, canonical facilities, attribution policies and double-counting controls.",
+    canonicalPath: "/resources/joint-borrowers-multiple-facilities-connected-exposures",
+    openGraphTitle: "Handling Joint Borrowers, Multiple Facilities and Connected Exposures",
+    openGraphDescription: "A relationship-aware credit architecture for economic exposure, party attribution, guarantees, connected views and reproducible portfolio aggregation.",
+    relatedCapability: { label: "Decision Automation", href: "/services/decision-automation", description: "Apply governed relationship and exposure-attribution semantics to affordability, limits, risk and collections decisions." },
+    relatedResourceSlugs: ["building-golden-customer-record-without-data-silo", "why-customer-id-is-not-enough-entity-resolution-lending", "customer-facility-account-exposure-credit-data-model", "building-reliable-dpd-engine", "reconstructing-account-state-financial-events"],
+    status: "published", indexable: true,
+    cover: { type: "generated-matrix", motion: "none", alt: "Entimema Engineering publication cover for Handling Joint Borrowers, Multiple Facilities and Connected Exposures.", stages: ["Party", "Role", "Relationship", "Facility", "Exposure", "Attribution", "Connected View"] },
+  },
+  {
     technicalTitle: "Building a Golden Customer Record Without Creating Another Data Silo",
     headline: "Building a Golden Customer Record Without Creating Another Data Silo",
     headlineEmphasis: "Without Creating Another Data Silo",
