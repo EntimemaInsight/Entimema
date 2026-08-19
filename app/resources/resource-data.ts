@@ -120,6 +120,26 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    technicalTitle: "Promise-to-Pay Analytics: Why a Commitment to Pay Is Not the Same Thing as a Payment",
+    headline: "Promise-to-Pay Analytics: Why a Commitment to Pay Is Not the Same Thing as a Payment",
+    headlineEmphasis: "Not the Same Thing as a Payment",
+    slug: "promise-to-pay-analytics-collections",
+    slogan: "Convert promise events into measurable evidence using fulfilment amount, timing, credibility, cure conversion, re-default, incremental value and probability-weighted cash forecasts.",
+    sloganEmphasis: "measurable evidence",
+    author: authors.aleksandar, publishedAt: "2026-08-19", updatedAt: "2026-08-19", readingMinutes: 58,
+    topic: "credit-risk", stream: "insights", featured: true,
+    seoTitle: "Promise-to-Pay Analytics in Collections | Entimema",
+    metaDescription: "Measure promise keeping, partial and broken PTPs, cure conversion, sustainable recovery, selection bias and probability-weighted collections cash flow.",
+    canonicalPath: "/resources/promise-to-pay-analytics-collections",
+    openGraphTitle: "Promise-to-Pay Analytics: Promise Is Not Payment",
+    openGraphDescription: "A practitioner framework for promise credibility, payment matching, cure conversion, recovery value and collections cash forecasting.",
+    openGraphImage: "/resources/covers/promise-to-pay-analytics.png",
+    relatedCapability: { label: "Decision Automation", href: "/services/decision-automation", description: "Build promise tracking, due-date workflows, payment matching, priority routing and recurring collections monitoring." },
+    relatedResourceSlugs: ["collections-prioritisation-intervention-value", "cure-redefault-analytics-sustainable-recovery", "behavioural-credit-scoring-post-origination-risk", "consumer-credit-early-warning-systems", "roll-rate-analysis-migration-matrices", "ifrs-9-lgd-recovery-cash-flows"],
+    status: "published", indexable: true,
+    cover: { type: "editorial-artwork", src: "/resources/covers/promise-to-pay-analytics.png", motion: "none", alt: "Entimema Insights cover showing a translucent projected bridge whose near segment becomes solid steel only where a future promise has materialised into realised value.", stages: ["Contact", "Promise", "Credibility", "Due Date", "Payment Matching", "Kept / Partial / Broken", "Cure", "Sustainable Cure", "Recovery Value", "Learning"] },
+  },
+  {
     technicalTitle: "Cure & Re-Default Analytics: Why Returning to Current Is Not the Same Thing as Recovery",
     headline: "Cure & Re-Default Analytics: Why Returning to Current Is Not the Same Thing as Recovery",
     headlineEmphasis: "Not the Same Thing as Recovery",
