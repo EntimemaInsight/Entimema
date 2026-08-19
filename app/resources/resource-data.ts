@@ -120,6 +120,25 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    technicalTitle: "Building a Golden Customer Record Without Creating Another Data Silo",
+    headline: "Building a Golden Customer Record Without Creating Another Data Silo",
+    headlineEmphasis: "Without Creating Another Data Silo",
+    slug: "building-golden-customer-record-without-data-silo",
+    slogan: "Compose a coherent customer state from canonical identity, field-level authority, temporal lineage and rebuildable decision views—without creating another stale master table.",
+    sloganEmphasis: "field-level authority, temporal lineage",
+    author: authors.aleksandar, publishedAt: "2026-08-19", updatedAt: "2026-08-19", readingMinutes: 44,
+    topic: "financial-data-and-erp", stream: "engineering", featured: true,
+    seoTitle: "Golden Customer Record Architecture for Banking | Entimema",
+    metaDescription: "Build a governed golden customer record using canonical party identity, field-level authority, temporal lineage, freshness and rebuildable decision projections.",
+    canonicalPath: "/resources/building-golden-customer-record-without-data-silo",
+    openGraphTitle: "Building a Golden Customer Record Without Creating Another Data Silo",
+    openGraphDescription: "An engineering architecture for authoritative customer facts, component freshness, known and restated state, lineage and disposable decision read models.",
+    relatedCapability: { label: "Decision Automation", href: "/services/decision-automation", description: "Serve freshness-aware, reproducible customer state to underwriting, risk, collections and finance decisions." },
+    relatedResourceSlugs: ["why-customer-id-is-not-enough-entity-resolution-lending", "customer-facility-account-exposure-credit-data-model", "event-time-processing-time-posting-time-credit-systems", "reconstructing-account-state-financial-events"],
+    status: "published", indexable: true,
+    cover: { type: "generated-matrix", motion: "none", alt: "Entimema Engineering publication cover for Building a Golden Customer Record Without Creating Another Data Silo.", stages: ["Canonical Party", "Authority", "Relationships", "State", "Freshness", "Projection", "Lineage"] },
+  },
+  {
     technicalTitle: "Why Customer ID Is Not Enough",
     headline: "Why Customer ID Is Not Enough: Entity Resolution in Lending Systems",
     headlineEmphasis: "Entity Resolution in Lending Systems",

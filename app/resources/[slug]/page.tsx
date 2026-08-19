@@ -62,6 +62,7 @@ import ReversalCorrectionArticle, { reversalCorrectionSections } from "../Revers
 import ReliableDpdEngineArticle, { reliableDpdEngineSections } from "../ReliableDpdEngineArticle";
 import CreditDataModelArticle, { creditDataModelSections } from "../CreditDataModelArticle";
 import EntityResolutionArticle, { entityResolutionSections } from "../EntityResolutionArticle";
+import GoldenCustomerStateArticle, { goldenCustomerStateSections } from "../GoldenCustomerStateArticle";
 import { getPublishedResource, getTopic, publishedResources, resourceStreams } from "../resource-data";
 import { FOUNDER_ID, ORGANIZATION_ID, SITE_URL, WEBSITE_ID, createBreadcrumbSchema, serializeJsonLd } from "@/lib/structured-data";
 
@@ -207,6 +208,18 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
   const isReliableDpdEngine = resource.slug === "building-reliable-dpd-engine";
   const isCreditDataModel = resource.slug === "customer-facility-account-exposure-credit-data-model";
   const isEntityResolution = resource.slug === "why-customer-id-is-not-enough-entity-resolution-lending";
+  const isGoldenCustomerState = resource.slug === "building-golden-customer-record-without-data-silo";
+
+  if (isGoldenCustomerState) {
+    return (
+      <>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(articleSchema) }} />
+        <ResourceArticle resource={resource} sections={[...goldenCustomerStateSections]}>
+          <GoldenCustomerStateArticle />
+        </ResourceArticle>
+      </>
+    );
+  }
 
   if (isEntityResolution) {
     return (
