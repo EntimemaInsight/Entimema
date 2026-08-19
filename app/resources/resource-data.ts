@@ -120,6 +120,25 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    technicalTitle: "Event Time vs Processing Time vs Posting Time in Credit Systems",
+    headline: "Event Time vs Processing Time vs Posting Time in Credit Systems: Building Point-in-Time Correct Financial State",
+    headlineEmphasis: "Building Point-in-Time Correct Financial State",
+    slug: "event-time-processing-time-posting-time-credit-systems",
+    slogan: "Separate economic, knowledge, processing and accounting histories so every feature, decision and replay uses the information that was genuinely available at the time.",
+    sloganEmphasis: "information that was genuinely available",
+    author: authors.aleksandar, publishedAt: "2026-08-19", updatedAt: "2026-08-19", readingMinutes: 38,
+    topic: "financial-data-and-erp", stream: "engineering", featured: true,
+    seoTitle: "Event vs Processing vs Posting Time in Credit | Entimema",
+    metaDescription: "Engineer point-in-time correct credit state using event, effective, received, processing, posting and decision time, bitemporal data and replay.",
+    canonicalPath: "/resources/event-time-processing-time-posting-time-credit-systems",
+    openGraphTitle: "Event Time vs Processing Time vs Posting Time in Credit Systems",
+    openGraphDescription: "An engineering architecture for known and restated financial state, point-in-time features, late events, bitemporal history and decision replay.",
+    relatedCapability: { label: "Decision Automation", href: "/services/decision-automation", description: "Build time-aware decision paths with explicit data availability, immutable manifests and controlled replay." },
+    relatedResourceSlugs: ["credit-risk-model-validation-pipeline", "credit-decision-engine-architecture", "credit-portfolio-monitoring-architecture", "ai-agents-credit-risk-controlled-deterministic-models"],
+    status: "published", indexable: true,
+    cover: { type: "generated-matrix", motion: "none", alt: "Entimema Engineering publication cover for Event Time vs Processing Time vs Posting Time in Credit Systems.", stages: ["Event Time", "Effective Time", "Received Time", "Processing Time", "Posting Time", "Decision Time"] },
+  },
+  {
     technicalTitle: "Why Batch Risk Is Becoming a Business Risk: The Cost of Making Credit Decisions on Data That Arrives Too Late",
     headline: "Why Batch Risk Is Becoming a Business Risk: The Cost of Making Credit Decisions on Data That Arrives Too Late",
     headlineEmphasis: "Batch Risk Is Becoming a Business Risk",
