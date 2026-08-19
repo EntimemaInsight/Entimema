@@ -120,6 +120,26 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    technicalTitle: "Behavioural Credit Scoring: How Account Behaviour Changes Risk After Origination",
+    headline: "Behavioural Credit Scoring: How Account Behaviour Changes Risk After Origination",
+    headlineEmphasis: "Changes Risk After Origination",
+    slug: "behavioural-credit-scoring-post-origination-risk",
+    slogan: "Transform payment, utilisation, liquidity and delinquency histories into dynamic risk estimates, migration evidence and governed lifecycle decisions.",
+    sloganEmphasis: "dynamic risk estimates",
+    author: authors.aleksandar, publishedAt: "2026-08-19", updatedAt: "2026-08-19", readingMinutes: 57,
+    topic: "credit-risk", stream: "insights", featured: true,
+    seoTitle: "Behavioural Credit Scoring & Dynamic Risk Models | Entimema",
+    metaDescription: "Build behavioural credit scoring using account snapshots, payment and utilisation features, score migration, lead time, seasoning and recalibration.",
+    canonicalPath: "/resources/behavioural-credit-scoring-post-origination-risk",
+    openGraphTitle: "Behavioural Credit Scoring: Risk After Origination",
+    openGraphDescription: "A practitioner architecture for panel data, dynamic behavioural features, risk migration, intervention feedback and model monitoring.",
+    openGraphImage: "/resources/covers/behavioural-credit-scoring.png",
+    relatedCapability: { label: "Decision Automation", href: "/services/decision-automation", description: "Build recurring behavioural scoring, risk migration, early-warning routing and governed lifecycle decisions." },
+    relatedResourceSlugs: ["consumer-credit-early-warning-systems", "credit-vintage-analysis", "roll-rate-analysis-migration-matrices", "pd-model-monitoring", "credit-decision-engine-architecture", "decision-engine-monitoring-strategy-drift", "credit-limit-assignment-exposure-strategy", "credit-risk-model-validation"],
+    status: "published", indexable: true,
+    cover: { type: "editorial-artwork", src: "/resources/covers/behavioural-credit-scoring.png", motion: "none", alt: "Entimema Insights cover showing a sparse origination-risk structure becoming progressively richer and subtly reoriented as behavioural evidence accumulates through successive glass layers.", stages: ["Origination Risk", "Account History", "Dynamic Features", "Behavioural Model", "Current Risk", "Migration", "Decision", "Outcome", "Recalibration"] },
+  },
+  {
     technicalTitle: "Early Warning Systems for Consumer Credit: From Deterioration Signals to Prioritised Intervention",
     headline: "Early Warning Systems for Consumer Credit: From Deterioration Signals to Prioritised Intervention",
     headlineEmphasis: "Prioritised Intervention",
