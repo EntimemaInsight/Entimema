@@ -120,6 +120,25 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    technicalTitle: "Building a Credit Risk Feature Store That Actually Respects Time",
+    headline: "Building a Credit Risk Feature Store That Actually Respects Time",
+    headlineEmphasis: "Actually Respects Time",
+    slug: "credit-risk-feature-store-respects-time",
+    slogan: "Make every model feature reproducible across online serving, offline training and historical replay through explicit grain, windows, availability, lineage and versions.",
+    sloganEmphasis: "explicit grain, windows, availability, lineage and versions",
+    author: authors.aleksandar, publishedAt: "2026-08-19", updatedAt: "2026-08-19", readingMinutes: 47,
+    topic: "decision-intelligence", stream: "engineering", featured: true,
+    seoTitle: "Point-in-Time Credit Risk Feature Store Architecture | Entimema",
+    metaDescription: "Build a credit risk feature store with semantic contracts, effective and available time, point-in-time retrieval, online/offline consistency and lineage.",
+    canonicalPath: "/resources/credit-risk-feature-store-respects-time",
+    openGraphTitle: "Building a Credit Risk Feature Store That Actually Respects Time",
+    openGraphDescription: "An engineering architecture for point-in-time features, online/offline consistency, versioned definitions, leakage controls and reproducible credit decisions.",
+    relatedCapability: { label: "Decision Automation", href: "/services/decision-automation", description: "Serve versioned, freshness-aware and point-in-time-correct model features to controlled lending decisions." },
+    relatedResourceSlugs: ["point-in-time-customer-state-reconstruction", "joint-borrowers-multiple-facilities-connected-exposures", "building-golden-customer-record-without-data-silo", "event-time-processing-time-posting-time-credit-systems", "building-reliable-dpd-engine"],
+    status: "published", indexable: true,
+    cover: { type: "generated-matrix", motion: "none", alt: "Entimema Engineering publication cover for Building a Credit Risk Feature Store That Actually Respects Time.", stages: ["Events", "Definition", "Window", "Effective Time", "Available Time", "Offline", "Online", "Replay"] },
+  },
+  {
     technicalTitle: "Point-in-Time Customer State Reconstruction",
     headline: "Point-in-Time Customer State Reconstruction: Rebuilding the Borrower Exactly as the Decision Engine Saw Them",
     headlineEmphasis: "Rebuilding the Borrower Exactly as the Decision Engine Saw Them",
