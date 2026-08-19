@@ -120,6 +120,26 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    technicalTitle: "Why Batch Risk Is Becoming a Business Risk: The Cost of Making Credit Decisions on Data That Arrives Too Late",
+    headline: "Why Batch Risk Is Becoming a Business Risk: The Cost of Making Credit Decisions on Data That Arrives Too Late",
+    headlineEmphasis: "Batch Risk Is Becoming a Business Risk",
+    slug: "why-batch-risk-is-becoming-a-business-risk",
+    slogan: "Set decision-specific latency budgets, trace event-to-action delay and modernise the paths where stale information changes risk, value or customer outcomes.",
+    sloganEmphasis: "decision-specific latency budgets",
+    author: authors.aleksandar, publishedAt: "2026-08-19", updatedAt: "2026-08-19", readingMinutes: 54,
+    topic: "financial-architecture", stream: "insights", featured: true,
+    seoTitle: "Credit Decision Latency & Data Freshness | Entimema",
+    metaDescription: "Learn when banking batch processing becomes business risk, how to set credit decision latency budgets, and where fresher data creates economic value.",
+    canonicalPath: "/resources/why-batch-risk-is-becoming-a-business-risk",
+    openGraphTitle: "Why Batch Risk Is Becoming a Business Risk",
+    openGraphDescription: "An Entimema framework for credit decision latency, data freshness, intervention windows and targeted event-driven modernisation.",
+    openGraphImage: "/resources/covers/why-batch-risk-is-becoming-business-risk.png",
+    relatedCapability: { label: "Decision Automation", href: "/services/decision-automation", description: "Design event-driven and micro-batch decision paths with governed freshness, workflow latency and decision observability." },
+    relatedResourceSlugs: ["hidden-infrastructure-debt-modern-lending", "payment-is-not-the-balance", "single-customer-view-is-usually-a-fiction", "decision-engine-monitoring-strategy-drift", "behavioural-credit-scoring-post-origination-risk", "consumer-credit-early-warning-systems", "collections-prioritisation-intervention-value", "credit-limit-assignment-exposure-strategy"],
+    status: "published", indexable: true,
+    cover: { type: "editorial-artwork", src: "/resources/covers/why-batch-risk-is-becoming-business-risk.png", motion: "none", alt: "Entimema Insights cover showing a copper financial signal moving through a glass-and-steel corridor while the decision planes ahead have already shifted into a different state.", stages: ["Financial Event", "Data Availability", "Feature Construction", "Model Refresh", "Decision", "Action", "Outcome"] },
+  },
+  {
     technicalTitle: "The Single Customer View Is Usually a Fiction: Why Lending Decisions Fail When Identity, Exposure and Behaviour Live in Different Systems",
     headline: "The Single Customer View Is Usually a Fiction: Why Lending Decisions Fail When Identity, Exposure and Behaviour Live in Different Systems",
     headlineEmphasis: "The Single Customer View Is Usually a Fiction",
