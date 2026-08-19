@@ -120,6 +120,25 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    technicalTitle: "Point-in-Time Correct Features for Credit Models",
+    headline: "Point-in-Time Correct Features for Credit Models: Preventing Leakage Before It Reaches the Model",
+    headlineEmphasis: "Preventing Leakage Before It Reaches the Model",
+    slug: "point-in-time-correct-features-credit-models",
+    slogan: "Filter every historical feature by exact decision cut-off, observation window, availability, identity and relationship state before it reaches training or validation.",
+    sloganEmphasis: "before it reaches training or validation",
+    author: authors.aleksandar, publishedAt: "2026-08-19", updatedAt: "2026-08-19", readingMinutes: 46,
+    topic: "credit-risk", stream: "engineering", featured: true,
+    seoTitle: "Point-in-Time Features & Credit Risk Data Leakage | Entimema",
+    metaDescription: "Engineer point-in-time correct credit features using exact cut-offs, availability-aware joins, historical identity, label separation and temporal leakage tests.",
+    canonicalPath: "/resources/point-in-time-correct-features-credit-models",
+    openGraphTitle: "Point-in-Time Correct Features for Credit Models",
+    openGraphDescription: "An engineering architecture for preventing temporal, identity, relationship, snapshot and label leakage before credit-model training.",
+    relatedCapability: { label: "Decision Automation", href: "/services/decision-automation", description: "Align training features with the exact temporal information contract used by production lending decisions." },
+    relatedResourceSlugs: ["credit-risk-feature-store-respects-time", "point-in-time-customer-state-reconstruction", "event-time-processing-time-posting-time-credit-systems", "building-reliable-dpd-engine", "late-arriving-events-backdated-corrections", "why-customer-id-is-not-enough-entity-resolution-lending"],
+    status: "published", indexable: true,
+    cover: { type: "generated-matrix", motion: "none", alt: "Entimema Engineering publication cover for Point-in-Time Correct Features for Credit Models.", stages: ["Decision Time", "Window", "Eligibility", "Availability", "Identity", "Snapshot", "Labels", "Validation"] },
+  },
+  {
     technicalTitle: "Building a Credit Risk Feature Store That Actually Respects Time",
     headline: "Building a Credit Risk Feature Store That Actually Respects Time",
     headlineEmphasis: "Actually Respects Time",
