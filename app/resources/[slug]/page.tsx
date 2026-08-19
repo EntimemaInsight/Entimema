@@ -17,6 +17,7 @@ import CreditRiskCutOffArticle, { creditRiskCutOffSections } from "../CreditRisk
 import CreditDecisionEngineArticle, { creditDecisionEngineSections } from "../CreditDecisionEngineArticle";
 import CreditPolicyRulesArticle, { creditPolicyRulesSections } from "../CreditPolicyRulesArticle";
 import AffordabilityDecisioningArticle, { affordabilityDecisioningSections } from "../AffordabilityDecisioningArticle";
+import CreditLimitAssignmentArticle, { creditLimitAssignmentSections } from "../CreditLimitAssignmentArticle";
 import RollRateMigrationArticle, { rollRateMigrationSections } from "../RollRateMigrationArticle";
 import EarlyWarningIndicatorsArticle, { earlyWarningIndicatorsSections } from "../EarlyWarningIndicatorsArticle";
 import CreditPortfolioMonitoringArticle, { creditPortfolioMonitoringSections } from "../CreditPortfolioMonitoringArticle";
@@ -141,6 +142,7 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
   const isCreditDecisionEngine = resource.slug === "credit-decision-engine-architecture";
   const isCreditPolicyRules = resource.slug === "credit-policy-rules-lending-rulebook-governance";
   const isAffordabilityDecisioning = resource.slug === "affordability-decisioning-ability-to-pay";
+  const isCreditLimitAssignment = resource.slug === "credit-limit-assignment-exposure-strategy";
   const isRollRateMigration = resource.slug === "roll-rate-analysis-migration-matrices";
   const isEarlyWarningIndicators = resource.slug === "early-warning-indicators-credit-risk";
   const isCreditPortfolioMonitoring = resource.slug === "credit-portfolio-monitoring-architecture";
@@ -166,12 +168,12 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
   const isIfrs9MacroeconomicScenarios = resource.slug === "forward-looking-macroeconomic-scenarios-ifrs-9";
   const isIfrs9EclValidation = resource.slug === "ifrs-9-ecl-validation-backtesting";
 
-  if (isCreditPolicyRules || isAffordabilityDecisioning) {
+  if (isCreditPolicyRules || isAffordabilityDecisioning || isCreditLimitAssignment) {
     return (
       <>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(articleSchema) }} />
-        <ResourceArticle resource={resource} sections={isAffordabilityDecisioning ? [...affordabilityDecisioningSections] : [...creditPolicyRulesSections]}>
-          {isAffordabilityDecisioning ? <AffordabilityDecisioningArticle /> : <CreditPolicyRulesArticle />}
+        <ResourceArticle resource={resource} sections={isCreditLimitAssignment ? [...creditLimitAssignmentSections] : isAffordabilityDecisioning ? [...affordabilityDecisioningSections] : [...creditPolicyRulesSections]}>
+          {isCreditLimitAssignment ? <CreditLimitAssignmentArticle /> : isAffordabilityDecisioning ? <AffordabilityDecisioningArticle /> : <CreditPolicyRulesArticle />}
         </ResourceArticle>
       </>
     );

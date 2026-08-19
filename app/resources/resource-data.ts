@@ -120,6 +120,26 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    technicalTitle: "Credit Limit Assignment: How to Set Exposure Without Turning a Good Borrower Into a Bad Decision",
+    headline: "Credit Limit Assignment: How to Set Exposure Without Turning a Good Borrower Into a Bad Decision",
+    headlineEmphasis: "Without Turning a Good Borrower Into a Bad Decision",
+    slug: "credit-limit-assignment-exposure-strategy",
+    slogan: "Move beyond approve or reject: combine borrower risk, affordability, utilisation, EAD, marginal value and portfolio capacity to set and reassess exposure.",
+    sloganEmphasis: "set and reassess exposure",
+    author: authors.aleksandar, publishedAt: "2026-08-19", updatedAt: "2026-08-19", readingMinutes: 48,
+    topic: "credit-risk", stream: "insights", featured: true,
+    seoTitle: "Credit Limit Assignment & Exposure Strategy | Entimema",
+    metaDescription: "Build risk-based credit limits using affordability, utilisation, EAD, expected loss, marginal value, portfolio constraints and lifecycle monitoring.",
+    canonicalPath: "/resources/credit-limit-assignment-exposure-strategy",
+    openGraphTitle: "Credit Limit Assignment: From Approval to Exposure Design",
+    openGraphDescription: "A practitioner architecture for risk-based limits, affordability, utilisation, EAD, marginal economics and lifecycle limit management.",
+    openGraphImage: "/resources/covers/credit-limit-assignment.png",
+    relatedCapability: { label: "Decision Automation", href: "/services/decision-automation", description: "Build governed limit simulation, dynamic exposure assignment and lifecycle monitoring inside credit decision orchestration." },
+    relatedResourceSlugs: ["credit-decision-engine-architecture", "affordability-decisioning-ability-to-pay", "credit-risk-cut-off-strategy", "ifrs-9-ead-credit-conversion-factors", "credit-policy-rules-lending-rulebook-governance", "early-warning-indicators-credit-risk", "credit-vintage-analysis"],
+    status: "published", indexable: true,
+    cover: { type: "editorial-artwork", src: "/resources/covers/credit-limit-assignment.png", motion: "none", alt: "Entimema Insights cover showing a modular glass-and-steel exposure structure extending from a stable anchor to a copper economic boundary, with further capacity beginning to deflect beyond it.", stages: ["Borrower Risk", "Affordability", "Current Exposure", "Utilisation", "EAD / CCF", "Expected Loss", "Marginal Value", "Portfolio Constraint", "Limit", "Reassessment"] },
+  },
+  {
     technicalTitle: "Affordability Decisioning: Why Ability to Pay Is Not the Same Thing as Probability of Default",
     headline: "Affordability Decisioning: Ability to Pay Is Not Probability of Default",
     headlineEmphasis: "Not Probability of Default",
