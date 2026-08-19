@@ -120,6 +120,26 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    technicalTitle: "The Payment Is Not the Balance: Why Financial Institutions Keep Confusing Transactions, Accounting States and Credit-Risk Reality",
+    headline: "The Payment Is Not the Balance: Why Financial Institutions Keep Confusing Transactions, Accounting States and Credit-Risk Reality",
+    headlineEmphasis: "The Payment Is Not the Balance",
+    slug: "payment-is-not-the-balance",
+    slogan: "Separate payment events from settlement, posting, accounting, delinquency and risk state—then reconcile each decision to the event history and finality it requires.",
+    sloganEmphasis: "payment events from settlement, posting, accounting, delinquency and risk state",
+    author: authors.aleksandar, publishedAt: "2026-08-19", updatedAt: "2026-08-19", readingMinutes: 48,
+    topic: "financial-architecture", stream: "insights", featured: true,
+    seoTitle: "Payment Events, Posting and Credit-Risk State | Entimema",
+    metaDescription: "Learn why payment, settlement, posting, balance and DPD differ—and how lenders reconcile payment events into accounting, risk and collections state.",
+    canonicalPath: "/resources/payment-is-not-the-balance",
+    openGraphTitle: "The Payment Is Not the Balance",
+    openGraphDescription: "A practitioner architecture for payment events, settlement, posting, delinquency, cure, risk state and Finance–Risk–Collections reconciliation.",
+    openGraphImage: "/resources/covers/payment-is-not-the-balance.png",
+    relatedCapability: { label: "Decision Automation", href: "/services/decision-automation", description: "Build payment-triggered controls, state-aware collections workflows and explainable reconciliation automation." },
+    relatedResourceSlugs: ["hidden-infrastructure-debt-modern-lending", "behavioural-credit-scoring-post-origination-risk", "consumer-credit-early-warning-systems", "collections-prioritisation-intervention-value", "cure-redefault-analytics-sustainable-recovery", "promise-to-pay-analytics-collections", "ifrs-9-lgd-recovery-cash-flows", "ifrs-9-ead-credit-conversion-factors"],
+    status: "published", indexable: true,
+    cover: { type: "editorial-artwork", src: "/resources/covers/payment-is-not-the-balance.png", motion: "none", alt: "Entimema Insights cover showing one copper-lit payment impulse crossing translucent architectural planes and producing several aligned glass-and-steel institutional states before reconciliation.", stages: ["Instruction", "Authorisation", "Processing", "Settlement", "Posting", "Account State", "Accounting State", "Delinquency State", "Risk State", "Decision", "Reconciliation"] },
+  },
+  {
     technicalTitle: "The Hidden Infrastructure Debt of Modern Lending: Why Digital Credit Still Runs on Batch Files, Reconciliations and Yesterday’s Data",
     headline: "The Hidden Infrastructure Debt of Modern Lending: Why Digital Credit Still Runs on Batch Files, Reconciliations and Yesterday’s Data",
     headlineEmphasis: "Hidden Infrastructure Debt",

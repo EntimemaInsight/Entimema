@@ -27,6 +27,7 @@ import CollectionsPrioritisationArticle, { collectionsPrioritisationSections } f
 import CureRedefaultAnalyticsArticle, { cureRedefaultAnalyticsSections } from "../CureRedefaultAnalyticsArticle";
 import PromiseToPayAnalyticsArticle, { promiseToPayAnalyticsSections } from "../PromiseToPayAnalyticsArticle";
 import HiddenInfrastructureDebtArticle, { hiddenInfrastructureDebtSections } from "../HiddenInfrastructureDebtArticle";
+import PaymentIsNotBalanceArticle, { paymentIsNotBalanceSections } from "../PaymentIsNotBalanceArticle";
 import RollRateMigrationArticle, { rollRateMigrationSections } from "../RollRateMigrationArticle";
 import EarlyWarningIndicatorsArticle, { earlyWarningIndicatorsSections } from "../EarlyWarningIndicatorsArticle";
 import CreditPortfolioMonitoringArticle, { creditPortfolioMonitoringSections } from "../CreditPortfolioMonitoringArticle";
@@ -161,6 +162,7 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
   const isCureRedefaultAnalytics = resource.slug === "cure-redefault-analytics-sustainable-recovery";
   const isPromiseToPayAnalytics = resource.slug === "promise-to-pay-analytics-collections";
   const isHiddenInfrastructureDebt = resource.slug === "hidden-infrastructure-debt-modern-lending";
+  const isPaymentIsNotBalance = resource.slug === "payment-is-not-the-balance";
   const isRollRateMigration = resource.slug === "roll-rate-analysis-migration-matrices";
   const isEarlyWarningIndicators = resource.slug === "early-warning-indicators-credit-risk";
   const isCreditPortfolioMonitoring = resource.slug === "credit-portfolio-monitoring-architecture";
@@ -186,12 +188,12 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
   const isIfrs9MacroeconomicScenarios = resource.slug === "forward-looking-macroeconomic-scenarios-ifrs-9";
   const isIfrs9EclValidation = resource.slug === "ifrs-9-ecl-validation-backtesting";
 
-  if (isCreditPolicyRules || isAffordabilityDecisioning || isCreditLimitAssignment || isRiskBasedPricing || isChampionChallengerStrategy || isDecisionEngineMonitoring || isConsumerCreditEarlyWarning || isBehaviouralCreditScoring || isCollectionsPrioritisation || isCureRedefaultAnalytics || isPromiseToPayAnalytics || isHiddenInfrastructureDebt) {
+  if (isCreditPolicyRules || isAffordabilityDecisioning || isCreditLimitAssignment || isRiskBasedPricing || isChampionChallengerStrategy || isDecisionEngineMonitoring || isConsumerCreditEarlyWarning || isBehaviouralCreditScoring || isCollectionsPrioritisation || isCureRedefaultAnalytics || isPromiseToPayAnalytics || isHiddenInfrastructureDebt || isPaymentIsNotBalance) {
     return (
       <>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(articleSchema) }} />
-        <ResourceArticle resource={resource} sections={isHiddenInfrastructureDebt ? [...hiddenInfrastructureDebtSections] : isPromiseToPayAnalytics ? [...promiseToPayAnalyticsSections] : isCureRedefaultAnalytics ? [...cureRedefaultAnalyticsSections] : isCollectionsPrioritisation ? [...collectionsPrioritisationSections] : isBehaviouralCreditScoring ? [...behaviouralCreditScoringSections] : isConsumerCreditEarlyWarning ? [...consumerCreditEarlyWarningSections] : isDecisionEngineMonitoring ? [...decisionEngineMonitoringSections] : isChampionChallengerStrategy ? [...championChallengerStrategySections] : isRiskBasedPricing ? [...riskBasedPricingSections] : isCreditLimitAssignment ? [...creditLimitAssignmentSections] : isAffordabilityDecisioning ? [...affordabilityDecisioningSections] : [...creditPolicyRulesSections]}>
-          {isHiddenInfrastructureDebt ? <HiddenInfrastructureDebtArticle /> : isPromiseToPayAnalytics ? <PromiseToPayAnalyticsArticle /> : isCureRedefaultAnalytics ? <CureRedefaultAnalyticsArticle /> : isCollectionsPrioritisation ? <CollectionsPrioritisationArticle /> : isBehaviouralCreditScoring ? <BehaviouralCreditScoringArticle /> : isConsumerCreditEarlyWarning ? <ConsumerCreditEarlyWarningArticle /> : isDecisionEngineMonitoring ? <DecisionEngineMonitoringArticle /> : isChampionChallengerStrategy ? <ChampionChallengerStrategyArticle /> : isRiskBasedPricing ? <RiskBasedPricingArticle /> : isCreditLimitAssignment ? <CreditLimitAssignmentArticle /> : isAffordabilityDecisioning ? <AffordabilityDecisioningArticle /> : <CreditPolicyRulesArticle />}
+        <ResourceArticle resource={resource} sections={isPaymentIsNotBalance ? [...paymentIsNotBalanceSections] : isHiddenInfrastructureDebt ? [...hiddenInfrastructureDebtSections] : isPromiseToPayAnalytics ? [...promiseToPayAnalyticsSections] : isCureRedefaultAnalytics ? [...cureRedefaultAnalyticsSections] : isCollectionsPrioritisation ? [...collectionsPrioritisationSections] : isBehaviouralCreditScoring ? [...behaviouralCreditScoringSections] : isConsumerCreditEarlyWarning ? [...consumerCreditEarlyWarningSections] : isDecisionEngineMonitoring ? [...decisionEngineMonitoringSections] : isChampionChallengerStrategy ? [...championChallengerStrategySections] : isRiskBasedPricing ? [...riskBasedPricingSections] : isCreditLimitAssignment ? [...creditLimitAssignmentSections] : isAffordabilityDecisioning ? [...affordabilityDecisioningSections] : [...creditPolicyRulesSections]}>
+          {isPaymentIsNotBalance ? <PaymentIsNotBalanceArticle /> : isHiddenInfrastructureDebt ? <HiddenInfrastructureDebtArticle /> : isPromiseToPayAnalytics ? <PromiseToPayAnalyticsArticle /> : isCureRedefaultAnalytics ? <CureRedefaultAnalyticsArticle /> : isCollectionsPrioritisation ? <CollectionsPrioritisationArticle /> : isBehaviouralCreditScoring ? <BehaviouralCreditScoringArticle /> : isConsumerCreditEarlyWarning ? <ConsumerCreditEarlyWarningArticle /> : isDecisionEngineMonitoring ? <DecisionEngineMonitoringArticle /> : isChampionChallengerStrategy ? <ChampionChallengerStrategyArticle /> : isRiskBasedPricing ? <RiskBasedPricingArticle /> : isCreditLimitAssignment ? <CreditLimitAssignmentArticle /> : isAffordabilityDecisioning ? <AffordabilityDecisioningArticle /> : <CreditPolicyRulesArticle />}
         </ResourceArticle>
       </>
     );
