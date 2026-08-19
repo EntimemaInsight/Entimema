@@ -90,3 +90,20 @@ every atomic result to active post-agent validation. Raw conversation is not an 
 
 This boundary is `VALIDATED_AGENT_RESULT`. There is still no LLM execution, PD/ECL model, RAG,
 persistence, UI, autonomous consequential action, or final multi-agent synthesis.
+
+## Sprint 7 — Reconciliation, Final Synthesis & Evaluation Harness
+
+The deterministic backend loop now continues from validated domain-agent results through
+cross-agent reconciliation, candidate decision synthesis, and Module B final admissibility.
+Reconciliation preserves differences in evidence, assumptions, definitions, horizons, scopes,
+and methods; shared dependencies are not counted as independent confirmation, and mixed findings
+are not forced into a single narrative.
+
+`FinalSynthesisResult` and its `UserSynthesisView` provide the validated synthesis boundary. A
+JSON-serializable `DecisionWorkspaceProjection`, structured epistemic veto, and traceable
+`DecisionMap` prepare the backend contract for the future Concierge Lab interface.
+
+The evaluation harness runs deterministic end-to-end cases, records hard and soft failures, and
+applies an S5/traceability/forbidden-inference release gate. Test count alone does not establish
+production readiness. There is still no UI, LLM execution, RAG, persistence, authentication,
+autonomous action, or public deployment.

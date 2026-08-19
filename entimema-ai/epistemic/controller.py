@@ -393,3 +393,104 @@ class EpistemicController:
             object_id=synthesis.id,
             reason="Typed hook only; synthesis execution and validation are deferred",
         )
+
+    @staticmethod
+    def validate_final_synthesis(synthesis, state: ProblemState) -> EpistemicValidationResult:
+        """Apply Module B final admissibility to a typed candidate synthesis."""
+        finding_ids = set(synthesis.supporting_finding_ids)
+        evidence_ids = {item.id for item in state.evidence}
+        assumption_ids = {item.id for item in state.assumptions}
+        rejected = []
+        conditional = []
+        reasons = []
+        for recommendation in synthesis.candidate_recommendations:
+            if (
+                not recommendation.supporting_finding_ids
+                or not set(recommendation.supporting_finding_ids) <= finding_ids
+            ):
+                rejected.append(recommendation.id)
+                reasons.append(f"TRACEABILITY_FAILURE:{recommendation.id}:FINDING")
+            elif (
+                not recommendation.evidence_ids
+                or not set(recommendation.evidence_ids) <= evidence_ids
+            ):
+                rejected.append(recommendation.id)
+                reasons.append(f"TRACEABILITY_FAILURE:{recommendation.id}:EVIDENCE")
+            elif not set(recommendation.assumption_ids) <= assumption_ids:
+                rejected.append(recommendation.id)
+                reasons.append(f"TRACEABILITY_FAILURE:{recommendation.id}:ASSUMPTION")
+            else:
+                try:
+                    validate_candidate_inference(
+                        recommendation.proposition, recommendation.proposition
+                    )
+                except ForbiddenInferenceError:
+                    rejected.append(recommendation.id)
+                    reasons.append(f"FORBIDDEN_INFERENCE:{recommendation.id}")
+                    continue
+                trace = validate_traceability(recommendation.id, synthesis.traceability_graph)
+                if not trace.complete:
+                    rejected.append(recommendation.id)
+                    reasons.append(f"TRACEABILITY_FAILURE:{recommendation.id}:GRAPH")
+                elif recommendation.assumption_ids:
+                    conditional.append(recommendation.id)
+        critical_unknowns = [
+            item.id
+            for item in state.unknowns
+            if item.id in synthesis.unresolved_unknown_ids
+            and item.materiality is Materiality.CRITICAL
+        ]
+        reasons.extend(f"CRITICAL_UNKNOWN:{item}" for item in critical_unknowns)
+        reasons.extend(f"TRUE_CONFLICT:{item}" for item in synthesis.true_conflict_ids)
+        if any(item.startswith("FORBIDDEN_INFERENCE") for item in reasons):
+            verdict, action = (
+                EpistemicVerdict.FORBIDDEN_INFERENCE,
+                RequiredNextAction.REMOVE_FORBIDDEN_INFERENCE,
+            )
+        elif any(item.startswith("TRACEABILITY_FAILURE") for item in reasons):
+            verdict, action = EpistemicVerdict.TRACEABILITY_FAILURE, RequiredNextAction.REPAIR
+        elif synthesis.true_conflict_ids:
+            verdict, action = (
+                EpistemicVerdict.CONTRADICTED,
+                RequiredNextAction.RESOLVE_CONTRADICTION,
+            )
+        elif critical_unknowns:
+            verdict, action = (
+                EpistemicVerdict.INSUFFICIENT_EVIDENCE,
+                RequiredNextAction.REQUEST_EVIDENCE,
+            )
+        elif (
+            conditional
+            or synthesis.assumption_ids
+            or synthesis.unresolved_unknown_ids
+            or synthesis.synthesis_status.value == "CONDITIONAL"
+        ):
+            verdict, action = EpistemicVerdict.CONDITIONALLY_VALID, RequiredNextAction.PROCEED
+        else:
+            verdict, action = EpistemicVerdict.VALIDATED, RequiredNextAction.PROCEED
+        validated = [
+            item.id
+            for item in synthesis.candidate_recommendations
+            if item.id not in rejected and item.id not in conditional
+        ]
+        return EpistemicValidationResult(
+            verdict=verdict,
+            validated_object_ids=validated,
+            rejected_object_ids=sorted(set(rejected)),
+            unresolved_object_ids=sorted(set(conditional + critical_unknowns)),
+            critical_assumption_ids=synthesis.assumption_ids,
+            contradiction_ids=synthesis.true_conflict_ids,
+            traceability_status=(
+                TraceabilityStatus.INCOMPLETE
+                if any(item.startswith("TRACEABILITY_FAILURE") for item in reasons)
+                else TraceabilityStatus.COMPLETE
+            ),
+            blocking_reasons=reasons,
+            required_next_action=action,
+            audit_records=EpistemicController._audits(
+                state.problem_id,
+                verdict,
+                reasons,
+                [item.id for item in synthesis.candidate_recommendations],
+            ),
+        )
