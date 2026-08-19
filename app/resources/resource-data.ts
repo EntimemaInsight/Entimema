@@ -120,6 +120,25 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    technicalTitle: "Why Customer ID Is Not Enough",
+    headline: "Why Customer ID Is Not Enough: Entity Resolution in Lending Systems",
+    headlineEmphasis: "Entity Resolution in Lending Systems",
+    slug: "why-customer-id-is-not-enough-entity-resolution-lending",
+    slogan: "Resolve one economic borrower across fragmented records using governed evidence, explicit uncertainty, stable canonical identity and time-aware merge and split lineage.",
+    sloganEmphasis: "governed evidence, explicit uncertainty",
+    author: authors.aleksandar, publishedAt: "2026-08-19", updatedAt: "2026-08-19", readingMinutes: 41,
+    topic: "financial-data-and-erp", stream: "engineering", featured: true,
+    seoTitle: "Entity Resolution in Banking & Lending Systems | Entimema",
+    metaDescription: "Engineer borrower entity resolution with canonical party IDs, deterministic and probabilistic matching, confidence, lineage, temporal identity and testing.",
+    canonicalPath: "/resources/why-customer-id-is-not-enough-entity-resolution-lending",
+    openGraphTitle: "Why Customer ID Is Not Enough",
+    openGraphDescription: "An engineering architecture for matching fragmented borrower records without false splits, false merges or irreproducible credit decisions.",
+    relatedCapability: { label: "Decision Automation", href: "/services/decision-automation", description: "Build identity-aware credit decisions with governed match confidence, point-in-time mapping and reproducible exposure inputs." },
+    relatedResourceSlugs: ["customer-facility-account-exposure-credit-data-model", "event-time-processing-time-posting-time-credit-systems", "reconstructing-account-state-financial-events", "building-reliable-dpd-engine"],
+    status: "published", indexable: true,
+    cover: { type: "generated-matrix", motion: "none", alt: "Entimema Engineering publication cover for Why Customer ID Is Not Enough.", stages: ["Source Record", "Normalisation", "Candidates", "Evidence", "Confidence", "Canonical Party", "Lineage"] },
+  },
+  {
     technicalTitle: "Customer, Facility, Account and Exposure",
     headline: "Customer, Facility, Account and Exposure: Designing the Credit Data Model",
     headlineEmphasis: "Designing the Credit Data Model",

@@ -61,6 +61,7 @@ import LateEventRestatementArticle, { lateEventRestatementSections } from "../La
 import ReversalCorrectionArticle, { reversalCorrectionSections } from "../ReversalCorrectionArticle";
 import ReliableDpdEngineArticle, { reliableDpdEngineSections } from "../ReliableDpdEngineArticle";
 import CreditDataModelArticle, { creditDataModelSections } from "../CreditDataModelArticle";
+import EntityResolutionArticle, { entityResolutionSections } from "../EntityResolutionArticle";
 import { getPublishedResource, getTopic, publishedResources, resourceStreams } from "../resource-data";
 import { FOUNDER_ID, ORGANIZATION_ID, SITE_URL, WEBSITE_ID, createBreadcrumbSchema, serializeJsonLd } from "@/lib/structured-data";
 
@@ -205,6 +206,18 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
   const isReversalCorrection = resource.slug === "reversals-chargebacks-corrections-risk-state";
   const isReliableDpdEngine = resource.slug === "building-reliable-dpd-engine";
   const isCreditDataModel = resource.slug === "customer-facility-account-exposure-credit-data-model";
+  const isEntityResolution = resource.slug === "why-customer-id-is-not-enough-entity-resolution-lending";
+
+  if (isEntityResolution) {
+    return (
+      <>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(articleSchema) }} />
+        <ResourceArticle resource={resource} sections={[...entityResolutionSections]}>
+          <EntityResolutionArticle />
+        </ResourceArticle>
+      </>
+    );
+  }
 
   if (isCreditDataModel) {
     return (
