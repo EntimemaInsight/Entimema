@@ -44,3 +44,19 @@ routing gates, critical-unknown policy, and one-question deterministic selection
 
 There is still no LLM execution, persistence, or domain-agent execution. `ROUTING_READY` is the
 current successful terminal boundary for the Concierge layer.
+
+## Sprint 4 — Epistemic & Reflexive Control Layer
+
+Module A constructs and updates the shared `ProblemState`. Module B independently audits whether
+that state and any candidate inference are epistemically admissible. It has deterministic veto
+authority for forbidden inference, broken traceability, material contradiction, assumption
+leakage, blocking unknowns, and incomplete material evidence provenance.
+
+The control layer reuses the existing verdicts: `VALIDATED`, `CONDITIONALLY_VALID`,
+`INSUFFICIENT_EVIDENCE`, `CONTRADICTED`, `OUT_OF_SCOPE`, `FORBIDDEN_INFERENCE`, and
+`TRACEABILITY_FAILURE`. It returns a required next action to the Sprint 2 state machine rather
+than owning dialogue transitions.
+
+Pre-routing validation is active. Post-agent and synthesis validation have typed, explicitly
+deferred contracts only. There is no agent execution, LLM execution, RAG, persistence, or
+production orchestration in this sprint.

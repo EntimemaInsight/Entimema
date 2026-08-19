@@ -1,3 +1,4 @@
+from datetime import UTC, datetime
 from enum import StrEnum
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
@@ -42,6 +43,8 @@ class EvidenceHypothesisImpact(BaseModel):
     hypothesis_id: str = Field(min_length=1)
     independent_interpretation: str = Field(min_length=1)
     impact: HypothesisImpact
+    interpretation_timestamp: datetime = Field(default_factory=lambda: datetime.now(UTC))
+    interpretation_order: int | None = Field(default=None, ge=0)
 
     @model_validator(mode="after")
     def require_independent_interpretation(self) -> "EvidenceHypothesisImpact":
