@@ -120,6 +120,26 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    technicalTitle: "Champion / Challenger Credit Strategy: How to Test Better Lending Decisions Without Confusing Simulation with Evidence",
+    headline: "Champion / Challenger Credit Strategy: How to Test Better Lending Decisions Without Confusing Simulation with Evidence",
+    headlineEmphasis: "Without Confusing Simulation with Evidence",
+    slug: "champion-challenger-credit-strategy-testing",
+    slogan: "Move from replay claims to governed evidence through decision migration, common-support assessment, sensitivity, controlled deployment, mature vintages and economic attribution.",
+    sloganEmphasis: "replay claims to governed evidence",
+    author: authors.aleksandar, publishedAt: "2026-08-19", updatedAt: "2026-08-19", readingMinutes: 54,
+    topic: "credit-risk", stream: "insights", featured: true,
+    seoTitle: "Champion Challenger Credit Strategy Testing | Entimema",
+    metaDescription: "Test lending strategies through replay, decision migration, common support, counterfactual caution, controlled challengers, vintages and attribution.",
+    canonicalPath: "/resources/champion-challenger-credit-strategy-testing",
+    openGraphTitle: "Champion / Challenger Credit Strategy: Simulation Is Not Evidence",
+    openGraphDescription: "A practitioner architecture for strategy replay, counterfactual limits, safe testing, outcome maturity and challenger graduation.",
+    openGraphImage: "/resources/covers/champion-challenger-credit-strategy.png",
+    relatedCapability: { label: "Decision Automation", href: "/services/decision-automation", description: "Build governed strategy replay, challenger routing, experimentation infrastructure and outcome monitoring." },
+    relatedResourceSlugs: ["credit-decision-engine-architecture", "credit-policy-rules-lending-rulebook-governance", "affordability-decisioning-ability-to-pay", "credit-limit-assignment-exposure-strategy", "risk-based-pricing-credit-decisioning", "credit-risk-cut-off-strategy", "reject-inference-credit-risk-rejected-applicants", "credit-vintage-analysis", "roll-rate-analysis-migration-matrices"],
+    status: "published", indexable: true,
+    cover: { type: "editorial-artwork", src: "/resources/covers/champion-challenger-credit-strategy.png", motion: "none", alt: "Entimema Insights cover showing two parallel precision decision structures passing through the same controlled test chambers before one diverges along a copper evidence path.", stages: ["Hypothesis", "Champion", "Challenger", "Replay", "Common Support", "Sensitivity", "Controlled Test", "Vintage", "Attribution", "Governance"] },
+  },
+  {
     technicalTitle: "Risk-Based Pricing: Why Charging More for Risk Can Increase the Risk You Are Trying to Price",
     headline: "Risk-Based Pricing: Why Charging More for Risk Can Increase the Risk You Are Trying to Price",
     headlineEmphasis: "Increase the Risk You Are Trying to Price",
