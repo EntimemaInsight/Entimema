@@ -120,6 +120,25 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    technicalTitle: "Late-Arriving Events and Backdated Corrections",
+    headline: "Late-Arriving Events and Backdated Corrections: How to Repair Financial State Without Rewriting History",
+    headlineEmphasis: "Repair Financial State Without Rewriting History",
+    slug: "late-arriving-events-backdated-corrections",
+    slogan: "Preserve actual knowledge, restate economic history and trace decision impact through controlled replay boundaries, dependency-aware rebuilds and immutable lineage.",
+    sloganEmphasis: "Preserve actual knowledge, restate economic history",
+    author: authors.aleksandar, publishedAt: "2026-08-19", updatedAt: "2026-08-19", readingMinutes: 41,
+    topic: "financial-data-and-erp", stream: "engineering", featured: true,
+    seoTitle: "Late Events & Backdated Financial Corrections | Entimema",
+    metaDescription: "Repair late and backdated financial events using known and restated state, replay boundaries, snapshot invalidation and decision-impact analysis.",
+    canonicalPath: "/resources/late-arriving-events-backdated-corrections",
+    openGraphTitle: "Late-Arriving Events and Backdated Corrections",
+    openGraphDescription: "An engineering architecture for correcting financial state without falsifying historical knowledge, decisions or audit lineage.",
+    relatedCapability: { label: "Decision Automation", href: "/services/decision-automation", description: "Build correction-aware decision paths with immutable production history, targeted replay and governed counterfactual impact." },
+    relatedResourceSlugs: ["reconstructing-account-state-financial-events", "idempotency-payment-credit-event-processing", "event-time-processing-time-posting-time-credit-systems", "credit-risk-model-validation-pipeline"],
+    status: "published", indexable: true,
+    cover: { type: "generated-matrix", motion: "none", alt: "Entimema Engineering publication cover for Late-Arriving Events and Backdated Corrections.", stages: ["Late Event", "Effective Time", "Known State", "Restated State", "Replay", "Impact", "Audit"] },
+  },
+  {
     technicalTitle: "Reconstructing Account State from Financial Events",
     headline: "Reconstructing Account State from Financial Events: From Event Streams to Balances, Exposure and Delinquency",
     headlineEmphasis: "From Event Streams to Balances, Exposure and Delinquency",
