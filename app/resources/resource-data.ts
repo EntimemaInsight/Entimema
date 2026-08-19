@@ -120,6 +120,26 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    technicalTitle: "Cure & Re-Default Analytics: Why Returning to Current Is Not the Same Thing as Recovery",
+    headline: "Cure & Re-Default Analytics: Why Returning to Current Is Not the Same Thing as Recovery",
+    headlineEmphasis: "Not the Same Thing as Recovery",
+    slug: "cure-redefault-analytics-sustainable-recovery",
+    slogan: "Distinguish technical cure from durable recovery using post-cure behaviour, survival, re-default risk, cure vintages, path dependence and economic loss evidence.",
+    sloganEmphasis: "durable recovery",
+    author: authors.aleksandar, publishedAt: "2026-08-19", updatedAt: "2026-08-19", readingMinutes: 61,
+    topic: "credit-risk", stream: "insights", featured: true,
+    seoTitle: "Cure & Re-Default Analytics in Credit Risk | Entimema",
+    metaDescription: "Measure sustainable cure, re-default risk, cure vintages, survival after cure, path dependence and LGD implications in collections portfolios.",
+    canonicalPath: "/resources/cure-redefault-analytics-sustainable-recovery",
+    openGraphTitle: "Cure & Re-Default Analytics: Durable Recovery",
+    openGraphDescription: "A practitioner framework for separating technical cure from sustainable recovery using post-cure risk, survival, vintages and economic outcomes.",
+    openGraphImage: "/resources/covers/cure-redefault-analytics.png",
+    relatedCapability: { label: "Decision Automation", href: "/services/decision-automation", description: "Build post-cure surveillance, cure-quality classification, workflow routing and recurring re-default evidence." },
+    relatedResourceSlugs: ["collections-prioritisation-intervention-value", "consumer-credit-early-warning-systems", "behavioural-credit-scoring-post-origination-risk", "roll-rate-analysis-migration-matrices", "credit-vintage-analysis", "ifrs-9-lgd-recovery-cash-flows", "significant-increase-credit-risk-ifrs-9-stage-2"],
+    status: "published", indexable: true,
+    cover: { type: "editorial-artwork", src: "/resources/covers/cure-redefault-analytics.png", motion: "none", alt: "Entimema Insights cover showing a re-aligned glass-and-steel structure that appears repaired while residual fractures remain around its copper joint.", stages: ["Delinquency", "Cure Event", "Technical Cure", "Post-Cure Behaviour", "Persistence", "Re-Default Risk", "Sustainable Cure", "Economic Recovery", "LGD", "Monitoring"] },
+  },
+  {
     technicalTitle: "Collections Prioritisation: Why the Highest-Risk Customer Is Not Always the Account You Should Contact First",
     headline: "Collections Prioritisation: Why the Highest-Risk Customer Is Not Always the Account You Should Contact First",
     headlineEmphasis: "Not Always the Account You Should Contact First",

@@ -24,6 +24,7 @@ import DecisionEngineMonitoringArticle, { decisionEngineMonitoringSections } fro
 import ConsumerCreditEarlyWarningArticle, { consumerCreditEarlyWarningSections } from "../ConsumerCreditEarlyWarningArticle";
 import BehaviouralCreditScoringArticle, { behaviouralCreditScoringSections } from "../BehaviouralCreditScoringArticle";
 import CollectionsPrioritisationArticle, { collectionsPrioritisationSections } from "../CollectionsPrioritisationArticle";
+import CureRedefaultAnalyticsArticle, { cureRedefaultAnalyticsSections } from "../CureRedefaultAnalyticsArticle";
 import RollRateMigrationArticle, { rollRateMigrationSections } from "../RollRateMigrationArticle";
 import EarlyWarningIndicatorsArticle, { earlyWarningIndicatorsSections } from "../EarlyWarningIndicatorsArticle";
 import CreditPortfolioMonitoringArticle, { creditPortfolioMonitoringSections } from "../CreditPortfolioMonitoringArticle";
@@ -155,6 +156,7 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
   const isConsumerCreditEarlyWarning = resource.slug === "consumer-credit-early-warning-systems";
   const isBehaviouralCreditScoring = resource.slug === "behavioural-credit-scoring-post-origination-risk";
   const isCollectionsPrioritisation = resource.slug === "collections-prioritisation-intervention-value";
+  const isCureRedefaultAnalytics = resource.slug === "cure-redefault-analytics-sustainable-recovery";
   const isRollRateMigration = resource.slug === "roll-rate-analysis-migration-matrices";
   const isEarlyWarningIndicators = resource.slug === "early-warning-indicators-credit-risk";
   const isCreditPortfolioMonitoring = resource.slug === "credit-portfolio-monitoring-architecture";
@@ -180,12 +182,12 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
   const isIfrs9MacroeconomicScenarios = resource.slug === "forward-looking-macroeconomic-scenarios-ifrs-9";
   const isIfrs9EclValidation = resource.slug === "ifrs-9-ecl-validation-backtesting";
 
-  if (isCreditPolicyRules || isAffordabilityDecisioning || isCreditLimitAssignment || isRiskBasedPricing || isChampionChallengerStrategy || isDecisionEngineMonitoring || isConsumerCreditEarlyWarning || isBehaviouralCreditScoring || isCollectionsPrioritisation) {
+  if (isCreditPolicyRules || isAffordabilityDecisioning || isCreditLimitAssignment || isRiskBasedPricing || isChampionChallengerStrategy || isDecisionEngineMonitoring || isConsumerCreditEarlyWarning || isBehaviouralCreditScoring || isCollectionsPrioritisation || isCureRedefaultAnalytics) {
     return (
       <>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(articleSchema) }} />
-        <ResourceArticle resource={resource} sections={isCollectionsPrioritisation ? [...collectionsPrioritisationSections] : isBehaviouralCreditScoring ? [...behaviouralCreditScoringSections] : isConsumerCreditEarlyWarning ? [...consumerCreditEarlyWarningSections] : isDecisionEngineMonitoring ? [...decisionEngineMonitoringSections] : isChampionChallengerStrategy ? [...championChallengerStrategySections] : isRiskBasedPricing ? [...riskBasedPricingSections] : isCreditLimitAssignment ? [...creditLimitAssignmentSections] : isAffordabilityDecisioning ? [...affordabilityDecisioningSections] : [...creditPolicyRulesSections]}>
-          {isCollectionsPrioritisation ? <CollectionsPrioritisationArticle /> : isBehaviouralCreditScoring ? <BehaviouralCreditScoringArticle /> : isConsumerCreditEarlyWarning ? <ConsumerCreditEarlyWarningArticle /> : isDecisionEngineMonitoring ? <DecisionEngineMonitoringArticle /> : isChampionChallengerStrategy ? <ChampionChallengerStrategyArticle /> : isRiskBasedPricing ? <RiskBasedPricingArticle /> : isCreditLimitAssignment ? <CreditLimitAssignmentArticle /> : isAffordabilityDecisioning ? <AffordabilityDecisioningArticle /> : <CreditPolicyRulesArticle />}
+        <ResourceArticle resource={resource} sections={isCureRedefaultAnalytics ? [...cureRedefaultAnalyticsSections] : isCollectionsPrioritisation ? [...collectionsPrioritisationSections] : isBehaviouralCreditScoring ? [...behaviouralCreditScoringSections] : isConsumerCreditEarlyWarning ? [...consumerCreditEarlyWarningSections] : isDecisionEngineMonitoring ? [...decisionEngineMonitoringSections] : isChampionChallengerStrategy ? [...championChallengerStrategySections] : isRiskBasedPricing ? [...riskBasedPricingSections] : isCreditLimitAssignment ? [...creditLimitAssignmentSections] : isAffordabilityDecisioning ? [...affordabilityDecisioningSections] : [...creditPolicyRulesSections]}>
+          {isCureRedefaultAnalytics ? <CureRedefaultAnalyticsArticle /> : isCollectionsPrioritisation ? <CollectionsPrioritisationArticle /> : isBehaviouralCreditScoring ? <BehaviouralCreditScoringArticle /> : isConsumerCreditEarlyWarning ? <ConsumerCreditEarlyWarningArticle /> : isDecisionEngineMonitoring ? <DecisionEngineMonitoringArticle /> : isChampionChallengerStrategy ? <ChampionChallengerStrategyArticle /> : isRiskBasedPricing ? <RiskBasedPricingArticle /> : isCreditLimitAssignment ? <CreditLimitAssignmentArticle /> : isAffordabilityDecisioning ? <AffordabilityDecisioningArticle /> : <CreditPolicyRulesArticle />}
         </ResourceArticle>
       </>
     );
