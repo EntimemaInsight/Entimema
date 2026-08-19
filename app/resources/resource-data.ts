@@ -120,6 +120,26 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    technicalTitle: "The Hidden Infrastructure Debt of Modern Lending: Why Digital Credit Still Runs on Batch Files, Reconciliations and Yesterday’s Data",
+    headline: "The Hidden Infrastructure Debt of Modern Lending: Why Digital Credit Still Runs on Batch Files, Reconciliations and Yesterday’s Data",
+    headlineEmphasis: "Hidden Infrastructure Debt",
+    slug: "hidden-infrastructure-debt-modern-lending",
+    slogan: "Trace the broken path from financial event to analytical state and executable decision—then modernise the critical path without defaulting to core replacement.",
+    sloganEmphasis: "financial event to analytical state",
+    author: authors.aleksandar, publishedAt: "2026-08-19", updatedAt: "2026-08-19", readingMinutes: 66,
+    topic: "financial-architecture", stream: "insights", featured: true,
+    seoTitle: "Hidden Infrastructure Debt in Modern Lending | Entimema",
+    metaDescription: "Understand lending infrastructure debt, batch latency, financial-state fragmentation, reconciliation tax and decision-centric modernisation around the core.",
+    canonicalPath: "/resources/hidden-infrastructure-debt-modern-lending",
+    openGraphTitle: "The Hidden Infrastructure Debt of Modern Lending",
+    openGraphDescription: "A flagship framework for connecting financial events, canonical analytical state, reconciliation, risk intelligence and executable decisions.",
+    openGraphImage: "/resources/covers/hidden-infrastructure-debt-modern-lending.png",
+    relatedCapability: { label: "Decision Automation", href: "/services/decision-automation", description: "Modernise the path from financial events and governed state to executable, monitored credit decisions." },
+    relatedResourceSlugs: ["credit-decision-engine-architecture", "decision-engine-monitoring-strategy-drift", "behavioural-credit-scoring-post-origination-risk", "consumer-credit-early-warning-systems", "collections-prioritisation-intervention-value", "ifrs-9-expected-credit-loss-architecture", "ifrs-9-ead-credit-conversion-factors", "credit-risk-model-validation"],
+    status: "published", indexable: true,
+    cover: { type: "editorial-artwork", src: "/resources/covers/hidden-infrastructure-debt-modern-lending.png", motion: "none", alt: "Entimema Insights cover showing a pristine glass digital surface above deep fragmented operational layers crossed by only a few coherent copper decision paths.", stages: ["Financial Event", "System of Record", "Replication", "Transformation", "Reconciliation", "Analytical State", "Decision", "Action", "Outcome"] },
+  },
+  {
     technicalTitle: "Promise-to-Pay Analytics: Why a Commitment to Pay Is Not the Same Thing as a Payment",
     headline: "Promise-to-Pay Analytics: Why a Commitment to Pay Is Not the Same Thing as a Payment",
     headlineEmphasis: "Not the Same Thing as a Payment",
