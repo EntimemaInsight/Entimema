@@ -120,6 +120,25 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    technicalTitle: "Idempotency in Payment and Credit Event Processing",
+    headline: "Idempotency in Payment and Credit Event Processing: How to Prevent Duplicate Financial Events from Corrupting Lending State",
+    headlineEmphasis: "Prevent Duplicate Financial Events from Corrupting Lending State",
+    slug: "idempotency-payment-credit-event-processing",
+    slogan: "Design stable event identity, atomic uniqueness and replay-safe consumers so repeated delivery creates exactly one financial effect.",
+    sloganEmphasis: "exactly one financial effect",
+    author: authors.aleksandar, publishedAt: "2026-08-19", updatedAt: "2026-08-19", readingMinutes: 39,
+    topic: "financial-data-and-erp", stream: "engineering", featured: true,
+    seoTitle: "Idempotency in Payment & Credit Event Processing | Entimema",
+    metaDescription: "Prevent duplicate payment and lending events with stable identity, atomic consumers, inbox/outbox patterns, safe retries, replay and crash tests.",
+    canonicalPath: "/resources/idempotency-payment-credit-event-processing",
+    openGraphTitle: "Idempotency in Payment and Credit Event Processing",
+    openGraphDescription: "An implementation architecture for exactly-once financial effect across duplicate delivery, concurrency, retries, replay and recovery.",
+    relatedCapability: { label: "Decision Automation", href: "/services/decision-automation", description: "Build replay-safe event workflows with stable action identity, transactional boundaries and observable recovery." },
+    relatedResourceSlugs: ["event-time-processing-time-posting-time-credit-systems", "credit-decision-engine-architecture", "credit-risk-model-validation-pipeline", "credit-portfolio-monitoring-architecture"],
+    status: "published", indexable: true,
+    cover: { type: "generated-matrix", motion: "none", alt: "Entimema Engineering publication cover for Idempotency in Payment and Credit Event Processing.", stages: ["Source Event", "Stable Identity", "Idempotency Key", "Atomic Persistence", "State Application", "Replay", "Verification"] },
+  },
+  {
     technicalTitle: "Event Time vs Processing Time vs Posting Time in Credit Systems",
     headline: "Event Time vs Processing Time vs Posting Time in Credit Systems: Building Point-in-Time Correct Financial State",
     headlineEmphasis: "Building Point-in-Time Correct Financial State",
