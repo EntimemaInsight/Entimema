@@ -120,6 +120,25 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    technicalTitle: "Backpressure and Failure Recovery in Financial Event Pipelines",
+    headline: "Backpressure and Failure Recovery in Financial Event Pipelines: Keeping Risk Decisions Correct When Real-Time Infrastructure Slows Down",
+    headlineEmphasis: "Keeping Risk Decisions Correct When Real-Time Infrastructure Slows Down",
+    slug: "backpressure-failure-recovery-financial-event-pipelines",
+    slogan: "Expose decision-specific staleness, protect event durability, degrade deliberately and recover through idempotent replay, reconciliation and decision revalidation.",
+    sloganEmphasis: "recover through idempotent replay, reconciliation and decision revalidation",
+    author: authors.aleksandar, publishedAt: "2026-08-19", updatedAt: "2026-08-19", readingMinutes: 48,
+    topic: "financial-data-and-erp", stream: "engineering", featured: true,
+    seoTitle: "Financial Event Pipeline Backpressure & Failure Recovery | Entimema",
+    metaDescription: "Engineer financial event pipeline resilience with lag and freshness guards, retry quarantine, durable checkpoints, idempotent replay and decision revalidation.",
+    canonicalPath: "/resources/backpressure-failure-recovery-financial-event-pipelines",
+    openGraphTitle: "Backpressure and Failure Recovery in Financial Event Pipelines",
+    openGraphDescription: "An engineering architecture for preventing stale financial state from silently driving credit decisions during overload, outage and recovery.",
+    relatedCapability: { label: "Decision Automation", href: "/services/decision-automation", description: "Protect lending decisions with dependency-aware freshness guards, explicit degradation and post-incident revalidation." },
+    relatedResourceSlugs: ["event-driven-decision-triggers-lending-systems", "real-time-utilisation-exposure-monitoring", "streaming-behavioural-features-early-warning", "batch-etl-event-driven-credit-risk-architecture", "idempotency-payment-credit-event-processing", "late-arriving-events-backdated-corrections"],
+    status: "published", indexable: true,
+    cover: { type: "generated-matrix", motion: "none", alt: "Entimema Engineering publication cover for Backpressure and Failure Recovery in Financial Event Pipelines.", stages: ["Arrival", "Queue", "Lag", "Guard", "Degrade", "Replay", "Reconcile", "Revalidate"] },
+  },
+  {
     technicalTitle: "Event-Driven Decision Triggers in Lending Systems",
     headline: "Event-Driven Decision Triggers in Lending Systems: When a State Change Should Actually Re-Run a Credit Decision",
     headlineEmphasis: "When a State Change Should Actually Re-Run a Credit Decision",
