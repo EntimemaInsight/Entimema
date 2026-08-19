@@ -1,0 +1,10 @@
+import type { DecisionMap } from "./types";
+import styles from "./concierge-lab.module.css";
+
+const columns = ["PROBLEM", "CLAIM", "EVIDENCE", "UNKNOWN", "HYPOTHESIS", "CONTRADICTION", "AGENT", "FINDING", "RECOMMENDATION"] as const;
+
+export default function DecisionMapView({ map, selectedId, onSelect }: { map: DecisionMap; selectedId: string | null; onSelect: (id: string) => void }) {
+  const selected = map.nodes.find((node) => node.id === selectedId);
+  const connected = selected ? map.edges.filter((edge) => edge.source_id === selected.id || edge.target_id === selected.id) : [];
+  return <section className={styles.mapSection} aria-labelledby="map-title"><div className={styles.sectionHeading}><span>Traceability</span><h2 id="map-title">Decision Map</h2></div>{map.nodes.length ? <><div className={styles.mapCanvas}>{columns.map((type) => { const nodes = map.nodes.filter((node) => node.node_type === type); if (!nodes.length) return null; return <div className={styles.mapColumn} key={type}><span>{type}</span>{nodes.map((node) => <button className={selectedId === node.id ? styles.nodeSelected : ""} key={node.id} onClick={() => onSelect(node.id)}><small>{node.id}</small>{node.label}</button>)}</div>; })}</div><div className={styles.edgeLegend}>{Array.from(new Set(map.edges.map((edge) => edge.edge_type))).map((type) => <span key={type}>{type.replaceAll("_", " ")}</span>)}</div>{selected && <aside className={styles.inspector} aria-live="polite"><div><span>{selected.node_type}</span><button aria-label="Close node details" onClick={() => onSelect("")}>×</button></div><h3>{selected.label}</h3>{selected.detail && <p>{selected.detail}</p>}{selected.metadata && Object.entries(selected.metadata).map(([key, value]) => <dl key={key}><dt>{key.replaceAll("_", " ")}</dt><dd>{Array.isArray(value) ? value.join(" · ") : value}</dd></dl>)}<h4>Traceability relationships</h4>{connected.map((edge) => <p key={`${edge.source_id}-${edge.target_id}`}>{edge.source_id} <b>{edge.edge_type}</b> {edge.target_id}</p>)}</aside>}</> : <p className={styles.mapEmpty}>The Decision Map unlocks when typed state relationships are available.</p>}</section>;
+}
