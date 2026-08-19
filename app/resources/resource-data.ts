@@ -120,6 +120,25 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    technicalTitle: "Point-in-Time Customer State Reconstruction",
+    headline: "Point-in-Time Customer State Reconstruction: Rebuilding the Borrower Exactly as the Decision Engine Saw Them",
+    headlineEmphasis: "Rebuilding the Borrower Exactly as the Decision Engine Saw Them",
+    slug: "point-in-time-customer-state-reconstruction",
+    slogan: "Reconstruct the identity, relationships, financial state, feature availability and execution versions actually consumed at decision time—without hindsight leakage.",
+    sloganEmphasis: "actually consumed at decision time",
+    author: authors.aleksandar, publishedAt: "2026-08-19", updatedAt: "2026-08-19", readingMinutes: 46,
+    topic: "decision-intelligence", stream: "engineering", featured: true,
+    seoTitle: "Point-in-Time Customer State & Credit Decision Replay | Entimema",
+    metaDescription: "Rebuild historical borrower state with bitemporal identity, relationships, financial state, feature availability, decision manifests and deterministic replay.",
+    canonicalPath: "/resources/point-in-time-customer-state-reconstruction",
+    openGraphTitle: "Point-in-Time Customer State Reconstruction",
+    openGraphDescription: "An engineering architecture for reconstructing exactly what a credit decision engine knew, which versions it used and why it produced its outcome.",
+    relatedCapability: { label: "Decision Automation", href: "/services/decision-automation", description: "Build reproducible decisions with point-in-time state, immutable input manifests, versioned strategies and controlled replay." },
+    relatedResourceSlugs: ["joint-borrowers-multiple-facilities-connected-exposures", "building-golden-customer-record-without-data-silo", "why-customer-id-is-not-enough-entity-resolution-lending", "customer-facility-account-exposure-credit-data-model", "event-time-processing-time-posting-time-credit-systems", "building-reliable-dpd-engine"],
+    status: "published", indexable: true,
+    cover: { type: "generated-matrix", motion: "none", alt: "Entimema Engineering publication cover for Point-in-Time Customer State Reconstruction.", stages: ["Decision Time", "Identity", "Relationships", "Facility State", "Features", "Versions", "Manifest", "Replay"] },
+  },
+  {
     technicalTitle: "Handling Joint Borrowers, Multiple Facilities and Connected Exposures",
     headline: "Handling Joint Borrowers, Multiple Facilities and Connected Exposures: Designing Relationship-Aware Credit State",
     headlineEmphasis: "Designing Relationship-Aware Credit State",

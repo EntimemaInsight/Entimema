@@ -64,6 +64,7 @@ import CreditDataModelArticle, { creditDataModelSections } from "../CreditDataMo
 import EntityResolutionArticle, { entityResolutionSections } from "../EntityResolutionArticle";
 import GoldenCustomerStateArticle, { goldenCustomerStateSections } from "../GoldenCustomerStateArticle";
 import ConnectedExposureArticle, { connectedExposureSections } from "../ConnectedExposureArticle";
+import PointInTimeCustomerStateArticle, { pointInTimeCustomerStateSections } from "../PointInTimeCustomerStateArticle";
 import { getPublishedResource, getTopic, publishedResources, resourceStreams } from "../resource-data";
 import { FOUNDER_ID, ORGANIZATION_ID, SITE_URL, WEBSITE_ID, createBreadcrumbSchema, serializeJsonLd } from "@/lib/structured-data";
 
@@ -211,6 +212,18 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
   const isEntityResolution = resource.slug === "why-customer-id-is-not-enough-entity-resolution-lending";
   const isGoldenCustomerState = resource.slug === "building-golden-customer-record-without-data-silo";
   const isConnectedExposure = resource.slug === "joint-borrowers-multiple-facilities-connected-exposures";
+  const isPointInTimeCustomerState = resource.slug === "point-in-time-customer-state-reconstruction";
+
+  if (isPointInTimeCustomerState) {
+    return (
+      <>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(articleSchema) }} />
+        <ResourceArticle resource={resource} sections={[...pointInTimeCustomerStateSections]}>
+          <PointInTimeCustomerStateArticle />
+        </ResourceArticle>
+      </>
+    );
+  }
 
   if (isConnectedExposure) {
     return (
