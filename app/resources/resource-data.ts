@@ -120,6 +120,25 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    technicalTitle: "Real-Time Utilisation and Exposure Monitoring",
+    headline: "Real-Time Utilisation and Exposure Monitoring: Keeping Credit Limits, Drawn Balances and Risk State Synchronized",
+    headlineEmphasis: "Keeping Credit Limits, Drawn Balances and Risk State Synchronized",
+    slug: "real-time-utilisation-exposure-monitoring",
+    slogan: "Synchronise effective limits, posted draw, pending reservations, repayments and blocked amounts before deriving available credit, utilisation or risk exposure.",
+    sloganEmphasis: "before deriving available credit, utilisation or risk exposure",
+    author: authors.aleksandar, publishedAt: "2026-08-19", updatedAt: "2026-08-19", readingMinutes: 48,
+    topic: "credit-risk", stream: "engineering", featured: true,
+    seoTitle: "Real-Time Credit Utilisation & Exposure Monitoring | Entimema",
+    metaDescription: "Engineer coherent real-time credit exposure using limit, drawn, pending and repayment state, reservation concurrency, lifecycle invariants and reconciliation.",
+    canonicalPath: "/resources/real-time-utilisation-exposure-monitoring",
+    openGraphTitle: "Real-Time Utilisation and Exposure Monitoring",
+    openGraphDescription: "An engineering architecture for synchronising limits, posted balances, pending usage, available credit, utilisation and risk state without double counting.",
+    relatedCapability: { label: "Decision Automation", href: "/services/decision-automation", description: "Gate limit, exposure and early-warning decisions on coherent, freshness-aware facility state." },
+    relatedResourceSlugs: ["streaming-behavioural-features-early-warning", "batch-etl-event-driven-credit-risk-architecture", "credit-risk-feature-store-respects-time", "customer-facility-account-exposure-credit-data-model", "reconstructing-account-state-financial-events"],
+    status: "published", indexable: true,
+    cover: { type: "generated-matrix", motion: "none", alt: "Entimema Engineering publication cover for Real-Time Utilisation and Exposure Monitoring.", stages: ["Limit", "Drawn", "Pending", "Available", "Utilisation", "Exposure", "Decision", "Reconciliation"] },
+  },
+  {
     technicalTitle: "Streaming Behavioural Features for Early Warning",
     headline: "Streaming Behavioural Features for Early Warning: Building Risk Signals That Update as Borrower Behaviour Changes",
     headlineEmphasis: "Building Risk Signals That Update as Borrower Behaviour Changes",

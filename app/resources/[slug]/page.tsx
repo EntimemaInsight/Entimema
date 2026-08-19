@@ -69,6 +69,7 @@ import CreditRiskFeatureStoreArticle, { creditRiskFeatureStoreSections } from ".
 import PointInTimeCreditFeaturesArticle, { pointInTimeCreditFeaturesSections } from "../PointInTimeCreditFeaturesArticle";
 import EventDrivenCreditArchitectureArticle, { eventDrivenCreditArchitectureSections } from "../EventDrivenCreditArchitectureArticle";
 import StreamingBehaviouralFeaturesArticle, { streamingBehaviouralFeaturesSections } from "../StreamingBehaviouralFeaturesArticle";
+import RealTimeExposureArticle, { realTimeExposureSections } from "../RealTimeExposureArticle";
 import { getPublishedResource, getTopic, publishedResources, resourceStreams } from "../resource-data";
 import { FOUNDER_ID, ORGANIZATION_ID, SITE_URL, WEBSITE_ID, createBreadcrumbSchema, serializeJsonLd } from "@/lib/structured-data";
 
@@ -221,6 +222,18 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
   const isPointInTimeCreditFeatures = resource.slug === "point-in-time-correct-features-credit-models";
   const isEventDrivenCreditArchitecture = resource.slug === "batch-etl-event-driven-credit-risk-architecture";
   const isStreamingBehaviouralFeatures = resource.slug === "streaming-behavioural-features-early-warning";
+  const isRealTimeExposure = resource.slug === "real-time-utilisation-exposure-monitoring";
+
+  if (isRealTimeExposure) {
+    return (
+      <>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(articleSchema) }} />
+        <ResourceArticle resource={resource} sections={[...realTimeExposureSections]}>
+          <RealTimeExposureArticle />
+        </ResourceArticle>
+      </>
+    );
+  }
 
   if (isStreamingBehaviouralFeatures) {
     return (
