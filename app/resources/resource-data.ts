@@ -120,6 +120,25 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    technicalTitle: "Customer, Facility, Account and Exposure",
+    headline: "Customer, Facility, Account and Exposure: Designing the Credit Data Model",
+    headlineEmphasis: "Designing the Credit Data Model",
+    slug: "customer-facility-account-exposure-credit-data-model",
+    slogan: "Represent parties, roles, facilities, servicing accounts and point-in-time exposure explicitly so every lending decision uses one coherent economic relationship model.",
+    sloganEmphasis: "one coherent economic relationship model",
+    author: authors.aleksandar, publishedAt: "2026-08-19", updatedAt: "2026-08-19", readingMinutes: 42,
+    topic: "financial-data-and-erp", stream: "engineering", featured: true,
+    seoTitle: "Customer, Facility, Account & Credit Data Model | Entimema",
+    metaDescription: "Design a lending data model for parties, roles, facilities, accounts, drawn and undrawn exposure, joint borrowers and point-in-time relationships.",
+    canonicalPath: "/resources/customer-facility-account-exposure-credit-data-model",
+    openGraphTitle: "Customer, Facility, Account and Exposure",
+    openGraphDescription: "An engineering model for canonical identity, party roles, facility/account separation, joint borrowers and decision-specific exposure projections.",
+    relatedCapability: { label: "Decision Automation", href: "/services/decision-automation", description: "Build identity-aware decisions from governed party relationships, facility state and point-in-time exposure views." },
+    relatedResourceSlugs: ["building-reliable-dpd-engine", "reconstructing-account-state-financial-events", "event-time-processing-time-posting-time-credit-systems", "idempotency-payment-credit-event-processing"],
+    status: "published", indexable: true,
+    cover: { type: "generated-matrix", motion: "none", alt: "Entimema Engineering publication cover for Customer, Facility, Account and Exposure.", stages: ["Identity", "Party", "Role", "Facility", "Account", "Drawn", "Undrawn", "Exposure"] },
+  },
+  {
     technicalTitle: "Building a Reliable DPD Engine",
     headline: "Building a Reliable DPD Engine: From Contractual Schedule and Payment Allocation to Delinquency State",
     headlineEmphasis: "From Contractual Schedule and Payment Allocation to Delinquency State",
