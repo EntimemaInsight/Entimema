@@ -120,6 +120,26 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    technicalTitle: "Decision Engine Monitoring: How to Detect When Lending Strategy Is Drifting Even If the Code Has Not Changed",
+    headline: "Decision Engine Monitoring: How to Detect When Lending Strategy Is Drifting Even If the Code Has Not Changed",
+    headlineEmphasis: "Even If the Code Has Not Changed",
+    slug: "decision-engine-monitoring-strategy-drift",
+    slogan: "Monitor configured logic and effective production behaviour across population, funnels, rules, offers, overrides, booking, outcomes and attribution.",
+    sloganEmphasis: "effective production behaviour",
+    author: authors.aleksandar, publishedAt: "2026-08-19", updatedAt: "2026-08-19", readingMinutes: 56,
+    topic: "credit-risk", stream: "insights", featured: true,
+    seoTitle: "Credit Decision Engine Monitoring & Strategy Drift | Entimema",
+    metaDescription: "Monitor credit decision drift across applicant mix, funnels, rules, effective cut-offs, pricing, limits, overrides, booked risk and outcomes.",
+    canonicalPath: "/resources/decision-engine-monitoring-strategy-drift",
+    openGraphTitle: "Decision Engine Monitoring: Detect Effective Strategy Drift",
+    openGraphDescription: "A practitioner architecture for configured versus effective strategy, decision attribution, leading evidence and mature outcomes.",
+    openGraphImage: "/resources/covers/decision-engine-monitoring.png",
+    relatedCapability: { label: "Decision Automation", href: "/services/decision-automation", description: "Build continuous decision monitoring, rule analytics, strategy attribution and challenger-discovery pipelines." },
+    relatedResourceSlugs: ["credit-decision-engine-architecture", "credit-policy-rules-lending-rulebook-governance", "affordability-decisioning-ability-to-pay", "credit-limit-assignment-exposure-strategy", "risk-based-pricing-credit-decisioning", "champion-challenger-credit-strategy-testing", "credit-risk-cut-off-strategy", "population-stability-index-credit-risk-model-monitoring", "credit-vintage-analysis", "roll-rate-analysis-migration-matrices", "model-calibration-drift-pd-risk-level"],
+    status: "published", indexable: true,
+    cover: { type: "editorial-artwork", src: "/resources/covers/decision-engine-monitoring.png", motion: "none", alt: "Entimema Insights cover showing a fixed steel decision structure while translucent input streams change composition and exit along a materially different copper-weighted trajectory.", stages: ["Population", "Funnel", "Rules", "Effective Frontier", "Offer", "Overrides", "Booked Mix", "Early Outcomes", "Mature Outcomes", "Attribution"] },
+  },
+  {
     technicalTitle: "Champion / Challenger Credit Strategy: How to Test Better Lending Decisions Without Confusing Simulation with Evidence",
     headline: "Champion / Challenger Credit Strategy: How to Test Better Lending Decisions Without Confusing Simulation with Evidence",
     headlineEmphasis: "Without Confusing Simulation with Evidence",
