@@ -120,6 +120,25 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    technicalTitle: "Building a Reliable DPD Engine",
+    headline: "Building a Reliable DPD Engine: From Contractual Schedule and Payment Allocation to Delinquency State",
+    headlineEmphasis: "From Contractual Schedule and Payment Allocation to Delinquency State",
+    slug: "building-reliable-dpd-engine",
+    slogan: "Derive explainable delinquency from versioned obligations, effective payments, allocation, calendar policy and reproducible cure and reversal logic.",
+    sloganEmphasis: "versioned obligations, effective payments, allocation",
+    author: authors.aleksandar, publishedAt: "2026-08-19", updatedAt: "2026-08-19", readingMinutes: 43,
+    topic: "credit-risk", stream: "engineering", featured: true,
+    seoTitle: "Building a Reliable Days Past Due (DPD) Engine | Entimema",
+    metaDescription: "Engineer reproducible DPD from contractual schedules, due items, payment allocation, reversals, backdated payments, cure and calendar policy.",
+    canonicalPath: "/resources/building-reliable-dpd-engine",
+    openGraphTitle: "Building a Reliable DPD Engine",
+    openGraphDescription: "An implementation architecture for due-item state, payment allocation, oldest unpaid obligations, cure, replay and DPD reconciliation.",
+    relatedCapability: { label: "Decision Automation", href: "/services/decision-automation", description: "Build explainable delinquency state for collections, behavioural scoring and governed customer treatment." },
+    relatedResourceSlugs: ["reversals-chargebacks-corrections-risk-state", "late-arriving-events-backdated-corrections", "reconstructing-account-state-financial-events", "idempotency-payment-credit-event-processing"],
+    status: "published", indexable: true,
+    cover: { type: "generated-matrix", motion: "none", alt: "Entimema Engineering publication cover for Building a Reliable DPD Engine.", stages: ["Schedule", "Due Items", "Payments", "Allocation", "Remaining Due", "Oldest Unpaid", "DPD", "Cure"] },
+  },
+  {
     technicalTitle: "Reversals, Chargebacks and Corrections Without Corrupting Risk State",
     headline: "Reversals, Chargebacks and Corrections Without Corrupting Risk State",
     headlineEmphasis: "Without Corrupting Risk State",

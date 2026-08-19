@@ -59,6 +59,7 @@ import IdempotentFinancialEventsArticle, { idempotentFinancialEventsSections } f
 import AccountStateReconstructionArticle, { accountStateReconstructionSections } from "../AccountStateReconstructionArticle";
 import LateEventRestatementArticle, { lateEventRestatementSections } from "../LateEventRestatementArticle";
 import ReversalCorrectionArticle, { reversalCorrectionSections } from "../ReversalCorrectionArticle";
+import ReliableDpdEngineArticle, { reliableDpdEngineSections } from "../ReliableDpdEngineArticle";
 import { getPublishedResource, getTopic, publishedResources, resourceStreams } from "../resource-data";
 import { FOUNDER_ID, ORGANIZATION_ID, SITE_URL, WEBSITE_ID, createBreadcrumbSchema, serializeJsonLd } from "@/lib/structured-data";
 
@@ -201,6 +202,18 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
   const isAccountStateReconstruction = resource.slug === "reconstructing-account-state-financial-events";
   const isLateEventRestatement = resource.slug === "late-arriving-events-backdated-corrections";
   const isReversalCorrection = resource.slug === "reversals-chargebacks-corrections-risk-state";
+  const isReliableDpdEngine = resource.slug === "building-reliable-dpd-engine";
+
+  if (isReliableDpdEngine) {
+    return (
+      <>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(articleSchema) }} />
+        <ResourceArticle resource={resource} sections={[...reliableDpdEngineSections]}>
+          <ReliableDpdEngineArticle />
+        </ResourceArticle>
+      </>
+    );
+  }
 
   if (isReversalCorrection) {
     return (
