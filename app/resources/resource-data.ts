@@ -120,6 +120,26 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    technicalTitle: "Risk-Based Pricing: Why Charging More for Risk Can Increase the Risk You Are Trying to Price",
+    headline: "Risk-Based Pricing: Why Charging More for Risk Can Increase the Risk You Are Trying to Price",
+    headlineEmphasis: "Increase the Risk You Are Trying to Price",
+    slug: "risk-based-pricing-credit-decisioning",
+    slogan: "Connect expected loss, funding, operating cost and capital with affordability, take-up and selection so price maximises sustainable risk-adjusted value—not nominal yield.",
+    sloganEmphasis: "sustainable risk-adjusted value",
+    author: authors.aleksandar, publishedAt: "2026-08-19", updatedAt: "2026-08-19", readingMinutes: 52,
+    topic: "credit-risk", stream: "insights", featured: true,
+    seoTitle: "Risk-Based Pricing & Credit Pricing Strategy | Entimema",
+    metaDescription: "Build risk-based lending prices using expected loss, funding, affordability, take-up, adverse selection, expected value and pricing-vintage monitoring.",
+    canonicalPath: "/resources/risk-based-pricing-credit-decisioning",
+    openGraphTitle: "Risk-Based Pricing: Price Can Change the Risk It Prices",
+    openGraphDescription: "A practitioner architecture for credit pricing, endogenous risk, affordability, demand, adverse selection and sustainable expected value.",
+    openGraphImage: "/resources/covers/risk-based-pricing.png",
+    relatedCapability: { label: "Decision Automation", href: "/services/decision-automation", description: "Build governed candidate-price simulation, offer optimisation, strategy orchestration and pricing monitoring." },
+    relatedResourceSlugs: ["credit-decision-engine-architecture", "affordability-decisioning-ability-to-pay", "credit-limit-assignment-exposure-strategy", "credit-risk-cut-off-strategy", "ifrs-9-ead-credit-conversion-factors", "reject-inference-credit-risk-rejected-applicants", "credit-vintage-analysis"],
+    status: "published", indexable: true,
+    cover: { type: "editorial-artwork", src: "/resources/covers/risk-based-pricing.png", motion: "none", alt: "Entimema Insights cover showing opposing graphite and glass structures held in a narrow equilibrium by a copper pricing coupling, representing risk cost, borrower capacity and selection feedback.", stages: ["PD / LGD / EAD", "Expected Loss", "Economic Cost", "Candidate Price", "Affordability", "Take-Up", "Selection", "Expected Value", "Offer", "Repricing"] },
+  },
+  {
     technicalTitle: "Credit Limit Assignment: How to Set Exposure Without Turning a Good Borrower Into a Bad Decision",
     headline: "Credit Limit Assignment: How to Set Exposure Without Turning a Good Borrower Into a Bad Decision",
     headlineEmphasis: "Without Turning a Good Borrower Into a Bad Decision",
