@@ -72,6 +72,7 @@ import StreamingBehaviouralFeaturesArticle, { streamingBehaviouralFeaturesSectio
 import RealTimeExposureArticle, { realTimeExposureSections } from "../RealTimeExposureArticle";
 import DecisionTriggersArticle, { decisionTriggersSections } from "../DecisionTriggersArticle";
 import PipelineResilienceArticle, { pipelineResilienceSections } from "../PipelineResilienceArticle";
+import SemanticDataContractsArticle, { semanticDataContractsSections } from "../SemanticDataContractsArticle";
 import { getPublishedResource, getTopic, publishedResources, resourceStreams } from "../resource-data";
 import { FOUNDER_ID, ORGANIZATION_ID, SITE_URL, WEBSITE_ID, createBreadcrumbSchema, serializeJsonLd } from "@/lib/structured-data";
 
@@ -227,6 +228,18 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
   const isRealTimeExposure = resource.slug === "real-time-utilisation-exposure-monitoring";
   const isDecisionTriggers = resource.slug === "event-driven-decision-triggers-lending-systems";
   const isPipelineResilience = resource.slug === "backpressure-failure-recovery-financial-event-pipelines";
+  const isSemanticDataContracts = resource.slug === "detecting-silent-schema-changes-risk-models";
+
+  if (isSemanticDataContracts) {
+    return (
+      <>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(articleSchema) }} />
+        <ResourceArticle resource={resource} sections={[...semanticDataContractsSections]}>
+          <SemanticDataContractsArticle />
+        </ResourceArticle>
+      </>
+    );
+  }
 
   if (isPipelineResilience) {
     return (

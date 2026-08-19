@@ -120,6 +120,25 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    technicalTitle: "Detecting Silent Schema Changes Before They Break Risk Models",
+    headline: "Detecting Silent Schema Changes Before They Break Risk Models: Data Contracts, Semantic Drift and Decision-Safe Change Control",
+    headlineEmphasis: "Data Contracts, Semantic Drift and Decision-Safe Change Control",
+    slug: "detecting-silent-schema-changes-risk-models",
+    slogan: "Govern upstream change through syntactic and semantic contracts, versioned adapters, shadow comparisons and decision-impact gates before risk meaning changes silently.",
+    sloganEmphasis: "before risk meaning changes silently",
+    author: authors.aleksandar, publishedAt: "2026-08-19", updatedAt: "2026-08-19", readingMinutes: 48,
+    topic: "financial-data-and-erp", stream: "engineering", featured: true,
+    seoTitle: "Detecting Silent Schema Changes in Credit Risk Data | Entimema",
+    metaDescription: "Detect schema and semantic drift in credit-risk data with contracts, versioned adapters, shadow validation, decision-impact testing and runtime monitoring.",
+    canonicalPath: "/resources/detecting-silent-schema-changes-risk-models",
+    openGraphTitle: "Detecting Silent Schema Changes Before They Break Risk Models",
+    openGraphDescription: "An engineering architecture for detecting semantic drift, tracing model impact and gating upstream changes before credit decisions are affected.",
+    relatedCapability: { label: "Decision Automation", href: "/services/decision-automation", description: "Gate source and adapter changes through feature, model and decision-impact evidence before production release." },
+    relatedResourceSlugs: ["backpressure-failure-recovery-financial-event-pipelines", "batch-etl-event-driven-credit-risk-architecture", "credit-risk-feature-store-respects-time", "point-in-time-correct-features-credit-models", "streaming-behavioural-features-early-warning"],
+    status: "published", indexable: true,
+    cover: { type: "generated-matrix", motion: "none", alt: "Entimema Engineering publication cover for Detecting Silent Schema Changes Before They Break Risk Models.", stages: ["Source", "Schema", "Semantics", "Adapter", "Feature", "Model", "Decision", "Gate"] },
+  },
+  {
     technicalTitle: "Backpressure and Failure Recovery in Financial Event Pipelines",
     headline: "Backpressure and Failure Recovery in Financial Event Pipelines: Keeping Risk Decisions Correct When Real-Time Infrastructure Slows Down",
     headlineEmphasis: "Keeping Risk Decisions Correct When Real-Time Infrastructure Slows Down",
