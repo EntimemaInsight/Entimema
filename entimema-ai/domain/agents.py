@@ -18,6 +18,29 @@ class AgentResultStatus(StrEnum):
     FAILED_VALIDATION = "FAILED_VALIDATION"
 
 
+class ConclusionType(StrEnum):
+    CALCULATION = "CALCULATION"
+    EVIDENCE_SYNTHESIS = "EVIDENCE_SYNTHESIS"
+    DIAGNOSTIC_INFERENCE = "DIAGNOSTIC_INFERENCE"
+    DATA_GAP = "DATA_GAP"
+    RECONCILIATION_FINDING = "RECONCILIATION_FINDING"
+
+
+class AgentConclusionRecord(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    id: str = Field(min_length=1)
+    proposition: str = Field(min_length=1)
+    conclusion_type: ConclusionType
+    evidence_ids: list[str] = Field(default_factory=list)
+    calculation_ids: list[str] = Field(default_factory=list)
+    inference_ids: list[str] = Field(default_factory=list)
+    assumption_ids: list[str] = Field(default_factory=list)
+    uncertainty: str = Field(min_length=1)
+    causal_level: str | None = None
+    trigger: str = ""
+
+
 class AgentDefinition(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
@@ -66,3 +89,4 @@ class AgentResult(BaseModel):
     unresolved_unknowns: list[str]
     limitations: list[str]
     status: AgentResultStatus
+    conclusion_records: list[AgentConclusionRecord] = Field(default_factory=list)

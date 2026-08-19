@@ -5,6 +5,9 @@ from pydantic import BaseModel, ConfigDict
 
 from concierge.repair import RepairStatus
 from concierge.routing_gate import evaluate_routing_readiness
+from core.exceptions import ForbiddenInferenceError
+from core.guardrails import validate_candidate_inference
+from domain.agents import AgentResult, AgentResultStatus, AgentTask
 from domain.contradictions import ContradictionType
 from domain.enums import EpistemicVerdict, Materiality
 from domain.problem_state import ProblemState
@@ -18,7 +21,6 @@ from epistemic.inference_validation import (
 )
 from epistemic.provenance import assess_provenance
 from epistemic.requests import (
-    AgentResultContract,
     EpistemicValidationRequest,
     SynthesisContract,
     ValidationStage,
@@ -55,7 +57,14 @@ class EpistemicController:
         if request.validation_stage is ValidationStage.POST_AGENT:
             if request.agent_result is None:
                 raise ValueError("POST_AGENT requires an AgentResultContract")
-            return self.validate_agent_result(request.agent_result)
+            if request.agent_result.agent_result is None or request.agent_result.agent_task is None:
+                raise ValueError("POST_AGENT requires a typed agent result and task")
+            return self.validate_agent_result(
+                request.agent_result.agent_result,
+                request.problem_state,
+                request.agent_result.agent_task,
+                request.agent_result.calculations,
+            )
         if request.synthesis is None:
             raise ValueError(f"{request.validation_stage} requires a SynthesisContract")
         return self.validate_synthesis(request.synthesis, request.validation_stage)
@@ -275,11 +284,104 @@ class EpistemicController:
         return assess_inference(inference, state).forbidden_inference
 
     @staticmethod
-    def validate_agent_result(agent_result: AgentResultContract) -> DeferredValidationResult:
-        return DeferredValidationResult(
-            stage=ValidationStage.POST_AGENT,
-            object_id=agent_result.id,
-            reason="Typed hook only; agent execution and post-agent validation are deferred",
+    def validate_agent_result(
+        agent_result: AgentResult,
+        state: ProblemState,
+        task: AgentTask,
+        calculations: list[object] | None = None,
+    ) -> EpistemicValidationResult:
+        evidence_ids = {item.id for item in state.evidence}
+        assumption_ids = {item.id for item in state.assumptions}
+        calculation_by_id = {item.id: item for item in calculations or []}
+        rejected = []
+        conditional = []
+        reasons = []
+        if agent_result.task_id != task.task_id or agent_result.agent_id != task.agent_id:
+            reasons.append(f"OUT_OF_SCOPE:{agent_result.task_id}")
+        if set(agent_result.assumptions_used) - assumption_ids:
+            reasons.append(f"TRACEABILITY_FAILURE:{agent_result.task_id}:ASSUMPTION")
+        unresolved_contradictions = {item.id for item in state.contradictions} - set(
+            agent_result.contradictions_found
+        )
+        if unresolved_contradictions:
+            conditional.extend(sorted(unresolved_contradictions))
+            reasons.extend(
+                f"UNRESOLVED_CONTRADICTION:{item}" for item in sorted(unresolved_contradictions)
+            )
+        for conclusion in agent_result.conclusion_records:
+            missing_evidence = set(conclusion.evidence_ids) - evidence_ids
+            missing_assumptions = set(conclusion.assumption_ids) - assumption_ids
+            missing_calculations = set(conclusion.calculation_ids) - set(calculation_by_id)
+            if missing_evidence or missing_assumptions or missing_calculations:
+                rejected.append(conclusion.id)
+                reasons.append(f"TRACEABILITY_FAILURE:{conclusion.id}")
+                continue
+            try:
+                validate_candidate_inference(conclusion.trigger, conclusion.proposition)
+            except ForbiddenInferenceError:
+                rejected.append(conclusion.id)
+                reasons.append(f"FORBIDDEN_INFERENCE:{conclusion.id}")
+                continue
+            proposition = conclusion.proposition.casefold()
+            if agent_result.agent_id.startswith("FIN_") and (
+                "probability of default" in proposition or " pd " in f" {proposition} "
+            ):
+                rejected.append(conclusion.id)
+                reasons.append(f"OUT_OF_SCOPE:{conclusion.id}")
+            elif agent_result.agent_id.startswith("ENG_") and (
+                "profitability recommendation" in proposition or "increase margin" in proposition
+            ):
+                rejected.append(conclusion.id)
+                reasons.append(f"OUT_OF_SCOPE:{conclusion.id}")
+            elif conclusion.assumption_ids or conclusion.uncertainty != "low":
+                conditional.append(conclusion.id)
+        for calculation in calculations or []:
+            if set(calculation.input_ids) - evidence_ids:
+                reasons.append(f"TRACEABILITY_FAILURE:{calculation.id}")
+        validated = [
+            item.id
+            for item in agent_result.conclusion_records
+            if item.id not in rejected and item.id not in conditional
+        ]
+        if any(item.startswith("FORBIDDEN_INFERENCE") for item in reasons):
+            verdict = EpistemicVerdict.FORBIDDEN_INFERENCE
+            action = RequiredNextAction.REMOVE_FORBIDDEN_INFERENCE
+        elif any(item.startswith("TRACEABILITY_FAILURE") for item in reasons):
+            verdict = EpistemicVerdict.TRACEABILITY_FAILURE
+            action = RequiredNextAction.RECALCULATE
+        elif any(item.startswith("OUT_OF_SCOPE") for item in reasons):
+            verdict = EpistemicVerdict.OUT_OF_SCOPE
+            action = RequiredNextAction.REVALIDATE_MODEL
+        elif agent_result.status in {
+            AgentResultStatus.INSUFFICIENT_INPUT,
+            AgentResultStatus.FAILED_VALIDATION,
+        }:
+            verdict = EpistemicVerdict.INSUFFICIENT_EVIDENCE
+            action = RequiredNextAction.REQUEST_EVIDENCE
+        elif conditional or agent_result.status is AgentResultStatus.CONDITIONAL:
+            verdict = EpistemicVerdict.CONDITIONALLY_VALID
+            action = RequiredNextAction.PROCEED
+        else:
+            verdict = EpistemicVerdict.VALIDATED
+            action = RequiredNextAction.PROCEED
+        return EpistemicValidationResult(
+            verdict=verdict,
+            validated_object_ids=validated,
+            rejected_object_ids=sorted(set(rejected)),
+            unresolved_object_ids=sorted(set(conditional)),
+            traceability_status=(
+                TraceabilityStatus.INCOMPLETE
+                if any(item.startswith("TRACEABILITY_FAILURE") for item in reasons)
+                else TraceabilityStatus.COMPLETE
+            ),
+            blocking_reasons=reasons,
+            required_next_action=action,
+            audit_records=EpistemicController._audits(
+                state.problem_id,
+                verdict,
+                reasons,
+                [item.id for item in agent_result.conclusion_records],
+            ),
         )
 
     @staticmethod

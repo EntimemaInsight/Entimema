@@ -3,8 +3,9 @@ from typing import Any
 
 from pydantic import BaseModel, ConfigDict, Field
 
+from domain.agents import AgentResult, AgentTask
 from domain.problem_state import ProblemState
-from epistemic.inference_validation import InferenceRecord
+from epistemic.inference_validation import CalculationRecord, InferenceRecord
 
 
 class ValidationStage(StrEnum):
@@ -20,6 +21,9 @@ class AgentResultContract(BaseModel):
     inference_ids: list[str] = Field(default_factory=list)
     calculation_ids: list[str] = Field(default_factory=list)
     payload: Any | None = None
+    agent_result: AgentResult | None = None
+    agent_task: AgentTask | None = None
+    calculations: list[CalculationRecord] = Field(default_factory=list)
 
 
 class SynthesisContract(BaseModel):

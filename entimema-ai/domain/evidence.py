@@ -22,6 +22,12 @@ class EvidenceRecord(BaseModel):
     scope: str | None = None
     unit: str | None = None
     definition: str | None = None
+    concept: str | None = None
+    numeric_value: float | None = None
+    canonical_key: str | None = None
+    period_label: str | None = None
+    indicator_direction: str | None = None
+    indicator_severity: str | None = None
 
     @model_validator(mode="after")
     def validate_period(self) -> "EvidenceRecord":

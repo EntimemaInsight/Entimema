@@ -18,8 +18,8 @@ epistemic status remain explicit.
 
 ## Current Sprint Scope
 
-This sprint implements the typed cognitive domain foundation only. It does not yet implement AI
-execution, persistence, RAG, orchestration runtime, or UI.
+The runtime now includes typed cognitive foundations, deterministic orchestration, and the first
+three executable domain agents. It does not implement LLM execution, persistence, RAG, or UI.
 
 ## Development
 
@@ -32,8 +32,8 @@ python -m venv .venv
 .venv/Scripts/python -m ruff check .
 ```
 
-The `app/main.py` module exposes only a typed `ProblemState` constructor. No server or agent
-execution framework is included in this sprint.
+The `app/main.py` module exposes a typed `ProblemState` constructor; domain execution remains a
+library runtime rather than a server or UI.
 
 ## Sprint 2 — Concierge State Machine
 
@@ -75,3 +75,18 @@ related terms as synonyms. `NO_ADMISSIBLE_AGENT` is a valid, structured outcome.
 
 Agent tasks are plans only. Specialist agents, analytics, autonomous actions, and result
 reconciliation do not execute in this sprint.
+
+## Sprint 6 — Domain Agent Execution v1
+
+Three registry-backed specialists now execute deterministic typed tasks: Finance Working
+Capital/Liquidity, Credit Risk Diagnostic, and Engineering Reconciliation. Finance calculations
+use explicit `CalculationRecord` provenance, credit diagnostics preserve separate observable
+dimensions without inventing PD or aggregate scores, and reconciliation uses exact canonical
+keys with explicit mismatch records.
+
+The execution controller resolves typed references, enforces the Module B pre-routing gate,
+dispatches only the three executable agents, respects orchestration DAG dependencies, and submits
+every atomic result to active post-agent validation. Raw conversation is not an agent input.
+
+This boundary is `VALIDATED_AGENT_RESULT`. There is still no LLM execution, PD/ECL model, RAG,
+persistence, UI, autonomous consequential action, or final multi-agent synthesis.
