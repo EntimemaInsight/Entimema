@@ -120,6 +120,26 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    technicalTitle: "Collections Prioritisation: Why the Highest-Risk Customer Is Not Always the Account You Should Contact First",
+    headline: "Collections Prioritisation: Why the Highest-Risk Customer Is Not Always the Account You Should Contact First",
+    headlineEmphasis: "Not Always the Account You Should Contact First",
+    slug: "collections-prioritisation-intervention-value",
+    slogan: "Rank delinquent accounts by changeable economic outcome—not risk alone—using exposure, natural cure, recoverability, contactability, treatment effect, cost and capacity.",
+    sloganEmphasis: "changeable economic outcome",
+    author: authors.aleksandar, publishedAt: "2026-08-19", updatedAt: "2026-08-19", readingMinutes: 59,
+    topic: "credit-risk", stream: "insights", featured: true,
+    seoTitle: "Collections Prioritisation & Intervention Value | Entimema",
+    metaDescription: "Build debt collections prioritisation around risk, exposure, cure, recoverability, contactability, treatment uplift, cost and operational capacity.",
+    canonicalPath: "/resources/collections-prioritisation-intervention-value",
+    openGraphTitle: "Collections Prioritisation: Risk Is Not Priority",
+    openGraphDescription: "A practitioner framework for capacity-aware collections queues ranked by expected incremental intervention value rather than PD or DPD alone.",
+    openGraphImage: "/resources/covers/collections-prioritisation.png",
+    relatedCapability: { label: "Decision Automation", href: "/services/decision-automation", description: "Build explainable, capacity-aware collections queues, approved treatment routing and recurring outcome monitoring." },
+    relatedResourceSlugs: ["consumer-credit-early-warning-systems", "behavioural-credit-scoring-post-origination-risk", "roll-rate-analysis-migration-matrices", "credit-vintage-analysis", "ifrs-9-lgd-recovery-cash-flows", "decision-engine-monitoring-strategy-drift", "champion-challenger-credit-strategy-testing"],
+    status: "published", indexable: true,
+    cover: { type: "editorial-artwork", src: "/resources/covers/collections-prioritisation.png", motion: "none", alt: "Entimema Insights cover showing scarce copper intervention paths bypassing the most visibly damaged structure and reaching glass-and-steel accounts whose outcomes remain recoverable.", stages: ["Risk", "Exposure", "Natural Cure", "Recoverability", "Contactability", "Treatment", "Intervention Value", "Priority", "Action", "Outcome", "Learning"] },
+  },
+  {
     technicalTitle: "Behavioural Credit Scoring: How Account Behaviour Changes Risk After Origination",
     headline: "Behavioural Credit Scoring: How Account Behaviour Changes Risk After Origination",
     headlineEmphasis: "Changes Risk After Origination",
