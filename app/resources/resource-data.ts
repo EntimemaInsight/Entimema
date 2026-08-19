@@ -120,6 +120,25 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    technicalTitle: "From Batch ETL to Event-Driven Credit Risk Architecture",
+    headline: "From Batch ETL to Event-Driven Credit Risk Architecture: Designing the Path from Financial Events to Real-Time Decisions",
+    headlineEmphasis: "Designing the Path from Financial Events to Real-Time Decisions",
+    slug: "batch-etl-event-driven-credit-risk-architecture",
+    slogan: "Choose batch, micro-batch, event-driven or on-demand processing from decision latency, then connect canonical events to state, features, actions and reconciliation.",
+    sloganEmphasis: "from decision latency",
+    author: authors.aleksandar, publishedAt: "2026-08-19", updatedAt: "2026-08-19", readingMinutes: 48,
+    topic: "financial-data-and-erp", stream: "engineering", featured: true,
+    seoTitle: "Event-Driven Credit Risk Architecture: Batch, CDC & Streaming | Entimema",
+    metaDescription: "Design event-driven lending architecture with CDC, canonical events, state projections, feature updates, triggers, replay, reconciliation and migration controls.",
+    canonicalPath: "/resources/batch-etl-event-driven-credit-risk-architecture",
+    openGraphTitle: "From Batch ETL to Event-Driven Credit Risk Architecture",
+    openGraphDescription: "An engineering framework for selecting batch, micro-batch and streaming modes and connecting financial events to timely, controlled credit decisions.",
+    relatedCapability: { label: "Decision Automation", href: "/services/decision-automation", description: "Connect material financial events to freshness-aware decisions, isolated actions and auditable outcomes." },
+    relatedResourceSlugs: ["point-in-time-correct-features-credit-models", "credit-risk-feature-store-respects-time", "point-in-time-customer-state-reconstruction", "event-time-processing-time-posting-time-credit-systems", "idempotency-payment-credit-event-processing"],
+    status: "published", indexable: true,
+    cover: { type: "generated-matrix", motion: "none", alt: "Entimema Engineering publication cover for From Batch ETL to Event-Driven Credit Risk Architecture.", stages: ["Source Change", "Ingestion", "Canonical Event", "State", "Features", "Decision", "Action", "Replay"] },
+  },
+  {
     technicalTitle: "Point-in-Time Correct Features for Credit Models",
     headline: "Point-in-Time Correct Features for Credit Models: Preventing Leakage Before It Reaches the Model",
     headlineEmphasis: "Preventing Leakage Before It Reaches the Model",
