@@ -58,6 +58,7 @@ import TemporalFinancialStateArticle, { temporalFinancialStateSections } from ".
 import IdempotentFinancialEventsArticle, { idempotentFinancialEventsSections } from "../IdempotentFinancialEventsArticle";
 import AccountStateReconstructionArticle, { accountStateReconstructionSections } from "../AccountStateReconstructionArticle";
 import LateEventRestatementArticle, { lateEventRestatementSections } from "../LateEventRestatementArticle";
+import ReversalCorrectionArticle, { reversalCorrectionSections } from "../ReversalCorrectionArticle";
 import { getPublishedResource, getTopic, publishedResources, resourceStreams } from "../resource-data";
 import { FOUNDER_ID, ORGANIZATION_ID, SITE_URL, WEBSITE_ID, createBreadcrumbSchema, serializeJsonLd } from "@/lib/structured-data";
 
@@ -199,6 +200,18 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
   const isIdempotentFinancialEvents = resource.slug === "idempotency-payment-credit-event-processing";
   const isAccountStateReconstruction = resource.slug === "reconstructing-account-state-financial-events";
   const isLateEventRestatement = resource.slug === "late-arriving-events-backdated-corrections";
+  const isReversalCorrection = resource.slug === "reversals-chargebacks-corrections-risk-state";
+
+  if (isReversalCorrection) {
+    return (
+      <>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(articleSchema) }} />
+        <ResourceArticle resource={resource} sections={[...reversalCorrectionSections]}>
+          <ReversalCorrectionArticle />
+        </ResourceArticle>
+      </>
+    );
+  }
 
   if (isLateEventRestatement) {
     return (

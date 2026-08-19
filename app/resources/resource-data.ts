@@ -120,6 +120,25 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    technicalTitle: "Reversals, Chargebacks and Corrections Without Corrupting Risk State",
+    headline: "Reversals, Chargebacks and Corrections Without Corrupting Risk State",
+    headlineEmphasis: "Without Corrupting Risk State",
+    slug: "reversals-chargebacks-corrections-risk-state",
+    slogan: "Undo economic effects through causally linked compensation while preserving original events, realised allocation, delinquency history and downstream decision evidence.",
+    sloganEmphasis: "causally linked compensation",
+    author: authors.aleksandar, publishedAt: "2026-08-19", updatedAt: "2026-08-19", readingMinutes: 40,
+    topic: "financial-data-and-erp", stream: "engineering", featured: true,
+    seoTitle: "Payment Reversals, Chargebacks & Risk State | Entimema",
+    metaDescription: "Engineer payment reversals and chargebacks with immutable causal events, allocation restoration, DPD recalculation, replay and reconciliation.",
+    canonicalPath: "/resources/reversals-chargebacks-corrections-risk-state",
+    openGraphTitle: "Reversals, Chargebacks and Corrections Without Corrupting Risk State",
+    openGraphDescription: "An engineering architecture for compensation events, partial reversals, causal chains, cure reopening, recovery impact and accounting reconciliation.",
+    relatedCapability: { label: "Decision Automation", href: "/services/decision-automation", description: "Build compensation-aware workflows that recalculate current risk state while retaining immutable action and decision lineage." },
+    relatedResourceSlugs: ["late-arriving-events-backdated-corrections", "reconstructing-account-state-financial-events", "idempotency-payment-credit-event-processing", "event-time-processing-time-posting-time-credit-systems"],
+    status: "published", indexable: true,
+    cover: { type: "generated-matrix", motion: "none", alt: "Entimema Engineering publication cover for Reversals, Chargebacks and Corrections Without Corrupting Risk State.", stages: ["Original Event", "Allocation", "Reversal", "Causal Link", "Compensation", "Risk State", "Reconciliation"] },
+  },
+  {
     technicalTitle: "Late-Arriving Events and Backdated Corrections",
     headline: "Late-Arriving Events and Backdated Corrections: How to Repair Financial State Without Rewriting History",
     headlineEmphasis: "Repair Financial State Without Rewriting History",
