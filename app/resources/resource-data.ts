@@ -120,6 +120,26 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    technicalTitle: "The Single Customer View Is Usually a Fiction: Why Lending Decisions Fail When Identity, Exposure and Behaviour Live in Different Systems",
+    headline: "The Single Customer View Is Usually a Fiction: Why Lending Decisions Fail When Identity, Exposure and Behaviour Live in Different Systems",
+    headlineEmphasis: "The Single Customer View Is Usually a Fiction",
+    slug: "single-customer-view-is-usually-a-fiction",
+    slogan: "Resolve one economic borrower across identities, parties, facilities, exposures and behaviour—then reconstruct the governed customer state required at decision time.",
+    sloganEmphasis: "one economic borrower",
+    author: authors.aleksandar, publishedAt: "2026-08-19", updatedAt: "2026-08-19", readingMinutes: 52,
+    topic: "financial-architecture", stream: "insights", featured: true,
+    seoTitle: "Single Customer View in Banking & Credit Risk | Entimema",
+    metaDescription: "Build a reliable lending customer view through entity resolution, party and facility relationships, exposure aggregation and point-in-time customer state.",
+    canonicalPath: "/resources/single-customer-view-is-usually-a-fiction",
+    openGraphTitle: "The Single Customer View Is Usually a Fiction",
+    openGraphDescription: "A practitioner architecture for customer identity resolution, relationship mapping, exposure integrity and decision-ready point-in-time customer state.",
+    openGraphImage: "/resources/covers/single-customer-view-fiction.png",
+    relatedCapability: { label: "Decision Automation", href: "/services/decision-automation", description: "Build identity-aware workflows, cross-product decision orchestration and governed customer-state reconstruction." },
+    relatedResourceSlugs: ["payment-is-not-the-balance", "hidden-infrastructure-debt-modern-lending", "credit-decision-engine-architecture", "affordability-decisioning-ability-to-pay", "credit-limit-assignment-exposure-strategy", "behavioural-credit-scoring-post-origination-risk", "collections-prioritisation-intervention-value", "ifrs-9-ead-credit-conversion-factors"],
+    status: "published", indexable: true,
+    cover: { type: "editorial-artwork", src: "/resources/covers/single-customer-view-fiction.png", motion: "none", alt: "Entimema Insights cover showing fragmented slices of one steel-and-glass economic entity aligned through translucent institutional layers into a coherent customer state.", stages: ["Source Identity", "Entity Resolution", "Canonical Party", "Relationship", "Facility", "Account", "Exposure", "Behaviour", "Customer State", "Decision"] },
+  },
+  {
     technicalTitle: "The Payment Is Not the Balance: Why Financial Institutions Keep Confusing Transactions, Accounting States and Credit-Risk Reality",
     headline: "The Payment Is Not the Balance: Why Financial Institutions Keep Confusing Transactions, Accounting States and Credit-Risk Reality",
     headlineEmphasis: "The Payment Is Not the Balance",
