@@ -120,6 +120,25 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    technicalTitle: "Reconstructing Account State from Financial Events",
+    headline: "Reconstructing Account State from Financial Events: From Event Streams to Balances, Exposure and Delinquency",
+    headlineEmphasis: "From Event Streams to Balances, Exposure and Delinquency",
+    slug: "reconstructing-account-state-financial-events",
+    slogan: "Turn ordered canonical events into explainable monetary, exposure and delinquency state through deterministic reducers, versioned allocation and verified replay.",
+    sloganEmphasis: "deterministic reducers, versioned allocation and verified replay",
+    author: authors.aleksandar, publishedAt: "2026-08-19", updatedAt: "2026-08-19", readingMinutes: 42,
+    topic: "financial-data-and-erp", stream: "engineering", featured: true,
+    seoTitle: "Reconstructing Loan Account State from Events | Entimema",
+    metaDescription: "Build a deterministic lending state engine for balances, exposure and delinquency using reducers, payment allocation, snapshots, replay and invariants.",
+    canonicalPath: "/resources/reconstructing-account-state-financial-events",
+    openGraphTitle: "Reconstructing Account State from Financial Events",
+    openGraphDescription: "An engineering architecture for deterministic loan balances, exposure, delinquency, snapshots, replay, invariants and reconciliation.",
+    relatedCapability: { label: "Decision Automation", href: "/services/decision-automation", description: "Build governed financial-state projections that supply explainable, point-in-time inputs to lending decisions." },
+    relatedResourceSlugs: ["idempotency-payment-credit-event-processing", "event-time-processing-time-posting-time-credit-systems", "credit-decision-engine-architecture", "credit-portfolio-monitoring-architecture"],
+    status: "published", indexable: true,
+    cover: { type: "generated-matrix", motion: "none", alt: "Entimema Engineering publication cover for Reconstructing Account State from Financial Events.", stages: ["Event Stream", "Aggregate", "Reducer", "Allocation", "Balance", "Exposure", "Delinquency", "Snapshot", "Replay"] },
+  },
+  {
     technicalTitle: "Idempotency in Payment and Credit Event Processing",
     headline: "Idempotency in Payment and Credit Event Processing: How to Prevent Duplicate Financial Events from Corrupting Lending State",
     headlineEmphasis: "Prevent Duplicate Financial Events from Corrupting Lending State",

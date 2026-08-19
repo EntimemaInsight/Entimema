@@ -56,6 +56,7 @@ import Ifrs9MacroeconomicScenariosArticle, { ifrs9MacroeconomicScenariosSections
 import Ifrs9EclValidationArticle, { ifrs9EclValidationSections } from "../Ifrs9EclValidationArticle";
 import TemporalFinancialStateArticle, { temporalFinancialStateSections } from "../TemporalFinancialStateArticle";
 import IdempotentFinancialEventsArticle, { idempotentFinancialEventsSections } from "../IdempotentFinancialEventsArticle";
+import AccountStateReconstructionArticle, { accountStateReconstructionSections } from "../AccountStateReconstructionArticle";
 import { getPublishedResource, getTopic, publishedResources, resourceStreams } from "../resource-data";
 import { FOUNDER_ID, ORGANIZATION_ID, SITE_URL, WEBSITE_ID, createBreadcrumbSchema, serializeJsonLd } from "@/lib/structured-data";
 
@@ -195,6 +196,18 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
   const isIfrs9EclValidation = resource.slug === "ifrs-9-ecl-validation-backtesting";
   const isTemporalFinancialState = resource.slug === "event-time-processing-time-posting-time-credit-systems";
   const isIdempotentFinancialEvents = resource.slug === "idempotency-payment-credit-event-processing";
+  const isAccountStateReconstruction = resource.slug === "reconstructing-account-state-financial-events";
+
+  if (isAccountStateReconstruction) {
+    return (
+      <>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(articleSchema) }} />
+        <ResourceArticle resource={resource} sections={[...accountStateReconstructionSections]}>
+          <AccountStateReconstructionArticle />
+        </ResourceArticle>
+      </>
+    );
+  }
 
   if (isIdempotentFinancialEvents) {
     return (
