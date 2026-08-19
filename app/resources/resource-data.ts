@@ -120,6 +120,26 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    technicalTitle: "Early Warning Systems for Consumer Credit: From Deterioration Signals to Prioritised Intervention",
+    headline: "Early Warning Systems for Consumer Credit: From Deterioration Signals to Prioritised Intervention",
+    headlineEmphasis: "Prioritised Intervention",
+    slug: "consumer-credit-early-warning-systems",
+    slogan: "Convert noisy behavioural change into corroborated deterioration evidence, exposure-aware priority, proportional intervention and measurable portfolio learning.",
+    sloganEmphasis: "exposure-aware priority",
+    author: authors.aleksandar, publishedAt: "2026-08-19", updatedAt: "2026-08-19", readingMinutes: 58,
+    topic: "credit-risk", stream: "insights", featured: true,
+    seoTitle: "Consumer Credit Early Warning Systems | Entimema",
+    metaDescription: "Build consumer credit early warning systems using behavioural signals, trajectory, corroboration, exposure, intervention value and alert outcomes.",
+    canonicalPath: "/resources/consumer-credit-early-warning-systems",
+    openGraphTitle: "Consumer Credit Early Warning: From Signals to Intervention",
+    openGraphDescription: "A flagship practitioner architecture for deterioration confirmation, account priority, proportional action and portfolio feedback.",
+    openGraphImage: "/resources/covers/consumer-credit-early-warning-systems.png",
+    relatedCapability: { label: "Decision Automation", href: "/services/decision-automation", description: "Build continuous warning surveillance, explainable prioritisation, intervention queues and outcome feedback pipelines." },
+    relatedResourceSlugs: ["decision-engine-monitoring-strategy-drift", "early-warning-indicators-credit-risk", "credit-vintage-analysis", "roll-rate-analysis-migration-matrices", "pd-model-monitoring", "significant-increase-credit-risk-ifrs-9-stage-2", "ifrs-9-expected-credit-loss-architecture", "credit-risk-model-validation", "champion-challenger-credit-strategy-testing"],
+    status: "published", indexable: true,
+    cover: { type: "editorial-artwork", src: "/resources/covers/consumer-credit-early-warning-systems.png", motion: "none", alt: "Entimema Insights cover showing an intact laminated glass-and-steel credit structure developing subtle internal compression and corroborating nearby tension before visible failure.", stages: ["Behaviour", "Signals", "Confirmation", "Velocity", "Exposure", "Intervention Value", "Priority", "Action", "Outcome", "Feedback"] },
+  },
+  {
     technicalTitle: "Decision Engine Monitoring: How to Detect When Lending Strategy Is Drifting Even If the Code Has Not Changed",
     headline: "Decision Engine Monitoring: How to Detect When Lending Strategy Is Drifting Even If the Code Has Not Changed",
     headlineEmphasis: "Even If the Code Has Not Changed",
