@@ -8,7 +8,7 @@ from domain.assumptions import AssumptionRecord
 from domain.claims import ClaimRecord
 from domain.contradictions import ContradictionRecord
 from domain.conversation import ConversationState
-from domain.enums import EpistemicVerdict
+from domain.enums import DecisionReadiness, EpistemicVerdict, WorkspacePhase
 from domain.evidence import EvidenceRecord
 from domain.hypotheses import HypothesisRecord
 from domain.transitions import StateTransition
@@ -50,6 +50,9 @@ class ProblemState(BaseModel):
     next_best_question: str | None = None
     routing_ready: bool = False
     epistemic_verdict: EpistemicVerdict | None = None
+    workspace_phase: WorkspacePhase = WorkspacePhase.INTAKE
+    decision_readiness: DecisionReadiness = DecisionReadiness.BLOCKED
+    blockers: list[str] = Field(default_factory=list)
     created_at: datetime = Field(default_factory=utc_now)
     updated_at: datetime = Field(default_factory=utc_now)
 

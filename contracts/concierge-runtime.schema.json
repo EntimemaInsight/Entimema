@@ -1,0 +1,1953 @@
+{
+  "ApplyInterpretedTurn": {
+    "$defs": {
+      "AssumptionRecord": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "minLength": 1,
+            "title": "Id",
+            "type": "string"
+          },
+          "materiality": {
+            "$ref": "#/$defs/Materiality"
+          },
+          "proposition": {
+            "minLength": 1,
+            "title": "Proposition",
+            "type": "string"
+          },
+          "reason": {
+            "minLength": 1,
+            "title": "Reason",
+            "type": "string"
+          },
+          "scenario_only": {
+            "default": false,
+            "title": "Scenario Only",
+            "type": "boolean"
+          },
+          "source": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Source"
+          },
+          "validation_required": {
+            "title": "Validation Required",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "proposition",
+          "reason",
+          "materiality",
+          "validation_required"
+        ],
+        "title": "AssumptionRecord",
+        "type": "object"
+      },
+      "CandidateOperationalProblem": {
+        "additionalProperties": false,
+        "properties": {
+          "contradiction_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Contradiction Ids",
+            "type": "array"
+          },
+          "decision": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Decision"
+          },
+          "decision_relevance": {
+            "$ref": "#/$defs/FitLevel",
+            "default": 2
+          },
+          "domain_candidates": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Domain Candidates",
+            "type": "array"
+          },
+          "evidence_fit": {
+            "$ref": "#/$defs/FitLevel",
+            "default": 2
+          },
+          "formulation": {
+            "minLength": 1,
+            "title": "Formulation",
+            "type": "string"
+          },
+          "goal": {
+            "$ref": "#/$defs/GoalType"
+          },
+          "goal_fit": {
+            "$ref": "#/$defs/FitLevel",
+            "default": 2
+          },
+          "granularity": {
+            "$ref": "#/$defs/ProblemGranularity",
+            "default": "UNKNOWN"
+          },
+          "horizon": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Horizon"
+          },
+          "id": {
+            "minLength": 1,
+            "title": "Id",
+            "type": "string"
+          },
+          "material_contradiction_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Material Contradiction Ids",
+            "type": "array"
+          },
+          "object": {
+            "$ref": "#/$defs/ProblemObject"
+          },
+          "required_assumption_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Required Assumption Ids",
+            "type": "array"
+          },
+          "requires_user_confirmation": {
+            "default": false,
+            "title": "Requires User Confirmation",
+            "type": "boolean"
+          },
+          "scope": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Scope"
+          },
+          "source": {
+            "minLength": 1,
+            "title": "Source",
+            "type": "string"
+          },
+          "supporting_evidence_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Supporting Evidence Ids",
+            "type": "array"
+          },
+          "unresolved_unknown_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Unresolved Unknown Ids",
+            "type": "array"
+          }
+        },
+        "required": [
+          "id",
+          "formulation",
+          "object",
+          "goal",
+          "source"
+        ],
+        "title": "CandidateOperationalProblem",
+        "type": "object"
+      },
+      "ClaimRecord": {
+        "additionalProperties": false,
+        "properties": {
+          "evidence_links": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Evidence Links",
+            "type": "array"
+          },
+          "id": {
+            "minLength": 1,
+            "title": "Id",
+            "type": "string"
+          },
+          "proposition": {
+            "minLength": 1,
+            "title": "Proposition",
+            "type": "string"
+          },
+          "scope": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Scope"
+          },
+          "source": {
+            "minLength": 1,
+            "title": "Source",
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/$defs/ClaimStatus",
+            "default": "REPORTED"
+          },
+          "timestamp": {
+            "format": "date-time",
+            "title": "Timestamp",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "proposition",
+          "source",
+          "timestamp"
+        ],
+        "title": "ClaimRecord",
+        "type": "object"
+      },
+      "ClaimStatus": {
+        "enum": [
+          "REPORTED",
+          "SUPPORTED",
+          "PARTIALLY_SUPPORTED",
+          "CONTRADICTED"
+        ],
+        "title": "ClaimStatus",
+        "type": "string"
+      },
+      "FitLevel": {
+        "enum": [
+          1,
+          2,
+          3
+        ],
+        "title": "FitLevel",
+        "type": "integer"
+      },
+      "GoalType": {
+        "enum": [
+          "DIAGNOSE",
+          "EXPLAIN",
+          "FORECAST",
+          "DECIDE",
+          "MONITOR",
+          "COMPARE",
+          "VALIDATE",
+          "AUTOMATE",
+          "RECONCILE",
+          "UNKNOWN"
+        ],
+        "title": "GoalType",
+        "type": "string"
+      },
+      "HypothesisRecord": {
+        "additionalProperties": false,
+        "properties": {
+          "contradicting_evidence_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Contradicting Evidence Ids",
+            "type": "array"
+          },
+          "falsification_condition": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Falsification Condition"
+          },
+          "forbidden_inference": {
+            "default": false,
+            "title": "Forbidden Inference",
+            "type": "boolean"
+          },
+          "id": {
+            "minLength": 1,
+            "title": "Id",
+            "type": "string"
+          },
+          "observable_implications": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Observable Implications",
+            "type": "array"
+          },
+          "proposition": {
+            "minLength": 1,
+            "title": "Proposition",
+            "type": "string"
+          },
+          "source": {
+            "minLength": 1,
+            "title": "Source",
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/$defs/HypothesisStatus",
+            "default": "ACTIVE"
+          },
+          "supporting_evidence_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Supporting Evidence Ids",
+            "type": "array"
+          },
+          "testable": {
+            "default": true,
+            "title": "Testable",
+            "type": "boolean"
+          },
+          "unresolved_unknown_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Unresolved Unknown Ids",
+            "type": "array"
+          }
+        },
+        "required": [
+          "id",
+          "proposition",
+          "source"
+        ],
+        "title": "HypothesisRecord",
+        "type": "object"
+      },
+      "HypothesisStatus": {
+        "enum": [
+          "ACTIVE",
+          "SUPPORTED",
+          "WEAKENED",
+          "CONTRADICTED",
+          "REJECTED",
+          "UNTESTABLE"
+        ],
+        "title": "HypothesisStatus",
+        "type": "string"
+      },
+      "Materiality": {
+        "enum": [
+          "LOW",
+          "MEDIUM",
+          "HIGH",
+          "CRITICAL"
+        ],
+        "title": "Materiality",
+        "type": "string"
+      },
+      "ProblemGranularity": {
+        "enum": [
+          "STRATEGIC",
+          "TACTICAL",
+          "OPERATIONAL",
+          "TRANSACTIONAL",
+          "UNKNOWN"
+        ],
+        "title": "ProblemGranularity",
+        "type": "string"
+      },
+      "ProblemObject": {
+        "additionalProperties": false,
+        "properties": {
+          "identifier": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Identifier"
+          },
+          "object_type": {
+            "$ref": "#/$defs/ProblemObjectType"
+          },
+          "source": {
+            "minLength": 1,
+            "title": "Source",
+            "type": "string"
+          }
+        },
+        "required": [
+          "object_type",
+          "source"
+        ],
+        "title": "ProblemObject",
+        "type": "object"
+      },
+      "ProblemObjectType": {
+        "enum": [
+          "ENTITY",
+          "PROCESS",
+          "TRANSACTION",
+          "PORTFOLIO",
+          "PRODUCT",
+          "MODEL",
+          "DECISION",
+          "RELATIONSHIP",
+          "WORKFLOW",
+          "SYSTEM",
+          "UNKNOWN"
+        ],
+        "title": "ProblemObjectType",
+        "type": "string"
+      },
+      "UnknownRecord": {
+        "additionalProperties": false,
+        "properties": {
+          "acquisition_cost": {
+            "anyOf": [
+              {
+                "minimum": 0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Acquisition Cost"
+          },
+          "blocks_routing": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Blocks Routing"
+          },
+          "hypotheses_affected": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Hypotheses Affected",
+            "type": "array"
+          },
+          "id": {
+            "minLength": 1,
+            "title": "Id",
+            "type": "string"
+          },
+          "materiality": {
+            "$ref": "#/$defs/Materiality"
+          },
+          "resolvable": {
+            "title": "Resolvable",
+            "type": "boolean"
+          },
+          "variable": {
+            "minLength": 1,
+            "title": "Variable",
+            "type": "string"
+          },
+          "why_needed": {
+            "minLength": 1,
+            "title": "Why Needed",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "variable",
+          "why_needed",
+          "materiality",
+          "resolvable"
+        ],
+        "title": "UnknownRecord",
+        "type": "object"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "assumptions": {
+        "items": {
+          "$ref": "#/$defs/AssumptionRecord"
+        },
+        "title": "Assumptions",
+        "type": "array"
+      },
+      "candidate_goal": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/GoalType"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "candidate_object": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/ProblemObject"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "claims": {
+        "items": {
+          "$ref": "#/$defs/ClaimRecord"
+        },
+        "title": "Claims",
+        "type": "array"
+      },
+      "command_id": {
+        "minLength": 1,
+        "title": "Command Id",
+        "type": "string"
+      },
+      "decision": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Decision"
+      },
+      "declared_problem": {
+        "title": "Declared Problem",
+        "type": "string"
+      },
+      "expected_version": {
+        "minimum": 0,
+        "title": "Expected Version",
+        "type": "integer"
+      },
+      "horizon": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Horizon"
+      },
+      "hypotheses": {
+        "items": {
+          "$ref": "#/$defs/HypothesisRecord"
+        },
+        "title": "Hypotheses",
+        "type": "array"
+      },
+      "operational_candidates": {
+        "items": {
+          "$ref": "#/$defs/CandidateOperationalProblem"
+        },
+        "title": "Operational Candidates",
+        "type": "array"
+      },
+      "requested_capabilities": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Requested Capabilities",
+        "type": "array"
+      },
+      "scope": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Scope"
+      },
+      "unknowns": {
+        "items": {
+          "$ref": "#/$defs/UnknownRecord"
+        },
+        "title": "Unknowns",
+        "type": "array"
+      },
+      "unresolved_references": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Unresolved References",
+        "type": "array"
+      }
+    },
+    "required": [
+      "command_id",
+      "expected_version",
+      "declared_problem"
+    ],
+    "title": "ApplyInterpretedTurn",
+    "type": "object"
+  },
+  "LiveMessageRequest": {
+    "additionalProperties": false,
+    "properties": {
+      "client_turn_id": {
+        "maxLength": 128,
+        "minLength": 1,
+        "title": "Client Turn Id",
+        "type": "string"
+      },
+      "message": {
+        "maxLength": 8000,
+        "minLength": 1,
+        "title": "Message",
+        "type": "string"
+      },
+      "selected_unknown_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Selected Unknown Id"
+      },
+      "session_context_version": {
+        "anyOf": [
+          {
+            "minimum": 0,
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Session Context Version"
+      }
+    },
+    "required": [
+      "message",
+      "client_turn_id"
+    ],
+    "title": "LiveMessageRequest",
+    "type": "object"
+  },
+  "LiveMessageResponse": {
+    "$defs": {
+      "ConversationTurnView": {
+        "additionalProperties": false,
+        "properties": {
+          "action_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Action Type"
+          },
+          "actor": {
+            "title": "Actor",
+            "type": "string"
+          },
+          "related_state_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Related State Ids",
+            "type": "array"
+          },
+          "status": {
+            "default": "ACCEPTED",
+            "title": "Status",
+            "type": "string"
+          },
+          "text": {
+            "title": "Text",
+            "type": "string"
+          },
+          "timestamp": {
+            "format": "date-time",
+            "title": "Timestamp",
+            "type": "string"
+          },
+          "turn_id": {
+            "title": "Turn Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "turn_id",
+          "actor",
+          "text",
+          "timestamp"
+        ],
+        "title": "ConversationTurnView",
+        "type": "object"
+      },
+      "RuntimeErrorView": {
+        "properties": {
+          "code": {
+            "title": "Code",
+            "type": "string"
+          },
+          "message": {
+            "title": "Message",
+            "type": "string"
+          },
+          "retryable": {
+            "default": false,
+            "title": "Retryable",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "code",
+          "message"
+        ],
+        "title": "RuntimeErrorView",
+        "type": "object"
+      }
+    },
+    "properties": {
+      "accepted_turn_id": {
+        "title": "Accepted Turn Id",
+        "type": "string"
+      },
+      "assistant_message": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Assistant Message"
+      },
+      "conversation": {
+        "items": {
+          "$ref": "#/$defs/ConversationTurnView"
+        },
+        "title": "Conversation",
+        "type": "array"
+      },
+      "decision_readiness": {
+        "title": "Decision Readiness",
+        "type": "string"
+      },
+      "dialogue_state": {
+        "title": "Dialogue State",
+        "type": "string"
+      },
+      "epistemic_verdict": {
+        "title": "Epistemic Verdict",
+        "type": "string"
+      },
+      "errors": {
+        "items": {
+          "$ref": "#/$defs/RuntimeErrorView"
+        },
+        "title": "Errors",
+        "type": "array"
+      },
+      "execution_summary": {
+        "additionalProperties": true,
+        "title": "Execution Summary",
+        "type": "object"
+      },
+      "next_best_question": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Next Best Question"
+      },
+      "problem_state_version": {
+        "title": "Problem State Version",
+        "type": "integer"
+      },
+      "runtime_actions": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Runtime Actions",
+        "type": "array"
+      },
+      "session_id": {
+        "title": "Session Id",
+        "type": "string"
+      },
+      "warnings": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Warnings",
+        "type": "array"
+      },
+      "workspace_projection": {
+        "additionalProperties": true,
+        "title": "Workspace Projection",
+        "type": "object"
+      }
+    },
+    "required": [
+      "session_id",
+      "accepted_turn_id",
+      "dialogue_state",
+      "problem_state_version",
+      "workspace_projection",
+      "conversation",
+      "runtime_actions",
+      "epistemic_verdict",
+      "decision_readiness",
+      "execution_summary"
+    ],
+    "title": "LiveMessageResponse",
+    "type": "object"
+  },
+  "ProblemState": {
+    "$defs": {
+      "AssumptionRecord": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "minLength": 1,
+            "title": "Id",
+            "type": "string"
+          },
+          "materiality": {
+            "$ref": "#/$defs/Materiality"
+          },
+          "proposition": {
+            "minLength": 1,
+            "title": "Proposition",
+            "type": "string"
+          },
+          "reason": {
+            "minLength": 1,
+            "title": "Reason",
+            "type": "string"
+          },
+          "scenario_only": {
+            "default": false,
+            "title": "Scenario Only",
+            "type": "boolean"
+          },
+          "source": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Source"
+          },
+          "validation_required": {
+            "title": "Validation Required",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "proposition",
+          "reason",
+          "materiality",
+          "validation_required"
+        ],
+        "title": "AssumptionRecord",
+        "type": "object"
+      },
+      "ClaimRecord": {
+        "additionalProperties": false,
+        "properties": {
+          "evidence_links": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Evidence Links",
+            "type": "array"
+          },
+          "id": {
+            "minLength": 1,
+            "title": "Id",
+            "type": "string"
+          },
+          "proposition": {
+            "minLength": 1,
+            "title": "Proposition",
+            "type": "string"
+          },
+          "scope": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Scope"
+          },
+          "source": {
+            "minLength": 1,
+            "title": "Source",
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/$defs/ClaimStatus",
+            "default": "REPORTED"
+          },
+          "timestamp": {
+            "format": "date-time",
+            "title": "Timestamp",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "proposition",
+          "source",
+          "timestamp"
+        ],
+        "title": "ClaimRecord",
+        "type": "object"
+      },
+      "ClaimStatus": {
+        "enum": [
+          "REPORTED",
+          "SUPPORTED",
+          "PARTIALLY_SUPPORTED",
+          "CONTRADICTED"
+        ],
+        "title": "ClaimStatus",
+        "type": "string"
+      },
+      "ContradictionRecord": {
+        "additionalProperties": false,
+        "properties": {
+          "contradiction_type": {
+            "$ref": "#/$defs/ContradictionType"
+          },
+          "evidence_a_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Evidence A Ids",
+            "type": "array"
+          },
+          "evidence_b_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Evidence B Ids",
+            "type": "array"
+          },
+          "id": {
+            "minLength": 1,
+            "title": "Id",
+            "type": "string"
+          },
+          "possible_resolution": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Possible Resolution"
+          },
+          "proposition_a": {
+            "minLength": 1,
+            "title": "Proposition A",
+            "type": "string"
+          },
+          "proposition_b": {
+            "minLength": 1,
+            "title": "Proposition B",
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/$defs/ContradictionStatus",
+            "default": "OPEN"
+          }
+        },
+        "required": [
+          "id",
+          "proposition_a",
+          "proposition_b",
+          "contradiction_type"
+        ],
+        "title": "ContradictionRecord",
+        "type": "object"
+      },
+      "ContradictionStatus": {
+        "enum": [
+          "OPEN",
+          "RESOLVED",
+          "TRUE_CONTRADICTION",
+          "INSUFFICIENT_INFORMATION"
+        ],
+        "title": "ContradictionStatus",
+        "type": "string"
+      },
+      "ContradictionType": {
+        "enum": [
+          "DEFINITIONAL",
+          "TEMPORAL",
+          "SCOPE",
+          "MEASUREMENT",
+          "SOURCE",
+          "TRUE_LOGICAL_CONTRADICTION"
+        ],
+        "title": "ContradictionType",
+        "type": "string"
+      },
+      "ConversationMode": {
+        "enum": [
+          "EXPLORATION",
+          "ANALYSIS",
+          "DECISION",
+          "COMMITMENT"
+        ],
+        "title": "ConversationMode",
+        "type": "string"
+      },
+      "ConversationState": {
+        "additionalProperties": false,
+        "properties": {
+          "active_sequence": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Active Sequence"
+          },
+          "current_activity": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Current Activity"
+          },
+          "explicit_commitments": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Explicit Commitments",
+            "type": "array"
+          },
+          "mode": {
+            "$ref": "#/$defs/ConversationMode",
+            "default": "EXPLORATION"
+          },
+          "open_repairs": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Open Repairs",
+            "type": "array"
+          },
+          "rejected_interpretations": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Rejected Interpretations",
+            "type": "array"
+          },
+          "unresolved_references": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Unresolved References",
+            "type": "array"
+          },
+          "user_invoked_categories": {
+            "items": {
+              "type": "string"
+            },
+            "title": "User Invoked Categories",
+            "type": "array"
+          }
+        },
+        "title": "ConversationState",
+        "type": "object"
+      },
+      "DecisionReadiness": {
+        "enum": [
+          "BLOCKED",
+          "FORMATION_READY",
+          "ANALYSIS_READY",
+          "ANALYSIS_IN_PROGRESS",
+          "DECISION_SUPPORT_READY"
+        ],
+        "title": "DecisionReadiness",
+        "type": "string"
+      },
+      "EpistemicType": {
+        "enum": [
+          "OBSERVED",
+          "RETRIEVED",
+          "REPORTED",
+          "REPORTED_OBSERVATION",
+          "CALCULATED",
+          "MODEL_PRODUCED",
+          "ASSUMPTION",
+          "HYPOTHESIS",
+          "INFERENCE",
+          "DECISION",
+          "UNKNOWN",
+          "CONTRADICTED"
+        ],
+        "title": "EpistemicType",
+        "type": "string"
+      },
+      "EpistemicVerdict": {
+        "enum": [
+          "VALIDATED",
+          "CONDITIONALLY_VALID",
+          "INSUFFICIENT_EVIDENCE",
+          "CONTRADICTED",
+          "OUT_OF_SCOPE",
+          "FORBIDDEN_INFERENCE",
+          "TRACEABILITY_FAILURE"
+        ],
+        "title": "EpistemicVerdict",
+        "type": "string"
+      },
+      "EvidenceRecord": {
+        "additionalProperties": false,
+        "properties": {
+          "canonical_key": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Canonical Key"
+          },
+          "concept": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Concept"
+          },
+          "definition": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Definition"
+          },
+          "evidence_type": {
+            "$ref": "#/$defs/EpistemicType"
+          },
+          "id": {
+            "minLength": 1,
+            "title": "Id",
+            "type": "string"
+          },
+          "indicator_direction": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Indicator Direction"
+          },
+          "indicator_severity": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Indicator Severity"
+          },
+          "numeric_value": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Numeric Value"
+          },
+          "period_end": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Period End"
+          },
+          "period_label": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Period Label"
+          },
+          "period_start": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Period Start"
+          },
+          "proposition": {
+            "minLength": 1,
+            "title": "Proposition",
+            "type": "string"
+          },
+          "provenance": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Provenance",
+            "type": "array"
+          },
+          "reliability": {
+            "maximum": 1,
+            "minimum": 0,
+            "title": "Reliability",
+            "type": "number"
+          },
+          "scope": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Scope"
+          },
+          "source": {
+            "minLength": 1,
+            "title": "Source",
+            "type": "string"
+          },
+          "source_type": {
+            "minLength": 1,
+            "title": "Source Type",
+            "type": "string"
+          },
+          "timestamp": {
+            "format": "date-time",
+            "title": "Timestamp",
+            "type": "string"
+          },
+          "transformations": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Transformations",
+            "type": "array"
+          },
+          "unit": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Unit"
+          }
+        },
+        "required": [
+          "id",
+          "proposition",
+          "evidence_type",
+          "source",
+          "source_type",
+          "timestamp",
+          "reliability"
+        ],
+        "title": "EvidenceRecord",
+        "type": "object"
+      },
+      "HypothesisRecord": {
+        "additionalProperties": false,
+        "properties": {
+          "contradicting_evidence_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Contradicting Evidence Ids",
+            "type": "array"
+          },
+          "falsification_condition": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Falsification Condition"
+          },
+          "forbidden_inference": {
+            "default": false,
+            "title": "Forbidden Inference",
+            "type": "boolean"
+          },
+          "id": {
+            "minLength": 1,
+            "title": "Id",
+            "type": "string"
+          },
+          "observable_implications": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Observable Implications",
+            "type": "array"
+          },
+          "proposition": {
+            "minLength": 1,
+            "title": "Proposition",
+            "type": "string"
+          },
+          "source": {
+            "minLength": 1,
+            "title": "Source",
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/$defs/HypothesisStatus",
+            "default": "ACTIVE"
+          },
+          "supporting_evidence_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Supporting Evidence Ids",
+            "type": "array"
+          },
+          "testable": {
+            "default": true,
+            "title": "Testable",
+            "type": "boolean"
+          },
+          "unresolved_unknown_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Unresolved Unknown Ids",
+            "type": "array"
+          }
+        },
+        "required": [
+          "id",
+          "proposition",
+          "source"
+        ],
+        "title": "HypothesisRecord",
+        "type": "object"
+      },
+      "HypothesisStatus": {
+        "enum": [
+          "ACTIVE",
+          "SUPPORTED",
+          "WEAKENED",
+          "CONTRADICTED",
+          "REJECTED",
+          "UNTESTABLE"
+        ],
+        "title": "HypothesisStatus",
+        "type": "string"
+      },
+      "Materiality": {
+        "enum": [
+          "LOW",
+          "MEDIUM",
+          "HIGH",
+          "CRITICAL"
+        ],
+        "title": "Materiality",
+        "type": "string"
+      },
+      "ProblemFormationReadiness": {
+        "additionalProperties": false,
+        "properties": {
+          "decision_defined": {
+            "default": false,
+            "title": "Decision Defined",
+            "type": "boolean"
+          },
+          "goal_defined": {
+            "default": false,
+            "title": "Goal Defined",
+            "type": "boolean"
+          },
+          "horizon_defined": {
+            "default": false,
+            "title": "Horizon Defined",
+            "type": "boolean"
+          },
+          "object_defined": {
+            "default": false,
+            "title": "Object Defined",
+            "type": "boolean"
+          },
+          "scope_defined": {
+            "default": false,
+            "title": "Scope Defined",
+            "type": "boolean"
+          }
+        },
+        "title": "ProblemFormationReadiness",
+        "type": "object"
+      },
+      "RepairRecord": {
+        "additionalProperties": false,
+        "properties": {
+          "candidate_interpretations": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Candidate Interpretations",
+            "type": "array"
+          },
+          "description": {
+            "minLength": 1,
+            "title": "Description",
+            "type": "string"
+          },
+          "id": {
+            "minLength": 1,
+            "title": "Id",
+            "type": "string"
+          },
+          "material": {
+            "default": true,
+            "title": "Material",
+            "type": "boolean"
+          },
+          "opened_at": {
+            "format": "date-time",
+            "title": "Opened At",
+            "type": "string"
+          },
+          "repair_type": {
+            "$ref": "#/$defs/RepairType"
+          },
+          "resolved_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Resolved At"
+          },
+          "status": {
+            "$ref": "#/$defs/RepairStatus",
+            "default": "OPEN"
+          },
+          "target": {
+            "minLength": 1,
+            "title": "Target",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "repair_type",
+          "target",
+          "description",
+          "opened_at"
+        ],
+        "title": "RepairRecord",
+        "type": "object"
+      },
+      "RepairStatus": {
+        "enum": [
+          "OPEN",
+          "RESOLVED",
+          "UNRESOLVABLE"
+        ],
+        "title": "RepairStatus",
+        "type": "string"
+      },
+      "RepairType": {
+        "enum": [
+          "REFERENCE",
+          "DEFINITION",
+          "ENTITY",
+          "UNIT",
+          "PERIOD",
+          "SCOPE",
+          "SEQUENCE"
+        ],
+        "title": "RepairType",
+        "type": "string"
+      },
+      "StateTransition": {
+        "enum": [
+          "INTAKE",
+          "CONTEXTUALISING",
+          "REPAIR",
+          "PROBLEM_FORMATION",
+          "HYPOTHESIS_DISCRIMINATION",
+          "EPISTEMIC_CHALLENGE",
+          "ROUTING_READY",
+          "AGENT_RUNNING",
+          "RESULT_VALIDATION",
+          "SYNTHESIS",
+          "CLOSED",
+          "INSUFFICIENT_EVIDENCE",
+          "FORBIDDEN_INFERENCE",
+          "OUT_OF_SCOPE",
+          "TRACEABILITY_FAILURE"
+        ],
+        "title": "StateTransition",
+        "type": "string"
+      },
+      "UnknownRecord": {
+        "additionalProperties": false,
+        "properties": {
+          "acquisition_cost": {
+            "anyOf": [
+              {
+                "minimum": 0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Acquisition Cost"
+          },
+          "blocks_routing": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Blocks Routing"
+          },
+          "hypotheses_affected": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Hypotheses Affected",
+            "type": "array"
+          },
+          "id": {
+            "minLength": 1,
+            "title": "Id",
+            "type": "string"
+          },
+          "materiality": {
+            "$ref": "#/$defs/Materiality"
+          },
+          "resolvable": {
+            "title": "Resolvable",
+            "type": "boolean"
+          },
+          "variable": {
+            "minLength": 1,
+            "title": "Variable",
+            "type": "string"
+          },
+          "why_needed": {
+            "minLength": 1,
+            "title": "Why Needed",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "variable",
+          "why_needed",
+          "materiality",
+          "resolvable"
+        ],
+        "title": "UnknownRecord",
+        "type": "object"
+      },
+      "WorkspacePhase": {
+        "description": "Where the workspace is; deliberately independent of readiness.",
+        "enum": [
+          "INTAKE",
+          "PROBLEM_DISCOVERY",
+          "EVIDENCE_GATHERING",
+          "EPISTEMIC_REVIEW",
+          "ANALYSIS",
+          "DECISION_SUPPORT",
+          "CLOSED"
+        ],
+        "title": "WorkspacePhase",
+        "type": "string"
+      }
+    },
+    "additionalProperties": false,
+    "description": "Central shared contract passed between future runtime components.",
+    "properties": {
+      "assumptions": {
+        "items": {
+          "$ref": "#/$defs/AssumptionRecord"
+        },
+        "title": "Assumptions",
+        "type": "array"
+      },
+      "blockers": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Blockers",
+        "type": "array"
+      },
+      "claims": {
+        "items": {
+          "$ref": "#/$defs/ClaimRecord"
+        },
+        "title": "Claims",
+        "type": "array"
+      },
+      "constraints": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Constraints",
+        "type": "array"
+      },
+      "contradictions": {
+        "items": {
+          "$ref": "#/$defs/ContradictionRecord"
+        },
+        "title": "Contradictions",
+        "type": "array"
+      },
+      "conversation_state": {
+        "$ref": "#/$defs/ConversationState"
+      },
+      "created_at": {
+        "format": "date-time",
+        "title": "Created At",
+        "type": "string"
+      },
+      "current_activity": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Current Activity"
+      },
+      "decision_horizon": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Decision Horizon"
+      },
+      "decision_readiness": {
+        "$ref": "#/$defs/DecisionReadiness",
+        "default": "BLOCKED"
+      },
+      "decision_required": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Decision Required"
+      },
+      "declared_problem": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Declared Problem"
+      },
+      "domain_scope": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Domain Scope",
+        "type": "array"
+      },
+      "epistemic_verdict": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/EpistemicVerdict"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "evidence": {
+        "items": {
+          "$ref": "#/$defs/EvidenceRecord"
+        },
+        "title": "Evidence",
+        "type": "array"
+      },
+      "formation_readiness": {
+        "$ref": "#/$defs/ProblemFormationReadiness"
+      },
+      "hypotheses": {
+        "items": {
+          "$ref": "#/$defs/HypothesisRecord"
+        },
+        "title": "Hypotheses",
+        "type": "array"
+      },
+      "lifecycle_state": {
+        "$ref": "#/$defs/StateTransition",
+        "default": "INTAKE"
+      },
+      "next_best_question": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Next Best Question"
+      },
+      "operational_problem": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Operational Problem"
+      },
+      "problem_id": {
+        "minLength": 1,
+        "title": "Problem Id",
+        "type": "string"
+      },
+      "relevant_entities": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Relevant Entities",
+        "type": "array"
+      },
+      "repairs": {
+        "items": {
+          "$ref": "#/$defs/RepairRecord"
+        },
+        "title": "Repairs",
+        "type": "array"
+      },
+      "routing_ready": {
+        "default": false,
+        "title": "Routing Ready",
+        "type": "boolean"
+      },
+      "session_id": {
+        "minLength": 1,
+        "title": "Session Id",
+        "type": "string"
+      },
+      "unknowns": {
+        "items": {
+          "$ref": "#/$defs/UnknownRecord"
+        },
+        "title": "Unknowns",
+        "type": "array"
+      },
+      "updated_at": {
+        "format": "date-time",
+        "title": "Updated At",
+        "type": "string"
+      },
+      "user_goal": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "User Goal"
+      },
+      "workspace_phase": {
+        "$ref": "#/$defs/WorkspacePhase",
+        "default": "INTAKE"
+      }
+    },
+    "required": [
+      "session_id",
+      "problem_id"
+    ],
+    "title": "ProblemState",
+    "type": "object"
+  }
+}

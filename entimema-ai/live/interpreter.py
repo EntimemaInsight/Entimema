@@ -12,6 +12,7 @@ from urllib import error, request
 from pydantic import BaseModel, ConfigDict, Field, ValidationError
 
 from domain.enums import Materiality
+from problem_formation.problem_objects import GoalType, ProblemObjectType
 
 INTERPRETER_SYSTEM_CONTRACT = """You are a linguistic structuring component.
 You do not solve the problem or provide financial conclusions. Extract only what is
@@ -63,6 +64,10 @@ class InterpretationCandidate(BaseModel):
     embedded_hypothesis_candidates: list[TextCandidate] = Field(default_factory=list)
     candidate_unknowns: list[UnknownCandidate] = Field(default_factory=list)
     repair_candidate: str | None = None
+    operational_problem_candidate: str | None = None
+    problem_object_type_candidate: ProblemObjectType | None = None
+    goal_type_candidate: GoalType | None = None
+    requested_capabilities: list[str] = Field(default_factory=list)
     confidence_metadata: dict[str, float] = Field(default_factory=dict)
 
 
@@ -144,6 +149,16 @@ def openai_interpretation_schema() -> dict[str, Any]:
         "embedded_hypothesis_candidates": {"type": "array", "items": text_candidate},
         "candidate_unknowns": {"type": "array", "items": unknown_candidate},
         "repair_candidate": nullable_string,
+        "operational_problem_candidate": nullable_string,
+        "problem_object_type_candidate": {
+            "type": ["string", "null"],
+            "enum": [*[item.value for item in ProblemObjectType], None],
+        },
+        "goal_type_candidate": {
+            "type": ["string", "null"],
+            "enum": [*[item.value for item in GoalType], None],
+        },
+        "requested_capabilities": {"type": "array", "items": {"type": "string"}},
         # Confidence is deliberately opaque to admission and restricted to an empty object.
         "confidence_metadata": {
             "type": "object",

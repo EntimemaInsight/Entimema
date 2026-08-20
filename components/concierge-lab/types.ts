@@ -7,7 +7,8 @@ export type EpistemicVerdict =
   | "FORBIDDEN_INFERENCE"
   | "TRACEABILITY_FAILURE";
 
-export type DecisionReadiness = "BLOCKED" | "ANALYSIS_READY" | "CONDITIONAL" | "DECISION_READY";
+export type DecisionReadiness = "BLOCKED" | "FORMATION_READY" | "ANALYSIS_READY" |
+  "ANALYSIS_IN_PROGRESS" | "DECISION_SUPPORT_READY" | "CONDITIONAL" | "DECISION_READY";
 export type DecisionMapNodeType =
   | "PROBLEM" | "CLAIM" | "EVIDENCE" | "UNKNOWN" | "HYPOTHESIS"
   | "CONTRADICTION" | "AGENT" | "FINDING" | "RECOMMENDATION";
@@ -46,6 +47,8 @@ export interface DecisionWorkspaceProjection {
   declared_problem: string | null;
   operational_problem: string | null;
   problem_status: string;
+  workspace_phase?: string;
+  blockers?: string[];
   reported_claims: ClaimView[];
   validated_evidence: EvidenceView[];
   unknowns: UnknownView[];

@@ -9,10 +9,10 @@ from api.schemas import (
 )
 from live.controller import LiveSessionController
 from live.response import empty_projection
-from live.session import InMemorySessionStore, RuntimeMode
+from live.session import RuntimeMode, SessionStore
 
 
-def create_router(store: InMemorySessionStore, controller: LiveSessionController) -> APIRouter:
+def create_router(store: SessionStore, controller: LiveSessionController) -> APIRouter:
     router = APIRouter(prefix="/api/v1")
 
     @router.post("/sessions", response_model=CreateSessionResponse, status_code=201)
