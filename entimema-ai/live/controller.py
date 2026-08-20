@@ -68,15 +68,30 @@ class LiveSessionController:
         try:
             candidate = self.interpreter.interpret(message=request.message, context=context)
         except InterpretationError as exc:
-            LOGGER.info(
-                "live_turn",
+            provider = self.interpreter.provider
+            LOGGER.warning(
+                "interpreter_failure",
                 extra={
+                    "event": "interpreter_failure",
+                    "failure_category": exc.category.value,
+                    "provider": type(provider).__name__,
+                    "model": getattr(provider, "model", None),
+                    "http_status": exc.http_status,
+                    "provider_error_code": exc.provider_error_code,
+                    "validation_locations": exc.validation_locations,
                     "session_id": session_id,
                     "turn_id": request.client_turn_id,
-                    "interpreter_status": "FAILED",
-                    "schema_validation_status": "REJECTED",
+                    "retryable": exc.retryable,
+                    "timestamp": datetime.now(UTC).isoformat(),
                 },
             )
+            if exc.is_provider_failure:
+                raise RuntimeAPIError(
+                    503,
+                    "INTERPRETER_PROVIDER_UNAVAILABLE",
+                    "The live linguistic interpreter is temporarily unavailable.",
+                    retryable=exc.retryable,
+                ) from exc
             raise RuntimeAPIError(
                 422,
                 "INTERPRETATION_FAILED",
