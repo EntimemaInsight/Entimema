@@ -35,6 +35,7 @@ export interface DecisionMapEdge { source_id: string; target_id: string; edge_ty
 export interface DecisionMap { nodes: DecisionMapNode[]; edges: DecisionMapEdge[] }
 
 export interface EvidenceView { id: string; proposition: string; evidence_type: string; source: string }
+export interface ArtifactView { id: string; filename: string; media_type: string; byte_size: number; status: string }
 export interface ClaimView { id: string; proposition: string; source: string; status: string }
 export interface UnknownView { id: string; variable: string; why_needed: string; materiality: string; clarification_target: string }
 export interface HypothesisView { id: string; proposition: string; status: string; support: number; against: number }
@@ -51,6 +52,10 @@ export interface DecisionWorkspaceProjection {
   blockers?: string[];
   reported_claims: ClaimView[];
   validated_evidence: EvidenceView[];
+  artifacts?: ArtifactView[];
+  unverified_evidence?: EvidenceView[];
+  evidence_contradictions?: unknown[];
+  evidence_resolved_unknowns?: unknown[];
   unknowns: UnknownView[];
   active_hypotheses: HypothesisView[];
   contradictions: ContradictionView[];

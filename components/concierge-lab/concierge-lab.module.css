@@ -131,3 +131,10 @@
   .workspace { display: flex; flex-direction: column; }.stateWorkspace { order: 1; width: 100%; padding: 24px 16px; }.conversation { position: static; order: 2; width: 100%; height: auto; min-height: 520px; border-top: 1px solid #cbd6e4; border-right: 0; }
   .problemCompare, .epistemic { grid-template-columns: 1fr; }.problemCompare > div + div { border-left: 0; border-top: 1px solid #d5dfeb; }.epistemic dl { grid-column: 1; flex-direction: column; }.synthesis > div:last-child { grid-template-columns: 1fr; }.mapCanvas { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; }.mapColumn { min-width: 175px; scroll-snap-align: start; }
 }
+
+.evidencePanel { margin: 1rem 2rem 0; border: 1px solid rgba(255,255,255,.14); padding: .75rem 1rem; }
+.evidencePanel > div { display: flex; align-items: center; justify-content: space-between; }
+.evidencePanel button { border: 1px solid currentColor; padding: .4rem .75rem; background: transparent; color: inherit; cursor: pointer; }
+.evidencePanel p, .evidencePanel small { opacity: .7; }
+.evidencePanel ul { display: flex; gap: .75rem; flex-wrap: wrap; list-style: none; padding: 0; margin: .75rem 0 0; }
+.evidencePanel li { display: grid; gap: .2rem; min-width: 12rem; }

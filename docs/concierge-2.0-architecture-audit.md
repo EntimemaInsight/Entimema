@@ -1138,3 +1138,39 @@ formal retention scheduling, and legal holds remain outside this sprint. SQLite 
 production-capable single-node adapter; horizontally scaled deployments should implement
 the same `SessionStore` transaction contract on the existing managed relational platform
 when one is selected.
+
+## Sprint 4 — Evidence architecture and multimodal intake
+
+### Boundary and invariants
+
+Evidence intake is part of the canonical Case runtime, not a document-chat or RAG subsystem. The architecture explicitly separates `Artifact`, `EvidenceCandidate`, and validated `Evidence`: transport and extraction never assert truth. A missing CSV/XLSX value is omitted rather than coerced to zero, and an XLSX formula result retains its formula and is labelled `FORMULA_RESULT`, distinct from `HARDCODED`.
+
+`Artifact` records carry Case, owner and tenant identities, original filename, declared media type, byte size, SHA-256 digest, upload time, stable storage reference, processing/security statuses and schema version. Artifact identity is UUID-based, never filename-based; hash deduplication is scoped to a Case.
+
+### Artifact storage and security
+
+`ArtifactStore` is the cloud-neutral binary port. `LocalArtifactStore` is the development adapter and stores opaque UUID-named objects outside both `ProblemState` and SQLite. A future GCS, S3-compatible, or Azure adapter implements the same put/get/case-retention boundary. The default retention policy follows the Case lifecycle; the adapter exposes case deletion so an application deletion coordinator can remove binaries without orphaning them.
+
+Registration validates non-empty and maximum size, supported MIME type, filename extension consistency, and PDF/XLSX signatures. XLSX extraction applies entry-count and expanded-size container limits. `MalwareScanner` is an explicit production hook; the development scanner reports `NOT_SCANNED` and never pretends trust. Encryption-at-rest remains adapter-managed. API access checks Case owner and tenant before attachment, processing, or projection. Access logging and a production scanner/object-store are deployment responsibilities behind these ports.
+
+### Extraction and provenance
+
+Each attempt creates an immutable `ExtractionRecord` with extractor identity/version, timestamps, status, metadata, structured-output reference, errors and warnings. Structured payloads live in dedicated durable evidence tables rather than Case snapshots.
+
+* PDF extraction reads deterministic text-layer blocks and records 1-based page plus block region. Image-only PDFs remain unverified with an explicit OCR warning; OCR is a future extractor.
+* XLSX extraction parses the OOXML package, recording worksheet, cell, raw value, displayed/shared-string value, formula, data type and hardcoded/formula-result identity.
+* CSV extraction detects UTF-8/BOM, delimiter and headers, and records physical row and named column for every non-missing value.
+
+`EvidenceSource` links every candidate and admitted Evidence object to artifact, extraction record, and normalized `EvidenceLocation`. Explicit typed relations support `SUPPORTS`, `CONTRADICTS`, `DERIVES_FROM`, `VALIDATES`, `SUPERSEDES`, and `RECONCILES_WITH`; callers must record these relationships rather than relying on an LLM inference.
+
+### Admission, Module B, Unknowns, and Q*
+
+Extraction only creates candidates in `UNVERIFIED`. Controlled validation records one of `VALIDATED_EVIDENCE`, `UNVERIFIED`, `CONTRADICTED`, `REQUIRES_CLARIFICATION`, or `REJECTED`, its human/system validator and rationale. Validated admission advances the optimistic Case version. Evidence conflicts remain structured contradictions: neither a user claim nor an evidence value is silently overwritten. Module B can block on these relations, and the canonical question selector derives targeted Q* from contradiction identifiers rather than document text.
+
+An optional Unknown target on admission creates an immutable `UnknownResolution` containing Unknown, Evidence, Artifact, time and Case version. The Unknown's history is retained rather than deleted. Workspace projection exposes artifact status, validated and unverified evidence, evidence contradictions, and resolution history; browsers do not reconstruct epistemic state.
+
+Analysis-run records now identify input state version and exact evidence IDs, artifact IDs, and extraction IDs available in canonical evidence provenance. This makes later analysis reproducible after reload. Registration and processing use command IDs and Case-scoped content hashes, while completed extraction lookup prevents duplicate canonical candidates. SQLite/WAL preserves all metadata across process restart.
+
+### Remaining production adapters
+
+The first intake path deliberately does not provide OCR, legacy XLS, DOCX, images, API/ERP ingestion, cloud object storage, antivirus infrastructure, customer KMS integration, or automated retention scheduling. Those capabilities attach to the existing ports and processing states without changing the domain model. Case deletion needs an application-level coordinator to invoke both durable metadata deletion and `ArtifactStore.delete_case`; no irreversible automatic deletion is enabled by default.
