@@ -3,7 +3,7 @@ from pydantic import BaseModel, ConfigDict, Field
 from agents.base import AgentExecutionContext, DomainAgentOutput
 from agents.credit_risk import CreditRiskDiagnosticAgent
 from agents.engineering import ReconciliationAgent
-from agents.finance import WorkingCapitalAgent
+from agents.finance import FinancialPlanningAgent, WorkingCapitalAgent
 from domain.agents import AgentResult, AgentResultStatus, AgentTask
 from domain.enums import EpistemicVerdict
 from domain.problem_state import ProblemState
@@ -44,6 +44,7 @@ class AgentExecutionController:
             agent.agent_id: agent
             for agent in (
                 WorkingCapitalAgent(),
+                FinancialPlanningAgent(),
                 CreditRiskDiagnosticAgent(),
                 ReconciliationAgent(),
             )
