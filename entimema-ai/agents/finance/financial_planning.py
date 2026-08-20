@@ -43,7 +43,11 @@ class FinancialPlanningAgent(DomainAgent):
         if not request.cost_drivers:
             blockers.append("CRITICAL_COST_LOGIC_UNDEFINED")
         assumption_ids = {item.assumption_id for item in request.assumptions}
-        driver_ids = {item.driver_id for item in request.revenue_drivers + request.cost_drivers}
+        declared_drivers = request.revenue_drivers + request.cost_drivers
+        driver_ids = {item.driver_id for item in declared_drivers}
+        driver_ids.update(
+            input_id for item in declared_drivers for input_id in item.input_driver_ids
+        )
         for scenario in request.scenarios:
             missing = set(scenario.assumption_ids) - assumption_ids
             if missing:

@@ -173,6 +173,26 @@ class ScenarioDefinition(BaseModel):
     assumption_ids: list[str]
 
 
+class ModelValue(BaseModel):
+    """An authoritative numeric model input, never an engine-created default."""
+
+    model_config = ConfigDict(extra="forbid", frozen=True)
+    metric: str
+    period: str
+    value: float
+    unit: str
+    source: str
+    evidence_id: str | None = None
+
+
+class EvidenceLineage(BaseModel):
+    model_config = ConfigDict(extra="forbid", frozen=True)
+    evidence_id: str
+    artifact: str
+    source_location: str
+    case_version: int = Field(gt=0)
+
+
 class DependencyEdge(BaseModel):
     model_config = ConfigDict(extra="forbid", frozen=True)
     upstream: ModelModule
@@ -218,6 +238,11 @@ class FinancialModelSpecification(BaseModel):
     validation_requirements: list[ModelValidationRequirement]
     source_evidence_ids: list[str]
     unresolved_issues: list[PlanningUnknown]
+    model_name: str = "Financial Model"
+    analysis_run_id: str | None = None
+    actual_values: list[ModelValue] = Field(default_factory=list)
+    opening_balances: list[ModelValue] = Field(default_factory=list)
+    evidence_lineage: list[EvidenceLineage] = Field(default_factory=list)
 
 
 class PlanningExecutionRequest(BaseModel):
