@@ -1,13 +1,6 @@
-from live.controller import LiveSessionController
-from live.interpreter import InterpretationCandidate, LanguageModelProvider, LinguisticInterpreter
-from live.session import InMemorySessionStore, LiveSession, RuntimeMode
+"""Live runtime package.
 
-__all__ = [
-    "InMemorySessionStore",
-    "InterpretationCandidate",
-    "LanguageModelProvider",
-    "LinguisticInterpreter",
-    "LiveSession",
-    "LiveSessionController",
-    "RuntimeMode",
-]
+Import concrete runtime types from their defining modules. Keeping package
+initialization free of eager convenience imports prevents lower-level modules
+such as ``live.session`` from loading the API-dependent controller.
+"""
