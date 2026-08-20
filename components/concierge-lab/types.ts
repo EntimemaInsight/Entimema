@@ -7,7 +7,7 @@ export type EpistemicVerdict =
   | "FORBIDDEN_INFERENCE"
   | "TRACEABILITY_FAILURE";
 
-export type DecisionReadiness = "BLOCKED" | "FORMATION_READY" | "ANALYSIS_READY" |
+export type DecisionReadiness = "NOT_READY" | "CLARIFICATION_REQUIRED" | "BLOCKED" | "FORMATION_READY" | "ANALYSIS_READY" |
   "ANALYSIS_IN_PROGRESS" | "DECISION_SUPPORT_READY" | "CONDITIONAL" | "DECISION_READY";
 export type DecisionMapNodeType =
   | "PROBLEM" | "CLAIM" | "EVIDENCE" | "UNKNOWN" | "HYPOTHESIS"
@@ -34,12 +34,14 @@ export interface DecisionMapNode {
 export interface DecisionMapEdge { source_id: string; target_id: string; edge_type: DecisionMapEdgeType }
 export interface DecisionMap { nodes: DecisionMapNode[]; edges: DecisionMapEdge[] }
 
-export interface EvidenceView { id: string; proposition: string; evidence_type: string; source: string }
+export interface EvidenceLocation { page?: number | null; sheet?: string | null; cell?: string | null; row?: number | null; column?: string | null }
+export interface EvidenceSourceView { artifact_id: string; extraction_id?: string; location?: EvidenceLocation }
+export interface EvidenceView { id: string; proposition: string; evidence_type?: string; source: string | EvidenceSourceView; source_filename?: string; formula?: string | null; admission_status?: string; value?: string | number | boolean | null }
 export interface ArtifactView { id: string; filename: string; media_type: string; byte_size: number; status: string }
 export interface ClaimView { id: string; proposition: string; source: string; status: string }
 export interface UnknownView { id: string; variable: string; why_needed: string; materiality: string; clarification_target: string }
 export interface HypothesisView { id: string; proposition: string; status: string; support: number; against: number }
-export interface ContradictionView { id: string; proposition_a: string; proposition_b: string; issue: string; status: string }
+export interface ContradictionView { id: string; proposition_a: string; proposition_b: string; issue: string; status: string; evidence_ids?: string[] }
 export interface FindingView { id: string; agent_id: string; proposition: string; type: string; limitations: string[] }
 export interface AgentModuleView { id: string; label: string; domain: string; task: string; status: string }
 export interface ReconciliationView { id: string; left: string; right: string; classification: string; true_conflict: boolean }
@@ -71,6 +73,7 @@ export interface DecisionWorkspaceProjection {
   decision_readiness: DecisionReadiness;
   human_decision_required: boolean;
   decision_map: DecisionMap;
+  analysis_run?: { analysis_run_id?: string; status?: string; input_state_version?: number; evidence_ids?: string[]; synthesis_result?: string; final_admissibility_state?: string; requested_capabilities?: string[] } | null;
 }
 
 export interface RecommendationView {
@@ -93,6 +96,7 @@ export interface LiveMessageResponse {
   decision_readiness: DecisionReadiness; execution_summary: Record<string, unknown>;
   errors: RuntimeError[]; warnings: string[];
 }
+export interface CaseResponse { session_id: string; state_version: number; workspace_projection: DecisionWorkspaceProjection; conversation: ConversationTurnView[] }
 export interface LabSnapshot {
   stage: string; projection: DecisionWorkspaceProjection; synthesis: UserSynthesisView | null;
   conversation: ConversationTurn[];

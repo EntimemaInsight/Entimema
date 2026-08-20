@@ -7,7 +7,7 @@ export async function proxyRuntime(request: Request, path: string) {
   if (!baseUrl) {
     return NextResponse.json({ errors: [{ code: "RUNTIME_UNAVAILABLE", message: "LIVE RUNTIME NOT CONFIGURED", retryable: false }] }, { status: 503 });
   }
-  const raw = await request.text();
+  const raw = request.method === "GET" || request.method === "HEAD" ? "" : await request.text();
   if (new TextEncoder().encode(raw).byteLength > MAX_BODY_BYTES) {
     return NextResponse.json({ errors: [{ code: "VALIDATION_FAILED", message: "Request is too large.", retryable: false }] }, { status: 413 });
   }

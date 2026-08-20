@@ -1174,3 +1174,32 @@ Analysis-run records now identify input state version and exact evidence IDs, ar
 ### Remaining production adapters
 
 The first intake path deliberately does not provide OCR, legacy XLS, DOCX, images, API/ERP ingestion, cloud object storage, antivirus infrastructure, customer KMS integration, or automated retention scheduling. Those capabilities attach to the existing ports and processing states without changing the domain model. Case deletion needs an application-level coordinator to invoke both durable metadata deletion and `ArtifactStore.delete_case`; no irreversible automatic deletion is enabled by default.
+
+## Sprint 5 — Decision Intelligence Workspace
+
+### Workspace component architecture
+
+`ConciergeLabShell` owns transport continuity and composes two deliberately separate surfaces: the Case notebook (`ConversationPanel`, including evidence capture) and the canonical Shared Problem State (`ProblemStatePanel` and `DecisionMapView`). The discreet intake expands only after a Case is created or a deterministic canonical projection is selected. Conversation is never used to reconstruct state.
+
+### Projection-to-UI flow
+
+The browser creates or reloads a durable Case through the Next.js runtime proxy. The returned `workspace_projection` is passed without epistemic reinterpretation to state, readiness, evidence, contradiction, map, and analysis views. Local storage retains only the durable Case identifier needed for recovery; conversation, readiness, objects, and versions are restored from `GET /sessions/{case_id}`. Formatting functions render canonical enum labels and provenance but do not infer status.
+
+### Object interactions
+
+- **Decision Map:** lightweight semantic buttons are generated solely from canonical nodes and relationships. Keyboard selection opens the same object context used by the state panels.
+- **Unknown → Q\*:** selecting a canonical Unknown records its ID, focuses the canonical `clarification_target` in the Case notebook, and submits `selected_unknown_id` with the user's answer. No UI-authored clarification is created.
+- **Evidence provenance:** validated evidence expands progressively to its artifact and PDF page, XLSX sheet/cell/formula, or CSV row/column location. Artifact processing status is displayed from the evidence projection.
+- **Contradictions:** inspection preserves both propositions side by side and explicitly avoids privileging either source; the canonical epistemic control supplies the clarification requirement.
+
+### Analysis Ready and continuity
+
+The Analysis layer remains locked until the canonical readiness is `ANALYSIS_READY` (or an existing canonical analysis run/capability is projected). It expands in the same Case and supports capability status, input state version, final admissibility, audited findings, and synthesis. Specialist IDs are secondary technical provenance rather than a bot-handoff model. Further conversation and evidence remain available after analysis.
+
+### Responsive and accessible behavior
+
+Desktop uses a persistent notebook/state split. Large tablets retain the split with denser single-column state sections; narrow screens prioritize Shared Problem State before the notebook. Native buttons, details/summary disclosure, labelled controls, status regions, keyboard-selectable map nodes, and visible focus rings provide the interaction baseline.
+
+### Remaining UX/product gaps
+
+Speech transcription is intentionally represented as a disabled boundary until a transcription service exists. The current Decision Map presents typed topology as grouped semantic nodes rather than drawing connectors; larger cases may need list virtualization and relationship filtering. Evidence admission controls and contradiction-resolution commands remain backend-led follow-up work. Authentication and a multi-Case index are required before durable Case recovery can move beyond a single anonymous Case identifier.

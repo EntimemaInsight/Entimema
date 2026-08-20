@@ -159,6 +159,8 @@ def test_ownership_recovery_validation_and_unknown_resolution_history(service):
         expected_version=0,
     )
     assert admitted["state_version"] == 1
+    assert admitted["validated_evidence"][0]["source_filename"] == "facts.csv"
+    assert "formula" in admitted["validated_evidence"][0]
     recovered = EvidenceRepository(database)
     assert recovered.evidence(case.case_id)[0].candidate_id == candidate_id
     assert recovered.validations(case.case_id)[0].case_version == 1
