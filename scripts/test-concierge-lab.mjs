@@ -22,14 +22,16 @@ assert.match(shell, /workspace_projection/, "UI consumes the canonical projectio
 assert.match(shell, /selected_unknown_id: unknownId/, "Q* answer is bound to its canonical Unknown");
 assert.doesNotMatch(shell, /decision_readiness\s*=|setReadiness/, "readiness is never browser-derived");
 assert.match(recoveryRoute, /\/api\/v1\/sessions\//, "recovery is proxied to the durable runtime");
-assert.match(state, /operational_problem \?\? "Still being formed"/);
+assert.match(state, /operational_problem \?\? "Being formed"/);
 assert.doesNotMatch(state, /operational_problem \?\? projection\.declared_problem/, "declared problem never substitutes for operational problem");
 assert.match(state, /No validated evidence yet/);
 assert.match(state, /Formula/);
 assert.match(state, /neither value is privileged/);
 assert.match(state, /decision_readiness === "ANALYSIS_READY"/);
 assert.match(state, /input_state_version/);
-assert.match(conversation, /Q\* · Required clarification/);
+assert.match(conversation, /Current clarification/);
+assert.doesNotMatch(conversation, /Canonical ID|Resolving canonical Unknown/, "client panel does not expose machine ontology");
+assert.match(state, /Clarification required/);
 assert.match(conversation, /Transcription not connected/);
 assert.match(map, /aria-pressed/);
 assert.match(map, /The map will form as the case develops/);
