@@ -337,6 +337,23 @@ class LiveSessionController:
                 "capabilities_invoked": executed,
                 "execution_status": "COMPLETED",
                 "provenance": {"command_id": command.command_id},
+                "evidence_ids": [item.id for item in result.state.evidence],
+                "artifact_ids": sorted(
+                    {
+                        link.removeprefix("artifact:")
+                        for item in result.state.evidence
+                        for link in item.provenance
+                        if link.startswith("artifact:")
+                    }
+                ),
+                "extraction_ids": sorted(
+                    {
+                        link.removeprefix("extraction:")
+                        for item in result.state.evidence
+                        for link in item.provenance
+                        if link.startswith("extraction:")
+                    }
+                ),
                 "reconciliation_result": (
                     result.analysis.final_synthesis_result.reconciliation_result.model_dump(
                         mode="json"

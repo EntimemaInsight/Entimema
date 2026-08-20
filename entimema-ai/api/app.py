@@ -7,6 +7,9 @@ from fastapi.responses import JSONResponse
 
 from api.errors import RuntimeAPIError
 from api.routes import create_router
+from evidence.repository import EvidenceRepository
+from evidence.service import EvidenceService
+from evidence.store import LocalArtifactStore
 from live.controller import LiveSessionController
 from live.interpreter import InterpretationError, LinguisticInterpreter, OpenAIInterpreterProvider
 from live.session import SQLiteSessionStore
@@ -20,6 +23,11 @@ def create_app() -> FastAPI:
     except InterpretationError:
         interpreter = None
     controller = LiveSessionController(store, interpreter)
+    evidence = EvidenceService(
+        store,
+        EvidenceRepository(store.path),
+        LocalArtifactStore(os.getenv("ENTIMEMA_ARTIFACT_ROOT", "var/artifacts")),
+    )
 
     async def runtime_error_handler(_: Request, exc: RuntimeAPIError) -> JSONResponse:
         return JSONResponse(
@@ -30,7 +38,7 @@ def create_app() -> FastAPI:
         )
 
     app.add_exception_handler(RuntimeAPIError, runtime_error_handler)  # type: ignore[arg-type]
-    app.include_router(create_router(store, controller))
+    app.include_router(create_router(store, controller, evidence))
 
     @app.get("/health")
     def health() -> dict[str, str]:

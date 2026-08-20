@@ -6,6 +6,7 @@ import BrandLogo from "@/components/BrandLogo";
 import ConversationPanel from "./ConversationPanel";
 import DecisionMapView from "./DecisionMapView";
 import ProblemStatePanel from "./ProblemStatePanel";
+import EvidencePanel from "./EvidencePanel";
 import { labScenarios } from "./fixtures";
 import styles from "./concierge-lab.module.css";
 import type { ConversationTurn, DecisionWorkspaceProjection, LiveMessageResponse, RuntimeError } from "./types";
@@ -79,7 +80,7 @@ export default function ConciergeLabShell() {
   }
 
   if (mode === "LIVE" && projection) {
-    return <main className={styles.lab}><LabHeader /><div className={styles.toolbar}><span>LAB / LIVE runtime</span><button onClick={resetAll}>Reset</button><output>State v{version}</output></div>{runtimeError && <div className={styles.runtimeError} role="alert"><strong>{runtimeError.code.replaceAll("_", " ")}</strong><p>{runtimeError.message}</p></div>}<div className={styles.workspace}><ConversationPanel prompt="" turns={turns} live value={message} busy={busy} onValue={setMessage} onSubmit={() => void submitLive()} /><div className={styles.stateWorkspace}><ProblemStatePanel projection={projection} synthesis={null} /><DecisionMapView map={projection.decision_map} selectedId={selectedNode} onSelect={setSelectedNode} /></div></div></main>;
+    return <main className={styles.lab}><LabHeader /><div className={styles.toolbar}><span>LAB / LIVE runtime</span><button onClick={resetAll}>Reset</button><output>State v{version}</output></div>{runtimeError && <div className={styles.runtimeError} role="alert"><strong>{runtimeError.code.replaceAll("_", " ")}</strong><p>{runtimeError.message}</p></div>}<EvidencePanel sessionId={sessionId ?? ""} artifacts={projection.artifacts ?? []} onComplete={(payload) => setProjection((current) => current ? { ...current, ...payload } as DecisionWorkspaceProjection : current)} /><div className={styles.workspace}><ConversationPanel prompt="" turns={turns} live value={message} busy={busy} onValue={setMessage} onSubmit={() => void submitLive()} /><div className={styles.stateWorkspace}><ProblemStatePanel projection={projection} synthesis={null} /><DecisionMapView map={projection.decision_map} selectedId={selectedNode} onSelect={setSelectedNode} /></div></div></main>;
   }
 
   if (!scenario || !snapshot) return null;
