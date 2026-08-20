@@ -45,10 +45,11 @@
 .stateWorkspace { min-width: 0; padding: clamp(24px, 3.2vw, 52px); }
 .problemState, .mapSection { width: min(1280px, 100%); margin: 0 auto; }
 .workspaceTitle { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 32px; align-items: start; }
-.workspaceTitle h1 { max-width: 920px; margin: 12px 0 0; font-size: clamp(30px, 3.5vw, 55px); line-height: 1.03; letter-spacing: -.055em; font-weight: 550; }
-.readiness { min-width: 175px; padding-left: 18px; border-left: 2px solid #273b65; }
+.workspaceTitle h1 { max-width: 920px; margin: 9px 0 0; font-size: clamp(24px, 2.5vw, 38px); line-height: 1.08; letter-spacing: -.045em; font-weight: 550; }
+.readiness { margin-top: 14px; padding: 18px 20px; border: 1px solid #ccd8e5; border-left: 3px solid #273b65; background: #fff; }
 .readiness span, .readiness small { display: block; color: #66748d; font-size: 9px; letter-spacing: .09em; text-transform: uppercase; }
 .readiness strong { display: block; margin: 7px 0; font-size: 13px; }
+.readiness p { margin: 0 0 7px; color: #3d4e6c; font-size: 12px; line-height: 1.45; }
 .problemCompare { margin-top: 36px; display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); background: #fff; border: 1px solid #d5dfeb; }
 .problemCompare > div { padding: 20px 23px; }
 .problemCompare > div + div { border-left: 1px solid #d5dfeb; background: #fbfcfe; }
@@ -141,9 +142,9 @@
 
 /* Sprint 5 decision workspace: state semantics, not chatbot ornament. */
 .recovering { margin: 18vh auto; text-align: center; color: #64728e; letter-spacing: .08em; text-transform: uppercase; font-size: 11px; }
-.operationalProblem { margin-top: 34px; padding: 22px 24px; background: #fff; border: 1px solid #cbd7e5; border-left: 3px solid #19345f; }
+.operationalProblem { margin-top: 18px; padding: 17px 20px; background: #fff; border: 1px solid #cbd7e5; border-left: 3px solid #19345f; }
 .operationalProblem > span { color: #65738b; font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
-.operationalProblem p { margin: 9px 0 0; font-size: 17px; line-height: 1.5; }
+.operationalProblem p { margin: 7px 0 0; font-size: 15px; line-height: 1.45; }
 .operationalProblem small { display: block; margin-top: 8px; color: #728097; }
 .workspaceTitle h1 { color: #102650; }
 .readiness.ready { border-left-color: #526e68; }

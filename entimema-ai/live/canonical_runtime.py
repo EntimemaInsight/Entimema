@@ -2,6 +2,7 @@
 
 from dataclasses import dataclass
 
+from concierge.interaction_realizer import InteractionRealizer, question_priority
 from concierge.question_selection import OrdinalLevel, QuestionCandidate, select_next_best_question
 from domain.enums import DecisionReadiness, EpistemicVerdict, WorkspacePhase
 from domain.problem_state import ProblemState
@@ -28,6 +29,7 @@ class CanonicalConciergeRuntime:
         self.formation = ProblemFormationEngine()
         self.auditor = EpistemicController()
         self.analysis = EndToEndRuntime()
+        self.interaction = InteractionRealizer()
 
     def apply(self, state: ProblemState, command: ApplyInterpretedTurn) -> CanonicalTurnResult:
         formation = self.formation.form_problem(
@@ -67,8 +69,13 @@ class CanonicalConciergeRuntime:
             else DecisionReadiness.BLOCKED
         )
         updated.routing_ready = ready
-        question = self._question(
+        selected_question = self._question(
             updated, formation.next_best_unknown_id, audit, command.unresolved_references
+        )
+        question = (
+            self.interaction.realise(selected_question, updated).client_question
+            if selected_question
+            else None
         )
         updated.next_best_question = question
         analysis = None
@@ -98,7 +105,7 @@ class CanonicalConciergeRuntime:
         return WorkspacePhase.PROBLEM_DISCOVERY
 
     @staticmethod
-    def _question(state, next_unknown_id, audit, unresolved_references) -> str | None:
+    def _question(state, next_unknown_id, audit, unresolved_references) -> QuestionCandidate | None:
         candidates = []
         for target in unresolved_references:
             candidates.append(
@@ -108,30 +115,51 @@ class CanonicalConciergeRuntime:
                     information_gain=OrdinalLevel.HIGH,
                     user_cost=OrdinalLevel.LOW,
                     presupposition_risk=OrdinalLevel.LOW,
+                    decision_priority=5,
                 )
             )
         unknowns = {item.id: item for item in state.unknowns}
-        if next_unknown_id in unknowns:
-            item = unknowns[next_unknown_id]
+        ordered_unknowns = sorted(
+            (item for item in unknowns.values() if item.blocks_routing),
+            key=lambda item: (item.id != next_unknown_id, item.id),
+        )
+        for item in ordered_unknowns:
             candidates.append(
                 QuestionCandidate(
                     id=f"q-{item.id}",
                     question=f"What is {item.variable}, and what source can verify it?",
                     targets_unknown_ids=[item.id],
+                    targets_blocker_ids=[item.id] if item.blocks_routing else [],
+                    required_information=[item.variable],
                     information_gain=OrdinalLevel.HIGH,
                     user_cost=OrdinalLevel.LOW,
                     presupposition_risk=OrdinalLevel.LOW,
+                    decision_priority=question_priority(item.variable),
+                    epistemic_reason=item.why_needed,
                 )
             )
         for contradiction_id in audit.contradiction_ids:
+            contradiction = next(
+                item for item in state.contradictions if item.id == contradiction_id
+            )
             candidates.append(
                 QuestionCandidate(
-                    id=f"q-{contradiction_id}",
+                    id=f"q-contradiction-{contradiction_id}",
                     question=f"Which source should resolve contradiction {contradiction_id}?",
+                    targets_blocker_ids=[contradiction_id],
+                    targets_contradiction_ids=[contradiction_id],
+                    evidence_record_ids=[
+                        *contradiction.evidence_a_ids,
+                        *contradiction.evidence_b_ids,
+                    ],
+                    required_information=["governing value, scope, or timing distinction"],
                     information_gain=OrdinalLevel.HIGH,
                     user_cost=OrdinalLevel.MEDIUM,
                     presupposition_risk=OrdinalLevel.LOW,
+                    decision_priority=5,
+                    epistemic_reason=(
+                        "Resolve conflicting evidence without privileging either source"
+                    ),
                 )
             )
-        selected = select_next_best_question(candidates)
-        return selected.question if selected else None
+        return select_next_best_question(candidates)

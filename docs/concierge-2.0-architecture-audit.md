@@ -1,5 +1,32 @@
 # Concierge 2.0 Architecture Audit
 
+## Sprint 6 addendum — Human Financial Interaction Layer
+
+The live runtime now has an explicit, read-only `InteractionRealizer` boundary after
+canonical Q* selection. The authoritative sequence is:
+
+`structured interpreter candidates → Problem Formation → Module B → prioritized structured Q* → InteractionRealizer → client language`
+
+Q* retains its target Unknown IDs, contradiction identity, epistemic reason and selection
+metadata. The realisation is presentation only: it receives the current Case and selected
+Q*, returns an immutable client question, and has no mutation method or authority to create,
+resolve, or reclassify state. Answers still return through interpretation and authoritative
+runtime mutation before Module B re-audits the Case.
+
+Question selection favours operational definition and decision-critical ambiguity, followed
+by contradictions and analytical scope, then evidence convenience. Only one question is
+selected per turn; closely related information can be expressed as one diagnostic step.
+Evidence language explains the analytical purpose and names a small, context-relevant set of
+records while retaining the shared `+Evidence` workflow. Contradiction language presents both
+propositions and both evidence-reference sets without choosing either.
+
+Technical depth adapts only from observable Case language, previous statements, explicit
+role/context, and available financial artefact vocabulary. It never infers personality,
+intelligence, education, emotion, or mental state. Hypotheses remain qualified possibilities;
+the realizer cannot promote them to facts. Client language describes future capabilities as
+analysis, modelling, planning, reconciliation, diagnostics, and forecasting—not bots or
+assistant hand-offs—so capability routing can remain behind the Concierge.
+
 **Sprint:** Sprint 1 — architecture audit  
 **Audit date:** 2026-08-20  
 **Scope:** `/concierge-lab`, its Next.js API bridge, the Python runtime in `entimema-ai`, deterministic fixtures, tests, and deployment documentation  
