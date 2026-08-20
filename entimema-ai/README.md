@@ -1,5 +1,37 @@
 # Entimema AI Runtime
 
+## Sprint 9 — Live Runtime Bridge
+
+The private Concierge Lab now has two explicit modes. `FIXTURE` preserves the five
+deterministic Sprint 8A UI scenarios and needs no model configuration. `LIVE` sends text
+through a Next.js server proxy to this FastAPI service. A schema-constrained linguistic
+interpreter extracts candidates only; deterministic runtime code admits state, applies
+epistemic stops, and owns routing and projection. The interpreter is not a router,
+calculator, state store, or final authority.
+
+Start locally in separate terminals:
+
+```bash
+cd entimema-ai
+OPENAI_API_KEY=... ENTIMEMA_INTERPRETER_MODEL=... uvicorn api.app:app --reload
+
+# repository root
+ENTIMEMA_RUNTIME_URL=http://127.0.0.1:8000 npm run dev
+```
+
+The runtime exposes `POST /api/v1/sessions`, `GET /api/v1/sessions/{id}`,
+`POST /api/v1/sessions/{id}/messages`, `POST /api/v1/sessions/{id}/reset`, and
+`GET /health`. Sessions are **IN-MEMORY / NON-PERSISTENT**, isolated within one process,
+and erased by a restart. `ENTIMEMA_MAX_TURNS` (default 40) and an 8,000-character message
+limit constrain lab usage.
+
+`OPENAI_API_KEY` and `ENTIMEMA_INTERPRETER_MODEL` belong only on the Python service;
+`ENTIMEMA_RUNTIME_URL` belongs on the Next.js server. If the URL is absent in production,
+the page remains usable in fixture mode and reports `LIVE RUNTIME NOT CONFIGURED` for live
+requests. The Python runtime requires external hosting; this repository does not claim a
+deployed persistent runtime. Persistence, authentication, uploads, voice, RAG, PD/ECL,
+accounts, billing, and autonomous actions remain deferred.
+
 Entimema AI Runtime is the typed foundation for a cognitive-financial decision
 architecture. It keeps conversation, problem formation, evidence, hypotheses,
 inference, domain analysis, and decisions separate so their provenance and
@@ -18,8 +50,9 @@ epistemic status remain explicit.
 
 ## Current Sprint Scope
 
-The runtime now includes typed cognitive foundations, deterministic orchestration, and the first
-three executable domain agents. It does not implement LLM execution, persistence, RAG, or UI.
+The runtime includes typed cognitive foundations, deterministic orchestration, executable domain
+agents, and the constrained live interpretation boundary used by the private lab. It does not
+implement persistence, RAG, uploads, voice, or production authentication.
 
 ## Development
 

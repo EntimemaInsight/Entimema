@@ -75,6 +75,16 @@ export interface UserSynthesisView {
   what_would_change_recommendation: string[]; epistemic_status: EpistemicVerdict;
 }
 export interface ConversationTurn { role: "User" | "Entimema"; text: string }
+export interface ConversationTurnView { turn_id: string; actor: "USER" | "ENTIMEMA"; text: string; timestamp: string; action_type?: string | null; related_state_ids: string[]; status: string }
+export interface RuntimeError { code: string; message: string; retryable: boolean }
+export interface LiveMessageResponse {
+  session_id: string; accepted_turn_id: string; assistant_message?: string | null;
+  next_best_question?: string | null; dialogue_state: string; problem_state_version: number;
+  workspace_projection: DecisionWorkspaceProjection; conversation: ConversationTurnView[];
+  runtime_actions: string[]; epistemic_verdict: EpistemicVerdict;
+  decision_readiness: DecisionReadiness; execution_summary: Record<string, unknown>;
+  errors: RuntimeError[]; warnings: string[];
+}
 export interface LabSnapshot {
   stage: string; projection: DecisionWorkspaceProjection; synthesis: UserSynthesisView | null;
   conversation: ConversationTurn[];

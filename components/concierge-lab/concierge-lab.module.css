@@ -17,6 +17,11 @@
 .scenarioPicker button { padding: 9px 13px; border: 1px solid #cfdae8; background: rgba(255,255,255,.72); color: #334665; cursor: pointer; font-size: 12px; }
 .scenarioPicker button:hover, .scenarioPicker button:focus-visible { border-color: #071943; color: #071943; }
 .intake .previewNote { margin-top: 22px; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; }
+.modeControl { margin-top: 30px; padding: 3px; display: flex; gap: 3px; background: #e4eaf2; }
+.modeControl button { padding: 8px 15px; border: 0; background: transparent; color: #5a6982; cursor: pointer; font-size: 10px; font-weight: 700; letter-spacing: .08em; }
+.modeControl .modeActive { background: #fff; color: #071943; box-shadow: 0 1px 4px rgba(7,25,67,.12); }
+.runtimeError { width: min(680px, calc(100% - 32px)); margin: 14px auto; padding: 13px 16px; background: #f5f1ea; border-left: 3px solid #8a6841; color: #4f3c28; text-align: left; }
+.runtimeError strong { font-size: 10px; letter-spacing: .08em; }.runtimeError p { margin: 5px 0 0; font-size: 12px; }
 .toolbar { min-height: 46px; padding: 7px clamp(18px, 3vw, 44px); display: flex; align-items: center; gap: 12px; background: #e9eef5; border-bottom: 1px solid #ced8e5; color: #4a5b77; font-size: 11px; }
 .toolbar > span { margin-right: auto; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
 .toolbar label { display: flex; align-items: center; gap: 7px; }
@@ -33,6 +38,7 @@
 .turn p { margin: 8px 0 0; color: #263a60; font-size: 13px; line-height: 1.55; }
 .captureControls { padding: 16px; border-top: 1px solid #dce4ed; }
 .captureControls > input { width: 100%; padding: 13px; border: 1px solid #bfcddd; color: #071943; }
+.captureControls .sendButton { width: 100%; margin-top: 7px; padding: 10px; align-items: center; border-color: #071943; background: #071943; color: #fff; cursor: pointer; }
 .captureControls > div { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
 .captureControls button { padding: 9px; display: flex; flex-direction: column; align-items: flex-start; border: 1px solid #d4dde8; background: #f8fafc; color: #63708a; font-size: 11px; text-align: left; }
 .captureControls button small { margin-top: 2px; font-size: 9px; }
