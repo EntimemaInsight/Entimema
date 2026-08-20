@@ -7,13 +7,18 @@ name = "entimema-ai-runtime"
 version = "0.1.0"
 description = "Typed cognitive-financial domain foundation for Entimema"
 requires-python = ">=3.12"
-dependencies = ["pydantic>=2.0,<3", "fastapi>=0.115,<1", "uvicorn>=0.30,<1"]
+dependencies = [
+  "pydantic>=2.0,<3",
+  "fastapi>=0.115,<1",
+  "uvicorn>=0.30,<1",
+  "openpyxl>=3.1,<4",
+]
 
 [project.optional-dependencies]
 dev = ["httpx>=0.27", "pytest>=8.0", "ruff>=0.6"]
 
 [tool.hatch.build.targets.wheel]
-packages = ["agents", "api", "app", "concierge", "core", "domain", "epistemic", "evidence", "evals", "live", "orchestrator", "problem_formation", "synthesis"]
+packages = ["agents", "api", "app", "concierge", "core", "domain", "epistemic", "evidence", "evals", "live", "orchestrator", "problem_formation", "synthesis", "workbooks"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
