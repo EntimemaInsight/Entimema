@@ -138,3 +138,54 @@
 .evidencePanel p, .evidencePanel small { opacity: .7; }
 .evidencePanel ul { display: flex; gap: .75rem; flex-wrap: wrap; list-style: none; padding: 0; margin: .75rem 0 0; }
 .evidencePanel li { display: grid; gap: .2rem; min-width: 12rem; }
+
+/* Sprint 5 decision workspace: state semantics, not chatbot ornament. */
+.recovering { margin: 18vh auto; text-align: center; color: #64728e; letter-spacing: .08em; text-transform: uppercase; font-size: 11px; }
+.operationalProblem { margin-top: 34px; padding: 22px 24px; background: #fff; border: 1px solid #cbd7e5; border-left: 3px solid #19345f; }
+.operationalProblem > span { color: #65738b; font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.operationalProblem p { margin: 9px 0 0; font-size: 17px; line-height: 1.5; }
+.operationalProblem small { display: block; margin-top: 8px; color: #728097; }
+.workspaceTitle h1 { color: #102650; }
+.readiness.ready { border-left-color: #526e68; }
+.readiness small { max-width: 210px; line-height: 1.5; }
+.turn { background: transparent; }
+.turn strong { color: #6c7890; }
+.turn p { max-width: 52ch; }
+.captureControls > textarea { width: 100%; resize: vertical; padding: 13px; border: 1px solid #bfcddd; color: #071943; font: inherit; line-height: 1.45; }
+.captureControls > textarea:focus-visible, button:focus-visible, summary:focus-visible, select:focus-visible, input:focus-visible { outline: 2px solid #234b82; outline-offset: 2px; }
+.qStar { margin: 18px; padding: 18px; background: #f4f0e8; border-left: 3px solid #826741; }
+.qStar span { color: #725b3e; font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.qStar strong { display: block; margin-top: 9px; color: #263a60; font-size: 14px; line-height: 1.4; }
+.qStar p { margin: 9px 0 0; color: #68758a; font-size: 10px; }
+.qStar code { font-size: 9px; }
+.unknown button { width: 100%; display: grid; grid-template-columns: 20px 1fr auto; align-items: center; gap: 5px; padding: 0; border: 0; background: transparent; color: inherit; text-align: left; cursor: pointer; }
+.unknown button i { width: 18px; height: 18px; display: grid; place-items: center; border: 1px solid #7e8da7; border-radius: 50%; font-size: 10px; font-style: normal; }
+.unknown > strong { display: block; margin-top: 10px; color: #586b89; font-size: 10px; line-height: 1.45; }
+.selectedObject { box-shadow: inset 3px 0 #183765; background: #f8fafc; }
+.unverified { box-shadow: inset 2px 0 #a6977d; }
+.hypothesis { box-shadow: inset 2px 0 #7d7692; }
+.mismatch { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+.mismatch section { padding: 10px; background: #f4f6f9; border-top: 1px solid #8796aa; }
+.mismatch > p { grid-column: 1 / -1; color: #756044; }
+.stateSection details code { display: block; margin-top: 6px; font-size: 10px; overflow-wrap: anywhere; }
+.analysisLocked { margin-top: 30px; padding: 18px 0; display: flex; justify-content: space-between; border-top: 1px solid #cbd6e4; border-bottom: 1px solid #dce4ee; color: #748198; }
+.analysisLocked span { color: #374d70; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.analysisLocked p { margin: 0; font-size: 10px; }
+.analysisBasis { margin: 16px 0; display: grid; grid-template-columns: repeat(3, 1fr); background: #fff; border: 1px solid #d5dfeb; }
+.analysisBasis div { padding: 13px; border-right: 1px solid #e1e7ef; }
+.analysisBasis dt { color: #78849a; font-size: 8px; letter-spacing: .08em; text-transform: uppercase; }
+.analysisBasis dd { margin: 6px 0 0; font-size: 11px; }
+.agentGrid details { margin-top: 10px; font-size: 9px; }
+.evidenceCapture { min-width: 0; }
+.captureControls .evidenceCapture > button { width: 100%; height: 100%; }
+.evidenceCapture > p { margin: 6px 0; color: #725b3e; font-size: 9px; line-height: 1.3; }
+.evidenceCapture details { margin-top: 6px; font-size: 9px; }
+.evidenceCapture ul { max-height: 110px; overflow: auto; padding: 0; list-style: none; }
+.evidenceCapture li { display: flex; justify-content: space-between; gap: 7px; padding: 5px 0; border-top: 1px solid #e1e7ef; }
+.mapEmpty { border: 1px dashed #c4cfdd; background: rgba(255,255,255,.45); }
+@media (max-width: 760px) {
+  .stateWorkspace { order: 1; }.conversation { order: 2; }
+  .analysisBasis, .mismatch { grid-template-columns: 1fr; }
+  .mismatch > p { grid-column: 1; }
+  .analysisLocked { display: block; }.analysisLocked p { margin-top: 8px; }
+}

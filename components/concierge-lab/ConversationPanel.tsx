@@ -1,15 +1,8 @@
-import type { ConversationTurn } from "./types";
+import EvidencePanel from "./EvidencePanel";
+import type { ArtifactView, ConversationTurn, UnknownView } from "./types";
 import styles from "./concierge-lab.module.css";
 
-export default function ConversationPanel({ prompt, turns, live, value, busy, onValue, onSubmit }: { prompt: string; turns: ConversationTurn[]; live?: boolean; value?: string; busy?: boolean; onValue?: (value: string) => void; onSubmit?: () => void }) {
-  const transcript = turns.length ? turns : prompt ? [{ role: "User" as const, text: prompt }, { role: "Entimema" as const, text: "The declared problem has been separated from the operational problem. Review the shared state and unresolved inputs." }] : [];
-  return <aside className={styles.conversation} aria-labelledby="conversation-title">
-    <div className={styles.panelHeading}><span>Capture</span><h2 id="conversation-title">Conversation</h2></div>
-    <div className={styles.transcript}>{transcript.map((turn, index) => <div className={styles.turn} key={`${turn.role}-${index}`}><strong>{turn.role}</strong><p>{turn.text}</p></div>)}</div>
-    <form className={styles.captureControls} onSubmit={(event) => { event.preventDefault(); onSubmit?.(); }}>
-      <label className={styles.srOnly} htmlFor="lab-input">Ask Entimema</label><input id="lab-input" placeholder="Ask Entimema" value={live ? value : undefined} onChange={(event) => onValue?.(event.target.value)} disabled={busy || !live} />
-      {live && <button className={styles.sendButton} type="submit" disabled={busy || !value?.trim()}>{busy ? "Updating…" : "Send"}</button>}
-      <div><button disabled title="Preview only">+ Evidence <small>Excel · CSV · PDF</small></button><button disabled title="Voice is not implemented">Hold to Speak <small>Preview</small></button></div>
-    </form>
-  </aside>;
+export default function ConversationPanel({ prompt, turns, live, value, busy, onValue, onSubmit, sessionId, artifacts = [], onEvidence, selectedUnknown }: { prompt: string; turns: ConversationTurn[]; live?: boolean; value?: string; busy?: boolean; onValue?: (value: string) => void; onSubmit?: () => void; sessionId?: string; artifacts?: ArtifactView[]; onEvidence?: (payload: Record<string, unknown>) => void; selectedUnknown?: UnknownView }) {
+  const transcript = turns.length ? turns : prompt ? [{ role: "User" as const, text: prompt }] : [];
+  return <aside className={styles.conversation} aria-labelledby="conversation-title"><div className={styles.panelHeading}><span>Conversation & evidence capture</span><h2 id="conversation-title">Case notebook</h2></div><div className={styles.transcript}>{transcript.map((turn, index) => <article className={styles.turn} key={`${turn.role}-${index}`}><strong>{turn.role === "User" ? "Client" : "Entimema"}</strong><p>{turn.text}</p></article>)}{selectedUnknown && <section className={styles.qStar} aria-labelledby="q-star-title"><span>Q* · Required clarification</span><strong id="q-star-title">{selectedUnknown.clarification_target}</strong><p>Resolving canonical Unknown <code>{selectedUnknown.id}</code> is required for analytical readiness.</p></section>}</div><form className={styles.captureControls} onSubmit={(event) => { event.preventDefault(); onSubmit?.(); }}><label className={styles.srOnly} htmlFor="lab-input">Bring the problem / Ask Entimema</label><textarea id="lab-input" placeholder="Bring the problem / Ask Entimema" value={live ? value : ""} onChange={(event) => onValue?.(event.target.value)} disabled={busy || !live} rows={3} />{live && <button className={styles.sendButton} type="submit" disabled={busy || !value?.trim()}>{busy ? "Updating Case…" : selectedUnknown ? "Resolve Q*" : "Add to Case"}</button>}<div>{sessionId && onEvidence ? <EvidencePanel sessionId={sessionId} artifacts={artifacts} onComplete={onEvidence} /> : <button type="button" disabled>+Evidence <small>Available in a live Case</small></button>}<button type="button" disabled aria-describedby="voice-boundary">Hold to Speak <small id="voice-boundary">Transcription not connected</small></button></div></form></aside>;
 }

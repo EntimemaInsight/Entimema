@@ -251,6 +251,8 @@ class EvidenceService:
         artifacts = self.repository.artifacts(case_id)
         candidates = self.repository.candidates(case_id)
         validated = self.repository.evidence(case_id)
+        artifacts_by_id = {item.id: item for item in artifacts}
+        candidates_by_id = {item.id: item for item in candidates}
         validated_candidate_ids = {x.candidate_id for x in validated}
         contradictions = [
             item
@@ -259,7 +261,18 @@ class EvidenceService:
         ]
         return {
             "artifacts": [x.model_dump(mode="json") for x in artifacts],
-            "validated_evidence": [x.model_dump(mode="json") for x in validated],
+            "validated_evidence": [
+                x.model_dump(mode="json")
+                | {
+                    "source_filename": artifacts_by_id[x.source.artifact_id].filename,
+                    "formula": (
+                        candidates_by_id[x.candidate_id].formula
+                        if x.candidate_id in candidates_by_id
+                        else None
+                    ),
+                }
+                for x in validated
+            ],
             "unverified_evidence": [
                 x.model_dump(mode="json") for x in candidates if x.id not in validated_candidate_ids
             ],
