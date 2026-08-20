@@ -1036,8 +1036,105 @@ durable database adapter can replace it without changing domain execution.
 
 ### Remaining migration work
 
-Durable event/snapshot persistence, idempotency records, artifact ingestion, ownership and
-authorization are not implemented by this integration sprint. The older dialogue
+At the close of Sprint 2, durable event/snapshot persistence, idempotency records, artifact
+ingestion, ownership and authorization were not implemented. Sprint 3 addresses the first
+three persistence-boundary concerns as documented below. The older dialogue
 `StateTransition` field remains for compatibility with deterministic tests and fixtures,
 but it is not used as live readiness authority. Fixture scenarios remain explicitly gated
 behind fixture mode and do not enter live free-text execution.
+
+---
+
+## 17. Sprint 3 Implementation Companion — Durable Decision Intelligence Cases
+
+The persistence boundary now treats a live workspace as a `ConciergeCase`, exposed through
+the compatibility `LiveSession` API name while clients migrate to case terminology. The
+aggregate owns identity (`case_id`), owner and tenant references, timestamps, status,
+schema/version metadata, conversation reference/log, current canonical `ProblemState`, and
+projection. Workspace phase, readiness, and blockers remain authoritative inside
+`ProblemState` and are not duplicated as independently mutable case fields.
+
+```mermaid
+flowchart TD
+    API[Principal + Case API] --> PORT[SessionStore persistence port]
+    PORT --> SQL[SQLite durable case store / WAL]
+    SQL --> C[Current case snapshot]
+    SQL --> V[Immutable state versions]
+    SQL --> CMD[Immutable command log]
+    SQL --> EVT[Immutable event envelopes]
+    SQL --> AUD[Module B audit decisions]
+    SQL --> Q[Clarification Q* records]
+    SQL --> RUN[Analysis runs + provenance]
+```
+
+### Adapter and transaction model
+
+`SQLiteSessionStore` is the production default and uses only the Python standard library,
+fitting the separately deployable runtime without an ORM/platform migration. SQLite WAL
+supports durable restart recovery and a single `BEGIN IMMEDIATE` transaction atomically
+advances the current snapshot and appends its state version, command, events, audit,
+clarification, and optional analysis run. `InMemorySessionStore` remains for deterministic
+tests and explicitly local development.
+
+Each mutation loads version N and commits N+1 with an expected-version predicate. A
+different stored version raises typed `StaleCaseVersionError`; the controller maps this
+expected conflict to `409 STALE_STATE`. Missing cases remain explicit `404` results rather
+than causing replacement-case creation. Other typed persistence errors leave room to map
+invalid commands, rejected domain transitions, idempotency misuse, and infrastructure
+failure separately.
+
+### Commands, idempotency, and events
+
+Commands are keyed by `(case_id, command_id)`. A completed retry returns the serialized
+original response before interpretation and cannot create another snapshot, event, audit,
+clarification, or analysis run. Accepted command records contain type, source, actor,
+correlation ID, expected version, structured Pydantic command payload, processing result,
+timestamp, and schema version. They never contain hidden model reasoning.
+
+Meaningful changes use append-only, schema-versioned envelopes with event ID/type, case and
+case version, command, actor/source, correlation/causation, occurrence time, and structured
+payload. The initial event is `CaseCreated`; live turns emit `CaseStateAdvanced`, readiness
+changes emit `DecisionReadinessChanged` with blockers added/cleared, and generated Q* emits
+`ClarificationRequested`. This is pragmatic snapshot-plus-logs persistence, not pure event
+sourcing.
+
+### Audit, clarification, analysis, and provenance
+
+Every accepted live turn stores the structured Module B verdict, audited state version,
+blockers, contradiction IDs, critical unknown IDs, evidence-chain violation codes,
+readiness, and record references. This is the reviewable evidence basis for an admission or
+veto, not chain-of-thought. Readiness events link their causation to that audit.
+
+Clarification records retain source unknown/contradiction identifiers, exact Q*, state
+version, open/resolution status, answer reference, and timestamps. Analysis runs retain the
+exact input version, requested capabilities, orchestration admission, bounded capabilities,
+status, command provenance, reconciliation, synthesis, final admissibility, and execution
+times. Agent identifiers remain provenance only.
+
+### Recovery, ownership, retention, and evolution
+
+A new adapter instance can open the same database and validate the complete case snapshot;
+version histories reconstruct prior canonical states and logs explain meaningful changes.
+All case tables cascade from the case identity, providing a deterministic deletion hook;
+separate artifact kinds permit future differentiated audit/legal retention policies.
+Owner and tenant columns establish the authorization boundary, and owner-scoped loads hide
+another principal's case as not found. Authentication and policy enforcement at the API
+edge remain follow-up work.
+
+Major snapshots, commands, and artifacts carry `schema_version = 1`. Loading passes through
+an explicit migration hook; future releases must add backward-compatible transformations
+rather than assuming stored JSON never changes.
+
+The legacy `ProblemState.lifecycle_state: StateTransition` is now documented in code as
+fixture compatibility only. Persistence serializes it only as part of the canonical state
+snapshot and never reads it to determine phase, readiness, blockers, concurrency, events,
+or analysis admission. Remove it after legacy dialogue fixtures migrate.
+
+### Remaining evidence-storage work
+
+Evidence binary/object storage, upload scanning, content hashes, extraction coordinates,
+encryption/key policy, access logging, database backups/failover, tenant authentication,
+formal retention scheduling, and legal holds remain outside this sprint. SQLite is a
+production-capable single-node adapter; horizontally scaled deployments should implement
+the same `SessionStore` transaction contract on the existing managed relational platform
+when one is selected.

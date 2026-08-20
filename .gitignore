@@ -12,6 +12,7 @@
 
 # testing
 /coverage
+/entimema-ai/var/
 
 # next.js
 /.next/
