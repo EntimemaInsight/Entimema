@@ -16,7 +16,13 @@ from domain.unknowns import UnknownRecord
 from live.canonical_runtime import CanonicalConciergeRuntime
 from live.commands import ApplyInterpretedTurn
 from live.interpreter import ConversationalAction, InterpretationError, LinguisticInterpreter
-from live.session import ConversationTurnView, RuntimeMode, SessionStore
+from live.session import (
+    ConversationTurnView,
+    PersistenceBundle,
+    RuntimeMode,
+    SessionStore,
+    StaleCaseVersionError,
+)
 from problem_formation.candidate_problems import CandidateOperationalProblem
 from problem_formation.problem_objects import ProblemObject
 
@@ -35,6 +41,9 @@ class LiveSessionController:
         self.runtime = runtime or CanonicalConciergeRuntime()
 
     def process_message(self, session_id: str, request: LiveMessageRequest) -> LiveMessageResponse:
+        previous = self.store.command_result(session_id, request.client_turn_id)
+        if previous is not None:
+            return LiveMessageResponse.model_validate(previous)
         try:
             session = self.store.get(session_id)
         except KeyError as exc:
@@ -202,16 +211,17 @@ class LiveSessionController:
                     action_type="CLARIFICATION",
                 )
             )
+        previous_readiness = session.problem_state.decision_readiness.value
+        previous_blockers = list(session.problem_state.blockers)
         session.problem_state, session.current_projection = result.state, result.projection
         session.state_version += 1
         session.updated_at = now
-        self.store.save(session)
         executed = (
             [x.agent_id for x in result.analysis.orchestration_plan.agent_assignments]
             if result.analysis
             else []
         )
-        return LiveMessageResponse(
+        response = LiveMessageResponse(
             session_id=session_id,
             accepted_turn_id=request.client_turn_id,
             assistant_message=result.question,
@@ -237,3 +247,138 @@ class LiveSessionController:
                 )
             ],
         )
+        version = session.state_version
+        audit_id = str(uuid4())
+        events = [
+            {
+                "event_id": str(uuid4()),
+                "case_id": session_id,
+                "event_type": "CaseStateAdvanced",
+                "case_version": version,
+                "occurred_at": now.isoformat(),
+                "command_id": command.command_id,
+                "actor": "USER",
+                "source": "CONCIERGE_API",
+                "correlation_id": request.client_turn_id,
+                "causation_id": command.command_id,
+                "payload": {"previous_version": version - 1},
+                "schema_version": 1,
+            }
+        ]
+        if previous_readiness != result.state.decision_readiness.value:
+            events.append(
+                {
+                    "event_id": str(uuid4()),
+                    "case_id": session_id,
+                    "event_type": "DecisionReadinessChanged",
+                    "case_version": version,
+                    "occurred_at": now.isoformat(),
+                    "command_id": command.command_id,
+                    "actor": "MODULE_B",
+                    "source": "CANONICAL_RUNTIME",
+                    "correlation_id": request.client_turn_id,
+                    "causation_id": audit_id,
+                    "payload": {
+                        "previous": previous_readiness,
+                        "new": result.state.decision_readiness.value,
+                        "blockers_added": sorted(
+                            set(result.state.blockers) - set(previous_blockers)
+                        ),
+                        "blockers_cleared": sorted(
+                            set(previous_blockers) - set(result.state.blockers)
+                        ),
+                    },
+                    "schema_version": 1,
+                }
+            )
+        clarification = None
+        if result.question:
+            target_ids = [item.id for item in result.state.unknowns if item.blocks_routing]
+            clarification = {
+                "clarification_id": str(uuid4()),
+                "case_id": session_id,
+                "state_version": version,
+                "source_record_ids": target_ids,
+                "question": result.question,
+                "status": "OPEN",
+                "user_answer_reference": None,
+                "resolution_state": "BLOCKING",
+                "created_at": now.isoformat(),
+                "updated_at": now.isoformat(),
+                "schema_version": 1,
+            }
+            events.append(
+                {
+                    "event_id": str(uuid4()),
+                    "case_id": session_id,
+                    "event_type": "ClarificationRequested",
+                    "case_version": version,
+                    "occurred_at": now.isoformat(),
+                    "command_id": command.command_id,
+                    "actor": "MODULE_B",
+                    "source": "CANONICAL_RUNTIME",
+                    "correlation_id": request.client_turn_id,
+                    "causation_id": audit_id,
+                    "payload": {
+                        "clarification_id": clarification["clarification_id"],
+                        "source_record_ids": target_ids,
+                    },
+                    "schema_version": 1,
+                }
+            )
+        analysis_run = None
+        if result.analysis:
+            analysis_run = {
+                "analysis_run_id": str(uuid4()),
+                "case_id": session_id,
+                "input_state_version": version,
+                "requested_capabilities": command.requested_capabilities,
+                "orchestrator_decision": "ADMITTED",
+                "capabilities_invoked": executed,
+                "execution_status": "COMPLETED",
+                "provenance": {"command_id": command.command_id},
+                "reconciliation_result": (
+                    result.analysis.final_synthesis_result.reconciliation_result.model_dump(
+                        mode="json"
+                    )
+                ),
+                "synthesis_result": result.analysis.final_synthesis_result.model_dump(mode="json"),
+                "final_admissibility_result": result.state.decision_readiness.value,
+                "started_at": now.isoformat(),
+                "ended_at": datetime.now(UTC).isoformat(),
+                "schema_version": 1,
+            }
+        bundle = PersistenceBundle(
+            command_id=command.command_id,
+            expected_version=command.expected_version,
+            actor_id=session.owner_id,
+            correlation_id=request.client_turn_id,
+            command_payload=command.model_dump(mode="json"),
+            response=response.model_dump(mode="json"),
+            events=events,
+            audit={
+                "audit_id": audit_id,
+                "case_id": session_id,
+                "state_version_audited": version,
+                "timestamp": now.isoformat(),
+                "decision": result.state.epistemic_verdict.value,
+                "blockers": result.state.blockers,
+                "contradiction_ids": [item.id for item in result.state.contradictions],
+                "evidence_chain_violations": [],
+                "critical_unknown_ids": [
+                    item.id for item in result.state.unknowns if item.blocks_routing
+                ],
+                "readiness": result.state.decision_readiness.value,
+                "record_references": [item.id for item in result.state.claims],
+                "schema_version": 1,
+            },
+            clarification=clarification,
+            analysis_run=analysis_run,
+        )
+        try:
+            self.store.save(session, expected_version=command.expected_version, bundle=bundle)
+        except StaleCaseVersionError as exc:
+            raise RuntimeAPIError(
+                409, "STALE_STATE", "The workspace changed; refresh it before submitting again."
+            ) from exc
+        return response

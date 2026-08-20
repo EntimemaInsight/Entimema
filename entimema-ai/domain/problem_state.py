@@ -41,6 +41,8 @@ class ProblemState(BaseModel):
     contradictions: list[ContradictionRecord] = Field(default_factory=list)
     constraints: list[str] = Field(default_factory=list)
     relevant_entities: list[str] = Field(default_factory=list)
+    # Compatibility-only for deterministic pre-2.0 fixtures. Durable/live authority is
+    # workspace_phase + decision_readiness + blockers; remove after fixture migration.
     lifecycle_state: StateTransition = StateTransition.INTAKE
     repairs: list[RepairRecord] = Field(default_factory=list)
     formation_readiness: ProblemFormationReadiness = Field(
