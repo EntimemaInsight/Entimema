@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import logging
 import os
 from datetime import UTC, datetime
@@ -69,21 +70,22 @@ class LiveSessionController:
             candidate = self.interpreter.interpret(message=request.message, context=context)
         except InterpretationError as exc:
             provider = self.interpreter.provider
+            telemetry = {
+                "event": "interpreter_failure",
+                "failure_category": exc.category.value,
+                "provider": type(provider).__name__,
+                "model": getattr(provider, "model", None),
+                "http_status": exc.http_status,
+                "provider_error_code": exc.provider_error_code,
+                "validation_locations": exc.validation_locations,
+                "session_id": session_id,
+                "turn_id": request.client_turn_id,
+                "retryable": exc.retryable,
+                "timestamp": datetime.now(UTC).isoformat(),
+            }
             LOGGER.warning(
-                "interpreter_failure",
-                extra={
-                    "event": "interpreter_failure",
-                    "failure_category": exc.category.value,
-                    "provider": type(provider).__name__,
-                    "model": getattr(provider, "model", None),
-                    "http_status": exc.http_status,
-                    "provider_error_code": exc.provider_error_code,
-                    "validation_locations": exc.validation_locations,
-                    "session_id": session_id,
-                    "turn_id": request.client_turn_id,
-                    "retryable": exc.retryable,
-                    "timestamp": datetime.now(UTC).isoformat(),
-                },
+                json.dumps(telemetry, separators=(",", ":")),
+                extra=telemetry,
             )
             if exc.is_provider_failure:
                 raise RuntimeAPIError(

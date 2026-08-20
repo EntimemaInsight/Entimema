@@ -196,13 +196,15 @@ def test_bulgarian_turn_is_admitted_deterministically_without_epistemic_promotio
 
 
 def test_provider_failure_logging_is_sanitized(caplog):
-    secret, private = "sk-do-not-log", "full private user message"
+    secret = "sk-do-not-log"
+    private = "full private user message"
+    provider_body = '{"error":{"message":"complete sensitive provider response"}}'
 
     class FailedProvider:
         model = "safe-model"
 
         def interpret_turn(self, **_):
-            cause = ValueError(f"{secret} {private}")
+            cause = ValueError(f"{secret} {private} {provider_body}")
             raise InterpretationError(
                 InterpreterFailureCategory.PROVIDER_AUTH_ERROR,
                 http_status=401,
@@ -222,7 +224,22 @@ def test_provider_failure_logging_is_sanitized(caplog):
     rendered = caplog.text
     assert secret not in rendered
     assert private not in rendered
+    assert provider_body not in rendered
     record = caplog.records[-1]
+    event = json.loads(record.getMessage())
+    assert event == {
+        "event": "interpreter_failure",
+        "failure_category": "PROVIDER_AUTH_ERROR",
+        "provider": "FailedProvider",
+        "model": "safe-model",
+        "http_status": 401,
+        "provider_error_code": "invalid_api_key",
+        "validation_locations": [],
+        "session_id": session.session_id,
+        "turn_id": "safe-turn",
+        "retryable": False,
+        "timestamp": event["timestamp"],
+    }
     assert record.failure_category == "PROVIDER_AUTH_ERROR"
     assert record.model == "safe-model"
     assert record.http_status == 401
