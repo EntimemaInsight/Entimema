@@ -979,3 +979,65 @@ The first implementation sprint should not add new agents. It should prove that 
 **Remove** declared-to-operational fallback and duplicate transition authority.  
 
 The repository does not need another chatbot layer or a new visual language. It needs to make its existing epistemic architecture the actual live execution path, then add durable evidence-aware workspace infrastructure around it.
+
+---
+
+## 16. Sprint 2 Implementation Companion — Canonical Live Runtime
+
+The live message controller is now an adapter. It authenticates the session/version,
+invokes the linguistic interpreter, maps its immutable candidate into an
+`ApplyInterpretedTurn` command, and delegates all domain work to
+`CanonicalConciergeRuntime`. It does not assign an operational problem, readiness,
+blockers, phase, or epistemic verdict.
+
+```mermaid
+flowchart LR
+    U[User utterance] --> I[Interpreter boundary]
+    I --> C[ApplyInterpretedTurn]
+    C --> F[ProblemFormationEngine]
+    F --> P[Canonical ProblemState]
+    P --> B[Module B pre-routing audit]
+    B --> G{Readiness guard}
+    G -->|veto| Q[Targeted Q* from unknown / contradiction]
+    G -->|ANALYSIS_READY| O[CentralOrchestrator]
+    O --> A[Bounded agent execution]
+    A --> R[Cross-agent reconciliation]
+    R --> S[Decision synthesis + final audit]
+    Q --> X[Canonical workspace projection]
+    S --> X
+    X --> UI[Workspace UI]
+```
+
+### Authority and retained modules
+
+- `ProblemFormationEngine` alone admits an operational formulation; absence remains
+  `null` and the projection never falls back to declared text.
+- `CanonicalConciergeRuntime` is the live command/reducer and phase/readiness authority.
+  Workspace phase, decision readiness and blocker codes are orthogonal aggregate fields.
+- Module B runs after formation and before readiness. Its veto is a hard analysis guard.
+- Existing capability matching, bounded agents, post-agent validation, reconciliation and
+  synthesis are retained behind `EndToEndRuntime`; specialist identity is provenance, not
+  a conversational handoff.
+- Conversation turns remain a separate session log. The right-side projection is produced
+  from `ProblemState` plus signed audit/analysis results, never from message parsing in the
+  browser.
+
+### Mutation, contract and persistence boundaries
+
+The interpreter can only propose schema-validated candidates. The typed command boundary
+creates epistemically distinct records, the formation engine validates and merges them,
+and Module B recomputes blockers before the state is saved. Pydantic is authoritative for
+the touched runtime contracts; `scripts/export_runtime_schema.py` exports the checked-in
+cross-language JSON Schema.
+
+The controller and API router now depend on the `SessionStore` port rather than the
+process-local implementation. `InMemorySessionStore` remains the development adapter; a
+durable database adapter can replace it without changing domain execution.
+
+### Remaining migration work
+
+Durable event/snapshot persistence, idempotency records, artifact ingestion, ownership and
+authorization are not implemented by this integration sprint. The older dialogue
+`StateTransition` field remains for compatibility with deterministic tests and fixtures,
+but it is not used as live readiness authority. Fixture scenarios remain explicitly gated
+behind fixture mode and do not enter live free-text execution.

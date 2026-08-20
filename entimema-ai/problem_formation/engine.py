@@ -10,6 +10,7 @@ from concierge.repair import RepairStatus
 from concierge.routing_gate import ProblemFormationReadiness, evaluate_routing_readiness
 from concierge.state_updates import revalidate_problem_state
 from core.exceptions import EpistemicValidationError, TraceabilityError
+from domain.assumptions import AssumptionRecord
 from domain.claims import ClaimRecord
 from domain.contradictions import ContradictionStatus
 from domain.enums import Materiality
@@ -82,6 +83,7 @@ class ProblemFormationInput(BaseModel):
     source_category_metadata: list[SourceCategoryMetadata] | None = None
     # Optional deterministic records and relations needed to bind supplied IDs.
     supplied_claims: list[ClaimRecord] = Field(default_factory=list)
+    supplied_assumptions: list[AssumptionRecord] = Field(default_factory=list)
     supplied_evidence: list[EvidenceRecord] = Field(default_factory=list)
     evidence_links: list[EvidenceLink] = Field(default_factory=list)
     evidence_hypothesis_impacts: list[EvidenceHypothesisImpact] = Field(default_factory=list)
@@ -161,6 +163,7 @@ class ProblemFormationEngine:
         self._validate_identity(state, formation_input)
         state.declared_problem = formation_input.declared_problem
         self._merge(state.claims, formation_input.supplied_claims, "claim")
+        self._merge(state.assumptions, formation_input.supplied_assumptions, "assumption")
         self._merge(state.evidence, formation_input.supplied_evidence, "evidence")
         self._merge(state.unknowns, formation_input.supplied_unknowns, "unknown")
         self._merge(state.hypotheses, formation_input.supplied_hypotheses, "hypothesis")
@@ -389,9 +392,8 @@ class ProblemFormationEngine:
     ) -> bool:
         eligible = {item.hypothesis_id for item in eligibility if item.eligible}
         active = [item for item in hypotheses if item.id in eligible]
-        return bool(active) and all(
-            item.observable_implications and item.falsification_condition for item in active
-        )
+        # An empty hypothesis set is already bounded; formation must not invent one.
+        return all(item.observable_implications and item.falsification_condition for item in active)
 
     @staticmethod
     def _core_premise_contradicted(state: ProblemState) -> bool:

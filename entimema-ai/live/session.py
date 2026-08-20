@@ -1,5 +1,6 @@
 """Development-only in-memory live sessions. Server restarts erase all state."""
 
+from abc import ABC, abstractmethod
 from datetime import UTC, datetime
 from enum import StrEnum
 from threading import RLock
@@ -39,7 +40,29 @@ class LiveSession(BaseModel):
     fixture_id: str | None = None
 
 
-class InMemorySessionStore:
+class SessionStore(ABC):
+    """Persistence port used by the runtime; implementations may be durable."""
+
+    @abstractmethod
+    def create(
+        self, mode: RuntimeMode, projection: dict, fixture_id: str | None = None
+    ) -> LiveSession:
+        raise NotImplementedError
+
+    @abstractmethod
+    def get(self, session_id: str) -> LiveSession:
+        raise NotImplementedError
+
+    @abstractmethod
+    def save(self, session: LiveSession) -> None:
+        raise NotImplementedError
+
+    @abstractmethod
+    def delete(self, session_id: str) -> None:
+        raise NotImplementedError
+
+
+class InMemorySessionStore(SessionStore):
     """IN-MEMORY / NON-PERSISTENT and process-local; suitable for the private lab only."""
 
     def __init__(self) -> None:
@@ -68,6 +91,12 @@ class InMemorySessionStore:
             if session_id not in self._sessions:
                 raise KeyError(session_id)
             return self._sessions[session_id]
+
+    def save(self, session: LiveSession) -> None:
+        with self._lock:
+            if session.session_id not in self._sessions:
+                raise KeyError(session.session_id)
+            self._sessions[session.session_id] = session
 
     def delete(self, session_id: str) -> None:
         with self._lock:
