@@ -23,7 +23,6 @@ export default function AgentLibrary() {
             <article className={styles.card} key={agent.id}>
               <AgentVisual kind={agent.visual} label={`${agent.name} abstract visual`} />
               <h3>{agent.name}</h3>
-              <p>{agent.description}</p>
             </article>
           ))}
         </div>
