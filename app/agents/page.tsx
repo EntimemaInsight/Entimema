@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import { DemoTrigger } from "@/components/DemoDiscovery";
 import Navbar from "@/components/Navbar";
+import AgentLibrary from "./AgentLibrary";
 import styles from "./agents.module.css";
 
 export const metadata: Metadata = {
@@ -50,6 +51,7 @@ export default function AgentsPage() {
             </div>
           </div>
         </section>
+        <AgentLibrary />
       </div>
     </main>
   );
