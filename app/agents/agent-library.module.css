@@ -1,21 +1,22 @@
-.library { padding: 52px 0 64px; }
+.library { --agent-card: #f7f9fc; --agent-card-border: rgba(23, 55, 88, .105); --agent-card-hover: #f5f8fb; --glyph-navy: #12375f; --glyph-signal: #e9682d; padding: 50px 0 68px; }
 .inner { max-width: 1160px; }
-.inner h2 { max-width: 680px; margin: 0 auto; color: var(--brand-navy-950); font-size: clamp(30px, 2.65vw, 38px); font-weight: 650; line-height: 1.08; letter-spacing: -.042em; text-align: center; text-wrap: balance; }
-.filters { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin-top: 18px; }
-.filter, .activeFilter { appearance: none; min-height: 32px; padding: 6px 13px; border: 1px solid rgba(12, 35, 64, .12); border-radius: 999px; font: inherit; font-size: 12px; font-weight: 580; line-height: 1; letter-spacing: -.008em; cursor: pointer; transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease; }
-.filter { color: var(--brand-navy-950); background: rgba(248, 250, 252, .72); }
-.filter:hover { border-color: rgba(12, 35, 64, .24); background: #fff; }
-.activeFilter { color: #fff; border-color: var(--brand-navy-950); background: var(--brand-navy-950); }
+.inner h2 { margin: 0; color: var(--brand-navy-950); font-size: clamp(36px, 3.15vw, 42px); font-weight: 650; line-height: 1.06; letter-spacing: -.043em; text-align: center; text-wrap: balance; }
+.filters { display: flex; flex-wrap: wrap; justify-content: center; gap: 7px; margin-top: 22px; }
+.filter, .activeFilter { appearance: none; min-height: 34px; padding: 7px 14px; border: 1px solid rgba(19, 52, 86, .14); border-radius: 999px; font: inherit; font-size: 13px; font-weight: 590; line-height: 1; letter-spacing: -.01em; cursor: pointer; transition: color 180ms cubic-bezier(.22, 1, .36, 1), background-color 180ms cubic-bezier(.22, 1, .36, 1), border-color 180ms cubic-bezier(.22, 1, .36, 1); }
+.filter { color: var(--brand-navy-950); background: rgba(249, 251, 253, .38); }
+.filter:hover { border-color: rgba(19, 52, 86, .27); background: rgba(247, 250, 252, .9); }
+.activeFilter { color: #fff; border-color: var(--brand-navy-950); background: var(--brand-navy-950); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .13); }
 .filter:focus-visible, .activeFilter:focus-visible { outline: 2px solid var(--brand-orange-500); outline-offset: 3px; }
-.grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 20px; }
-.card { display: flex; min-height: 144px; flex-direction: column; padding: 16px 17px 17px; overflow: hidden; border: 1px solid rgba(22, 61, 101, .085); border-radius: 10px; background: #f5f8fb; transition: border-color 160ms ease, box-shadow 160ms ease; animation: cardIn 200ms ease both; }
-.card:hover { border-color: rgba(22, 61, 101, .16); box-shadow: 0 5px 14px rgba(25, 53, 82, .04); }
-.visual { display: grid; width: 58px; height: 52px; place-items: start; margin-bottom: 12px; }
-.visual svg { width: 54px; height: 52px; overflow: visible; filter: drop-shadow(0 5px 6px rgba(26, 66, 113, .08)); }
-.form { stroke: #1556a1; stroke-width: 1.35; stroke-linecap: round; stroke-linejoin: round; }
-.signal { fill: rgba(240, 105, 45, .14); stroke: #ed6b2d; stroke-width: 1.8; }
-.card h3 { max-width: 24ch; margin: auto 0 0; color: var(--brand-navy-950); font-size: 16px; font-weight: 650; line-height: 1.18; letter-spacing: -.024em; text-wrap: balance; }
-@keyframes cardIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
-@media (max-width: 960px) { .library { padding-block: 52px 64px; } .inner { max-width: 760px; } .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .card { min-height: 142px; } }
-@media (max-width: 620px) { .library { padding-block: 46px 58px; } .inner h2 { font-size: clamp(29px, 9vw, 36px); } .filters { gap: 6px; margin-top: 17px; } .filter, .activeFilter { padding-inline: 12px; } .grid { grid-template-columns: 1fr; gap: 10px; margin-top: 18px; } .card { min-height: 138px; padding: 16px 17px; } }
-@media (prefers-reduced-motion: reduce) { .card { animation: none; transition: none; } }
+.grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 13px; margin-top: 22px; }
+.card { min-height: 166px; padding: 19px 20px 20px; border: 1px solid var(--agent-card-border); border-radius: 9px; background: var(--agent-card); transition: transform 190ms cubic-bezier(.22, 1, .36, 1), border-color 190ms cubic-bezier(.22, 1, .36, 1), background-color 190ms cubic-bezier(.22, 1, .36, 1); animation: cardIn 180ms cubic-bezier(.22, 1, .36, 1) both; }
+.card:hover { transform: translateY(-1px); border-color: rgba(23, 55, 88, .19); background: var(--agent-card-hover); }
+.glyphField { display: grid; width: 44px; height: 44px; place-items: center; border: 1px solid rgba(35, 73, 111, .07); border-radius: 8px; background: #edf3f8; transition: border-color 190ms cubic-bezier(.22, 1, .36, 1); }
+.tone2 { background: #f0f4f7; } .tone3 { background: #eaf2f8; } .tone4 { background: #f3f3f0; }
+.glyph { width: 27px; height: 27px; stroke: var(--glyph-navy); stroke-width: 1.35; stroke-linecap: round; stroke-linejoin: round; }
+.glyph :global(.signal) { stroke: var(--glyph-signal); } .glyph :global(.fill) { fill: var(--glyph-signal); stroke: none; }
+.card:hover .glyphField { border-color: rgba(35, 73, 111, .12); }
+.card h3 { max-width: 23ch; margin: 17px 0 0; color: var(--brand-navy-950); font-size: 17px; font-weight: 650; line-height: 1.18; letter-spacing: -.027em; text-wrap: balance; }
+@keyframes cardIn { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 960px) { .library { padding-block: 50px 64px; } .inner { max-width: 760px; } .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 620px) { .library { padding-block: 44px 58px; } .inner h2 { font-size: clamp(33px, 9.5vw, 40px); } .filters { gap: 6px; margin-top: 20px; } .filter, .activeFilter { padding-inline: 12px; } .grid { grid-template-columns: 1fr; gap: 10px; margin-top: 20px; } .card { min-height: 154px; padding: 18px 19px; } }
+@media (prefers-reduced-motion: reduce) { .card, .glyphField, .filter, .activeFilter { animation: none; transition: none; } }
