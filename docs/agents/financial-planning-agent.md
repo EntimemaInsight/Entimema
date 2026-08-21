@@ -1,6 +1,6 @@
 # Financial Planning capability
 
-Sprint 7A introduces `financial_planning` as a bounded specialist capability behind the Concierge.
+Sprint 7A introduced `financial_planning` as a bounded specialist capability in the Agent Platform.
 It is one capability family for annual budgets, rolling forecasts, reforecasts, scenario planning,
 and reusable financial model builds. It is not a chatbot, an “AI CFO”, or a workbook generator.
 
@@ -15,7 +15,7 @@ problem. Its output remains a candidate analytical result subject to the existin
 
 The central orchestrator routes the canonical `financial_planning` capability only after its existing
 epistemic admission gate. Routing does not inspect the word “budget”. The Workspace may present the
-activity as **Financial Planning** and preserve Concierge continuity.
+activity as **Financial Planning** while preserving durable Case continuity.
 
 ## Driver methodology and scope
 
@@ -99,7 +99,7 @@ are operational metadata and are not inputs to formula/layout construction.
 `build_and_register` passes successful XLSX bytes to the existing artifact registration service using
 the XLSX media type and an idempotent generation command. Registration does not call evidence
 admission: the result is a generated `Artifact`, not validated `Evidence`. Its storage reference is
-returned as the Concierge/workspace download reference for a **Financial model ready / Download
+returned as the agent-workspace download reference for a **Financial model ready / Download
 workbook** action. Critical validation failure never produces a production-ready delivery.
 
 ### Limitations

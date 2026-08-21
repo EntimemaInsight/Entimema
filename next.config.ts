@@ -6,6 +6,9 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // Transitional product-retirement redirect. Keep temporary until external
+      // links and index coverage have migrated to the Agent Library.
+      { source: "/concierge-lab", destination: "/agents", permanent: false },
       { source: "/insights", destination: "/resources", permanent: true },
       { source: "/services/financial-architecture", destination: "/services/cfo-function", permanent: true },
       { source: "/services/risk-management", destination: "/services/credit-risk", permanent: true },
