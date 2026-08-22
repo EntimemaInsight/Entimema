@@ -1,4 +1,7 @@
-# Google Cloud Run deployment
+# Google Cloud Run deployment (Agent Platform runtime)
+
+> The original private Concierge Lab is retired as a public product. This service also hosts durable
+> Case, Evidence, and specialist-agent foundations, so keep it pending environment-level verification.
 
 Sprint 9B packages the existing Entimema FastAPI runtime for an initial private-lab
 deployment. It does not add persistence, authentication, or change the reasoning architecture.
@@ -90,12 +93,12 @@ GET <Cloud Run URL>/health
 
 The expected result is HTTP `200` with a basic runtime status. The response may report the
 interpreter as unavailable when its configuration is absent; it does not expose configuration
-values, secrets, or session state. Then use `/concierge-lab` in LIVE mode to validate the full
-Vercel-to-Cloud-Run path.
+values, secrets, or session state. Validate the health endpoint and Agent Platform API directly;
+`/concierge-lab` now redirects to `/agents` and is no longer a runtime validation surface.
 
 ## Deferred production hardening
 
-Before a public or production Concierge release, add a durable external session store, proper
+Before a public or production Agent Platform release, add a durable external session store, proper
 service authentication/authorization, a deliberate scaling model, secret rotation, monitoring,
 and production capacity/load validation. RAG, uploads, voice, PD/ECL, and autonomous actions also
 remain outside Sprint 9B.

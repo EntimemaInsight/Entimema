@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "test:concierge-lab": "node scripts/test-concierge-lab.mjs",
+    "test:product-retirement": "node scripts/test-product-retirement.mjs",
     "audit:structured-data": "node scripts/audit-structured-data.mjs",
     "start": "next start",
     "lint": "eslint"
