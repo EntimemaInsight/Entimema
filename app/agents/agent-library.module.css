@@ -14,6 +14,8 @@
 .card:hover { border-color: rgba(22, 54, 86, .12); background: var(--card-hover); }
 .card:focus-visible { outline: 2px solid var(--brand-orange-500); outline-offset: 3px; }
 .markField { position: relative; display: grid; width: var(--mark-tile-width); height: var(--mark-tile-height); place-items: center; overflow: hidden; border: 1px solid rgba(24, 54, 79, .045); border-radius: 8px; background: #ead8d2; transition: background-color var(--transition), border-color var(--transition); }
+.signatureField { position: relative; display: block; width: var(--mark-tile-width); height: var(--mark-tile-height); flex: 0 0 auto; overflow: hidden; border-radius: 8px; }
+.signatureImage { display: block; object-fit: cover; }
 .markField::after { position: absolute; inset: 0; background: radial-gradient(circle at 28% 24%, rgba(255,255,255,.18), transparent 48%); content: ""; pointer-events: none; }
 .tone2 { background: #e8ddca; } .tone3 { background: #e4e1d4; } .tone4 { background: #dfe4d2; } .tone5 { background: #d8e3d9; } .tone6 { background: #d6e4e3; } .tone7 { background: #dae2e9; } .tone8 { background: #e1dce7; }
 .mark { position: relative; z-index: 1; width: 24px; height: 24px; overflow: visible; color: var(--mark-ink); shape-rendering: geometricPrecision; }
