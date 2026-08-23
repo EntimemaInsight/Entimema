@@ -1,4 +1,4 @@
-export const SITE_URL = "https://www.entimema.net";
+export const SITE_URL = "https://www.entimema.com";
 export const ORGANIZATION_ID = `${SITE_URL}/#organization`;
 export const WEBSITE_ID = `${SITE_URL}/#website`;
 export const FOUNDER_ID = `${SITE_URL}/about#founder`;

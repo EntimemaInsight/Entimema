@@ -2,7 +2,7 @@ import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join, relative } from "node:path";
 
 const root = join(process.cwd(), ".next", "server", "app");
-const site = "https://www.entimema.net";
+const site = "https://www.entimema.com";
 const expected = {
   Organization: [`${site}/#organization`],
   WebSite: [`${site}/#website`],

@@ -6,7 +6,7 @@ import AnalyticsConsent from "@/components/AnalyticsConsent";
 import { DemoDiscoveryProvider } from "@/components/DemoDiscovery";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.entimema.net"),
+  metadataBase: new URL("https://www.entimema.com"),
   title: "Entimema | Financial Architecture, Decision Science & AI",
   description: "Financial architecture, decision science and AI agents for better financial, risk and management decisions.",
   openGraph: {
