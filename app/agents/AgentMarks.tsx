@@ -9,6 +9,11 @@ const MarkFrame = ({ children, ...props }: MarkProps) => (
   </svg>
 );
 
+const ProductMarkFrame = ({ children, ...props }: MarkProps) => (
+  <svg viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false" data-product-mark="prototype" {...props}>
+    {children}
+  </svg>
+);
 const HollowNode = ({ x, y }: { x: number; y: number }) => <circle className="node" cx={x} cy={y} r="1.35" />;
 const MicroNode = ({ x, y }: { x: number; y: number }) => <circle className="microNode" cx={x} cy={y} r=".72" />;
 const SignalNode = ({ x, y }: { x: number; y: number }) => <circle className="signalNode" cx={x} cy={y} r="1.75" />;
@@ -63,17 +68,13 @@ const SynthesisMark = (props: MarkProps) => <MarkFrame {...props}>
   <path className="secondary" d="M21 24h6M24 12v24" /><SignalNode x={24} y={24}/>
 </MarkFrame>;
 
-// Staggered cohorts unfold across one horizon; one trajectory exits the expected landscape.
-const VintageMark = (props: MarkProps) => <MarkFrame {...props}>
-  <path className="field" d="M7.5 9.4c8.8.2 12.2 5.9 20.3 5.2 5.2-.4 8.7-.9 13.2 1.7v1.8c-4.6-2.7-8-2.2-13.1-1.8-8.4.8-11.9-5-20.4-5.2z" />
-  <path className="primary" d="M7.5 10.3c4.4 0 6.8 1.3 9.7 2.9 3.3 1.9 6.6 2.4 10.6 2.1 5.2-.4 8.7-1 13.2 1.7M11.8 17.8c4.2 0 6.6 1.3 9.4 2.9 3.2 1.8 6.4 2.4 10.2 2.1 3.9-.3 6.8-.4 9.6 1.3M16.2 25.3c4 0 6.2 1.3 8.9 2.8 3 1.8 5.9 2.4 9.4 2.1 2.5-.2 4.6-.1 6.5.8M20.6 32.8c3.8 0 6 1.2 8.4 2.7 2.2 1.3 3.7 2.2 5.4 2.9 1.8.8 3.9 1.1 6.6.6" />
-  <path className="guide" d="M17.2 13.2L21.2 20.7 25.1 28.1 29 35.5M40.9 12.8v14.7" />
-  <path className="secondary" d="M8 7.7v5.2M12.3 15.2v5.2M16.7 22.7v5.2M21.1 30.2v5.2M38.5 14.8l2.5 2.2-2.5 2.1M38.6 21.9l2.4 2.2-2.4 2.1M38.7 29l2.3 2-2.3 2" />
-  <HollowNode x={7.5} y={10.3}/><HollowNode x={11.8} y={17.8}/><HollowNode x={16.2} y={25.3}/><HollowNode x={20.6} y={32.8}/>
-  <MicroNode x={17.2} y={13.2}/><MicroNode x={27.8} y={15.3}/><MicroNode x={21.2} y={20.7}/><MicroNode x={31.4} y={22.8}/><MicroNode x={25.1} y={28.1}/><MicroNode x={34.5} y={30.2}/><MicroNode x={29} y={35.5}/>
-  <path className="signal" d="M33.1 37.8l1.3.6" /><SignalNode x={34.4} y={38.4}/><HollowNode x={41} y={39}/>
-</MarkFrame>;
-
+// Three temporal ribbons share a cadence until the final cohort makes a material divergence.
+const VintageMark = (props: MarkProps) => <ProductMarkFrame {...props}>
+  <path className="productSolid" d="M3 5.5h13.4l4.1 4.1H29v4.2H18.8l-4.1-4.1H3z" />
+  <path className="productSolid" d="M3 13.9h10.5l4.1 4.1H29v4.2H15.9l-4.1-4.1H3z" />
+  <path className="productSolid" d="M3 22.3h8.1l4.1 4.1H24v4.1H13.5l-4.1-4.1H3z" />
+  <path className="productSignal" d="M24 26.4h5v4.1h-5z" />
+</ProductMarkFrame>;
 // A portfolio constellation orbits a reference envelope; one signal breaks containment.
 const PortfolioMark = (props: MarkProps) => <MarkFrame {...props}>
   <circle className="field" cx="24" cy="24" r="10"/><circle className="primary" cx="24" cy="24" r="7.5"/>
@@ -83,17 +84,13 @@ const PortfolioMark = (props: MarkProps) => <MarkFrame {...props}>
   <path className="signal" d="M31 18l7.7-4.8" />
 </MarkFrame>;
 
-// Expected and observed probability fields overlap until a monitored region drifts.
-const ProbabilityMark = (props: MarkProps) => <MarkFrame {...props}>
-  <path className="field" d="M6 35c5-1 7-16 17-18 8-2 11 12 19 16v4H6z" />
-  <path className="fieldAlt" d="M6 35c7-2 9-10 16-11 9-2 10 11 20 11v2H6z" />
-  <path className="primary" d="M6 35c5-1 7-16 17-18 8-2 11 12 19 16" />
-  <path className="observed" d="M6 35c7-2 9-10 16-11 9-2 10 11 20 11" />
-  <path className="guide" d="M10 35V31M16 35V24M22 35V17M28 35V22M34 35V29M40 35V33" />
-  <path className="secondary" d="M6 38h36M22 13v25" />
-  <HollowNode x={16} y={25}/><HollowNode x={22} y={24}/><HollowNode x={28} y={24}/><SignalNode x={34} y={31}/>
-</MarkFrame>;
-
+// Expected and observed probability bodies remain enclosed; their displaced overlap exposes drift.
+const ProbabilityMark = (props: MarkProps) => <ProductMarkFrame {...props}>
+  <path className="productStroke" d="M3.5 18.5C3.5 11 8.1 5 13.7 5s10.2 6 10.2 13.5v8H3.5z" />
+  <path className="productStroke" d="M8.1 18.5C8.1 12.2 12.2 7 17.3 7s9.2 5.2 9.2 11.5v8H8.1z" />
+  <path className="productSolid" d="M13.7 12.1c2.1 0 3.8 2.8 3.8 6.4v3.8H9.9v-3.8c0-3.6 1.7-6.4 3.8-6.4z" />
+  <circle className="productSignal" cx="26.5" cy="18.5" r="2.5" />
+</ProductMarkFrame>;
 // An exposure crosses three ordered risk chambers while the loss horizon intensifies.
 const RiskChambersMark = (props: MarkProps) => <MarkFrame {...props}>
   <path className="field" d="M6 10h10v28H6z"/><path className="fieldAlt" d="M19 10h10v28H19z"/><path className="fieldStrong" d="M32 10h10v28H32z"/>
@@ -113,15 +110,12 @@ const VarianceMark = (props: MarkProps) => <MarkFrame {...props}>
   <HollowNode x={14} y={24}/><HollowNode x={21} y={26}/><SignalNode x={28} y={24}/><HollowNode x={35} y={22}/>
 </MarkFrame>;
 
-// Nested cost layers are successively removed, exposing one protected residual margin.
-const MarginMark = (props: MarkProps) => <MarkFrame {...props}>
-  <path className="primary" d="M7 8h34v32H7zM12 13h24v22H12zM17 18h14v12H17z" />
-  <path className="field" d="M17 18h14v12H17z" />
-  <path className="secondary" d="M7 15h5M7 23h10M7 31h5M36 17h5M31 25h10M36 33h5" />
-  <path className="guide" d="M10 11l5 5m18 16 5 5" />
-  <path className="signal" d="M17 30h14" /><SignalNode x={24} y={30}/>
-</MarkFrame>;
-
+// A value vessel is reduced through repeated cost layers, leaving a protected residual chamber.
+const MarginMark = (props: MarkProps) => <ProductMarkFrame {...props}>
+  <path className="productSolid" fillRule="evenodd" d="M3 3h26v26H3zm4 4v18h18V7z" />
+  <path className="productSolid" d="M8.5 8.5h15v4h-15zM8.5 14h11.5v4H8.5zM8.5 19.5h8v4H8.5z" />
+  <path className="productSignal" d="M18.5 19.5h5v4h-5z" />
+</ProductMarkFrame>;
 // A present state opens into bounded future envelopes; one trajectory becomes active.
 const ScenarioMark = (props: MarkProps) => <MarkFrame {...props}>
   <path className="field" d="M22 17c7-8 12-8 20-7v8c-7-1-12 0-20 4zM22 26c8 2 13 4 20 4v8c-8 0-13-2-20-7z" />
