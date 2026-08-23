@@ -1,4 +1,4 @@
-.library { --library-max: 1140px; --card-surface: #f6f8fa; --card-hover: #f3f6f8; --card-radius: 8px; --card-gap: 14px; --card-padding: 23px; --glyph-tile: 44px; --glyph-ink: #18364f; --glyph-signal: #b94824; --transition: 190ms cubic-bezier(.22, 1, .36, 1); }
+.library { --library-max: 1140px; --card-surface: #f6f8fa; --card-hover: #f3f6f8; --card-radius: 8px; --card-gap: 14px; --card-padding: 23px; --mark-tile: 58px; --mark-ink: #18364f; --mark-signal: #b94824; --transition: 190ms cubic-bezier(.22, 1, .36, 1); }
 .inner { max-width: var(--library-max); }
 .heading { text-align: center; }
 .heading h2 { margin: 0; font-size: clamp(38px, 3.15vw, 43px); font-weight: 600; line-height: 1.06; letter-spacing: -.043em; text-wrap: balance; }
@@ -13,13 +13,25 @@
 .card { display: block; min-height: 158px; padding: var(--card-padding); border: 1px solid rgba(22, 54, 86, .055); border-radius: var(--card-radius); background: var(--card-surface); transition: transform var(--transition), border-color var(--transition), background-color var(--transition); animation: cardIn 180ms cubic-bezier(.22, 1, .36, 1) both; }
 .card:hover { transform: translateY(-1px); border-color: rgba(22, 54, 86, .12); background: var(--card-hover); }
 .card:focus-visible { outline: 2px solid var(--brand-orange-500); outline-offset: 3px; }
-.glyphField { display: grid; width: var(--glyph-tile); height: var(--glyph-tile); place-items: center; border-radius: 6px; background: #efd7d0; transition: background-color var(--transition), transform var(--transition); }
-.tone2 { background: #eedcc9; } .tone3 { background: #e8e2c9; } .tone4 { background: #e0e8c8; } .tone5 { background: #d5e8d8; } .tone6 { background: #d3e7e5; } .tone7 { background: #d8e3ed; } .tone8 { background: #e2dced; }
-.glyph { width: 24px; height: 24px; overflow: visible; stroke: var(--glyph-ink); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
-.glyph :global(.signal) { stroke: var(--glyph-signal); } .glyph :global(.fill) { fill: var(--glyph-signal); stroke: none; }
-.card:hover .glyphField { transform: translateY(-1px); }
-.card h3 { max-width: 22ch; margin: 18px 0 0; color: var(--brand-navy-950); font-size: 16.5px; font-weight: 550; line-height: 1.42; letter-spacing: -.021em; text-wrap: balance; }
+.markField { position: relative; display: grid; width: var(--mark-tile); height: var(--mark-tile); place-items: center; overflow: hidden; border: 1px solid rgba(24, 54, 79, .045); border-radius: 8px; background: #ead8d2; transition: background-color var(--transition), border-color var(--transition); }
+.markField::after { position: absolute; inset: 0; background: radial-gradient(circle at 28% 24%, rgba(255,255,255,.18), transparent 48%); content: ""; pointer-events: none; }
+.tone2 { background: #e8ddca; } .tone3 { background: #e4e1d4; } .tone4 { background: #dfe4d2; } .tone5 { background: #d8e3d9; } .tone6 { background: #d6e4e3; } .tone7 { background: #dae2e9; } .tone8 { background: #e1dce7; }
+.mark { position: relative; z-index: 1; width: 44px; height: 44px; overflow: visible; color: var(--mark-ink); shape-rendering: geometricPrecision; }
+.mark :global(.primary), .mark :global(.node) { stroke: currentColor; stroke-width: 1.45; stroke-linecap: round; stroke-linejoin: round; }
+.mark :global(.secondary) { stroke: currentColor; stroke-width: .82; stroke-linecap: round; stroke-linejoin: round; opacity: .56; }
+.mark :global(.micro) { stroke: currentColor; stroke-width: .7; stroke-linecap: round; opacity: .48; }
+.mark :global(.guide) { stroke: currentColor; stroke-width: .72; stroke-linecap: round; stroke-dasharray: 1.2 2.1; opacity: .42; }
+.mark :global(.observed) { stroke: currentColor; stroke-width: 1.15; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 2.2 1.7; opacity: .72; }
+.mark :global(.field) { fill: currentColor; opacity: .055; }
+.mark :global(.fieldAlt) { fill: currentColor; opacity: .09; }
+.mark :global(.fieldStrong) { fill: currentColor; opacity: .14; }
+.mark :global(.microNode) { fill: currentColor; opacity: .55; }
+.mark :global(.signal) { stroke: var(--mark-signal); stroke-width: 1.25; stroke-linecap: round; stroke-linejoin: round; }
+.mark :global(.signalNode) { fill: var(--mark-signal); stroke: #fff; stroke-width: .65; }
+.card:hover .markField { border-color: rgba(24, 54, 79, .09); }
+.card:hover .mark :global(.secondary), .card:hover .mark :global(.guide) { opacity: .68; }
+.card h3 { max-width: 22ch; margin: 17px 0 0; color: var(--brand-navy-950); font-size: 16.5px; font-weight: 550; line-height: 1.42; letter-spacing: -.021em; text-wrap: balance; }
 @keyframes cardIn { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: translateY(0); } }
 @media (max-width: 900px) { .inner { max-width: 760px; } .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 620px) { .heading h2 { font-size: clamp(35px, 10vw, 41px); } .heading p { max-width: 28ch; margin-inline: auto; } .filters { gap: 5px 14px; margin-top: 28px; } .filter, .activeFilter { min-height: 44px; } .grid { grid-template-columns: 1fr; gap: 10px; margin-top: 32px; } .card { min-height: 150px; padding: 21px; } }
-@media (prefers-reduced-motion: reduce) { .card, .glyphField, .filter, .activeFilter { animation: none; transition: none; } }
+@media (prefers-reduced-motion: reduce) { .card, .markField, .filter, .activeFilter { animation: none; transition: none; } }
