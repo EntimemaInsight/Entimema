@@ -12,12 +12,15 @@ export default function AgentLibrary() {
   return (
     <section className={styles.library} aria-labelledby="agent-library-title">
       <div className={`site-container ${styles.inner}`}>
-        <h2 id="agent-library-title">Decision intelligence, deployed.</h2>
-        <div className={styles.filters} role="group" aria-label="Filter agents by business use case">
+        <header className={styles.heading}>
+          <h2 id="agent-library-title">Decision intelligence, deployed.</h2>
+          <p>Specialist agents for recurring financial decisions.</p>
+        </header>
+        <nav className={styles.filters} aria-label="Agent categories">
           {agentCategories.map((category) => (
             <button key={category} type="button" className={active === category ? styles.activeFilter : styles.filter} aria-pressed={active === category} onClick={() => setActive(category)}>{category}</button>
           ))}
-        </div>
+        </nav>
         <div className={styles.grid} aria-live="polite" aria-label={`${visible.length} agents shown`}>
           {visible.map((agent) => (
             <AgentCard agent={agent} key={agent.id} />

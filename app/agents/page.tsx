@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import AnnouncementBar from "@/components/AnnouncementBar";
-import { DemoTrigger } from "@/components/DemoDiscovery";
+import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import AgentLibrary from "./AgentLibrary";
 import styles from "./agents.module.css";
@@ -20,12 +20,6 @@ export const metadata: Metadata = {
   alternates: { canonical: "/agents" },
 };
 
-const principles = [
-  ["Methodology first.", "Built from structured financial, risk and analytical frameworks — not generic prompting."],
-  ["Designed for decisions.", "Agents are shaped around specific analytical questions, workflows and decision contexts."],
-  ["Human judgement stays in the loop.", "AI accelerates analysis and structures evidence. Responsibility for consequential decisions remains with people."],
-] as const;
-
 export default function AgentsPage() {
   return (
     <main className={styles.page}>
@@ -37,21 +31,21 @@ export default function AgentsPage() {
         <section className={styles.hero} aria-labelledby="agents-title">
           <div className={`site-container ${styles.heroInner}`}>
             <div className={styles.proposition}>
-              <h1 id="agents-title"><span>AI agents built around</span> <em>the logic behind the decision.</em></h1>
-              <p>Entimema transforms financial, risk and analytical methodology into specialised AI agents designed to investigate, reason and support decisions within real business workflows.</p>
-              <DemoTrigger className={`primary-cta ${styles.primaryCta}`} />
-            </div>
-            <div className={styles.principleGrid} aria-label="Principles behind Entimema agents">
-              {principles.map(([title, copy]) => (
-                <article key={title}>
-                  <h2>{title}</h2>
-                  <p>{copy}</p>
-                </article>
-              ))}
+              <p className={styles.eyebrow}>ENTIMEMA AGENTS</p>
+              <h1 id="agents-title">Specialist systems for <em>consequential decisions.</em></h1>
+              <p>Financial, risk and analytical methodology—structured as operating agents for real decision workflows.</p>
             </div>
           </div>
         </section>
         <AgentLibrary />
+        <section className={styles.bridge} aria-labelledby="agents-bridge-title">
+          <div className={`site-container ${styles.bridgeInner}`}>
+            <p>FROM METHOD TO OPERATION</p>
+            <h2 id="agents-bridge-title">Built around the decision—not the demo.</h2>
+            <p>Entimema connects specialist agents to governed financial and risk workflows, trusted evidence and human judgement.</p>
+            <Link href="/services/decision-automation">Explore decision intelligence <span aria-hidden="true">↗</span></Link>
+          </div>
+        </section>
       </div>
     </main>
   );
