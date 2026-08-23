@@ -1,16 +1,16 @@
-.library { --library-grid-width: 1114px; --card-surface: #f6f8fa; --card-hover: #f3f6f8; --card-radius: 8px; --card-gap: 14px; --card-height: 155px; --card-padding: 22px; --mark-tile: 44px; --mark-ink: #18364f; --mark-signal: #b94824; --transition: 190ms cubic-bezier(.22, 1, .36, 1); padding: 110px 0 130px; }
-.inner { width: min(var(--library-grid-width), calc(100% - 48px)); margin-inline: auto; }
+.library { --library-grid-width: 1114px; --card-surface: #f6f8fa; --card-hover: #f3f6f8; --card-radius: 8px; --card-gap: 14px; --card-height: 154px; --card-padding: 22px; --mark-tile: 44px; --mark-ink: #18364f; --mark-signal: #b94824; --transition: 190ms cubic-bezier(.22, 1, .36, 1); padding: 105px 0 120px; }
+.inner { width: var(--library-grid-width); max-width: calc(100% - 48px); margin-inline: auto; }
 .heading { text-align: center; }
-.heading h2 { margin: 0; font-size: 39px; font-weight: 600; line-height: 1.12; letter-spacing: -.043em; text-wrap: balance; }
+.heading h2 { margin: 0; font-size: 40px; font-weight: 600; line-height: 1.1; letter-spacing: -.043em; text-wrap: balance; }
 .heading p { margin: 12px 0 0; color: var(--text-secondary); font-size: 15px; line-height: 1.55; letter-spacing: -.01em; }
 .filters { display: flex; flex-wrap: wrap; justify-content: center; gap: 7px 26px; margin-top: 40px; }
 .filter, .activeFilter { appearance: none; height: 34px; padding: 0; border: 0; border-radius: 999px; background: transparent; color: var(--text-secondary); font-size: 14px; font-weight: 500; line-height: 1; letter-spacing: -.01em; cursor: pointer; transition: color var(--transition), background-color var(--transition); }
 .filter:hover { color: var(--brand-navy-950); }
 .activeFilter { padding-inline: 14px; color: #fff; background: var(--brand-navy-950); }
 .filter:focus-visible, .activeFilter:focus-visible { outline: 2px solid var(--brand-orange-500); outline-offset: 3px; }
-.grid { display: grid; grid-template-columns: repeat(4, 268px); gap: var(--card-gap); margin-top: 36px; }
+.grid { display: grid; width: var(--library-grid-width); grid-template-columns: repeat(4, 268px); gap: var(--card-gap); margin-top: 35px; }
 .grid article { min-width: 0; }
-.card { display: flex; height: var(--card-height); flex-direction: column; padding: var(--card-padding); border: 1px solid rgba(22, 54, 86, .055); border-radius: var(--card-radius); background: var(--card-surface); transition: border-color var(--transition), background-color var(--transition); }
+.card { display: flex; width: 268px; height: var(--card-height); flex-direction: column; padding: var(--card-padding); border: 1px solid rgba(22, 54, 86, .055); border-radius: var(--card-radius); background: var(--card-surface); transition: border-color var(--transition), background-color var(--transition); }
 .card:hover { border-color: rgba(22, 54, 86, .12); background: var(--card-hover); }
 .card:focus-visible { outline: 2px solid var(--brand-orange-500); outline-offset: 3px; }
 .markField { position: relative; display: grid; width: var(--mark-tile); height: var(--mark-tile); place-items: center; overflow: hidden; border: 1px solid rgba(24, 54, 79, .045); border-radius: 8px; background: #ead8d2; transition: background-color var(--transition), border-color var(--transition); }
@@ -30,7 +30,7 @@
 .mark :global(.signalNode) { fill: var(--mark-signal); stroke: #fff; stroke-width: .65; }
 .card:hover .markField { border-color: rgba(24, 54, 79, .09); }
 .card:hover .mark :global(.secondary), .card:hover .mark :global(.guide) { opacity: .68; }
-.card h3 { max-width: none; margin: 19px 0 0; color: var(--brand-navy-950); font-size: 16px; font-weight: 500; line-height: 1.45; letter-spacing: -.021em; text-wrap: balance; }
-@media (max-width: 1199px) { .inner { width: min(550px, calc(100% - 48px)); } .grid { grid-template-columns: repeat(2, 268px); } }
-@media (max-width: 620px) { .library { padding: 84px 0 100px; } .inner { width: min(420px, calc(100% - 40px)); } .heading h2 { font-size: clamp(35px, 10vw, 39px); } .heading p { max-width: 28ch; margin-inline: auto; } .filters { justify-content: flex-start; flex-wrap: nowrap; gap: 14px; margin-top: 28px; overflow-x: auto; scrollbar-width: none; } .filters::-webkit-scrollbar { display: none; } .filter, .activeFilter { min-height: 44px; height: 44px; flex: 0 0 auto; } .grid { grid-template-columns: 1fr; gap: 10px; margin-top: 32px; } .card { --card-height: 150px; --card-padding: 21px; } }
+.card h3 { max-width: none; margin: 18px 0 0; color: var(--brand-navy-950); font-size: 16px; font-weight: 500; line-height: 1.45; letter-spacing: -.021em; text-wrap: balance; }
+@media (max-width: 1199px) { .inner { width: 550px; } .grid { width: 550px; grid-template-columns: repeat(2, 268px); } }
+@media (max-width: 620px) { .library { padding: 84px 0 100px; } .inner { width: min(420px, calc(100% - 40px)); max-width: none; } .heading h2 { font-size: clamp(35px, 10vw, 39px); } .heading p { max-width: 28ch; margin-inline: auto; } .filters { justify-content: flex-start; flex-wrap: nowrap; gap: 14px; margin-top: 28px; overflow-x: auto; scrollbar-width: none; } .filters::-webkit-scrollbar { display: none; } .filter, .activeFilter { min-height: 44px; height: 44px; flex: 0 0 auto; } .grid { width: 100%; grid-template-columns: 1fr; gap: 10px; margin-top: 32px; } .card { --card-height: 150px; --card-padding: 21px; width: 100%; } }
 @media (prefers-reduced-motion: reduce) { .card, .markField, .filter, .activeFilter { animation: none; transition: none; } }
