@@ -1,17 +1,31 @@
-import type { SVGProps } from "react";
-export type AgentGlyphName = "closure" | "ordering" | "extraction" | "normalization" | "synthesis" | "cohorts" | "observation" | "stability" | "stages" | "deviation" | "residual" | "branching";
+import type { ComponentType, SVGProps } from "react";
+
 type GlyphProps = SVGProps<SVGSVGElement>;
-const Frame = ({ children, ...props }: GlyphProps) => <svg viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false" {...props}>{children}</svg>;
-export const ClosureGlyph = (p: GlyphProps) => <Frame {...p}><path d="M13 6H7v20h18v-6M19 6h6v8"/><path className="signal" d="m19 14 6 6M25 14v6h-6"/></Frame>;
-export const OrderingGlyph = (p: GlyphProps) => <Frame {...p}><circle cx="8" cy="9" r="2.5"/><path d="m15.5 6.5 2.5 5h-5zM23 6.5h5v5h-5M6 20h4M14 20h4M23.5 20h4M6 25h4M14 25h4M23.5 25h4"/><path className="signal" d="M5 16h24"/></Frame>;
-export const ExtractionGlyph = (p: GlyphProps) => <Frame {...p}><path d="M5 7h14v18H5zM8 11h8M8 15h8M8 19h8"/><path className="signal" d="M23 6v20M20 10h6M20 16h6M20 22h6"/></Frame>;
-export const NormalizationGlyph = (p: GlyphProps) => <Frame {...p}><path d="M5 8h11M8 13h12M6 18h17"/><path className="signal" d="M9 24h17M26 6v20"/></Frame>;
-export const SynthesisGlyph = (p: GlyphProps) => <Frame {...p}><path d="M5 7l8 7M5 16h8M5 25l8-7M27 7l-8 7M27 25l-8-7"/><path className="signal" d="M13 12h6v8h-6z"/></Frame>;
-export const CohortsGlyph = (p: GlyphProps) => <Frame {...p}><path d="m6 24 4-16h4l-4 16zM12 24l4-16h4l-4 16zM18 24l4-16h4l-4 16z"/><path className="signal" d="m23 24 3-12h3l-3 12z"/></Frame>;
-export const ObservationGlyph = (p: GlyphProps) => <Frame {...p}><circle cx="16" cy="16" r="2.5"/><path d="M16 6v4M16 22v4M6 16h4M22 16h4M9 9l3 3M20 20l3 3M23 9l-3 3"/><circle className="signal fill" cx="8" cy="24" r="1.75"/></Frame>;
-export const StabilityGlyph = (p: GlyphProps) => <Frame {...p}><path d="M4 23c3 0 4-14 12-14s9 14 12 14M4 23c3 0 5-12 12-12 6 0 8 8 12 10"/><path className="signal" d="M22 15c2 2 3 5 6 6"/></Frame>;
-export const StagesGlyph = (p: GlyphProps) => <Frame {...p}><path d="M5 22h6V10H5zM13 24h6V8h-6zM21 26h6V6h-6z"/><path className="signal" d="M4 8l24 16"/></Frame>;
-export const DeviationGlyph = (p: GlyphProps) => <Frame {...p}><path d="M5 10h22M5 22h22M9 7v6M16 7v6M23 7v6M9 19v6M23 19v6"/><path className="signal" d="M16 18v8"/></Frame>;
-export const ResidualGlyph = (p: GlyphProps) => <Frame {...p}><path d="M5 6h22v20H5zM9 10h14v12H9zM13 14h6v4h-6z"/><path className="signal" d="M23 10v12"/></Frame>;
-export const BranchingGlyph = (p: GlyphProps) => <Frame {...p}><path d="M5 24c5 0 7-2 9-6V7M14 18c2-5 5-8 12-9M14 18c3 0 7 2 12 7"/><path className="signal" d="M14 18c3 0 7-1 12-1"/></Frame>;
-export const agentGlyphs: Record<AgentGlyphName, (props: GlyphProps) => React.ReactNode> = { closure: ClosureGlyph, ordering: OrderingGlyph, extraction: ExtractionGlyph, normalization: NormalizationGlyph, synthesis: SynthesisGlyph, cohorts: CohortsGlyph, observation: ObservationGlyph, stability: StabilityGlyph, stages: StagesGlyph, deviation: DeviationGlyph, residual: ResidualGlyph, branching: BranchingGlyph };
+type GlyphComponent = ComponentType<GlyphProps>;
+
+const GlyphFrame = ({ children, ...props }: GlyphProps) => (
+  <svg viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false" {...props}>{children}</svg>
+);
+
+// EDGL signature: a displaced terminal marks the consequential state or output.
+export const ClosureGlyph = (props: GlyphProps) => <GlyphFrame {...props}><path d="M9 6H5v20h22V10h-4"/><path d="M9 10v12h14V10"/><path className="signal" d="m19 7 4 3-4 3"/></GlyphFrame>;
+export const OrderingGlyph = (props: GlyphProps) => <GlyphFrame {...props}><path d="M6 8h8M6 16h12M6 24h16"/><circle cx="17" cy="8" r="1.5"/><circle cx="21" cy="16" r="1.5"/><circle className="signal fill" cx="25" cy="24" r="1.75"/></GlyphFrame>;
+export const ExtractionGlyph = (props: GlyphProps) => <GlyphFrame {...props}><path d="M5 7h14v18H5zM9 11h6M9 16h6M9 21h6"/><path className="signal" d="M19 16h8m-3-3 3 3-3 3"/></GlyphFrame>;
+export const NormalizationGlyph = (props: GlyphProps) => <GlyphFrame {...props}><path d="M5 8h9M5 16h13M5 24h17"/><path className="signal" d="M25 7v18M22 8h6M22 16h6M22 24h6"/></GlyphFrame>;
+export const SynthesisGlyph = (props: GlyphProps) => <GlyphFrame {...props}><path d="M5 7h5l5 7M5 16h7M5 25h5l5-7M27 7h-5l-5 7M27 25h-5l-5-7"/><path className="signal" d="M13 14h6v4h-6z"/></GlyphFrame>;
+export const CohortsGlyph = (props: GlyphProps) => <GlyphFrame {...props}><path d="M5 24 9 10h6l4 14M10 24l4-10h6l4 10M15 24l3-6h6l3 6"/><path className="signal" d="M5 24h23"/></GlyphFrame>;
+export const ObservationGlyph = (props: GlyphProps) => <GlyphFrame {...props}><path d="M5 9h22M5 23h22M8 16h5m6 0h5"/><circle className="signal fill" cx="16" cy="16" r="2"/></GlyphFrame>;
+export const StabilityGlyph = (props: GlyphProps) => <GlyphFrame {...props}><path d="M5 10c4 0 5 4 8 4s4-4 7-4 4 4 7 4M5 22c4 0 5-4 8-4s4 4 7 4 4-4 7-4"/><path className="signal" d="M5 16h22"/></GlyphFrame>;
+export const StagesGlyph = (props: GlyphProps) => <GlyphFrame {...props}><path d="M5 9h6v14H5zM13 9h6v14h-6zM21 9h6v14h-6z"/><path className="signal" d="M8 6v3m8 0v14m8 0v3"/></GlyphFrame>;
+export const DeviationGlyph = (props: GlyphProps) => <GlyphFrame {...props}><path d="M5 10h22M5 22h22M9 7v6M16 7v6M23 7v6M9 19v6M23 19v6"/><path className="signal" d="M16 17v10"/></GlyphFrame>;
+export const ResidualGlyph = (props: GlyphProps) => <GlyphFrame {...props}><path d="M5 6h22v20H5zM9 10h14v12H9z"/><path className="signal" d="M13 14h6v4h-6"/></GlyphFrame>;
+export const BranchingGlyph = (props: GlyphProps) => <GlyphFrame {...props}><path d="M5 16h8M13 16c3 0 3-7 7-7h7M13 16c3 0 3 7 7 7h7"/><path className="signal" d="M13 16h14"/><circle cx="13" cy="16" r="1.5"/></GlyphFrame>;
+
+export const agentGlyphs = {
+  closure: ClosureGlyph, ordering: OrderingGlyph, extraction: ExtractionGlyph,
+  normalization: NormalizationGlyph, synthesis: SynthesisGlyph, cohorts: CohortsGlyph,
+  observation: ObservationGlyph, stability: StabilityGlyph, stages: StagesGlyph,
+  deviation: DeviationGlyph, residual: ResidualGlyph, branching: BranchingGlyph,
+} satisfies Record<string, GlyphComponent>;
+
+export type AgentGlyphName = keyof typeof agentGlyphs;

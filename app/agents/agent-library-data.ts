@@ -1,18 +1,23 @@
 import type { AgentGlyphName } from "./AgentGlyphs";
+
 export const agentCategories = ["All", "Onboarding", "Finance", "Credit", "Risk & Compliance"] as const;
 export type AgentCategory = Exclude<(typeof agentCategories)[number], "All">;
-export type AgentDefinition = { id: string; slug: string; name: string; href: string; categories: readonly AgentCategory[]; glyph: AgentGlyphName; tone: 1 | 2 | 3 | 4 | 5 | 6 };
+type GlyphTone = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+export type AgentDefinition = { id: string; slug: string; name: string; href: string; categories: readonly AgentCategory[]; glyph: AgentGlyphName; tone: GlyphTone; operation: string; metaphor: string };
+
+// Agent -> analytical operation -> minimal geometry. This is the acceptance
+// record for deliberate glyph assignment, not user-facing copy.
 export const agents: readonly AgentDefinition[] = [
-  { id: "application-completeness", slug: "application-completeness", name: "Application Completeness Agent", href: "/services/risk-ai-agents", categories: ["Onboarding", "Credit"], glyph: "closure", tone: 1 },
-  { id: "document-classification", slug: "document-classification", name: "Document Classification Agent", href: "/services/risk-ai-agents", categories: ["Onboarding"], glyph: "ordering", tone: 4 },
-  { id: "financial-statement-extraction", slug: "financial-statement-extraction", name: "Financial Statement Extraction Agent", href: "/services/financial-ai-agents", categories: ["Onboarding", "Finance", "Credit"], glyph: "extraction", tone: 2 },
-  { id: "financial-spreading", slug: "financial-spreading", name: "Financial Spreading Agent", href: "/services/financial-ai-agents", categories: ["Finance", "Credit"], glyph: "normalization", tone: 5 },
-  { id: "credit-memo", slug: "credit-memo", name: "Credit Memo Agent", href: "/services/credit-risk", categories: ["Credit"], glyph: "synthesis", tone: 3 },
-  { id: "credit-vintage-analysis", slug: "credit-vintage-analysis", name: "Credit Vintage Analysis Agent", href: "/resources/credit-vintage-analysis", categories: ["Credit"], glyph: "cohorts", tone: 6 },
-  { id: "portfolio-monitoring", slug: "portfolio-monitoring", name: "Portfolio Monitoring Agent", href: "/services/credit-risk", categories: ["Credit", "Risk & Compliance"], glyph: "observation", tone: 2 },
-  { id: "pd-model-monitoring", slug: "pd-model-monitoring", name: "PD Model Monitoring Agent", href: "/resources/pd-model-monitoring", categories: ["Credit", "Risk & Compliance"], glyph: "stability", tone: 4 },
-  { id: "ifrs-9-ecl-analysis", slug: "ifrs-9-ecl-analysis", name: "IFRS 9 / ECL Analysis Agent", href: "/resources/ifrs-9-expected-credit-loss-architecture", categories: ["Finance", "Risk & Compliance"], glyph: "stages", tone: 1 },
-  { id: "p-and-l-variance", slug: "p-and-l-variance", name: "P&L Variance Agent", href: "/services/management-reporting", categories: ["Finance"], glyph: "deviation", tone: 5 },
-  { id: "cost-and-margin", slug: "cost-and-margin", name: "Cost & Margin Agent", href: "/services/cost-and-profitability", categories: ["Finance"], glyph: "residual", tone: 3 },
-  { id: "budget-and-scenario", slug: "budget-and-scenario", name: "Budget & Scenario Agent", href: "/services/budgets-and-forecasting", categories: ["Finance"], glyph: "branching", tone: 6 },
-];
+  { id: "application-completeness", slug: "application-completeness", name: "Application Completeness Agent", href: "/services/risk-ai-agents", categories: ["Onboarding", "Credit"], glyph: "closure", tone: 1, operation: "Close an evidence boundary after required inputs arrive", metaphor: "Interrupted nested frames resolved by a displaced terminal" },
+  { id: "document-classification", slug: "document-classification", name: "Document Classification Agent", href: "/services/risk-ai-agents", categories: ["Onboarding"], glyph: "ordering", tone: 4, operation: "Assign observations to an ordered classification", metaphor: "Increasing measures terminating in ordered states" },
+  { id: "financial-statement-extraction", slug: "financial-statement-extraction", name: "Financial Statement Extraction Agent", href: "/services/financial-ai-agents", categories: ["Onboarding", "Finance", "Credit"], glyph: "extraction", tone: 7, operation: "Move selected evidence out of a bounded source", metaphor: "Source frame with one directional output" },
+  { id: "financial-spreading", slug: "financial-spreading", name: "Financial Spreading Agent", href: "/services/financial-ai-agents", categories: ["Finance", "Credit"], glyph: "normalization", tone: 2, operation: "Align unequal inputs to a common analytical reference", metaphor: "Variable measures aligned against one reference boundary" },
+  { id: "credit-memo", slug: "credit-memo", name: "Credit Memo Agent", href: "/services/credit-risk", categories: ["Credit"], glyph: "synthesis", tone: 5, operation: "Converge distributed evidence into a decision artifact", metaphor: "Multiple inputs compressed into a central bounded result" },
+  { id: "credit-vintage-analysis", slug: "credit-vintage-analysis", name: "Credit Vintage Analysis Agent", href: "/resources/credit-vintage-analysis", categories: ["Credit"], glyph: "cohorts", tone: 8, operation: "Compare cohorts developing across shared time", metaphor: "Offset parallel trajectories on a common horizon" },
+  { id: "portfolio-monitoring", slug: "portfolio-monitoring", name: "Portfolio Monitoring Agent", href: "/services/credit-risk", categories: ["Credit", "Risk & Compliance"], glyph: "observation", tone: 3, operation: "Locate a current observation inside expected bounds", metaphor: "Focal observation held between two boundaries" },
+  { id: "pd-model-monitoring", slug: "pd-model-monitoring", name: "PD Model Monitoring Agent", href: "/resources/pd-model-monitoring", categories: ["Credit", "Risk & Compliance"], glyph: "stability", tone: 6, operation: "Assess signal behaviour around a stable reference", metaphor: "Counter-moving envelopes balanced around a reference line" },
+  { id: "ifrs-9-ecl-analysis", slug: "ifrs-9-ecl-analysis", name: "IFRS 9 / ECL Analysis Agent", href: "/resources/ifrs-9-expected-credit-loss-architecture", categories: ["Finance", "Risk & Compliance"], glyph: "stages", tone: 1, operation: "Evaluate transition through ordered deterioration states", metaphor: "Three equal states with a continuous displaced transition" },
+  { id: "p-and-l-variance", slug: "p-and-l-variance", name: "P&L Variance Agent", href: "/services/management-reporting", categories: ["Finance"], glyph: "deviation", tone: 7, operation: "Identify an observation displaced from its expected position", metaphor: "Regular paired markers with one downward exception" },
+  { id: "cost-and-margin", slug: "cost-and-margin", name: "Cost & Margin Agent", href: "/services/cost-and-profitability", categories: ["Finance"], glyph: "residual", tone: 4, operation: "Reveal the quantity remaining after nested decomposition", metaphor: "Nested boundaries terminating in an open residual" },
+  { id: "budget-and-scenario", slug: "budget-and-scenario", name: "Budget & Scenario Agent", href: "/services/budgets-and-forecasting", categories: ["Finance"], glyph: "branching", tone: 2, operation: "Compare alternative outcomes around a controlled base case", metaphor: "One decision node producing three bounded paths" },
+] as const;
