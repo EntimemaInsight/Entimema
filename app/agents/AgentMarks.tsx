@@ -65,11 +65,13 @@ const SynthesisMark = (props: MarkProps) => <MarkFrame {...props}>
 
 // Staggered cohorts unfold across one horizon; one trajectory exits the expected landscape.
 const VintageMark = (props: MarkProps) => <MarkFrame {...props}>
-  <path className="field" d="M7 9h34v30H7z" /><path className="secondary" d="M7 39V9M7 39h34" />
-  <path className="guide" d="M12 10v29M19 10v29M26 10v29M33 10v29M40 10v29" />
-  <path className="primary" d="M7 13c7 0 9 4 14 6s10 1 19 6M12 19c5 0 8 3 12 5s9 2 16 5M19 25c5 0 7 3 10 5s6 3 11 4M26 31c4 0 7 3 10 6" />
-  <path className="signal" d="M12 19c5 0 8 3 12 5 4 2 8 2 12 4" />
-  <MicroNode x={12} y={14}/><MicroNode x={19} y={18}/><MicroNode x={26} y={21}/><MicroNode x={33} y={23}/><HollowNode x={19} y={25}/><HollowNode x={26} y={29}/><SignalNode x={36} y={28}/>
+  <path className="field" d="M7.5 9.4c8.8.2 12.2 5.9 20.3 5.2 5.2-.4 8.7-.9 13.2 1.7v1.8c-4.6-2.7-8-2.2-13.1-1.8-8.4.8-11.9-5-20.4-5.2z" />
+  <path className="primary" d="M7.5 10.3c4.4 0 6.8 1.3 9.7 2.9 3.3 1.9 6.6 2.4 10.6 2.1 5.2-.4 8.7-1 13.2 1.7M11.8 17.8c4.2 0 6.6 1.3 9.4 2.9 3.2 1.8 6.4 2.4 10.2 2.1 3.9-.3 6.8-.4 9.6 1.3M16.2 25.3c4 0 6.2 1.3 8.9 2.8 3 1.8 5.9 2.4 9.4 2.1 2.5-.2 4.6-.1 6.5.8M20.6 32.8c3.8 0 6 1.2 8.4 2.7 2.2 1.3 3.7 2.2 5.4 2.9 1.8.8 3.9 1.1 6.6.6" />
+  <path className="guide" d="M17.2 13.2L21.2 20.7 25.1 28.1 29 35.5M40.9 12.8v14.7" />
+  <path className="secondary" d="M8 7.7v5.2M12.3 15.2v5.2M16.7 22.7v5.2M21.1 30.2v5.2M38.5 14.8l2.5 2.2-2.5 2.1M38.6 21.9l2.4 2.2-2.4 2.1M38.7 29l2.3 2-2.3 2" />
+  <HollowNode x={7.5} y={10.3}/><HollowNode x={11.8} y={17.8}/><HollowNode x={16.2} y={25.3}/><HollowNode x={20.6} y={32.8}/>
+  <MicroNode x={17.2} y={13.2}/><MicroNode x={27.8} y={15.3}/><MicroNode x={21.2} y={20.7}/><MicroNode x={31.4} y={22.8}/><MicroNode x={25.1} y={28.1}/><MicroNode x={34.5} y={30.2}/><MicroNode x={29} y={35.5}/>
+  <path className="signal" d="M33.1 37.8l1.3.6" /><SignalNode x={34.4} y={38.4}/><HollowNode x={41} y={39}/>
 </MarkFrame>;
 
 // A portfolio constellation orbits a reference envelope; one signal breaks containment.
