@@ -139,19 +139,19 @@ const ProbabilityMark = (props: MarkProps) => (
     <path d="M12.7 7.1a9 9 0 0 0-7.2 6.2M5.3 16.2a9 9 0 0 0 2.8 6.6M10.6 24.3a9 9 0 0 0 7.5-1.3" stroke="currentColor" strokeWidth="2.15" strokeLinecap="butt" />
     <path d="M13.2 10.9a5.3 5.3 0 0 0-4.3 3.2M9 18.4a5.3 5.3 0 0 0 8.7 1.4M18.1 13.1a5.3 5.3 0 0 0-2.1-1.7" stroke="currentColor" strokeWidth="1.8" strokeLinecap="butt" />
 
-    <path d="M14 16 24.6 7.7M14 16h10.6M14 16l10.6 8.3" stroke="currentColor" strokeWidth=".78" strokeLinecap="round" strokeDasharray="1.05 1.75" />
-    <path d="m19.1 10.7 1.9-.2-.5 1.8M19.8 16l1.6-1M19.8 16l1.6 1M19.1 21.3l1.9.2-.5-1.8" stroke="currentColor" strokeWidth=".72" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M14 16 24.6 7.7M14 16h10.6M14 16l10.6 8.3" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
+    <path d="m19.1 10.7 1.9-.2-.5 1.8M19.8 16l1.6-1M19.8 16l1.6 1M19.1 21.3l1.9.2-.5-1.8" stroke="currentColor" strokeWidth=".9" strokeLinecap="round" strokeLinejoin="round" />
 
     <circle className="productSolid" cx="13" cy="16" r="3.35" />
-    <path d="M13 12.65a3.35 3.35 0 0 1 3.1 2.08L13 16Z" fill="#d6e4e3" />
-    <circle cx="13" cy="16" r="1.15" fill="#d6e4e3" />
+    <path d="M13 12.65a3.35 3.35 0 0 1 3.1 2.08L13 16Z" fill="var(--mark-field)" />
+    <circle cx="13" cy="16" r="1.15" fill="var(--mark-field)" />
 
     <circle className="productSolid" cx="27.4" cy="7" r="3.15" />
-    <path d="m25.95 7.05 1 1 1.9-2.15" stroke="#d6e4e3" strokeWidth=".9" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="m25.95 7.05 1 1 1.9-2.15" stroke="var(--mark-field)" strokeWidth=".9" strokeLinecap="round" strokeLinejoin="round" />
     <circle className="productSignal" cx="27.4" cy="16" r="3.15" />
-    <path d="M27.4 14.25v2.15M27.4 17.55v.05" stroke="#d6e4e3" strokeWidth=".95" strokeLinecap="round" />
+    <path d="M27.4 14.25v2.15M27.4 17.55v.05" stroke="var(--mark-field)" strokeWidth=".95" strokeLinecap="round" />
     <circle className="productSolid" cx="27.4" cy="25" r="3.15" />
-    <path d="m26.25 23.85 2.3 2.3m0-2.3-2.3 2.3" stroke="#d6e4e3" strokeWidth=".85" strokeLinecap="round" />
+    <path d="m26.25 23.85 2.3 2.3m0-2.3-2.3 2.3" stroke="var(--mark-field)" strokeWidth=".85" strokeLinecap="round" />
   </svg>
 );
 // Three discrete risk chambers are crossed by one deteriorating exposure before ECL recognition.
