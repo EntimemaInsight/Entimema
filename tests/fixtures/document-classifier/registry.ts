@@ -1,0 +1,1 @@
+export const DOCUMENT_CLASSIFIER_FIXTURES = { syntheticTrialBalance: { fileName: "synthetic-trial-balance.csv", description: "Non-confidential synthetic accounting fixture generated in tests." } } as const;
