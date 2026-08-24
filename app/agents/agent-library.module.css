@@ -1,4 +1,4 @@
-.library { --library-grid-width: 970px; --card-width: 232px; --card-surface: #f6f8fa; --card-hover: #f3f6f8; --card-radius: 8px; --card-gap: 14px; --card-height: 146px; --card-padding: 20px; --mark-tile-width: 44px; --mark-tile-height: 44px; --mark-ink: #18364f; --mark-signal: #b94824; --transition: 190ms cubic-bezier(.22, 1, .36, 1); padding: 105px 0 145px; }
+.library { --library-grid-width: 970px; --card-width: 232px; --card-surface: #f6f8fa; --card-hover: #f3f6f8; --card-radius: 8px; --card-gap: 14px; --card-height: 146px; --card-padding: 20px; --mark-tile-width: 44px; --mark-tile-height: 44px; --mark-ink: #07152f; --mark-signal: #e65a2c; --transition: 190ms cubic-bezier(.22, 1, .36, 1); padding: 105px 0 145px; }
 .inner { width: var(--library-grid-width); max-width: calc(100% - 48px); margin-inline: auto; }
 .heading { text-align: center; }
 .heading h2 { margin: 0; font-size: 40px; font-weight: 600; line-height: 1.1; letter-spacing: -.043em; text-wrap: balance; }
@@ -13,27 +13,36 @@
 .card { display: flex; width: var(--card-width); height: var(--card-height); flex-direction: column; padding: var(--card-padding); border: 1px solid rgba(22, 54, 86, .055); border-radius: var(--card-radius); background: var(--card-surface); transition: border-color var(--transition), background-color var(--transition); }
 .card:hover { border-color: rgba(22, 54, 86, .12); background: var(--card-hover); }
 .card:focus-visible { outline: 2px solid var(--brand-orange-500); outline-offset: 3px; }
-.markField { position: relative; display: grid; width: var(--mark-tile-width); height: var(--mark-tile-height); place-items: center; overflow: hidden; border: 1px solid rgba(24, 54, 79, .045); border-radius: 8px; background: #ead8d2; transition: background-color var(--transition), border-color var(--transition); }
+.markField { --mark-field: #ffe1c1; position: relative; display: grid; width: var(--mark-tile-width); height: var(--mark-tile-height); place-items: center; overflow: hidden; border: 1px solid rgba(7, 21, 47, .045); border-radius: 8px; background: var(--mark-field); transition: background-color var(--transition), border-color var(--transition); }
 .signatureField { position: relative; display: block; width: var(--mark-tile-width); height: var(--mark-tile-height); flex: 0 0 auto; overflow: hidden; border-radius: 8px; }
 .signatureImage { display: block; object-fit: cover; }
-.markField::after { position: absolute; inset: 0; background: radial-gradient(circle at 28% 24%, rgba(255,255,255,.18), transparent 48%); content: ""; pointer-events: none; }
-.tone2 { background: #e8ddca; } .tone3 { background: #e4e1d4; } .tone4 { background: #dfe4d2; } .tone5 { background: #d8e3d9; } .tone6 { background: #d6e4e3; } .tone7 { background: #dae2e9; } .tone8 { background: #e1dce7; }
+.tone2 { --mark-field: #fff0bd; } .tone3 { --mark-field: #fff7c9; } .tone4 { --mark-field: #efffb9; } .tone5 { --mark-field: #d5f7e8; } .tone6 { --mark-field: #d5f2f1; } .tone7 { --mark-field: #dceaff; } .tone8 { --mark-field: #e8e2f7; }
 .mark { position: relative; z-index: 1; width: 24px; height: 24px; overflow: visible; color: var(--mark-ink); shape-rendering: geometricPrecision; }
 .mark[data-product-mark="prototype"] { width: 28px; height: 28px; }
-.mark[data-product-mark="application-completeness"] { width: 28px; height: 28px; color: #07152f; }
-.mark[data-product-mark="document-classification"] { width: 28px; height: 28px; color: #07152f; }
-.mark[data-product-mark="financial-statement-extraction"] { width: 28px; height: 28px; color: #07152f; }
-.mark[data-product-mark="financial-spreading"] { width: 28px; height: 28px; color: #07152f; }
-.mark[data-product-mark="credit-memo"] { width: 28px; height: 28px; color: #07152f; }
-.mark[data-product-mark="credit-vintage-analysis"] { width: 28px; height: 28px; color: #07152f; }
-.mark[data-product-mark="portfolio-monitoring"] { width: 28px; height: 28px; color: #07152f; }
-.mark[data-product-mark="pd-model-monitoring"] { width: 30px; height: 30px; color: #07152f; }
-.mark[data-product-mark="ifrs-9-ecl-analysis"] { width: 30px; height: 30px; color: #07152f; }
-.mark[data-product-mark="p-and-l-variance"] { width: 30px; height: 30px; color: #07152f; }
-.mark[data-product-mark="data-integrity-check"] { width: 30px; height: 30px; color: #07152f; }
-.markField:has(.mark[data-product-mark="application-completeness"]) { background: #f8ddd2; }
+.mark[data-product-mark="application-completeness"] { width: 29px; height: 29px; transform: translateY(-.25px); }
+.mark[data-product-mark="document-classification"] { width: 30px; height: 30px; transform: translateX(.25px); }
+.mark[data-product-mark="financial-statement-extraction"] { width: 28px; height: 28px; }
+.mark[data-product-mark="financial-spreading"] { width: 29px; height: 29px; transform: translateX(-.25px); }
+.mark[data-product-mark="credit-memo"] { width: 29px; height: 29px; transform: translateX(.5px); }
+.mark[data-product-mark="credit-vintage-analysis"] { width: 28px; height: 28px; transform: translateY(.25px); }
+.mark[data-product-mark="portfolio-monitoring"] { width: 29px; height: 29px; transform: translate(.25px, -.25px); }
+.mark[data-product-mark="pd-model-monitoring"] { width: 30px; height: 30px; transform: translateX(-.5px); }
+.mark[data-product-mark="ifrs-9-ecl-analysis"] { width: 29px; height: 29px; transform: translateY(.5px); }
+.mark[data-product-mark="p-and-l-variance"] { width: 29px; height: 29px; transform: translateY(-.25px); }
+.mark[data-product-mark="data-integrity-check"] { width: 28px; height: 28px; }
+.markField:has(.mark[data-product-mark="application-completeness"]) { --mark-field: #ffe1c1; }
+.markField:has(.mark[data-product-mark="document-classification"]) { --mark-field: #efffb9; }
+.markField:has(.mark[data-product-mark="financial-statement-extraction"]) { --mark-field: #dceaff; }
+.markField:has(.mark[data-product-mark="financial-spreading"]) { --mark-field: #fff0bd; }
+.markField:has(.mark[data-product-mark="credit-memo"]) { --mark-field: #d5f7e8; }
+.markField:has(.mark[data-product-mark="credit-vintage-analysis"]) { --mark-field: #e8e2f7; }
+.markField:has(.mark[data-product-mark="portfolio-monitoring"]) { --mark-field: #fff7c9; }
+.markField:has(.mark[data-product-mark="pd-model-monitoring"]) { --mark-field: #d5f2f1; }
+.markField:has(.mark[data-product-mark="ifrs-9-ecl-analysis"]) { --mark-field: #ffd9d2; }
+.markField:has(.mark[data-product-mark="p-and-l-variance"]) { --mark-field: #dce4ff; }
+.markField:has(.mark[data-product-mark="data-integrity-check"]) { --mark-field: #e7f7c7; }
 .mark :global(.productSolid) { fill: currentColor; }
-.mark :global(.productCutout) { fill: #f8ddd2; }
+.mark :global(.productCutout) { fill: var(--mark-field); }
 .mark :global(.productCheckpoint) { stroke: currentColor; stroke-width: .62; stroke-linecap: round; stroke-dasharray: 1.35 1.65; }
 .mark :global(.productCheckpointLeft) { stroke: currentColor; stroke-width: 1.05; stroke-linecap: round; }
 .mark :global(.productStroke) { stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
@@ -46,7 +55,7 @@
 .mark[data-product-mark="credit-vintage-analysis"] :global(.productSignal) { fill: #e65a2c; }
 .mark[data-product-mark="portfolio-monitoring"] :global(.productSignal), .mark[data-product-mark="portfolio-monitoring"] :global(.portfolioMatrixSignal) { fill: #e65a2c; }
 .mark[data-product-mark="pd-model-monitoring"] :global(.productSignal) { fill: #e65a2c; }
-.mark[data-product-mark="ifrs-9-ecl-analysis"] :global(.productSignal) { fill: #e65a2c; stroke: #f8ddd2; stroke-width: .55; }
+.mark[data-product-mark="ifrs-9-ecl-analysis"] :global(.productSignal) { fill: #e65a2c; stroke: var(--mark-field); stroke-width: .55; }
 .mark[data-product-mark="p-and-l-variance"] :global(.productSignal) { fill: #e65a2c; }
 .mark[data-product-mark="data-integrity-check"] :global(.productSignal) { fill: #e65a2c; }
 .mark :global(.integrityStructure) { fill: none; stroke: currentColor; stroke-width: 1.25; stroke-linecap: round; stroke-linejoin: round; }
@@ -65,7 +74,7 @@
 .mark :global(.pdModel) { fill: #d6e4e3; stroke: currentColor; stroke-width: 1.65; stroke-linejoin: round; }
 .mark :global(.pdModelCore) { fill: none; stroke: currentColor; stroke-width: .72; stroke-linecap: round; stroke-linejoin: round; }
 .mark :global(.portfolioMatrix), .mark :global(.portfolioBars), .mark :global(.portfolioTrendNode) { fill: currentColor; }
-.mark :global(.portfolioField) { fill: #ead8d2; stroke: currentColor; stroke-width: 1.65; }
+.mark :global(.portfolioField) { fill: var(--mark-field); stroke: currentColor; stroke-width: 1.65; }
 .mark :global(.portfolioOuterRing) { fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: butt; }
 .mark :global(.portfolioOuterDots) { fill: none; stroke: currentColor; stroke-width: 1.45; stroke-linecap: round; }
 .mark :global(.portfolioTrend) { fill: none; stroke: currentColor; stroke-width: 1.05; stroke-linecap: round; stroke-linejoin: round; }
@@ -74,7 +83,7 @@
 .mark :global(.creditConvergence) { fill: none; stroke: currentColor; stroke-width: 1.45; stroke-linecap: butt; stroke-linejoin: round; }
 .mark :global(.creditGate) { fill: none; stroke: currentColor; stroke-width: 1.55; stroke-linecap: round; }
 .mark :global(.creditDecision) { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: square; stroke-linejoin: miter; }
-.mark :global(.extractionCutout) { fill: #dae2e9; }
+.mark :global(.extractionCutout) { fill: var(--mark-field); }
 .mark :global(.extractionTable), .mark :global(.extractionOutputDetail) { fill: none; stroke: #dae2e9; stroke-width: .58; stroke-linecap: round; stroke-linejoin: round; }
 .mark :global(.extractionOutput) { fill: currentColor; }
 .mark :global(.extractionFlow) { fill: none; stroke: currentColor; stroke-width: .58; stroke-linecap: round; stroke-dasharray: .55 1.05; }
@@ -82,14 +91,14 @@
 .mark :global(.extractionLens) { fill: #dae2e9; }
 .mark :global(.extractionHandle) { fill: none; stroke: currentColor; stroke-width: 2.8; stroke-linecap: round; }
 .mark :global(.extractionTarget), .mark :global(.extractionCapture) { fill: none; stroke: #e65a2c; stroke-width: .85; stroke-linecap: round; stroke-linejoin: round; }
-.mark :global(.spreadingCutout) { fill: #e8ddca; }
-.mark :global(.spreadingGrid), .mark :global(.spreadingConnector) { fill: none; stroke: currentColor; stroke-width: .55; stroke-linecap: round; stroke-linejoin: round; }
+.mark :global(.spreadingCutout) { fill: var(--mark-field); }
+.mark :global(.spreadingGrid), .mark :global(.spreadingConnector) { fill: none; stroke: currentColor; stroke-width: .7; stroke-linecap: round; stroke-linejoin: round; }
 .mark :global(.spreadingSignal) { fill: none; stroke: #e65a2c; stroke-width: 1.15; stroke-linecap: round; stroke-linejoin: round; }
 .mark :global(.spreadingValidation) { fill: none; stroke: currentColor; stroke-width: .6; stroke-linecap: round; stroke-dasharray: .5 1.05; }
 .mark :global(.classificationInput), .mark :global(.classificationOutput), .mark :global(.classificationNode) { fill: currentColor; }
-.mark :global(.classificationInputCutout), .mark :global(.classificationOutputDetail) { fill: #dfe4d2; }
+.mark :global(.classificationInputCutout), .mark :global(.classificationOutputDetail) { fill: var(--mark-field); }
 .mark :global(.classificationInbound) { fill: none; stroke: currentColor; stroke-width: .62; stroke-linecap: round; stroke-dasharray: .65 1.25; }
-.mark :global(.classificationClassifier) { fill: #dfe4d2; stroke: currentColor; stroke-width: 1.7; stroke-linejoin: round; }
+.mark :global(.classificationClassifier) { fill: var(--mark-field); stroke: currentColor; stroke-width: 1.7; stroke-linejoin: round; }
 .mark :global(.classificationAperture) { fill: none; stroke: currentColor; stroke-width: 1.05; stroke-linecap: round; }
 .mark :global(.classificationRouting) { fill: none; stroke: currentColor; stroke-width: .58; stroke-linecap: round; stroke-linejoin: round; }
 .mark :global(.classificationOutputSignal) { fill: #e65a2c; }
