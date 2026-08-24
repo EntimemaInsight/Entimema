@@ -154,17 +154,13 @@ const ProbabilityMark = (props: MarkProps) => (
     <path d="m26.25 23.85 2.3 2.3m0-2.3-2.3 2.3" stroke="#d6e4e3" strokeWidth=".85" strokeLinecap="round" />
   </svg>
 );
-// Ordered stages accumulate loss mass beneath a deterioration path and terminal ECL event.
+// Three discrete risk chambers are crossed by one deteriorating exposure before ECL recognition.
 const RiskChambersMark = (props: MarkProps) => (
   <svg viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false" data-product-mark="ifrs-9-ecl-analysis" {...props}>
-    <path className="eclRiskMass" d="M12 25.1V20.3l8-5.7v10.5H12ZM21.5 25.1V16.8l8-6.1v14.4h-8Z" />
-    <path className="eclStage" d="M2.5 13.9v11.2h8V11.6M12 12.1v13h8V8.3M21.5 10.3v14.8h8V5.8" />
-    <path className="eclDeterioration" d="m12.7 18.8 4.1-3.2 3.9-3.1 4.3-3.1 3.4-3" />
-    <circle className="eclDeteriorationNode" cx="16.8" cy="15.6" r="1.15" />
-    <circle className="eclDeteriorationNode" cx="24.9" cy="9.4" r="1.15" />
-    <path className="eclTrajectory" d="M2.5 11.8 9.2 9.3l3.4-4.1h4.1l2.5-2.7 4-.6 4.1-1.5" />
-    <circle className="productSignal" cx="29.1" cy="1.75" r="1.7" />
-    <path className="eclBaseline" d="M1.8 28.5h9.1M11.8 28.5h8.6M21.3 28.5h9.2" />
+    <path className="eclChamber" d="M2.4 25.4h8.1v2.4H2.4zM12.3 27.8v-7h7.7v7M22 27.8h7.6V10.6h-5.5v8" />
+    <path className="eclMigration" d="M6.3 24.2v-5.8c0-2.1 1.2-3.2 3.3-3.2h1.1c2.1 0 3.2 1.1 3.2 3.2v.5M14 17.4v-4.2c0-2 1.1-3.1 3.1-3.1h2.6c1.9 0 3-1 3-2.9V6" />
+    <path className="eclDirection" d="m4.8 22.7 1.5 1.5 1.5-1.5M12.5 17.4l1.5 1.5 1.5-1.5M21.2 7.2 22.7 5.7l1.5 1.5" />
+    <circle className="productSignal" cx="27.5" cy="5.6" r="2.45" />
   </svg>
 );
 
