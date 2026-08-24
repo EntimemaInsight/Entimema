@@ -83,7 +83,7 @@ export function DemoDiscoveryProvider({ children }: { children: ReactNode }) {
     demo: { titleId: "demo-discovery-title", closeLabel: "Close Discover Entimema" },
     project: { titleId: "sales-contact-title", closeLabel: "Close Start a new project" },
     partnership: { titleId: "partnership-contact-title", closeLabel: "Close Partner with Entimema" },
-    client: { titleId: "client-contact-title", closeLabel: "Close Existing Client Support" },
+    client: { titleId: "client-contact-title", closeLabel: "Close Support" },
     newsletter: { titleId: "newsletter-subscription-title", closeLabel: "Close Decision Signals subscription" },
   }[modalKind ?? "demo"];
   return (
@@ -230,7 +230,7 @@ function ClientForm({ titleId }: { titleId: string }) {
     setStatus(await send(data, "client"));
   }
   if (status === "success") return <Success kind="client" titleId={titleId} />;
-  return <><FormHeader title="Existing Client Support" titleId={titleId} /><form className={styles.form} noValidate onSubmit={submit}><input name="intent" type="hidden" value="client" /><Honeypot id="client-website" /><Field error={errors.firstName} id="client-firstName" label="First name" name="firstName" required /><Field error={errors.lastName} id="client-lastName" label="Last name" name="lastName" required /><Field autoComplete="email" error={errors.email} id="client-email" label="Company email" name="companyEmail" required type="email" /><Field autoComplete="organization" error={errors.company} id="client-company" label="Company name" name="companyName" required /><Field autoComplete="tel" error={errors.phone} id="client-phone" label="Phone number" name="phoneNumber" required type="tel" /><SelectField error={errors.inquiryType} id="client-inquiry-type" label="Inquiry type" name="inquiryType" options={clientInquiryTypes} /><MessageField error={errors.message} id="client-message" label="Description" /><ConsentAndPrivacy marketing={false} /><SubmitArea status={status} /></form></>;
+  return <><FormHeader title="Support" titleId={titleId} /><form className={styles.form} noValidate onSubmit={submit}><input name="intent" type="hidden" value="client" /><Honeypot id="client-website" /><Field error={errors.firstName} id="client-firstName" label="First name" name="firstName" required /><Field error={errors.lastName} id="client-lastName" label="Last name" name="lastName" required /><Field autoComplete="email" error={errors.email} id="client-email" label="Company email" name="companyEmail" required type="email" /><Field autoComplete="organization" error={errors.company} id="client-company" label="Company name" name="companyName" required /><Field autoComplete="tel" error={errors.phone} id="client-phone" label="Phone number" name="phoneNumber" required type="tel" /><SelectField error={errors.inquiryType} id="client-inquiry-type" label="Inquiry type" name="inquiryType" options={clientInquiryTypes} /><MessageField error={errors.message} id="client-message" label="Description" /><ConsentAndPrivacy marketing={false} /><SubmitArea status={status} /></form></>;
 }
 
 function NewsletterForm({ titleId }: { titleId: string }) {

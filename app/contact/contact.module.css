@@ -35,7 +35,7 @@
 }
 
 .path {
-  border: 0;
+  border: 1px solid color-mix(in srgb, var(--brand-navy-900) 88%, white);
   text-align: left;
   font: inherit;
   cursor: pointer;
@@ -50,8 +50,10 @@
   background: var(--brand-navy-900);
   color: var(--surface);
   transition:
-    background-color 300ms var(--ease-standard),
-    transform 300ms var(--ease-standard);
+    background-color 220ms var(--ease-standard),
+    border-color 220ms var(--ease-standard),
+    box-shadow 220ms var(--ease-standard),
+    transform 220ms var(--ease-standard);
 }
 
 .formPanel {
@@ -291,6 +293,11 @@
   height: clamp(46px, 3.7vw, 57px);
   display: grid;
   place-items: center;
+  border: 1px solid color-mix(in srgb, var(--brand-blue-200) 62%, transparent);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--brand-blue-200) 82%, white);
+  color: var(--brand-navy-950);
+  transition: transform 220ms var(--ease-standard);
 }
 
 .icon {
@@ -300,7 +307,15 @@
   stroke-width: 1.75;
   stroke-linecap: round;
   stroke-linejoin: round;
-  transition: transform 220ms var(--ease-standard);
+}
+
+.supportMark {
+  display: grid;
+  place-items: center;
+  font-size: clamp(31px, 2.5vw, 38px);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1;
+  transform: translateY(-1px);
 }
 
 .title {
@@ -315,14 +330,23 @@
 
 .path:hover {
   background: var(--brand-navy-800);
+  border-color: color-mix(in srgb, var(--brand-blue-200) 58%, var(--brand-navy-800));
+  box-shadow: 0 10px 24px color-mix(in srgb, var(--brand-navy-950) 13%, transparent);
   transform: translateY(-3px);
 }
 
-.path:hover .icon { transform: translateY(-1px); }
+.path:hover .iconFrame { transform: translateY(-2px); }
+
+.path:active {
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--brand-navy-950) 10%, transparent);
+  transform: translateY(-1px);
+}
 
 .path:focus-visible {
-  outline: 3px solid var(--brand-blue-200);
-  outline-offset: 4px;
+  border-color: var(--brand-blue-200);
+  outline: 3px solid color-mix(in srgb, var(--brand-blue-200) 82%, white);
+  outline-offset: 3px;
+  box-shadow: 0 10px 24px color-mix(in srgb, var(--brand-navy-950) 13%, transparent);
 }
 
 @media (max-width: 900px) {
@@ -436,7 +460,7 @@
 
 @media (hover: none) and (pointer: coarse) {
   .path:hover,
-  .path:hover .icon {
+  .path:hover .iconFrame {
     transform: none;
   }
 
@@ -447,14 +471,14 @@
 
 @media (prefers-reduced-motion: reduce) {
   .path,
-  .icon,
+  .iconFrame,
   .formPanel {
     transition-duration: 0.01ms;
     animation-duration: 0.01ms;
   }
 
   .path:hover,
-  .path:hover .icon {
+  .path:hover .iconFrame {
     transform: none;
   }
 }
