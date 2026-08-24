@@ -3,7 +3,7 @@ import type { DocumentType } from "./taxonomy";
 export const ROUTING_MAP: Partial<Record<DocumentType, string>> = {
   "Financial Statements": "financial_spreading", "Balance Sheet": "financial_spreading", "Income Statement": "financial_spreading",
   "Cash Flow Statement": "financial_spreading", "Trial Balance": "financial_spreading", "General Ledger": "financial_data_preparation",
-  "Accounts Receivable Aging": "receivables_analysis", "Accounts Payable Aging": "payables_analysis", "Bank Statement": "cash_flow_analysis",
+  "Accounts Receivable Aging": "receivables_analysis", "Accounts Payable Aging": "payables_analysis", "Invoice Register": "financial_data_preparation", "Purchase Invoice": "payables_analysis", "Bank Statement": "cash_flow_analysis",
   Budget: "budget_analysis", Forecast: "forecast_analysis", Unknown: "manual_review",
 };
 const threshold = (name: string, fallback: number) => { const value = Number(process.env[name]); return Number.isFinite(value) && value >= 0 && value <= 1 ? value : fallback; };
