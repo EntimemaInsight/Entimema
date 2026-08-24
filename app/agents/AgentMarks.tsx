@@ -55,13 +55,19 @@ const ClassificationMark = (props: MarkProps) => (
 // A financial source is isolated by a precision aperture and resolves into structured values.
 const ExtractionMark = (props: MarkProps) => (
   <svg viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false" data-product-mark="financial-statement-extraction" {...props}>
-    <path className="productSolid" d="M3 2.5h13.8L22.5 8v19.5H3z" />
-    <path className="extractionCutout" d="M16.8 2.5V8h5.7z" />
-    <path className="extractionCutout" d="M6.5 7h7v1.8h-7zM6.5 11h11.8v1.8H6.5zM6.5 15h8.2v1.8H6.5z" />
-    <circle className="productSolid" cx="21.5" cy="21" r="8.5" />
-    <circle className="extractionCutout" cx="21.5" cy="21" r="5.15" />
-    <path className="extractionDatum" d="M18.2 17.8h2.25v2.25H18.2zM21.7 17.8h3.1v2.25h-3.1zM18.2 21.3h3.5v2.25h-3.5zM23 21.3h1.8v2.25H23z" />
-    <rect className="productSignal" x="20.45" y="24.8" width="2.1" height="2.1" rx=".3" />
+    <path className="productSolid" d="M4.1 1.8h12.7l4.5 4.5v17.1H4.1z" />
+    <path className="extractionCutout" d="M16.8 1.8v4.5h4.5zM6.3 5.4h6.7v1H6.3zM6.3 8h9.4v1H6.3z" />
+    <path className="extractionTable" d="M6.2 11h11.9v7.7H6.2zM9.15 11v7.7M13.1 11v7.7M6.2 13.55h11.9M6.2 16.1h11.9" />
+
+    <path className="extractionOutput" d="M3.7 25.3h4.5v5H3.7zM9.3 25.3h4.5v5H9.3zM14.9 25.3h4.5v5h-4.5zM20.5 25.3H25v5h-4.5z" />
+    <path className="extractionOutputDetail" d="M5 28.9h2M6 26.5v2.4M10.5 28.9v-1.2M11.55 28.9v-2.1M12.6 28.9v-3M16 29l2.2-2.8M16.4 26.4h.01M17.85 28.8h.01M21.5 28.1a1.25 1.25 0 1 0 1.25-1.25v1.25z" />
+    <path className="extractionFlow" d="M6 20.5v3M11.55 20.5v3M17.15 20.5v3M22.75 20.5v3" />
+
+    <circle className="extractionAperture" cx="20.3" cy="16.3" r="6.3" />
+    <circle className="extractionLens" cx="20.3" cy="16.3" r="4.65" />
+    <path className="extractionHandle" d="m24.7 20.7 4.7 4.7" />
+    <path className="extractionTarget" d="M18.2 14.8v-1.2h1.2M22.4 14.8v-1.2h-1.2M18.2 17.8V19h1.2M22.4 17.8V19h-1.2" />
+    <path className="extractionCapture" d="M19.5 15.3h1.7M19.5 16.3h2.2M19.5 17.3h1.7" />
   </svg>
 );
 

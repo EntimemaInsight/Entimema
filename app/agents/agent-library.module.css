@@ -36,7 +36,13 @@
 .mark[data-product-mark="financial-statement-extraction"] :global(.productSignal) { fill: #e65a2c; }
 .mark[data-product-mark="financial-spreading"] :global(.productSignal) { fill: #e65a2c; }
 .mark :global(.extractionCutout) { fill: #dae2e9; }
-.mark :global(.extractionDatum) { fill: currentColor; }
+.mark :global(.extractionTable), .mark :global(.extractionOutputDetail) { fill: none; stroke: #dae2e9; stroke-width: .58; stroke-linecap: round; stroke-linejoin: round; }
+.mark :global(.extractionOutput) { fill: currentColor; }
+.mark :global(.extractionFlow) { fill: none; stroke: currentColor; stroke-width: .58; stroke-linecap: round; stroke-dasharray: .55 1.05; }
+.mark :global(.extractionAperture) { fill: #dae2e9; stroke: currentColor; stroke-width: 1.65; }
+.mark :global(.extractionLens) { fill: #dae2e9; }
+.mark :global(.extractionHandle) { fill: none; stroke: currentColor; stroke-width: 2.8; stroke-linecap: round; }
+.mark :global(.extractionTarget), .mark :global(.extractionCapture) { fill: none; stroke: #e65a2c; stroke-width: .85; stroke-linecap: round; stroke-linejoin: round; }
 .mark :global(.spreadingCutout) { fill: #e8ddca; }
 .mark :global(.spreadingGrid), .mark :global(.spreadingConnector) { fill: none; stroke: currentColor; stroke-width: .55; stroke-linecap: round; stroke-linejoin: round; }
 .mark :global(.spreadingSignal) { fill: none; stroke: #e65a2c; stroke-width: 1.15; stroke-linecap: round; stroke-linejoin: round; }
