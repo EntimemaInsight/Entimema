@@ -38,7 +38,9 @@ export default function AgentLibrary() {
     if (!selected) return;
 
     const currentIndex = agents.findIndex((agent) => agent.id === selected.id);
-    const nextIndex = (currentIndex + direction + agents.length) % agents.length;
+    const nextIndex = currentIndex + direction;
+    if (nextIndex < 0 || nextIndex >= agents.length) return;
+
     setSelected(agents[nextIndex]);
     setActive("All");
   }
@@ -70,9 +72,10 @@ export default function AgentLibrary() {
 
 function AgentReference({ agent, onNavigate, onUseCaseSelect, referenceRef }: { agent: AgentDefinition; onNavigate: (direction: -1 | 1) => void; onUseCaseSelect: (category: AgentCategory) => void; referenceRef: React.RefObject<HTMLDivElement | null> }) {
   const Mark = agentMarks[agent.mark];
+  const agentIndex = agents.findIndex((candidate) => candidate.id === agent.id);
   return (
     <div className={styles.referenceAnchor} ref={referenceRef}>
-      <button aria-label="Previous Agent" className={`${styles.referenceNavigation} ${styles.previousAgent}`} onClick={() => onNavigate(-1)} type="button"><span aria-hidden="true">‹</span></button>
+      {agentIndex > 0 && <button aria-label="Previous Agent" className={`${styles.referenceNavigation} ${styles.previousAgent}`} onClick={() => onNavigate(-1)} type="button"><span aria-hidden="true">‹</span></button>}
       <article aria-labelledby="active-agent-name" className={styles.reference} data-agent={agent.id} id="active-agent-reference">
         <div className={styles.referenceMain}>
           <span className={`${styles.markField} ${styles.referenceMarkField}`} aria-hidden="true"><Mark className={`${styles.mark} ${styles.referenceMark}`} /></span>
@@ -87,7 +90,7 @@ function AgentReference({ agent, onNavigate, onUseCaseSelect, referenceRef }: { 
           </div>
         </aside>
       </article>
-      <button aria-label="Next Agent" className={`${styles.referenceNavigation} ${styles.nextAgent}`} onClick={() => onNavigate(1)} type="button"><span aria-hidden="true">›</span></button>
+      {agentIndex < agents.length - 1 && <button aria-label="Next Agent" className={`${styles.referenceNavigation} ${styles.nextAgent}`} onClick={() => onNavigate(1)} type="button"><span aria-hidden="true">›</span></button>}
     </div>
   );
 }
