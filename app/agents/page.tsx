@@ -31,9 +31,28 @@ export default function AgentsPage() {
         <section className={styles.hero} aria-labelledby="agents-title">
           <div className={`site-container ${styles.heroInner}`}>
             <div className={styles.proposition}>
-              <p className={styles.eyebrow}>ENTIMEMA AGENTS</p>
-              <h1 id="agents-title">Specialist systems for <em>consequential decisions.</em></h1>
-              <p>Financial, risk and analytical methodology—structured as operating agents for real decision workflows.</p>
+              <h1 id="agents-title">Applied financial intelligence,<br className={styles.desktopBreak} /> built for real decisions.</h1>
+              <p>Transform labor-intensive workflows that once took days into automated decisions delivered in moments—reducing cost, friction, and human error.</p>
+              <Link className={styles.demoCta} href="/contact">Get a demo</Link>
+            </div>
+          </div>
+        </section>
+        <section className={styles.values} aria-labelledby="agent-values-title">
+          <div className={`site-container ${styles.valuesInner}`}>
+            <p className={styles.valuesLabel} id="agent-values-title">WHY ENTIMEMA AGENTS</p>
+            <div className={styles.valueGrid}>
+              <article className={styles.valuePanel}>
+                <h2>Deploy faster.</h2>
+                <p>Turn established financial and risk methodologies into operational workflows without rebuilding the analytical logic from scratch.</p>
+              </article>
+              <article className={styles.valuePanel}>
+                <h2>Adapt to your decisions.</h2>
+                <p>Configure inputs, thresholds, policies and decision logic around the way your institution actually operates.</p>
+              </article>
+              <article className={styles.valuePanel}>
+                <h2>Keep every decision accountable.</h2>
+                <p>Preserve evidence, logic and outputs in a transparent workflow designed for review, governance and human oversight.</p>
+              </article>
             </div>
           </div>
         </section>
