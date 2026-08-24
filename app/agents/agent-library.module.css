@@ -26,6 +26,7 @@
 .mark[data-product-mark="financial-spreading"] { width: 28px; height: 28px; color: #07152f; }
 .mark[data-product-mark="credit-memo"] { width: 28px; height: 28px; color: #07152f; }
 .mark[data-product-mark="credit-vintage-analysis"] { width: 28px; height: 28px; color: #07152f; }
+.mark[data-product-mark="pd-model-monitoring"] { width: 30px; height: 30px; color: #07152f; }
 .markField:has(.mark[data-product-mark="application-completeness"]) { background: #f8ddd2; }
 .mark :global(.productSolid) { fill: currentColor; }
 .mark :global(.productCutout) { fill: #f8ddd2; }
@@ -39,6 +40,12 @@
 .mark[data-product-mark="financial-spreading"] :global(.productSignal) { fill: #e65a2c; }
 .mark[data-product-mark="credit-memo"] :global(.productSignal) { fill: #e65a2c; }
 .mark[data-product-mark="credit-vintage-analysis"] :global(.productSignal) { fill: #e65a2c; }
+.mark :global(.monitoringData), .mark :global(.monitoringState) { fill: currentColor; }
+.mark :global(.monitoringConnector) { fill: none; stroke: currentColor; stroke-width: .75; stroke-linecap: round; stroke-dasharray: .55 1.55; }
+.mark :global(.monitoringModel) { fill: #d6e4e3; stroke: currentColor; stroke-width: 1.75; stroke-linejoin: round; }
+.mark :global(.monitoringTrajectory), .mark :global(.monitoringBars) { fill: none; stroke: currentColor; stroke-width: .9; stroke-linecap: round; stroke-linejoin: round; }
+.mark :global(.monitoringStateSymbol), .mark :global(.monitoringAlertSymbol) { fill: none; stroke: #d6e4e3; stroke-width: 1.05; stroke-linecap: round; stroke-linejoin: round; }
+.mark :global(.monitoringAlert) { fill: #e65a2c; }
 .mark :global(.creditEvidence) { fill: currentColor; }
 .mark :global(.creditConvergence) { fill: none; stroke: currentColor; stroke-width: 1.45; stroke-linecap: butt; stroke-linejoin: round; }
 .mark :global(.creditGate) { fill: none; stroke: currentColor; stroke-width: 1.55; stroke-linecap: round; }

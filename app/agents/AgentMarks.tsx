@@ -130,13 +130,23 @@ const PortfolioMark = (props: MarkProps) => <MarkFrame {...props}>
   <path className="signal" d="M31 18l7.7-4.8" />
 </MarkFrame>;
 
-// Expected and observed probability bodies remain enclosed; their displaced overlap exposes drift.
-const ProbabilityMark = (props: MarkProps) => <ProductMarkFrame {...props}>
-  <path className="productStroke" d="M3.5 18.5C3.5 11 8.1 5 13.7 5s10.2 6 10.2 13.5v8H3.5z" />
-  <path className="productStroke" d="M8.1 18.5C8.1 12.2 12.2 7 17.3 7s9.2 5.2 9.2 11.5v8H8.1z" />
-  <path className="productSolid" d="M13.7 12.1c2.1 0 3.8 2.8 3.8 6.4v3.8H9.9v-3.8c0-3.6 1.7-6.4 3.8-6.4z" />
-  <circle className="productSignal" cx="26.5" cy="18.5" r="2.5" />
-</ProductMarkFrame>;
+// Discrete observations pass through a bounded model evaluation into monitored states.
+const ProbabilityMark = (props: MarkProps) => (
+  <svg viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false" data-product-mark="pd-model-monitoring" {...props}>
+    <path className="monitoringData" d="M1.5 4h2.7v2.7H1.5zM5.8 2.5h2.7v2.7H5.8zM5.8 7.1h2.7v2.7H5.8zM1.5 11.7h2.7v2.7H1.5zM5.8 14h2.7v2.7H5.8zM1.5 18.6h2.7v2.7H1.5zM5.8 22.9h2.7v2.7H5.8zM1.5 27.3h2.7V30H1.5z" />
+
+    <path className="monitoringConnector" d="M9.7 6.7c1.2 0 1.8 1.2 2.7 2.1M9.7 13.1h2.7M9.7 19.5c1.2 0 1.8-1.2 2.7-2.1M9.7 25.4c1.2 0 1.8-1.2 2.7-2.1M21.4 7.2h3.2M21.4 15.9h3.2M21.4 24.6h3.2" />
+
+    <path className="monitoringModel" d="m14.7 5.4 4.7-1.8c1-.4 2 .3 2 1.4v22c0 1.1-1 1.8-2 1.4l-4.7-1.8c-1.1-.4-1.7-1.2-1.7-2.4V7.8c0-1.2.6-2 1.7-2.4z" />
+    <path className="monitoringTrajectory" d="m14.8 17.7 1.7-2.4 1.6 1.1 1.6-3.2" />
+    <path className="monitoringBars" d="M14.7 23.8v-2.2M16.5 23.8v-3.7M18.3 23.8v-5.1M20.1 23.8v-6.8" />
+
+    <path className="monitoringState" d="M25.6 3.9h4.9v5.4h-4.9zM25.6 22.7h4.9v5.4h-4.9z" />
+    <path className="monitoringStateSymbol" d="m26.8 6.5.8.8 1.7-1.9M26.9 24.2l2.3 2.4M29.2 24.2l-2.3 2.4" />
+    <circle className="monitoringAlert" cx="28.05" cy="15.9" r="2.65" />
+    <path className="monitoringAlertSymbol" d="M28.05 14.25v2.05m0 1.15v.05" />
+  </svg>
+);
 // An exposure crosses three ordered risk chambers while the loss horizon intensifies.
 const RiskChambersMark = (props: MarkProps) => <MarkFrame {...props}>
   <path className="field" d="M6 10h10v28H6z"/><path className="fieldAlt" d="M19 10h10v28H19z"/><path className="fieldStrong" d="M32 10h10v28H32z"/>
