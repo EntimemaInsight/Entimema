@@ -52,16 +52,18 @@ const ClassificationMark = (props: MarkProps) => (
   </svg>
 );
 
-// Dense source evidence passes through an aperture into selected, structured variables.
-const ExtractionMark = (props: MarkProps) => <MarkFrame {...props}>
-  <path className="field" d="M6.5 8h21v32h-21z" />
-  <path className="primary" d="M6.5 8h21v12l-4 4 4 4v12h-21zM27.5 20v8" />
-  <path className="micro" d="M10 12h5m2 0h7M10 16h11M10 20h4m2 0h7M10 24h9M10 28h5m2 0h7M10 32h12M10 36h6m2 0h6" />
-  <path className="guide" d="M14 20l9.5 4L14 28M19 32l4.5-8" />
-  <path className="primary" d="M27.5 24h5M34 14h7M34 24h7M34 34h7" />
-  <HollowNode x={34} y={14}/><SignalNode x={34} y={24}/><HollowNode x={34} y={34}/>
-  <path className="secondary" d="M41 11v6M41 21v6M41 31v6" />
-</MarkFrame>;
+// A financial source is isolated by a precision aperture and resolves into structured values.
+const ExtractionMark = (props: MarkProps) => (
+  <svg viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false" data-product-mark="financial-statement-extraction" {...props}>
+    <path className="productSolid" d="M3 2.5h13.8L22.5 8v19.5H3z" />
+    <path className="extractionCutout" d="M16.8 2.5V8h5.7z" />
+    <path className="extractionCutout" d="M6.5 7h7v1.8h-7zM6.5 11h11.8v1.8H6.5zM6.5 15h8.2v1.8H6.5z" />
+    <circle className="productSolid" cx="21.5" cy="21" r="8.5" />
+    <circle className="extractionCutout" cx="21.5" cy="21" r="5.15" />
+    <path className="extractionDatum" d="M18.2 17.8h2.25v2.25H18.2zM21.7 17.8h3.1v2.25h-3.1zM18.2 21.3h3.5v2.25h-3.5zM23 21.3h1.8v2.25H23z" />
+    <rect className="productSignal" x="20.45" y="24.8" width="2.1" height="2.1" rx=".3" />
+  </svg>
+);
 
 // Unequal source measures are compressed through a datum and leave as a parallel architecture.
 const SpreadingMark = (props: MarkProps) => <MarkFrame {...props}>

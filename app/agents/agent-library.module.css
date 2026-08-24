@@ -22,6 +22,7 @@
 .mark[data-product-mark="prototype"] { width: 28px; height: 28px; }
 .mark[data-product-mark="application-completeness"] { width: 28px; height: 28px; color: #07152f; }
 .mark[data-product-mark="document-classification"] { width: 28px; height: 28px; color: #07152f; }
+.mark[data-product-mark="financial-statement-extraction"] { width: 28px; height: 28px; color: #07152f; }
 .markField:has(.mark[data-product-mark="application-completeness"]) { background: #f8ddd2; }
 .mark :global(.productSolid) { fill: currentColor; }
 .mark :global(.productCutout) { fill: #f8ddd2; }
@@ -31,6 +32,9 @@
 .mark :global(.productSignal) { fill: var(--mark-signal); }
 .mark[data-product-mark="application-completeness"] :global(.productSignal) { fill: #e65a2c; }
 .mark[data-product-mark="document-classification"] :global(.productSignal) { fill: #e65a2c; }
+.mark[data-product-mark="financial-statement-extraction"] :global(.productSignal) { fill: #e65a2c; }
+.mark :global(.extractionCutout) { fill: #dae2e9; }
+.mark :global(.extractionDatum) { fill: currentColor; }
 .mark :global(.classificationLayer) { stroke: currentColor; stroke-width: 3.35; stroke-linecap: butt; }
 .mark :global(.classificationAssignedField) { stroke: currentColor; stroke-width: 2.7; stroke-linecap: round; stroke-dasharray: 3.4 2.05; }
 .mark :global(.classificationBoundary) { stroke: currentColor; stroke-width: .82; stroke-linecap: round; stroke-dasharray: .55 2.05; }
