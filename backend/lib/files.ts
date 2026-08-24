@@ -1,6 +1,5 @@
 import path from "node:path";
 import mammoth from "mammoth";
-import pdf from "pdf-parse";
 import * as XLSX from "xlsx";
 import { AgentError } from "./errors";
 const SUPPORTED = {
@@ -37,7 +36,7 @@ export async function inspectUploadedFile(value: FormDataEntryValue | null): Pro
   const buffer = Buffer.from(await value.arrayBuffer());
   try {
     assertMagic(extension, buffer); let extractedText: string;
-    if (extension === ".pdf") { if (buffer.includes(Buffer.from("/Encrypt"))) throw new AgentError("FILE_ENCRYPTED", 422); extractedText = (await pdf(buffer)).text; }
+    if (extension === ".pdf") { if (buffer.includes(Buffer.from("/Encrypt"))) throw new AgentError("FILE_ENCRYPTED", 422); const { default: pdf } = await import("pdf-parse"); extractedText = (await pdf(buffer)).text; }
     else if (extension === ".docx") extractedText = (await mammoth.extractRawText({ buffer })).value;
     else if (extension === ".xlsx" || extension === ".xls") extractedText = spreadsheetText(buffer);
     else extractedText = decodeText(buffer);
