@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { DemoTrigger } from "@/components/DemoDiscovery";
+import Link from "next/link";
 import { agentMarks } from "./AgentMarks";
 import { agentCategories, agents, type AgentCategory, type AgentDefinition } from "./agent-library-data";
 import AgentCard from "./AgentCard";
@@ -81,7 +81,7 @@ function AgentReference({ agent, onNavigate, onUseCaseSelect, referenceRef }: { 
           <span className={`${styles.markField} ${styles.referenceMarkField}`} aria-hidden="true"><Mark className={`${styles.mark} ${styles.referenceMark}`} /></span>
           <h3 id="active-agent-name">{agent.name}</h3>
           <p>{agent.description}</p>
-          <DemoTrigger className={styles.referenceCta}>Request a demo <span aria-hidden="true">↗</span></DemoTrigger>
+          <Link className={styles.referenceCta} href={`/demo?agent=${encodeURIComponent(agent.id)}`}>Request a demo <span aria-hidden="true">↗</span></Link>
         </div>
         <aside className={styles.useCases} aria-labelledby="use-cases-title">
           <h4 id="use-cases-title">Use Cases</h4>

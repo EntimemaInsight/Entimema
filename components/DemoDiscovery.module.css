@@ -28,6 +28,14 @@
 .submit:disabled { cursor: wait; opacity: .7; }
 .success { min-height: 300px; display: grid; align-content: center; }
 .honeypot { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.pageForm .header { padding-inline: 0; text-align: left; }
+.pageForm .header h2 { font-size: clamp(28px, 2.3vw, 36px); letter-spacing: -.04em; }
+.agentInterest { display: grid; gap: 5px; margin-top: 22px; padding: 15px 17px; border: 1px solid var(--hairline); border-radius: var(--primary-cta-radius); background: rgba(255, 255, 255, .72); }
+.agentInterest span { color: var(--text-secondary); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.agentInterest strong { font-size: 15px; font-weight: 650; }
+.pageForm .consentArea { justify-items: start; text-align: left; }
+.pageForm .consent { justify-content: flex-start; }
+.pageForm .privacy { text-align: left; }
 
 @media (max-width: 680px) {
   .overlay { align-items: start; padding: 14px; }
