@@ -15,6 +15,7 @@ export default function AgentLibrary() {
 
   function selectAgent(agent: AgentDefinition) {
     setSelected(agent);
+    setActive("All");
     requestAnimationFrame(() => referenceRef.current?.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" }));
   }
 
