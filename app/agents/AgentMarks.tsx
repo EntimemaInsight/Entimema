@@ -173,14 +173,17 @@ const RiskChambersMark = (props: MarkProps) => (
   </svg>
 );
 
-// Budget and actual remain nearly coincident; the material displacement becomes a bounded field.
-const VarianceMark = (props: MarkProps) => <MarkFrame {...props}>
-  <path className="field" d="M7 30l7-6 7 2 7-9 7 5 6-7v8l-6 5-7-4-7 8-7-2-7 6z" />
-  <path className="primary" d="M7 30l7-6 7 2 7-9 7 5 6-7" />
-  <path className="observed" d="M7 36l7-6 7 2 7-8 7 4 6-5" />
-  <path className="guide" d="M7 12v27M7 39h34M14 12v27M21 12v27M28 12v27M35 12v27M41 12v27" />
-  <HollowNode x={14} y={24}/><HollowNode x={21} y={26}/><SignalNode x={28} y={24}/><HollowNode x={35} y={22}/>
-</MarkFrame>;
+// Plan and actual anchor a material deviation beneath one decision event.
+const VarianceMark = (props: MarkProps) => (
+  <svg viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false" data-product-mark="p-and-l-variance" {...props}>
+    <path className="varianceReference" d="M2.3 14.4h27.4" />
+    <path className="varianceAxis" d="M16 6.8v15.1" />
+    <path className="varianceMass" d="M5.7 14.4c2.1 0 3.2.6 4.6 2.2v10.7H5.7V14.4ZM22.3 15.7h4.7v11.6h-4.7V15.7ZM22.3 10.4a5.1 5.1 0 0 1 5.1-5.1v9.1h-5.1v-4Z" />
+    <path className="varianceCurve" d="M7.2 14.45c3.6 0 4.4 8 8.8 8s5.4-8 9.1-8" />
+    <path className="varianceBaseline" d="M2.8 27.3h26.4" />
+    <circle className="productSignal" cx="16" cy="4.1" r="1.75" />
+  </svg>
+);
 
 // A value vessel is reduced through repeated cost layers, leaving a protected residual chamber.
 const MarginMark = (props: MarkProps) => <ProductMarkFrame {...props}>
