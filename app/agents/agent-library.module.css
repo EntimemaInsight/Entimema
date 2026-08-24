@@ -21,6 +21,7 @@
 .mark { position: relative; z-index: 1; width: 24px; height: 24px; overflow: visible; color: var(--mark-ink); shape-rendering: geometricPrecision; }
 .mark[data-product-mark="prototype"] { width: 28px; height: 28px; }
 .mark[data-product-mark="application-completeness"] { width: 28px; height: 28px; color: #07152f; }
+.mark[data-product-mark="document-classification"] { width: 28px; height: 28px; color: #07152f; }
 .markField:has(.mark[data-product-mark="application-completeness"]) { background: #f8ddd2; }
 .mark :global(.productSolid) { fill: currentColor; }
 .mark :global(.productCutout) { fill: #f8ddd2; }
@@ -29,6 +30,10 @@
 .mark :global(.productStroke) { stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
 .mark :global(.productSignal) { fill: var(--mark-signal); }
 .mark[data-product-mark="application-completeness"] :global(.productSignal) { fill: #e65a2c; }
+.mark[data-product-mark="document-classification"] :global(.productSignal) { fill: #e65a2c; }
+.mark :global(.classificationLayer) { stroke: currentColor; stroke-width: 3.35; stroke-linecap: butt; }
+.mark :global(.classificationAssignedField) { stroke: currentColor; stroke-width: 2.7; stroke-linecap: round; stroke-dasharray: 3.4 2.05; }
+.mark :global(.classificationBoundary) { stroke: currentColor; stroke-width: .82; stroke-linecap: round; stroke-dasharray: .55 2.05; }
 .mark :global(.primary), .mark :global(.node) { stroke: currentColor; stroke-width: 1.45; stroke-linecap: round; stroke-linejoin: round; }
 .mark :global(.secondary) { stroke: currentColor; stroke-width: .82; stroke-linecap: round; stroke-linejoin: round; opacity: .56; }
 .mark :global(.micro) { stroke: currentColor; stroke-width: .7; stroke-linecap: round; opacity: .48; }
