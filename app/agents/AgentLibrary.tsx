@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { DemoTrigger } from "@/components/DemoDiscovery";
 import { agentMarks } from "./AgentMarks";
 import { agentCategories, agents, type AgentCategory, type AgentDefinition } from "./agent-library-data";
@@ -13,6 +13,16 @@ export default function AgentLibrary() {
   const referenceRef = useRef<HTMLDivElement>(null);
   const visible = useMemo(() => active === "All" ? agents : agents.filter((agent) => agent.categories.includes(active)), [active]);
 
+  useEffect(() => {
+    function resetLibrary() {
+      setSelected(null);
+      setActive("All");
+    }
+
+    window.addEventListener("agent-library:reset", resetLibrary);
+    return () => window.removeEventListener("agent-library:reset", resetLibrary);
+  }, []);
+
   function selectAgent(agent: AgentDefinition) {
     setSelected(agent);
     setActive("All");
@@ -24,6 +34,15 @@ export default function AgentLibrary() {
     requestAnimationFrame(() => document.getElementById("agent-library-filters")?.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "center" }));
   }
 
+  function navigateAgent(direction: -1 | 1) {
+    if (!selected) return;
+
+    const currentIndex = agents.findIndex((agent) => agent.id === selected.id);
+    const nextIndex = (currentIndex + direction + agents.length) % agents.length;
+    setSelected(agents[nextIndex]);
+    setActive("All");
+  }
+
   return (
     <section className={styles.library} aria-labelledby="agent-library-title">
       <div className={styles.inner}>
@@ -33,7 +52,7 @@ export default function AgentLibrary() {
             <span className={styles.headingEmphasis}>deployed.</span>
           </h2>
         </header>
-        {selected && <AgentReference agent={selected} onUseCaseSelect={selectUseCase} referenceRef={referenceRef} />}
+        {selected && <AgentReference agent={selected} onNavigate={navigateAgent} onUseCaseSelect={selectUseCase} referenceRef={referenceRef} />}
         <nav className={styles.filters} id="agent-library-filters" aria-label="Agent categories">
           {agentCategories.map((category) => (
             <button key={category} type="button" className={active === category ? styles.activeFilter : styles.filter} aria-pressed={active === category} onClick={() => setActive(category)}>{category}</button>
@@ -49,10 +68,11 @@ export default function AgentLibrary() {
   );
 }
 
-function AgentReference({ agent, onUseCaseSelect, referenceRef }: { agent: AgentDefinition; onUseCaseSelect: (category: AgentCategory) => void; referenceRef: React.RefObject<HTMLDivElement | null> }) {
+function AgentReference({ agent, onNavigate, onUseCaseSelect, referenceRef }: { agent: AgentDefinition; onNavigate: (direction: -1 | 1) => void; onUseCaseSelect: (category: AgentCategory) => void; referenceRef: React.RefObject<HTMLDivElement | null> }) {
   const Mark = agentMarks[agent.mark];
   return (
     <div className={styles.referenceAnchor} ref={referenceRef}>
+      <button aria-label="Previous Agent" className={`${styles.referenceNavigation} ${styles.previousAgent}`} onClick={() => onNavigate(-1)} type="button"><span aria-hidden="true">‹</span></button>
       <article aria-labelledby="active-agent-name" className={styles.reference} data-agent={agent.id} id="active-agent-reference">
         <div className={styles.referenceMain}>
           <span className={`${styles.markField} ${styles.referenceMarkField}`} aria-hidden="true"><Mark className={`${styles.mark} ${styles.referenceMark}`} /></span>
@@ -67,6 +87,7 @@ function AgentReference({ agent, onUseCaseSelect, referenceRef }: { agent: Agent
           </div>
         </aside>
       </article>
+      <button aria-label="Next Agent" className={`${styles.referenceNavigation} ${styles.nextAgent}`} onClick={() => onNavigate(1)} type="button"><span aria-hidden="true">›</span></button>
     </div>
   );
 }
