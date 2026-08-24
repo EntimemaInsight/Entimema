@@ -167,7 +167,7 @@ export function AgentDemoForm({ agentId, agentName }: { agentId: string; agentNa
       <Honeypot id="agent-demo-website" />
       <PersonAndCompanyFields errors={errors} jobTitleRequired={false} namePrefix="agent-demo-" salesPayload={false} />
       <ConsentAndPrivacy />
-      <SubmitArea label="Request demo" status={status} />
+      <SubmitArea label="Submit" status={status} />
     </form>
   </div>;
 }
