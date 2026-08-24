@@ -38,17 +38,21 @@ const ClosureMark = (props: MarkProps) => (
   </svg>
 );
 
-// Nested input fields meet a bounded classification state across one decision boundary.
+// Heterogeneous inputs pass through a substantial classifier into assigned structures.
 const ClassificationMark = (props: MarkProps) => (
   <svg viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false" data-product-mark="document-classification" {...props}>
-    <path className="classificationLayer" d="M14.9 3.2a12.8 12.8 0 0 0 0 25.6" />
-    <path className="classificationLayer" d="M14.9 8.2a7.8 7.8 0 0 0 0 15.6" />
-    <path className="classificationLayer" d="M14.9 12.5a3.5 3.5 0 0 0 0 7" />
-    <path className="classificationLayer" d="M17.1 8.4a7.8 7.8 0 0 1 0 15.2" />
-    <path className="classificationAssignedField" d="M17.1 3.3a12.8 12.8 0 0 1 0 25.4" />
-    <circle className="productSolid" cx="14.9" cy="16" r="2.65" />
-    <path className="classificationBoundary" d="M16 1.8v28.4" />
-    <circle className="productSignal" cx="24" cy="16" r="2.35" />
+    <path className="classificationInput" d="M1.5 2.4h5l2 2v5.1h-7zM1.5 12h7v6.7h-7zM1.5 21.2h7v6.5h-7z" />
+    <path className="classificationInputCutout" d="M6.5 2.4v2h2zM2.8 7.1h3.9v.7H2.8zM2.8 14l1.5 1.6 1.35-1.35 1.6 2.1H2.8zM6.5 13.25a.8.8 0 1 1 0 1.6.8.8 0 0 1 0-1.6zM2.8 23h4.35v.7H2.8zM2.8 25.2h4.35v.7H2.8z" />
+    <path className="classificationInbound" d="M8.9 6h1.35c.9 0 1.35.5 1.35 1.35v3.05c0 .8.45 1.25 1.25 1.25h.8M8.9 15.35h2c.8 0 1.2.45 1.2 1.25v1.15c0 .8.45 1.25 1.25 1.25h.3M8.9 24.3h1.55c.8 0 1.2-.45 1.2-1.25v-.55c0-.8.45-1.25 1.25-1.25h.75" />
+    <path className="classificationClassifier" d="m16.3 7 5.3 3.55c.55.38.85.9.85 1.55v8.55c0 .65-.3 1.18-.85 1.55l-5.3 3.55c-1.05.7-2.25-.05-2.25-1.3V8.3c0-1.25 1.2-2 2.25-1.3z" />
+    <path className="classificationAperture" d="M16.35 10.1v12.55M18.1 13.3h1M20.1 13.3h1M18.1 15.5h1M20.1 15.5h1M18.1 17.7h1M20.1 17.7h1M18.1 19.9h1M20.1 19.9h1" />
+    <path className="classificationRouting" d="M22.45 16.35h1.45V8.1c0-.75.4-1.15 1.15-1.15h.6M23.9 16.35h1.75M23.9 16.35v8.1c0 .75.4 1.15 1.15 1.15h.6" />
+    <circle className="classificationNode" cx="26" cy="6.95" r=".7" />
+    <circle className="classificationNode" cx="26" cy="16.35" r=".7" />
+    <circle className="productSignal" cx="26" cy="25.6" r=".8" />
+    <path className="classificationOutput" d="M27.1 3.8h3.6v6.3h-3.6zM27.1 13.15h3.6v6.3h-3.6zM27.1 22.5h3.6v6.3h-3.6z" />
+    <path className="classificationOutputDetail" d="M27.8 4.9H30v3.9h-2.2zM28.9 4.9v3.9M27.8 6.85H30M27.8 18v-1.15M28.9 18v-2.25M30 18v-3.35M27.8 25.65a1.1 1.1 0 1 0 1.1-1.1v1.1z" />
+    <path className="classificationOutputSignal" d="M28.9 24.55a1.1 1.1 0 0 1 1.1 1.1h-1.1z" />
   </svg>
 );
 
