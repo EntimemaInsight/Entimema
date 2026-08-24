@@ -159,15 +159,19 @@ const ProbabilityMark = (props: MarkProps) => (
     <path className="productSignal" d="M26 25.6h3v1.6h-3z" />
   </svg>
 );
-// An exposure crosses three ordered risk chambers while the loss horizon intensifies.
-const RiskChambersMark = (props: MarkProps) => <MarkFrame {...props}>
-  <path className="field" d="M6 10h10v28H6z"/><path className="fieldAlt" d="M19 10h10v28H19z"/><path className="fieldStrong" d="M32 10h10v28H32z"/>
-  <path className="primary" d="M6 10h10v28H6zM19 10h10v28H19zM32 10h10v28H32z" />
-  <path className="secondary" d="M9 34V24m4 10V18M22 34V20m4 14V15M35 34V17m4 17V12" />
-  <path className="guide" d="M10 17c6 0 8 8 14 8s8-7 13-7" />
-  <HollowNode x={10} y={17}/><SignalNode x={24} y={25}/><HollowNode x={37} y={18}/>
-  <path className="signal" d="M37 18v16M34.5 34h5" />
-</MarkFrame>;
+// Ordered stages accumulate loss mass beneath a deterioration path and terminal ECL event.
+const RiskChambersMark = (props: MarkProps) => (
+  <svg viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false" data-product-mark="ifrs-9-ecl-analysis" {...props}>
+    <path className="eclRiskMass" d="M12 25.1V20.3l8-5.7v10.5H12ZM21.5 25.1V16.8l8-6.1v14.4h-8Z" />
+    <path className="eclStage" d="M2.5 13.9v11.2h8V11.6M12 12.1v13h8V8.3M21.5 10.3v14.8h8V5.8" />
+    <path className="eclDeterioration" d="m12.7 18.8 4.1-3.2 3.9-3.1 4.3-3.1 3.4-3" />
+    <circle className="eclDeteriorationNode" cx="16.8" cy="15.6" r="1.15" />
+    <circle className="eclDeteriorationNode" cx="24.9" cy="9.4" r="1.15" />
+    <path className="eclTrajectory" d="M2.5 11.8 9.2 9.3l3.4-4.1h4.1l2.5-2.7 4-.6 4.1-1.5" />
+    <circle className="productSignal" cx="29.1" cy="1.75" r="1.7" />
+    <path className="eclBaseline" d="M1.8 28.5h9.1M11.8 28.5h8.6M21.3 28.5h9.2" />
+  </svg>
+);
 
 // Budget and actual remain nearly coincident; the material displacement becomes a bounded field.
 const VarianceMark = (props: MarkProps) => <MarkFrame {...props}>
