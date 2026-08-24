@@ -20,9 +20,15 @@
 .tone2 { background: #e8ddca; } .tone3 { background: #e4e1d4; } .tone4 { background: #dfe4d2; } .tone5 { background: #d8e3d9; } .tone6 { background: #d6e4e3; } .tone7 { background: #dae2e9; } .tone8 { background: #e1dce7; }
 .mark { position: relative; z-index: 1; width: 24px; height: 24px; overflow: visible; color: var(--mark-ink); shape-rendering: geometricPrecision; }
 .mark[data-product-mark="prototype"] { width: 28px; height: 28px; }
+.mark[data-product-mark="application-completeness"] { width: 28px; height: 28px; color: #07152f; }
+.markField:has(.mark[data-product-mark="application-completeness"]) { background: #f8ddd2; }
 .mark :global(.productSolid) { fill: currentColor; }
+.mark :global(.productCutout) { fill: #f8ddd2; }
+.mark :global(.productCheckpoint) { stroke: currentColor; stroke-width: .62; stroke-linecap: round; stroke-dasharray: 1.35 1.65; }
+.mark :global(.productCheckpointLeft) { stroke: currentColor; stroke-width: 1.05; stroke-linecap: round; }
 .mark :global(.productStroke) { stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
 .mark :global(.productSignal) { fill: var(--mark-signal); }
+.mark[data-product-mark="application-completeness"] :global(.productSignal) { fill: #e65a2c; }
 .mark :global(.primary), .mark :global(.node) { stroke: currentColor; stroke-width: 1.45; stroke-linecap: round; stroke-linejoin: round; }
 .mark :global(.secondary) { stroke: currentColor; stroke-width: .82; stroke-linecap: round; stroke-linejoin: round; opacity: .56; }
 .mark :global(.micro) { stroke: currentColor; stroke-width: .7; stroke-linecap: round; opacity: .48; }
