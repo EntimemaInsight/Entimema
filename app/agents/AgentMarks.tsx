@@ -121,14 +121,27 @@ const VintageMark = (props: MarkProps) => (
     <circle className="productSignal" cx="25.46" cy="25.33" r="2.05" />
   </svg>
 );
-// A portfolio constellation orbits a reference envelope; one signal breaks containment.
-const PortfolioMark = (props: MarkProps) => <MarkFrame {...props}>
-  <circle className="field" cx="24" cy="24" r="10"/><circle className="primary" cx="24" cy="24" r="7.5"/>
-  <path className="secondary" d="M24 11v26M11 24h26M18.7 18.7l10.6 10.6M29.3 18.7L18.7 29.3" />
-  <path className="guide" d="M8 13c8-7 24-7 32 0M8 35c8 7 24 7 32 0" />
-  <HollowNode x={11} y={17}/><HollowNode x={15} y={32}/><HollowNode x={24} y={14}/><HollowNode x={33} y={21}/><MicroNode x={28} y={34}/><SignalNode x={40} y={12}/>
-  <path className="signal" d="M31 18l7.7-4.8" />
-</MarkFrame>;
+// A portfolio matrix sits inside a continuous monitoring field; trajectory and alert resolve within it.
+const PortfolioMark = (props: MarkProps) => (
+  <svg viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false" data-product-mark="portfolio-monitoring" {...props}>
+    <path className="portfolioMatrix" d="M2 5h2.7v2.7H2zM5.7 5h2.7v2.7H5.7zM9.4 5h2.7v2.7H9.4zM2 8.7h2.7v2.7H2zM5.7 8.7h2.7v2.7H5.7zM9.4 8.7h2.7v2.7H9.4zM2 12.4h2.7v2.7H2zM5.7 12.4h2.7v2.7H5.7zM9.4 12.4h2.7v2.7H9.4zM2 16.1h2.7v2.7H2zM5.7 16.1h2.7v2.7H5.7zM9.4 16.1h2.7v2.7H9.4zM2 19.8h2.7v2.7H2zM5.7 19.8h2.7v2.7H5.7zM9.4 19.8h2.7v2.7H9.4zM2 23.5h2.7v2.7H2zM5.7 23.5h2.7v2.7H5.7zM9.4 23.5h2.7v2.7H9.4zM13.1 23.5h2.7v2.7h-2.7z" />
+    <path className="portfolioMatrixSignal" d="M9.4 5h2.7v2.7H9.4zM5.7 16.1h2.7v2.7H5.7z" />
+
+    <path className="portfolioOuterRing" d="M16.1 3.2a12.8 12.8 0 0 1 9.5 4.2M29.3 13a12.8 12.8 0 0 1-.2 7.2M27.4 23.7a12.8 12.8 0 0 1-13.2 4.9" />
+    <path className="portfolioOuterDots" d="M13.7 3.5h.01M11.5 4.25h.01M9.55 5.45h.01M7.95 7h.01" />
+    <circle className="portfolioField" cx="18.6" cy="16" r="8.8" />
+
+    <path className="portfolioTrend" d="m12.7 17.6 3.1-2.4 2.9 1.75 3.65-3.65" />
+    <circle className="portfolioTrendNode" cx="12.7" cy="17.6" r=".95" />
+    <circle className="portfolioTrendNode" cx="15.8" cy="15.2" r=".95" />
+    <circle className="portfolioTrendNode" cx="18.7" cy="16.95" r=".95" />
+    <circle className="portfolioTrendNode" cx="22.35" cy="13.3" r=".95" />
+    <path className="portfolioBars" d="M15 20.2h1.45v2.5H15zM17.4 19h1.45v3.7H17.4zM19.8 17.8h1.45v4.9H19.8zM22.2 16.4h1.45v6.3H22.2z" />
+
+    <circle className="productSignal" cx="26.25" cy="9.7" r="2.15" />
+    <path className="portfolioAlertCheck" d="m25.25 9.7.7.7 1.35-1.45" />
+  </svg>
+);
 
 // Expected and observed probability bodies remain enclosed; their displaced overlap exposes drift.
 const ProbabilityMark = (props: MarkProps) => <ProductMarkFrame {...props}>
