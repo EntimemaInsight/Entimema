@@ -65,14 +65,29 @@ const ExtractionMark = (props: MarkProps) => (
   </svg>
 );
 
-// Unequal source measures are compressed through a datum and leave as a parallel architecture.
-const SpreadingMark = (props: MarkProps) => <MarkFrame {...props}>
-  <path className="primary" d="M7 10h9M7 17h15M7 24h7M7 31h18M7 38h12" />
-  <path className="guide" d="M16 10l12 12M22 17l6 5M14 24l14-2M25 31l3-9M19 38l9-16" />
-  <path className="field" d="M27 17h5v12h-5z" /><path className="primary" d="M28.5 17v12" />
-  <path className="secondary" d="M32 12h9M32 20h9M32 28h9M32 36h9" />
-  <path className="primary" d="M41 10v28" /><MicroNode x={35} y={12}/><MicroNode x={37} y={20}/><SignalNode x={39} y={28}/><MicroNode x={35} y={36}/>
-</MarkFrame>;
+// A financial source passes through one spreading decision into three standardized tables.
+const SpreadingMark = (props: MarkProps) => (
+  <svg viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false" data-product-mark="financial-spreading" {...props}>
+    <path className="productSolid" d="M2.8 5.2h6.6l3.1 3.1v13.3H2.8z" />
+    <path className="spreadingCutout" d="M9.4 5.2v3.1h3.1zM4.4 8.4h3.7v1H4.4zM4.4 10.5h5.7v1H4.4zM4.4 12.6h4.6v1H4.4zM4.2 15h7v5.1h-7z" />
+    <path className="spreadingGrid" d="M6.55 15v5.1M8.9 15v5.1M4.2 17.55h7" />
+
+    <path className="spreadingConnector" d="M12.5 16.8h2.3M19.2 16.8h1.8M17 14.6V8.2c0-.8.6-1.4 1.4-1.4H21M17 19v6.3c0 .8.6 1.4 1.4 1.4H21" />
+    <circle className="productSolid" cx="17" cy="16.8" r="3.05" />
+    <path className="spreadingSignal" d="M15.3 16.8h3.3m-1.25-1.3 1.3 1.3-1.3 1.3" />
+
+    <path className="productSolid" d="M22.1 4.2h7.1v6.1h-7.1zM22.1 13.75h7.1v6.1h-7.1zM22.1 23.3h7.1v6.1h-7.1z" />
+    <path className="spreadingCutout" d="M22.8 5.45h5.7v4.15h-5.7zM22.8 15h5.7v4.15h-5.7zM22.8 24.55h5.7v4.15h-5.7z" />
+    <path className="spreadingGrid" d="M24.7 5.45V9.6m1.9-4.15V9.6m-3.8-2.08h5.7M24.7 15v4.15m1.9-4.15v4.15m-3.8-2.08h5.7M24.7 24.55v4.15m1.9-4.15v4.15m-3.8-2.08h5.7" />
+    <circle className="productSolid" cx="21" cy="6.8" r=".65" />
+    <circle className="productSolid" cx="21" cy="16.8" r=".65" />
+    <circle className="productSolid" cx="21" cy="26.7" r=".65" />
+
+    <path className="spreadingValidation" d="M7.6 22.5v2.4" />
+    <circle className="productSolid" cx="7.6" cy="26.7" r="2.05" />
+    <path className="spreadingSignal" d="m6.65 26.7.65.65 1.25-1.4" />
+  </svg>
+);
 
 // Independent evidence streams form a compact, defensible synthesis core.
 const SynthesisMark = (props: MarkProps) => <MarkFrame {...props}>
