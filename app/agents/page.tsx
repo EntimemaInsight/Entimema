@@ -31,15 +31,17 @@ export default function AgentsPage() {
         <section className={styles.hero} aria-labelledby="agents-title">
           <div className={`site-container ${styles.heroInner}`}>
             <div className={styles.proposition}>
-              <h1 id="agents-title">Applied financial intelligence,<br className={styles.desktopBreak} /> built for real decisions.</h1>
+              <h1 id="agents-title">
+                <span>Applied financial intelligence,</span>
+                <span className={styles.emphasis}>built for real decisions.</span>
+              </h1>
               <p>Transform labor-intensive workflows that once took days into automated decisions delivered in moments—reducing cost, friction, and human error.</p>
               <Link className={styles.demoCta} href="/contact">Get a demo</Link>
             </div>
           </div>
         </section>
-        <section className={styles.values} aria-labelledby="agent-values-title">
+        <section className={styles.values} aria-label="Why Entimema agents">
           <div className={`site-container ${styles.valuesInner}`}>
-            <p className={styles.valuesLabel} id="agent-values-title">WHY ENTIMEMA AGENTS</p>
             <div className={styles.valueGrid}>
               <article className={styles.valuePanel}>
                 <h2>Deploy faster.</h2>

@@ -2,7 +2,7 @@
 .inner { width: var(--library-grid-width); max-width: calc(100% - 48px); margin-inline: auto; }
 .heading { text-align: center; }
 .heading h2 { margin: 0; font-size: 40px; font-weight: 600; line-height: 1.1; letter-spacing: -.043em; text-wrap: balance; }
-.heading p { margin: 12px 0 0; color: var(--text-secondary); font-size: 15px; line-height: 1.55; letter-spacing: -.01em; }
+.headingEmphasis { color: var(--brand-orange-500); }
 .filters { display: flex; flex-wrap: wrap; justify-content: center; gap: 0; margin-top: 38px; }
 .filter, .activeFilter { appearance: none; height: 34px; padding: 0 14px; border: 0; border-radius: 999px; background: transparent; color: var(--text-secondary); font-size: 14px; font-weight: 500; line-height: 20px; letter-spacing: -.01em; cursor: pointer; transition: color var(--transition), background-color var(--transition); }
 .filter:hover { color: var(--brand-navy-950); }

@@ -13,8 +13,10 @@ export default function AgentLibrary() {
     <section className={styles.library} aria-labelledby="agent-library-title">
       <div className={styles.inner}>
         <header className={styles.heading}>
-          <h2 id="agent-library-title">Decision intelligence, deployed.</h2>
-          <p>Specialist agents for recurring financial decisions.</p>
+          <h2 id="agent-library-title">
+            <span>Decision intelligence,</span>{" "}
+            <span className={styles.headingEmphasis}>deployed.</span>
+          </h2>
         </header>
         <nav className={styles.filters} aria-label="Agent categories">
           {agentCategories.map((category) => (
