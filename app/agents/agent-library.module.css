@@ -25,6 +25,7 @@
 .mark[data-product-mark="financial-statement-extraction"] { width: 28px; height: 28px; color: #07152f; }
 .mark[data-product-mark="financial-spreading"] { width: 28px; height: 28px; color: #07152f; }
 .mark[data-product-mark="credit-memo"] { width: 28px; height: 28px; color: #07152f; }
+.mark[data-product-mark="credit-vintage-analysis"] { width: 28px; height: 28px; color: #07152f; }
 .markField:has(.mark[data-product-mark="application-completeness"]) { background: #f8ddd2; }
 .mark :global(.productSolid) { fill: currentColor; }
 .mark :global(.productCutout) { fill: #f8ddd2; }
@@ -37,6 +38,7 @@
 .mark[data-product-mark="financial-statement-extraction"] :global(.productSignal) { fill: #e65a2c; }
 .mark[data-product-mark="financial-spreading"] :global(.productSignal) { fill: #e65a2c; }
 .mark[data-product-mark="credit-memo"] :global(.productSignal) { fill: #e65a2c; }
+.mark[data-product-mark="credit-vintage-analysis"] :global(.productSignal) { fill: #e65a2c; }
 .mark :global(.creditEvidence) { fill: currentColor; }
 .mark :global(.creditConvergence) { fill: none; stroke: currentColor; stroke-width: 1.45; stroke-linecap: butt; stroke-linejoin: round; }
 .mark :global(.creditGate) { fill: none; stroke: currentColor; stroke-width: 1.55; stroke-linecap: round; }
