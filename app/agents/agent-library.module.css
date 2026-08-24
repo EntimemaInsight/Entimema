@@ -47,9 +47,13 @@
 .mark :global(.spreadingGrid), .mark :global(.spreadingConnector) { fill: none; stroke: currentColor; stroke-width: .55; stroke-linecap: round; stroke-linejoin: round; }
 .mark :global(.spreadingSignal) { fill: none; stroke: #e65a2c; stroke-width: 1.15; stroke-linecap: round; stroke-linejoin: round; }
 .mark :global(.spreadingValidation) { fill: none; stroke: currentColor; stroke-width: .6; stroke-linecap: round; stroke-dasharray: .5 1.05; }
-.mark :global(.classificationLayer) { stroke: currentColor; stroke-width: 3.35; stroke-linecap: butt; }
-.mark :global(.classificationAssignedField) { stroke: currentColor; stroke-width: 2.7; stroke-linecap: round; stroke-dasharray: 3.4 2.05; }
-.mark :global(.classificationBoundary) { stroke: currentColor; stroke-width: .82; stroke-linecap: round; stroke-dasharray: .55 2.05; }
+.mark :global(.classificationInput), .mark :global(.classificationOutput), .mark :global(.classificationNode) { fill: currentColor; }
+.mark :global(.classificationInputCutout), .mark :global(.classificationOutputDetail) { fill: #dfe4d2; }
+.mark :global(.classificationInbound) { fill: none; stroke: currentColor; stroke-width: .62; stroke-linecap: round; stroke-dasharray: .65 1.25; }
+.mark :global(.classificationClassifier) { fill: #dfe4d2; stroke: currentColor; stroke-width: 1.7; stroke-linejoin: round; }
+.mark :global(.classificationAperture) { fill: none; stroke: currentColor; stroke-width: 1.05; stroke-linecap: round; }
+.mark :global(.classificationRouting) { fill: none; stroke: currentColor; stroke-width: .58; stroke-linecap: round; stroke-linejoin: round; }
+.mark :global(.classificationOutputSignal) { fill: #e65a2c; }
 .mark :global(.primary), .mark :global(.node) { stroke: currentColor; stroke-width: 1.45; stroke-linecap: round; stroke-linejoin: round; }
 .mark :global(.secondary) { stroke: currentColor; stroke-width: .82; stroke-linecap: round; stroke-linejoin: round; opacity: .56; }
 .mark :global(.micro) { stroke: currentColor; stroke-width: .7; stroke-linecap: round; opacity: .48; }
