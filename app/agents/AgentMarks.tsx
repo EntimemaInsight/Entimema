@@ -110,13 +110,17 @@ const SynthesisMark = (props: MarkProps) => (
   </svg>
 );
 
-// Three temporal ribbons share a cadence until the final cohort makes a material divergence.
-const VintageMark = (props: MarkProps) => <ProductMarkFrame {...props}>
-  <path className="productSolid" d="M3 5.5h13.4l4.1 4.1H29v4.2H18.8l-4.1-4.1H3z" />
-  <path className="productSolid" d="M3 13.9h10.5l4.1 4.1H29v4.2H15.9l-4.1-4.1H3z" />
-  <path className="productSolid" d="M3 22.3h8.1l4.1 4.1H24v4.1H13.5l-4.1-4.1H3z" />
-  <path className="productSignal" d="M24 26.4h5v4.1h-5z" />
-</ProductMarkFrame>;
+// Concentric cohorts advance into a striped time sector; the isolated event marks emerging risk.
+const VintageMark = (props: MarkProps) => (
+  <svg viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false" data-product-mark="credit-vintage-analysis" {...props}>
+    <path className="productSolid" fillRule="evenodd" d="M15.4 2.1A13.9 13.9 0 0 0 5.57 25.83a13.9 13.9 0 0 0 18.25 1.28l-1.42-2.02A11.43 11.43 0 0 1 7.39 7.87a11.43 11.43 0 0 1 8.01-3.3V2.1Z" />
+    <path className="productSolid" d="M27.85 17.15a12.7 12.7 0 0 1-1.75 6.47l-2.13-1.25a10.22 10.22 0 0 0 1.41-5.22h2.47Z" />
+    <path className="productSolid" fillRule="evenodd" d="M15.4 7.35a8.65 8.65 0 1 0 8.65 9.8h-2.48a6.18 6.18 0 1 1-6.17-7.33V7.35Z" />
+    <path className="productSolid" d="M15.4 12.02a4.12 4.12 0 1 0 4.12 4.12H15.4v-4.12Z" />
+    <path className="productSolid" d="M16.82 2.18v1.38h2.4a13.4 13.4 0 0 0-2.4-1.38Zm0 2.48v1.38h5.77a13.4 13.4 0 0 0-1.63-1.38h-4.14Zm0 2.48v1.38h7.7a13.4 13.4 0 0 0-1.08-1.38h-6.62Zm0 2.48V11h9.06a13.4 13.4 0 0 0-.72-1.38h-8.34Zm0 2.48v1.38h9.98a13.4 13.4 0 0 0-.42-1.38h-9.56Zm0 2.48v1.38h10.4a13.4 13.4 0 0 0-.17-1.38H16.82Z" />
+    <circle className="productSignal" cx="25.46" cy="25.33" r="2.05" />
+  </svg>
+);
 // A portfolio constellation orbits a reference envelope; one signal breaks containment.
 const PortfolioMark = (props: MarkProps) => <MarkFrame {...props}>
   <circle className="field" cx="24" cy="24" r="10"/><circle className="primary" cx="24" cy="24" r="7.5"/>
