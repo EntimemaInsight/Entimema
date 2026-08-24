@@ -9,11 +9,6 @@ const MarkFrame = ({ children, ...props }: MarkProps) => (
   </svg>
 );
 
-const ProductMarkFrame = ({ children, ...props }: MarkProps) => (
-  <svg viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false" data-product-mark="prototype" {...props}>
-    {children}
-  </svg>
-);
 const HollowNode = ({ x, y }: { x: number; y: number }) => <circle className="node" cx={x} cy={y} r="1.35" />;
 const MicroNode = ({ x, y }: { x: number; y: number }) => <circle className="microNode" cx={x} cy={y} r=".72" />;
 const SignalNode = ({ x, y }: { x: number; y: number }) => <circle className="signalNode" cx={x} cy={y} r="1.75" />;
@@ -185,12 +180,26 @@ const VarianceMark = (props: MarkProps) => (
   </svg>
 );
 
-// A value vessel is reduced through repeated cost layers, leaving a protected residual chamber.
-const MarginMark = (props: MarkProps) => <ProductMarkFrame {...props}>
-  <path className="productSolid" fillRule="evenodd" d="M3 3h26v26H3zm4 4v18h18V7z" />
-  <path className="productSolid" d="M8.5 8.5h15v4h-15zM8.5 14h11.5v4H8.5zM8.5 19.5h8v4H8.5z" />
-  <path className="productSignal" d="M18.5 19.5h5v4h-5z" />
-</ProductMarkFrame>;
+// Six connected sources validate against one central truth; the single event signals integrity.
+const DataIntegrityMark = (props: MarkProps) => (
+  <svg viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false" data-product-mark="data-integrity-check" {...props}>
+    <path className="integrityStructure" d="M14.1 4.2 7.2 8.2M17.9 4.2l6.9 4M5.1 11.2v9.6M7.2 23.8l6.9 4M17.9 27.8l6.9-4M26.9 11.2v3.1M26.9 17.7v3.1" />
+    <path className="integrityValidation" d="M16 5.4v5.2M7.2 10.4l4.1 2.5M24.8 10.4l-4.1 2.5M7.2 21.6l4.1-2.5M24.8 21.6l-4.1-2.5M16 21.3v5.3" />
+
+    <circle className="integrityNode" cx="16" cy="3.2" r="2.15" />
+    <circle className="integrityNode" cx="5.1" cy="9.4" r="2.15" />
+    <circle className="integrityNode" cx="26.9" cy="9.4" r="2.15" />
+    <circle className="integrityNode" cx="5.1" cy="22.6" r="2.15" />
+    <circle className="integrityNode" cx="26.9" cy="22.6" r="2.15" />
+    <circle className="integrityNode" cx="16" cy="28.8" r="2.15" />
+
+    <ellipse className="integrityTruth" cx="16" cy="13.2" rx="5.5" ry="2.15" />
+    <path className="integrityTruth" d="M10.5 14.2v3.15c0 1.2 2.46 2.15 5.5 2.15s5.5-.95 5.5-2.15V14.2c-1.06.78-3.08 1.25-5.5 1.25s-4.44-.47-5.5-1.25Z" />
+    <path className="integrityTruth" d="M10.5 18.3v2.75c0 1.2 2.46 2.15 5.5 2.15s5.5-.95 5.5-2.15V18.3c-1.06.78-3.08 1.25-5.5 1.25s-4.44-.47-5.5-1.25Z" />
+
+    <circle className="productSignal" cx="26.9" cy="16" r="2.05" />
+  </svg>
+);
 // A present state opens into bounded future envelopes; one trajectory becomes active.
 const ScenarioMark = (props: MarkProps) => <MarkFrame {...props}>
   <path className="field" d="M22 17c7-8 12-8 20-7v8c-7-1-12 0-20 4zM22 26c8 2 13 4 20 4v8c-8 0-13-2-20-7z" />
@@ -212,7 +221,7 @@ export const agentMarks = {
   probability: ProbabilityMark,
   riskChambers: RiskChambersMark,
   variance: VarianceMark,
-  margin: MarginMark,
+  integrity: DataIntegrityMark,
   scenarios: ScenarioMark,
 } satisfies Record<string, MarkComponent>;
 

@@ -30,6 +30,7 @@
 .mark[data-product-mark="pd-model-monitoring"] { width: 30px; height: 30px; color: #07152f; }
 .mark[data-product-mark="ifrs-9-ecl-analysis"] { width: 30px; height: 30px; color: #07152f; }
 .mark[data-product-mark="p-and-l-variance"] { width: 30px; height: 30px; color: #07152f; }
+.mark[data-product-mark="data-integrity-check"] { width: 30px; height: 30px; color: #07152f; }
 .markField:has(.mark[data-product-mark="application-completeness"]) { background: #f8ddd2; }
 .mark :global(.productSolid) { fill: currentColor; }
 .mark :global(.productCutout) { fill: #f8ddd2; }
@@ -47,6 +48,10 @@
 .mark[data-product-mark="pd-model-monitoring"] :global(.productSignal) { fill: #e65a2c; }
 .mark[data-product-mark="ifrs-9-ecl-analysis"] :global(.productSignal) { fill: #e65a2c; stroke: #f8ddd2; stroke-width: .55; }
 .mark[data-product-mark="p-and-l-variance"] :global(.productSignal) { fill: #e65a2c; }
+.mark[data-product-mark="data-integrity-check"] :global(.productSignal) { fill: #e65a2c; }
+.mark :global(.integrityStructure) { fill: none; stroke: currentColor; stroke-width: 1.25; stroke-linecap: round; stroke-linejoin: round; }
+.mark :global(.integrityValidation) { fill: none; stroke: currentColor; stroke-width: .82; stroke-linecap: round; stroke-dasharray: 1.05 1.55; }
+.mark :global(.integrityNode), .mark :global(.integrityTruth) { fill: currentColor; }
 .mark :global(.varianceMass) { fill: currentColor; }
 .mark :global(.varianceReference), .mark :global(.varianceAxis) { fill: none; stroke: currentColor; stroke-width: .72; stroke-linecap: round; stroke-dasharray: 1.25 1.85; }
 .mark :global(.varianceCurve) { fill: none; stroke: currentColor; stroke-width: 1.55; stroke-linecap: round; stroke-linejoin: round; }
