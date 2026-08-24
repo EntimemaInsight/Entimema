@@ -18,16 +18,25 @@ const HollowNode = ({ x, y }: { x: number; y: number }) => <circle className="no
 const MicroNode = ({ x, y }: { x: number; y: number }) => <circle className="microNode" cx={x} cy={y} r=".72" />;
 const SignalNode = ({ x, y }: { x: number; y: number }) => <circle className="signalNode" cx={x} cy={y} r="1.75" />;
 
-// Required evidence positions converge on the one open chamber that closes the system.
-const ClosureMark = (props: MarkProps) => <MarkFrame {...props}>
-  <path className="field" d="M8 8.5h32v31H8z" />
-  <path className="primary" d="M8 18V8.5h9.5M30.5 8.5H40V18M40 30v9.5h-9.5M17.5 39.5H8V30" />
-  <path className="secondary" d="M17.5 8.5h13M8 18v12M40 18v12M17.5 39.5h13" />
-  <path className="guide" d="M12 13l9 8m15-8-9 8M12 35l9-8" />
-  <path className="primary" d="M18.5 18.5h11v11h-11z" />
-  <HollowNode x={12} y={13}/><HollowNode x={36} y={13}/><HollowNode x={12} y={35}/>
-  <SignalNode x={36} y={35}/><path className="signal" d="M27 27l7.7 6.7" />
-</MarkFrame>;
+// Fragments progress through two checkpoints and close at the single decision event.
+const ClosureMark = (props: MarkProps) => (
+  <svg viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false" data-product-mark="application-completeness" {...props}>
+    <path className="productSolid" d="M2 5.4h10.1c2.2 0 3.4 1.2 4.6 2.9l2.4 3.5c.8 1.2 1.7 1.7 3.1 1.7h3.2c1.2 0 1.8.6 2.5 1.7.5.8 1.1 1.2 2.1 1.2v3H26.8c-1.4 0-2.4-.6-3.1-1.8-.4-.7-.9-1-1.8-1h-3.3c-2 0-3.3-.8-4.4-2.5l-2.4-3.6c-.8-1.2-1.7-1.7-3.1-1.7H2z" />
+    <path className="productSolid" d="M2 12.2h8.8c2.2 0 3.5 1.1 4.7 2.9l2.3 3.4c.8 1.2 1.8 1.7 3.2 1.7h4.4c1.2 0 1.8.6 2.5 1.7.5.8 1.1 1.2 2.1 1.2v3h-3.2c-1.4 0-2.4-.6-3.1-1.8-.4-.7-.9-1-1.8-1h-3.3c-2 0-3.3-.8-4.4-2.5l-2.4-3.6c-.8-1.2-1.7-1.7-3.1-1.7H2z" />
+    <path className="productSolid" d="M2 19h8.3c2.1 0 3.3 1 4.5 2.8l2.1 3.1c.8 1.2 1.8 1.7 3.2 1.7h3.8v3H18c-2 0-3.3-.8-4.4-2.5l-2.3-3.4c-.7-1-1.5-1.4-2.7-1.4H2zM27.4 26.6H30v3h-2.6z" />
+    <path className="productCutout" d="M7 4.4h1.2v24.4H7z" />
+    <path className="productCheckpointLeft" d="M7.6 2.6v1.3m0 5.5v1.3m0 5.5v1.3m0 5.5v1.3m0 1.5v3" />
+    <circle className="productCutout" cx="7.6" cy="5.5" r="1.8" />
+    <circle className="productCutout" cx="7.6" cy="12.3" r="1.8" />
+    <circle className="productCutout" cx="7.6" cy="19.1" r="1.8" />
+    <circle className="productSolid" cx="7.6" cy="5.5" r="1.05" />
+    <circle className="productSolid" cx="7.6" cy="12.3" r="1.05" />
+    <circle className="productSolid" cx="7.6" cy="19.1" r="1.05" />
+    <path className="productCheckpoint" d="M23.5 9v15.7" />
+    <circle className="productCutout" cx="25.6" cy="28.1" r="2.2" />
+    <circle className="productSignal" cx="25.6" cy="28.1" r="1.55" />
+  </svg>
+);
 
 // Scattered observations cross a curved boundary and resolve into ordered states.
 const ClassificationMark = (props: MarkProps) => <MarkFrame {...props}>
