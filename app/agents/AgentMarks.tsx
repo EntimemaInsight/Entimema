@@ -99,14 +99,16 @@ const SpreadingMark = (props: MarkProps) => (
   </svg>
 );
 
-// Independent evidence streams form a compact, defensible synthesis core.
-const SynthesisMark = (props: MarkProps) => <MarkFrame {...props}>
-  <path className="field" d="M18 16l6-4 6 4v16l-6 4-6-4z" />
-  <path className="primary" d="M18 16l6-4 6 4v16l-6 4-6-4zM18 20h12M18 28h12" />
-  <path className="guide" d="M7 10l11 8M7 24h11M7 38l11-8M41 10l-11 8M41 38l-11-8" />
-  <HollowNode x={7} y={10}/><HollowNode x={7} y={24}/><HollowNode x={7} y={38}/><HollowNode x={41} y={10}/><HollowNode x={41} y={38}/>
-  <path className="secondary" d="M21 24h6M24 12v24" /><SignalNode x={24} y={24}/>
-</MarkFrame>;
+// Heterogeneous evidence converges through a structured synthesis gate into one decision.
+const SynthesisMark = (props: MarkProps) => (
+  <svg viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false" data-product-mark="credit-memo" {...props}>
+    <path className="creditEvidence" d="M2.1 4.1h2.1v2.1H2.1zM1.3 9.5h1.8v1.8H1.3zM4.7 9.8h1.5v1.5H4.7zM1 15.2h2.7v1.4H1zM4.9 14.8h1.8v1.8H4.9zM1.1 20.5h2.4v1.5H1.1zM5 20.4h1.6V22H5zM2.4 25.8h1.8v1.8H2.4zM5.2 28.2h1.5v1.5H5.2z" />
+    <path className="creditConvergence" d="M7.7 5.1c5.1.2 7.7 2.3 9.2 6.2.6 1.6 1.5 2.6 2.7 3.1M7.7 10.2c4.4.1 6.4 1.7 8.3 4.2 1 1.3 2.1 2.1 3.6 2.3M7.7 15.3c4.2 0 5.6.7 7.8 2.3 1.3.9 2.6 1.3 4.1 1.3M7.7 20.8c4.4 0 6.6-1 8.6-2.3 1.1-.7 2.1-1.1 3.3-1.1M7.7 25.8c4.7-.1 7-1.7 8.5-4.6.8-1.5 1.8-2.4 3.4-2.8M7.7 29c5.4-.4 7.9-2.7 9.3-6.7.5-1.5 1.4-2.5 2.6-2.9" />
+    <path className="creditGate" d="M19.5 14v6.7M21.3 13.6v7.5" />
+    <path className="creditDecision" d="m22.9 14.8 4-4h3.2l1.9 4.1M22.9 20l4 4h3.2l1.9-4.2" />
+    <circle className="productSignal" cx="29.6" cy="17.4" r="1.55" />
+  </svg>
+);
 
 // Three temporal ribbons share a cadence until the final cohort makes a material divergence.
 const VintageMark = (props: MarkProps) => <ProductMarkFrame {...props}>
