@@ -143,13 +143,22 @@ const PortfolioMark = (props: MarkProps) => (
   </svg>
 );
 
-// Expected and observed probability bodies remain enclosed; their displaced overlap exposes drift.
-const ProbabilityMark = (props: MarkProps) => <ProductMarkFrame {...props}>
-  <path className="productStroke" d="M3.5 18.5C3.5 11 8.1 5 13.7 5s10.2 6 10.2 13.5v8H3.5z" />
-  <path className="productStroke" d="M8.1 18.5C8.1 12.2 12.2 7 17.3 7s9.2 5.2 9.2 11.5v8H8.1z" />
-  <path className="productSolid" d="M13.7 12.1c2.1 0 3.8 2.8 3.8 6.4v3.8H9.9v-3.8c0-3.6 1.7-6.4 3.8-6.4z" />
-  <circle className="productSignal" cx="26.5" cy="18.5" r="2.5" />
-</ProductMarkFrame>;
+// DATA passes through the governed MODEL and resolves into monitored STATES.
+const ProbabilityMark = (props: MarkProps) => (
+  <svg viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false" data-product-mark="pd-model-monitoring" {...props}>
+    <path className="pdData" d="M1.5 5h7v5.2h-7zM1.5 13.4h7v5.2h-7zM1.5 21.8h7V27h-7z" />
+    <path className="pdDataDetail" d="M3.1 6.7h3.8M3.1 8.5h2.5M3.1 15.1h3.8M3.1 16.9h2.5M3.1 23.5h3.8M3.1 25.3h2.5" />
+    <path className="pdInbound" d="M8.5 7.6h2.2c.8 0 1.2.4 1.2 1.2v4.7M8.5 16h3.4M8.5 24.4h2.2c.8 0 1.2-.4 1.2-1.2v-4.7" />
+
+    <path className="pdModel" d="m12 10.2 4-2.3 4 2.3v11.6l-4 2.3-4-2.3z" />
+    <path className="pdModelCore" d="M14.1 12.2h3.8v7.6h-3.8zM14.1 14.1h3.8M14.1 16h3.8M14.1 17.9h3.8" />
+
+    <path className="pdOutbound" d="M20 16h2.1M22.1 16V8.8c0-.8.4-1.2 1.2-1.2h1.2M22.1 16h2.4M22.1 16v7.2c0 .8.4 1.2 1.2 1.2h1.2" />
+    <path className="pdState" d="M24.5 4.8h6v5.6h-6zM24.5 13.2h6v5.6h-6zM24.5 21.6h6v5.6h-6z" />
+    <path className="pdStateDetail" d="M26 8.4V6.8h1.1v1.6h1.1V6h1.1v2.4M26 16h3M26 17.2h2M26 24.4h3" />
+    <path className="productSignal" d="M26 25.6h3v1.6h-3z" />
+  </svg>
+);
 // An exposure crosses three ordered risk chambers while the loss horizon intensifies.
 const RiskChambersMark = (props: MarkProps) => <MarkFrame {...props}>
   <path className="field" d="M6 10h10v28H6z"/><path className="fieldAlt" d="M19 10h10v28H19z"/><path className="fieldStrong" d="M32 10h10v28H32z"/>
