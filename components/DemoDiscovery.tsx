@@ -140,6 +140,38 @@ function DemoForm({ titleId }: { titleId: string }) {
   return <><FormHeader title="Discover Entimema" titleId={titleId} /><form className={styles.form} noValidate onSubmit={submit}><input name="intent" type="hidden" value="demo" /><Honeypot id="demo-website" /><PersonAndCompanyFields errors={errors} jobTitleRequired={false} namePrefix="" salesPayload={false} /><ConsentAndPrivacy /><SubmitArea status={status} /></form></>;
 }
 
+export function AgentDemoForm({ agentId, agentName }: { agentId: string; agentName: string }) {
+  const [status, setStatus] = useState<Status>("idle");
+  const [errors, setErrors] = useState<FieldErrors>({});
+  const titleId = "agent-demo-form-title";
+
+  async function submit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (status === "sending") return;
+    const form = event.currentTarget;
+    const data = new FormData(form);
+    const nextErrors = validate(data, [["firstName", "firstName"], ["lastName", "lastName"], ["email", "email"], ["company", "company"], ["country", "country"], ["phone", "phone"]]);
+    if (showErrors(form, nextErrors, setErrors)) return;
+    setStatus("sending");
+    setStatus(await send(data));
+  }
+
+  if (status === "success") return <Success kind="demo" titleId={titleId} />;
+  return <div aria-labelledby={titleId} className={styles.pageForm}>
+    <FormHeader title="Request a focused demo" titleId={titleId} />
+    <div className={styles.agentInterest}><span>Agent of interest</span><strong>{agentName}</strong></div>
+    <form className={styles.form} noValidate onSubmit={submit}>
+      <input name="intent" type="hidden" value="demo" />
+      <input name="agentId" type="hidden" value={agentId} />
+      <input name="agentName" type="hidden" value={agentName} />
+      <Honeypot id="agent-demo-website" />
+      <PersonAndCompanyFields errors={errors} jobTitleRequired={false} namePrefix="agent-demo-" salesPayload={false} />
+      <ConsentAndPrivacy />
+      <SubmitArea label="Request demo" status={status} />
+    </form>
+  </div>;
+}
+
 function SalesForm({ initialTopic, titleId }: { initialTopic: string; titleId: string }) {
   const [status, setStatus] = useState<Status>("idle");
   const [errors, setErrors] = useState<FieldErrors>({});
