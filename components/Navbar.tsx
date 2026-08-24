@@ -16,6 +16,18 @@ export default function Navbar({ active = "home" }: { active?: NavKey }) {
     }
   }
 
+  function handleAgentLibraryClick(event: MouseEvent<HTMLAnchorElement>) {
+    if (window.location.pathname !== "/agents") return;
+
+    event.preventDefault();
+    window.history.replaceState(null, "", "/agents");
+    window.dispatchEvent(new Event("agent-library:reset"));
+    window.scrollTo({
+      top: 0,
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+    });
+  }
+
   return (
     <header className="site-header">
       <div className="site-container site-header__inner site-header__inner--editorial">
@@ -31,6 +43,7 @@ export default function Navbar({ active = "home" }: { active?: NavKey }) {
             className={active === "agents" ? "is-active" : undefined}
             href="/agents"
             aria-current={active === "agents" ? "page" : undefined}
+            onClick={handleAgentLibraryClick}
           >
             Agent Library
           </Link>
