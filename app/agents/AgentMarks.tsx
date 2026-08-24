@@ -38,15 +38,19 @@ const ClosureMark = (props: MarkProps) => (
   </svg>
 );
 
-// Scattered observations cross a curved boundary and resolve into ordered states.
-const ClassificationMark = (props: MarkProps) => <MarkFrame {...props}>
-  <path className="field" d="M25 8h15v32H17c5-7 7-12 7-18 0-5-1-9 1-14z" />
-  <path className="primary" d="M25 8c-2 6 0 10-1 15-1 6-3 11-7 17" />
-  <path className="secondary" d="M29 12h8M28 20h9M26 28h11M22 36h15" />
-  <path className="guide" d="M7 12c7 1 11 3 17 8M8 25c7 0 10 1 15 3M10 36c5 0 7 0 11-1" />
-  <MicroNode x={8} y={12}/><MicroNode x={11} y={18}/><MicroNode x={8} y={25}/><MicroNode x={12} y={31}/><MicroNode x={10} y={36}/>
-  <HollowNode x={32} y={12}/><HollowNode x={32} y={20}/><SignalNode x={32} y={28}/><HollowNode x={32} y={36}/>
-</MarkFrame>;
+// Nested input fields meet a bounded classification state across one decision boundary.
+const ClassificationMark = (props: MarkProps) => (
+  <svg viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false" data-product-mark="document-classification" {...props}>
+    <path className="classificationLayer" d="M14.9 3.2a12.8 12.8 0 0 0 0 25.6" />
+    <path className="classificationLayer" d="M14.9 8.2a7.8 7.8 0 0 0 0 15.6" />
+    <path className="classificationLayer" d="M14.9 12.5a3.5 3.5 0 0 0 0 7" />
+    <path className="classificationLayer" d="M17.1 8.4a7.8 7.8 0 0 1 0 15.2" />
+    <path className="classificationAssignedField" d="M17.1 3.3a12.8 12.8 0 0 1 0 25.4" />
+    <circle className="productSolid" cx="14.9" cy="16" r="2.65" />
+    <path className="classificationBoundary" d="M16 1.8v28.4" />
+    <circle className="productSignal" cx="24" cy="16" r="2.35" />
+  </svg>
+);
 
 // Dense source evidence passes through an aperture into selected, structured variables.
 const ExtractionMark = (props: MarkProps) => <MarkFrame {...props}>
