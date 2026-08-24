@@ -131,20 +131,27 @@ const PortfolioMark = (props: MarkProps) => (
   </svg>
 );
 
-// DATA passes through the governed MODEL and resolves into monitored STATES.
+// Broken calibration envelopes resolve a compact model state into three monitored outcomes.
 const ProbabilityMark = (props: MarkProps) => (
   <svg viewBox="0 0 32 32" fill="none" aria-hidden="true" focusable="false" data-product-mark="pd-model-monitoring" {...props}>
-    <path className="pdData" d="M1.5 5h7v5.2h-7zM1.5 13.4h7v5.2h-7zM1.5 21.8h7V27h-7z" />
-    <path className="pdDataDetail" d="M3.1 6.7h3.8M3.1 8.5h2.5M3.1 15.1h3.8M3.1 16.9h2.5M3.1 23.5h3.8M3.1 25.3h2.5" />
-    <path className="pdInbound" d="M8.5 7.6h2.2c.8 0 1.2.4 1.2 1.2v4.7M8.5 16h3.4M8.5 24.4h2.2c.8 0 1.2-.4 1.2-1.2v-4.7" />
+    <path d="M11.9 3.1A13 13 0 0 0 2.6 15.8" stroke="currentColor" strokeWidth="2.45" strokeLinecap="butt" />
+    <path d="M3.5 19.2a13 13 0 0 0 4.1 7.1M10.2 27.7a13 13 0 0 0 9.2-1.1" stroke="currentColor" strokeWidth="2.45" strokeLinecap="butt" />
+    <path d="M12.7 7.1a9 9 0 0 0-7.2 6.2M5.3 16.2a9 9 0 0 0 2.8 6.6M10.6 24.3a9 9 0 0 0 7.5-1.3" stroke="currentColor" strokeWidth="2.15" strokeLinecap="butt" />
+    <path d="M13.2 10.9a5.3 5.3 0 0 0-4.3 3.2M9 18.4a5.3 5.3 0 0 0 8.7 1.4M18.1 13.1a5.3 5.3 0 0 0-2.1-1.7" stroke="currentColor" strokeWidth="1.8" strokeLinecap="butt" />
 
-    <path className="pdModel" d="m12 10.2 4-2.3 4 2.3v11.6l-4 2.3-4-2.3z" />
-    <path className="pdModelCore" d="M14.1 12.2h3.8v7.6h-3.8zM14.1 14.1h3.8M14.1 16h3.8M14.1 17.9h3.8" />
+    <path d="M14 16 24.6 7.7M14 16h10.6M14 16l10.6 8.3" stroke="currentColor" strokeWidth=".78" strokeLinecap="round" strokeDasharray="1.05 1.75" />
+    <path d="m19.1 10.7 1.9-.2-.5 1.8M19.8 16l1.6-1M19.8 16l1.6 1M19.1 21.3l1.9.2-.5-1.8" stroke="currentColor" strokeWidth=".72" strokeLinecap="round" strokeLinejoin="round" />
 
-    <path className="pdOutbound" d="M20 16h2.1M22.1 16V8.8c0-.8.4-1.2 1.2-1.2h1.2M22.1 16h2.4M22.1 16v7.2c0 .8.4 1.2 1.2 1.2h1.2" />
-    <path className="pdState" d="M24.5 4.8h6v5.6h-6zM24.5 13.2h6v5.6h-6zM24.5 21.6h6v5.6h-6z" />
-    <path className="pdStateDetail" d="M26 8.4V6.8h1.1v1.6h1.1V6h1.1v2.4M26 16h3M26 17.2h2M26 24.4h3" />
-    <path className="productSignal" d="M26 25.6h3v1.6h-3z" />
+    <circle className="productSolid" cx="13" cy="16" r="3.35" />
+    <path d="M13 12.65a3.35 3.35 0 0 1 3.1 2.08L13 16Z" fill="#d6e4e3" />
+    <circle cx="13" cy="16" r="1.15" fill="#d6e4e3" />
+
+    <circle className="productSolid" cx="27.4" cy="7" r="3.15" />
+    <path d="m25.95 7.05 1 1 1.9-2.15" stroke="#d6e4e3" strokeWidth=".9" strokeLinecap="round" strokeLinejoin="round" />
+    <circle className="productSignal" cx="27.4" cy="16" r="3.15" />
+    <path d="M27.4 14.25v2.15M27.4 17.55v.05" stroke="#d6e4e3" strokeWidth=".95" strokeLinecap="round" />
+    <circle className="productSolid" cx="27.4" cy="25" r="3.15" />
+    <path d="m26.25 23.85 2.3 2.3m0-2.3-2.3 2.3" stroke="#d6e4e3" strokeWidth=".85" strokeLinecap="round" />
   </svg>
 );
 // Ordered stages accumulate loss mass beneath a deterioration path and terminal ECL event.
