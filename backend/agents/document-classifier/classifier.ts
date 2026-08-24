@@ -1,14 +1,18 @@
 import { createResponse, getDocumentClassifierModel } from "../../lib/openai";
-import type { InspectedDocument } from "../../lib/files";
 import { AgentError } from "../../lib/errors";
-import { buildDocumentPrompt, DOCUMENT_CLASSIFIER_INSTRUCTIONS } from "./prompt";
-import { MODEL_CLASSIFICATION_JSON_SCHEMA } from "./schema";
-import { parseModelJson } from "./validator";
-export async function classifyDocument(document: InspectedDocument) {
-  const response = await createResponse({ model: getDocumentClassifierModel(), store: false, instructions: DOCUMENT_CLASSIFIER_INSTRUCTIONS,
-    input: buildDocumentPrompt(document.fileName, document.mimeType, document.extractedText),
-    text: { format: { type: "json_schema", name: "document_classification", strict: true, schema: MODEL_CLASSIFICATION_JSON_SCHEMA } },
+import { compactFingerprint, type DocumentFingerprint } from "./fingerprint";
+import { FAST_AI_JSON_SCHEMA, FastAIClassificationSchema, type FastAIClassification } from "./fast-schema";
+
+export type AIClassifier = (fingerprint: DocumentFingerprint) => Promise<FastAIClassification>;
+const instructions = "Classify the compact business-document fingerprint into the normalized taxonomy. Unknown is not an assumption. Return Unknown when evidence is insufficient. Do not infer routing or metadata.";
+
+export const classifyFingerprintWithAI: AIClassifier = async (fingerprint) => {
+  const response = await createResponse({
+    model: getDocumentClassifierModel(), store: false, instructions, reasoning: { effort: "none" }, max_output_tokens: 200,
+    input: compactFingerprint(fingerprint),
+    text: { format: { type: "json_schema", name: "fast_document_classification", strict: true, schema: FAST_AI_JSON_SCHEMA } },
   });
   if (response.status !== "completed") throw new AgentError("CLASSIFICATION_FAILED", 502);
-  return parseModelJson(response.output_text);
-}
+  try { return FastAIClassificationSchema.parse(JSON.parse(response.output_text)); }
+  catch (error) { throw new AgentError("OPENAI_RESPONSE_INVALID", 502, undefined, error); }
+};
