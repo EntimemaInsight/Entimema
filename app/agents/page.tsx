@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import AnnouncementBar from "@/components/AnnouncementBar";
-import Link from "next/link";
+import { DemoTrigger } from "@/components/DemoDiscovery";
 import Navbar from "@/components/Navbar";
 import AgentLibrary from "./AgentLibrary";
 import styles from "./agents.module.css";
@@ -36,7 +36,7 @@ export default function AgentsPage() {
                 <span className={styles.emphasis}>built for real decisions.</span>
               </h1>
               <p>Transform labor-intensive workflows that once took days into automated decisions delivered in moments—reducing cost, friction, and human error.</p>
-              <Link className={styles.demoCta} href="/contact">Get a demo</Link>
+              <DemoTrigger className={styles.demoCta}>Get a demo</DemoTrigger>
             </div>
           </div>
         </section>
@@ -59,14 +59,6 @@ export default function AgentsPage() {
           </div>
         </section>
         <AgentLibrary />
-        <section className={styles.bridge} aria-labelledby="agents-bridge-title">
-          <div className={`site-container ${styles.bridgeInner}`}>
-            <p>FROM METHOD TO OPERATION</p>
-            <h2 id="agents-bridge-title">Built around the decision—not the demo.</h2>
-            <p>Entimema connects specialist agents to governed financial and risk workflows, trusted evidence and human judgement.</p>
-            <Link href="/services/decision-automation">Explore decision intelligence <span aria-hidden="true">↗</span></Link>
-          </div>
-        </section>
       </div>
     </main>
   );
