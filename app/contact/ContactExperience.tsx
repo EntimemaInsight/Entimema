@@ -17,14 +17,14 @@ function PartnershipIcon({ className }: IconProps) {
   return <svg aria-hidden="true" className={className} fill="none" focusable="false" viewBox="0 0 32 32"><circle cx="7" cy="16" r="3.5" /><circle cx="25" cy="8" r="3.5" /><circle cx="25" cy="24" r="3.5" /><path d="m10.2 14.5 11.6-5M10.2 17.5l11.6 5" /></svg>;
 }
 
-function ClientIcon({ className }: IconProps) {
-  return <svg aria-hidden="true" className={className} fill="none" focusable="false" viewBox="0 0 32 32"><circle cx="13" cy="10" r="5" /><path d="M4.5 27c.6-5.4 3.4-8 8.5-8 3.4 0 5.8 1.2 7.2 3.7M21 16.5l2.5 2.5 5-5" /></svg>;
+function SupportMark({ className }: IconProps) {
+  return <span className={`${className} ${styles.supportMark}`}>?</span>;
 }
 
 const paths = [
   { intent: "project" as const, title: "New Project", Icon: ProjectIcon },
   { intent: "partnership" as const, title: "Partnerships", Icon: PartnershipIcon },
-  { intent: "client" as const, title: "Existing Clients", Icon: ClientIcon },
+  { intent: "client" as const, title: "Support", Icon: SupportMark },
 ];
 
 export default function ContactExperience({ initialTopic }: { initialTopic?: string }) {
