@@ -1,5 +1,5 @@
 .root { height: 100%; display: flex; align-items: center; }
-.trigger { height: 100%; display: inline-flex; align-items: center; gap: 9px; padding: 0; border: 0; background: transparent; color: rgba(4,19,63,.82); font: inherit; font-size: var(--type-navigation); font-weight: 560; letter-spacing: var(--tracking-action); cursor: pointer; }
+.trigger { height: 100%; display: inline-flex; align-items: center; gap: 9px; padding: 0; border: 0; background: transparent; color: rgba(4,19,63,.82); font: inherit; font-size: var(--type-navigation); font-weight: 400; letter-spacing: var(--tracking-action); cursor: pointer; }
 .trigger:hover,.trigger:focus-visible,.active { color: var(--brand-navy-950); }
 .trigger:focus-visible { outline: 2px solid var(--brand-navy-800); outline-offset: 5px; }
 .trigger > span { width: 7px; height: 7px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg) translateY(-2px); transition: transform 180ms var(--ease-standard); }
