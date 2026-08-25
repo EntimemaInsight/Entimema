@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 type Mode = "finance" | "risk";
 
@@ -13,8 +13,6 @@ type Scene = {
   company: string;
   industry: string;
   period: string;
-  topTags: string[];
-  orbitTags: string[];
   leftTitle: string;
   leftSteps: string[];
   leftResult: string;
@@ -35,8 +33,6 @@ const scenes: Record<Mode, Scene> = {
     company: "Example Scenario",
     industry: "Manufacturing",
     period: "FY 2026",
-    topTags: ["P&L", "Balance Sheet", "Cash Flow", "Budget", "KPI"],
-    orbitTags: ["Forecast", "Working Capital", "Management Report", "Financial Model", "Management Analysis", "Scenario Analysis", "Board Report", "Decision Support"],
     leftTitle: "Financial Intelligence",
     leftSteps: ["Connecting to ERP…", "Reading financial data…", "Checking consistency…", "Detecting anomalies…"],
     leftResult: "Insights generated.",
@@ -60,8 +56,6 @@ const scenes: Record<Mode, Scene> = {
     company: "Example Scenario",
     industry: "Banking & Finance",
     period: "FY 2026",
-    topTags: ["Credit Risk", "Market Risk", "Liquidity Risk", "Operational Risk", "Compliance"],
-    orbitTags: ["PD / LGD", "Scenario Analysis", "Stress Testing", "Exposure", "Concentration", "Risk Dashboard", "Fraud Detection", "Decision Support"],
     leftTitle: "Risk Intelligence",
     leftSteps: ["Collecting risk data…", "Calculating exposures…", "Assessing probabilities…", "Detecting risk drivers…"],
     leftResult: "Risk insights generated.",
@@ -120,7 +114,6 @@ function AgentPanel({ side, scene, activeStep }: { side: "left" | "right"; scene
 
 export default function DecisionArchitecture() {
   const ref = useRef<HTMLElement>(null);
-  const svgRef = useRef<SVGSVGElement>(null);
   const switchTimer = useRef<number | null>(null);
   const [visible, setVisible] = useState(false);
   const [mode, setMode] = useState<Mode>("finance");
@@ -147,13 +140,6 @@ export default function DecisionArchitecture() {
   }, []);
 
   useEffect(() => {
-    const svg = svgRef.current;
-    if (!svg) return;
-    if (visible && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) svg.unpauseAnimations();
-    else svg.pauseAnimations();
-  }, [visible]);
-
-  useEffect(() => {
     if (!visible) return;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduce) return;
@@ -171,7 +157,6 @@ export default function DecisionArchitecture() {
     return () => window.clearInterval(id);
   }, [visible, mode, transitioning]);
 
-  const tags = useMemo(() => scene.topTags, [scene]);
   const output = scene.outputStates[activeStep];
 
   return (
@@ -179,28 +164,7 @@ export default function DecisionArchitecture() {
       <div className="site-container executive-intelligence__inner">
         <div className="executive-intelligence__canvas">
           <div className="executive-intelligence__dots" aria-hidden="true" />
-          <div className="executive-intelligence__sparkles" aria-hidden="true"><i/><i/><i/><i/><i/><i/></div>
           <div className="executive-intelligence__glow" aria-hidden="true" />
-
-          <div className="executive-intelligence__top-tags">
-            {tags.map((tag, index) => <span style={{ "--tag": index } as React.CSSProperties} key={tag}>{tag}</span>)}
-          </div>
-
-          <svg ref={svgRef} className="executive-intelligence__connections" viewBox="0 0 1400 760" preserveAspectRatio="none" aria-hidden="true">
-            {[
-              "M700 118 C700 175 700 205 700 245",
-              "M430 120 C470 172 515 196 576 238",
-              "M970 120 C930 172 885 196 824 238",
-              "M345 380 C430 380 480 380 545 380",
-              "M1055 380 C970 380 920 380 855 380",
-              "M700 520 C700 565 700 588 700 630",
-            ].map((path, index) => <path d={path} key={path} className={`executive-line executive-line--${index + 1}`} />)}
-            <circle className="executive-data-pulse executive-data-pulse--1" r="4"><animateMotion dur="3.8s" repeatCount="indefinite" path="M430 120 C470 172 515 196 576 238" /></circle>
-            <circle className="executive-data-pulse executive-data-pulse--2" r="4"><animateMotion dur="4.4s" begin="-1.8s" repeatCount="indefinite" path="M970 120 C930 172 885 196 824 238" /></circle>
-            <circle className="executive-data-pulse executive-data-pulse--3" r="4"><animateMotion dur="3.3s" begin="-.8s" repeatCount="indefinite" path="M345 380 C430 380 480 380 545 380" /></circle>
-            <circle className="executive-data-pulse executive-data-pulse--4" r="4"><animateMotion dur="3.7s" begin="-2.4s" repeatCount="indefinite" path="M1055 380 C970 380 920 380 855 380" /></circle>
-            <circle className="executive-data-pulse executive-data-pulse--5" r="4"><animateMotion dur="3.1s" begin="-1.2s" repeatCount="indefinite" path="M700 520 C700 565 700 588 700 630" /></circle>
-          </svg>
 
           <div className="executive-intelligence__layout">
             <AgentPanel side="left" scene={scene} activeStep={activeStep} />
@@ -208,7 +172,6 @@ export default function DecisionArchitecture() {
             <div className="executive-profile">
               <div className="executive-profile__image">
                 <Image src={scene.image} alt={`${scene.name}, ${scene.role}`} fill priority sizes="(max-width: 760px) 86vw, 420px" quality={96} />
-                <div className="executive-profile__scan" aria-hidden="true" />
                 <div className="executive-profile__veil" />
               </div>
               <div className="executive-profile__identity">
@@ -223,10 +186,6 @@ export default function DecisionArchitecture() {
             </div>
 
             <AgentPanel side="right" scene={scene} activeStep={(activeStep + 2) % 4} />
-          </div>
-
-          <div className="executive-intelligence__orbit">
-            {scene.orbitTags.map((tag, index) => <span className={`executive-orbit-tag executive-orbit-tag--${index + 1}`} style={{ "--tag": index } as React.CSSProperties} key={tag}>{tag}</span>)}
           </div>
 
           <div className="executive-intelligence__output">
