@@ -15,12 +15,13 @@ export const metadata: Metadata = {
   twitter: { card: "summary", title, description },
 };
 
-const principles = [
-  ["Client isolation", "Each client and processing job remains associated with its own authorised context."],
-  ["Purpose limitation", "Data is processed only for the defined Agent workflow and required output."],
-  ["Least privilege", "Systems and authorised users receive only the access required for the task."],
-  ["Traceable execution", "Material processing events, exceptions and interventions remain reviewable."],
-  ["Human accountability", "AI output supports professional judgment and does not remove human responsibility."],
+const assurances = [
+  ["standard", "Unified security standard", "One framework across every agent and workflow."],
+  ["contexts", "Isolated client contexts", "Client, workspace and job data remain separated."],
+  ["lifecycle", "Protected data lifecycle", "Encrypted transport, controlled storage and deletion."],
+  ["purpose", "Purpose-limited processing", "Agents receive only the data required for the task."],
+  ["trace", "Traceable execution", "Material actions, exceptions and interventions remain reviewable."],
+  ["accountability", "Human accountability", "Uncertainty is exposed and material decisions remain accountable."],
 ];
 
 const lifecycle = [
@@ -51,6 +52,55 @@ function ArrowModel({ items, label }: { items: string[]; label: string }) {
   return <div className={styles.arrowModel} aria-label={label}>{items.map((item, index) => <div className={styles.arrowItem} key={item}><span>{item}</span>{index < items.length - 1 && <b aria-hidden="true">→</b>}</div>)}</div>;
 }
 
+function AssuranceIllustration({ type }: { type: string }) {
+  const sharedProps = { fill: "none", stroke: "currentColor", strokeWidth: 1.35, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
+
+  return <svg className={styles.assuranceIllustration} viewBox="0 0 320 190" aria-hidden="true">
+    <g {...sharedProps}>
+      {type === "standard" && <>
+        <path d="M160 41v27M91 113H63v29M229 113h28v29M160 122v27" />
+        <rect className={styles.systemFill} x="106" y="68" width="108" height="54" rx="6" />
+        <path d="M125 86h70M125 96h46M125 106h58" />
+        <circle className={styles.dataFill} cx="63" cy="151" r="13" /><circle className={styles.dataFill} cx="160" cy="158" r="13" /><circle className={styles.dataFill} cx="257" cy="151" r="13" />
+        <circle cx="160" cy="32" r="9" />
+      </>}
+      {type === "contexts" && <>
+        <rect x="29" y="45" width="76" height="112" rx="7" /><rect x="122" y="45" width="76" height="112" rx="7" /><rect x="215" y="45" width="76" height="112" rx="7" />
+        <path d="M29 69h76M122 69h76M215 69h76" />
+        <circle className={styles.dataFill} cx="50" cy="57" r="4" /><circle className={styles.dataFill} cx="143" cy="57" r="4" /><circle className={styles.dataFill} cx="236" cy="57" r="4" />
+        <rect className={styles.systemFill} x="44" y="89" width="46" height="13" rx="3" /><rect className={styles.systemFill} x="137" y="89" width="46" height="13" rx="3" /><rect className={styles.systemFill} x="230" y="89" width="46" height="13" rx="3" />
+        <circle cx="54" cy="127" r="5" /><circle cx="68" cy="127" r="5" /><circle cx="82" cy="127" r="5" /><circle cx="147" cy="127" r="5" /><circle cx="161" cy="127" r="5" /><circle cx="175" cy="127" r="5" /><circle cx="240" cy="127" r="5" /><circle cx="254" cy="127" r="5" /><circle cx="268" cy="127" r="5" />
+      </>}
+      {type === "lifecycle" && <>
+        <path d="M113 42a69 69 0 0 1 95 23M226 83a69 69 0 0 1-19 77M188 171a69 69 0 0 1-89-29M90 124a69 69 0 0 1 9-64" />
+        <path d="m202 55 8 11-14 1M220 75l7 10-13 3M216 151l-10 10-3-14M109 153l-11-10 14-3M91 72l8-12 5 13" />
+        <path className={styles.systemFill} d="M143 73h34l17 17v39h-51z" /><path d="M177 73v17h17M153 105h30M153 115h22" />
+        <text x="79" y="38">UPLOAD</text><text x="232" y="94">PROCESS</text><text x="177" y="184">DELIVER</text><text x="37" y="130">DELETE</text>
+      </>}
+      {type === "purpose" && <>
+        <path d="M34 48h119l51 47-51 47H34" />
+        <circle className={styles.dataFill} cx="58" cy="70" r="6" /><circle className={styles.dataFill} cx="89" cy="63" r="6" /><circle className={styles.dataFill} cx="123" cy="76" r="6" /><circle className={styles.dataFill} cx="68" cy="103" r="6" /><circle className={styles.dataFill} cx="109" cy="105" r="6" /><circle className={styles.dataFill} cx="82" cy="132" r="6" /><circle className={styles.dataFill} cx="137" cy="126" r="6" />
+        <path d="M204 95h34" /><rect className={styles.systemFill} x="238" y="70" width="54" height="50" rx="7" /><circle cx="265" cy="89" r="7" /><path d="M252 108h26" />
+        <circle className={styles.validFill} cx="182" cy="95" r="5" />
+      </>}
+      {type === "trace" && <>
+        <path d="M53 95h214" />
+        <circle className={styles.dataFill} cx="59" cy="95" r="11" /><circle className={styles.dataFill} cx="126" cy="95" r="11" /><circle className={styles.reviewFill} cx="194" cy="95" r="11" /><circle className={styles.validFill} cx="261" cy="95" r="11" />
+        <path d="m255 95 4 4 8-9M194 89v7M194 102h.01" />
+        <text x="41" y="127">INPUT</text><text x="99" y="127">PROCESS</text><text x="168" y="127">EXCEPTION</text><text x="236" y="127">COMPLETE</text>
+        <path d="M59 76v-9h67v9M194 76V62h67v14" />
+      </>}
+      {type === "accountability" && <>
+        <rect className={styles.systemFill} x="32" y="70" width="64" height="54" rx="7" /><circle cx="64" cy="89" r="7" /><path d="M50 111h28M96 97h46" />
+        <path d="m134 91 9 6-9 6M142 97h27" />
+        <rect className={styles.reviewFill} x="169" y="55" width="62" height="84" rx="8" /><circle cx="200" cy="81" r="9" /><path d="M184 108c7-12 25-12 32 0M231 97h31" />
+        <path d="m254 91 9 6-9 6M262 97h25" /><circle className={styles.validFill} cx="291" cy="97" r="8" /><path d="m287 97 3 3 6-7" />
+        <text x="177" y="155">REVIEW</text>
+      </>}
+    </g>
+  </svg>;
+}
+
 export default function PrivacyPage() {
   return <main className={styles.page}>
     <Navbar />
@@ -69,8 +119,24 @@ export default function PrivacyPage() {
       <p className={styles.platformStatement}>One platform. One security standard. Every agent.</p>
     </header>
 
-    <section className={styles.principles} aria-label="Platform security principles">
-      {principles.map(([heading, copy], index) => <article key={heading}><span>{String(index + 1).padStart(2, "0")}</span><h2>{heading}</h2><p>{copy}</p></article>)}
+    <section className={styles.assuranceSection} aria-labelledby="assurance-heading">
+      <header className={styles.assuranceHeader}>
+        <p className={styles.eyebrow}>INHERITED BY EVERY ENTIMEMA AGENT</p>
+        <h2 id="assurance-heading">One standard, enforced across the platform.</h2>
+        <p>Every agent operates within the same controls for data isolation, purpose-limited processing, traceability and accountable decision support.</p>
+      </header>
+      <div className={styles.assuranceGrid}>
+        {assurances.map(([type, heading, copy], index) => <article className={styles.assuranceCard} key={heading}>
+          <div className={styles.cardTopline}><span>{String(index + 1).padStart(2, "0")}</span><span>PERMANENT CONTROL</span></div>
+          <AssuranceIllustration type={type} />
+          <div className={styles.cardCopy}><h3>{heading}</h3><p>{copy}</p></div>
+        </article>)}
+      </div>
+    </section>
+
+    <section className={styles.lifecycleOverview} id="lifecycle" aria-label="Unified processing lifecycle">
+      <SectionHeading eyebrow="UNIFIED PROCESSING LIFECYCLE" title="One controlled lifecycle across every Entimema Agent" />
+      <ol className={styles.lifecycle}>{lifecycle.map(([heading, copy], index) => <li key={heading}><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{heading}</h3><p>{copy}</p></div></li>)}</ol>
     </section>
 
     <div className={styles.indexLayout}>
@@ -79,11 +145,6 @@ export default function PrivacyPage() {
         <section className={styles.section} id="framework">
           <SectionHeading eyebrow="01 / UNIFIED FRAMEWORK" title="One permanent standard for every agent." intro="This standard governs every current and future Entimema Agent, every client and the complete lifecycle: Access → Upload → Isolated Processing → Analysis → Validation → Delivery → Retention or Deletion." />
           <div className={styles.callout}><strong>Platform invariant</strong><p>Every Entimema Agent operates within the same unified security, privacy and Responsible AI framework. A new agent inherits the framework by default and cannot bypass, weaken or redefine it.</p></div>
-        </section>
-
-        <section className={`${styles.section} ${styles.wide}`} id="lifecycle">
-          <SectionHeading eyebrow="02 / CONTROLLED EXECUTION" title="One controlled lifecycle across every Entimema Agent" />
-          <ol className={styles.lifecycle}>{lifecycle.map(([heading, copy], index) => <li key={heading}><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{heading}</h3><p>{copy}</p></div></li>)}</ol>
         </section>
 
         <section className={styles.section} id="data-controls">
