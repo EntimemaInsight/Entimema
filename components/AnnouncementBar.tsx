@@ -25,7 +25,9 @@ export default function AnnouncementBar() {
   return (
     <aside className="announcement" aria-label="Current announcement">
       <div className="announcement__message">
-        <span>Where finance, risk and AI become better decisions.</span>
+        <Link className="announcement__statement" href="/resources">
+          Where finance, risk and AI become better decisions.
+        </Link>
         <Link className="announcement__link" href="/resources">
           Learn more <b aria-hidden="true">→</b>
         </Link>
