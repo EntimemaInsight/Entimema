@@ -252,6 +252,9 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
                     </section>
                   ))}
                 </div>
+                <Link className={styles.mobileTopLevel} href="/agents" onClick={close}>
+                  <span>Agent Library</span><span aria-hidden="true">→</span>
+                </Link>
                 <button aria-controls={`${menuId}-mobile-resources`} aria-expanded={mobileResourcesOpen} className={styles.mobileTopLevel} onClick={() => setMobileResourcesOpen((current) => !current)} type="button">
                   <span>Resources</span><span aria-hidden="true">{mobileResourcesOpen ? "−" : "+"}</span>
                 </button>
@@ -265,9 +268,6 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
                     </Link>
                   ))}
                 </div>
-                <Link className={styles.mobileTopLevel} href="/agents" onClick={close}>
-                  <span>Agent Library</span><span aria-hidden="true">→</span>
-                </Link>
                 <Link className={styles.mobileTopLevel} href="/about" onClick={close}>
                   <span>About</span><span aria-hidden="true">→</span>
                 </Link>
