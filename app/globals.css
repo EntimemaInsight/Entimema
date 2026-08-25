@@ -6571,6 +6571,118 @@ main div[class*="relatedGrid"] a:active > b { transform: translate3d(1px, 0, 0);
 .case-cta__inner { row-gap: var(--rhythm-heading-copy); }
 
 main > section[class*="hero"] > .site-container > div[class*="heroInner"] { column-gap: clamp(52px, 5vw, 84px); }
+
+/* Sprint — elevated, calm executive workspace */
+.home-stage {
+  min-height: 0;
+}
+.hero {
+  min-height: 0;
+}
+.hero__layout--editorial {
+  min-height: 0;
+}
+.hero__copy--editorial {
+  padding-top: clamp(30px, 3.2vw, 46px);
+  padding-bottom: clamp(24px, 2.2vw, 32px);
+}
+.hero__description--editorial {
+  margin-top: clamp(22px, 2.2vw, 32px);
+}
+.hero__cta {
+  margin-top: clamp(18px, 1.8vw, 26px);
+}
+.decision-architecture.executive-intelligence {
+  padding: 0 0 clamp(64px, 6vw, 88px);
+  background: #fff;
+}
+.executive-intelligence__inner {
+  width: min(1250px, calc(100% - 80px));
+}
+.executive-intelligence__canvas {
+  min-height: 620px;
+  border-color: rgba(18, 46, 110, .055);
+  background:
+    radial-gradient(ellipse at 50% 48%, rgba(71, 92, 200, .10) 0%, rgba(111, 148, 220, .052) 33%, rgba(239, 246, 255, .48) 59%, rgba(255, 255, 255, 0) 82%),
+    linear-gradient(180deg, #fff 0%, #f9fbff 43%, #eef5ff 72%, #fff 100%);
+  box-shadow: 0 18px 58px rgba(20, 44, 109, .045);
+}
+.executive-intelligence__dots {
+  z-index: 0;
+  opacity: 1;
+  background-image: radial-gradient(circle, rgba(38, 78, 155, .13) 0 .65px, transparent .82px);
+  background-size: 8px 8px;
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 32%, rgba(0, 0, 0, .62) 58%, transparent 88%);
+  mask-image: radial-gradient(ellipse at center, #000 32%, rgba(0, 0, 0, .62) 58%, transparent 88%);
+  animation: none;
+}
+.executive-intelligence__glow {
+  z-index: 1;
+  width: 620px;
+  height: 440px;
+  opacity: .72;
+  background: radial-gradient(ellipse, rgba(58, 79, 181, .09), rgba(89, 121, 205, .035) 48%, transparent 74%) !important;
+  animation: none;
+}
+.executive-intelligence__layout {
+  inset: 34px 32px 110px;
+  grid-template-columns: minmax(230px, 1fr) minmax(340px, 400px) minmax(230px, 1fr);
+  gap: 22px;
+}
+.executive-agent,
+.executive-profile {
+  animation: none;
+  will-change: auto;
+}
+.executive-agent {
+  box-shadow: 0 12px 34px rgba(24, 45, 102, .065);
+}
+.executive-profile {
+  box-shadow: 0 20px 54px rgba(25, 46, 112, .14), 0 0 0 1px rgba(var(--executive-accent), .15) !important;
+}
+.executive-intelligence__output {
+  bottom: 20px;
+}
+
+@media (max-width: 1100px) {
+  .executive-intelligence__inner { width: min(100% - 48px, 980px); }
+  .executive-intelligence__canvas { min-height: 750px; }
+  .executive-intelligence__layout {
+    inset: 34px 26px 170px;
+    grid-template-columns: minmax(250px, 1fr) minmax(320px, 370px);
+  }
+  .executive-agent--right { width: min(520px, 70%); }
+  .executive-intelligence__output { bottom: 54px; }
+}
+
+@media (max-width: 760px) {
+  .hero__copy--editorial { padding: 34px 0 28px; }
+  .decision-architecture.executive-intelligence { padding: 0 0 56px; }
+  .executive-intelligence__inner { width: calc(100% - 32px); }
+  .executive-intelligence__canvas {
+    min-height: auto;
+    padding: 20px 14px 82px;
+  }
+  .executive-intelligence__dots {
+    opacity: .5;
+    background-size: 9px 9px;
+  }
+  .executive-intelligence__glow { display: none; }
+  .executive-intelligence__layout { position: relative; inset: auto; gap: 16px; }
+  .executive-profile { max-width: 410px; }
+  .executive-intelligence__output { margin-top: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .executive-intelligence__layout,
+  .executive-agent__step,
+  .executive-intelligence__output,
+  .executive-intelligence__check,
+  .executive-agent__live {
+    animation: none !important;
+    transition: none !important;
+  }
+}
 main > section[class*="hero"] div[class*="heroCopy"] { max-width: 42rem; }
 main > section[class*="hero"] div[class*="heroCopy"] > [class*="category"] { display: inline-block; margin-bottom: var(--rhythm-label-heading); }
 main > section[class*="hero"] div[class*="heroCopy"] > h1 {
