@@ -39,7 +39,7 @@ export default function Navbar({ active = "home" }: { active?: NavKey }) {
           <nav className="site-nav site-nav--editorial" aria-label="Main navigation">
             <WhatWeDoMegaMenu active={active === "services"} />
             <Link
-              className={active === "agents" ? "is-active" : undefined}
+              className={`site-nav__item${active === "agents" ? " is-active" : ""}`}
               href="/agents"
               aria-current={active === "agents" ? "page" : undefined}
               onClick={handleAgentLibraryClick}
@@ -48,7 +48,7 @@ export default function Navbar({ active = "home" }: { active?: NavKey }) {
             </Link>
             <ResourcesMegaMenu active={active === "resources"} />
             <Link
-              className={active === "about" ? "is-active" : undefined}
+              className={`site-nav__item${active === "about" ? " is-active" : ""}`}
               href="/about"
               aria-current={active === "about" ? "page" : undefined}
             >
