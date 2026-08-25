@@ -9,6 +9,11 @@ const MAX_ROWS = 80;
 const MAX_COLUMNS = 16;
 const MAX_COMPACT_CHARACTERS = 32_000;
 
+export type FingerprintFailureReason = "parser_unavailable" | "extraction_failed";
+export class FingerprintError extends Error {
+  constructor(public readonly reason: FingerprintFailureReason, public readonly cause?: unknown) { super(reason); this.name = "FingerprintError"; }
+}
+
 export type DocumentFingerprint = {
   fileName: string;
   extension: string;
@@ -64,22 +69,31 @@ export async function createDocumentFingerprint(document: InspectedDocument): Pr
     if (document.extension === ".docx") textWindow = (await mammoth.extractRawText({ buffer: document.buffer })).value.slice(0, MAX_COMPACT_CHARACTERS);
     else if (document.extension === ".pdf") {
       if (document.buffer.includes(Buffer.from("/Encrypt"))) throw new AgentError("FILE_ENCRYPTED", 422);
-      const { default: pdf } = await import("pdf-parse");
-      textWindow = (await pdf(document.buffer)).text.slice(0, MAX_COMPACT_CHARACTERS);
+      let pdf: (dataBuffer: Buffer) => Promise<{ text: string }>;
+      try { ({ default: pdf } = await import("pdf-parse/lib/pdf-parse.js")); }
+      catch (error) { throw new FingerprintError("parser_unavailable", error); }
+      try { textWindow = (await pdf(document.buffer)).text.slice(0, MAX_COMPACT_CHARACTERS); }
+      catch (error) { throw new FingerprintError("extraction_failed", error); }
     } else textWindow = decodeText(document.buffer).slice(0, MAX_COMPACT_CHARACTERS);
-    if (!textWindow.trim()) throw new AgentError("FILE_CORRUPT", 422, "No readable document content was found.");
+    if (!textWindow.trim()) {
+      if (document.extension === ".pdf") throw new FingerprintError("extraction_failed");
+      throw new AgentError("FILE_CORRUPT", 422, "No readable document content was found.");
+    }
     const rows = textWindow.split(/\r?\n/).filter(Boolean).slice(0, MAX_ROWS);
     const delimiter = document.extension === ".csv" ? ([",", ";", "\t", "|"].sort((a, b) => (rows[0]?.split(b).length ?? 0) - (rows[0]?.split(a).length ?? 0))[0]) : null;
     const representativeRows = rows.map((row) => delimiter ? row.split(delimiter).slice(0, MAX_COLUMNS).map((cell) => cell.trim()) : [row.trim()]);
     return { fileName: document.fileName, extension: document.extension, mimeType: document.mimeType, sheetNames: [], headers: representativeRows[0] ?? [], representativeRows, dimensions: representativeRows[0] ? [`${representativeRows.length}x${representativeRows[0].length}`] : [], ...textSignals(textWindow), textWindow };
   } catch (error) {
-    if (error instanceof AgentError) throw error;
+    if (error instanceof AgentError || error instanceof FingerprintError) throw error;
     const message = error instanceof Error ? error.message.toLowerCase() : "";
     if (message.includes("password") || message.includes("encrypt")) throw new AgentError("FILE_ENCRYPTED", 422, undefined, error);
     throw new AgentError("FILE_CORRUPT", 422, undefined, error);
   }
 }
 
+export function createFallbackFingerprint(document: InspectedDocument): DocumentFingerprint {
+  return { fileName: document.fileName, extension: document.extension, mimeType: document.mimeType, sheetNames: [], headers: [], representativeRows: [], dimensions: [], dateSignals: [], currencySignals: [], textWindow: "" };
+}
 export function compactFingerprint(fingerprint: DocumentFingerprint) {
   return JSON.stringify({ filename: fingerprint.fileName, sheet_names: fingerprint.sheetNames, headers: fingerprint.headers, dimensions: fingerprint.dimensions, representative_rows: fingerprint.representativeRows.slice(0, 24), date_signals: fingerprint.dateSignals, currency_signals: fingerprint.currencySignals });
 }

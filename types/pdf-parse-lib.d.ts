@@ -1,0 +1,1 @@
+declare module "pdf-parse/lib/pdf-parse.js" { export default function pdf(dataBuffer: Buffer): Promise<{ text: string }>; }

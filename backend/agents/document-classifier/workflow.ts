@@ -5,6 +5,11 @@ export const DOCUMENT_CLASSIFIER_WORKFLOW = {
 } as const;
 export type WorkflowNode = (typeof DOCUMENT_CLASSIFIER_WORKFLOW.nodes)[number];
 export type ExecutionStep = { node: WorkflowNode; status: "completed" | "failed" | "skipped" };
-export function executionTrace(aiCalled: boolean): ExecutionStep[] {
-  return DOCUMENT_CLASSIFIER_WORKFLOW.nodes.map((node) => ({ node, status: node === "ai_fallback" && !aiCalled ? "skipped" : "completed" }));
+export function executionTrace(aiCalled: boolean, fingerprintFallback = false): ExecutionStep[] {
+  return DOCUMENT_CLASSIFIER_WORKFLOW.nodes.map((node) => {
+    if (fingerprintFallback && node === "fingerprint") return { node, status: "failed" };
+    if (fingerprintFallback && node === "local_classification") return { node, status: "skipped" };
+    if (node === "ai_fallback" && !aiCalled) return { node, status: "skipped" };
+    return { node, status: "completed" };
+  });
 }
