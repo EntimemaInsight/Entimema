@@ -45,7 +45,7 @@ function PillarIcon({ type }: { type: string }) {
 
 export default function AboutPage() {
   return (
-    <main className={`about-page about-typography ${styles.page}`}>
+    <main className={`about-page ${styles.page}`}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(createFounderSchema()) }} />
       <AboutHeader />
       <section className="about-hero">

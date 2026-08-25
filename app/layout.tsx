@@ -1,16 +1,9 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import ScrollExperience from "@/components/ScrollExperience";
 import GlobalFooter from "@/components/GlobalFooter";
 import AnalyticsConsent from "@/components/AnalyticsConsent";
 import { DemoDiscoveryProvider } from "@/components/DemoDiscovery";
-
-const inter = Inter({
-  subsets: ["latin", "cyrillic"],
-  display: "swap",
-  variable: "--font-inter",
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.entimema.com"),
@@ -42,7 +35,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en">
       <body><DemoDiscoveryProvider><ScrollExperience />{children}<GlobalFooter /><AnalyticsConsent /></DemoDiscoveryProvider></body>
     </html>
   );
