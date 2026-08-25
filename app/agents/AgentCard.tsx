@@ -17,8 +17,6 @@ export default function AgentCard({ agent, onSelect = () => undefined, selected 
           </span>
         )}
         <h3>{agent.name}</h3>
-        <p>{agent.description}</p>
-        <span className={styles.cardMeta}>{agent.categories.join(" · ")}</span>
       </button>
     </article>
   );
