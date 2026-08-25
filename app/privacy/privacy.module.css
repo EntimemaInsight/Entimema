@@ -15,13 +15,26 @@
 .heroArchitecture i { position: relative; height: 1px; background: #c9ced7; }
 .heroArchitecture i::after { content: ""; position: absolute; right: 0; top: -3px; width: 7px; height: 7px; border: 1px solid #a42e2a; border-radius: 50%; background: #fff; }
 .platformStatement { margin: clamp(70px, 8vw, 120px) 0 0; padding: 23px 0; border-top: 1px solid #dfe2e7; color: #071b4f; font-size: 13px; font-weight: 750; letter-spacing: .045em; }
-.principles { display: grid; grid-template-columns: repeat(5, 1fr); padding-inline: max(24px, calc((100vw - 1412px) / 2)); border-block: 1px solid #d8dce2; background: #f2f0eb; }
-.principles article { min-width: 0; padding: 29px clamp(17px, 1.8vw, 31px) 34px; border-left: 1px solid #d8d6d0; }
-.principles article:first-child { border-left: 0; padding-left: 0; }
-.principles article:last-child { padding-right: 0; }
-.principles span { color: #a42e2a; font-size: 10px; font-weight: 700; }
-.principles h2 { margin: 20px 0 11px; font-size: 15px; font-weight: 700; }
-.principles p { margin: 0; color: #606b7c; font-size: 13px; line-height: 1.6; }
+.assuranceSection { padding: clamp(82px, 9vw, 144px) max(24px, calc((100vw - 1412px) / 2)); border-top: 1px solid #d8dce2; background: #f2f0eb; }
+.assuranceHeader { max-width: 840px; margin-bottom: clamp(44px, 5vw, 72px); }
+.assuranceHeader h2 { margin: 0; font-size: clamp(38px, 4.5vw, 68px); font-weight: 570; line-height: 1.03; letter-spacing: -.045em; }
+.assuranceHeader > p:last-child { max-width: 720px; margin: 25px 0 0; color: #59667c; font-size: clamp(16px, 1.3vw, 19px); line-height: 1.7; }
+.assuranceGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(16px, 1.8vw, 28px); }
+.assuranceCard { min-width: 0; min-height: clamp(430px, 38vw, 520px); display: flex; flex-direction: column; padding: clamp(22px, 2.1vw, 32px); border: 1px solid #172d59; border-radius: 10px; background: #fbfaf7; box-shadow: 0 1px 0 rgb(7 27 79 / 5%); transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease; }
+.assuranceCard:hover { transform: translateY(-3px); background: #fff; box-shadow: 0 14px 34px rgb(7 27 79 / 8%); }
+.cardTopline { display: flex; justify-content: space-between; gap: 20px; color: #7c8799; font-size: 9px; font-weight: 750; line-height: 1.4; letter-spacing: .13em; }
+.cardTopline span:first-child { color: #a42e2a; }
+.assuranceIllustration { width: 100%; height: auto; margin: clamp(24px, 3.2vw, 46px) 0 clamp(22px, 2.5vw, 36px); color: #172d59; }
+.assuranceIllustration text { fill: #68758b; stroke: none; font-size: 7px; font-weight: 700; letter-spacing: .08em; }
+.assuranceIllustration .systemFill { fill: #eeeaf5; }
+.assuranceIllustration .dataFill { fill: #dcd5ea; }
+.assuranceIllustration .reviewFill { fill: #f5dcda; }
+.assuranceIllustration .validFill { fill: #dbe9df; }
+.cardCopy { margin-top: auto; padding-top: 24px; border-top: 1px solid #d8dce2; }
+.cardCopy h3 { margin: 0; font-size: clamp(21px, 1.7vw, 27px); font-weight: 620; line-height: 1.12; letter-spacing: -.025em; }
+.cardCopy p { max-width: 310px; margin: 14px 0 0; color: #647087; font-size: 14px; line-height: 1.6; }
+.lifecycleOverview { scroll-margin-top: 30px; padding: clamp(82px, 9vw, 144px) max(24px, calc((100vw - 1412px) / 2)) clamp(96px, 10vw, 160px); border-bottom: 1px solid #d8dce2; background: #fff; }
+.lifecycleOverview .sectionHeader { max-width: 980px; }
 .indexLayout { width: min(1412px, calc(100% - 80px)); margin: 0 auto; display: grid; grid-template-columns: 190px minmax(0, 1fr); gap: clamp(55px, 8vw, 130px); padding-block: clamp(72px, 8vw, 130px); }
 .toc { position: sticky; top: 32px; align-self: start; padding-top: 9px; }
 .toc p { margin: 0 0 18px; color: #8490a0; font-size: 10px; font-weight: 750; letter-spacing: .14em; }
@@ -104,13 +117,13 @@
 
 @media (max-width: 1050px) {
   .heroGrid { grid-template-columns: 1fr; }.heroArchitecture { max-width: 520px; }
-  .principles { grid-template-columns: repeat(2, 1fr); }.principles article { border-top: 1px solid #d8d6d0; }.principles article:first-child, .principles article:nth-child(2) { border-top: 0; }.principles article:nth-child(odd) { border-left: 0; padding-left: 0; }
+  .assuranceGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }.assuranceCard { min-height: 470px; }
   .indexLayout { grid-template-columns: 1fr; }.toc { position: static; padding: 20px; border: 1px solid #d4d6d8; }.toc ol { display: flex; flex-wrap: wrap; }.toc li { width: 50%; }.toc li:nth-child(2) { border-top: 1px solid #dbdcd9; }
   .lifecycle { grid-template-columns: repeat(2, 1fr); }.lifecycle li:nth-child(even) { transform: none; }.lifecycle li:nth-child(2n) { border-right: 1px solid #cdd1d8; }
 }
 @media (max-width: 720px) {
   .hero { padding-inline: 20px; }.hero h1 { font-size: clamp(42px, 13vw, 62px); }.heroLead { font-size: 18px; }
-  .principles { padding-inline: 20px; grid-template-columns: 1fr; }.principles article, .principles article:nth-child(2) { padding: 24px 0; border-top: 1px solid #d8d6d0; border-left: 0; }.principles article:first-child { border-top: 0; }
+  .assuranceSection, .lifecycleOverview { padding-inline: 20px; }.assuranceGrid { grid-template-columns: 1fr; gap: 18px; }.assuranceCard { min-height: 440px; padding: 24px; }.assuranceIllustration { max-height: 210px; }
   .indexLayout { width: min(100% - 40px, 1412px); gap: 58px; }.toc li { width: 100%; }
   .sectionHeader h2 { font-size: clamp(34px, 10vw, 48px); }.sectionIntro { font-size: 16px; }
   .lifecycle { grid-template-columns: 1fr; }.lifecycle li { min-height: auto; flex-direction: row; justify-content: flex-start; border-right: 1px solid #cdd1d8; border-bottom: 0; }.lifecycle li:last-child { border-bottom: 1px solid #cdd1d8; }
@@ -121,5 +134,5 @@
   .gate ol { grid-template-columns: 1fr; }.tags span { width: 100%; }
   .actions { align-items: stretch; flex-direction: column; }.primary, .secondary, .secondaryLight { width: 100%; }
 }
-@media (max-width: 380px) { .hero, .finalCta { padding-inline: 18px; }.indexLayout { width: calc(100% - 36px); }.tint, .dark, .responsible, .gate, .report { margin-inline: -12px; padding-inline: 18px; } }
-@media (prefers-reduced-motion: reduce) { .page { scroll-behavior: auto; } }
+@media (max-width: 380px) { .hero, .assuranceSection, .lifecycleOverview, .finalCta { padding-inline: 18px; }.indexLayout { width: calc(100% - 36px); }.tint, .dark, .responsible, .gate, .report { margin-inline: -12px; padding-inline: 18px; } }
+@media (prefers-reduced-motion: reduce) { .page { scroll-behavior: auto; }.assuranceCard { transition: none; }.assuranceCard:hover { transform: none; } }
