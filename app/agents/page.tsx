@@ -38,23 +38,21 @@ export default function AgentsPage() {
               <p>Transform labor-intensive workflows that once took days into automated decisions delivered in moments—reducing cost, friction, and human error.</p>
               <DemoTrigger className={styles.demoCta}>Get a demo</DemoTrigger>
             </div>
-          </div>
-        </section>
-        <section className={styles.values} aria-label="Why Entimema agents">
-          <div className={`site-container ${styles.valuesInner}`}>
-            <div className={styles.valueGrid}>
-              <article className={styles.valuePanel}>
-                <h2>Deploy faster.</h2>
-                <p>Turn established financial and risk methodologies into operational workflows without rebuilding the analytical logic from scratch.</p>
-              </article>
-              <article className={styles.valuePanel}>
-                <h2>Adapt to your decisions.</h2>
-                <p>Configure inputs, thresholds, policies and decision logic around the way your institution actually operates.</p>
-              </article>
-              <article className={styles.valuePanel}>
-                <h2>Keep every decision accountable.</h2>
-                <p>Preserve evidence, logic and outputs in a transparent workflow designed for review, governance and human oversight.</p>
-              </article>
+            <div className={styles.values} aria-label="Why Entimema agents">
+              <div className={styles.valueGrid}>
+                <article className={styles.valuePanel}>
+                  <h2>Deploy faster.</h2>
+                  <p>Turn established financial and risk methodologies into operational workflows without rebuilding the analytical logic from scratch.</p>
+                </article>
+                <article className={styles.valuePanel}>
+                  <h2>Adapt to your decisions.</h2>
+                  <p>Configure inputs, thresholds, policies and decision logic around the way your institution actually operates.</p>
+                </article>
+                <article className={styles.valuePanel}>
+                  <h2>Keep every decision accountable.</h2>
+                  <p>Preserve evidence, logic and outputs in a transparent workflow designed for review, governance and human oversight.</p>
+                </article>
+              </div>
             </div>
           </div>
         </section>
