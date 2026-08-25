@@ -32,7 +32,7 @@ const columns = [
     links: [
       ["About Entimema", "/about"],
       ["Contact", "/contact"],
-      ["Privacy", "/privacy"],
+      ["Security & Privacy", "/privacy"],
     ],
   },
 ] as const;
