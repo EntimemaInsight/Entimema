@@ -12,19 +12,15 @@
 }
 
 .aboveFold {
-  min-height: calc(100svh - var(--announcement-height) - 104px);
   display: flex;
   flex-direction: column;
   background: #fff;
 }
 
-:global(html.announcement-collapsed) .aboveFold { min-height: calc(100svh - 104px); }
-
 .indexHero {
-  flex: 1;
   display: grid;
   align-items: start;
-  padding: clamp(44px, 5.2vh, 68px) 0 clamp(28px, 4.6vh, 50px);
+  padding: clamp(44px, 5.2vh, 68px) 0 48px;
   background: #fff;
   text-align: center;
 }
@@ -56,7 +52,7 @@
 .searchField:focus-within,
 .categoryField:focus-within { position: relative; z-index: 1; outline: 3px solid rgba(255, 74, 18, .28); outline-offset: 3px; }
 
-.discovery { padding: clamp(18px, 2.5vh, 26px) 0 clamp(24px, 3.5vh, 34px); }
+.discovery { padding: 24px 0 28px; }
 .discovery .wideContainer { display: grid; grid-template-columns: minmax(280px, 390px) minmax(220px, 280px); justify-content: space-between; gap: 48px; }
 .searchField,
 .categoryField { position: relative; display: block; }
@@ -398,9 +394,8 @@
 
 @media (max-width: 800px) {
   .wideContainer { width: min(100% - 48px, 680px); }
-  .aboveFold,
-  :global(html.announcement-collapsed) .aboveFold { min-height: 0; }
-  .indexHero { padding-block: 64px 58px; }
+  .indexHero { padding-block: 64px 40px; }
+  .discovery { padding-top: 16px; }
   .discovery .wideContainer { grid-template-columns: 1fr; }
   .emptyState { grid-template-columns: 1fr; gap: 26px; }
   .resourceList article { grid-template-columns: 1fr; gap: 10px; }
@@ -435,6 +430,8 @@
   .articleLayout { width: calc(100% - 36px); }
   .articleContinuation { width: calc(100% - 36px); }
   .indexHero h1 { font-size: clamp(44px, 14vw, 58px); }
+  .indexHero { padding-bottom: 32px; }
+  .discovery { padding-top: 12px; }
   .newsletterCta { width: 100%; margin-top: 30px; padding-inline: 14px; }
   .demoCta { padding: 76px 18px; }
   .demoCta h2 { font-size: clamp(40px, 12vw, 52px); }
