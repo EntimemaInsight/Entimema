@@ -21,19 +21,19 @@ body {
  * becomes smaller while layout receives proportionally more CSS-pixel space.
  * Keeping the mechanism on the root makes every current and future route inherit
  * it, including fixed/sticky UI, without page-specific dimensional overrides.
- * The stepped ramp protects 1280/1440-class laptops; full 80% parity begins at
- * 1600px. Tablet and mobile retain their existing presentation unchanged.
+ * Full 90% parity begins at 1280px. Tablet and mobile retain their existing
+ * presentation unchanged.
  */
 @media (min-width: 1280px) and (max-width: 1439px) {
   html { zoom: .9; }
 }
 
 @media (min-width: 1440px) and (max-width: 1599px) {
-  html { zoom: .85; }
+  html { zoom: .9; }
 }
 
 @media (min-width: 1600px) {
-  html { zoom: .8; }
+  html { zoom: .9; }
 }
 
 a { color: inherit; text-decoration: none; }
