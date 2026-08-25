@@ -1,0 +1,6 @@
+"use client";
+import { useEffect,useState } from "react";
+export type StoredRun={runId:string;timestamp:string;documentType:string;source:string;confidence:number;route:string;duration:number;status:string};
+export const RUNS_KEY="entimema.workspace.runs.v1";
+export function readRuns():StoredRun[]{try{return JSON.parse(sessionStorage.getItem(RUNS_KEY)??"[]") as StoredRun[]}catch{return[]}}
+export function RunsTable(){const[runs,setRuns]=useState<StoredRun[]>([]);useEffect(()=>{const frame=requestAnimationFrame(()=>setRuns(readRuns()));return()=>cancelAnimationFrame(frame)},[]);if(!runs.length)return <div className="emptyRuns"><strong>No runs in this session</strong><span>Execution metadata will appear here. Documents are not retained.</span></div>;return <div className="runsTable"><div className="runHead"><span>Run</span><span>Time</span><span>Document</span><span>Source</span><span>Confidence</span><span>Route</span><span>Duration</span></div>{runs.map(r=><div className="runRecord" key={r.runId}><code>{r.runId.slice(0,8)}</code><time>{new Date(r.timestamp).toLocaleTimeString()}</time><span>{r.documentType}</span><span>{r.source}</span><span>{Math.round(r.confidence*100)}%</span><span>{r.route.replaceAll("_"," ")}</span><span>{Math.round(r.duration)} ms</span></div>)}</div>}
