@@ -8,7 +8,6 @@ const routes = [
   "/contact",
   "/privacy",
   "/resources",
-  "/resources/entimema",
   "/services",
   "/services/cfo-function",
   "/services/budgets-and-forecasting",
