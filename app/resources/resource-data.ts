@@ -1642,6 +1642,26 @@ export const resources: ResourceRecord[] = [
     relatedResourceSlugs:["building-a-manufacturing-cost-architecture","working-capital-as-a-system","operational-driver-forecasting"],status:"published",indexable:true,
     cover:{type:"editorial-artwork",src:"/resources/covers/erp-management-intelligence.png",motion:"none",alt:"Editorial artwork showing fragmented ERP transaction data resolving into a structured analytical intelligence installation.",stages:["Transactions","Reconcile","Semantics","Model","Decision"]},
   },
+  {
+    technicalTitle: "Financial Data Normalisation: Turning Inconsistent Statements into Analysis-Ready Information",
+    headline: "Financial Data Normalisation: Turning Inconsistent Statements into Analysis-Ready Information",
+    headlineEmphasis: "Analysis-Ready Information",
+    slug: "financial-data-normalisation",
+    slogan: "The numbers can reconcile and still mean different things.",
+    sloganEmphasis: "still mean different things",
+    author: authors.aleksandar, publishedAt: "2026-08-26", readingMinutes: 20,
+    topic: "financial-data-and-erp", stream: "insights", featured: true,
+    seoTitle: "Financial Data Normalisation for Analysis-Ready Reporting | Entimema",
+    metaDescription: "Learn how financial statements from different entities, periods and systems are interpreted, mapped, harmonised and reconciled into analysis-ready data.",
+    canonicalPath: "/resources/financial-data-normalisation",
+    openGraphTitle: "Financial Data Normalisation: Turning Inconsistent Statements into Analysis-Ready Information",
+    openGraphDescription: "How inconsistent financial statements become comparable, validated and traceable analytical information without losing economic meaning.",
+    openGraphImage: "/resources/covers/financial-data-normalisation.png",
+    relatedCapability: { label: "Financial Data", href: "/services/financial-data", description: "Transform heterogeneous financial evidence into reconciled, analysis-ready information with visible lineage and exceptions." },
+    relatedResourceSlugs: ["from-erp-data-to-management-intelligence", "operational-driver-forecasting", "building-a-manufacturing-cost-architecture"],
+    status: "published", indexable: true,
+    cover: { type: "editorial-artwork", src: "/resources/covers/financial-data-normalisation.png", motion: "none", alt: "Entimema Financial Data and ERP analysis cover showing inconsistent transparent financial statement planes converging through a controlled mapping architecture into one aligned system.", stages: ["Sources", "Structure", "Meaning", "Periods", "Mapping", "Validation", "Analysis"] },
+  },
 ];
 
 export const publishedResources = resources.filter(
