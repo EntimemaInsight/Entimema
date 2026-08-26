@@ -15,6 +15,7 @@ import ErpManagementIntelligenceArticle, { erpIntelligenceSections } from "../Er
 import FinancialDataNormalisationArticle, { financialDataNormalisationSections } from "../FinancialDataNormalisationArticle";
 import TrialBalanceMappingArticle, { trialBalanceMappingSections } from "../TrialBalanceMappingArticle";
 import FinancialDataValidationArticle, { financialDataValidationSections } from "../FinancialDataValidationArticle";
+import ConfidenceHumanReviewArticle, { confidenceHumanReviewSections } from "../ConfidenceHumanReviewArticle";
 import LogisticRegressionScorecardArticle, { logisticRegressionScorecardSections } from "../LogisticRegressionScorecardArticle";
 import CreditRiskCutOffArticle, { creditRiskCutOffSections } from "../CreditRiskCutOffArticle";
 import CreditDecisionEngineArticle, { creditDecisionEngineSections } from "../CreditDecisionEngineArticle";
@@ -174,6 +175,7 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
   const isFinancialDataNormalisation = resource.slug === "financial-data-normalisation";
   const isTrialBalanceMapping = resource.slug === "trial-balance-to-financial-statements";
   const isFinancialDataValidation = resource.slug === "financial-data-validation-control-layer";
+  const isConfidenceHumanReview = resource.slug === "confidence-human-review-ai-finance";
   const isLogisticRegressionScorecard = resource.slug === "logistic-regression-credit-risk-scorecards";
   const isCreditRiskCutOff = resource.slug === "credit-risk-cut-off-strategy";
   const isCreditDecisionEngine = resource.slug === "credit-decision-engine-architecture";
@@ -235,6 +237,17 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
   const isDecisionTriggers = resource.slug === "event-driven-decision-triggers-lending-systems";
   const isPipelineResilience = resource.slug === "backpressure-failure-recovery-financial-event-pipelines";
   const isSemanticDataContracts = resource.slug === "detecting-silent-schema-changes-risk-models";
+
+  if (isConfidenceHumanReview) {
+    return (
+      <>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(articleSchema) }} />
+        <ResourceArticle resource={resource} sections={[...confidenceHumanReviewSections]}>
+          <ConfidenceHumanReviewArticle />
+        </ResourceArticle>
+      </>
+    );
+  }
 
   if (isFinancialDataValidation) {
     return (

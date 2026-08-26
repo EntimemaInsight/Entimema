@@ -1702,6 +1702,26 @@ export const resources: ResourceRecord[] = [
     status: "published", indexable: true,
     cover: { type: "editorial-artwork", src: "/resources/covers/financial-data-validation-control-layer.png", motion: "none", alt: "Entimema Financial Data and ERP analysis cover showing translucent source planes passing through precision glass control gates, with one exception held in amber before a stable reconciled structure.", stages: ["Extraction", "Completeness", "Arithmetic", "Accounting", "Reconciliation", "Status", "Decision"] },
   },
+  {
+    technicalTitle: "Confidence Is Not Accuracy: Designing Human Review in AI-Assisted Finance",
+    headline: "Confidence Is Not Accuracy: Designing Human Review in AI-Assisted Finance",
+    headlineEmphasis: "Designing Human Review in AI-Assisted Finance",
+    slug: "confidence-human-review-ai-finance",
+    slogan: "The most dangerous error is the one the system presents without hesitation.",
+    sloganEmphasis: "presents without hesitation",
+    author: authors.aleksandar, publishedAt: "2026-08-26", readingMinutes: 20,
+    topic: "financial-data-and-erp", stream: "insights", featured: true,
+    seoTitle: "AI Confidence Scores and Human Review in Finance | Entimema",
+    metaDescription: "Learn how finance teams should combine calibrated confidence, validation evidence, materiality, exception handling and human review in AI-assisted financial workflows.",
+    canonicalPath: "/resources/confidence-human-review-ai-finance",
+    openGraphTitle: "Confidence Is Not Accuracy: Human Review in AI-Assisted Finance",
+    openGraphDescription: "A practitioner framework for combining calibrated confidence, validation evidence, financial materiality, abstention and governed human review.",
+    openGraphImage: "/resources/covers/confidence-human-review-ai-finance.png",
+    relatedCapability: { label: "Financial Data", href: "/services/financial-data", description: "Route financial exceptions through calibrated confidence, deterministic evidence, materiality and governed review." },
+    relatedResourceSlugs: ["financial-data-validation-control-layer", "trial-balance-to-financial-statements", "financial-data-normalisation", "from-erp-data-to-management-intelligence"],
+    status: "published", indexable: true,
+    cover: { type: "editorial-artwork", src: "/resources/covers/confidence-human-review-ai-finance.png", motion: "none", alt: "Entimema Financial Data and ERP analysis cover showing translucent information planes routed through validation gates, a precise review node and a stopped unresolved element before a decision plane.", stages: ["Interpretation", "Confidence", "Evidence", "Materiality", "Review", "Abstain", "Decision"] },
+  },
 ];
 
 export const publishedResources = resources.filter(
