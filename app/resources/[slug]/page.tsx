@@ -13,6 +13,7 @@ import PdModelTimeArchitectureArticle, { pdModelTimeArchitectureSections } from 
 import PdDefaultDefinitionArticle, { pdDefaultDefinitionSections } from "../PdDefaultDefinitionArticle";
 import ErpManagementIntelligenceArticle, { erpIntelligenceSections } from "../ErpManagementIntelligenceArticle";
 import FinancialDataNormalisationArticle, { financialDataNormalisationSections } from "../FinancialDataNormalisationArticle";
+import TrialBalanceMappingArticle, { trialBalanceMappingSections } from "../TrialBalanceMappingArticle";
 import LogisticRegressionScorecardArticle, { logisticRegressionScorecardSections } from "../LogisticRegressionScorecardArticle";
 import CreditRiskCutOffArticle, { creditRiskCutOffSections } from "../CreditRiskCutOffArticle";
 import CreditDecisionEngineArticle, { creditDecisionEngineSections } from "../CreditDecisionEngineArticle";
@@ -170,6 +171,7 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
   const isPdDefaultDefinition = resource.slug === "pd-default-definition-target-construction";
   const isErpIntelligence = resource.slug === "from-erp-data-to-management-intelligence";
   const isFinancialDataNormalisation = resource.slug === "financial-data-normalisation";
+  const isTrialBalanceMapping = resource.slug === "trial-balance-to-financial-statements";
   const isLogisticRegressionScorecard = resource.slug === "logistic-regression-credit-risk-scorecards";
   const isCreditRiskCutOff = resource.slug === "credit-risk-cut-off-strategy";
   const isCreditDecisionEngine = resource.slug === "credit-decision-engine-architecture";
@@ -232,6 +234,16 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
   const isPipelineResilience = resource.slug === "backpressure-failure-recovery-financial-event-pipelines";
   const isSemanticDataContracts = resource.slug === "detecting-silent-schema-changes-risk-models";
 
+  if (isTrialBalanceMapping) {
+    return (
+      <>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(articleSchema) }} />
+        <ResourceArticle resource={resource} sections={[...trialBalanceMappingSections]}>
+          <TrialBalanceMappingArticle />
+        </ResourceArticle>
+      </>
+    );
+  }
   if (isFinancialDataNormalisation) {
     return (
       <>
