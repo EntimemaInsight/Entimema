@@ -11,10 +11,11 @@ import BrandLogo from "@/components/BrandLogo";
 import ResourceCard from "./ResourceCard";
 import ResourceSemanticText from "./ResourceSemanticText";
 import EngineeringPublicationCover from "./EngineeringPublicationCover";
+import FinancialIntelligenceSeries, { financialIntelligenceSlugs } from "./FinancialIntelligenceSeries";
 
 export type ArticleSection = { id: string; label: string };
 
-export default function ResourceArticle({ resource, sections, children }: { resource: ResourceRecord; sections?: ArticleSection[]; children: ReactNode }) {
+export default function ResourceArticle({ resource, sections, children, readingMinutes }: { resource: ResourceRecord; sections?: ArticleSection[]; children: ReactNode; readingMinutes?: number }) {
   const topic = getTopic(resource.topic);
   const published = resource.publishedAt ? new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric" }).format(new Date(resource.publishedAt)) : null;
   const relatedResources = getPublishedRelatedResources(resource);
@@ -28,10 +29,10 @@ export default function ResourceArticle({ resource, sections, children }: { reso
       <article className={styles.article}>
         <header className={`${styles.articleHeader} ${isEngineering ? styles.engineeringArticleHeader : ""}`}>
           <div className={styles.readingContainer}>
-            <div className={styles.articleMeta}><span>{isEngineering ? "Engineering & Research" : topic?.label}</span><span>{resource.readingMinutes} min read</span></div>
+            <div className={styles.articleMeta}><span>{isEngineering ? "Engineering & Research" : topic?.label}</span><span>{readingMinutes ?? resource.readingMinutes} min read</span></div>
             {!isEngineering ? <h1><ResourceSemanticText text={resource.headline} emphasis={resource.headlineEmphasis} className={styles.headlineEmphasis} /></h1> : null}
             <div className={styles.publicationIdentity}>
-              <Link className={styles.publicationLink} href="/resources/entimema" aria-label="Entimema publication profile">
+              <Link className={styles.publicationLink} href="/about#founder" aria-label={`${resource.author.name}, founder of Entimema`}>
                 <BrandLogo compact />
               </Link>
               {published ? <time dateTime={resource.publishedAt}>{published}</time> : null}
@@ -47,6 +48,7 @@ export default function ResourceArticle({ resource, sections, children }: { reso
           {sections && sections.length > 2 ? <ArticleContents sections={sections} /> : null}
           <div className={styles.prose}>{children}</div>
         </div>
+        {financialIntelligenceSlugs.has(resource.slug) ? <FinancialIntelligenceSeries currentSlug={resource.slug} /> : null}
       </article>
 
       {relatedResources.length ? (

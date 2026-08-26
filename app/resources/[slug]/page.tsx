@@ -80,6 +80,15 @@ import SemanticDataContractsArticle, { semanticDataContractsSections } from "../
 import TraceableFinancialAnalysisWorkflowArticle, { traceableFinancialAnalysisWorkflowSections } from "../TraceableFinancialAnalysisWorkflowArticle";
 import { getPublishedResource, getTopic, publishedResources, resourceStreams } from "../resource-data";
 import { FOUNDER_ID, ORGANIZATION_ID, SITE_URL, WEBSITE_ID, createBreadcrumbSchema, serializeJsonLd } from "@/lib/structured-data";
+import { calculateReadingMinutes } from "../reading-time";
+
+const financialIntelligenceSubjects: Record<string, readonly string[]> = {
+  "financial-data-normalisation": ["Financial data normalisation", "Canonical financial data mapping"],
+  "trial-balance-to-financial-statements": ["Trial balance mapping", "Financial statement preparation"],
+  "financial-data-validation-control-layer": ["Financial data validation", "Financial reconciliation controls"],
+  "confidence-human-review-ai-finance": ["AI confidence", "Human review in finance"],
+  "traceable-financial-analysis-workflow": ["Financial analysis", "Evidence traceability"],
+};
 
 export const dynamicParams = false;
 
@@ -138,11 +147,9 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
         author: { "@id": FOUNDER_ID },
         publisher: { "@id": ORGANIZATION_ID },
         isPartOf: { "@id": WEBSITE_ID },
-        articleSection: stream.label,
-        about: [
-          { "@type": "Thing", name: topic?.label ?? resource.topic },
-          { "@type": "Thing", name: resource.technicalTitle },
-        ],
+        articleSection: financialIntelligenceSubjects[resource.slug] ? "Financial Data & ERP" : stream.label,
+        about: (financialIntelligenceSubjects[resource.slug] ?? [topic?.label ?? resource.topic, resource.technicalTitle])
+          .map((name) => ({ "@type": "Thing", name })),
         ...("src" in resource.cover ? { image: `${SITE_URL}${resource.openGraphImage ?? resource.cover.src}` } : {}),
       },
       {
@@ -244,7 +251,7 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
     return (
       <>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(articleSchema) }} />
-        <ResourceArticle resource={resource} sections={[...traceableFinancialAnalysisWorkflowSections]}>
+        <ResourceArticle resource={resource} sections={[...traceableFinancialAnalysisWorkflowSections]} readingMinutes={calculateReadingMinutes("TraceableFinancialAnalysisWorkflowArticle.tsx")}>
           <TraceableFinancialAnalysisWorkflowArticle />
         </ResourceArticle>
       </>
@@ -255,7 +262,7 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
     return (
       <>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(articleSchema) }} />
-        <ResourceArticle resource={resource} sections={[...confidenceHumanReviewSections]}>
+        <ResourceArticle resource={resource} sections={[...confidenceHumanReviewSections]} readingMinutes={calculateReadingMinutes("ConfidenceHumanReviewArticle.tsx")}>
           <ConfidenceHumanReviewArticle />
         </ResourceArticle>
       </>
@@ -266,7 +273,7 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
     return (
       <>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(articleSchema) }} />
-        <ResourceArticle resource={resource} sections={[...financialDataValidationSections]}>
+        <ResourceArticle resource={resource} sections={[...financialDataValidationSections]} readingMinutes={calculateReadingMinutes("FinancialDataValidationArticle.tsx")}>
           <FinancialDataValidationArticle />
         </ResourceArticle>
       </>
@@ -277,7 +284,7 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
     return (
       <>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(articleSchema) }} />
-        <ResourceArticle resource={resource} sections={[...trialBalanceMappingSections]}>
+        <ResourceArticle resource={resource} sections={[...trialBalanceMappingSections]} readingMinutes={calculateReadingMinutes("TrialBalanceMappingArticle.tsx")}>
           <TrialBalanceMappingArticle />
         </ResourceArticle>
       </>
@@ -287,7 +294,7 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
     return (
       <>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(articleSchema) }} />
-        <ResourceArticle resource={resource} sections={[...financialDataNormalisationSections]}>
+        <ResourceArticle resource={resource} sections={[...financialDataNormalisationSections]} readingMinutes={calculateReadingMinutes("FinancialDataNormalisationArticle.tsx")}>
           <FinancialDataNormalisationArticle />
         </ResourceArticle>
       </>

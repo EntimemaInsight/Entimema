@@ -51,7 +51,7 @@ export default function GlobalFooter() {
         <nav className={styles.navigation} aria-label="Footer navigation">
           {columns.map((column) => (
             <section className={styles.column} key={column.title}>
-              <h2>{column.title}</h2>
+              <div className={styles.columnLabel}>{column.title}</div>
               <ul>
                 {column.links.map(([label, href]) => (
                   <li key={href}><Link href={href}>{label}</Link></li>
