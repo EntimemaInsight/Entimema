@@ -77,6 +77,7 @@ import RealTimeExposureArticle, { realTimeExposureSections } from "../RealTimeEx
 import DecisionTriggersArticle, { decisionTriggersSections } from "../DecisionTriggersArticle";
 import PipelineResilienceArticle, { pipelineResilienceSections } from "../PipelineResilienceArticle";
 import SemanticDataContractsArticle, { semanticDataContractsSections } from "../SemanticDataContractsArticle";
+import TraceableFinancialAnalysisWorkflowArticle, { traceableFinancialAnalysisWorkflowSections } from "../TraceableFinancialAnalysisWorkflowArticle";
 import { getPublishedResource, getTopic, publishedResources, resourceStreams } from "../resource-data";
 import { FOUNDER_ID, ORGANIZATION_ID, SITE_URL, WEBSITE_ID, createBreadcrumbSchema, serializeJsonLd } from "@/lib/structured-data";
 
@@ -237,6 +238,18 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
   const isDecisionTriggers = resource.slug === "event-driven-decision-triggers-lending-systems";
   const isPipelineResilience = resource.slug === "backpressure-failure-recovery-financial-event-pipelines";
   const isSemanticDataContracts = resource.slug === "detecting-silent-schema-changes-risk-models";
+  const isTraceableFinancialAnalysisWorkflow = resource.slug === "traceable-financial-analysis-workflow";
+
+  if (isTraceableFinancialAnalysisWorkflow) {
+    return (
+      <>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(articleSchema) }} />
+        <ResourceArticle resource={resource} sections={[...traceableFinancialAnalysisWorkflowSections]}>
+          <TraceableFinancialAnalysisWorkflowArticle />
+        </ResourceArticle>
+      </>
+    );
+  }
 
   if (isConfidenceHumanReview) {
     return (

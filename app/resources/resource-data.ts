@@ -120,6 +120,26 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    technicalTitle: "How to Build a Traceable Financial Analysis Workflow from Raw Files to Management Decisions",
+    headline: "How to Build a Traceable Financial Analysis Workflow from Raw Files to Management Decisions",
+    headlineEmphasis: "Traceable Financial Analysis Workflow",
+    slug: "traceable-financial-analysis-workflow",
+    slogan: "A financial conclusion is only as reliable as the path that produced it.",
+    sloganEmphasis: "the path that produced it",
+    author: authors.aleksandar, publishedAt: "2026-08-26", readingMinutes: 20,
+    topic: "financial-data-and-erp", stream: "insights", featured: true,
+    seoTitle: "Traceable Financial Analysis Workflow from Files to Decisions | Entimema",
+    metaDescription: "Learn how raw financial files become validated models, evidence-linked findings and management decisions through a controlled end-to-end financial analysis workflow.",
+    canonicalPath: "/resources/traceable-financial-analysis-workflow",
+    openGraphTitle: "How to Build a Traceable Financial Analysis Workflow",
+    openGraphDescription: "A controlled path from source evidence to validated financial models, traceable findings and accountable management decisions.",
+    openGraphImage: "/resources/covers/traceable-financial-analysis-workflow.png",
+    relatedCapability: { label: "Financial Data", href: "/services/financial-data", description: "Build a controlled evidence-to-decision workflow across financial files, validated models and traceable findings." },
+    relatedResourceSlugs: ["confidence-human-review-ai-finance", "financial-data-validation-control-layer", "trial-balance-to-financial-statements", "financial-data-normalisation"],
+    status: "published", indexable: true,
+    cover: { type: "editorial-artwork", src: "/resources/covers/traceable-financial-analysis-workflow.png", motion: "none", alt: "Entimema cover showing source structures passing through glass control chambers on a continuous amber evidence line, with a review path returning before a stable decision object.", stages: ["Intake", "Interpret", "Structure", "Control", "Review", "Analyse", "Decision"] },
+  },
+  {
     technicalTitle: "Detecting Silent Schema Changes Before They Break Risk Models",
     headline: "Detecting Silent Schema Changes Before They Break Risk Models: Data Contracts, Semantic Drift and Decision-Safe Change Control",
     headlineEmphasis: "Data Contracts, Semantic Drift and Decision-Safe Change Control",
