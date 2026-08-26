@@ -45,6 +45,14 @@ for (const file of documents) {
 
 const errors = [];
 const fail = (message) => errors.push(message);
+
+function publicUrls(value) {
+  if (typeof value === "string") return value.match(/https?:\/\/[^\s"<>]+/g) ?? [];
+  if (Array.isArray(value)) return value.flatMap(publicUrls);
+  if (value && typeof value === "object") return Object.values(value).flatMap(publicUrls);
+  return [];
+}
+
 for (const [type, ids] of Object.entries(expected)) {
   for (const id of ids) {
     const matches = entities.filter((entity) => entity["@type"] === type && entity["@id"] === id);
@@ -53,8 +61,12 @@ for (const [type, ids] of Object.entries(expected)) {
 }
 
 for (const entity of entities) {
-  const serialized = JSON.stringify(entity);
-  if (/localhost|staging|(?<!www\.)entimema\.net/.test(serialized)) fail(`Non-production URL in ${entity.source}`);
+  for (const value of publicUrls(entity)) {
+    const hostname = new URL(value).hostname.toLowerCase();
+    if (hostname === "localhost" || hostname.includes("staging") || hostname === "entimema.net" || hostname.endsWith(".entimema.net")) {
+      fail(`Non-production URL ${value} in ${entity.source}`);
+    }
+  }
   if (entity["@type"] === "Service" && entity.provider?.["@id"] !== expected.Organization[0]) fail(`Invalid Service provider in ${entity.source}`);
   if (entity["@type"] === "Article") {
     if (entity.author?.["@id"] !== expected.Person[0]) fail(`Invalid Article author in ${entity.source}`);

@@ -26,7 +26,7 @@ declare global {
 const safeCampaignValue = (value: string | null) => value?.trim().toLowerCase().slice(0, 100) || undefined;
 
 export function isProductionAnalyticsHost() {
-  return typeof window !== "undefined" && window.location.hostname === "www.entimema.net";
+  return typeof window !== "undefined" && window.location.hostname === "www.entimema.com";
 }
 
 export function hasAnalyticsConsent() {
@@ -46,7 +46,7 @@ export function createAcquisitionContext(): AcquisitionContext {
   if (utmSource === "linkedin" && utmMedium === "organic_social") sourceCategory = "organic_social";
   else if (utmSource || utmMedium || utmCampaign) sourceCategory = "campaign";
   else if (referrerHost && /(^|\.)(google|bing|duckduckgo|yahoo)\./.test(referrerHost)) sourceCategory = "organic_search";
-  else if (referrerHost && !/(^|\.)entimema\.net$/.test(referrerHost)) sourceCategory = "referral";
+  else if (referrerHost && !/(^|\.)entimema\.com$/.test(referrerHost)) sourceCategory = "referral";
 
   return { source_category: sourceCategory, landing_page: window.location.pathname, referrer_host: referrerHost, utm_source: utmSource, utm_medium: utmMedium, utm_campaign: utmCampaign, utm_content: utmContent };
 }

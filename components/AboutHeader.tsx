@@ -13,7 +13,7 @@ export default function AboutHeader() {
           <Link href="/about" className="is-active" aria-current="page">About Entimema</Link>
           <Link href="/contact">Contact</Link>
           <Link href="/" className="about-header__home">
-            <span>entimema.net</span>
+            <span>entimema.com</span>
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19 19 5M8 5h11v11" /></svg>
           </Link>
         </nav>
