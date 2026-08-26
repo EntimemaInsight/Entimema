@@ -1682,6 +1682,26 @@ export const resources: ResourceRecord[] = [
     status: "published", indexable: true,
     cover: { type: "editorial-artwork", src: "/resources/covers/trial-balance-to-financial-statements.png", motion: "none", alt: "Entimema Financial Data and ERP analysis cover showing granular account elements passing through a classification plane into aligned P&L and Balance Sheet layers while controlled exceptions retain amber lineage.", stages: ["Trial balance", "Profile", "Interpret", "Map", "Review", "Validate", "Statements"] },
   },
+  {
+    technicalTitle: "Financial Data Validation: The Control Layer Between Extraction and Analysis",
+    headline: "Financial Data Validation: The Control Layer Between Extraction and Analysis",
+    headlineEmphasis: "The Control Layer Between Extraction and Analysis",
+    slug: "financial-data-validation-control-layer",
+    slogan: "Reading the number is not the same as proving it.",
+    sloganEmphasis: "not the same as proving it",
+    author: authors.aleksandar, publishedAt: "2026-08-26", readingMinutes: 20,
+    topic: "financial-data-and-erp", stream: "insights", featured: true,
+    seoTitle: "Financial Data Validation and Reconciliation Controls | Entimema",
+    metaDescription: "A practitioner framework for validating extracted financial data through completeness, arithmetic, accounting, cross-statement, period and semantic controls before analysis.",
+    canonicalPath: "/resources/financial-data-validation-control-layer",
+    openGraphTitle: "Financial Data Validation: The Control Layer Between Extraction and Analysis",
+    openGraphDescription: "How deterministic validation and reconciliation turn extracted financial values into controlled, exception-aware and decision-ready evidence.",
+    openGraphImage: "/resources/covers/financial-data-validation-control-layer.png",
+    relatedCapability: { label: "Financial Data", href: "/services/financial-data", description: "Build deterministic financial controls, reconciliations and explicit decision-readiness states across heterogeneous evidence." },
+    relatedResourceSlugs: ["financial-data-normalisation", "trial-balance-to-financial-statements", "from-erp-data-to-management-intelligence", "building-a-manufacturing-cost-architecture"],
+    status: "published", indexable: true,
+    cover: { type: "editorial-artwork", src: "/resources/covers/financial-data-validation-control-layer.png", motion: "none", alt: "Entimema Financial Data and ERP analysis cover showing translucent source planes passing through precision glass control gates, with one exception held in amber before a stable reconciled structure.", stages: ["Extraction", "Completeness", "Arithmetic", "Accounting", "Reconciliation", "Status", "Decision"] },
+  },
 ];
 
 export const publishedResources = resources.filter(
