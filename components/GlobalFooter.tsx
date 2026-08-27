@@ -42,7 +42,11 @@ export default function GlobalFooter() {
     <footer className={styles.footer}>
       <div className={`site-container ${styles.inner}`}>
         <div className={styles.brandZone}>
-          <Link className={styles.brandLink} href="/" aria-label="Entimema — home">
+          <Link
+            className={styles.brandLink}
+            href="https://www.entimema.com/#top"
+            aria-label="Entimema — go to homepage"
+          >
             <BrandLogo compact />
           </Link>
           <span className={styles.copyright}>© 2026 Entimema</span>
