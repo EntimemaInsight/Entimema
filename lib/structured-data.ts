@@ -12,7 +12,6 @@ type ServiceSchemaInput = {
   path: `/services/${string}`;
   name: string;
   description: string;
-  breadcrumbSection: "Finance" | "Decision Science";
   breadcrumbName: string;
 };
 
@@ -82,7 +81,7 @@ export function createFounderSchema() {
   };
 }
 
-export function createServicePageSchema({ path, name, description, breadcrumbSection, breadcrumbName }: ServiceSchemaInput) {
+export function createServicePageSchema({ path, name, description, breadcrumbName }: ServiceSchemaInput) {
   const pageUrl = `${SITE_URL}${path}`;
   const pageId = `${pageUrl}#webpage`;
   const serviceId = `${pageUrl}#service`;
@@ -108,8 +107,8 @@ export function createServicePageSchema({ path, name, description, breadcrumbSec
       },
       createBreadcrumbSchema(
         [
-          { name: "Home", item: `${SITE_URL}/` },
-          { name: breadcrumbSection },
+          { name: "Entimema", item: `${SITE_URL}/` },
+          { name: "Services", item: `${SITE_URL}/services` },
           { name: breadcrumbName, item: pageUrl },
         ],
         `${pageUrl}#breadcrumb`,

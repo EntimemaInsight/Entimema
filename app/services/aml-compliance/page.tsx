@@ -4,6 +4,7 @@ import Link from "next/link";
 import { DemoTrigger } from "@/components/DemoDiscovery";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
+import { createServicePageSchema, serializeJsonLd } from "@/lib/structured-data";
 import AmlOperationsDashboard from "./AmlOperationsDashboard";
 import styles from "../credit-risk/credit-risk.module.css";
 
@@ -55,6 +56,7 @@ function SectionHeader({ label, title, intro }: { label: string; title: ReactNod
 export default function AmlCompliancePage() {
   return (
     <main className={styles.page}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(createServicePageSchema({ path: "/services/aml-compliance", name: "AML & Compliance Consulting", description: "Build a traceable AML control architecture connecting KYC, screening, transaction monitoring, investigations, escalation and regulatory evidence.", breadcrumbName: "AML & Compliance" })) }} />
       <AnnouncementBar />
       <Navbar active="services" />
       <section className={styles.hero} aria-labelledby="aml-compliance-title"><div className={`site-container ${styles.heroInner}`}>

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { DemoTrigger } from "@/components/DemoDiscovery";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
+import { createServicePageSchema, serializeJsonLd } from "@/lib/structured-data";
 import AiOperationsDashboard from "./AiOperationsDashboard";
 import styles from "./financial-ai-agents.module.css";
 
@@ -51,6 +52,7 @@ function SectionHeader({ label, title, intro }: { label: string; title: React.Re
 export default function FinancialAiAgentsPage() {
   return (
     <main className={styles.page}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(createServicePageSchema({ path: "/services/financial-ai-agents", name: "Finance AI Agents", description: "Build governed finance AI agents for reporting, planning, controlling and ERP workflows with trusted data, defined rules and human oversight.", breadcrumbName: "Finance AI Agents" })) }} />
       <AnnouncementBar />
       <Navbar active="services" />
       <section className={styles.hero} aria-labelledby="financial-ai-agents-title"><div className={`site-container ${styles.heroInner}`}>

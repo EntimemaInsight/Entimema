@@ -52,7 +52,7 @@ function SectionHeader({ label, title, intro }: { label: string; title: React.Re
 export default function BudgetsAndForecastingPage() {
   return (
     <main className={styles.page}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(createServicePageSchema({ path: "/services/budgets-and-forecasting", name: "Financial Forecasting Consulting", description: "Replace static plans with driver-based forecasting, rolling updates and scenarios that connect operations, financial outcomes and cash decisions.", breadcrumbSection: "Finance", breadcrumbName: "Planning & Forecasting" })) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(createServicePageSchema({ path: "/services/budgets-and-forecasting", name: "Financial Forecasting Consulting", description: "Replace static plans with driver-based forecasting, rolling updates and scenarios that connect operations, financial outcomes and cash decisions.", breadcrumbName: "Planning & Forecasting" })) }} />
       <AnnouncementBar />
       <Navbar active="services" />
       <section className={styles.hero} aria-labelledby="budgets-title"><div className={`site-container ${styles.heroInner}`}>

@@ -3,19 +3,23 @@ import { join, relative } from "node:path";
 
 const root = join(process.cwd(), ".next", "server", "app");
 const site = "https://www.entimema.com";
+const serviceSlugs = [
+  "aml-compliance",
+  "budgets-and-forecasting",
+  "cfo-function",
+  "cost-and-profitability",
+  "credit-risk",
+  "decision-automation",
+  "financial-ai-agents",
+  "financial-data",
+  "management-reporting",
+  "risk-ai-agents",
+];
 const expected = {
   Organization: [`${site}/#organization`],
   WebSite: [`${site}/#website`],
   Person: [`${site}/about#founder`],
-  Service: [
-    "credit-risk",
-    "cfo-function",
-    "budgets-and-forecasting",
-    "cost-and-profitability",
-    "management-reporting",
-    "financial-data",
-    "decision-automation",
-  ].map((slug) => `${site}/services/${slug}#service`),
+  Service: serviceSlugs.map((slug) => `${site}/services/${slug}#service`),
   Article: [
     "building-a-manufacturing-cost-architecture",
     "working-capital-as-a-system",
@@ -81,6 +85,51 @@ for (const entity of entities) {
     entity.itemListElement?.forEach((item, index) => {
       if (item.position !== index + 1) fail(`Invalid breadcrumb ordering in ${entity.source}`);
     });
+  }
+}
+
+// Every generated production service detail route must expose exactly one complete
+// BreadcrumbList whose final URL is the route's self-referencing canonical. This
+// also verifies that all breadcrumb targets resolve to generated production routes.
+for (const slug of serviceSlugs) {
+  const source = `services/${slug}.html`;
+  const html = documentHtml.get(source);
+  if (!html) {
+    fail(`Generated service route missing: ${source}`);
+    continue;
+  }
+  const canonicalTag = html.match(/<link\b[^>]*rel=["']canonical["'][^>]*>/i)?.[0] ?? "";
+  const canonical = canonicalTag.match(/href=["']([^"']+)["']/i)?.[1];
+  const expectedCanonical = `${site}/services/${slug}`;
+  if (canonical !== expectedCanonical) fail(`Unexpected canonical ${canonical ?? "(missing)"} in ${source}`);
+
+  const breadcrumbs = entities.filter((entity) => entity.source === source && entity["@type"] === "BreadcrumbList");
+  if (breadcrumbs.length !== 1) {
+    fail(`BreadcrumbList in ${source} expected once, found ${breadcrumbs.length}`);
+    continue;
+  }
+  const items = breadcrumbs[0].itemListElement ?? [];
+  if (!Array.isArray(items) || items.length < 2) fail(`Breadcrumb requires at least two items in ${source}`);
+  items.forEach((item, index) => {
+    if (item?.["@type"] !== "ListItem") fail(`Invalid breadcrumb item type in ${source}`);
+    if (!Number.isInteger(item.position) || item.position !== index + 1) fail(`Invalid breadcrumb ordering in ${source}`);
+    if (typeof item.name !== "string" || !item.name.trim()) fail(`Missing breadcrumb name in ${source}`);
+    if (typeof item.item !== "string" || !item.item.trim()) {
+      fail(`Missing breadcrumb item URL in ${source}`);
+      return;
+    }
+    try {
+      const url = new URL(item.item);
+      if (url.origin !== site || url.protocol !== "https:") fail(`Invalid breadcrumb URL ${item.item} in ${source}`);
+      if (url.hostname === "entimema.net" || url.hostname.endsWith(".entimema.net")) fail(`Non-production breadcrumb URL ${item.item} in ${source}`);
+    } catch {
+      fail(`Invalid breadcrumb URL ${item.item} in ${source}`);
+    }
+  });
+  if (items.at(-1)?.item !== canonical) fail(`Final breadcrumb does not match canonical in ${source}`);
+  const resolvable = new Set([`${site}/`, `${site}/services`, ...serviceSlugs.map((routeSlug) => `${site}/services/${routeSlug}`)]);
+  for (const item of items) {
+    if (typeof item.item === "string" && !resolvable.has(item.item)) fail(`Breadcrumb URL does not resolve: ${item.item} in ${source}`);
   }
 }
 
