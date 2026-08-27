@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ResourceArticle from "../ResourceArticle";
+import GovernedSpreadsheetWorkflowArticle, { governedSpreadsheetWorkflowSections } from "../GovernedSpreadsheetWorkflowArticle";
 import FinancialDataLineageArticle, { financialDataLineageSections } from "../FinancialDataLineageArticle";
 import FinancialKpiTreesArticle, { financialKpiTreesSections } from "../FinancialKpiTreesArticle";
 import ManagementReportingArticle, { managementReportingSections } from "../ManagementReportingArticle";
@@ -91,6 +92,7 @@ import { FOUNDER_ID, ORGANIZATION_ID, SITE_URL, WEBSITE_ID, createBreadcrumbSche
 import { calculateReadingMinutes } from "../reading-time";
 
 const financialIntelligenceSubjects: Record<string, readonly string[]> = {
+  "beyond-spreadsheet-automation": ["Spreadsheet controls", "Financial workflow automation", "Model versus workflow", "Excel coexistence", "Governed execution"],
   "financial-data-lineage": ["Financial data lineage", "Field-level traceability", "Transformation history", "Calculation dependencies", "Reviewer intervention"],
   "financial-kpi-trees": ["Financial KPI trees", "Operational drivers", "Profit and cash", "Return on invested capital", "Causal boundaries"],
   "management-reporting-for-cfo-decisions": ["Management Reporting", "KPI Hierarchy", "Executive Financial Decisions"],
@@ -264,6 +266,15 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
   const isPipelineResilience = resource.slug === "backpressure-failure-recovery-financial-event-pipelines";
   const isSemanticDataContracts = resource.slug === "detecting-silent-schema-changes-risk-models";
   const isTraceableFinancialAnalysisWorkflow = resource.slug === "traceable-financial-analysis-workflow";
+
+  if (resource.slug === "beyond-spreadsheet-automation") {
+    return <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(articleSchema) }} />
+      <ResourceArticle resource={resource} sections={[...governedSpreadsheetWorkflowSections]} readingMinutes={calculateReadingMinutes("GovernedSpreadsheetWorkflowArticle.tsx")}>
+        <GovernedSpreadsheetWorkflowArticle />
+      </ResourceArticle>
+    </>;
+  }
 
   if (resource.slug === "financial-data-lineage") {
     return <>

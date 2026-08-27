@@ -120,6 +120,27 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    // FIR-14; ANALYSIS / 14. Financial Data & ERP per the supplied sprint brief.
+    technicalTitle: "Beyond Spreadsheet Automation: Turning Financial Models into Governed Workflows",
+    headline: "Beyond Spreadsheet Automation: Turning Financial Models into Governed Workflows",
+    headlineEmphasis: "Turning Financial Models into Governed Workflows",
+    slug: "beyond-spreadsheet-automation",
+    slogan: "The spreadsheet may contain the model. The workflow determines whether the process can be repeated, controlled and defended.",
+    sloganEmphasis: "repeated, controlled and defended",
+    author: authors.aleksandar, publishedAt: "2026-08-27", readingMinutes: 18,
+    topic: "financial-data-and-erp", stream: "insights", featured: true,
+    seoTitle: "Beyond Excel Automation: Governed Finance Workflows | Entimema",
+    metaDescription: "Learn when recurring Excel-heavy finance processes should remain spreadsheets, gain stronger controls or become governed workflows with traceable execution.",
+    canonicalPath: "/resources/beyond-spreadsheet-automation",
+    openGraphTitle: "Beyond Spreadsheet Automation: Turning Financial Models into Governed Workflows",
+    openGraphDescription: "The spreadsheet may contain the model. The workflow determines whether the process can be repeated, controlled and defended.",
+    openGraphImage: "/resources/covers/beyond-spreadsheet-automation.png",
+    relatedCapability: { label: "Financial Data", href: "/services/financial-data", description: "Bring one recurring Excel-heavy process and evaluate its automation potential." },
+    relatedResourceSlugs: ["financial-data-lineage", "month-end-reporting-workflow", "management-reporting-for-cfo-decisions", "financial-data-normalisation", "trial-balance-to-financial-statements", "financial-data-validation-control-layer", "traceable-financial-analysis-workflow"],
+    status: "published", indexable: true,
+    cover: { type: "editorial-artwork", src: "/resources/covers/beyond-spreadsheet-automation.png", motion: "none", alt: "Entimema Analysis 14: flexible translucent analytical planes pass through dark architectural control chambers along an amber path, retaining an exploratory branch and a final glass review surface.", stages: ["Model", "Control", "Workflow"] },
+  },
+  {
     // FIR-13; ANALYSIS / 13. Financial Data & ERP per the supplied sprint brief.
     technicalTitle: "Financial Data Lineage: Making Every Analytical Number Traceable to Its Source",
     headline: "Financial Data Lineage: Making Every Analytical Number Traceable to Its Source",
