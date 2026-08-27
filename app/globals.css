@@ -14,29 +14,6 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-/* Let the Contact route share one intrinsic viewport column with the global
- * footer. The footer keeps its natural responsive height; the page receives
- * only the space left after the real header and footer have been laid out. */
-body:has(> .contact-page) {
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  background: #fff;
-}
-
-body:has(> .contact-page) > .contact-page {
-  min-height: 0;
-  display: flex;
-  flex: 1 0 auto;
-  flex-direction: column;
-  background: #fff;
-}
-
-body:has(> .contact-page) > .contact-page + footer {
-  flex: 0 0 auto;
-  border-top-color: transparent;
-}
-
 /*
  * Desktop density
  *
