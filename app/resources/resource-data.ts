@@ -120,6 +120,27 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    // FIR-12; ANALYSIS / 12. Financial Architecture per the supplied sprint brief.
+    technicalTitle: "Financial KPI Trees: Connecting Operational Drivers to Profit, Cash and Return",
+    headline: "Financial KPI Trees: Connecting Operational Drivers to Profit, Cash and Return",
+    headlineEmphasis: "Operational Drivers to Profit, Cash and Return",
+    slug: "financial-kpi-trees",
+    slogan: "A KPI becomes decision-useful when its movement can be traced through the business mechanism that created it.",
+    sloganEmphasis: "traced through the business mechanism",
+    author: authors.aleksandar, publishedAt: "2026-08-27", readingMinutes: 18,
+    topic: "financial-architecture", stream: "insights", featured: true,
+    seoTitle: "Financial KPI Trees: Connect Drivers to Profit, Cash and ROIC | Entimema",
+    metaDescription: "Learn how to build reconciled financial KPI trees connecting operational drivers to revenue, margin, working capital, cash flow and return on invested capital.",
+    canonicalPath: "/resources/financial-kpi-trees",
+    openGraphTitle: "Financial KPI Trees: Connecting Operational Drivers to Profit, Cash and Return",
+    openGraphDescription: "Connect reconciled revenue, margin, working capital and ROIC branches to evidence, controllability, ownership and targeted financial decisions.",
+    openGraphImage: "/resources/covers/financial-kpi-trees.png",
+    relatedCapability: { label: "Management Reporting", href: "/services/management-reporting", description: "Trace a financial outcome back to the operational drivers that created it." },
+    relatedResourceSlugs: ["management-reporting-for-cfo-decisions", "variance-analysis-price-volume-mix-cost-drivers", "working-capital-analysis", "profit-vs-cash-flow-reconstruction", "traceable-financial-analysis-workflow", "financial-data-validation-control-layer", "horizontal-and-vertical-financial-analysis"],
+    status: "published", indexable: true,
+    cover: { type: "editorial-artwork", src: "/resources/covers/financial-kpi-trees.png", motion: "none", alt: "Entimema Analysis 12: an elevated glass outcome connects through translucent structural branches to operational nodes, with amber evidence paths, an interrupted association and a separate review node.", stages: ["Outcome", "Drivers", "Decision"] },
+  },
+  {
     // FIR-11; ANALYSIS / 11. Financial Architecture per the supplied sprint brief.
     technicalTitle: "Management Reporting That Supports Decisions: Designing the Information Layer for CFOs",
     headline: "Management Reporting That Supports Decisions: Designing the Information Layer for CFOs",
@@ -136,7 +157,7 @@ export const resources: ResourceRecord[] = [
     openGraphDescription: "Turn a validated financial model into a controlled KPI hierarchy, material executive findings and accountable management actions without losing the evidence.",
     openGraphImage: "/resources/covers/management-reporting-for-cfo-decisions.png",
     relatedCapability: { label: "Management Reporting", href: "/services/management-reporting", description: "Convert validated financial data into a management decision layer." },
-    relatedResourceSlugs: ["month-end-reporting-workflow", "variance-analysis-price-volume-mix-cost-drivers", "working-capital-analysis", "profit-vs-cash-flow-reconstruction", "traceable-financial-analysis-workflow", "financial-data-validation-control-layer", "horizontal-and-vertical-financial-analysis"],
+    relatedResourceSlugs: ["financial-kpi-trees", "month-end-reporting-workflow", "variance-analysis-price-volume-mix-cost-drivers", "working-capital-analysis", "profit-vs-cash-flow-reconstruction", "traceable-financial-analysis-workflow", "financial-data-validation-control-layer", "horizontal-and-vertical-financial-analysis"],
     status: "published", indexable: true,
     cover: { type: "editorial-artwork", src: "/resources/covers/management-reporting-for-cfo-decisions.png", motion: "none", alt: "Entimema Analysis 11: layered glass financial structures support one elevated decision surface, with three restrained amber signals, continuous evidence lineage and a separate unresolved review node.", stages: ["Information", "Judgement", "Decision"] },
   },

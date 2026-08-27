@@ -291,3 +291,5 @@ await import("./audit-cash-flow-reconstruction.mjs");
 await import("./audit-month-end-reporting.mjs");
 
 await import("./audit-management-reporting.mjs");
+
+await import("./audit-financial-kpi-trees.mjs");
