@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ResourceArticle from "../ResourceArticle";
+import ManagementReportingArticle, { managementReportingSections } from "../ManagementReportingArticle";
 import MonthEndReportingWorkflowArticle, { monthEndReportingWorkflowSections } from "../MonthEndReportingWorkflowArticle";
 import CashFlowReconstructionArticle, { cashFlowReconstructionSections } from "../CashFlowReconstructionArticle";
 import WorkingCapitalAnalysisArticle, { workingCapitalAnalysisSections } from "../WorkingCapitalAnalysisArticle";
@@ -88,6 +89,7 @@ import { FOUNDER_ID, ORGANIZATION_ID, SITE_URL, WEBSITE_ID, createBreadcrumbSche
 import { calculateReadingMinutes } from "../reading-time";
 
 const financialIntelligenceSubjects: Record<string, readonly string[]> = {
+  "management-reporting-for-cfo-decisions": ["Management Reporting", "KPI Hierarchy", "Executive Financial Decisions"],
   "month-end-reporting-workflow": ["Month-End Close", "Management Reporting", "Financial Controls"],
   "profit-vs-cash-flow-reconstruction": ["Cash Flow Analysis", "Accrual Accounting", "Three-Statement Reconciliation"],
   "working-capital-analysis": ["Working Capital", "Cash Conversion Cycle", "Operating Cash Flow"],
@@ -258,6 +260,15 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
   const isPipelineResilience = resource.slug === "backpressure-failure-recovery-financial-event-pipelines";
   const isSemanticDataContracts = resource.slug === "detecting-silent-schema-changes-risk-models";
   const isTraceableFinancialAnalysisWorkflow = resource.slug === "traceable-financial-analysis-workflow";
+
+  if (resource.slug === "management-reporting-for-cfo-decisions") {
+    return <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(articleSchema) }} />
+      <ResourceArticle resource={resource} sections={[...managementReportingSections]} readingMinutes={calculateReadingMinutes("ManagementReportingArticle.tsx")}>
+        <ManagementReportingArticle />
+      </ResourceArticle>
+    </>;
+  }
 
   if (resource.slug === "month-end-reporting-workflow") {
     return <>

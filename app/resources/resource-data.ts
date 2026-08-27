@@ -120,6 +120,27 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    // FIR-11; ANALYSIS / 11. Financial Architecture per the supplied sprint brief.
+    technicalTitle: "Management Reporting That Supports Decisions: Designing the Information Layer for CFOs",
+    headline: "Management Reporting That Supports Decisions: Designing the Information Layer for CFOs",
+    headlineEmphasis: "Supports Decisions",
+    slug: "management-reporting-for-cfo-decisions",
+    slogan: "Management does not need every available number. It needs the smallest complete view of the decision.",
+    sloganEmphasis: "the smallest complete view of the decision",
+    author: authors.aleksandar, publishedAt: "2026-08-27", readingMinutes: 18,
+    topic: "financial-architecture", stream: "insights", featured: true,
+    seoTitle: "Management Reporting for CFO Decisions | Entimema",
+    metaDescription: "Learn how to design management reporting around decision-specific KPIs, operational drivers, material exceptions, evidence-linked commentary and action ownership.",
+    canonicalPath: "/resources/management-reporting-for-cfo-decisions",
+    openGraphTitle: "Management Reporting That Supports Decisions: Designing the Information Layer for CFOs",
+    openGraphDescription: "Turn a validated financial model into a controlled KPI hierarchy, material executive findings and accountable management actions without losing the evidence.",
+    openGraphImage: "/resources/covers/management-reporting-for-cfo-decisions.png",
+    relatedCapability: { label: "Management Reporting", href: "/services/management-reporting", description: "Convert validated financial data into a management decision layer." },
+    relatedResourceSlugs: ["month-end-reporting-workflow", "variance-analysis-price-volume-mix-cost-drivers", "working-capital-analysis", "profit-vs-cash-flow-reconstruction", "traceable-financial-analysis-workflow", "financial-data-validation-control-layer", "horizontal-and-vertical-financial-analysis"],
+    status: "published", indexable: true,
+    cover: { type: "editorial-artwork", src: "/resources/covers/management-reporting-for-cfo-decisions.png", motion: "none", alt: "Entimema Analysis 11: layered glass financial structures support one elevated decision surface, with three restrained amber signals, continuous evidence lineage and a separate unresolved review node.", stages: ["Information", "Judgement", "Decision"] },
+  },
+  {
     // FIR-10; ANALYSIS / 10. Financial Data & ERP per the supplied sprint brief.
     technicalTitle: "The Month-End Reporting Workflow: From Fragmented Files to Decision-Ready Management Information",
     headline: "The Month-End Reporting Workflow: From Fragmented Files to Decision-Ready Management Information",
@@ -136,7 +157,7 @@ export const resources: ResourceRecord[] = [
     openGraphDescription: "Control source completeness, accounting and reporting states, reconciliations, adjustments and approvals before publishing management information.",
     openGraphImage: "/resources/covers/month-end-reporting-workflow.png",
     relatedCapability: { label: "Financial Data", href: "/services/financial-data", description: "Transform one monthly reporting cycle into a repeatable controlled workflow." },
-    relatedResourceSlugs: ["variance-analysis-price-volume-mix-cost-drivers", "profit-vs-cash-flow-reconstruction", "working-capital-analysis", "traceable-financial-analysis-workflow"],
+    relatedResourceSlugs: ["management-reporting-for-cfo-decisions", "variance-analysis-price-volume-mix-cost-drivers", "profit-vs-cash-flow-reconstruction", "working-capital-analysis", "traceable-financial-analysis-workflow"],
     status: "published", indexable: true,
     cover: { type: "editorial-artwork", src: "/resources/covers/month-end-reporting-workflow.png", motion: "none", alt: "Entimema Analysis 10: heterogeneous glass planes converge through architectural control chambers into a stable versioned object, linked by amber evidence with a separate exception plane and retained superseded layer.", stages: ["Close", "Control", "Decision"] },
   },
