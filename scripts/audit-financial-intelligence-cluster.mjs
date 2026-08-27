@@ -4,6 +4,7 @@ import { join } from "node:path";
 const root = join(process.cwd(), ".next", "server", "app");
 const site = "https://www.entimema.com";
 const slugs = [
+  "variance-analysis-price-volume-mix-cost-drivers",
   "horizontal-and-vertical-financial-analysis",
   "financial-data-normalisation",
   "trial-balance-to-financial-statements",
@@ -12,6 +13,7 @@ const slugs = [
   "traceable-financial-analysis-workflow",
 ];
 const titles = {
+  "variance-analysis-price-volume-mix-cost-drivers": "Variance Analysis: Price, Volume, Mix and Cost Drivers | Entimema",
   "horizontal-and-vertical-financial-analysis": "Horizontal and Vertical Financial Analysis Explained | Entimema",
   "financial-data-normalisation": "Financial Data Normalisation and Mapping | Entimema",
   "trial-balance-to-financial-statements": "Trial Balance Mapping to Financial Statements | Entimema",
@@ -46,7 +48,7 @@ for (const slug of slugs) {
   if (!html.includes('href="/about#founder"')) fail(`Founder link missing on ${path}`);
   if (!article || article.author?.["@id"] !== `${site}/about#founder`) fail(`Invalid Article author on ${path}`);
   if (article.publisher?.["@id"] !== `${site}/#organization`) fail(`Invalid publisher on ${path}`);
-  if (article.articleSection !== (slug === "horizontal-and-vertical-financial-analysis" ? "Financial Architecture" : "Financial Data & ERP")) fail(`Invalid articleSection on ${path}`);
+  if (article.articleSection !== (slug === "variance-analysis-price-volume-mix-cost-drivers" ? "Planning & Forecasting" : slug === "horizontal-and-vertical-financial-analysis" ? "Financial Architecture" : "Financial Data & ERP")) fail(`Invalid articleSection on ${path}`);
   if (!breadcrumb) fail(`Breadcrumb schema missing on ${path}`);
   if (!slugs.filter((candidate) => candidate !== slug).every((candidate) => html.includes(`href="/resources/${candidate}"`))) fail(`Cluster link missing on ${path}`);
   if (!registry.includes(`slug: "${slug}"`) || !registry.includes(`canonicalPath: "${path}"`)) fail(`Resources registry entry missing for ${path}`);
@@ -132,3 +134,61 @@ const operatingCash = values.get("Reported EBITDA")[1] - tradeWorkingCapital - 0
 close(operatingCash, -0.6, 1e-9, "Operating cash");
 close(operatingCash - 1.9 + movement("Current debt") + movement("Non-current debt") + 2.5, movement("Total cash"), 1e-9, "Cash flow reconciliation");
 console.log("FIR-06 Balance Sheet, working-capital and cash-flow bridges passed.");
+
+// FIR-07: parse published table inputs and validate the displayed bridges.
+const vSlug = "variance-analysis-price-volume-mix-cost-drivers";
+const vSource = readFileSync("app/resources/VarianceAnalysisArticle.tsx", "utf8");
+const vFile = ts.createSourceFile("FIR07.tsx", vSource, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+const vBody = vFile.statements.find(n => ts.isFunctionDeclaration(n)).body;
+const vParts = [];
+function visitVariance(n) {
+  if (ts.isJsxText(n)) { vParts.push(n.text); return; }
+  if (ts.isJsxAttribute(n) && ignored.has(n.name.getText(vFile))) return;
+  if (ts.isStringLiteral(n) || ts.isNoSubstitutionTemplateLiteral(n) || ts.isNumericLiteral(n)) { vParts.push(n.text); return; }
+  ts.forEachChild(n, visitVariance);
+}
+visitVariance(vBody);
+const vWords = vParts.join(" ").trim().split(/\s+/u).filter(Boolean).length;
+const vMinutes = Math.max(1, Math.round(vWords / 220));
+if (vWords >= 4500 || vMinutes < 18 || vMinutes > 22) fail("FIR-07 length: " + vWords + " / " + vMinutes);
+const vRecord = registry.split("// FIR-07;")[1]?.split('status: "published"')[0];
+if (!vRecord?.includes("readingMinutes: " + vMinutes)) fail("FIR-07 card reading time mismatch");
+const vHtml = readFileSync(join(root, "resources", vSlug + ".html"), "utf8");
+if (!vHtml.replace(/<!--.*?-->/g, "").includes(vMinutes + " min read")) fail("FIR-07 article reading time mismatch");
+const vTables = [];
+function collectTables(n) {
+  if (ts.isJsxSelfClosingElement(n) && n.tagName.getText(vFile) === "ResourceTable") {
+    const rows = n.attributes.properties.find(a => a.name?.getText(vFile) === "rows")?.initializer?.expression;
+    if (rows && ts.isArrayLiteralExpression(rows)) vTables.push(rows.elements.map(row => row.elements.map(cell => cell.text)));
+  }
+  ts.forEachChild(n, collectTables);
+}
+collectTables(vBody);
+const num = s => Number(s.replaceAll(",", "").replaceAll("+", ""));
+const inputs = vTables.find(t => t[0]?.[0] === "Product A").slice(0, 2).map(r => r.slice(1).map(num));
+const qb = inputs.reduce((n,r)=>n+r[0],0), qa = inputs.reduce((n,r)=>n+r[3],0);
+const rb = inputs.reduce((n,r)=>n+r[2],0), ra = inputs.reduce((n,r)=>n+r[5],0);
+for (const r of inputs) { close(r[0]*r[1],r[2],0,"FIR07 budget row"); close(r[3]*r[4],r[5],0,"FIR07 actual row"); }
+const effects = [(qa-qb)*rb/qb, inputs.reduce((n,r)=>n+(r[3]-qa*r[0]/qb)*r[1],0), inputs.reduce((n,r)=>n+r[3]*(r[4]-r[1]),0)];
+const revenueBridge = vTables.find(t => t[0]?.[0] === "Budget revenue");
+let running = rb;
+for (let i=0;i<3;i++) { close(effects[i],num(revenueBridge[i+1][1]),1e-8,"FIR07 revenue effect"); running+=effects[i]; close(running,num(revenueBridge[i+1][2]),1e-8,"FIR07 revenue running total"); }
+close(running,ra,1e-8,"FIR07 revenue identity");
+const material = vTables.find(t => t[0]?.[0] === "Standard quantity allowed").map(r => Number(r[1].replace(/[^0-9.]/g,"")));
+const [sq,sp,aq,ap] = material;
+const costBridge = vTables.find(t => t[0]?.[0] === "Standard cost allowed");
+close(sq*sp,num(costBridge[0][2]),1e-8,"FIR07 standard cost");
+close(aq*(ap-sp),num(costBridge[1][1]),1e-8,"FIR07 material price");
+close((aq-sq)*sp,num(costBridge[2][1]),1e-8,"FIR07 material usage");
+close(aq*ap,num(costBridge[2][2]),1e-8,"FIR07 actual cost");
+close(sq*sp+num(costBridge[1][1]),num(costBridge[1][2]),1e-8,"FIR07 cost intermediate");
+close(num(costBridge[1][1])+num(costBridge[2][1]),aq*ap-sq*sp,1e-8,"FIR07 cost identity");
+for (const table of [revenueBridge,costBridge]) if (num(table.at(-1)[1])!==0) fail("FIR07 residual nonzero");
+const vAsset = readFileSync("public/resources/covers/"+vSlug+".png");
+if (vAsset.readUInt32BE(16)!==1536 || vAsset.readUInt32BE(20)!==1024) fail("FIR07 cover dimensions");
+for (const [,href] of vSource.matchAll(/href="([^"#]+)"/g)) {
+ if (!href.startsWith("/")) continue;
+ if (href.startsWith("/resources/")) { if (!existsSync(join(root,href.slice(1)+".html"))) fail("FIR07 missing route "+href); }
+ else if (!existsSync(join(process.cwd(),"app",href.slice(1),"page.tsx"))) fail("FIR07 missing service "+href);
+}
+console.log("FIR-07 passed: "+vWords+" words / "+vMinutes+" min; PVM, cost, residuals, metadata, cover and links.");

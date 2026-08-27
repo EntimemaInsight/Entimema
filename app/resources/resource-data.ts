@@ -120,6 +120,27 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    // FIR-07; ANALYSIS / 07. Planning & Forecasting per the supplied sprint brief.
+    technicalTitle: "Variance Analysis: Price, Volume, Mix and Cost Drivers",
+    headline: "Variance Analysis That Explains Performance: Price, Volume, Mix and Cost Drivers",
+    headlineEmphasis: "Explains Performance",
+    slug: "variance-analysis-price-volume-mix-cost-drivers",
+    slogan: "The total variance shows the distance from plan. The driver bridge explains how the business arrived there.",
+    sloganEmphasis: "The driver bridge explains how the business arrived there",
+    author: authors.aleksandar, publishedAt: "2026-08-27", readingMinutes: 18,
+    topic: "planning-and-forecasting", stream: "insights", featured: true,
+    seoTitle: "Variance Analysis: Price, Volume, Mix and Cost Drivers | Entimema",
+    metaDescription: "Learn how to decompose budget-versus-actual performance into price, volume, mix, cost and efficiency drivers through controlled, reconciled variance bridges.",
+    canonicalPath: "/resources/variance-analysis-price-volume-mix-cost-drivers",
+    openGraphTitle: "Variance Analysis That Explains Performance: Price, Volume, Mix and Cost Drivers",
+    openGraphDescription: "Reconcile performance drivers, test operational evidence and distinguish materiality from controllability before assigning management action.",
+    openGraphImage: "/resources/covers/variance-analysis-price-volume-mix-cost-drivers.png",
+    relatedCapability: { label: "Planning & Forecasting", href: "/services/budgets-and-forecasting", description: "Move from variance reporting to driver-level explanation." },
+    relatedResourceSlugs: ["financial-data-validation-control-layer", "traceable-financial-analysis-workflow", "horizontal-and-vertical-financial-analysis", "operational-driver-forecasting", "building-a-manufacturing-cost-architecture"],
+    status: "published", indexable: true,
+    cover: { type: "editorial-artwork", src: "/resources/covers/variance-analysis-price-volume-mix-cost-drivers.png", motion: "none", alt: "Entimema Analysis 07: a financial plane separates into translucent architectural layers linked by amber evidence filaments and reunites at a reconciliation plane.", stages: ["Variance", "Drivers", "Reconcile", "Evidence", "Decision"] },
+  },
+  {
     // FIR-06; ANALYSIS / 06. Category follows the approved sprint brief.
     technicalTitle: "Horizontal and Vertical Financial Analysis",
     headline: "Horizontal and Vertical Financial Analysis: From Percentage Changes to Business Explanation",

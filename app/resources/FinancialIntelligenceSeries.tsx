@@ -8,6 +8,7 @@ const stages = [
   ["confidence-human-review-ai-finance", "Review"],
   ["traceable-financial-analysis-workflow", "Analyse"],
   ["horizontal-and-vertical-financial-analysis", "Compare"],
+  ["variance-analysis-price-volume-mix-cost-drivers", "Explain"],
 ] as const;
 
 export const financialIntelligenceSlugs: ReadonlySet<string> = new Set(stages.map(([slug]) => slug));
