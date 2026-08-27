@@ -88,11 +88,11 @@ import { FOUNDER_ID, ORGANIZATION_ID, SITE_URL, WEBSITE_ID, createBreadcrumbSche
 import { calculateReadingMinutes } from "../reading-time";
 
 const financialIntelligenceSubjects: Record<string, readonly string[]> = {
-  "month-end-reporting-workflow": ["Month-end reporting process", "Financial-close reporting", "Management-reporting automation", "Close calendar"],
-  "profit-vs-cash-flow-reconstruction": ["Profit versus cash flow", "Indirect cash-flow reconstruction", "Three-statement reconciliation"],
-  "working-capital-analysis": ["Working capital analysis", "Cash conversion cycle", "DSO DIO DPO", "Operating cash flow"],
-  "variance-analysis-price-volume-mix-cost-drivers": ["Variance analysis", "Price volume mix analysis", "Cost variance analysis"],
-  "horizontal-and-vertical-financial-analysis": ["Horizontal financial analysis", "Common-size financial statements"],
+  "month-end-reporting-workflow": ["Month-End Close", "Management Reporting", "Financial Controls"],
+  "profit-vs-cash-flow-reconstruction": ["Cash Flow Analysis", "Accrual Accounting", "Three-Statement Reconciliation"],
+  "working-capital-analysis": ["Working Capital", "Cash Conversion Cycle", "Operating Cash Flow"],
+  "variance-analysis-price-volume-mix-cost-drivers": ["Variance Analysis", "Price-Volume-Mix Analysis", "Cost Drivers"],
+  "horizontal-and-vertical-financial-analysis": ["Horizontal Analysis", "Vertical Analysis", "Financial Statement Analysis"],
   "financial-data-normalisation": ["Financial data normalisation", "Canonical financial data mapping"],
   "trial-balance-to-financial-statements": ["Trial balance mapping", "Financial statement preparation"],
   "financial-data-validation-control-layer": ["Financial data validation", "Financial reconciliation controls"],
@@ -157,7 +157,9 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
         author: { "@id": FOUNDER_ID },
         publisher: { "@id": ORGANIZATION_ID },
         isPartOf: { "@id": WEBSITE_ID },
-        articleSection: financialIntelligenceSubjects[resource.slug] ? topic?.label : stream.label,
+        articleSection: ["month-end-reporting-workflow", "profit-vs-cash-flow-reconstruction", "working-capital-analysis", "variance-analysis-price-volume-mix-cost-drivers", "horizontal-and-vertical-financial-analysis"].includes(resource.slug)
+          ? "Financial Analysis & Reporting"
+          : financialIntelligenceSubjects[resource.slug] ? topic?.label : stream.label,
         about: (financialIntelligenceSubjects[resource.slug] ?? [topic?.label ?? resource.topic, resource.technicalTitle])
           .map((name) => ({ "@type": "Thing", name })),
         ...("src" in resource.cover ? { image: `${SITE_URL}${resource.openGraphImage ?? resource.cover.src}` } : {}),
