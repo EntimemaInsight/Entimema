@@ -4,6 +4,7 @@ import { join } from "node:path";
 const root = join(process.cwd(), ".next", "server", "app");
 const site = "https://www.entimema.com";
 const slugs = [
+  "working-capital-analysis",
   "variance-analysis-price-volume-mix-cost-drivers",
   "horizontal-and-vertical-financial-analysis",
   "financial-data-normalisation",
@@ -13,6 +14,7 @@ const slugs = [
   "traceable-financial-analysis-workflow",
 ];
 const titles = {
+  "working-capital-analysis": "Working Capital Analysis: DSO, DIO, DPO and Cash Conversion | Entimema",
   "variance-analysis-price-volume-mix-cost-drivers": "Variance Analysis: Price, Volume, Mix and Cost Drivers | Entimema",
   "horizontal-and-vertical-financial-analysis": "Horizontal and Vertical Financial Analysis Explained | Entimema",
   "financial-data-normalisation": "Financial Data Normalisation and Mapping | Entimema",
@@ -48,7 +50,7 @@ for (const slug of slugs) {
   if (!html.includes('href="/about#founder"')) fail(`Founder link missing on ${path}`);
   if (!article || article.author?.["@id"] !== `${site}/about#founder`) fail(`Invalid Article author on ${path}`);
   if (article.publisher?.["@id"] !== `${site}/#organization`) fail(`Invalid publisher on ${path}`);
-  if (article.articleSection !== (slug === "variance-analysis-price-volume-mix-cost-drivers" ? "Planning & Forecasting" : slug === "horizontal-and-vertical-financial-analysis" ? "Financial Architecture" : "Financial Data & ERP")) fail(`Invalid articleSection on ${path}`);
+  if (article.articleSection !== (slug === "variance-analysis-price-volume-mix-cost-drivers" ? "Planning & Forecasting" : ["horizontal-and-vertical-financial-analysis", "working-capital-analysis"].includes(slug) ? "Financial Architecture" : "Financial Data & ERP")) fail(`Invalid articleSection on ${path}`);
   if (!breadcrumb) fail(`Breadcrumb schema missing on ${path}`);
   if (!slugs.filter((candidate) => candidate !== slug).every((candidate) => html.includes(`href="/resources/${candidate}"`))) fail(`Cluster link missing on ${path}`);
   if (!registry.includes(`slug: "${slug}"`) || !registry.includes(`canonicalPath: "${path}"`)) fail(`Resources registry entry missing for ${path}`);
@@ -192,3 +194,72 @@ for (const [,href] of vSource.matchAll(/href="([^"#]+)"/g)) {
  else if (!existsSync(join(process.cwd(),"app",href.slice(1),"page.tsx"))) fail("FIR07 missing service "+href);
 }
 console.log("FIR-07 passed: "+vWords+" words / "+vMinutes+" min; PVM, cost, residuals, metadata, cover and links.");
+// FIR-08: validate source tables, displayed arithmetic and generated publication.
+{
+  const wClose = (actual, expected, tolerance, label) => {
+    if (!Number.isFinite(actual) || !Number.isFinite(expected)) fail(`${label}: non-finite value`);
+    close(actual, expected, tolerance, label);
+  };
+  const wSlug = "working-capital-analysis";
+  const wSource = readFileSync("app/resources/WorkingCapitalAnalysisArticle.tsx", "utf8");
+  const wFile = ts.createSourceFile("FIR08.tsx", wSource, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  const wParts = [], wTables = [];
+  function visitWorkingCapital(n) {
+    if (ts.isJsxText(n)) { wParts.push(n.text); return; }
+    if (ts.isJsxAttribute(n) && ignored.has(n.name.getText(wFile))) return;
+    if (ts.isStringLiteral(n) || ts.isNoSubstitutionTemplateLiteral(n) || ts.isNumericLiteral(n)) { wParts.push(n.text); return; }
+    ts.forEachChild(n, visitWorkingCapital);
+  }
+  visitWorkingCapital(wFile.statements.find(ts.isFunctionDeclaration).body);
+  const wWords = wParts.join(" ").trim().split(/\s+/u).filter(Boolean).length;
+  const wMinutes = Math.max(1, Math.round(wWords / 220));
+  if (wWords >= 4500 || wMinutes < 18 || wMinutes > 22) fail(`FIR-08 length: ${wWords} / ${wMinutes}`);
+  const wRecord = registry.split("// FIR-08;")[1]?.split('status: "published"')[0];
+  if (!wRecord?.includes(`readingMinutes: ${wMinutes}`)) fail("FIR-08 card reading mismatch");
+  const wHtml = readFileSync(join(root, "resources", wSlug + ".html"), "utf8");
+  if (!wHtml.replace(/<!--.*?-->/g, "").includes(`${wMinutes} min read`)) fail("FIR-08 reading mismatch");
+  function collectWorkingTables(n) {
+    if (ts.isJsxSelfClosingElement(n) && n.tagName.getText(wFile) === "ResourceTable") {
+      const attr = n.attributes.properties.find(a => ts.isJsxAttribute(a) && a.name.getText(wFile) === "rows");
+      const expr = attr?.initializer?.expression;
+      if (!expr || !ts.isArrayLiteralExpression(expr)) fail("FIR-08 table rows must be inspectable");
+      wTables.push(expr.elements.map(row => row.elements.map(cell => cell.text)));
+    }
+    ts.forEachChild(n, collectWorkingTables);
+  }
+  collectWorkingTables(wFile);
+  const wn = s => Number(s.replaceAll("−", "-").replace(/[^\d.+-].*$/, ""));
+  const inputs = new Map(wTables[1].map(r => [r[0], r.slice(1).map(wn)]));
+  const days = [];
+  for (const i of [0, 1]) {
+    const v = k => inputs.get(k)[i];
+    days.push([v("Average trade receivables") / v("Credit revenue") * 365, v("Average inventory") / v("Cost of sales") * 365, v("Average trade payables") / v("Credit purchases") * 365]);
+    days[i].push(days[i][0] + days[i][1] - days[i][2]);
+    for (let j = 0; j < 4; j++) wClose(Number(wTables[2][j][i + 1].split("= ")[1]), days[i][j], 0.0051, `FIR-08 days ${i}/${j}`);
+  }
+  for(let j=0;j<4;j++) wClose(wn(wTables[2][j][3]),days[1][j]-days[0][j],0.0051,"FIR-08 days movement");
+  const quality=wTables[3];
+  for(const c of [1,2]) {
+    wClose(quality.slice(0,4).reduce((a,r)=>a+wn(r[c]),0),wn(quality[4][c]),1e-9,"FIR-08 ageing total");
+    wClose(quality.slice(5,9).reduce((a,r)=>a+wn(r[c]),0),wn(quality[9][c]),1e-9,"FIR-08 stock total");
+  }
+  wClose(wn(quality[9][1])+inputs.get("Credit purchases")[1]+inputs.get("Cash inventory purchases")[1]-inputs.get("Cost of sales")[1],wn(quality[9][2]),1e-9,"FIR-08 stock flow");
+  let cash=0;
+  for(const row of wTables[4].slice(0,-1)){cash+=wn(row[1]);wClose(cash,wn(row[2]),1e-9,"FIR-08 bridge running total");}
+  wClose(cash,wn(wTables[4].at(-1)[1]),1e-9,"FIR-08 bridge end");
+  const scenarios=wTables[5],revenue=inputs.get("Credit revenue")[1],cost=inputs.get("Cost of sales")[1],purchases=inputs.get("Credit purchases")[1];
+  const release=[revenue*5/365,cost*8/365,purchases*2/365];
+  release.forEach((x,i)=>wClose(wn(scenarios[i+1][1]),x,0.00000051,"FIR-08 controlled release"));
+  wClose(wn(scenarios[4][1]),release.reduce((a,b)=>a+b,0),0.00000051,"FIR-08 release total");
+  wClose(wn(scenarios[5][1]),(revenue*12+cost*20+purchases*10)/365,0.00000051,"FIR-08 aggressive release");
+  wClose(wn(scenarios[0][1]),-(11.4+13.8-9)*0.1,1e-9,"FIR-08 growth funding");
+  const wAsset=readFileSync("public/resources/covers/working-capital-analysis.png");
+  if(wAsset.readUInt32BE(16)!==1536||wAsset.readUInt32BE(20)!==1024)fail("FIR-08 cover dimensions");
+  for(const [,href] of wSource.matchAll(/href="(\/[^"#]*)(?:#[^"]*)?"/g)) {
+    if(href.startsWith("/resources/")){if(!existsSync(join(root,`${href.slice(1)}.html`)))fail(`Missing FIR-08 related route ${href}`);}
+    else if(!existsSync(join(process.cwd(),"app",href.slice(1),"page.tsx")))fail(`Missing FIR-08 route ${href}`);
+  }
+  if((registry.match(/slug: "working-capital-analysis"/g)||[]).length!==1)fail("Duplicate FIR-08 registry record");
+  console.log(`FIR-08 source tables, days, quality totals, stock flow, cash bridge, scenarios, links and cover passed: ${wWords} words / ${wMinutes} min.`);
+
+}

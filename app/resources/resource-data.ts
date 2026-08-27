@@ -120,6 +120,27 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    // FIR-08; ANALYSIS / 08. Financial Architecture per the supplied sprint brief.
+    technicalTitle: "Working Capital Analysis: Connecting Liquidity, Operations and Cash Conversion",
+    headline: "Working Capital Analysis: Connecting Liquidity, Operations and Cash Conversion",
+    headlineEmphasis: "Cash Conversion",
+    slug: "working-capital-analysis",
+    slogan: "Profit is recorded at one moment. Cash moves on the timetable of the operating cycle.",
+    sloganEmphasis: "Cash moves on the timetable of the operating cycle",
+    author: authors.aleksandar, publishedAt: "2026-08-27", readingMinutes: 18,
+    topic: "financial-architecture", stream: "insights", featured: true,
+    seoTitle: "Working Capital Analysis: DSO, DIO, DPO and Cash Conversion | Entimema",
+    metaDescription: "Learn how to connect receivables, inventory, payables and the cash conversion cycle to liquidity, operating cash and controlled working-capital actions.",
+    canonicalPath: "/resources/working-capital-analysis",
+    openGraphTitle: "Working Capital Analysis: Connecting Liquidity, Operations and Cash Conversion",
+    openGraphDescription: "Locate operating cash, test receivables and inventory quality, reconcile EBITDA to cash and assign controlled working-capital actions.",
+    openGraphImage: "/resources/covers/working-capital-analysis.png",
+    relatedCapability: { label: "Financial Data", href: "/services/financial-data", description: "Identify where operating cash is trapped and what can be acted upon." },
+    relatedResourceSlugs: ["traceable-financial-analysis-workflow", "horizontal-and-vertical-financial-analysis", "working-capital-as-a-system", "operational-driver-forecasting"],
+    status: "published", indexable: true,
+    cover: { type: "editorial-artwork", src: "/resources/covers/working-capital-analysis.png", motion: "none", alt: "Entimema Analysis 08: an amber liquidity filament passes through glass inventory and receivables chambers, with a suspended segment and an offset supplier-financing support.", stages: ["Operating cycle", "Quality", "Cash", "Action"] },
+  },
+  {
     // FIR-07; ANALYSIS / 07. Planning & Forecasting per the supplied sprint brief.
     technicalTitle: "Variance Analysis: Price, Volume, Mix and Cost Drivers",
     headline: "Variance Analysis That Explains Performance: Price, Volume, Mix and Cost Drivers",

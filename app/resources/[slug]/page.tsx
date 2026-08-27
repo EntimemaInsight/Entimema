@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ResourceArticle from "../ResourceArticle";
+import WorkingCapitalAnalysisArticle, { workingCapitalAnalysisSections } from "../WorkingCapitalAnalysisArticle";
 import VarianceAnalysisArticle, { varianceAnalysisSections } from "../VarianceAnalysisArticle";
 import HorizontalVerticalAnalysisArticle, { horizontalVerticalAnalysisSections } from "../HorizontalVerticalAnalysisArticle";
 import ManufacturingCostArticle, { manufacturingCostSections } from "../ManufacturingCostArticle";
@@ -85,6 +86,7 @@ import { FOUNDER_ID, ORGANIZATION_ID, SITE_URL, WEBSITE_ID, createBreadcrumbSche
 import { calculateReadingMinutes } from "../reading-time";
 
 const financialIntelligenceSubjects: Record<string, readonly string[]> = {
+  "working-capital-analysis": ["Working capital analysis", "Cash conversion cycle", "DSO DIO DPO", "Operating cash flow"],
   "variance-analysis-price-volume-mix-cost-drivers": ["Variance analysis", "Price volume mix analysis", "Cost variance analysis"],
   "horizontal-and-vertical-financial-analysis": ["Horizontal financial analysis", "Common-size financial statements"],
   "financial-data-normalisation": ["Financial data normalisation", "Canonical financial data mapping"],
@@ -250,6 +252,15 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
   const isPipelineResilience = resource.slug === "backpressure-failure-recovery-financial-event-pipelines";
   const isSemanticDataContracts = resource.slug === "detecting-silent-schema-changes-risk-models";
   const isTraceableFinancialAnalysisWorkflow = resource.slug === "traceable-financial-analysis-workflow";
+
+  if (resource.slug === "working-capital-analysis") {
+    return <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(articleSchema) }} />
+      <ResourceArticle resource={resource} sections={[...workingCapitalAnalysisSections]} readingMinutes={calculateReadingMinutes("WorkingCapitalAnalysisArticle.tsx")}>
+        <WorkingCapitalAnalysisArticle />
+      </ResourceArticle>
+    </>;
+  }
 
   if (resource.slug === "variance-analysis-price-volume-mix-cost-drivers") {
     return <>
