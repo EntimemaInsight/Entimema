@@ -120,6 +120,27 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    // FIR-15; ANALYSIS / 15. Financial Architecture per the supplied sprint brief.
+    technicalTitle: "AI in Financial Analysis: What Models Should Interpret and What Rules Must Control",
+    headline: "AI in Financial Analysis: What Models Should Interpret and What Rules Must Control",
+    headlineEmphasis: "What Models Should Interpret and What Rules Must Control",
+    slug: "ai-financial-analysis-models-rules-controls",
+    slogan: "AI should interpret financial meaning. Rules should prove financial integrity. Humans should retain material judgement.",
+    sloganEmphasis: "Humans should retain material judgement",
+    author: authors.aleksandar, publishedAt: "2026-08-27", readingMinutes: 18,
+    topic: "financial-architecture", stream: "insights", featured: true,
+    seoTitle: "AI in Financial Analysis: Models, Rules and Human Judgement | Entimema",
+    metaDescription: "Learn how governed financial workflows combine AI interpretation, deterministic calculations, exception routing, abstention and human judgement.",
+    canonicalPath: "/resources/ai-financial-analysis-models-rules-controls",
+    openGraphTitle: "AI in Financial Analysis: What Models Should Interpret and What Rules Must Control",
+    openGraphDescription: "Model intelligence interprets, deterministic logic controls and humans retain material judgement in a governed evidence-to-decision workflow.",
+    openGraphImage: "/resources/covers/ai-financial-analysis-models-rules-controls.png",
+    relatedCapability: { label: "Financial Data", href: "/services/financial-data", description: "See a finance workflow where AI interprets, rules control and humans retain judgement." },
+    relatedResourceSlugs: ["financial-data-validation-control-layer", "confidence-human-review-ai-finance", "traceable-financial-analysis-workflow", "month-end-reporting-workflow", "financial-data-lineage", "beyond-spreadsheet-automation"],
+    status: "published", indexable: true,
+    cover: { type: "editorial-artwork", src: "/resources/covers/ai-financial-analysis-models-rules-controls.png", motion: "none", alt: "Entimema Analysis 15: heterogeneous glass planes pass through a precise metal control structure, with an amber evidence path diverted to an elevated judgement plane before returning to a stable glass decision object.", stages: ["Interpretation", "Control", "Judgement"] },
+  },
+  {
     // FIR-14; ANALYSIS / 14. Financial Data & ERP per the supplied sprint brief.
     technicalTitle: "Beyond Spreadsheet Automation: Turning Financial Models into Governed Workflows",
     headline: "Beyond Spreadsheet Automation: Turning Financial Models into Governed Workflows",

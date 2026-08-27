@@ -296,3 +296,5 @@ await import("./audit-financial-kpi-trees.mjs");
 await import("./audit-financial-data-lineage.mjs");
 
 await import("./audit-governed-spreadsheet-workflow.mjs");
+
+await import("./audit-ai-finance-architecture.mjs");
