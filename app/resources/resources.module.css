@@ -113,8 +113,6 @@
 .resourceGrid h3 { max-width: 540px; margin: 17px 0 13px; font-size: clamp(25px, 2vw, 30px); line-height: 1.09; letter-spacing: -.038em; }
 .resourceGrid h3 { color: var(--brand-navy-950); transition: color .25s ease; }
 .resourceGrid p { max-width: 570px; margin: 0; color: var(--text-secondary); font-size: 15px; line-height: 1.62; }
-.cardFooter { display: flex; justify-content: space-between; gap: 20px; align-items: center; margin-top: 27px; padding-top: 16px; border-top: 1px solid var(--hairline); }
-.resourceGrid time { color: var(--text-secondary); font-size: 12px; }
 .resourceCardLink:hover h3 { color: var(--brand-navy-800); }
 
 /* Engineering & Research is an intentionally separate publication treatment. */
@@ -180,7 +178,6 @@
 .publicationIdentity :global(.site-brand) { gap: 8px; }
 .publicationIdentity :global(.site-brand__mark) { width: 34px; height: 34px; }
 .publicationIdentity :global(.site-brand__word) { font-size: 13px; font-weight: 700; }
-.publicationIdentity time { padding-left: 11px; border-left: 1px solid var(--hairline); color: var(--text-secondary); font-size: 11px; }
 .publicationLink { display: inline-flex; color: var(--brand-navy-950); transition: opacity .2s ease; }
 .publicationLink:hover { opacity: .72; }
 .publicationLink:focus-visible { outline: 2px solid var(--brand-orange-500); outline-offset: 4px; }

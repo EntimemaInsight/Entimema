@@ -17,7 +17,6 @@ export type ArticleSection = { id: string; label: string };
 
 export default function ResourceArticle({ resource, sections, children, readingMinutes }: { resource: ResourceRecord; sections?: ArticleSection[]; children: ReactNode; readingMinutes?: number }) {
   const topic = getTopic(resource.topic);
-  const published = resource.publishedAt ? new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric" }).format(new Date(resource.publishedAt)) : null;
   const relatedResources = getPublishedRelatedResources(resource);
   const isEngineering = resource.stream === "engineering";
 
@@ -35,7 +34,6 @@ export default function ResourceArticle({ resource, sections, children, readingM
               <Link className={styles.publicationLink} href="/about#founder" aria-label={`${resource.author.name}, founder of Entimema`}>
                 <BrandLogo compact />
               </Link>
-              {published ? <time dateTime={resource.publishedAt}>{published}</time> : null}
             </div>
           </div>
         </header>
