@@ -120,6 +120,27 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    // FIR-06; ANALYSIS / 06. Category follows the approved sprint brief.
+    technicalTitle: "Horizontal and Vertical Financial Analysis",
+    headline: "Horizontal and Vertical Financial Analysis: From Percentage Changes to Business Explanation",
+    headlineEmphasis: "Business Explanation",
+    slug: "horizontal-and-vertical-financial-analysis",
+    slogan: "The percentage shows the movement. The structure reveals what the business became.",
+    sloganEmphasis: "The structure reveals what the business became",
+    author: authors.aleksandar, publishedAt: "2026-08-27", readingMinutes: 18,
+    topic: "financial-architecture", stream: "insights", featured: true,
+    seoTitle: "Horizontal and Vertical Financial Analysis Explained | Entimema",
+    metaDescription: "Combine horizontal and common-size analysis with absolute change, denominator tests and cross-statement evidence to explain financial performance.",
+    canonicalPath: "/resources/horizontal-and-vertical-financial-analysis",
+    openGraphTitle: "Horizontal and Vertical Financial Analysis: From Percentage Changes to Business Explanation",
+    openGraphDescription: "A controlled method for comparing periods, diagnosing structural shifts and testing business explanations against financial evidence.",
+    openGraphImage: "/resources/covers/horizontal-and-vertical-financial-analysis.png",
+    relatedCapability: { label: "Financial Data", href: "/services/financial-data", description: "Convert multiple reporting periods into one controlled comparative view." },
+    relatedResourceSlugs: ["traceable-financial-analysis-workflow", "financial-data-normalisation", "trial-balance-to-financial-statements", "financial-data-validation-control-layer", "operational-driver-forecasting"],
+    status: "published", indexable: true,
+    cover: { type: "editorial-artwork", src: "/resources/covers/horizontal-and-vertical-financial-analysis.png", motion: "none", alt: "Entimema Analysis 06: translucent architectural planes change in scale and internal proportion, joined by a restrained amber analytical line and a lower financial structure.", stages: ["Compare", "Scale", "Structure", "Test", "Explain"] },
+  },
+  {
     technicalTitle: "How to Build a Traceable Financial Analysis Workflow from Raw Files to Management Decisions",
     headline: "How to Build a Traceable Financial Analysis Workflow from Raw Files to Management Decisions",
     headlineEmphasis: "Traceable Financial Analysis Workflow",

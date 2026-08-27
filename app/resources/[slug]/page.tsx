@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ResourceArticle from "../ResourceArticle";
+import HorizontalVerticalAnalysisArticle, { horizontalVerticalAnalysisSections } from "../HorizontalVerticalAnalysisArticle";
 import ManufacturingCostArticle, { manufacturingCostSections } from "../ManufacturingCostArticle";
 import WorkingCapitalArticle, { workingCapitalSections } from "../WorkingCapitalArticle";
 import OperationalDriverForecastingArticle, { operationalForecastSections } from "../OperationalDriverForecastingArticle";
@@ -83,6 +84,7 @@ import { FOUNDER_ID, ORGANIZATION_ID, SITE_URL, WEBSITE_ID, createBreadcrumbSche
 import { calculateReadingMinutes } from "../reading-time";
 
 const financialIntelligenceSubjects: Record<string, readonly string[]> = {
+  "horizontal-and-vertical-financial-analysis": ["Horizontal financial analysis", "Common-size financial statements"],
   "financial-data-normalisation": ["Financial data normalisation", "Canonical financial data mapping"],
   "trial-balance-to-financial-statements": ["Trial balance mapping", "Financial statement preparation"],
   "financial-data-validation-control-layer": ["Financial data validation", "Financial reconciliation controls"],
@@ -147,7 +149,7 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
         author: { "@id": FOUNDER_ID },
         publisher: { "@id": ORGANIZATION_ID },
         isPartOf: { "@id": WEBSITE_ID },
-        articleSection: financialIntelligenceSubjects[resource.slug] ? "Financial Data & ERP" : stream.label,
+        articleSection: financialIntelligenceSubjects[resource.slug] ? topic?.label : stream.label,
         about: (financialIntelligenceSubjects[resource.slug] ?? [topic?.label ?? resource.topic, resource.technicalTitle])
           .map((name) => ({ "@type": "Thing", name })),
         ...("src" in resource.cover ? { image: `${SITE_URL}${resource.openGraphImage ?? resource.cover.src}` } : {}),
@@ -246,6 +248,17 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
   const isPipelineResilience = resource.slug === "backpressure-failure-recovery-financial-event-pipelines";
   const isSemanticDataContracts = resource.slug === "detecting-silent-schema-changes-risk-models";
   const isTraceableFinancialAnalysisWorkflow = resource.slug === "traceable-financial-analysis-workflow";
+
+  if (resource.slug === "horizontal-and-vertical-financial-analysis") {
+    return (
+      <>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(articleSchema) }} />
+        <ResourceArticle resource={resource} sections={[...horizontalVerticalAnalysisSections]} readingMinutes={calculateReadingMinutes("HorizontalVerticalAnalysisArticle.tsx")}>
+          <HorizontalVerticalAnalysisArticle />
+        </ResourceArticle>
+      </>
+    );
+  }
 
   if (isTraceableFinancialAnalysisWorkflow) {
     return (
