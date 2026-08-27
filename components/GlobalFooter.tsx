@@ -44,7 +44,7 @@ export default function GlobalFooter() {
         <div className={styles.brandZone}>
           <Link
             className={styles.brandLink}
-            href="https://www.entimema.com/#top"
+            href="/#top"
             aria-label="Entimema — go to homepage"
           >
             <BrandLogo compact />
