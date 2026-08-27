@@ -52,7 +52,7 @@ function SectionHeader({ label, title, intro }: { label: string; title: React.Re
 export default function ManagementReportingPage() {
   return (
     <main className={styles.page}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(createServicePageSchema({ path: "/services/management-reporting", name: "Management Reporting Consulting", description: "Turn fragmented financial and operational reporting into timely management information, clear KPIs and decision-ready performance analysis.", breadcrumbSection: "Finance", breadcrumbName: "Management Reporting" })) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(createServicePageSchema({ path: "/services/management-reporting", name: "Management Reporting Consulting", description: "Turn fragmented financial and operational reporting into timely management information, clear KPIs and decision-ready performance analysis.", breadcrumbName: "Management Reporting" })) }} />
       <AnnouncementBar />
       <Navbar active="services" />
       <section className={styles.hero} aria-labelledby="management-reporting-title"><div className={`site-container ${styles.heroInner}`}>

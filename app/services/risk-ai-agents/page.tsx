@@ -4,6 +4,7 @@ import Link from "next/link";
 import { DemoTrigger } from "@/components/DemoDiscovery";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
+import { createServicePageSchema, serializeJsonLd } from "@/lib/structured-data";
 import RiskAgentOperations from "./RiskAgentOperations";
 import styles from "../decision-automation/decision-automation.module.css";
 
@@ -55,6 +56,7 @@ function SectionHeader({ label, title, intro }: { label: string; title: ReactNod
 export default function RiskAiAgentsPage() {
   return (
     <main className={styles.page}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(createServicePageSchema({ path: "/services/risk-ai-agents", name: "Risk AI Agents", description: "Build governed AI agents for credit, AML and risk operations with defined roles, explicit controls, escalation and human oversight.", breadcrumbName: "Risk AI Agents" })) }} />
       <AnnouncementBar />
       <Navbar active="services" />
       <section className={styles.hero} aria-labelledby="risk-ai-agents-title"><div className={`site-container ${styles.heroInner}`}>

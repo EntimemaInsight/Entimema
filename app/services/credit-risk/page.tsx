@@ -56,7 +56,7 @@ function SectionHeader({ label, title, intro }: { label: string; title: ReactNod
 export default function CreditRiskPage() {
   return (
     <main className={styles.page}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(createServicePageSchema({ path: "/services/credit-risk", name: "Credit Risk Consulting", description: "Strengthen credit decisions with specialist consulting across risk models, policy, portfolio analytics and controlled implementation.", breadcrumbSection: "Decision Science", breadcrumbName: "Credit Risk" })) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(createServicePageSchema({ path: "/services/credit-risk", name: "Credit Risk Consulting", description: "Strengthen credit decisions with specialist consulting across risk models, policy, portfolio analytics and controlled implementation.", breadcrumbName: "Credit Risk" })) }} />
       <AnnouncementBar />
       <Navbar active="services" />
       <section className={styles.hero} aria-labelledby="credit-risk-title"><div className={`site-container ${styles.heroInner}`}>

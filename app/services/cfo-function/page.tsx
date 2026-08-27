@@ -52,7 +52,7 @@ function SectionHeader({ label, title, intro }: { label: string; title: React.Re
 export default function CfoFunctionPage() {
   return (
     <main className={styles.page}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(createServicePageSchema({ path: "/services/cfo-function", name: "Fractional CFO Services & Advisory", description: "Build senior finance capability, management information and decision processes without committing to a full CFO organisation from day one.", breadcrumbSection: "Finance", breadcrumbName: "CFO Advisory" })) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(createServicePageSchema({ path: "/services/cfo-function", name: "Fractional CFO Services & Advisory", description: "Build senior finance capability, management information and decision processes without committing to a full CFO organisation from day one.", breadcrumbName: "CFO Advisory" })) }} />
       <AnnouncementBar />
       <Navbar active="services" />
       <section className={styles.hero} aria-labelledby="cfo-title">
