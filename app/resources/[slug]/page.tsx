@@ -110,13 +110,17 @@ const financialIntelligenceSubjects: Record<string, readonly string[]> = {
   "traceable-financial-analysis-workflow": ["Financial analysis", "Evidence traceability"],
 };
 
+type ResourcePageProps = {
+  params: Promise<{ slug: string }>;
+};
+
 export const dynamicParams = false;
 
 export function generateStaticParams() {
   return publishedResources.map(({ slug }) => ({ slug }));
 }
 
-export async function generateMetadata({ params }: PageProps<"/resources/[slug]">): Promise<Metadata> {
+export async function generateMetadata({ params }: ResourcePageProps): Promise<Metadata> {
   const { slug } = await params;
   const resource = getPublishedResource(slug);
   if (!resource) return {};
@@ -124,6 +128,7 @@ export async function generateMetadata({ params }: PageProps<"/resources/[slug]"
   return {
     title: resource.seoTitle,
     description: resource.metaDescription,
+    robots: { index: resource.indexable, follow: true },
     alternates: { canonical: resource.canonicalPath },
     openGraph: {
       type: "article",
@@ -144,7 +149,7 @@ export async function generateMetadata({ params }: PageProps<"/resources/[slug]"
   };
 }
 
-export default async function ResourcePage({ params }: PageProps<"/resources/[slug]">) {
+export default async function ResourcePage({ params }: ResourcePageProps) {
   const { slug } = await params;
   const resource = getPublishedResource(slug);
   if (!resource) notFound();
