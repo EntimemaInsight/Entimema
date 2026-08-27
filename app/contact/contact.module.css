@@ -1,6 +1,9 @@
 .contact {
-  min-height: calc(100svh - var(--header-height-v2));
+  min-height: 0;
+  display: flex;
+  flex: 1 0 auto;
   padding: clamp(28px, 2.5vw, 36px) 0 clamp(28px, 2.5vw, 36px);
+  background: #fff;
 }
 
 .hero {
@@ -370,10 +373,6 @@
 }
 
 @media (min-width: 901px) {
-  .contact {
-    display: flex;
-  }
-
   .contact > :global(.site-container) {
     display: flex;
     flex-direction: column;
