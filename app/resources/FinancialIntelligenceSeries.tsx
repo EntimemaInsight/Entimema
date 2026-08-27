@@ -11,6 +11,7 @@ const stages = [
   ["variance-analysis-price-volume-mix-cost-drivers", "Explain"],
   ["working-capital-analysis", "Convert"],
   ["profit-vs-cash-flow-reconstruction", "Reconcile"],
+  ["month-end-reporting-workflow", "Report"],
 ] as const;
 
 export const financialIntelligenceSlugs: ReadonlySet<string> = new Set(stages.map(([slug]) => slug));

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ResourceArticle from "../ResourceArticle";
+import MonthEndReportingWorkflowArticle, { monthEndReportingWorkflowSections } from "../MonthEndReportingWorkflowArticle";
 import CashFlowReconstructionArticle, { cashFlowReconstructionSections } from "../CashFlowReconstructionArticle";
 import WorkingCapitalAnalysisArticle, { workingCapitalAnalysisSections } from "../WorkingCapitalAnalysisArticle";
 import VarianceAnalysisArticle, { varianceAnalysisSections } from "../VarianceAnalysisArticle";
@@ -87,6 +88,7 @@ import { FOUNDER_ID, ORGANIZATION_ID, SITE_URL, WEBSITE_ID, createBreadcrumbSche
 import { calculateReadingMinutes } from "../reading-time";
 
 const financialIntelligenceSubjects: Record<string, readonly string[]> = {
+  "month-end-reporting-workflow": ["Month-end reporting process", "Financial-close reporting", "Management-reporting automation", "Close calendar"],
   "profit-vs-cash-flow-reconstruction": ["Profit versus cash flow", "Indirect cash-flow reconstruction", "Three-statement reconciliation"],
   "working-capital-analysis": ["Working capital analysis", "Cash conversion cycle", "DSO DIO DPO", "Operating cash flow"],
   "variance-analysis-price-volume-mix-cost-drivers": ["Variance analysis", "Price volume mix analysis", "Cost variance analysis"],
@@ -254,6 +256,15 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
   const isPipelineResilience = resource.slug === "backpressure-failure-recovery-financial-event-pipelines";
   const isSemanticDataContracts = resource.slug === "detecting-silent-schema-changes-risk-models";
   const isTraceableFinancialAnalysisWorkflow = resource.slug === "traceable-financial-analysis-workflow";
+
+  if (resource.slug === "month-end-reporting-workflow") {
+    return <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(articleSchema) }} />
+      <ResourceArticle resource={resource} sections={[...monthEndReportingWorkflowSections]} readingMinutes={calculateReadingMinutes("MonthEndReportingWorkflowArticle.tsx")}>
+        <MonthEndReportingWorkflowArticle />
+      </ResourceArticle>
+    </>;
+  }
 
   if (resource.slug === "profit-vs-cash-flow-reconstruction") {
     return <>

@@ -120,6 +120,27 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    // FIR-10; ANALYSIS / 10. Financial Data & ERP per the supplied sprint brief.
+    technicalTitle: "The Month-End Reporting Workflow: From Fragmented Files to Decision-Ready Management Information",
+    headline: "The Month-End Reporting Workflow: From Fragmented Files to Decision-Ready Management Information",
+    headlineEmphasis: "Decision-Ready Management Information",
+    slug: "month-end-reporting-workflow",
+    slogan: "The report is not late because analysis takes too long. It is late because the path to trusted numbers remains uncontrolled.",
+    sloganEmphasis: "the path to trusted numbers remains uncontrolled",
+    author: authors.aleksandar, publishedAt: "2026-08-27", readingMinutes: 18,
+    topic: "financial-data-and-erp", stream: "insights", featured: true,
+    seoTitle: "Month-End Reporting Workflow: From Close to Management Information | Entimema",
+    metaDescription: "Learn how to transform fragmented month-end files, mappings, reconciliations, adjustments and approvals into a repeatable decision-ready reporting workflow.",
+    canonicalPath: "/resources/month-end-reporting-workflow",
+    openGraphTitle: "The Month-End Reporting Workflow: From Fragmented Files to Decision-Ready Management Information",
+    openGraphDescription: "Control source completeness, accounting and reporting states, reconciliations, adjustments and approvals before publishing management information.",
+    openGraphImage: "/resources/covers/month-end-reporting-workflow.png",
+    relatedCapability: { label: "Financial Data", href: "/services/financial-data", description: "Transform one monthly reporting cycle into a repeatable controlled workflow." },
+    relatedResourceSlugs: ["traceable-financial-analysis-workflow", "financial-data-validation-control-layer", "variance-analysis-price-volume-mix-cost-drivers", "profit-vs-cash-flow-reconstruction"],
+    status: "published", indexable: true,
+    cover: { type: "editorial-artwork", src: "/resources/covers/month-end-reporting-workflow.png", motion: "none", alt: "Entimema Analysis 10: heterogeneous glass planes converge through architectural control chambers into a stable versioned object, linked by amber evidence with a separate exception plane and retained superseded layer.", stages: ["Close", "Control", "Decision"] },
+  },
+  {
     // FIR-09; ANALYSIS / 09. Financial Architecture per the supplied sprint brief.
     technicalTitle: "Why Profit Does Not Equal Cash: Reconstructing Cash Flow from Financial Statements",
     headline: "Why Profit Does Not Equal Cash: Reconstructing Cash Flow from Financial Statements",

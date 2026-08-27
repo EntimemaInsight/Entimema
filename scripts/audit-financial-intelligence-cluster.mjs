@@ -4,6 +4,7 @@ import { join } from "node:path";
 const root = join(process.cwd(), ".next", "server", "app");
 const site = "https://www.entimema.com";
 const slugs = [
+  "month-end-reporting-workflow",
   "profit-vs-cash-flow-reconstruction",
   "working-capital-analysis",
   "variance-analysis-price-volume-mix-cost-drivers",
@@ -15,6 +16,7 @@ const slugs = [
   "traceable-financial-analysis-workflow",
 ];
 const titles = {
+  "month-end-reporting-workflow": "Month-End Reporting Workflow: From Close to Management Information | Entimema",
   "profit-vs-cash-flow-reconstruction": "Why Profit Does Not Equal Cash: Cash Flow Reconstruction | Entimema",
   "working-capital-analysis": "Working Capital Analysis: DSO, DIO, DPO and Cash Conversion | Entimema",
   "variance-analysis-price-volume-mix-cost-drivers": "Variance Analysis: Price, Volume, Mix and Cost Drivers | Entimema",
@@ -268,3 +270,5 @@ console.log("FIR-07 passed: "+vWords+" words / "+vMinutes+" min; PVM, cost, resi
 
 // Source-derived FIR-09 numerical and publication controls.
 await import("./audit-cash-flow-reconstruction.mjs");
+
+await import("./audit-month-end-reporting.mjs");
