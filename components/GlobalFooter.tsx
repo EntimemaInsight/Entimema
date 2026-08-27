@@ -1,5 +1,6 @@
 import Link from "next/link";
 import BrandLogo from "./BrandLogo";
+import FooterHomeLink from "./FooterHomeLink";
 import styles from "./GlobalFooter.module.css";
 
 const columns = [
@@ -42,13 +43,9 @@ export default function GlobalFooter() {
     <footer className={styles.footer}>
       <div className={`site-container ${styles.inner}`}>
         <div className={styles.brandZone}>
-          <Link
-            className={styles.brandLink}
-            href="/#top"
-            aria-label="Entimema — go to homepage"
-          >
+          <FooterHomeLink className={styles.brandLink}>
             <BrandLogo compact />
-          </Link>
+          </FooterHomeLink>
           <span className={styles.copyright}>© 2026 Entimema</span>
         </div>
 
