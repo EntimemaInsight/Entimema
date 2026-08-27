@@ -15,6 +15,15 @@ const slugs = [
   "confidence-human-review-ai-finance",
   "traceable-financial-analysis-workflow",
 ];
+const waveTwoSlugs = slugs.slice(0, 5);
+const waveOneSlugs = slugs.slice(5);
+const waveTwoAbout = {
+  "horizontal-and-vertical-financial-analysis": ["Horizontal Analysis", "Vertical Analysis", "Financial Statement Analysis"],
+  "variance-analysis-price-volume-mix-cost-drivers": ["Variance Analysis", "Price-Volume-Mix Analysis", "Cost Drivers"],
+  "working-capital-analysis": ["Working Capital", "Cash Conversion Cycle", "Operating Cash Flow"],
+  "profit-vs-cash-flow-reconstruction": ["Cash Flow Analysis", "Accrual Accounting", "Three-Statement Reconciliation"],
+  "month-end-reporting-workflow": ["Month-End Close", "Management Reporting", "Financial Controls"],
+};
 const titles = {
   "month-end-reporting-workflow": "Month-End Reporting Workflow: From Close to Management Information | Entimema",
   "profit-vs-cash-flow-reconstruction": "Why Profit Does Not Equal Cash: Cash Flow Reconstruction | Entimema",
@@ -32,6 +41,7 @@ const decode = (value) => value.replaceAll("&amp;", "&").replaceAll("&#x27;", "'
 
 const registry = readFileSync(join(process.cwd(), "app", "resources", "resource-data.ts"), "utf8");
 const sitemap = readFileSync(join(root, "sitemap.xml.body"), "utf8");
+const descriptions = new Set();
 for (const slug of slugs) {
   const path = `/resources/${slug}`;
   const url = `${site}${path}`;
@@ -48,18 +58,25 @@ for (const slug of slugs) {
 
   if (title !== titles[slug]) fail(`Unexpected title for ${path}: ${title}`);
   if (description.length < 120 || description.length > 165) fail(`Description length ${description.length} for ${path}`);
+  if (descriptions.has(description)) fail(`Duplicate meta description for ${path}`);
+  descriptions.add(description);
   if (canonical !== url) fail(`Invalid canonical for ${path}: ${canonical}`);
   if ((html.match(/<h1(?:\s|>)/g) ?? []).length !== 1) fail(`Expected one H1 for ${path}`);
   if (/noindex/i.test(html)) fail(`Unexpected noindex on ${path}`);
   if (!html.includes('href="/about#founder"')) fail(`Founder link missing on ${path}`);
   if (!article || article.author?.["@id"] !== `${site}/about#founder`) fail(`Invalid Article author on ${path}`);
   if (article.publisher?.["@id"] !== `${site}/#organization`) fail(`Invalid publisher on ${path}`);
-  if (article.articleSection !== (slug === "variance-analysis-price-volume-mix-cost-drivers" ? "Planning & Forecasting" : ["horizontal-and-vertical-financial-analysis", "working-capital-analysis", "profit-vs-cash-flow-reconstruction"].includes(slug) ? "Financial Architecture" : "Financial Data & ERP")) fail(`Invalid articleSection on ${path}`);
+  const expectedSection = waveTwoSlugs.includes(slug) ? "Financial Analysis & Reporting" : (slug === "traceable-financial-analysis-workflow" ? "Financial Data & ERP" : article.articleSection);
+  if (article.articleSection !== expectedSection) fail(`Invalid articleSection on ${path}`);
+  if (waveTwoAbout[slug] && !waveTwoAbout[slug].every((name) => article.about?.some((entity) => entity.name === name))) fail(`Invalid about entities on ${path}`);
   if (!breadcrumb) fail(`Breadcrumb schema missing on ${path}`);
-  if (!slugs.filter((candidate) => candidate !== slug).every((candidate) => html.includes(`href="/resources/${candidate}"`))) fail(`Cluster link missing on ${path}`);
+  const wave = waveTwoSlugs.includes(slug) ? waveTwoSlugs : waveOneSlugs;
+  if (!wave.filter((candidate) => candidate !== slug).every((candidate) => html.includes(`href="/resources/${candidate}"`))) fail(`Series link missing on ${path}`);
+  if (waveTwoSlugs.includes(slug) && !html.includes('href="/resources/traceable-financial-analysis-workflow"')) fail(`Wave 1 bridge missing on ${path}`);
   if (!registry.includes(`slug: "${slug}"`) || !registry.includes(`canonicalPath: "${path}"`)) fail(`Resources registry entry missing for ${path}`);
-  if (!sitemap.includes(`<loc>${url}</loc>`)) fail(`Sitemap entry missing for ${path}`);
+  if ((sitemap.match(new RegExp(`<loc>${url}</loc>`, "g")) ?? []).length !== 1) fail(`Sitemap entry must occur once for ${path}`);
   if (html.includes("entimema.net")) fail(`Legacy domain found on ${path}`);
+  if (html.includes("/resources/entimema")) fail(`Legacy author route found on ${path}`);
   if (!html.includes(`/resources/covers/${slug}.png`)) fail(`Cover URL missing on ${path}`);
 }
 

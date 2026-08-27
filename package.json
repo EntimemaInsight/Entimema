@@ -8,6 +8,7 @@
     "test:concierge-lab": "node scripts/test-concierge-lab.mjs",
     "audit:structured-data": "node scripts/audit-structured-data.mjs",
     "audit:financial-intelligence": "node scripts/audit-financial-intelligence-cluster.mjs",
+    "audit:financial-intelligence-wave-2": "node scripts/audit-financial-intelligence-cluster.mjs",
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
