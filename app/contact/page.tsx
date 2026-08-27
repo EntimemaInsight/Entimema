@@ -16,7 +16,7 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
     <main className={styles.page}>
       <Navbar active="contact" />
       <section className={styles.contact} aria-labelledby="contact-title">
-        <div className="site-container">
+        <div className={`site-container ${styles.inner}`}>
           <header className={styles.hero}>
             <h1 id="contact-title">Contact us</h1>
             <p>We&apos;re here to help answer your questions.</p>
