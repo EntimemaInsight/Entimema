@@ -13,7 +13,7 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
   const { topic } = await searchParams;
 
   return (
-    <main className="contact-page">
+    <main className={styles.page}>
       <Navbar active="contact" />
       <section className={styles.contact} aria-labelledby="contact-title">
         <div className="site-container">

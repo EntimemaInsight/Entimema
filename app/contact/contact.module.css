@@ -1,7 +1,10 @@
+.page {
+  background: #fff;
+}
+
 .contact {
-  min-height: 0;
+  min-height: calc(100svh - var(--header-height-v2));
   display: flex;
-  flex: 1 0 auto;
   padding: clamp(28px, 2.5vw, 36px) 0 clamp(28px, 2.5vw, 36px);
   background: #fff;
 }
@@ -354,6 +357,7 @@
 
 @media (max-width: 900px) {
   .contact {
+    min-height: auto;
     padding-block: clamp(44px, 6vw, 56px) clamp(52px, 7vw, 72px);
   }
 
@@ -375,6 +379,7 @@
 @media (min-width: 901px) {
   .contact > :global(.site-container) {
     display: flex;
+    flex: 1;
     flex-direction: column;
   }
 
