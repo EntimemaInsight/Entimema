@@ -120,6 +120,27 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    // FIR-13; ANALYSIS / 13. Financial Data & ERP per the supplied sprint brief.
+    technicalTitle: "Financial Data Lineage: Making Every Analytical Number Traceable to Its Source",
+    headline: "Financial Data Lineage: Making Every Analytical Number Traceable to Its Source",
+    headlineEmphasis: "Traceable to Its Source",
+    slug: "financial-data-lineage",
+    slogan: "A financial conclusion becomes defensible when every transformation between evidence and decision remains visible.",
+    sloganEmphasis: "every transformation between evidence and decision remains visible",
+    author: authors.aleksandar, publishedAt: "2026-08-27", readingMinutes: 18,
+    topic: "financial-data-and-erp", stream: "insights", featured: true,
+    seoTitle: "Financial Data Lineage: Trace Every Number to Its Source | Entimema",
+    metaDescription: "Learn how field-level financial data lineage connects source evidence, transformations, mappings, calculations and reviewer decisions to traceable analytical findings.",
+    canonicalPath: "/resources/financial-data-lineage",
+    openGraphTitle: "Financial Data Lineage: Making Every Analytical Number Traceable to Its Source",
+    openGraphDescription: "A financial conclusion becomes defensible when every transformation between evidence and decision remains visible.",
+    openGraphImage: "/resources/covers/financial-data-lineage.png",
+    relatedCapability: { label: "Financial Data", href: "/services/financial-data", description: "Inspect how a reported value travels from source evidence to final finding." },
+    relatedResourceSlugs: ["financial-kpi-trees", "financial-data-normalisation", "trial-balance-to-financial-statements", "financial-data-validation-control-layer", "confidence-human-review-ai-finance", "traceable-financial-analysis-workflow", "management-reporting-for-cfo-decisions"],
+    status: "published", indexable: true,
+    cover: { type: "editorial-artwork", src: "/resources/covers/financial-data-lineage.png", motion: "none", alt: "Entimema Analysis 13: a continuous amber evidence path crosses translucent transformation planes and a reviewer node, converging into a glass calculation object and elevated finding plane.", stages: ["Source", "Lineage", "Decision"] },
+  },
+  {
     // FIR-12; ANALYSIS / 12. Financial Architecture per the supplied sprint brief.
     technicalTitle: "Financial KPI Trees: Connecting Operational Drivers to Profit, Cash and Return",
     headline: "Financial KPI Trees: Connecting Operational Drivers to Profit, Cash and Return",

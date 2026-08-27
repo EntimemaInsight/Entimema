@@ -27,22 +27,28 @@ const kpiTreeStages = [
   ["financial-kpi-trees", "Trace drivers", "Financial KPI trees"],
 ] as const;
 
+const lineageStages = [
+  ["financial-kpi-trees", "Trace drivers", "Financial KPI trees"],
+  ["financial-data-lineage", "Inspect evidence", "Financial data lineage"],
+] as const;
+
 export const financialIntelligenceSlugs: ReadonlySet<string> = new Set(
-  [...waveOneStages, ...waveTwoStages, ...managementReportingStages, ...kpiTreeStages].map(([slug]) => slug),
+  [...waveOneStages, ...waveTwoStages, ...managementReportingStages, ...kpiTreeStages, ...lineageStages].map(([slug]) => slug),
 );
 
 export default function FinancialIntelligenceSeries({ currentSlug }: { currentSlug: string }) {
+  const isLineage = currentSlug === "financial-data-lineage";
   const isKpiTree = currentSlug === "financial-kpi-trees";
   const isManagementReporting = currentSlug === "management-reporting-for-cfo-decisions";
   const isWaveTwo = waveTwoStages.some(([slug]) => slug === currentSlug);
-  const stages = isKpiTree ? kpiTreeStages : isManagementReporting ? managementReportingStages : isWaveTwo ? waveTwoStages : waveOneStages;
+  const stages = isLineage ? lineageStages : isKpiTree ? kpiTreeStages : isManagementReporting ? managementReportingStages : isWaveTwo ? waveTwoStages : waveOneStages;
   return (
-    <nav className={styles.seriesNavigation} aria-label={`Financial Intelligence Research ${isKpiTree ? "FIR-11 to FIR-12" : isManagementReporting ? "FIR-10 to FIR-11" : isWaveTwo ? "Wave 2" : "Wave 1"} series`}>
-      <span>FINANCIAL INTELLIGENCE RESEARCH · {isKpiTree ? "FIR-11 → FIR-12" : isManagementReporting ? "FIR-10 → FIR-11" : isWaveTwo ? "WAVE 2" : "WAVE 1"}</span>
+    <nav className={styles.seriesNavigation} aria-label={`Financial Intelligence Research ${isLineage ? "FIR-12 to FIR-13" : isKpiTree ? "FIR-11 to FIR-12" : isManagementReporting ? "FIR-10 to FIR-11" : isWaveTwo ? "Wave 2" : "Wave 1"} series`}>
+      <span>FINANCIAL INTELLIGENCE RESEARCH · {isLineage ? "FIR-12 → FIR-13" : isKpiTree ? "FIR-11 → FIR-12" : isManagementReporting ? "FIR-10 → FIR-11" : isWaveTwo ? "WAVE 2" : "WAVE 1"}</span>
       <ol>
         {stages.map(([slug, label, accessibleLabel], index) => (
           <li key={slug}>
-            <small>{index + (isKpiTree ? 11 : isManagementReporting ? 10 : 1)}</small>
+            <small>{index + (isLineage ? 12 : isKpiTree ? 11 : isManagementReporting ? 10 : 1)}</small>
             {slug === currentSlug ? <strong aria-current="page">{label}</strong> : <Link href={`/resources/${slug}`}>{accessibleLabel}</Link>}
           </li>
         ))}
