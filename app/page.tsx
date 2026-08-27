@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main className="site-page">
+    <main id="top" className="site-page">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(createHomeSchema()) }} />
       <a className="skip-link" href="#home">Skip to main content</a>
       <AnnouncementBar />
