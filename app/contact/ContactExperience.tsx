@@ -70,7 +70,7 @@ export default function ContactExperience({ initialTopic }: { initialTopic?: str
         ))}
       </div>
 
-      <p className={styles.emailFallback}>Prefer email? Write to us at <a href="mailto:office@entimema.net">office@entimema.net</a>.</p>
+      <p className={styles.emailFallback}>Prefer email? Write to us at <a href="mailto:office@entimema.com">office@entimema.com</a>.</p>
     </>
   );
 }

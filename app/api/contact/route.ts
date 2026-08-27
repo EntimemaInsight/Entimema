@@ -100,7 +100,7 @@ export async function POST(request: Request) {
   try {
     const { error } = await new Resend(apiKey).emails.send({
       from: "Entimema Website <website@entimema.net>",
-      to: "office@entimema.net",
+      to: "office@entimema.com",
       replyTo,
       subject,
       html,
