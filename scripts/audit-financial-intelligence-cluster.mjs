@@ -4,6 +4,7 @@ import { join } from "node:path";
 const root = join(process.cwd(), ".next", "server", "app");
 const site = "https://www.entimema.com";
 const slugs = [
+  "profit-vs-cash-flow-reconstruction",
   "working-capital-analysis",
   "variance-analysis-price-volume-mix-cost-drivers",
   "horizontal-and-vertical-financial-analysis",
@@ -14,6 +15,7 @@ const slugs = [
   "traceable-financial-analysis-workflow",
 ];
 const titles = {
+  "profit-vs-cash-flow-reconstruction": "Why Profit Does Not Equal Cash: Cash Flow Reconstruction | Entimema",
   "working-capital-analysis": "Working Capital Analysis: DSO, DIO, DPO and Cash Conversion | Entimema",
   "variance-analysis-price-volume-mix-cost-drivers": "Variance Analysis: Price, Volume, Mix and Cost Drivers | Entimema",
   "horizontal-and-vertical-financial-analysis": "Horizontal and Vertical Financial Analysis Explained | Entimema",
@@ -50,7 +52,7 @@ for (const slug of slugs) {
   if (!html.includes('href="/about#founder"')) fail(`Founder link missing on ${path}`);
   if (!article || article.author?.["@id"] !== `${site}/about#founder`) fail(`Invalid Article author on ${path}`);
   if (article.publisher?.["@id"] !== `${site}/#organization`) fail(`Invalid publisher on ${path}`);
-  if (article.articleSection !== (slug === "variance-analysis-price-volume-mix-cost-drivers" ? "Planning & Forecasting" : ["horizontal-and-vertical-financial-analysis", "working-capital-analysis"].includes(slug) ? "Financial Architecture" : "Financial Data & ERP")) fail(`Invalid articleSection on ${path}`);
+  if (article.articleSection !== (slug === "variance-analysis-price-volume-mix-cost-drivers" ? "Planning & Forecasting" : ["horizontal-and-vertical-financial-analysis", "working-capital-analysis", "profit-vs-cash-flow-reconstruction"].includes(slug) ? "Financial Architecture" : "Financial Data & ERP")) fail(`Invalid articleSection on ${path}`);
   if (!breadcrumb) fail(`Breadcrumb schema missing on ${path}`);
   if (!slugs.filter((candidate) => candidate !== slug).every((candidate) => html.includes(`href="/resources/${candidate}"`))) fail(`Cluster link missing on ${path}`);
   if (!registry.includes(`slug: "${slug}"`) || !registry.includes(`canonicalPath: "${path}"`)) fail(`Resources registry entry missing for ${path}`);
@@ -263,3 +265,6 @@ console.log("FIR-07 passed: "+vWords+" words / "+vMinutes+" min; PVM, cost, resi
   console.log(`FIR-08 source tables, days, quality totals, stock flow, cash bridge, scenarios, links and cover passed: ${wWords} words / ${wMinutes} min.`);
 
 }
+
+// Source-derived FIR-09 numerical and publication controls.
+await import("./audit-cash-flow-reconstruction.mjs");

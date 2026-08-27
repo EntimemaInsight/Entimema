@@ -120,6 +120,27 @@ const authors = {
 
 export const resources: ResourceRecord[] = [
   {
+    // FIR-09; ANALYSIS / 09. Financial Architecture per the supplied sprint brief.
+    technicalTitle: "Why Profit Does Not Equal Cash: Reconstructing Cash Flow from Financial Statements",
+    headline: "Why Profit Does Not Equal Cash: Reconstructing Cash Flow from Financial Statements",
+    headlineEmphasis: "Does Not Equal Cash",
+    slug: "profit-vs-cash-flow-reconstruction",
+    slogan: "Profit records economic performance. Cash reveals how the business was funded.",
+    sloganEmphasis: "Cash reveals how the business was funded",
+    author: authors.aleksandar, publishedAt: "2026-08-27", readingMinutes: 18,
+    topic: "financial-architecture", stream: "insights", featured: true,
+    seoTitle: "Why Profit Does Not Equal Cash: Cash Flow Reconstruction | Entimema",
+    metaDescription: "Learn how to reconstruct operating, investing and financing cash flow from the P&L, Balance Sheet and supporting schedules through deterministic reconciliation.",
+    canonicalPath: "/resources/profit-vs-cash-flow-reconstruction",
+    openGraphTitle: "Why Profit Does Not Equal Cash: Reconstructing Cash Flow from Financial Statements",
+    openGraphDescription: "Connect profit, working capital, investment and financing through controlled roll-forwards and an opening-to-closing cash reconciliation.",
+    openGraphImage: "/resources/covers/profit-vs-cash-flow-reconstruction.png",
+    relatedCapability: { label: "Financial Data", href: "/services/financial-data", description: "Turn connected statement movements into a traceable cash explanation." },
+    relatedResourceSlugs: ["working-capital-analysis", "financial-data-validation-control-layer", "traceable-financial-analysis-workflow", "working-capital-as-a-system"],
+    status: "published", indexable: true,
+    cover: { type: "editorial-artwork", src: "/resources/covers/profit-vs-cash-flow-reconstruction.png", motion: "none", alt: "Entimema Analysis 09: an amber profit monolith is separated through glass operating, investment and financing planes, linked by an evidence filament to a smaller reconciled cash object.", stages: ["Profit", "Movement", "Cash"] },
+  },
+  {
     // FIR-08; ANALYSIS / 08. Financial Architecture per the supplied sprint brief.
     technicalTitle: "Working Capital Analysis: Connecting Liquidity, Operations and Cash Conversion",
     headline: "Working Capital Analysis: Connecting Liquidity, Operations and Cash Conversion",
