@@ -1,5 +1,6 @@
 import path from "node:path";
 import { AgentError } from "./errors";
+import { DOCUMENT_CLASSIFIER_MAX_FILE_BYTES } from "../../lib/document-classifier-upload";
 
 const SUPPORTED = {
   ".pdf": ["application/pdf"],
@@ -12,7 +13,7 @@ const SUPPORTED = {
 } as const;
 type SupportedExtension = keyof typeof SUPPORTED;
 export type InspectedDocument = { fileName: string; extension: SupportedExtension; mimeType: string; size: number; buffer: Buffer };
-const maxBytes = () => { const n = Number(process.env.DOCUMENT_CLASSIFIER_MAX_FILE_BYTES); return Number.isInteger(n) && n > 0 ? n : 20 * 1024 * 1024; };
+const maxBytes = () => DOCUMENT_CLASSIFIER_MAX_FILE_BYTES;
 const prefix = (buffer: Buffer, bytes: number[]) => bytes.every((byte, index) => buffer[index] === byte);
 
 function assertMagic(extension: SupportedExtension, buffer: Buffer) {

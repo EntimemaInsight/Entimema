@@ -4,6 +4,10 @@ import { AgentError, errorResponse } from "../../../lib/errors";
 import { logAgentEvent } from "../../../lib/logging";
 import type { AuthorizedActor } from "../../../../lib/execution-auth";
 import type { ExecutionRateLimiter } from "../../../lib/rate-limit";
+import { DOCUMENT_CLASSIFIER_MAX_REQUEST_BYTES } from "../../../../lib/document-classifier-upload";
+
+// Allows normal multipart framing while bounding malformed/hostile declared bodies.
+export const MAX_MULTIPART_REQUEST_BYTES = DOCUMENT_CLASSIFIER_MAX_REQUEST_BYTES;
 
 type Dependencies = {
   authorize: () => Promise<AuthorizedActor>;
@@ -21,6 +25,10 @@ export function createDocumentClassifierPostHandler(dependencies: Dependencies) 
       actor = await dependencies.authorize();
       runId = randomUUID();
       await dependencies.rateLimiter.consume(actor.actorId);
+      const declaredRequestSize = Number(request.headers.get("content-length"));
+      if (Number.isFinite(declaredRequestSize) && declaredRequestSize > MAX_MULTIPART_REQUEST_BYTES) {
+        throw new AgentError("FILE_TOO_LARGE", 413);
+      }
       if (!(request.headers.get("content-type") ?? "").toLowerCase().startsWith("multipart/form-data")) {
         throw new AgentError("FILE_MISSING", 400, "Expected multipart/form-data with exactly one file field.");
       }
