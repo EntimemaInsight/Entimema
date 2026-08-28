@@ -1,0 +1,15 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import "server-only";
+import type { FinancialRun } from "../schema";
+import type { FinancialRunRepository,PersistEvent,RunListItem } from "./contracts";
+import { PersistenceConflictError } from "./contracts";
+const config=()=>{const url=process.env.FINANCIAL_DATABASE_REST_URL?.replace(/\/$/,"");const key=process.env.FINANCIAL_DATABASE_SERVICE_KEY;if(!url||!key)throw new Error("Financial persistence is not configured");return{url,key}};
+async function call(path:string,init:RequestInit={}){const{url,key}=config();const response=await fetch(`${url}/rest/v1/${path}`,{...init,headers:{apikey:key,Authorization:`Bearer ${key}`,"Content-Type":"application/json",...(init.headers??{})},cache:"no-store"});if(!response.ok){if(response.status===409)throw new PersistenceConflictError("Stale run revision");throw new Error(`Financial persistence request failed (${response.status})`)}return response.status===204?null:response.json()}
+const hydrate=(row:any):FinancialRun=>({...row.contract,revision:row.revision,createdAt:row.created_at,updatedAt:row.updated_at,validatedAt:row.validated_at,auditEvents:row.audit_events??[]});
+export class SupabaseFinancialRunRepository implements FinancialRunRepository{
+ async create(ownerId:string,run:FinancialRun,event:PersistEvent){const rows=await call("rpc/fi_create_run",{method:"POST",body:JSON.stringify({p_owner_id:ownerId,p_run_id:run.runId,p_contract:run,p_event:event})});return hydrate(rows[0]??rows)}
+ async list(ownerId:string){const rows=await call(`financial_runs?owner_id=eq.${encodeURIComponent(ownerId)}&select=run_id,status,revision,created_at,updated_at,contract&order=updated_at.desc`);return rows.map((r:any):RunListItem=>({runId:r.run_id,filename:r.contract.source.filename,selectedStatement:r.contract.source.selectedSection,status:r.status,periods:r.contract.metrics.periods,financialRows:r.contract.metrics.financialSourceRows,openTasks:r.contract.metrics.reviewTasks,createdAt:r.created_at,updatedAt:r.updated_at,revision:r.revision}))}
+ async get(ownerId:string,runId:string){const rows=await call(`financial_runs?owner_id=eq.${encodeURIComponent(ownerId)}&run_id=eq.${encodeURIComponent(runId)}&select=*,audit_events(event_id,event_type,actor_id,created_at,revision)&limit=1`);if(!rows.length)return null;rows[0].audit_events=(rows[0].audit_events??[]).map((e:any)=>({eventId:e.event_id,eventType:e.event_type,actor:e.actor_id==="system"?"System":"Workspace user",timestamp:e.created_at,revision:e.revision})).sort((a:any,b:any)=>a.timestamp.localeCompare(b.timestamp));return hydrate(rows[0])}
+ async update(ownerId:string,run:FinancialRun,expectedRevision:number,event:PersistEvent,snapshot?:Record<string,unknown>){const rows=await call("rpc/fi_update_run",{method:"POST",body:JSON.stringify({p_owner_id:ownerId,p_run_id:run.runId,p_expected_revision:expectedRevision,p_contract:run,p_status:run.status,p_event:event,p_snapshot:snapshot??null})});if(!rows?.length)throw new PersistenceConflictError("Stale run revision");return hydrate(rows[0])}
+}
+export const financialRunRepository=new SupabaseFinancialRunRepository();
