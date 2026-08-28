@@ -4,6 +4,7 @@ import { AgentError } from "./errors";
 const SUPPORTED = {
   ".pdf": ["application/pdf"],
   ".xlsx": ["application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "application/octet-stream"],
+  ".xlsm": ["application/vnd.ms-excel.sheet.macroenabled.12", "application/octet-stream"],
   ".xls": ["application/vnd.ms-excel", "application/octet-stream"],
   ".csv": ["text/csv", "application/csv", "text/plain", "application/vnd.ms-excel", "application/octet-stream"],
   ".txt": ["text/plain", "application/octet-stream"],
@@ -16,7 +17,7 @@ const prefix = (buffer: Buffer, bytes: number[]) => bytes.every((byte, index) =>
 
 function assertMagic(extension: SupportedExtension, buffer: Buffer) {
   if (extension === ".pdf" && !prefix(buffer, [0x25, 0x50, 0x44, 0x46, 0x2d])) throw new Error("Invalid PDF signature");
-  if ((extension === ".xlsx" || extension === ".docx") && !prefix(buffer, [0x50, 0x4b])) throw new Error("Invalid ZIP signature");
+  if ((extension === ".xlsx" || extension === ".xlsm" || extension === ".docx") && !prefix(buffer, [0x50, 0x4b])) throw new Error("Invalid ZIP signature");
   if (extension === ".xls" && !prefix(buffer, [0xd0, 0xcf, 0x11, 0xe0, 0xa1, 0xb1, 0x1a, 0xe1])) throw new Error("Invalid OLE signature");
 }
 
