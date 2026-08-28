@@ -5,7 +5,7 @@ import { routeClassification } from "../../../agents/document-classifier/router"
 import type { Classification } from "../../../agents/document-classifier/schema";
 import { executionTrace } from "../../../agents/document-classifier/workflow";
 import { AgentError } from "../../../lib/errors";
-import { inspectUploadedFile } from "../../../lib/files";
+import { inspectUploadedFile, type InspectedDocument } from "../../../lib/files";
 import { applySelectiveAIFallback, parseFinancialWorkbook, type AISheetClassifier } from "../../../agents/document-classifier/financial-intake";
 
 export type ClassificationSource = "local" | "ai" | "hybrid";
@@ -28,12 +28,9 @@ function aiResultToClassification(ai: Awaited<ReturnType<AIClassifier>>, local: 
   };
 }
 
-export async function runDocumentClassifier(formData: FormData, dependencies: Dependencies = {}) {
+export async function runInspectedDocumentClassifier(document: InspectedDocument, dependencies: Dependencies = {}) {
   const totalStarted = performance.now();
-  const validationStarted = performance.now();
-  if ([...formData.keys()].some((key) => key !== "file") || formData.getAll("file").length !== 1) throw new AgentError("FILE_MISSING", 400, "Expected exactly one multipart file field named 'file'.");
-  const document = await inspectUploadedFile(formData.get("file"));
-  const file_validation_ms = elapsed(validationStarted);
+  const file_validation_ms = 0;
 
   if (document.extension === ".xlsx" || document.extension === ".xlsm") {
     const started = performance.now();
@@ -86,4 +83,13 @@ export async function runDocumentClassifier(formData: FormData, dependencies: De
   const timing: Timing = { file_validation_ms, fingerprint_ms, local_classification_ms, ai_classification_ms, routing_ms, total_ms: elapsed(totalStarted) };
   const diagnostics = fingerprintFailure ? [{ node: "fingerprint" as const, code: fingerprintFailure, message: "Local document inspection unavailable — AI fallback used." }] : [];
   return { document, response: { agent: "document_classifier" as const, status: "completed" as const, classification, classification_source: classificationSource, local_classification: local, openai_call_count: aiCalls, routing, execution: executionTrace(aiCalls > 0, Boolean(fingerprintFailure)), diagnostics, timing } };
+}
+
+export async function runDocumentClassifier(formData: FormData, dependencies: Dependencies = {}) {
+  const validationStarted = performance.now();
+  if ([...formData.keys()].some((key) => key !== "file") || formData.getAll("file").length !== 1) throw new AgentError("FILE_MISSING", 400, "Expected exactly one multipart file field named 'file'.");
+  const document = await inspectUploadedFile(formData.get("file"));
+  const result = await runInspectedDocumentClassifier(document, dependencies);
+  result.response.timing.file_validation_ms = elapsed(validationStarted);
+  return result;
 }
