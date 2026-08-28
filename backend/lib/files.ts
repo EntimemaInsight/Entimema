@@ -21,6 +21,19 @@ function assertMagic(extension: SupportedExtension, buffer: Buffer) {
   if (extension === ".xls" && !prefix(buffer, [0xd0, 0xcf, 0x11, 0xe0, 0xa1, 0xb1, 0x1a, 0xe1])) throw new Error("Invalid OLE signature");
 }
 
+export function inspectFileBuffer(fileName: string, mimeType: string, buffer: Buffer, declaredSize = buffer.byteLength): InspectedDocument {
+  if (!fileName.trim()) throw new AgentError("FILE_MISSING", 400);
+  if (!buffer.byteLength) throw new AgentError("FILE_CORRUPT", 422, "The uploaded file is empty.");
+  if (buffer.byteLength > maxBytes() || declaredSize > maxBytes()) throw new AgentError("FILE_TOO_LARGE", 413);
+  if (declaredSize !== buffer.byteLength) throw new AgentError("FILE_CORRUPT", 422, "The uploaded size does not match the authorized file.");
+  const extension = path.extname(path.basename(fileName)).toLowerCase() as SupportedExtension;
+  if (!(extension in SUPPORTED)) throw new AgentError("UNSUPPORTED_FILE_TYPE", 415);
+  const normalizedMime = mimeType.toLowerCase() || "application/octet-stream";
+  if (!(SUPPORTED[extension] as readonly string[]).includes(normalizedMime)) throw new AgentError("UNSUPPORTED_FILE_TYPE", 415, "The file extension and MIME type do not match a supported format.");
+  try { assertMagic(extension, buffer); } catch (error) { throw new AgentError("FILE_CORRUPT", 422, undefined, error); }
+  return { fileName: path.basename(fileName), extension, mimeType: normalizedMime, size: buffer.byteLength, buffer };
+}
+
 export async function inspectUploadedFile(value: FormDataEntryValue | null): Promise<InspectedDocument> {
   if (!(value instanceof File) || !value.name.trim()) throw new AgentError("FILE_MISSING", 400);
   if (!value.size) throw new AgentError("FILE_CORRUPT", 422, "The uploaded file is empty.");
@@ -29,8 +42,5 @@ export async function inspectUploadedFile(value: FormDataEntryValue | null): Pro
   if (!(extension in SUPPORTED)) throw new AgentError("UNSUPPORTED_FILE_TYPE", 415);
   const mimeType = value.type.toLowerCase() || "application/octet-stream";
   if (!(SUPPORTED[extension] as readonly string[]).includes(mimeType)) throw new AgentError("UNSUPPORTED_FILE_TYPE", 415, "The file extension and MIME type do not match a supported format.");
-  const buffer = Buffer.from(await value.arrayBuffer());
-  try { assertMagic(extension, buffer); }
-  catch (error) { throw new AgentError("FILE_CORRUPT", 422, undefined, error); }
-  return { fileName: value.name, extension, mimeType, size: value.size, buffer };
+  return inspectFileBuffer(value.name, mimeType, Buffer.from(await value.arrayBuffer()), value.size);
 }
