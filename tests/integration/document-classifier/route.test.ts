@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { createDocumentClassifierPostHandler } from "../../../backend/api/agents/document-classifier/http";
 import { AgentError } from "../../../backend/lib/errors";
 import type { AgentLog } from "../../../backend/lib/logging";
+import { DOCUMENT_CLASSIFIER_MAX_REQUEST_BYTES } from "../../../lib/document-classifier-upload";
 
 const allow = async () => ({ actorId: "actor-safe-id" });
 const limiter = { async consume() {} };
@@ -45,6 +46,28 @@ test("malformed multipart is a controlled 400", async () => {
   const handler = createDocumentClassifierPostHandler({ authorize: allow, rateLimiter: limiter, logger() {} });
   const response = await handler(new Request("http://localhost/run", { method: "POST", headers: { "content-type": "multipart/form-data; boundary=missing" }, body: "invalid" }));
   assert.equal(response.status, 400); assert.equal((await response.json()).error_code, "FILE_MISSING");
+});
+
+test("declared request above the platform boundary is rejected before parsing or classification", async () => {
+  let parsed = 0, classified = 0;
+  const input = new Request("http://localhost/run", { method: "POST", headers: { "content-type": "multipart/form-data; boundary=x", "content-length": String(DOCUMENT_CLASSIFIER_MAX_REQUEST_BYTES + 1) } });
+  Object.defineProperty(input, "formData", { value: async () => { parsed++; return new FormData(); } });
+  const handler = createDocumentClassifierPostHandler({ authorize: allow, rateLimiter: limiter, classifier: async () => { classified++; throw new Error("unreachable"); }, logger() {} });
+  const response = await handler(input);
+  assert.equal(response.status, 413); assert.equal(parsed, 0); assert.equal(classified, 0);
+  assert.equal((await response.json()).error_code, "FILE_TOO_LARGE");
+});
+
+test("active multipart route has no private-storage configuration dependency", async () => {
+  const keys = Object.keys(process.env).filter((key) => key.startsWith("DOCUMENT_UPLOAD_"));
+  const saved = Object.fromEntries(keys.map((key) => [key, process.env[key]]));
+  keys.forEach((key) => delete process.env[key]);
+  try {
+    const form = new FormData(); form.set("file", new File(["Account,Debit,Credit\n1000,100,0"], "trial.csv", { type: "text/csv" }));
+    const handler = createDocumentClassifierPostHandler({ authorize: allow, rateLimiter: limiter, logger() {} });
+    const response = await handler(request(form));
+    assert.notEqual((await response.json()).error_code, "STORAGE_UNAVAILABLE");
+  } finally { Object.assign(process.env, saved); }
 });
 
 test("execution logs contain safe metadata but not document content", async () => {
