@@ -101,26 +101,33 @@
 
 .page :global(.founder-card) {
   width: min(100%, var(--about-wide));
-  min-height: 0;
+  min-height: clamp(48rem, 59vw, 54rem);
   margin: clamp(4rem, 5.8vw, 5.5rem) auto 0;
-  grid-template-columns: minmax(18rem, .78fr) minmax(0, 1.42fr);
+  grid-template-columns: minmax(0, 42%) minmax(0, 58%);
   align-items: stretch;
+  overflow: hidden;
+  border: 1px solid rgba(8, 26, 66, .12);
+  border-radius: 28px;
+  background: rgba(255, 253, 249, .94);
+  box-shadow: 0 32px 90px rgba(24, 31, 49, .075);
 }
 
 .page :global(.founder-card__portrait) {
-  min-height: 0;
-  aspect-ratio: 436 / 483;
-  align-self: start;
+  position: relative;
+  min-height: 100%;
+  align-self: stretch;
+  overflow: hidden;
+  border-radius: 27px 0 0 27px;
 }
 
 .page :global(.founder-card__portrait img) {
   object-fit: cover;
-  object-position: center 18%;
+  object-position: 50% 50%;
 }
 
 .page :global(.founder-card__content) {
   min-width: 0;
-  padding: clamp(2.5rem, 3.6vw, 3.75rem);
+  padding: clamp(2.75rem, 4vw, 4.25rem);
   grid-template-rows: auto auto;
   align-content: space-between;
   gap: clamp(2.5rem, 4vw, 4.25rem);
@@ -574,7 +581,8 @@
   }
 
   .page :global(.founder-card) {
-    grid-template-columns: minmax(16rem, .72fr) minmax(0, 1.28fr);
+    min-height: 48rem;
+    grid-template-columns: minmax(0, 41%) minmax(0, 59%);
   }
 
   .page :global(.founder-card__content) {
@@ -594,12 +602,19 @@
   .page :global(.about-lead) { max-width: 52ch; }
 
   .page :global(.founder-card) {
+    min-height: 0;
     grid-template-columns: 1fr;
   }
 
   .page :global(.founder-card__portrait) {
-    width: min(100%, 35rem);
-    aspect-ratio: 436 / 483;
+    width: 100%;
+    min-height: 0;
+    aspect-ratio: 4 / 5;
+    border-radius: 27px 27px 0 0;
+  }
+
+  .page :global(.founder-card__portrait img) {
+    object-position: 50% 29%;
   }
 
   .page :global(.founder-card__content) {
@@ -658,12 +673,13 @@
   .page :global(.founder-card) { margin-top: 3.5rem; }
 
   .page :global(.founder-card) {
-    border-radius: 12px;
+    border-radius: 26px;
   }
 
   .page :global(.founder-card__portrait) {
     width: 100%;
     aspect-ratio: 4 / 5;
+    border-radius: 25px 25px 0 0;
   }
 
   .page :global(.founder-card__content) {

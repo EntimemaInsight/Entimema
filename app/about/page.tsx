@@ -105,7 +105,12 @@ export default function AboutPage() {
 
             <article id="founder" className={`founder-card ${styles.experienceReveal}`} data-about-reveal="experience">
               <div className="founder-card__portrait">
-                <Image src="/aleksandar-about.png" alt="Aleksandar Dimitrov, Founder of Entimema" fill sizes="(max-width: 900px) 100vw, 34vw" />
+                <Image
+                  src="/aleksandar-dimitrov-founder-v2.webp"
+                  alt="Aleksandar Dimitrov, Founder of Entimema"
+                  fill
+                  sizes="(max-width: 864px) calc(100vw - 36px), (max-width: 1320px) 40vw, 554px"
+                />
               </div>
               <div className="founder-card__content">
                 <div className="founder-card__bio">
