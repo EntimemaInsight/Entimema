@@ -420,3 +420,4 @@
     transition: none;
   }
 }
+.mobileResourceDestination[aria-current="page"] strong { text-decoration: underline; text-underline-offset: 5px; }

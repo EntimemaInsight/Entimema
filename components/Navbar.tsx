@@ -47,13 +47,7 @@ export default function Navbar({ active = "home" }: { active?: NavKey }) {
               Agent Library
             </Link>
             <ResourcesMegaMenu active={active === "resources"} />
-            <Link
-              className={`site-nav__item${active === "about" ? " is-active" : ""}`}
-              href="/about"
-              aria-current={active === "about" ? "page" : undefined}
-            >
-              About
-            </Link>
+            <ResourcesMegaMenu variant="company" />
           </nav>
         </div>
 

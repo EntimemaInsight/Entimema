@@ -9,7 +9,7 @@ import FounderPortrait from "../../app/about/FounderPortrait";
 Object.assign(globalThis, { React });
 
 const page = readFileSync("app/about/page.tsx", "utf8");
-const approved = JSON.parse(readFileSync("tests/about/founder-copy.json", "utf8")) as string[];
+
 
 test("Founder portrait is a single lazy WebP with exact alt and bounded responsive requests", () => {
   const html = renderToStaticMarkup(React.createElement(FounderPortrait));
@@ -24,15 +24,15 @@ test("Founder portrait is a single lazy WebP with exact alt and bounded responsi
   assert.ok(widths.every(width => width <= 1080));
 });
 
-test("every approved Founder content block is preserved", () => {
-  for (const block of approved) assert.ok(page.includes(block), block);
-  assert.match(page, /<article id="founder" className="founder-card" aria-labelledby="founder-title"/);
-  assert.match(page, /<h2 id="founder-title">/);
-  assert.match(page, /<blockquote/);
+test("Institutional About removes biography and portrait while keeping Founder and Labs pathways", () => {
+  assert.doesNotMatch(page, /<FounderPortrait|founder-card|createFounderSchema|<blockquote/);
+  assert.match(page, /href="\/alexander-dimitrov"/);
+  assert.match(page, /href="\/labs"/);
+  assert.equal((page.match(/<h1\b/g) || []).length, 1);
 });
 
 test("About stays public, canonical and present in navigation and sitemap", () => {
-  assert.match(page, /canonical: "\/about"/);
+  assert.match(page, /https:\/\/www\.entimema\.com\/about/);
   assert.doesNotMatch(page, /notFound\(|redirect\(/);
   assert.match(readFileSync("components/AboutHeader.tsx", "utf8"), /href="\/about"/);
   assert.match(readFileSync("app/sitemap.ts", "utf8"), /"\/about"/);

@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { companyDestinations, isCompanyRoute } from "@/lib/company-navigation";
 import { createPortal } from "react-dom";
 import {
   useCallback,
@@ -86,6 +88,8 @@ type WhatWeDoMegaMenuProps = {
 };
 
 export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMegaMenuProps) {
+  const pathname = usePathname();
+  const [mobileCompanyOpen, setMobileCompanyOpen] = useState(false);
   const isMounted = useSyncExternalStore(subscribeToClientMount, () => true, () => false);
   const [isOpen, setIsOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
@@ -117,6 +121,7 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
     setIsClosing(true);
     setMobileSolutionsOpen(false);
     setMobileResourcesOpen(false);
+    setMobileCompanyOpen(false);
     clearExitTimer();
     const exitDuration = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 180;
     exitTimerRef.current = setTimeout(() => setIsClosing(false), exitDuration);
@@ -268,9 +273,14 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
                     </Link>
                   ))}
                 </div>
-                <Link className={styles.mobileTopLevel} href="/about" onClick={close}>
-                  <span>About</span><span aria-hidden="true">→</span>
-                </Link>
+                <button aria-controls={`${menuId}-mobile-company`} aria-expanded={mobileCompanyOpen} className={`${styles.mobileTopLevel} ${isCompanyRoute(pathname) ? styles.active : ""}`} onClick={() => setMobileCompanyOpen(current => !current)} type="button">
+                  <span>Company</span><span aria-hidden="true">{mobileCompanyOpen ? "−" : "+"}</span>
+                </button>
+                <div className={styles.mobileResources} hidden={!mobileCompanyOpen} id={`${menuId}-mobile-company`}>
+                  {companyDestinations.map(item => <Link className={styles.mobileResourceDestination} href={item.href} key={item.href} onClick={close} aria-current={pathname.replace(/\/$/, "") === item.href ? "page" : undefined}>
+                    <span><strong>{item.title}</strong><small>{item.description}</small></span><b aria-hidden="true">→</b>
+                  </Link>)}
+                </div>
                 <Link className={`${styles.mobileTopLevel} ${styles.mobileContact}`} href="/contact" onClick={close}>
                   <span>Contact us</span><span aria-hidden="true">→</span>
                 </Link>

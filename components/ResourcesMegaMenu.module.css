@@ -29,3 +29,13 @@
 @media (max-width: 1050px) { .inner { gap: 40px; } .stream { padding-inline: 28px; } }
 @media (max-width: 900px) { .root { display:none; } }
 @media (prefers-reduced-motion:reduce) { .menu,.closing { animation:none; } .trigger > span,.allResearch,.allResearch b,.stream h3,.stream h3 b { transition:none; } }
+/* Company uses the Resources disclosure, portal, focus and dismissal behavior. */
+.companyMenu { right: auto; width: min(390px, calc(100vw - 48px)); border: 1px solid var(--hairline); }
+.companyInner { padding: 12px 24px; }
+.companyLink { display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 86px; padding: 16px 0; color: var(--brand-navy-950); }
+.companyLink + .companyLink { border-top: 1px solid var(--hairline); }
+.companyLink strong { display: block; font-size: 17px; font-weight: 600; }
+.companyLink small { display: block; margin-top: 6px; color: var(--text-secondary); font-size: 13px; line-height: 1.5; }
+.companyLink b { color: var(--brand-navy-800); }
+.companyLink:hover strong, .companyLink[aria-current="page"] strong { text-decoration: underline; text-underline-offset: 5px; }
+.companyLink:focus-visible { outline: 2px solid var(--brand-navy-800); outline-offset: 4px; }
