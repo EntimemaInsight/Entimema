@@ -8,7 +8,7 @@ await mkdir(output, { recursive: true });
 const browser = await chromium.launch({ channel: 'msedge', headless: true });
 const reports = [];
 try {
-  for (const [width, height] of [[375,812],[768,1024],[1024,768],[1363,936],[1440,900],[1920,1080]]) {
+  for (const [width, height] of [[1440,900],[1366,768],[1024,768],[768,1024],[430,932],[390,844]]) {
     const page = await browser.newPage({ viewport: { width, height }, deviceScaleFactor: 2, reducedMotion: 'reduce' });
     assert.equal((await page.goto(`${base}/alexander-dimitrov`, { waitUntil: 'domcontentloaded', timeout: 120000 })).status(), 200);
     assert.equal(await page.locator('h1').count(), 1);
@@ -29,7 +29,7 @@ try {
     assert.equal(await page.locator('section[aria-labelledby="areas-heading"] h3').count(), 4);
     const links = page.locator('section[aria-labelledby="research-heading"] article a');
     assert.equal(await links.count(), 6);
-    if (width === 375) {
+    if (width === 390) {
       for (const href of await links.evaluateAll(nodes => nodes.map(node => node.getAttribute('href')))) {
         assert.equal((await page.request.get(`${base}${href}`)).status(), 200, href);
       }
@@ -46,13 +46,27 @@ try {
       const box = node.getBoundingClientRect();
       const grid = node.parentElement;
       const style = getComputedStyle(grid);
-      return { portrait: { width: box.width, height: box.height, top: box.top }, headingBottom: grid.querySelector('h1').getBoundingClientRect().bottom, gridWidth: grid.getBoundingClientRect().width, columns: style.gridTemplateColumns, gap: style.columnGap, zoom: getComputedStyle(document.documentElement).zoom, objectPosition: getComputedStyle(node.querySelector('img')).objectPosition, overflow: document.documentElement.scrollWidth > document.documentElement.clientWidth };
+      const heading = getComputedStyle(grid.querySelector('h1'));
+      const copy = grid.querySelector(':scope > div:last-child');
+      const body = getComputedStyle(copy);
+      const copyBox = copy.getBoundingClientRect();
+      return { h1Css: parseFloat(heading.fontSize), bodyCss: parseFloat(body.fontSize), bodyLineHeight: parseFloat(body.lineHeight), biography: {left: copyBox.left, top: copyBox.top, width: copyBox.width}, portraitRight: box.right, portraitBottom: box.bottom, portrait: { width: box.width, height: box.height, top: box.top }, headingBottom: grid.querySelector('h1').getBoundingClientRect().bottom, gridWidth: grid.getBoundingClientRect().width, columns: style.gridTemplateColumns, gap: style.columnGap, zoom: getComputedStyle(document.documentElement).zoom, objectPosition: getComputedStyle(node.querySelector('img')).objectPosition, overflow: document.documentElement.scrollWidth > document.documentElement.clientWidth };
     });
     assert.ok(Math.abs(metrics.portrait.width - metrics.portrait.height) < 1);
     assert.ok(metrics.headingBottom < metrics.portrait.top);
     assert.equal(metrics.overflow, false);
+    const previousH1 = Math.min(48, Math.max(36, width * 0.031));
+    assert.ok(Math.abs(metrics.h1Css / previousH1 - 0.91) < 0.001);
+    assert.equal(metrics.bodyCss, width <= 575 ? 17 : 18);
+    assert.ok(Math.abs(metrics.bodyLineHeight / metrics.bodyCss - 1.58) < 0.001);
+    if (width >= 1024) {
+      assert.ok(metrics.portraitRight < metrics.biography.left);
+      assert.ok(Math.abs(metrics.portrait.top - metrics.biography.top) < 1);
+    } else {
+      assert.ok(metrics.portraitBottom <= metrics.biography.top);
+    }
     assert.ok(metrics.portrait.width <= 400 && metrics.portrait.height <= 400, JSON.stringify(metrics));
-    assert.equal(await img.evaluate(node => getComputedStyle(node).objectFit), 'contain');
+    assert.equal(await img.evaluate(node => getComputedStyle(node).objectFit), 'cover');
     assert.equal(await img.evaluate(node => node.naturalWidth), 400);
     assert.equal(await img.evaluate(node => node.naturalHeight), 400);
     assert.equal(await img.evaluate(node => getComputedStyle(node).filter), 'none');

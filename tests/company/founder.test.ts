@@ -58,5 +58,5 @@ test("Natural portrait remains the unmodified 400px JPEG with a strict CSS cap",
   assert.equal(portraitRules.length, 1, "No breakpoint can override the source-size cap");
   assert.match(portraitRules[0], /max-width:\s*400px/);
   assert.match(portraitRules[0], /aspect-ratio:\s*1\s*\/\s*1/);
-  assert.match(css, /object-fit:\s*contain/);
+  assert.match(css, /object-fit:\s*cover/);
 });

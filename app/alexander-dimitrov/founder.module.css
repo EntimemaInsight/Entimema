@@ -3,10 +3,10 @@
 .introduction { display: grid; max-width: 1120px; margin-inline: auto; grid-template-columns: minmax(0, 400px) minmax(0, 1fr); grid-template-areas: ". heading" "portrait biography"; column-gap: clamp(48px, 8vw, 120px); row-gap: var(--space-4); }
 .heading { grid-area: heading; }
 .role { margin: 0 0 var(--space-2); font-size: var(--text-md); font-weight: 600; color: var(--text-secondary); }
-.heading h1 { margin: 0; font-size: clamp(36px, 3.1vw, 48px); line-height: 1.12; letter-spacing: -.035em; font-weight: 600; }
+.heading h1 { margin: 0; font-size: clamp(32.76px, 2.821vw, 43.68px); line-height: 1.12; letter-spacing: -.035em; font-weight: 600; }
 .portrait { grid-area: portrait; position: relative; width: 100%; aspect-ratio: 1 / 1; max-width: 400px; overflow: hidden; align-self: start; }
-.portrait img { object-fit: contain; object-position: 50% 50%; }
-.biography { grid-area: biography; font-size: 19px; line-height: 1.65; }
+.portrait img { object-fit: cover; object-position: 50% 50%; }
+.biography { grid-area: biography; font-size: 18px; line-height: 1.58; }
 .biography p { margin: 0 0 var(--space-3); }
 .biography p:last-child { margin-bottom: 0; }
 .thesis { margin-block: var(--space-section); border-left: 2px solid var(--brand-blue-200); padding-left: var(--space-4); max-width: 1060px; }
@@ -35,8 +35,7 @@
 }
 @media (max-width: 575px) {
   .page { padding-top: calc(var(--header-height) + var(--space-4)); }
-  .heading h1 { font-size: 36px; }
-  .biography { font-size: 18px; }
+  .biography { font-size: 17px; }
   .matrix, .articles { grid-template-columns: minmax(0, 1fr); }
   .thesis { padding-left: var(--space-3); }
 }
