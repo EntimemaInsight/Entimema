@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
+import ScrollExperience from "@/components/ScrollExperience";
+import CompanyCta from "@/components/company/CompanyCta";
+import DecisionConstellation from "@/components/company/DecisionConstellation";
+import company from "@/components/company/company.module.css";
 import { ORGANIZATION_ID, WEBSITE_ID, serializeJsonLd } from "@/lib/structured-data";
 import styles from "./institutional.module.css";
 import legacy from "./about.module.css";
@@ -39,9 +43,11 @@ const method = [
 export default function AboutPage() {
   return <>
     <Navbar active="about" />
-    <main id="about-main" className={`${legacy.page} editorial-surface ${styles.page}`}>
+    <main id="about-main" data-company="about" className={`${legacy.page} editorial-surface ${styles.page} ${company.page}`}>
+      <ScrollExperience company="about" />
       <div className="editorial-container">
-        <section className={`editorial-hero ${styles.hero}`} aria-labelledby="about-heading">
+        <section className={`editorial-hero ${styles.hero}`} aria-labelledby="about-heading" data-company-scene>
+          <DecisionConstellation variant="about" />
           <p className="editorial-eyebrow">Entimema / Decision Intelligence</p>
           <h1 id="about-heading" className={`editorial-display-lg editorial-reveal-text ${styles.heroTitle}`}>
             <span>Financial decisions are becoming more complex.</span>
@@ -173,7 +179,7 @@ export default function AboutPage() {
           <p className="editorial-eyebrow">From the thesis to the work</p>
           <h2 id="about-closing" className="editorial-display-md">Follow the reasoning. Explore the workflow.</h2>
           <div className={styles.actions}>
-            <div><Link className={`editorial-link--research ${styles.primaryAction}`} href="/workspace/financial-intelligence">Explore Financial Intelligence <span aria-hidden="true">→</span></Link><p className="editorial-caption">Secure workspace · sign-in required</p></div>
+            <div><CompanyCta className={`editorial-link--research ${styles.primaryAction}`} href="/workspace/financial-intelligence">Explore Financial Intelligence <span aria-hidden="true">→</span></CompanyCta><p className="editorial-caption">Secure workspace · sign-in required</p></div>
             <div className={styles.secondaryActions}>
               <Link className="editorial-link--arrow" href="/resources">Read Entimema Research <span aria-hidden="true">→</span></Link>
               <Link className={`editorial-link--quiet ${styles.tertiaryAction}`} href="/contact">Start a conversation <span aria-hidden="true">→</span></Link>

@@ -1,0 +1,85 @@
+/* All tokens and rules belong to Company main content, never the site shell. */
+.page {
+  --company-paper: #faf3e9;
+  --company-surface: #fdf8f1;
+  --company-indigo: #293f83;
+  --company-cta: var(--entimema-navy);
+  --company-ease: cubic-bezier(.22, 1, .36, 1);
+  --company-duration: 760ms;
+  --company-step: 90ms;
+  --company-distance: 20px;
+  --company-start-opacity: .55;
+  --entimema-paper: var(--company-paper);
+  --entimema-paper-warm: var(--company-surface);
+  --entimema-surface: var(--company-paper);
+  --entimema-surface-elevated: var(--company-surface);
+  background: var(--company-paper);
+}
+.page[data-company="labs"] { --company-duration: 820ms; --company-step: 100ms; }
+.page[data-company="founder"] { --company-duration: 640ms; --company-step: 70ms; --company-distance: 12px; --company-start-opacity: .75; }
+/* Disable the older page-load entrances, avoiding nested or double animations. */
+.page :global([class*="editorial-reveal-"]), .page :global(.editorial-reveal-metadata) > * { animation: none; }
+.page :global([data-company-scene]) { position: relative; isolation: isolate; }
+.constellation { position: absolute; z-index: -1; pointer-events: none; width: min(68%, 780px); height: auto; right: 0; top: 2.5rem; color: var(--company-indigo); opacity: .1; }
+.constellation[data-company-ornament="labs"] { width: min(88%, 920px); top: .5rem; opacity: .16; }
+.constellation[data-company-ornament="founder"] { width: min(32%, 240px); top: 1rem; opacity: .08; }
+.verified { fill: currentColor; }
+.unknown { stroke-dasharray: 2 3; }
+.constellation [data-unresolved] { stroke-dasharray: .018 .018; opacity: .6; }
+.reviewGate { stroke-width: 2; }
+.page .cta {
+  display: inline-flex; align-items: center; justify-content: space-between;
+  gap: 1.5rem; min-height: 52px; max-width: 100%; padding: .85rem 1.5rem;
+  border: 1px solid transparent; border-radius: 6px;
+  background: var(--company-cta); color: #fff;
+  font-family: var(--entimema-font-interface); font-size: 1rem; font-weight: 500;
+  line-height: 1.4; letter-spacing: 0; text-decoration: none;
+  transition: background-color 200ms ease, transform 200ms var(--company-ease);
+}
+.page .cta > span { flex-shrink: 0; transition: transform 200ms var(--company-ease); }
+.page :is(a, button):focus-visible { outline: 2px solid var(--entimema-focus); outline-offset: 5px; }
+.page .cta:focus-visible { outline: 3px solid var(--company-indigo); outline-offset: 4px; }
+.page :global(.editorial-link--arrow) > span,
+.page :global(.editorial-link--quiet) > span { display: inline-block; transition: transform 200ms var(--company-ease); }
+@media (hover: hover) {
+  .page .cta:hover { background: var(--company-indigo); color: #fff; transform: translateY(-2px); }
+  .page .cta:hover > span { transform: translateX(4px); }
+  .page :global(.editorial-link--arrow):hover > span,
+  .page :global(.editorial-link--quiet):hover > span { transform: translateX(3px); }
+  .page :global(.editorial-link--arrow):hover { text-decoration-thickness: 2px; }
+  .page :global([data-node]):hover { border-color: var(--company-indigo); }
+}
+.page .cta:active { transform: translateY(0); background: var(--entimema-navy-deep); }
+/* Visible by default, including after hydration/observer failure. Animation is
+   finite and only attached upon entry; it never owns a persistent hidden state. */
+@keyframes cascade { from { opacity: var(--company-start-opacity); transform: translateY(var(--company-distance)); } to { opacity: 1; transform: none; } }
+@keyframes portrait { from { opacity: .8; } to { opacity: 1; } }
+@keyframes trace { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes node { from { opacity: .3; } to { opacity: 1; } }
+@media (prefers-reduced-motion: no-preference) {
+  .page :global([data-company-entered]) { animation: cascade var(--company-duration) var(--company-ease) calc(var(--company-order, 0) * var(--company-step)) backwards; }
+  .page :global([data-founder-portrait][data-company-entered]) { animation-name: portrait; }
+  .page .constellation:global([data-company-entered]) { animation: none; }
+  .page .constellation:global([data-company-entered]) path[pathLength]:not([data-unresolved]) { stroke-dasharray: 1; animation: trace 1800ms var(--company-ease) calc(440ms + var(--edge-order) * 80ms) backwards; }
+  .page .constellation:global([data-company-entered]) .verified { animation: node 800ms ease calc(600ms + var(--edge-order) * 75ms) backwards; }
+  .page :global([data-company-entered]):focus-within { animation: none; }
+}
+@media (max-width: 47.999rem) {
+  .page { --company-distance: 12px; --company-step: 65ms; }
+  .constellation { width: 80%; top: 1rem; opacity: .07; }
+  .constellation[data-company-ornament="labs"] { width: 100%; opacity: .12; }
+  .page .cta { gap: 1rem; padding-inline: 1.125rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .page :global([data-company-entered]), .page .constellation * { animation: none !important; transform: none !important; }
+  .page :is(a, button), .page :is(a, button) > span { transition: none !important; transform: none !important; }
+}
+@media (forced-colors: active) { .page .cta { border-color: ButtonText; } .constellation { display: none; } }
+/* Fade the Labs drawing into the upper margin before it reaches reading copy. */
+.constellation[data-company-ornament="labs"] {
+  top: -3.5rem;
+  mask-image: linear-gradient(to bottom, #000 0%, #000 22%, transparent 88%);
+}
+@media (max-width: 47.999rem) {
+  .constellation[data-company-ornament="labs"] { top: -2rem; }
+}

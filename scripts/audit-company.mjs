@@ -47,7 +47,7 @@ try {
     assert.equal(await page.title(),'About Entimema | Controlled Financial Decision Systems');
     for(const sel of ['meta[name=description]','meta[property="og:description"]','meta[name="twitter:description"]'])assert.equal(await page.locator(sel).getAttribute('content'),desc);
     assert.equal(await page.locator('main img').count(),0);
-    assert.equal(await page.locator('main section').count(),7);
+    assert.equal(await page.locator('main section').count(),8);
    }
    const metrics=await page.evaluate(()=>{
     const lum=c=>c.map(v=>{v/=255;return v<=.04045?v/12.92:((v+.055)/1.055)**2.4;}).reduce((s,v,i)=>s+v*[.2126,.7152,.0722][i],0);

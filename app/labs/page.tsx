@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
+import ScrollExperience from "@/components/ScrollExperience";
+import CompanyCta from "@/components/company/CompanyCta";
+import DecisionConstellation from "@/components/company/DecisionConstellation";
+import company from "@/components/company/company.module.css";
 import { serializeJsonLd } from "@/lib/structured-data";
 import { resourceStreams, resourceTopics } from "../resources/resource-data";
 import { applicationSteps, domains, evidenceStates, process, selectedPublications, openQuestions, researchWork, labsTitle, labsDescription, labsUrl, labsSchema } from "./labs-data";
@@ -20,9 +24,11 @@ const publicationDate = (date: string) => new Intl.DateTimeFormat("en-GB", { day
 export default function LabsPage() {
   return <>
     <Navbar />
-    <main className={`editorial-surface ${styles.page}`}>
+    <main data-company="labs" className={`editorial-surface ${styles.page} ${company.page}`}>
+      <ScrollExperience company="labs" />
       <div className={`editorial-container editorial-container--editorial ${styles.container}`}>
-        <section className={styles.hero} aria-labelledby="labs-heading" id="remit">
+        <section className={styles.hero} aria-labelledby="labs-heading" id="remit" data-company-scene>
+          <DecisionConstellation variant="labs" />
           <div className={styles.heroCopy}>
             <p className="editorial-eyebrow">Entimema Labs <span className={styles.divider}>/</span> 01 — Research remit</p>
             <h1 className="editorial-display-lg" id="labs-heading">The questions behind financial decisions.</h1>
@@ -86,7 +92,7 @@ export default function LabsPage() {
 
         <section className={`${styles.section} ${styles.explore}`} aria-labelledby="explore-heading" id="explore">
           <header><p className="editorial-eyebrow">08 / Explore</p><h2 className="editorial-headline-lg" id="explore-heading">Inspect the method. Explore its application.</h2><p className="editorial-body-md">Entimema Labs is practitioner-led by Alexander Dimitrov.</p></header>
-          <div className={styles.exploreLinks}><Link className={`editorial-link--research ${styles.primaryLink}`} href="/resources">Explore Entimema Research <Arrow /></Link><div><Link className="editorial-link--arrow" href="/workspace/financial-intelligence">See Financial Intelligence in practice <Arrow /></Link><p className="editorial-caption">Secure workspace · sign-in required</p></div><Link className="editorial-link--arrow" href="/alexander-dimitrov">About the Founder <Arrow /></Link><Link className="editorial-link--quiet" href="/contact">Start a conversation <Arrow /></Link></div>
+          <div className={styles.exploreLinks}><CompanyCta className={`editorial-link--research ${styles.primaryLink}`} href="/resources">Explore Entimema Research <Arrow /></CompanyCta><div><Link className="editorial-link--arrow" href="/workspace/financial-intelligence">See Financial Intelligence in practice <Arrow /></Link><p className="editorial-caption">Secure workspace · sign-in required</p></div><Link className="editorial-link--arrow" href="/alexander-dimitrov">About the Founder <Arrow /></Link><Link className="editorial-link--quiet" href="/contact">Start a conversation <Arrow /></Link></div>
         </section>
       </div>
     </main>

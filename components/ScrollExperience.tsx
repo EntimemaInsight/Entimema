@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { observeCompanyMotion } from "./company/observe-company-motion";
 
 const REVEAL_SELECTOR = [
   ".hero__copy",
@@ -13,8 +14,14 @@ const REVEAL_SELECTOR = [
   ".trust-layer > *",
 ].join(",");
 
-export default function ScrollExperience() {
+export default function ScrollExperience({ company }: { company?: "about" | "founder" | "labs" } = {}) {
   useEffect(() => {
+    if (company) {
+      const root = document.querySelector<HTMLElement>(`main[data-company="${company}"]`);
+      // Enhancement failure must never propagate into React's page error boundary.
+      try { return root ? observeCompanyMotion(root, company) : undefined; }
+      catch { return; }
+    }
     const revealNodes = Array.from(document.querySelectorAll<HTMLElement>(REVEAL_SELECTOR));
     const isServiceDetail = window.location.pathname.startsWith("/services/");
 
@@ -87,6 +94,8 @@ export default function ScrollExperience() {
       });
     }
 
+    if (!revealNodes.length) return;
+
     revealNodes.forEach((node, index) => {
       node.classList.add("motion-reveal");
       if (!node.style.getPropertyValue("--motion-order")) {
@@ -115,7 +124,7 @@ export default function ScrollExperience() {
     return () => {
       observer.disconnect();
     };
-  }, []);
+  }, [company]);
 
   return null;
 }

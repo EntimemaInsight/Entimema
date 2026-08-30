@@ -48,7 +48,8 @@ try {
       if (resource.publishedAt) assert.equal(await article.locator('time').getAttribute('datetime'), resource.publishedAt);
     }
     assert.equal(await page.locator('main canvas, main iframe, main img').count(), 0);
-    assert.equal(await page.locator('main svg:not(#decision-architecture svg)').count(), 0);
+    assert.equal(await page.locator('main svg:not(#decision-architecture svg, [data-company-ornament])').count(), 0);
+    assert.equal(await page.locator('[data-company-ornament][aria-hidden="true"][focusable="false"]').count(), 1);
     const graph = await auditDecisionGraph(page, { width, output });
     const metrics = await page.locator('main').evaluate(main => {
       const lum = rgb => rgb.map(v => { v /= 255; return v <= .04045 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4; }).reduce((s, v, i) => s + v * [.2126, .7152, .0722][i], 0);

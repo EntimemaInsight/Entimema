@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
+import ScrollExperience from "@/components/ScrollExperience";
+import CompanyCta from "@/components/company/CompanyCta";
+import DecisionConstellation from "@/components/company/DecisionConstellation";
+import company from "@/components/company/company.module.css";
 import { GENERAL_CONSULTING_CTA } from "@/lib/cta-labels";
 import { serializeJsonLd, SITE_URL } from "@/lib/structured-data";
 import { getTopic } from "../resources/resource-data";
@@ -27,7 +31,8 @@ export default function FounderPage() {
   return (
     <>
       <Navbar />
-      <main className={`editorial-surface ${styles.page}`}>
+      <main data-company="founder" className={`editorial-surface ${styles.page} ${company.page}`}>
+      <ScrollExperience company="founder" />
         <div className={`editorial-container editorial-container--editorial ${styles.container}`}>
           <section className={styles.introduction} aria-labelledby="founder-name">
             <div className={styles.heading}>
@@ -92,7 +97,8 @@ export default function FounderPage() {
             </div>
           </section>
 
-          <section className={`editorial-section ${styles.section} ${styles.entimema}`} aria-labelledby="entimema-heading">
+          <section className={`editorial-section ${styles.section} ${styles.entimema}`} aria-labelledby="entimema-heading" data-company-scene>
+            <DecisionConstellation variant="founder" />
             <div className={`editorial-grid editorial-grid--desktop ${styles.sectionHeader}`}>
               <div className="editorial-col-5 editorial-stack">
                 <p className="editorial-eyebrow">04 / Why Entimema</p>
@@ -148,7 +154,7 @@ export default function FounderPage() {
               <p className={`editorial-col-7 editorial-body-md ${styles.sectionIntro}`}>{productBridge}</p>
             </div>
             <div className={styles.actions}>
-              <div><Link className={`editorial-link--research ${styles.primaryAction}`} href="/workspace/financial-intelligence">Explore Financial Intelligence <span aria-hidden="true">→</span></Link><p className="editorial-caption">Secure workspace · sign-in required</p></div>
+              <div><CompanyCta className={`editorial-link--research ${styles.primaryAction}`} href="/workspace/financial-intelligence">Explore Financial Intelligence <span aria-hidden="true">→</span></CompanyCta><p className="editorial-caption">Secure workspace · sign-in required</p></div>
               <div className={styles.secondaryActions}>
                 <Link className="editorial-link--arrow" href="/resources">Read Entimema Research <span aria-hidden="true">→</span></Link>
                 <Link className={`editorial-link--quiet ${styles.tertiaryAction}`} href="/contact">{GENERAL_CONSULTING_CTA} <span aria-hidden="true">→</span></Link>
