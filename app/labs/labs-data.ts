@@ -1,4 +1,5 @@
 import { ORGANIZATION_ID, SITE_URL, WEBSITE_ID } from "../../lib/structured-data";
+import { publishedResources } from "../resources/resource-data";
 
 export const labsTitle = "Entimema Labs | Financial Intelligence, Credit Risk and Decision Systems";
 export const labsDescription = "Entimema Labs develops practitioner research, controlled financial workflows and traceable decision systems across financial intelligence and credit risk.";
@@ -8,22 +9,80 @@ export const labsSchema = {
   url: labsUrl, name: labsTitle, description: labsDescription,
   isPartOf: { "@id": WEBSITE_ID }, about: { "@id": ORGANIZATION_ID },
 };
+
+// Resolve canonical records without copying or changing shared publication metadata.
+export function researchWork(slug: string) {
+  const resource = publishedResources.find((item) => item.slug === slug);
+  if (!resource) throw new Error(`Labs references an unpublished or missing resource: ${slug}`);
+  return resource;
+}
+export const evidenceStates = [
+  { title: "Open question", description: "An unresolved problem to investigate." },
+  { title: "Methodological position", description: "A proposed way to reason, measure or test." },
+  { title: "Published research", description: "Work available for inspection and challenge." },
+  { title: "Implemented capability", description: "A method put to work within a defined scope." },
+] as const;
 export const domains = [
-  { title: "Financial Intelligence", description: "We research how heterogeneous financial information can be interpreted, harmonised, reconciled and transformed into traceable management insight.", points: ["Financial data structures and canonical schemas", "Management reporting and decision models", "Planning, forecasting and performance logic", "Controls, reconciliation and analytical traceability"] },
-  { title: "Credit Risk", description: "We develop practitioner-grade frameworks for measuring, monitoring and operationalising credit risk across the decision lifecycle.", points: ["Risk measurement and portfolio monitoring", "Scorecards, probability of default and calibration", "Decision strategies and early-warning systems", "Model governance, validation and explainability"] },
-  { title: "Decision Systems", description: "We examine how model intelligence, deterministic controls and human review can be composed into reliable financial workflows.", points: ["Evidence and decision lineage", "Confidence, exceptions and escalation", "Controlled AI-assisted workflows", "Human judgement in high-stakes decisions"] },
+  {
+    id: "financial-intelligence", title: "Financial Intelligence",
+    question: "How can heterogeneous financial information become an analytical model without losing accounting meaning?",
+    investigations: [
+      "Canonical schemas, data normalisation and the meaning of periods, currencies and units.",
+      "Reporting, planning and forecasting logic connected to the decisions they support.",
+      "Reconciliation, evidence lineage and the point at which interpretation needs human review.",
+    ],
+    boundary: "The research scope is wider than the current Income Statement workflow. Reporting, planning and forecasting topics are not all implemented product capabilities.",
+    work: ["financial-data-normalisation", "financial-data-validation-control-layer"],
+  },
+  {
+    id: "credit-risk", title: "Credit Risk",
+    question: "How should predictive risk models connect to decision strategy, monitoring and governance?",
+    investigations: [
+      "Scorecards, probability of default and calibration: what a risk estimate does and does not establish.",
+      "Portfolio monitoring, decision strategies and early-warning signals across the credit lifecycle.",
+      "Validation and explainability in relation to the decision a model is intended to support.",
+    ],
+    boundary: "This is methodological research. The publications do not imply that Entimema operates a production lending platform or a live credit-decision engine.",
+    work: ["credit-decision-engine-architecture", "credit-scorecard-development-explainable-risk-ranking"],
+  },
+  {
+    id: "decision-systems", title: "Decision Systems",
+    question: "How can model interpretation, deterministic controls and human judgement form one auditable decision system?",
+    investigations: [
+      "The relationships between source evidence, claims, assumptions and unresolved unknowns.",
+      "Confidence, materiality, exceptions and the conditions for escalation or abstention.",
+      "How rules and human review constrain AI-assisted workflows while preserving decision lineage.",
+    ],
+    boundary: "An architecture defines responsibilities; it does not, by itself, demonstrate accuracy, safe autonomy or empirical validation.",
+    work: ["ai-financial-analysis-models-rules-controls", "confidence-human-review-ai-finance"],
+  },
 ] as const;
 export const process = [
-  { title: "Observe", description: "Start with a recurring financial or risk decision that fails under real operating conditions." },
-  { title: "Formalise", description: "Separate evidence, assumptions, methodology, calculations, uncertainty and judgement." },
-  { title: "Test", description: "Challenge the framework through analytical examples, failure modes and control requirements." },
-  { title: "Operationalise", description: "Translate the validated logic into a workflow, analytical system or decision-support product." },
-  { title: "Improve", description: "Use monitored outcomes and validated human corrections to refine the system." },
+  { title: "Observe", description: "Identify a recurring practitioner problem and the operating conditions in which it appears." },
+  { title: "Formalise", description: "Separate evidence, definitions, assumptions, calculations and judgement so each can be examined." },
+  { title: "Test", description: "Challenge methodology, calculations and controls through analytical examples and explicit failure modes." },
+  { title: "Operationalise", description: "Translate elements that meet their stated checks into workflows, rules or analytical systems, preserving the limits of those checks." },
+  { title: "Improve", description: "Use observed exceptions and validated corrections to identify where a method or implementation needs refinement." },
 ] as const;
-export const principles = [
-  { title: "Evidence before inference", description: "Conclusions must remain connected to identifiable evidence, while assumptions and unknowns stay visible." },
-  { title: "Models interpret; rules control", description: "Model intelligence supports semantic interpretation and contextual reasoning. Deterministic logic owns arithmetic, reconciliations and fixed controls." },
-  { title: "Uncertainty must be surfaced", description: "Ambiguity should trigger confidence assessment, clarification or human review—not an invented answer." },
-  { title: "Traceability is part of the product", description: "Every material output should preserve the path from source evidence through transformation to decision." },
+export const applicationSteps = [
+  { title: "Research question", description: "What must be established before an extracted financial value can support analysis?", slug: "ai-financial-analysis-models-rules-controls", linkLabel: "Interpretation and control" },
+  { title: "Methodology", description: "Preserve accounting meaning through canonical concepts, periods, currency and scale. Keep interpretation separate from proof of arithmetic.", slug: "financial-data-normalisation", linkLabel: "Financial data normalisation" },
+  { title: "Implementation", description: "Income Statement v1 connects extracted values and canonical mappings to source and evidence references that can be inspected.", slug: "financial-data-lineage", linkLabel: "Evidence lineage" },
+  { title: "Control", description: "Deterministic reconciliation checks financial relationships. Readiness gates identify failed controls, missing evidence and unresolved material issues.", slug: "financial-data-validation-control-layer", linkLabel: "Validation controls" },
+  { title: "Human review", description: "Review tasks expose ambiguity and proposed mappings. Supported review decisions are recorded and the affected checks are recalculated.", slug: "confidence-human-review-ai-finance", linkLabel: "Confidence and review" },
 ] as const;
-export const outputs = ["Practitioner research and methodological frameworks", "Financial and credit-risk decision architectures", "Controlled analytical workflows", "Validation, monitoring and governance methods", "Reusable components for Entimema products and client work"] as const;
+const selectedWork = [
+  { slug: "ai-financial-analysis-models-rules-controls", reason: "Defines the responsibilities of interpretation, arithmetic and professional judgement." },
+  { slug: "financial-data-lineage", reason: "Examines the path from a reported value back to its evidence and transformations." },
+  { slug: "confidence-human-review-ai-finance", reason: "Asks when uncertainty should become a review decision rather than an automated answer." },
+  { slug: "financial-data-validation-control-layer", reason: "Makes the checks between extraction and analysis explicit." },
+  { slug: "credit-decision-engine-architecture", reason: "Connects risk estimates to policy, affordability and the responsibilities of a lending decision." },
+  { slug: "credit-scorecard-development-explainable-risk-ranking", reason: "Examines how borrower information becomes an explainable risk ranking, before it becomes a decision." },
+] as const;
+export const selectedPublications = selectedWork.map(({ slug, reason }) => ({ resource: researchWork(slug), reason }));
+export const openQuestions = [
+  "How much ambiguity can be resolved automatically before a financial interpretation requires human review?",
+  "How should confidence interact with materiality when a small error can change a consequential decision?",
+  "How should decision lineage remain inspectable as source data, definitions and models change?",
+  "How can financial and risk workflows preserve professional judgement while making routine execution repeatable?",
+] as const;
