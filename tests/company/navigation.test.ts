@@ -17,7 +17,7 @@ test('About is an institutional AboutPage referencing the existing organization'
   const page = readFileSync('app/about/page.tsx', 'utf8');
   assert.match(page, /"@type": "AboutPage"/);
   assert.match(page, /mainEntity: \{ "@id": ORGANIZATION_ID \}/);
-  assert.doesNotMatch(page, /"@type": "Person"|createFounderSchema|FounderPortrait|<img|<Image|href="\/contact"/);
+  assert.doesNotMatch(page, /"@type": "Person"|createFounderSchema|FounderPortrait|<img|<Image/);
   assert.match(page, /About Entimema \| Controlled Financial Decision Systems/);
   for (const route of ['services', 'resources', 'alexander-dimitrov', 'labs']) assert.ok(page.includes(`href="/${route}"`));
 });

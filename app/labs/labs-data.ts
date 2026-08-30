@@ -4,11 +4,6 @@ import { publishedResources } from "../resources/resource-data";
 export const labsTitle = "Entimema Labs | Financial Intelligence, Credit Risk and Decision Systems";
 export const labsDescription = "Entimema Labs develops practitioner research, controlled financial workflows and traceable decision systems across financial intelligence and credit risk.";
 export const labsUrl = `${SITE_URL}/labs`;
-export const labsSchema = {
-  "@context": "https://schema.org", "@type": "WebPage", "@id": `${labsUrl}#webpage`,
-  url: labsUrl, name: labsTitle, description: labsDescription,
-  isPartOf: { "@id": WEBSITE_ID }, about: { "@id": ORGANIZATION_ID },
-};
 
 // Resolve canonical records without copying or changing shared publication metadata.
 export function researchWork(slug: string) {
@@ -86,3 +81,24 @@ export const openQuestions = [
   "How should decision lineage remain inspectable as source data, definitions and models change?",
   "How can financial and risk workflows preserve professional judgement while making routine execution repeatable?",
 ] as const;
+
+// Describe only the visible selected-publications index, using existing article IDs.
+// Labs remains a page published by Entimema, not an independent organisation.
+export const labsSchema = {
+  "@context": "https://schema.org", "@type": "WebPage", "@id": `${labsUrl}#webpage`,
+  url: labsUrl, name: labsTitle, description: labsDescription,
+  isPartOf: { "@id": WEBSITE_ID }, about: { "@id": ORGANIZATION_ID },
+  publisher: { "@id": ORGANIZATION_ID },
+  mentions: {
+    "@type": "ItemList", "@id": `${labsUrl}#selected-work`,
+    name: "Selected methodological work",
+    numberOfItems: selectedPublications.length,
+    itemListElement: selectedPublications.map(({ resource }, index) => ({
+      "@type": "ListItem", position: index + 1,
+      item: {
+        "@type": "Article", "@id": `${SITE_URL}${resource.canonicalPath}#article`,
+        url: `${SITE_URL}${resource.canonicalPath}`, headline: resource.headline,
+      },
+    })),
+  },
+};
