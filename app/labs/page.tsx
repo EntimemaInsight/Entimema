@@ -5,6 +5,7 @@ import { serializeJsonLd } from "@/lib/structured-data";
 import { resourceStreams, resourceTopics } from "../resources/resource-data";
 import { applicationSteps, domains, evidenceStates, process, selectedPublications, openQuestions, researchWork, labsTitle, labsDescription, labsUrl, labsSchema } from "./labs-data";
 import styles from "./labs.module.css";
+import DecisionGraph from "./DecisionGraph";
 
 export const metadata: Metadata = {
   title: { absolute: labsTitle }, description: labsDescription,
@@ -60,9 +61,7 @@ export default function LabsPage() {
             <p className="editorial-technical-label">Methodological position</p><p className="editorial-body-md">Models interpret; rules control. Evidence, assumptions and unknowns must remain distinguishable, with consequential ambiguity available for human review.</p>
             <p className="editorial-caption">Exceptions and corrections can expose a gap. They do not automatically constitute empirical research learning, nor does every correction train or improve an AI model.</p>
           </div>
-          {/* Sprint 2C.2: a semantic Decision Graph belongs here, after the method and its limits.
-              Define evidence/claim/unknown relationships before adding a figure or interaction.
-              No empty visual placeholder or decorative network is rendered in this sprint. */}
+          <DecisionGraph />
         </section>
 
         <section className={`${styles.section} ${styles.application}`} aria-labelledby="application-heading" id="applied-system">

@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { auditDecisionGraph, auditStaticGraph } from './audit-labs-graph.mjs';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { selectedPublications } from '../app/labs/labs-data.ts';
 
@@ -46,11 +47,13 @@ try {
       assert.ok((await article.innerText()).includes(resource.readingMinutes + ' min read'));
       if (resource.publishedAt) assert.equal(await article.locator('time').getAttribute('datetime'), resource.publishedAt);
     }
-    assert.equal(await page.locator('main canvas, main iframe, main img, main svg').count(), 0);
+    assert.equal(await page.locator('main canvas, main iframe, main img').count(), 0);
+    assert.equal(await page.locator('main svg:not(#decision-architecture svg)').count(), 0);
+    const graph = await auditDecisionGraph(page, { width, output });
     const metrics = await page.locator('main').evaluate(main => {
       const lum = rgb => rgb.map(v => { v /= 255; return v <= .04045 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4; }).reduce((s, v, i) => s + v * [.2126, .7152, .0722][i], 0);
       const rgb = color => (color.match(/[\d.]+/g) || []).slice(0, 3).map(Number);
-      const contrast = [...main.querySelectorAll('p,h1,h2,h3,li,a,dt,dd,time')].map(node => {
+      const contrast = [...main.querySelectorAll('p,h1,h2,h3,li,a,dt,dd,time,button,#decision-architecture span')].map(node => {
         let parent = node, bg = 'rgba(0, 0, 0, 0)';
         while (parent && bg === 'rgba(0, 0, 0, 0)') { bg = getComputedStyle(parent).backgroundColor; parent = parent.parentElement; }
         const a = lum(rgb(getComputedStyle(node).color)), b = lum(rgb(bg));
@@ -67,7 +70,8 @@ try {
     assert.equal(metrics.headingSkips, false);
     assert.equal(metrics.animatedElements, 0);
     assert.deepEqual(errors, []);
-    const links = page.locator('main a');
+    const links = page.locator('main a, main button');
+    await page.keyboard.press('Tab');
     await links.first().focus();
     for (let i = 0; i < await links.count(); i++) {
       const link = links.nth(i);
@@ -83,11 +87,12 @@ try {
     await page.screenshot({ path: output + '/' + width + '-viewport.png' });
     await page.screenshot({ path: output + '/' + width + '-full.png', fullPage: true });
     for (const id of expectedSections) await page.locator('#' + id).screenshot({ path: output + '/' + width + '-' + id + '.png', style: '.site-header, .site-header * { visibility: hidden !important; }' });
-    reports.push({ width, status: 200, ...metrics, errors });
+    reports.push({ width, status: 200, ...metrics, graph, errors });
     await page.close();
   }
   const noJs = await browser.newPage({ javaScriptEnabled: false, viewport: { width: 375, height: 900 } });
   await noJs.goto(base + '/labs');
+  await auditStaticGraph(noJs);
   const staticCopy = normalize(await noJs.locator('main').innerText());
   for (const text of approved) assert.ok(staticCopy.includes(normalize(text)), 'Server HTML missing: ' + text);
   const hrefs = [...new Set(await noJs.locator('main a').evaluateAll(nodes => nodes.map(n => n.getAttribute('href'))))];
