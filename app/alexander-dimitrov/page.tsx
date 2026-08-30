@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "profile", title, description, url: founderUrl,
     firstName: "Alexander", lastName: "Dimitrov",
-    images: [{ url: `${SITE_URL}${portraitPath}`, width: 1024, height: 1536, alt: portraitAlt }],
+    images: [{ url: `${SITE_URL}${portraitPath}`, width: 400, height: 400, alt: portraitAlt }],
   },
   twitter: { card: "summary", title, description, images: [`${SITE_URL}${portraitPath}`] },
 };
@@ -37,10 +37,10 @@ export default function FounderPage() {
               <h1 id="founder-name">{founderName}</h1>
             </div>
             <div className={styles.portrait} data-founder-portrait>
-              {/* Deliver the pre-encoded 1024px WebP directly: no second lossy
-                  pass or optimizer request wider than the definitive source. */}
+              {/* Preserve the original 400px JPEG bytes: no second lossy pass,
+                  optimizer enlargement, or artificial enhancement. */}
               <Image src={portraitPath} alt={portraitAlt} fill unoptimized
-                sizes="(max-width: 575px) calc(100vw - 40px), (max-width: 1023px) 480px, (max-width: 1279px) 42vw, 536px"
+                sizes="(max-width: 440px) calc(100vw - 40px), (min-width: 1280px) 360px, 400px"
                 loading="eager" fetchPriority="high" />
             </div>
             <div className={styles.biography}>{biography.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</div>

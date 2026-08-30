@@ -1,11 +1,11 @@
 .page { background: #fdfcf9; color: var(--text-primary); padding-block: calc(var(--header-height) + var(--space-6)) var(--space-8); }
 .container { max-width: 1333.333px; }
-.introduction { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-areas: ". heading" "portrait biography"; column-gap: clamp(48px, 10.5vw, 142.222px); row-gap: var(--space-4); }
+.introduction { display: grid; max-width: 1120px; margin-inline: auto; grid-template-columns: minmax(0, 400px) minmax(0, 1fr); grid-template-areas: ". heading" "portrait biography"; column-gap: clamp(48px, 8vw, 120px); row-gap: var(--space-4); }
 .heading { grid-area: heading; }
 .role { margin: 0 0 var(--space-2); font-size: var(--text-md); font-weight: 600; color: var(--text-secondary); }
 .heading h1 { margin: 0; font-size: clamp(36px, 3.1vw, 48px); line-height: 1.12; letter-spacing: -.035em; font-weight: 600; }
-.portrait { grid-area: portrait; position: relative; width: 100%; aspect-ratio: 1 / 1; max-width: 595.556px; overflow: hidden; align-self: start; }
-.portrait img { object-fit: cover; object-position: 50% 33%; }
+.portrait { grid-area: portrait; position: relative; width: 100%; aspect-ratio: 1 / 1; max-width: 400px; overflow: hidden; align-self: start; }
+.portrait img { object-fit: contain; object-position: 50% 50%; }
 .biography { grid-area: biography; font-size: 19px; line-height: 1.65; }
 .biography p { margin: 0 0 var(--space-3); }
 .biography p:last-child { margin-bottom: 0; }
@@ -25,12 +25,10 @@
 .cta > a { flex-shrink: 0; }
 .page a:focus-visible { outline: 3px solid var(--brand-navy-800); outline-offset: 5px; }
 @media (max-width: 1279px) {
-  .portrait { max-width: 536px; }
   .introduction { column-gap: var(--space-5); }
 }
 @media (max-width: 1023px) {
   .introduction { grid-template-columns: minmax(0, 1fr); grid-template-areas: "heading" "portrait" "biography"; row-gap: var(--space-4); }
-  .portrait { max-width: 480px; }
   .biography { max-width: 65ch; }
   .articles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .sectionHeading, .cta { flex-direction: column; align-items: flex-start; }
@@ -42,4 +40,3 @@
   .matrix, .articles { grid-template-columns: minmax(0, 1fr); }
   .thesis { padding-left: var(--space-3); }
 }
-

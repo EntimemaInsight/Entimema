@@ -1,0 +1,34 @@
+{
+  "biography": [
+    "Alexander Dimitrov is the Founder of Entimema, a financial and decision-intelligence company building controlled systems for finance, risk and high-stakes business decisions.",
+    "His work is shaped by experience across financial management, controlling, accounting, SAP and ERP environments, credit risk, quantitative analysis and automation. This combination has given him a practical view of a problem that organisations repeatedly encounter: data, models and systems may all exist, yet still fail to produce a decision that people can understand, control and improve.",
+    "At Entimema, Alexander leads the development of financial methodologies, decision workflows, practitioner research and AI-assisted products. His focus is on translating specialist knowledge into traceable systems in which model intelligence, deterministic controls and human judgement each have a clearly defined role."
+  ],
+  "thesis": "The best model is not the most complex one. It is the one that can operate inside a real organisation—across its data, systems, constraints and decision responsibilities.",
+  "areas": [
+    {
+      "title": "Financial Management",
+      "description": "Management reporting, planning, controlling, cost and margin architecture."
+    },
+    {
+      "title": "Credit Risk & Decision Science",
+      "description": "Credit-risk methodology, quantitative analysis, decision strategies and model governance."
+    },
+    {
+      "title": "Systems & Data",
+      "description": "SAP, ERP environments, financial data structures, reconciliation and evidence lineage."
+    },
+    {
+      "title": "AI & Controlled Workflows",
+      "description": "AI-assisted financial processes combining model interpretation, deterministic controls and human review."
+    }
+  ],
+  "articles": [
+    "/resources/ai-financial-analysis-models-rules-controls",
+    "/resources/financial-data-lineage",
+    "/resources/management-reporting-for-cfo-decisions",
+    "/resources/credit-scorecard-development-explainable-risk-ranking",
+    "/resources/traceable-financial-analysis-workflow",
+    "/resources/beyond-spreadsheet-automation"
+  ]
+}

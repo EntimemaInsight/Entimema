@@ -19,9 +19,11 @@ try {
     const portrait = page.locator('[data-founder-portrait]');
     const img = portrait.locator('img');
     assert.equal(await img.getAttribute('alt'), 'Alexander Dimitrov, Founder of Entimema');
-    assert.equal(await img.getAttribute('src'), '/alexander-dimitrov-founder.webp');
+    assert.equal(await img.getAttribute('src'), '/alexander-dimitrov-founder-natural.jpg');
     assert.equal(await img.getAttribute('fetchpriority'), 'high');
+    const beforeImage = await portrait.boundingBox();
     await img.evaluate(node => node.decode());
+    assert.deepEqual(await portrait.boundingBox(), beforeImage, "Portrait decode must not shift layout");
     assert.equal(await page.locator('main a[href*="linkedin"]').count(), 0);
     assert.equal(await page.locator('[aria-label="Founder thesis"]').innerText(), 'The best model is not the most complex one. It is the one that can operate inside a real organisation—across its data, systems, constraints and decision responsibilities.');
     assert.equal(await page.locator('section[aria-labelledby="areas-heading"] h3').count(), 4);
@@ -32,7 +34,7 @@ try {
         assert.equal((await page.request.get(`${base}${href}`)).status(), 200, href);
       }
     }
-    assert.equal(await page.locator('meta[property="og:image"]').getAttribute('content'), 'https://www.entimema.com/alexander-dimitrov-founder.webp');
+    assert.equal(await page.locator('meta[property="og:image"]').getAttribute('content'), 'https://www.entimema.com/alexander-dimitrov-founder-natural.jpg');
     assert.equal(await intro.locator('a, button, svg').count(), 0);
     assert.equal(await page.title(), 'Alexander Dimitrov | Founder of Entimema');
     assert.equal(await page.locator('link[rel="canonical"]').getAttribute('href'), 'https://www.entimema.com/alexander-dimitrov');
@@ -49,7 +51,13 @@ try {
     assert.ok(Math.abs(metrics.portrait.width - metrics.portrait.height) < 1);
     assert.ok(metrics.headingBottom < metrics.portrait.top);
     assert.equal(metrics.overflow, false);
-    if (width >= 1280) assert.ok(metrics.portrait.width >= 500 && metrics.portrait.width <= 537, JSON.stringify(metrics));
+    assert.ok(metrics.portrait.width <= 400 && metrics.portrait.height <= 400, JSON.stringify(metrics));
+    assert.equal(await img.evaluate(node => getComputedStyle(node).objectFit), 'contain');
+    assert.equal(await img.evaluate(node => node.naturalWidth), 400);
+    assert.equal(await img.evaluate(node => node.naturalHeight), 400);
+    assert.equal(await img.evaluate(node => getComputedStyle(node).filter), 'none');
+    assert.ok(await img.evaluate(node => parseFloat(getComputedStyle(node).width) <= 400));
+    assert.equal(metrics.objectPosition, '50% 50%');
     await links.first().focus();
     assert.equal(await links.first().evaluate(node => node === document.activeElement), true);
     await page.locator('main article img').evaluateAll(async images => {
@@ -64,8 +72,3 @@ try {
   await writeFile(`${output}/metrics.json`, JSON.stringify(reports, null, 2));
   console.log(JSON.stringify(reports, null, 2));
 } finally { await browser.close(); }
-
-
-
-
-

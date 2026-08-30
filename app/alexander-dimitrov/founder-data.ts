@@ -2,7 +2,7 @@ import { publishedResources } from "../resources/resource-data";
 import { FOUNDER_ID, ORGANIZATION_ID, SITE_URL } from "@/lib/structured-data";
 
 export const founderName = "Alexander Dimitrov";
-export const portraitPath = "/alexander-dimitrov-founder.webp";
+export const portraitPath = "/alexander-dimitrov-founder-natural.jpg";
 export const portraitAlt = "Alexander Dimitrov, Founder of Entimema";
 export const founderUrl = `${SITE_URL}/alexander-dimitrov`;
 export const biography = [
@@ -49,4 +49,3 @@ export const personSchema = {
   sameAs: ["https://www.linkedin.com/in/alexander-dimitrov-entimema/"],
   knowsAbout: areas.map(({ title }) => title),
 };
-
