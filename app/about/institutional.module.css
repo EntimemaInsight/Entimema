@@ -6,11 +6,11 @@
 .page :global(.editorial-stack) > * + * { margin-top: var(--entimema-space-component); }
 .page :global(.editorial-stack) > :global(.editorial-eyebrow) + :is(h2, h3) { margin-top: calc(var(--entimema-space-component) * 1.25); }
 .hero { padding-bottom: 0; }
-.heroTitle { max-width: 30ch; margin-top: var(--entimema-space-section); font-size: var(--entimema-display-xl); line-height: 1.06; letter-spacing: -.035em; }
+.heroTitle { max-width: 30ch; margin-top: var(--entimema-space-section); font-size: calc(var(--entimema-display-xl) * .94); line-height: 1.06; letter-spacing: -.035em; }
 .heroTitle > span { display: block; max-width: 27ch; }
 .heroTitle > span + span { margin-top: .3em; max-width: 30ch; }
 .heroContext { margin-top: var(--entimema-space-section); align-items: start; }
-.heroContext > :global(.editorial-standfirst-md) { max-width: 53ch; font-size: var(--entimema-standfirst-lg); line-height: 1.6; }
+.page .heroContext > :global(.editorial-standfirst-md) { max-width: 53ch; font-size: calc(var(--entimema-standfirst-lg) * .91); line-height: 1.6; }
 .positioning { color: var(--entimema-ink-muted); line-height: 1.9; padding-top: .35rem; }
 .chapterLinks { margin-block: var(--entimema-space-section) var(--entimema-space-component); gap: .5rem 2rem; }
 .chapterLinks a { min-height: 44px; display: inline-flex; align-items: center; }
@@ -58,7 +58,7 @@
 .labsBridge > a { margin-top: var(--entimema-space-section) !important; }
 .practitionerBridge { padding-top: var(--entimema-space-section); }
 .closing { border-top: 1px solid var(--entimema-rule-strong); }
-.closing h2 { max-width: 24ch; font-size: var(--entimema-display-lg); }
+.closing h2 { max-width: 24ch; font-size: calc(var(--entimema-display-lg) * .82); }
 .actions { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); align-items: start; gap: var(--entimema-grid-gap); border-top: 1px solid var(--entimema-rule-strong); padding-top: var(--entimema-space-component); }
 .page .closing .actions { margin-top: var(--entimema-space-section); }
 .actions a { min-height: 44px; align-items: center; }
@@ -66,7 +66,22 @@
 .actions :global(.editorial-caption) { margin-top: var(--entimema-space-micro); }
 .secondaryActions { display: grid; justify-items: start; gap: var(--entimema-space-component); }
 .tertiaryAction { color: var(--entimema-ink-muted); font-size: var(--entimema-metadata); }
+/* Scale only About headings and introductions; shared tokens and body sizes stay intact. */
+.page h2:global(.editorial-headline-xl) { font-size: calc(var(--entimema-headline-xl) * .82); }
+.page :is(.thesis, .research) h2 { font-size: calc(var(--entimema-display-md) * .82); }
+.page h2:global(.editorial-headline-lg) { font-size: calc(var(--entimema-headline-lg) * .82); }
+.page p:global(.editorial-standfirst-md) { font-size: calc(var(--entimema-standfirst-md) * .91); }
+.page :global(.editorial-stack) > :global(.editorial-eyebrow) + h2 { margin-top: var(--entimema-space-component); }
+.page :global(.editorial-stack) > h2 + p { margin-top: calc(var(--entimema-space-component) * .85); }
+.section, .thesis, .closing { padding-block: calc(var(--entimema-space-major-section) * .9); }
 @media (max-width: 63.999rem) {
+  .heroTitle { font-size: calc(var(--entimema-display-xl) * .96); }
+  .page h2:global(.editorial-headline-xl) { font-size: calc(var(--entimema-headline-xl) * .9); }
+  .page :is(.thesis, .research) h2 { font-size: calc(var(--entimema-display-md) * .9); }
+  .page h2:global(.editorial-headline-lg) { font-size: calc(var(--entimema-headline-lg) * .9); }
+  .closing h2 { font-size: calc(var(--entimema-display-lg) * .9); }
+  .page p:global(.editorial-standfirst-md) { font-size: max(1.125rem, calc(var(--entimema-standfirst-md) * .96)); }
+  .page .heroContext > :global(.editorial-standfirst-md) { font-size: calc(var(--entimema-standfirst-lg) * .96); }
   .heroTitle { max-width: 29ch; }
   .disciplines { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .disciplines > div:nth-child(odd) { border-left: 0; padding-left: 0; }
@@ -76,7 +91,13 @@
   .practitionerBridge { padding-top: var(--entimema-space-component); }
 }
 @media (max-width: 47.999rem) {
-  .heroTitle { margin-top: calc(var(--entimema-space-component) * 1.5); font-size: var(--entimema-display-lg); line-height: 1.1; letter-spacing: -.025em; }
+  .page h2:global(.editorial-headline-xl) { font-size: 1.75rem; }
+  .page :is(.thesis, .research) h2 { font-size: 1.875rem; }
+  .page h2:global(.editorial-headline-lg) { font-size: var(--entimema-headline-lg); }
+  .closing h2 { font-size: 2rem; }
+  .page p:global(.editorial-standfirst-md),
+  .page .heroContext > :global(.editorial-standfirst-md) { font-size: var(--entimema-standfirst-md); }
+  .heroTitle { margin-top: calc(var(--entimema-space-component) * 1.5); font-size: 2.25rem; line-height: 1.1; letter-spacing: -.025em; }
   .heroTitle > span + span { margin-top: .45em; }
   .heroContext { gap: var(--entimema-space-component); }
   .heroContext > :global(.editorial-standfirst-md) { font-size: var(--entimema-standfirst-md); }
