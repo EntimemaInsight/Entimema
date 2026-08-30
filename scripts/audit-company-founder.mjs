@@ -25,7 +25,15 @@ try {
     assert.equal(await intro.locator('.editorial-eyebrow').textContent(), 'Founder, Entimema');
     assert.equal(await intro.locator('.editorial-standfirst-md').textContent(), approved.profileIntro);
     assert.deepEqual(await intro.locator('.editorial-body-md p').allTextContents(), approved.biography);
-    assert.equal(await intro.locator('a, button, svg').count(), 0);
+    assert.equal(await intro.locator('a').count(), 1);
+    assert.equal(await intro.locator('button').count(), 0);
+    const badge = intro.locator('[data-founder-portrait] [data-founder-linkedin]');
+    assert.equal(await badge.getAttribute('aria-label'), 'View Alexander Dimitrov on LinkedIn');
+    assert.equal(await badge.getAttribute('href'), 'https://www.linkedin.com/in/alexander-dimitrov-entimema/');
+    assert.equal(await badge.getAttribute('target'), '_blank');
+    assert.equal(await badge.getAttribute('rel'), 'noopener noreferrer');
+    assert.equal(await badge.locator('svg').getAttribute('aria-hidden'), 'true');
+    assert.equal(await badge.locator('svg').getAttribute('focusable'), 'false');
     const portrait = page.locator('[data-founder-portrait]');
     const img = portrait.locator('img');
     const beforeImage = await portrait.boundingBox();
@@ -52,7 +60,7 @@ try {
       assert.equal(await cover.getAttribute('alt'), expected.cover.alt);
       assert.equal(await cover.evaluate(n => getComputedStyle(n).objectFit), 'contain');
     }
-    assert.equal(await page.locator('main a[href*="linkedin"]').count(), 0);
+    assert.equal(await page.locator('main a[href*="linkedin"]').count(), 1);
     assert.equal(await page.title(), 'Alexander Dimitrov | Founder of Entimema');
     assert.equal(await page.locator('link[rel="canonical"]').getAttribute('href'), 'https://www.entimema.com/alexander-dimitrov');
     assert.equal(await page.locator('meta[name="description"]').getAttribute('content'), 'Alexander Dimitrov is the Founder of Entimema, working across financial management, credit risk, decision systems and controlled AI workflows.');
