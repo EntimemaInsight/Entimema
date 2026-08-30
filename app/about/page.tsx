@@ -165,9 +165,9 @@ export default function AboutPage() {
               <Link className="editorial-link--arrow" href="/labs">Explore Entimema Labs <span aria-hidden="true">→</span></Link>
             </div>
             <div className={`editorial-col-6 editorial-item editorial-stack ${styles.practitionerBridge}`}>
-              <p className="editorial-eyebrow">The practitioner foundation</p>
-              <h2 className="editorial-headline-lg">Practitioner-led by design.</h2>
-              <p className="editorial-body-md">Entimema is founded and led by Alexander Dimitrov, whose experience spans finance, accounting, controlling and credit risk. That grounding keeps the work connected to the decisions practitioners actually face.</p>
+              <p className="editorial-eyebrow">The founder’s perspective</p>
+              <h2 className="editorial-headline-lg">The question behind the architecture.</h2>
+              <p className="editorial-body-md">Entimema is founded and led by Alexander Dimitrov. Its practitioner foundation begins with a question that precedes any individual model or technology: how financial reality becomes data, how that data acquires meaning, how uncertainty is represented, and how evidence becomes a decision an institution can explain, control and act upon.</p>
               <Link className="editorial-link--arrow" href="/alexander-dimitrov">About the Founder <span aria-hidden="true">→</span></Link>
             </div>
           </div>
