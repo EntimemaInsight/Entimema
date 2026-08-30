@@ -59,7 +59,7 @@ export default function AboutPage() {
           <hr className="editorial-rule-strong editorial-reveal-rule" />
         </section>
 
-        <section className={`editorial-section editorial-grid editorial-grid--desktop ${styles.section}`} aria-labelledby="about-problem">
+        <section className={`editorial-section editorial-grid editorial-grid--desktop editorial-reveal-fade ${styles.section}`} aria-labelledby="about-problem">
           <div className="editorial-col-5 editorial-stack">
             <p className="editorial-eyebrow">01 / The tension</p>
             <h2 id="about-problem" className="editorial-headline-xl">Financial systems record activity. They do not always support decisions.</h2>
@@ -96,7 +96,7 @@ export default function AboutPage() {
       </section>
 
       <div className="editorial-container">
-        <section className={`editorial-major-section ${styles.section}`} aria-labelledby="about-method">
+        <section className={`editorial-major-section editorial-reveal-fade ${styles.section}`} aria-labelledby="about-method">
           <div className="editorial-grid editorial-grid--desktop">
             <div className="editorial-col-7 editorial-stack">
               <p className="editorial-eyebrow">03 / The method</p>
@@ -152,13 +152,13 @@ export default function AboutPage() {
 
         <section className={`editorial-section ${styles.bridges}`} aria-label="The research agenda and practitioner foundation">
           <div className="editorial-grid editorial-grid--desktop">
-            <div className="editorial-col-6 editorial-item editorial-stack">
+            <div className={`editorial-col-6 editorial-item editorial-stack ${styles.labsBridge}`}>
               <p className="editorial-eyebrow">The research agenda</p>
               <h2 className="editorial-headline-lg">The inquiry behind the systems.</h2>
               <p className="editorial-body-md">Entimema Labs develops the research agenda behind the systems. The company sets the institutional mission; Labs develops the methods; Financial Intelligence brings them into execution.</p>
               <Link className="editorial-link--arrow" href="/labs">Explore Entimema Labs <span aria-hidden="true">→</span></Link>
             </div>
-            <div className="editorial-col-6 editorial-item editorial-stack">
+            <div className={`editorial-col-6 editorial-item editorial-stack ${styles.practitionerBridge}`}>
               <p className="editorial-eyebrow">The practitioner foundation</p>
               <h2 className="editorial-headline-lg">Practitioner-led by design.</h2>
               <p className="editorial-body-md">Entimema is founded and led by Alexander Dimitrov, whose experience spans finance, accounting, controlling and credit risk. That grounding keeps the work connected to the decisions practitioners actually face.</p>
@@ -173,8 +173,11 @@ export default function AboutPage() {
           <p className="editorial-eyebrow">From the thesis to the work</p>
           <h2 id="about-closing" className="editorial-display-md">Follow the reasoning. Explore the workflow.</h2>
           <div className={styles.actions}>
-            <div><Link className="editorial-link--research" href="/workspace/financial-intelligence">Explore Financial Intelligence <span aria-hidden="true">→</span></Link><p className="editorial-caption">Secure workspace · sign-in required</p></div>
-            <Link className="editorial-link--arrow" href="/resources">Read Entimema Research <span aria-hidden="true">→</span></Link>
+            <div><Link className={`editorial-link--research ${styles.primaryAction}`} href="/workspace/financial-intelligence">Explore Financial Intelligence <span aria-hidden="true">→</span></Link><p className="editorial-caption">Secure workspace · sign-in required</p></div>
+            <div className={styles.secondaryActions}>
+              <Link className="editorial-link--arrow" href="/resources">Read Entimema Research <span aria-hidden="true">→</span></Link>
+              <Link className={`editorial-link--quiet ${styles.tertiaryAction}`} href="/contact">Start a conversation <span aria-hidden="true">→</span></Link>
+            </div>
           </div>
         </div>
       </section>
