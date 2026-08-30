@@ -101,15 +101,16 @@
 
 .page :global(.founder-card) {
   width: min(100%, var(--about-wide));
-  min-height: clamp(48rem, 59vw, 54rem);
-  margin: clamp(4rem, 5.8vw, 5.5rem) auto 0;
+  min-height: 0;
+  margin: var(--about-section-space) auto 0;
   grid-template-columns: minmax(0, 42%) minmax(0, 58%);
   align-items: stretch;
   overflow: hidden;
-  border: 1px solid rgba(8, 26, 66, .12);
-  border-radius: 28px;
-  background: rgba(255, 253, 249, .94);
-  box-shadow: 0 32px 90px rgba(24, 31, 49, .075);
+  border: 1px solid #182b47;
+  border-radius: 30px;
+  background: #0d1d35;
+  color: #f7f5ef;
+  box-shadow: 0 24px 72px rgba(8, 26, 66, .08);
 }
 
 .page :global(.founder-card__portrait) {
@@ -117,20 +118,22 @@
   min-height: 100%;
   align-self: stretch;
   overflow: hidden;
-  border-radius: 27px 0 0 27px;
+  border-radius: 29px 0 0 29px;
+  background: #191b1d;
 }
 
 .page :global(.founder-card__portrait img) {
   object-fit: cover;
-  object-position: 50% 50%;
+  object-position: 50% 35%;
 }
 
 .page :global(.founder-card__content) {
   min-width: 0;
-  padding: clamp(2.75rem, 4vw, 4.25rem);
+  padding: clamp(2rem, 3.3vw, 3.25rem);
+  background: radial-gradient(ellipse at 100% 0, #142741 0, #0d1d35 75%);
   grid-template-rows: auto auto;
-  align-content: space-between;
-  gap: clamp(2.5rem, 4vw, 4.25rem);
+  align-content: start;
+  gap: 2rem;
 }
 
 .page :global(.founder-card__bio) {
@@ -148,6 +151,7 @@
 }
 
 .page :global(.founder-card__bio > p:not(.founder-card__label)) {
+  color: #c1cbd9;
   max-width: var(--about-reading);
   margin-bottom: var(--about-space-paragraph);
   font-size: var(--about-type-body);
@@ -158,6 +162,7 @@
 }
 
 .page :global(.founder-card__label) {
+  color: #8da8ff;
   margin-bottom: var(--about-space-label-heading);
   font-size: var(--about-type-label);
   font-weight: 600;
@@ -170,12 +175,14 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0;
   margin-top: 0;
-  padding-top: clamp(1.75rem, 2.5vw, 2.25rem);
+  padding-top: 1.5rem;
+  border-color: #35445a;
 }
 
 .page :global(.founder-pillar) {
   min-height: 0;
-  padding: 0 clamp(1.25rem, 2vw, 2rem) clamp(1.75rem, 2.5vw, 2.25rem);
+  padding: 0 1.25rem 1.5rem;
+  margin: 0;
 }
 
 .page :global(.founder-pillar:nth-child(odd)) {
@@ -184,12 +191,12 @@
 }
 
 .page :global(.founder-pillar:nth-child(even)) {
-  border-left: 1px solid rgba(8,26,66,.13);
+  border-left: 1px solid #35445a;
 }
 
 .page :global(.founder-pillar:nth-child(n + 3)) {
   padding-top: clamp(1.75rem, 2.5vw, 2.25rem);
-  border-top: 1px solid rgba(8,26,66,.13);
+  border-top: 1px solid #35445a;
 }
 
 .page :global(.founder-pillar:nth-child(2)) {
@@ -201,10 +208,11 @@
 }
 
 .page :global(.founder-pillar p) {
+  color: #bac6d6;
   max-width: 38ch;
   margin-top: .75rem;
-  font-size: var(--about-type-supporting);
-  line-height: var(--about-leading-supporting);
+  font-size: .9375rem;
+  line-height: 1.55;
   letter-spacing: var(--about-tracking-copy);
   text-wrap: pretty;
 }
@@ -217,6 +225,7 @@
 }
 
 .page :global(.founder-pillar .founder-pillar__subtitle) {
+  color: #dde4ef;
   font-size: var(--about-type-supporting);
   font-weight: 560;
   line-height: 1.5;
@@ -361,16 +370,28 @@
   letter-spacing: .08em;
 }
 
+.founderIdentity {
+  margin-top: 1.75rem !important;
+}
+
+.founderIdentity strong {
+  display: inline-block;
+  margin-bottom: .2rem;
+  color: #f7f5ef;
+  font-size: 1.1875rem;
+  font-weight: 600;
+}
+
 .personalStatement {
-  max-width: 54ch;
-  margin-top: var(--about-space-heading-copy) !important;
-  padding-left: 1rem;
-  border-left: 2px solid #2446df;
+  margin: 1.75rem 0 0;
+  padding-left: 1.125rem;
+  border-left: 2px solid #6e91f5;
+  color: #e0e7f1;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: var(--about-type-section-intro) !important;
-  font-weight: 400 !important;
-  line-height: var(--about-leading-intro) !important;
-  letter-spacing: -.015em !important;
+  font-size: 1.1875rem;
+  font-weight: 400;
+  line-height: 1.55;
+  letter-spacing: -.015em;
 }
 
 .futureSection {
@@ -534,23 +555,7 @@
 .workSequence li:nth-child(5) { --about-item: 4; }
 .workSequence li:nth-child(6) { --about-item: 5; }
 
-.experienceReveal:not(.revealed) :global(.founder-card__portrait) {
-  opacity: 0;
-  transform: scale(.995);
-}
-.experienceReveal:not(.revealed) :global(.founder-card__content) {
-  opacity: 0;
-  transform: translate3d(0, 12px, 0);
-}
-.experienceReveal.revealed :global(.founder-card__portrait),
-.experienceReveal.revealed :global(.founder-card__content) {
-  opacity: 1;
-  transform: none;
-  transition:
-    opacity var(--about-motion-section) ease-out,
-    transform var(--about-motion-section) var(--about-motion-ease);
-}
-.experienceReveal.revealed :global(.founder-card__content) { transition-delay: 100ms; }
+
 
 .futureSection { transition-duration: var(--about-motion-emphasis) !important; }
 .futureSection.revealed { transition-duration: var(--about-motion-emphasis) !important; }
@@ -581,7 +586,7 @@
   }
 
   .page :global(.founder-card) {
-    min-height: 48rem;
+    min-height: 0;
     grid-template-columns: minmax(0, 41%) minmax(0, 59%);
   }
 
@@ -614,7 +619,7 @@
   }
 
   .page :global(.founder-card__portrait img) {
-    object-position: 50% 29%;
+    object-position: 50% 38%;
   }
 
   .page :global(.founder-card__content) {
@@ -696,7 +701,7 @@
   .page :global(.founder-pillar:nth-child(odd)) {
     padding: 1.5rem 0;
     border-left: 0;
-    border-top: 1px solid rgba(8,26,66,.13);
+    border-top: 1px solid #35445a;
   }
 
   .page :global(.founder-pillar:first-child) {
@@ -736,8 +741,7 @@
   .heroReveal :global(.about-accent-rule),
   .heroReveal :global(.about-lead),
   .narrativeSection :is(.principles li, .workSequence li),
-  .experienceReveal :global(.founder-card__portrait),
-  .experienceReveal :global(.founder-card__content) {
+  .heroReveal {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
@@ -747,4 +751,14 @@
   .conversation a,
   .conversation a span { transition: none; }
   .conversation a { opacity: 1; transform: none; }
+}
+
+@media (max-width: 48rem) {
+  .page :global(.founder-pillars) { grid-template-columns: 1fr; }
+  .page :global(.founder-pillar:nth-child(n)) {
+    padding: 1.5rem 0;
+    border-left: 0;
+    border-top: 1px solid #35445a;
+  }
+  .page :global(.founder-pillar:first-child) { padding-top: 0; border-top: 0; }
 }

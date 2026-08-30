@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import FounderPortrait from "./FounderPortrait";
 import Link from "next/link";
 import { GENERAL_CONSULTING_CTA } from "@/lib/cta-labels";
 import AboutHeader from "@/components/AboutHeader";
@@ -14,10 +14,10 @@ export const metadata: Metadata = {
 };
 
 const pillars = [
-  { title: "FINANCIAL MANAGEMENT", subtitle: "Controlling, accounting and management reporting.", text: "Financial disciplines connected to the decisions and operating environment they support.", icon: "pie" },
-  { title: "RISK & MODELS", subtitle: "Credit risk and quantitative analysis.", text: "Models interpreted within the policy, operational and management context where decisions are made.", icon: "chart" },
-  { title: "SYSTEMS & DATA", subtitle: "SAP, ERP and operational environments.", text: "Financial logic, operations and data structured to work together as one practical system.", icon: "data" },
-  { title: "AI & AUTOMATION", subtitle: "Integrations, agents and controlled workflows.", text: "Technology used to reduce complexity while human judgement and accountability remain in control.", icon: "ai" },
+  { title: "FINANCIAL MANAGEMENT", subtitle: "Controlling, accounting and management reporting.", text: "Financial disciplines connected to the decisions and operating environment they support." },
+  { title: "RISK & MODELS", subtitle: "Credit risk and quantitative analysis.", text: "Models interpreted within the policy, operational and management context where decisions are made." },
+  { title: "SYSTEMS & DATA", subtitle: "SAP, ERP and operational environments.", text: "Financial logic, operations and data structured to work together as one practical system." },
+  { title: "AI & AUTOMATION", subtitle: "Integrations, agents and controlled workflows.", text: "Technology used to reduce complexity while human judgement and accountability remain in control." },
 ];
 
 const principles = [
@@ -35,13 +35,6 @@ const workSteps = [
   "EMBED THE SOLUTION — We connect the model to reporting, workflows, systems or decision processes where it creates practical value.",
   "IMPROVE THROUGH FEEDBACK — We observe outcomes, challenge assumptions and refine the system as new evidence emerges.",
 ];
-
-function PillarIcon({ type }: { type: string }) {
-  if (type === "pie") return <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M16 3v13h13A13 13 0 1 1 16 3Z"/><path d="M19 3.5A12.5 12.5 0 0 1 28.5 13H19Z"/></svg>;
-  if (type === "chart") return <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M4 27V5M4 27h24"/><path d="m8 22 6-7 5 3 8-10"/><path d="M22 8h5v5"/></svg>;
-  if (type === "data") return <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><ellipse cx="16" cy="7" rx="10" ry="4"/><path d="M6 7v9c0 2.2 4.5 4 10 4s10-1.8 10-4V7M6 16v9c0 2.2 4.5 4 10 4s10-1.8 10-4v-9"/></svg>;
-  return <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M16 2v28M2 16h28M6 6l20 20M26 6 6 26"/><circle cx="16" cy="16" r="4"/></svg>;
-}
 
 export default function AboutPage() {
   return (
@@ -103,28 +96,23 @@ export default function AboutPage() {
               </div>
             </section>
 
-            <article id="founder" className={`founder-card ${styles.experienceReveal}`} data-about-reveal="experience">
+            <article id="founder" className="founder-card" aria-labelledby="founder-title">
               <div className="founder-card__portrait">
-                <Image
-                  src="/aleksandar-dimitrov-founder-v2.webp"
-                  alt="Aleksandar Dimitrov, Founder of Entimema"
-                  fill
-                  sizes="(max-width: 864px) calc(100vw - 36px), (max-width: 1320px) 40vw, 554px"
-                />
+                <FounderPortrait />
               </div>
               <div className="founder-card__content">
                 <div className="founder-card__bio">
                   <p className="founder-card__label">FOUNDER</p>
-                  <h2>Built from practice, not theory alone.</h2>
+                  <h2 id="founder-title">Built from practice, not theory alone.</h2>
                   <p>Entimema is shaped by experience across financial management, controlling, accounting, SAP and ERP environments, credit risk, quantitative analysis and automation.</p>
                   <p>That perspective matters because models do not operate in isolation. They have to work inside real reporting cycles, operational constraints, systems and management decisions.</p>
-                  <p><strong>Alexander Dimitrov</strong><br />Founder, Entimema</p>
-                  <p className={styles.personalStatement}>The best model is not the most complex one. It is the one an organisation can understand, use and improve.</p>
+                  <p className={styles.founderIdentity}><strong>Alexander Dimitrov</strong><br />Founder, Entimema</p>
+                  <blockquote className={styles.personalStatement}>The best model is not the most complex one. It is the one an organisation can understand, use and improve.</blockquote>
                 </div>
                 <div className="founder-pillars">
                   {pillars.map((pillar) => (
                     <section className="founder-pillar" key={pillar.title}>
-                      <div className="founder-pillar__title"><PillarIcon type={pillar.icon} /><h3>{pillar.title}</h3></div>
+                      <div className="founder-pillar__title"><h3>{pillar.title}</h3></div>
                       <p className="founder-pillar__subtitle">{pillar.subtitle}</p>
                       <p>{pillar.text}</p>
                     </section>
