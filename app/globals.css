@@ -1,5 +1,7 @@
 @import "../styles/tokens.css";
 @import "../styles/components.css";
+@import "../styles/editorial-tokens.css";
+@import "../styles/editorial.css";
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; --announcement-height: 56px; }
@@ -7211,3 +7213,20 @@ html.is-scrolled .header-cta {
     transition: none;
   }
 }
+
+/* Editorial foundation: shared chrome only; geometry and menu logic retained. */
+.site-header { border-bottom-color: var(--entimema-rule); }
+.site-nav--editorial .site-nav__item {
+  font-family: var(--entimema-font-interface);
+  transition-duration: var(--entimema-motion-hover);
+}
+.site-nav--editorial .site-nav__item[aria-expanded="true"] { background-color: var(--entimema-paper-warm); }
+@media (hover: hover) and (pointer: fine) {
+  .site-nav--editorial .site-nav__item:hover { background-color: var(--entimema-paper-warm); }
+}
+.site-header :is(a, button):focus-visible,
+.about-header :is(a, button):focus-visible {
+  outline: 2px solid var(--entimema-focus);
+  outline-offset: 3px;
+}
+.announcement__message > a:focus-visible { outline: 2px solid white; outline-offset: 3px; }
