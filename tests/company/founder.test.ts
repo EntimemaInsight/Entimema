@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { areas, biography, personSchema, portraitAlt, selectedArticles, thesis } from "../../app/alexander-dimitrov/founder-data";
+import { areas, biography, foundations, personSchema, portraitAlt, principles, productBridge, profileIntro, researchQuestions, selectedArticles, structuralProblems, thesis, whyEntimema } from "../../app/alexander-dimitrov/founder-data";
+import { getTopic } from "../../app/resources/resource-data";
 import { FOUNDER_ID, ORGANIZATION_ID, serializeJsonLd } from "../../lib/structured-data";
 
 test("Founder identity connects to the existing organization and person", () => {
@@ -27,18 +28,25 @@ test("Six selected articles exist, are published and explicitly identify the Fou
   }
 });
 
-test("Editorial content includes three biography paragraphs, thesis and four areas", () => {
-  assert.equal(biography.length, 3);
-  assert.ok(biography[0].startsWith("Alexander Dimitrov is the Founder of Entimema,"));
-  assert.ok(biography[2].endsWith("each have a clearly defined role."));
-  assert.ok(thesis.includes("data, systems, constraints and decision responsibilities."));
+test("Editorial profile connects approved practitioner domains to research without changing identity", () => {
+  assert.equal(biography.length, 2);
+  assert.ok(profileIntro.includes("accounting and controlling"));
+  assert.ok(biography[1].includes("leads the development of financial methodologies"));
+  assert.equal(thesis, "The best model is not the most complex one. It is the one that can operate inside a real organisation—across its data, systems, constraints and decision responsibilities.");
+  assert.deepEqual(foundations.map(area => area.title), ["Finance", "Accounting & controlling", "Credit risk & decision science", "Systems & decision workflows"]);
+  assert.deepEqual(structuralProblems.map(problem => problem.title), ["Data", "Models", "Reports", "Automation"]);
+  assert.deepEqual(Object.keys(researchQuestions), selectedArticles.map(article => article.slug));
+  for (const article of selectedArticles) {
+    assert.ok(researchQuestions[article.slug].endsWith("?"));
+    assert.ok("src" in article.cover, "Each retained publication must have its existing cover");
+  }
   assert.deepEqual(areas.map(area => area.title), ["Financial Management", "Credit Risk & Decision Science", "Systems & Data", "AI & Controlled Workflows"]);
 });
 
 test("Approved Founder content and article selection are preserved", async () => {
   const { readFile } = await import("node:fs/promises");
   const approved = JSON.parse(await readFile(new URL("./founder-content.json", import.meta.url), "utf8"));
-  assert.deepEqual({ biography, thesis, areas, articles: selectedArticles.map(article => article.canonicalPath) }, approved);
+  assert.deepEqual({ profileIntro, biography, thesis, areas, foundations, structuralProblems, principles, whyEntimema, productBridge, researchQuestions, articles: selectedArticles.map(article => article.canonicalPath), publications: selectedArticles.map(article => ({ title: article.headline, path: article.canonicalPath, topic: getTopic(article.topic)?.label, minutes: article.readingMinutes, cover: article.cover })) }, approved);
 });
 
 test("Natural portrait remains the unmodified 400px JPEG with a strict CSS cap", async () => {
