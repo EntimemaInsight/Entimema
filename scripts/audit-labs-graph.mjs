@@ -10,6 +10,16 @@ export async function auditDecisionGraph(page, { width, output }) {
   const mobile = width <= 768;
   assert.equal(await figure.locator('[data-mobile-edge=support]').isVisible(), mobile);
   assert.equal(await figure.locator('[data-edge=support]').isVisible(), !mobile);
+  if (!mobile) {
+    const labels = await figure.locator('[data-edge] > span').evaluateAll(nodes => nodes.map(n => {
+      const r = n.getBoundingClientRect();
+      return { text: n.textContent, left: r.left, right: r.right, top: r.top, bottom: r.bottom };
+    }));
+    for (let i = 0; i < labels.length; i++) for (let j = i + 1; j < labels.length; j++) {
+      const a = labels[i], b = labels[j];
+      assert.ok(a.right <= b.left || b.right <= a.left || a.bottom <= b.top || b.bottom <= a.top, 'Overlapping relationship labels: ' + a.text + ' / ' + b.text);
+    }
+  }
   await figure.screenshot({ path: output + '/' + width + '-graph-default.png', style: '.site-header, .site-header * { visibility: hidden !important; }' });
   const initialBox = await figure.boundingBox();
   const appY = await page.locator('#applied-system').evaluate(n => n.getBoundingClientRect().top + scrollY);
@@ -39,6 +49,16 @@ export async function auditDecisionGraph(page, { width, output }) {
   assert.equal(await figure.locator('[data-node][aria-pressed=true]').count(), 0);
   await figure.locator('[data-node=model]').click();
   assert.equal(await figure.locator('[data-node=model]').getAttribute('aria-pressed'), 'true');
+  if (!mobile) {
+    const labels = await figure.locator('[data-edge] > span').evaluateAll(nodes => nodes.map(n => {
+      const r = n.getBoundingClientRect();
+      return { text: n.textContent, left: r.left, right: r.right, top: r.top, bottom: r.bottom };
+    }));
+    for (let i = 0; i < labels.length; i++) for (let j = i + 1; j < labels.length; j++) {
+      const a = labels[i], b = labels[j];
+      assert.ok(a.right <= b.left || b.right <= a.left || a.bottom <= b.top || b.bottom <= a.top, 'Overlapping relationship labels: ' + a.text + ' / ' + b.text);
+    }
+  }
   await figure.screenshot({ path: output + '/' + width + '-graph-model.png', style: '.site-header, .site-header * { visibility: hidden !important; }' });
   await figure.getByRole('button', { name: 'Reset emphasis' }).click();
   await page.waitForFunction(() => document.querySelectorAll('#decision-architecture [data-node][aria-pressed=true]').length === 0);
