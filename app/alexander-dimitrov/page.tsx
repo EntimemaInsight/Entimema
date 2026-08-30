@@ -56,7 +56,7 @@ export default function FounderPage() {
                 <p className="editorial-eyebrow">01 / Practitioner foundations</p>
                 <h2 id="areas-heading" className="editorial-headline-xl">Different disciplines.<br />One decision.</h2>
               </div>
-              <p className={`editorial-col-7 editorial-body-md ${styles.sectionIntro}`}>Finance, accounting, risk and systems offer different perspectives on the same problem: how financial information becomes an understandable, controlled and actionable decision.</p>
+              <p className={`editorial-col-7 editorial-body-md ${styles.sectionIntro}`}>Alexander’s perspective has been shaped at the intersection of finance, risk, quantitative modelling and enterprise decision systems. These disciplines approach financial decisions from different directions, but ultimately confront the same problem: how to preserve meaning, uncertainty and accountability as reality is transformed into data, analysis and institutional action.</p>
             </div>
             <ol className={`editorial-index ${styles.foundations}`} role="list">
               {foundations.map((foundation) => <li key={foundation.title}>
@@ -75,7 +75,9 @@ export default function FounderPage() {
                 <h2 id="problem-heading" className="editorial-headline-xl">The missing layer is decision structure.</h2>
               </div>
               <div className={`editorial-col-7 editorial-body-md ${styles.copy}`}>
-                <p>That combination of disciplines brings a recurring problem into view. Organisations can possess data, models, reports and systems without reliably producing decisions that people can understand, control and improve.</p>
+                <p>Finance and Risk organizations generate vast amounts of data, models, rules and analysis. Yet these elements do not automatically form a coherent decision architecture.</p>
+                <p>Accounting definitions may diverge from analytical definitions. Models may abstract away operational context. Rules may encode assumptions that are no longer visible. Conclusions may become progressively detached from their original evidence as they pass between spreadsheets, systems, reports and decision-makers.</p>
+                <p>The result is not merely fragmented information. It is fragmented reasoning.</p>
                 <dl className={styles.observations}>{structuralProblems.map((problem) => <div key={problem.title}>
                   <dt className="editorial-technical-label">{problem.title}</dt>
                   <dd>{problem.description}</dd>
@@ -102,14 +104,14 @@ export default function FounderPage() {
             <div className={`editorial-grid editorial-grid--desktop ${styles.sectionHeader}`}>
               <div className="editorial-col-5 editorial-stack">
                 <p className="editorial-eyebrow">04 / Why Entimema</p>
-                <h2 id="entimema-heading" className="editorial-headline-xl">From practitioner questions to institutional work.</h2>
+                <h2 id="entimema-heading" className="editorial-headline-xl">From fragmented reasoning to decision architecture.</h2>
               </div>
               <div className={`editorial-col-7 editorial-body-md ${styles.copy}`}>
                 {whyEntimema.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
                 <Link className="editorial-link--arrow" href="/about">Why Entimema <span aria-hidden="true">→</span></Link>
                 <aside className={styles.labsBridge} aria-label="The research agenda">
                   <p className="editorial-technical-label">Entimema Labs</p>
-                  <p>Practitioner questions need methods that can be examined and developed. Entimema Labs provides the research environment for that work.</p>
+                  <p>A new decision architecture requires methods that can be examined, challenged and improved. Entimema Labs provides the research environment in which practitioner questions are developed into original frameworks, analytical methods and operational designs.</p>
                   <Link className="editorial-link--arrow" href="/labs">Explore Entimema Labs <span aria-hidden="true">→</span></Link>
                 </aside>
               </div>
@@ -123,7 +125,8 @@ export default function FounderPage() {
                 <h2 id="research-heading" className="editorial-headline-xl">The questions behind the work.</h2>
               </div>
               <div className={`editorial-col-7 editorial-body-md ${styles.copy}`}>
-                <p>These six publications examine the questions behind financial interpretation, risk and control. They make the reasoning available for scrutiny, from the source of a number to the workflow in which it is used.</p>
+                <p>Entimema Research examines the methodological questions beneath financial and risk decisions: where a number comes from, what it represents, which assumptions shape it, how uncertainty enters the analysis and how a conclusion can remain traceable as it moves into operational use.</p>
+                <p>The publications make that reasoning available for scrutiny. Together, they provide evidence of the intellectual and methodological foundations on which Entimema is being built.</p>
                 <Link className="editorial-link--arrow" href="/resources">Explore all research <span aria-hidden="true">→</span></Link>
               </div>
             </div>
@@ -151,7 +154,11 @@ export default function FounderPage() {
                 <p className="editorial-eyebrow">06 / From reasoning to use</p>
                 <h2 id="conversation-heading" className="editorial-headline-xl">The work continues in the workflow.</h2>
               </div>
-              <p className={`editorial-col-7 editorial-body-md ${styles.sectionIntro}`}>{productBridge}</p>
+              <div className={`editorial-col-7 editorial-body-md ${styles.sectionIntro} ${styles.copy}`}>
+                <p>{productBridge}</p>
+                <p>The future of Finance and Risk is not simply more automation. It is better decision architecture: systems through which financial reasoning becomes faster and more adaptable without becoming less rigorous, explainable or accountable.</p>
+                <p>Entimema exists to help finance organizations and financial institutions move toward that model.</p>
+              </div>
             </div>
             <div className={styles.actions}>
               <div><CompanyCta className={`editorial-link--research ${styles.primaryAction}`} href="/workspace/financial-intelligence">Explore Financial Intelligence <span aria-hidden="true">→</span></CompanyCta><p className="editorial-caption">Secure workspace · sign-in required</p></div>

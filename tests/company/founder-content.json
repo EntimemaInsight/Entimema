@@ -1,10 +1,10 @@
 {
-  "profileIntro": "His work sits across finance, accounting and controlling, credit risk, financial systems and decision architecture.",
+  "profileIntro": "Founder of Entimema, a decision-intelligence company being built to connect financial evidence, quantitative models, deterministic controls, AI reasoning and human judgment within traceable Finance and Risk workflows.",
   "biography": [
-    "Alexander Dimitrov’s experience spans financial management, SAP and ERP environments, credit risk, quantitative analysis and automation.",
-    "At Entimema, he leads the development of financial methodologies, decision workflows, practitioner research and AI-assisted products."
+    "Alexander’s work is centred on a question that precedes any individual model or technology: how financial reality becomes data, how that data acquires meaning, how uncertainty is represented, and how evidence is transformed into decisions that an institution can explain, control and act upon.",
+    "Entimema emerged from the conviction that better financial decisions require more than better models or greater automation. They require a coherent architecture through which evidence, analysis, judgment and action remain connected."
   ],
-  "thesis": "The best model is not the most complex one. It is the one that can operate inside a real organisation—across its data, systems, constraints and decision responsibilities.",
+  "thesis": "The value of a model is not determined by complexity alone. It is determined by whether the model can operate responsibly inside a real institution—across its data, definitions, systems, constraints and decision accountabilities.",
   "areas": [
     {
       "title": "Financial Management",
@@ -25,49 +25,52 @@
   ],
   "foundations": [
     {
-      "title": "Finance",
-      "description": "Planning, reporting, cost and margin architecture connect measurement to management choices. The question is what a number allows someone to understand and decide."
+      "title": "Financial meaning",
+      "description": "Financial data is not a neutral representation of reality. Definitions, recognition rules, classifications, periods and management perspectives determine what a number means before it enters any model. Reliable decisions begin by preserving that meaning as information moves from source transactions to analysis."
     },
     {
-      "title": "Accounting & controlling",
-      "description": "Accounting and controlling provide the financial basis for those choices. Reconciliation and consistent financial logic make that basis explainable and open to review."
+      "title": "Data and representation",
+      "description": "Analytical work transforms financial events into variables, structures and comparable observations. That transformation requires choices about granularity, time, missing information, reconciliation and measurement. Unless those choices remain visible, analytical precision can conceal uncertainty in the underlying evidence."
     },
     {
-      "title": "Credit risk & decision science",
-      "description": "Credit-risk methodology and quantitative analysis bring uncertainty and decision boundaries into view. Model governance keeps interpretation connected to the responsibilities of the decision."
+      "title": "Risk and uncertainty",
+      "description": "Quantitative models make patterns, probabilities and decision boundaries explicit, but a model is always a representation rather than the decision itself. Its outputs acquire institutional meaning only when assumptions, limitations, uncertainty and consequences are understood in the context in which the model is used."
     },
     {
-      "title": "Systems & decision workflows",
-      "description": "SAP, ERP and financial data structures connect the model to its operating environment. Controlled workflows carry evidence, interpretation and human review into repeatable use."
+      "title": "Systems and decision execution",
+      "description": "Enterprise systems and workflows determine how evidence, models and rules operate beyond the analytical environment. A decision becomes institutionally usable when its inputs can be traced, its calculations controlled, its uncertainty surfaced and material exceptions directed to human judgment."
     }
   ],
   "structuralProblems": [
     {
       "title": "Data",
-      "description": "Availability does not ensure understanding."
+      "description": "Availability does not establish meaning. The origin, definition and transformation of financial data determine what can legitimately be concluded from it."
     },
     {
       "title": "Models",
-      "description": "An analytical result is not yet a decision."
+      "description": "An analytical output is not yet a decision. Its assumptions, uncertainty and intended use must remain visible when it enters an operational process."
     },
     {
-      "title": "Reports",
-      "description": "Information does not determine what happens next."
+      "title": "Rules",
+      "description": "A deterministic result may be reproducible while its underlying business logic remains implicit, outdated or disconnected from the evidence it governs."
     },
     {
       "title": "Automation",
-      "description": "Execution does not, by itself, establish control."
+      "description": "Execution does not, by itself, establish control. A faster process can reproduce the same ambiguity at greater speed and scale."
     }
   ],
   "principles": [
-    "Model interpretation gives financial information meaning. Deterministic controls test the calculations and constraints on which a decision depends.",
-    "Human judgement remains responsible for the conclusion. Traceability makes the path open to review; practical usability makes it possible to work with the result."
+    "Models can interpret patterns, estimate uncertainty and support judgment. Deterministic controls must continue to own arithmetic, reconciliations, accounting identities and fixed decision constraints.",
+    "Human judgment remains necessary where evidence is incomplete, definitions conflict or consequences are material. Traceability keeps the path from source evidence to conclusion open to examination. Practical usability allows the reasoning to survive beyond the analytical environment in which it was created.",
+    "The objective is not to remove professional judgment from Finance and Risk. It is to give that judgment a stronger evidential and operational structure."
   ],
   "whyEntimema": [
-    "The practitioner question becomes an institutional one: how can financial decisions be made understandable, traceable and useful inside the organisation?",
-    "Entimema gives that question a programme of work: financial methodologies, decision workflows, practitioner research and AI-assisted products. Specialist knowledge becomes a system that can be used, examined and improved."
+    "Entimema is being built around an emerging category: Decision Intelligence for Finance and Risk.",
+    "Its purpose is to connect financial evidence, analytical models, deterministic rules, AI-assisted interpretation and human judgment within end-to-end workflows. The workflow—not an isolated model or AI agent—is the relevant product boundary.",
+    "This means moving beyond the automation of individual tasks toward an institutional architecture in which data can be interpreted without losing its financial meaning, calculations can be controlled, uncertainty can be made explicit, exceptions can reach the right person and every material conclusion can be traced back to its evidence.",
+    "Entimema turns that thesis into a programme of work across practitioner research, financial methodologies, decision workflows and Financial Intelligence products. The ambition is to make specialist reasoning reusable without making it opaque—and operational without separating it from human responsibility."
   ],
-  "productBridge": "The same concerns—financial data, reconciliation, evidence lineage, model interpretation, deterministic controls and human review—come together in Financial Intelligence as operational financial workflows.",
+  "productBridge": "The same concerns—financial meaning, data representation, reconciliation, evidence lineage, model interpretation, deterministic controls, explicit uncertainty and human review—come together in Entimema Financial Intelligence as operational financial workflows.",
   "researchQuestions": {
     "ai-financial-analysis-models-rules-controls": "What should a model interpret, and what must a financial control verify?",
     "financial-data-lineage": "Can a financial conclusion be followed back to its source?",

@@ -28,13 +28,13 @@ test("Six selected articles exist, are published and explicitly identify the Fou
   }
 });
 
-test("Editorial profile connects approved practitioner domains to research without changing identity", () => {
+test("Founder thesis connects decision intelligence to research without changing identity", () => {
   assert.equal(biography.length, 2);
-  assert.ok(profileIntro.includes("accounting and controlling"));
-  assert.ok(biography[1].includes("leads the development of financial methodologies"));
-  assert.equal(thesis, "The best model is not the most complex one. It is the one that can operate inside a real organisation—across its data, systems, constraints and decision responsibilities.");
-  assert.deepEqual(foundations.map(area => area.title), ["Finance", "Accounting & controlling", "Credit risk & decision science", "Systems & decision workflows"]);
-  assert.deepEqual(structuralProblems.map(problem => problem.title), ["Data", "Models", "Reports", "Automation"]);
+  assert.ok(profileIntro.includes("decision-intelligence company being built"));
+  assert.ok(biography[1].includes("evidence, analysis, judgment and action remain connected"));
+  assert.equal(thesis, "The value of a model is not determined by complexity alone. It is determined by whether the model can operate responsibly inside a real institution—across its data, definitions, systems, constraints and decision accountabilities.");
+  assert.deepEqual(foundations.map(area => area.title), ["Financial meaning", "Data and representation", "Risk and uncertainty", "Systems and decision execution"]);
+  assert.deepEqual(structuralProblems.map(problem => problem.title), ["Data", "Models", "Rules", "Automation"]);
   assert.deepEqual(Object.keys(researchQuestions), selectedArticles.map(article => article.slug));
   for (const article of selectedArticles) {
     assert.ok(researchQuestions[article.slug].endsWith("?"));
