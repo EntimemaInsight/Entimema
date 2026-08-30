@@ -51,12 +51,16 @@
 .directionCopy { align-self: center; }
 .bridges { padding-top: 0; padding-bottom: var(--entimema-space-major-section); }
 .bridges a { min-height: 44px; align-items: center; }
-/* A research insert, not a product card; the practitioner bridge stays quiet. */
-.labsBridge { background: var(--entimema-paper-warm); border-top: 2px solid var(--entimema-navy); padding: var(--entimema-space-section) var(--entimema-space-component); }
-.labsBridge h2 { max-width: 19ch; }
-.labsBridge > p:not(:global(.editorial-eyebrow)) { max-width: 52ch; }
-.labsBridge > a { margin-top: var(--entimema-space-section) !important; }
-.practitionerBridge { padding-top: var(--entimema-space-section); }
+/* Paired editorial gateways: natural height, shared origins, no card surface. */
+.labsBridge, .practitionerBridge {
+  display: flex; flex-direction: column;
+  border-top: 1px solid var(--company-rule-major);
+  padding: var(--company-space-block);
+}
+.bridges h2 { max-width: 24ch; }
+.bridges p:not(:global(.editorial-eyebrow)) { max-width: 52ch; }
+.page .bridges a { align-self: flex-start; margin-top: auto; padding-top: var(--company-space-block); }
+
 .closing { border-top: 1px solid var(--entimema-rule-strong); }
 .closing h2 { max-width: 24ch; font-size: calc(var(--entimema-display-lg) * .82); }
 .actions { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); align-items: start; gap: var(--entimema-grid-gap); border-top: 1px solid var(--entimema-rule-strong); padding-top: var(--entimema-space-component); }
@@ -88,7 +92,7 @@
   .disciplines > div:nth-child(n + 3) { border-top: 1px solid var(--entimema-rule); }
   .disciplines > div:last-child { grid-column: 1 / -1; }
   .alignEnd { justify-self: start; }
-  .practitionerBridge { padding-top: var(--entimema-space-component); }
+  .page .bridges a { margin-top: var(--company-space-block); padding-top: 0; }
 }
 @media (max-width: 47.999rem) {
   .page h2:global(.editorial-headline-xl) { font-size: 1.75rem; }

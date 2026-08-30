@@ -58,3 +58,5 @@ TypeScript and production build pass. The 25 Company/About tests pass. Lint has 
 Detailed local and production reports/screenshots are retained in the worktree's ignored `build` directory, so generated evidence does not inflate the release commit.
 
 Final local candidate: all 18 route/viewport checks passed. CLS was 0 in every run; local LCP ranged 152–704ms and the maximum sampled event duration was 56ms. The audit recorded two frame intervals above 50ms across the complete scroll sample, including the 4x CPU-throttled mobile runs. JavaScript-disabled, reduced-motion and injected observer-failure checks passed for all three routes; native return navigation and Company CSS scoping passed. Observer instrumentation includes Next Link's own prefetch observer as well as the single Company motion observer. The media preference assertion waits for the browser's rendering frame, not an arbitrary animation timeout.
+
+About, Founder and Labs are visually and editorially locked after the Company Final Art-Direction Sprint. Future changes require a specific content, accessibility, conversion or measured user-behaviour justification.

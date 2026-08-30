@@ -4,6 +4,12 @@
   --company-surface: #fdf8f1;
   --company-indigo: #293f83;
   --company-cta: var(--entimema-navy);
+  --company-space-block: var(--entimema-space-component);
+  --company-space-section: var(--entimema-space-section);
+  --company-rule-major: var(--entimema-rule-strong);
+  --company-rule-internal: var(--entimema-rule);
+  --company-control-padding: .75rem;
+  --company-target-min: 44px;
   --company-ease: cubic-bezier(.22, 1, .36, 1);
   --company-duration: 760ms;
   --company-step: 90ms;
@@ -49,6 +55,14 @@
   .page :global(.editorial-link--arrow):hover { text-decoration-thickness: 2px; }
   .page :global([data-node]):hover { border-color: var(--company-indigo); }
 }
+.page :global(.editorial-link--quiet):is(:hover, :focus-visible) { text-decoration-thickness: 2px; text-decoration-color: currentColor; }
+/* 49 CSS px retains at least 44 rendered px under the unchanged desktop 90% scale.
+   Only standalone editorial actions are affected; the site footer is untouched. */
+@media (min-width: 1280px) { .page { --company-target-min: 49px; } }
+.page[data-company] :is(:global(.editorial-link), :global(.editorial-link--arrow), :global(.editorial-link--quiet)),
+.page[data-company] :global(#decision-architecture) button:not([data-node]) { min-height: var(--company-target-min); }
+.page[data-company] :global(.editorial-link) { display: inline-block; }
+.page[data-company] :global(.editorial-link--quiet) { display: inline-flex; align-items: center; }
 .page .cta:active { transform: translateY(0); background: var(--entimema-navy-deep); }
 /* Visible by default, including after hydration/observer failure. Animation is
    finite and only attached upon entry; it never owns a persistent hidden state. */
