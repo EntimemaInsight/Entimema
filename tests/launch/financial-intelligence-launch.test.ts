@@ -13,10 +13,23 @@ test("launch page is explicitly pre-launch and has no live-market claim", () => 
 });
 
 test("narrative and all governed workflow stages remain in order", () => {
-  const sections = ["THE OLD CONDITION", "THE THRESHOLD", "THE WORKFLOW", "THE WORKSPACE", "THE RESULT", "THE FOUNDER’S NOTE", "THE INVITATION"];
+  const sections = ["THE OLD CONDITION", "THE THRESHOLD", "THE DIVISION OF RESPONSIBILITY", "THE GOVERNED WORKFLOW", "THE VISIBLE WORKSPACE", "THE CONTROLLED RESULT", "THE FOUNDER’S NOTE", "THE INVITATION"];
   let cursor = -1;
   for (const section of sections) { const next = page.indexOf(section); assert.ok(next > cursor, `${section} follows the prior section`); cursor = next; }
   for (const stage of ["Intelligent Intake", "Document and Data Understanding", "Financial Extraction", "Period Harmonisation", "Canonical Financial Mapping", "Deterministic Validation", "Confidence and Exception Handling", "Human Review", "Validated Financial Model", "Analysis and Findings", "Traceable Export"]) assert.match(page, new RegExp(stage));
+});
+
+test("article furniture, figure relationships and publication context are explicit", () => {
+  assert.equal((page.match(/<h1/g) ?? []).length, 1);
+  assert.match(page, /ENTIMEMA · FINANCIAL INTELLIGENCE/);
+  assert.match(page, /SPECIAL TECHNOLOGY REPORT/);
+  assert.match(page, /By <Link href="\/alexander-dimitrov">Alexander Dimitrov<\/Link>/);
+  assert.match(page, /<time dateTime="2026-08-31">31 August 2026<\/time>/);
+  assert.equal((page.match(/<figure>/g) ?? []).length, 3);
+  assert.equal((page.match(/<figcaption>/g) ?? []).length, 3);
+  assert.match(page, /Figure 1 · The workflow separates interpretation/);
+  assert.match(page, /Figure 2 · One governed execution sequence/);
+  assert.match(page, /Figure 3 · The Decision Workspace keeps source evidence/);
 });
 
 test("conversion, Founder identity references, metadata and schema are canonical", () => {
