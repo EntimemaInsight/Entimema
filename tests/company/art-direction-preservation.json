@@ -18,7 +18,7 @@
   "lib/structured-data.ts": "c299b00dbfbb4412910326ee945c91206b8a1ed25369bf9594fce56462208af9",
   "app/layout.tsx": "d51d42276c9bfe74d1e494f628637eb0a32f6bb1ed6175fb78fb42eef49c7cca",
   "app/globals.css": "f61da2063c6960ee7b1447182bb5abc1392e37e896f97148a12173c03b45ae27",
-  "app/sitemap.ts": "f9efa5f2b02193694a28f0aebb85080468a9112a1c169a7514bd850a5a6a9cb7",
+  "app/sitemap.ts": "a6fb9abd3843180b60c3c869809c0e12fa7c7583e7389036954915fdcae1bfbe",
   "app/robots.ts": "8bdfbee6f93ffdb22dad1399b0aca6829bf83e529c11ffd1217a9bb9ab4afa0b",
   "styles/editorial.css": "9212bb4497942f6af506f9b5fe62c7a21bc908a1d20ad250990849b9b9644353",
   "styles/editorial-tokens.css": "15f6ce714f6a51eb3e9124e282b8841a4344b2c73280e5237d9238b7e6635491",

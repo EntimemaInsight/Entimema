@@ -9,6 +9,7 @@ const routes = [
   "/labs",
   "/contact",
   "/privacy",
+  "/financial-intelligence-launch",
   "/resources",
   "/services",
   "/services/cfo-function",
