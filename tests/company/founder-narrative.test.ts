@@ -36,12 +36,15 @@ test("Founder metadata, JSON-LD vocabulary, portrait markup, publications and CT
   assert.equal(hash(page.match(/<Image src=\{portraitPath\}[\s\S]*?\/>/)![0]), frozen.portraitHash);
   assert.equal(hash(page.slice(page.indexOf("            <div className={styles.articles}>"), page.indexOf('          <section className={`editorial-section ${styles.section} ${styles.closing}'))), frozen.researchHash);
   assert.equal(hash(page.slice(page.indexOf("            <div className={styles.actions}>"))), frozen.actionsHash);
-  assert.deepEqual([...page.matchAll(/<(?:Link|CompanyCta)\b[^>]*>[\s\S]*?<\/(?:Link|CompanyCta)>/g)].map(m => m[0]), frozen.links);
+  assert.deepEqual(
+    [...page.matchAll(/<(?:Link|CompanyCta)\b[^>]*>[\s\S]*?<\/(?:Link|CompanyCta)>/g)].map(m => m[0]),
+    frozen.links.map((link: string) => link.replace(/\r\n/g, "\n")),
+  );
   for (const key of ["publications", "articles", "researchQuestions", "areas"]) assert.deepEqual(approved[key], frozen[key]);
   assert.deepEqual(personSchema, {
-    "@context": "https://schema.org", "@type": "Person", "@id": "https://www.entimema.com/about#founder",
+    "@type": "Person", "@id": "https://www.entimema.com/about#founder",
     name: "Alexander Dimitrov", url: "https://www.entimema.com/alexander-dimitrov",
-    image: "https://www.entimema.com/alexander-dimitrov-founder-natural.jpg", jobTitle: "Founder",
+    image: { "@id": "https://www.entimema.com/alexander-dimitrov#portrait" }, jobTitle: "Founder",
     worksFor: { "@id": "https://www.entimema.com/#organization" },
     sameAs: ["https://www.linkedin.com/in/alexander-dimitrov-entimema/"],
     knowsAbout: frozen.areas.map((area: { title: string }) => area.title),
@@ -53,4 +56,3 @@ test("Founder retains the Company motion, editorial reveal, scene, ornament and 
     "editorial-reveal-text", "editorial-reveal-rule", "editorial-reveal-fade", "data-company-scene",
     '<DecisionConstellation variant="founder" />', "<CompanyCta", "data-founder-portrait"]) assert.ok(page.includes(hook), hook);
 });
-

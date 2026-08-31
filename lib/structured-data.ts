@@ -65,8 +65,8 @@ export function createFounderSchema() {
       {
         "@type": "Person",
         "@id": FOUNDER_ID,
-        name: "Aleksandar Dimitrov",
-        url: FOUNDER_ID,
+        name: "Alexander Dimitrov",
+        url: `${SITE_URL}/alexander-dimitrov`,
         jobTitle: "Founder",
         worksFor: { "@id": ORGANIZATION_ID },
       },
