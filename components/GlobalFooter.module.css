@@ -37,28 +37,30 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 24px;
 }
 
 .linkedinLink {
-  width: 48px;
-  height: 48px;
+  width: 56px;
+  height: 56px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 4px;
-  color: var(--brand-navy-950);
-  transition: color var(--entimema-motion-hover) var(--entimema-motion-ease), transform var(--entimema-motion-hover) var(--entimema-motion-ease);
+  border-radius: 13px;
+  background: var(--brand-navy-950);
+  color: #fff;
+  transition: opacity var(--entimema-motion-hover) var(--entimema-motion-ease), box-shadow var(--entimema-motion-hover) var(--entimema-motion-ease), transform var(--entimema-motion-hover) var(--entimema-motion-ease);
 }
 
 .linkedinLink svg {
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
   fill: currentColor;
 }
 
 .linkedinLink:hover {
-  color: var(--brand-navy-900);
+  opacity: 0.92;
+  box-shadow: 0 5px 12px rgb(11 31 50 / 14%);
   transform: translateY(-2px);
 }
 
