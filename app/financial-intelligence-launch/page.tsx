@@ -3,10 +3,11 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import { FOUNDER_ID, ORGANIZATION_ID, SITE_URL, WEBSITE_ID, createBreadcrumbSchema, serializeJsonLd } from "@/lib/structured-data";
 import styles from "./launch.module.css";
+import ProductExplainer from "./ProductExplainer";
 
 const path = "/financial-intelligence-launch";
 const url = `${SITE_URL}${path}`;
-const title = "From financial evidence to a decision you can defend.";
+const title = "Financial documents in. Validated analysis out.";
 const description = "Launching 9 September 2026: Entimema Financial Intelligence transforms financial documents and data into validated, traceable and decision-ready analysis.";
 
 export const metadata: Metadata = {
@@ -51,14 +52,13 @@ export default function FinancialIntelligenceLaunchPage() {
     <main className={styles.page}>
       <article>
         <header className={styles.masthead}>
-          <div className={styles.publication}><span>ENTIMEMA · FINANCIAL INTELLIGENCE</span><span>SPECIAL TECHNOLOGY REPORT</span><span>LAUNCHING 9 SEPTEMBER 2026</span></div>
-          <h1>{title}</h1>
-          <p className={styles.standfirst}>Entimema Financial Intelligence transforms fragmented financial documents and data into validated, traceable and decision-ready analysis—combining AI interpretation, deterministic control and human judgement in one governed workflow.</p>
-          <div className={styles.byline}>
-            <p>By <Link href="/alexander-dimitrov">Alexander Dimitrov</Link><span>Founder, Entimema</span></p>
-            <time dateTime="2026-08-31">31 August 2026</time>
-          </div>
+          <div className={styles.publication}><span>ENTIMEMA FINANCIAL INTELLIGENCE</span><span>LAUNCHING 9 SEPTEMBER 2026</span></div>
+          <div className={styles.heroGrid}><div className={styles.heroCopy}><h1><span>Financial documents in.</span><span>Validated analysis out.</span></h1><p className={styles.standfirst}>AI interprets the evidence. Deterministic controls verify the numbers. Humans resolve material exceptions.</p><nav className={styles.heroActions} aria-label="Launch actions"><Link href="/contact?topic=financial-data">Request a private walkthrough</Link><Link href="#how-it-works">See how it works</Link></nav></div>
+          <div className={styles.heroPipeline} role="img" aria-label="Financial documents are interpreted by AI, validated by deterministic controls, reviewed by a human when necessary, and delivered as validated analysis."><div className={styles.heroDocs}><span>PDF<small>Revenue · SRC–01</small></span><span>XLSX<small>FY 2025 · SRC–02</small></span><span>CSV<small>EUR · SRC–03</small></span></div><ol><li><b>AI INTERPRETATION</b><span>Meaning · period · definition · context</span></li><li><b>DETERMINISTIC CONTROL</b><span>Arithmetic · reconciliation · identities</span></li><li><b>HUMAN REVIEW</b><span>Material uncertainty is escalated—not concealed.</span></li></ol><div className={styles.heroResult}><b>VALIDATED ANALYSIS</b><span>Evidence linked</span><span>Controls passed</span><span>Exceptions resolved</span><strong>Ready for decision</strong></div><p className={styles.pipelineCaption}>PDF · XLSX · CSV → INTERPRET → VALIDATE → REVIEW → DECISION-READY ANALYSIS</p></div></div>
         </header>
+
+        <ProductExplainer />
+        <div className={styles.articleBridge}><small>ENTIMEMA · FINANCIAL INTELLIGENCE · SPECIAL TECHNOLOGY REPORT</small><span>THE ARCHITECTURE BEHIND THE RESULT</span><p>The explainer shows what the product does. The report below examines why its architecture matters.</p><div className={styles.byline}><p>By <Link href="/alexander-dimitrov">Alexander Dimitrov</Link><span>Founder, Entimema</span></p><time dateTime="2026-08-31">31 August 2026</time></div></div>
 
         <section className={`${styles.chapter} ${styles.opening}`} aria-labelledby="old-condition">
           <Marker>I. THE OLD CONDITION</Marker>
