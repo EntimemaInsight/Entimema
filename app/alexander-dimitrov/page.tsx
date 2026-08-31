@@ -9,7 +9,7 @@ import company from "@/components/company/company.module.css";
 import { GENERAL_CONSULTING_CTA } from "@/lib/cta-labels";
 import { serializeJsonLd, SITE_URL } from "@/lib/structured-data";
 import { getTopic } from "../resources/resource-data";
-import { biography, foundations, founderName, founderUrl, personSchema, portraitAlt, portraitPath, principles, productBridge, profileIntro, researchQuestions, selectedArticles, structuralProblems, thesis, whyEntimema } from "./founder-data";
+import { biography, foundations, founderName, founderProfileSchema, founderUrl, personSchema, portraitAlt, portraitPath, principles, productBridge, profileIntro, researchQuestions, selectedArticles, structuralProblems, thesis, whyEntimema } from "./founder-data";
 import styles from "./founder.module.css";
 
 const title = "Alexander Dimitrov | Founder of Entimema";
@@ -178,7 +178,7 @@ export default function FounderPage() {
           </section>
         </div>
       </main>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(personSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(founderProfileSchema) }} />
     </>
   );
 }

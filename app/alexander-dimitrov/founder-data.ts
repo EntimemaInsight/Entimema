@@ -5,6 +5,8 @@ export const founderName = "Alexander Dimitrov";
 export const portraitPath = "/alexander-dimitrov-founder-natural.jpg";
 export const portraitAlt = "Alexander Dimitrov, Founder of Entimema";
 export const founderUrl = `${SITE_URL}/alexander-dimitrov`;
+export const founderPageId = `${founderUrl}#profile-page`;
+export const portraitId = `${founderUrl}#portrait`;
 
 // Practitioner facts are limited to the previously approved Founder biography.
 // The thematic passages below interpret those disciplines, not additional career history.
@@ -76,14 +78,46 @@ export const selectedArticles = selectedSlugs.flatMap((slug) => {
 });
 
 export const personSchema = {
-  "@context": "https://schema.org",
   "@type": "Person",
   "@id": FOUNDER_ID,
   name: founderName,
   url: founderUrl,
-  image: `${SITE_URL}${portraitPath}`,
+  image: { "@id": portraitId },
   jobTitle: "Founder",
   worksFor: { "@id": ORGANIZATION_ID },
   sameAs: ["https://www.linkedin.com/in/alexander-dimitrov-entimema/"],
   knowsAbout: areas.map(({ title }) => title),
+};
+
+/**
+ * Keep the public profile, portrait and Person in one connected authority graph.
+ * The visible portrait remains byte-for-byte unchanged; this only makes its
+ * identity, dimensions and relationship to the Founder profile explicit.
+ */
+export const founderProfileSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    personSchema,
+    {
+      "@type": "ProfilePage",
+      "@id": founderPageId,
+      url: founderUrl,
+      name: `${founderName} | Founder of Entimema`,
+      description: profileIntro,
+      isPartOf: { "@id": `${SITE_URL}/#website` },
+      mainEntity: { "@id": FOUNDER_ID },
+      primaryImageOfPage: { "@id": portraitId },
+    },
+    {
+      "@type": "ImageObject",
+      "@id": portraitId,
+      contentUrl: `${SITE_URL}${portraitPath}`,
+      url: `${SITE_URL}${portraitPath}`,
+      width: 400,
+      height: 400,
+      caption: portraitAlt,
+      representativeOfPage: true,
+      about: { "@id": FOUNDER_ID },
+    },
+  ],
 };

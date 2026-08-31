@@ -4,7 +4,7 @@ import sitemap from "../../app/sitemap";
 import robots from "../../app/robots";
 import { companyDestinations } from "../../lib/company-navigation";
 import { createHomeSchema, FOUNDER_ID, ORGANIZATION_ID, SITE_URL, WEBSITE_ID, serializeJsonLd } from "../../lib/structured-data";
-import { personSchema } from "../../app/alexander-dimitrov/founder-data";
+import { founderProfileSchema, personSchema } from "../../app/alexander-dimitrov/founder-data";
 import { labsSchema, selectedPublications } from "../../app/labs/labs-data";
 import { publishedResources } from "../../app/resources/resource-data";
 
@@ -37,6 +37,7 @@ test("Company identities retain the established organization, website and founde
   assert.equal(personSchema["@id"], FOUNDER_ID);
   assert.equal(personSchema.url, SITE_URL + "/alexander-dimitrov");
   assert.deepEqual(personSchema.worksFor, { "@id": ORGANIZATION_ID });
+  assert.deepEqual(founderProfileSchema["@graph"].map(entity => entity["@type"]), ["Person", "ProfilePage", "ImageObject"]);
   assert.equal(labsSchema["@type"], "WebPage");
   assert.deepEqual(labsSchema.publisher, { "@id": ORGANIZATION_ID });
 });

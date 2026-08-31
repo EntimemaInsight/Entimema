@@ -70,8 +70,14 @@ try {
     assert.equal(await page.locator('meta[property="og:type"]').getAttribute('content'), 'profile');
     assert.equal(await page.locator('meta[property="og:image:width"]').getAttribute('content'), '400');
     assert.equal(await page.locator('meta[property="og:image:height"]').getAttribute('content'), '400');
-    const person = (await page.locator('script[type="application/ld+json"]').allTextContents()).map(JSON.parse).find(schema => schema['@type'] === 'Person');
-    assert.deepEqual(person, { '@context': 'https://schema.org', '@type': 'Person', '@id': 'https://www.entimema.com/about#founder', name: 'Alexander Dimitrov', url: 'https://www.entimema.com/alexander-dimitrov', image: `https://www.entimema.com${portraitPath}`, jobTitle: 'Founder', worksFor: { '@id': 'https://www.entimema.com/#organization' }, sameAs: ['https://www.linkedin.com/in/alexander-dimitrov-entimema/'], knowsAbout: approved.areas.map(a => a.title) });
+    const founderSchema = (await page.locator('script[type="application/ld+json"]').allTextContents()).map(JSON.parse).find(schema => schema['@graph']?.some(entity => entity['@type'] === 'ProfilePage'));
+    const person = founderSchema['@graph'].find(entity => entity['@type'] === 'Person');
+    const profile = founderSchema['@graph'].find(entity => entity['@type'] === 'ProfilePage');
+    const portraitEntity = founderSchema['@graph'].find(entity => entity['@type'] === 'ImageObject');
+    assert.deepEqual(person, { '@type': 'Person', '@id': 'https://www.entimema.com/about#founder', name: 'Alexander Dimitrov', url: 'https://www.entimema.com/alexander-dimitrov', image: { '@id': 'https://www.entimema.com/alexander-dimitrov#portrait' }, jobTitle: 'Founder', worksFor: { '@id': 'https://www.entimema.com/#organization' }, sameAs: ['https://www.linkedin.com/in/alexander-dimitrov-entimema/'], knowsAbout: approved.areas.map(a => a.title) });
+    assert.deepEqual(profile.mainEntity, { '@id': person['@id'] });
+    assert.deepEqual(profile.primaryImageOfPage, { '@id': portraitEntity['@id'] });
+    assert.deepEqual({ contentUrl: portraitEntity.contentUrl, width: portraitEntity.width, height: portraitEntity.height, caption: portraitEntity.caption }, { contentUrl: `https://www.entimema.com${portraitPath}`, width: 400, height: 400, caption: 'Alexander Dimitrov, Founder of Entimema' });
     assert.equal(await page.locator('main a[href="/about"]').count(), 1);
     assert.equal(await page.locator('main a[href="/labs"]').count(), 1);
     const actions = page.locator('section[aria-labelledby="conversation-heading"] a');

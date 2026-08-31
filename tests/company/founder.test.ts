@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { areas, biography, foundations, personSchema, portraitAlt, principles, productBridge, profileIntro, researchQuestions, selectedArticles, structuralProblems, thesis, whyEntimema } from "../../app/alexander-dimitrov/founder-data";
+import { areas, biography, foundations, founderPageId, founderProfileSchema, personSchema, portraitAlt, portraitId, principles, productBridge, profileIntro, researchQuestions, selectedArticles, structuralProblems, thesis, whyEntimema } from "../../app/alexander-dimitrov/founder-data";
 import { getTopic } from "../../app/resources/resource-data";
 import { FOUNDER_ID, ORGANIZATION_ID, serializeJsonLd } from "../../lib/structured-data";
 
@@ -12,8 +12,26 @@ test("Founder identity connects to the existing organization and person", () => 
   assert.equal(schema.url, "https://www.entimema.com/alexander-dimitrov");
   assert.equal(schema.worksFor["@id"], ORGANIZATION_ID);
   assert.deepEqual(schema.sameAs, ["https://www.linkedin.com/in/alexander-dimitrov-entimema/"]);
-  assert.equal(schema.image, "https://www.entimema.com/alexander-dimitrov-founder-natural.jpg");
+  assert.deepEqual(schema.image, { "@id": portraitId });
   assert.equal(portraitAlt, "Alexander Dimitrov, Founder of Entimema");
+});
+
+test("Founder profile publishes one connected Person, ProfilePage and portrait graph", () => {
+  const schema = JSON.parse(serializeJsonLd(founderProfileSchema));
+  assert.equal(schema["@context"], "https://schema.org");
+  assert.equal(schema["@graph"].length, 3);
+  const profile = schema["@graph"].find((entity: { "@type": string }) => entity["@type"] === "ProfilePage");
+  const image = schema["@graph"].find((entity: { "@type": string }) => entity["@type"] === "ImageObject");
+  assert.deepEqual(profile.mainEntity, { "@id": FOUNDER_ID });
+  assert.equal(profile["@id"], founderPageId);
+  assert.deepEqual(profile.primaryImageOfPage, { "@id": portraitId });
+  assert.deepEqual(image, {
+    "@type": "ImageObject", "@id": portraitId,
+    contentUrl: "https://www.entimema.com/alexander-dimitrov-founder-natural.jpg",
+    url: "https://www.entimema.com/alexander-dimitrov-founder-natural.jpg",
+    width: 400, height: 400, caption: portraitAlt, representativeOfPage: true,
+    about: { "@id": FOUNDER_ID },
+  });
 });
 
 test("Six selected articles exist, are published and explicitly identify the Founder", () => {
