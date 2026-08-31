@@ -60,8 +60,10 @@ test("the existing logo home link and copyright remain intact", () => {
 
 test("the institutional reference has premium target, focus and motion styles", () => {
   const css = readFileSync("components/GlobalFooter.module.css", "utf8");
-  assert.match(css, /\.linkedinLink \{[\s\S]*?width: 48px;[\s\S]*?height: 48px;/);
-  assert.match(css, /\.linkedinLink svg \{[\s\S]*?width: 30px;[\s\S]*?height: 30px;/);
+  assert.match(css, /\.linkedinLink \{[\s\S]*?width: 56px;[\s\S]*?height: 56px;/);
+  assert.match(css, /\.linkedinLink \{[\s\S]*?border-radius: 13px;[\s\S]*?background: var\(--brand-navy-950\);[\s\S]*?color: #fff;/);
+  assert.match(css, /\.linkedinLink svg \{[\s\S]*?width: 28px;[\s\S]*?height: 28px;/);
+  assert.match(css, /\.institutionalReferences \{[\s\S]*?gap: 24px;/);
   assert.match(css, /\.linkedinLink:focus-visible/);
   assert.match(css, /outline: 2px solid var\(--entimema-focus\)/);
   assert.match(css, /prefers-reduced-motion: reduce[\s\S]*?\.linkedinLink:hover \{[\s\S]*?transform: none;/);
