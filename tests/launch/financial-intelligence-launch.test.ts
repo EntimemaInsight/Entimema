@@ -3,6 +3,7 @@ import { readFileSync } from "node:fs";
 import test from "node:test";
 
 const page = readFileSync("app/financial-intelligence-launch/page.tsx", "utf8");
+const explainer = readFileSync("app/financial-intelligence-launch/ProductExplainer.tsx", "utf8");
 const css = readFileSync("app/financial-intelligence-launch/launch.module.css", "utf8");
 const sitemap = readFileSync("app/sitemap.ts", "utf8");
 
@@ -53,4 +54,30 @@ test("responsive and reduced-motion rules preserve narrow layouts", () => {
   assert.match(css, /overflow:clip/);
   assert.match(css, /min-height:48px/);
   assert.match(css, /@media\(prefers-reduced-motion:reduce\)/);
+});
+
+test("first viewport states the complete pre-launch product promise", () => {
+  assert.match(page, /Financial documents in\./);
+  assert.match(page, /Validated analysis out\./);
+  assert.match(page, /AI interprets the evidence\. Deterministic controls verify the numbers\. Humans resolve material exceptions\./);
+  for (const stage of ["PDF", "XLSX", "CSV", "AI INTERPRETATION", "DETERMINISTIC CONTROL", "HUMAN REVIEW", "VALIDATED ANALYSIS"]) assert.match(page, new RegExp(stage));
+  assert.match(page, /Evidence linked/); assert.match(page, /Controls passed/); assert.match(page, /Exceptions resolved/); assert.match(page, /Ready for decision/);
+  assert.doesNotMatch(page, /Run your first analysis/);
+});
+
+test("visual explainer keeps five plain-language stages and evidence lineage", () => {
+  for (const heading of ["Start with the documents the business already uses.", "Interpret what every value represents.", "Test what must be exact.", "Ask a human where judgement matters.", "Move forward with analysis you can examine and defend."]) assert.match(explainer, new RegExp(heading.replace(/[.]/g, "\\.")));
+  assert.match(explainer, /The workflow does not silently guess/);
+  assert.match(explainer, /Evidence lineage/);
+  assert.match(explainer, /Rules verify; humans resolve/);
+  assert.match(explainer, /mobileVisual/);
+  assert.match(explainer, /IntersectionObserver/);
+});
+
+test("motion is finite, has a reduced-motion final state and uses no video", () => {
+  assert.doesNotMatch(page + explainer, /<video|autoplay/i);
+  assert.doesNotMatch(css, /infinite/);
+  assert.match(css, /prefers-reduced-motion:reduce/);
+  assert.match(css, /\.heroResult\{opacity:1/);
+  assert.match(css, /overflow:clip/);
 });
