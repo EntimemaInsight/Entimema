@@ -3,8 +3,6 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import styles from "./resources.module.css";
 
-const circumference = 2 * Math.PI * 18;
-
 function Icon({ name }: { name: "linkedin" | "email" | "link" | "save" }) {
   if (name === "linkedin") return <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6.5 8.1H3V21h3.5V8.1ZM4.8 3a2.05 2.05 0 1 0 0 4.1A2.05 2.05 0 0 0 4.8 3ZM21 13.6c0-3.9-2.1-5.8-4.9-5.8-2.3 0-3.3 1.2-3.9 2.1V8.1H8.7V21h3.5v-6.4c0-1.7.3-3.4 2.5-3.4 2.1 0 2.2 2 2.2 3.5V21H21v-7.4Z" /></svg>;
   if (name === "email") return <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M3 5.5h18v13H3v-13Zm1.5 1.7 7.5 5.4 7.5-5.4M4.5 17l5.4-5m9.6 5-5.4-5" /></svg>;
@@ -17,6 +15,7 @@ export default function ArticleUtilities({ slug, title, targetId }: { slug: stri
   const [copied, setCopied] = useState(false);
   const [saved, setSaved] = useState(false);
   const [feedback, setFeedback] = useState("");
+  const [sectionCount, setSectionCount] = useState(1);
   const feedbackTimer = useRef<number | null>(null);
   const canonicalUrl = `https://www.entimema.com/resources/${slug}`;
 
@@ -27,6 +26,7 @@ export default function ArticleUtilities({ slug, title, targetId }: { slug: stri
     const update = () => {
       const target = document.getElementById(targetId);
       if (!target) return;
+      setSectionCount(Math.max(1, target.querySelectorAll("section[id]").length));
       const rect = target.getBoundingClientRect();
       const start = window.scrollY + rect.top - window.innerHeight * 0.24;
       const finish = window.scrollY + rect.bottom - window.innerHeight * 0.72;
@@ -72,17 +72,21 @@ export default function ArticleUtilities({ slug, title, targetId }: { slug: stri
     announce(next ? "Saved in this browser" : "Removed from saved articles");
   }
 
-  const progressStyle = { "--reading-progress": circumference * (1 - progress) } as CSSProperties;
+  const progressStyle = { "--reading-progress": progress } as CSSProperties;
   const complete = progress >= 0.995;
 
   return (
     <aside className={styles.articleUtilities} aria-label="Article tools">
-      <div className={styles.readingProgress} aria-label={complete ? "Article read" : `${Math.round(progress * 100)}% read`} role="img">
-        <svg aria-hidden="true" viewBox="0 0 44 44" style={progressStyle}>
-          <circle className={styles.progressTrack} cx="22" cy="22" r="18" />
-          <circle className={styles.progressValue} cx="22" cy="22" r="18" />
-        </svg>
-        {complete ? <span aria-hidden="true">✓</span> : null}
+      <div className={styles.readingProgress} aria-label={complete ? "Article read" : `${Math.round(progress * 100)}% read`} role="img" style={progressStyle}>
+        <span className={styles.spineLabel} aria-hidden="true">READ</span>
+        <div className={styles.spineTrack} aria-hidden="true">
+          <i className={styles.spineValue} />
+          {Array.from({ length: sectionCount }, (_, index) => (
+            <i className={styles.spineSection} key={index} style={{ "--section-position": sectionCount === 1 ? 0 : index / (sectionCount - 1) } as CSSProperties} />
+          ))}
+          <i className={styles.spineCursor} />
+        </div>
+        <span className={styles.spineStatus} aria-hidden="true">{complete ? "✓ READ" : `${Math.round(progress * 100)}%`}</span>
       </div>
       <a aria-label="Share on LinkedIn" data-label="Share on LinkedIn" href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(canonicalUrl)}`} onClick={() => announce("Opening LinkedIn share")} rel="noopener noreferrer" target="_blank"><Icon name="linkedin" /><span>LinkedIn</span></a>
       <a aria-label="Share by email" data-label="Share by email" href={`mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(canonicalUrl)}`} onClick={() => announce("Opening a new email")}><Icon name="email" /><span>Email</span></a>
