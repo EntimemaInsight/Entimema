@@ -13,7 +13,7 @@ export const scoreScalingPdoSections = [
 const architecture = ["Logistic model","Log-odds","Good:Bad odds","Base score / odds / PDO","Scaled score","Variable points","Score-to-PD mapping","Cut-off","Production decision"];
 
 export default function ScoreScalingPdoArticle(){return <>
-  <p className="resource-lead"><em>A model probability is not yet an operational credit score. Score scaling is the mathematical and governance layer that converts model odds into a stable, interpretable and executable score architecture.</em></p>
+  <p className="resource-lead"><em><strong>Credit score scaling converts model odds into operational points using Factor = PDO / ln(2) and Offset = Base Score − Factor × ln(Base Odds).</strong> PDO—points to double the odds—sets the distance between equivalent risk levels. The resulting scale preserves model ranking while creating stable scores, cut-offs and an auditable score-to-PD mapping.</em></p>
   <KeyObservation><p><strong>Scaling changes representation, not ranking.</strong> The score is a coordinate system placed on risk—not new predictive information.</p></KeyObservation>
 
   <section id="representation"><h2>From a statistical probability to an operational language</h2>

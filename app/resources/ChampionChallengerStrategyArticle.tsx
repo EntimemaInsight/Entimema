@@ -25,10 +25,10 @@ const failures=[
 ];
 
 export default function ChampionChallengerStrategyArticle(){return <div className={styles.articleBody}>
-  <section id="definition"><p className={styles.lead}>A challenger strategy is not better because a replay simulation says so. It is better only when the evidence survives selection bias, counterfactual uncertainty, implementation effects and real portfolio outcomes.</p>
+  <section id="definition"><p className={styles.lead}><strong>Champion-challenger testing compares the current production credit strategy with a governed alternative on the same eligible population.</strong> Replay identifies decision migration; controlled deployment and mature vintage outcomes determine whether the challenger actually improves risk-adjusted value. A challenger is not better because a simulation says so—it is better only when the evidence survives selection bias, counterfactual uncertainty, implementation effects and real portfolio outcomes.</p>
     <div className={styles.dual}><article><b>CHAMPION</b><strong>Dᵢᶜ = Sᶜ(Xᵢ)</strong><span>Current production strategy</span></article><i>↔</i><article><b>CHALLENGER</b><strong>Dᵢʰ = Sʰ(Xᵢ)</strong><span>Alternative governed strategy</span></article></div>
     <Formula label="Conceptual decision change"><span className={styles.formula}>ΔDᵢ = Dᵢʰ − Dᵢᶜ</span></Formula>
-    <p>Strategy is more than cut-off. Eligibility, policy rules, affordability, referrals, limits, pricing and product alternatives can all change. A single-change challenger is easier to interpret; a multi-change challenger can create larger value but weaker attribution.</p>
+    <p>Strategy is more than cut-off. Eligibility, policy rules, affordability, referrals, limits, pricing and product alternatives can all change inside the <Link href="/resources/credit-decision-engine-architecture">credit decision engine</Link>. A single-change challenger is easier to interpret; a multi-change challenger can create larger value but weaker attribution.</p>
     <KeyObservation title="Signature distinction"><p><strong>Simulation tells you what the strategy would have decided. It does not automatically tell you what would have happened.</strong></p></KeyObservation>
   </section>
 

@@ -102,6 +102,8 @@ const financialIntelligenceSubjects: Record<string, readonly string[]> = {
   "profit-vs-cash-flow-reconstruction": ["Cash Flow Analysis", "Accrual Accounting", "Three-Statement Reconciliation"],
   "working-capital-analysis": ["Working Capital", "Cash Conversion Cycle", "Operating Cash Flow"],
   "variance-analysis-price-volume-mix-cost-drivers": ["Variance Analysis", "Price-Volume-Mix Analysis", "Cost Drivers"],
+  "champion-challenger-credit-strategy-testing": ["Champion Challenger Testing", "Credit Strategy Testing", "Credit Risk", "Controlled Experimentation"],
+  "score-scaling-points-to-double-odds-credit-scores": ["Credit Score Scaling", "Points to Double the Odds", "PDO Formula", "Credit Scorecards"],
   "horizontal-and-vertical-financial-analysis": ["Horizontal Analysis", "Vertical Analysis", "Financial Statement Analysis"],
   "financial-data-normalisation": ["Financial data normalisation", "Canonical financial data mapping"],
   "trial-balance-to-financial-statements": ["Trial balance mapping", "Financial statement preparation"],
