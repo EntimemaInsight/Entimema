@@ -349,6 +349,97 @@
 .fir15Editorial .table tbody td:first-child { color: var(--brand-navy-950); font-weight: 650; }
 .fir15Editorial .table tbody tr:last-child td { border-bottom: 0; }
 
+/* Insight Visual Grammar — the final editorial normalization layer for bespoke data visuals. */
+.fir15Editorial .prose :where(
+  [class*="__matrix"], [class*="__heatmap"], [class*="__contribution"],
+  [class*="__maturity"], [class*="__snapshotGrid"], [class*="__caseGrid"],
+  [class*="__audienceGrid"], [class*="__criteriaGrid"], [class*="__validationGrid"],
+  [class*="__metricGrid"], [class*="__stageGrid"], [class*="__monitorGrid"],
+  [class*="__conceptGrid"], [class*="__definitionGrid"], [class*="__testGrid"],
+  [class*="__toolGrid"], [class*="__moduleGrid"], [class*="__comparison"],
+  [class*="__compare"], [class*="__dual"], [class*="__bridges"],
+  [class*="__cards"], [class*="__principles"]
+) { position: relative; border-top: 2px solid var(--brand-navy-950); border-bottom: 1px solid #aeb3bd; border-inline: 0; color: var(--brand-navy-950); background: rgba(255,255,255,.36); box-shadow: 0 14px 34px rgba(4,19,63,.045); }
+
+.fir15Editorial .prose :where(
+  [class*="__matrix"], [class*="__heatmap"], [class*="__contribution"],
+  [class*="__maturity"], [class*="__snapshotGrid"], [class*="__caseGrid"],
+  [class*="__audienceGrid"], [class*="__criteriaGrid"], [class*="__validationGrid"],
+  [class*="__metricGrid"], [class*="__stageGrid"], [class*="__monitorGrid"],
+  [class*="__conceptGrid"], [class*="__definitionGrid"], [class*="__testGrid"],
+  [class*="__toolGrid"], [class*="__moduleGrid"], [class*="__comparison"],
+  [class*="__compare"], [class*="__dual"], [class*="__bridges"],
+  [class*="__cards"], [class*="__principles"]
+)::before { content:""; position:absolute; z-index:2; top:-2px; left:0; width:72px; height:2px; background:var(--brand-orange-500); }
+
+.fir15Editorial .prose :where(
+  [class*="__matrix"], [class*="__heatmap"], [class*="__contribution"],
+  [class*="__maturity"], [class*="__snapshotGrid"], [class*="__caseGrid"],
+  [class*="__audienceGrid"], [class*="__criteriaGrid"], [class*="__validationGrid"],
+  [class*="__metricGrid"], [class*="__stageGrid"], [class*="__monitorGrid"],
+  [class*="__conceptGrid"], [class*="__definitionGrid"], [class*="__testGrid"],
+  [class*="__toolGrid"], [class*="__moduleGrid"], [class*="__comparison"],
+  [class*="__compare"], [class*="__dual"], [class*="__bridges"],
+  [class*="__cards"], [class*="__principles"]
+) > :where(article,div,span,li,strong,b,em) { border-color:#c8ccd3; color:var(--brand-navy-950); }
+
+.fir15Editorial .prose :where(
+  [class*="__flow"], [class*="__workflow"], [class*="__agentFlow"],
+  [class*="__architecture"], [class*="__agent"], [class*="__chain"],
+  [class*="__sequence"], [class*="__timeline"], [class*="__layers"],
+  [class*="__stack"], [class*="__lifecycle"], [class*="__loop"],
+  [class*="__bridge"], [class*="__transmission"], [class*="__evidenceFlow"],
+  [class*="__validationFlow"], [class*="__toolFlow"], [class*="__recordFlow"],
+  [class*="__claimFlow"], [class*="__decisionSystem"]
+) { position:relative; border-top:2px solid var(--brand-navy-950); border-bottom:1px solid #aeb3bd; color:var(--brand-navy-950); }
+
+.fir15Editorial .prose :where(
+  [class*="__flow"], [class*="__workflow"], [class*="__agentFlow"],
+  [class*="__architecture"], [class*="__agent"], [class*="__chain"],
+  [class*="__sequence"], [class*="__timeline"], [class*="__layers"],
+  [class*="__stack"], [class*="__lifecycle"], [class*="__loop"],
+  [class*="__bridge"], [class*="__transmission"], [class*="__evidenceFlow"],
+  [class*="__validationFlow"], [class*="__toolFlow"], [class*="__recordFlow"],
+  [class*="__claimFlow"], [class*="__decisionSystem"]
+)::before { content:""; position:absolute; z-index:2; top:-2px; left:0; width:72px; height:2px; background:var(--brand-orange-500); }
+
+.fir15Editorial .prose :where(
+  [class*="__flow"], [class*="__workflow"], [class*="__agentFlow"],
+  [class*="__architecture"], [class*="__agent"], [class*="__chain"],
+  [class*="__sequence"], [class*="__timeline"], [class*="__layers"],
+  [class*="__stack"], [class*="__lifecycle"], [class*="__loop"],
+  [class*="__bridge"], [class*="__transmission"], [class*="__evidenceFlow"],
+  [class*="__validationFlow"], [class*="__toolFlow"], [class*="__recordFlow"],
+  [class*="__claimFlow"], [class*="__decisionSystem"]
+) > :where(article,div,span,li,strong,em) { border-color:#c8ccd3; }
+
+.fir15Editorial .prose :where(
+  [class*="__frontier"], [class*="__graph"], [class*="__axis"],
+  [class*="__funnel"], [class*="__migration"], [class*="__propagation"],
+  [class*="__borrowers"], [class*="__zones"], [class*="__histories"],
+  [class*="__temporal"], [class*="__lineage"]
+) { position:relative; border-top:2px solid var(--brand-navy-950); border-bottom:1px solid #aeb3bd; border-left-color:#818a9a; color:var(--brand-navy-950); background-color:rgba(255,255,255,.46); box-shadow:0 14px 34px rgba(4,19,63,.04); }
+
+.fir15Editorial .prose :where(
+  [class*="__frontier"], [class*="__graph"], [class*="__axis"],
+  [class*="__funnel"], [class*="__migration"], [class*="__propagation"],
+  [class*="__borrowers"], [class*="__zones"], [class*="__histories"],
+  [class*="__temporal"], [class*="__lineage"]
+)::before { content:""; position:absolute; z-index:2; top:-2px; left:0; width:72px; height:2px; background:var(--brand-orange-500); }
+
+.fir15Editorial .prose :where([class*="__humanNode"],[class*="__total"],[class*="__emphasis"]) { border-color:var(--brand-navy-950); color:#fff; background:var(--brand-navy-950); }
+.fir15Editorial .prose :where([class*="__warning"],[class*="__failure"],[class*="__diagnostic"]) { border-color:#b84322; }
+.fir15Editorial .prose :where([class*="__formula"],[class*="__equation"]) { font-family:"Cambria Math","STIX Two Math",Georgia,serif !important; font-variant-numeric:lining-nums tabular-nums; }
+.fir15Editorial .prose :where([class*="__code"],[class*="__schema"]) { border-radius:0; box-shadow:none; }
+
+.fir15Editorial .prose :where(
+  [class*="__matrix"], [class*="__heatmap"], [class*="__contribution"],
+  [class*="__maturity"], [class*="__comparison"], [class*="__compare"],
+  [class*="__flow"], [class*="__workflow"], [class*="__agentFlow"],
+  [class*="__architecture"], [class*="__timeline"], [class*="__frontier"],
+  [class*="__graph"], [class*="__funnel"]
+) :where(h3,strong,b) { text-wrap:balance; }
+
 .editorialIdentityRow { width: fit-content; display: flex; flex-wrap: wrap; align-items: stretch; gap: 0; margin-top: 28px; border-block: 1px solid #aeb3bd; color: #677085; font-family: var(--font-sans); font-size: 12px; line-height: 1.4; }
 .editorialIdentityRow > span { display: none; }
 .editorialIdentityRow > a { min-height: 48px; display: inline-flex; align-items: center; color: var(--brand-navy-950); text-decoration: none; transition: color .2s ease, background-color .2s ease; }
