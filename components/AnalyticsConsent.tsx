@@ -24,12 +24,16 @@ export default function AnalyticsConsent() {
   const mounted = useSyncExternalStore(subscribeToClientMount, () => true, () => false);
   const enabled = mounted && Boolean(validMeasurementId) && isProductionAnalyticsHost();
   const [consent, setConsent] = useState<Consent>(readStoredConsent);
+  const [analyticsSelected, setAnalyticsSelected] = useState(() => readStoredConsent() === "granted");
   const [preferencesOpen, setPreferencesOpen] = useState(false);
   const initialized = useRef(false);
 
   useEffect(() => {
     if (!enabled) return;
-    const openPreferences = () => setPreferencesOpen(true);
+    const openPreferences = () => {
+      setAnalyticsSelected(readStoredConsent() === "granted");
+      setPreferencesOpen(true);
+    };
     window.addEventListener(ANALYTICS_PREFERENCES_EVENT, openPreferences);
     return () => window.removeEventListener(ANALYTICS_PREFERENCES_EVENT, openPreferences);
   }, [enabled]);
@@ -74,16 +78,25 @@ export default function AnalyticsConsent() {
 
   return <>
     {consent === "granted" && validMeasurementId ? <Script src={`https://www.googletagmanager.com/gtag/js?id=${validMeasurementId}`} strategy="lazyOnload" /> : null}
-    {consentDialogOpen ? <section aria-label="Analytics preferences" className={styles.banner} role="dialog">
-      <div>
-        <strong>Privacy-conscious analytics</strong>
-        <p>With your permission, Entimema uses Google Analytics to understand how the website is used and improve the experience. Form contents and uploaded financial data are never shared with Google Analytics.</p>
+    {consentDialogOpen ? <section aria-label="Privacy choices" className={styles.banner} role="dialog">
+      <div className={styles.intro}>
+        <strong>Privacy choices</strong>
+        <p>Choose whether Entimema may use privacy-conscious analytics. Form contents and uploaded financial data are never shared with Google Analytics.</p>
         <Link className={styles.privacyLink} href="/privacy">Privacy Policy</Link>
       </div>
-      <div className={styles.actions}>
-        <button className={styles.secondary} onClick={() => choose("denied")} type="button">Decline</button>
-        <button className={styles.primary} onClick={() => choose("granted")} type="button">Allow analytics</button>
+      <div className={styles.preferenceList}>
+        <div className={styles.preferenceRow}>
+          <div><strong>Essential services</strong><span>Required for security and core website functions.</span></div>
+          <span className={styles.alwaysActive}>Always active</span>
+        </div>
+        <div className={styles.preferenceRow}>
+          <div><strong>Analytics</strong><span>Helps us understand website use and improve the experience.</span></div>
+          <button aria-checked={analyticsSelected} aria-label="Allow analytics" className={styles.switch} onClick={() => setAnalyticsSelected((selected) => !selected)} role="switch" type="button"><span /></button>
+        </div>
       </div>
-    </section> : <button className={styles.preferencesTrigger} onClick={() => setPreferencesOpen(true)} type="button">Privacy choices</button>}
+      <div className={styles.actions}>
+        <button className={styles.primary} onClick={() => choose(analyticsSelected ? "granted" : "denied")} type="button">Save preferences</button>
+      </div>
+    </section> : <button aria-label="Open privacy choices" className={styles.preferencesTrigger} onClick={() => { setAnalyticsSelected(consent === "granted"); setPreferencesOpen(true); }} title="Privacy choices" type="button"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3.25a8.75 8.75 0 0 0-8.75 8.75M12 6a6 6 0 0 0-6 6c0 1.5-.2 3.34-1.15 5.23M12 8.75A3.25 3.25 0 0 0 8.75 12c0 3.1-.65 5.78-2.1 8.15M12 11.25a.75.75 0 0 0-.75.75c0 3.75-.72 6.72-2.1 8.75M14.75 12c0 4.45-.74 7.43-1.72 9M17.5 12c0 3.85-.48 6.8-1.22 9M20.25 12A8.25 8.25 0 0 0 12 3.75" /></svg></button>}
   </>;
 }

@@ -1,14 +1,27 @@
-.banner { position: fixed; z-index: 10000; right: 24px; bottom: 24px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 28px; width: min(680px, calc(100vw - 48px)); padding: 22px 24px; border: 1px solid var(--brand-blue-200); background: var(--brand-navy-950); box-shadow: 0 18px 48px rgba(5, 19, 33, .2); color: #fff; }
+.banner { position: fixed; z-index: 10000; right: 24px; bottom: 24px; width: min(620px, calc(100vw - 48px)); padding: 22px 24px; border: 1px solid var(--brand-blue-200); background: var(--brand-navy-950); box-shadow: 0 18px 48px rgba(5, 19, 33, .2); color: #fff; }
 .banner strong { font-size: 15px; }
 .banner p { max-width: 56ch; margin: 7px 0 0; color: rgba(255,255,255,.72); font-size: 13px; line-height: 1.55; }
+.intro { padding-right: 10px; }
 .privacyLink { display: inline-block; margin-top: 9px; color: rgba(255,255,255,.86); font-size: 12px; font-weight: 700; text-underline-offset: 3px; }
 .privacyLink:hover { color: #fff; }
-.actions { display: flex; align-items: end; gap: 8px; }
+.preferenceList { display: grid; gap: 1px; margin-top: 18px; background: rgba(255,255,255,.12); }
+.preferenceRow { display: flex; align-items: center; justify-content: space-between; gap: 22px; padding: 14px 15px; background: rgba(255,255,255,.055); }
+.preferenceRow > div { display: grid; gap: 3px; }
+.preferenceRow strong { font-size: 13px; }
+.preferenceRow span { color: rgba(255,255,255,.66); font-size: 12px; line-height: 1.4; }
+.preferenceRow .alwaysActive { flex: 0 0 auto; color: rgba(255,255,255,.82); font-weight: 700; }
+.switch { position: relative; flex: 0 0 auto; width: 44px; height: 24px; padding: 0; border: 1px solid rgba(255,255,255,.42); border-radius: 999px; background: rgba(255,255,255,.14); cursor: pointer; transition: background .18s ease, border-color .18s ease; }
+.switch span { position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; border-radius: 50%; background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,.28); transition: transform .18s ease; }
+.switch[aria-checked="true"] { border-color: var(--brand-orange-500); background: var(--brand-orange-500); }
+.switch[aria-checked="true"] span { transform: translateX(20px); }
+.switch:focus-visible { outline: 3px solid var(--brand-blue-200); outline-offset: 3px; }
+.actions { display: flex; justify-content: flex-end; margin-top: 16px; }
 .actions button { min-height: 42px; padding: 0 15px; border: 1px solid rgba(255,255,255,.35); font: inherit; font-size: 12px; font-weight: 700; cursor: pointer; }
 .primary { border-color: var(--brand-orange-500) !important; background: var(--brand-orange-500); color: var(--brand-navy-950); }
-.secondary { background: transparent; color: #fff; }
 .actions button:focus-visible { outline: 3px solid var(--brand-blue-200); outline-offset: 3px; }
-.preferencesTrigger { position: fixed; z-index: 9999; left: 18px; bottom: 18px; padding: 8px 11px; border: 1px solid rgba(4,19,63,.24); background: rgba(255,255,255,.94); box-shadow: 0 8px 24px rgba(5,19,33,.09); color: var(--brand-navy-950); font: inherit; font-size: 12px; font-weight: 700; cursor: pointer; backdrop-filter: blur(10px); }
-.preferencesTrigger:hover { border-color: rgba(4,19,63,.48); background: #fff; }
+.preferencesTrigger { position: fixed; z-index: 9999; left: 18px; bottom: 18px; display: grid; place-items: center; width: 48px; height: 48px; padding: 0; border: 1px solid rgba(255,255,255,.7); border-radius: 50%; background: var(--brand-blue-700, #4338ca); box-shadow: 0 10px 26px rgba(5,19,33,.2); color: #fff; cursor: pointer; transition: transform .18s ease, box-shadow .18s ease; }
+.preferencesTrigger svg { width: 28px; height: 28px; fill: none; stroke: currentColor; stroke-width: 1.55; stroke-linecap: round; stroke-linejoin: round; }
+.preferencesTrigger:hover { transform: translateY(-2px); box-shadow: 0 14px 30px rgba(5,19,33,.25); }
 .preferencesTrigger:focus-visible { outline: 3px solid var(--brand-blue-200); outline-offset: 3px; }
-@media (max-width: 640px) { .banner { right: 12px; bottom: 12px; grid-template-columns: 1fr; gap: 18px; width: calc(100vw - 24px); padding: 20px; } .actions { align-items: stretch; } .actions button { flex: 1; } }
+@media (max-width: 640px) { .banner { right: 12px; bottom: 12px; width: calc(100vw - 24px); padding: 20px; } .preferenceRow { align-items: flex-start; } .actions button { width: 100%; } .preferencesTrigger { left: 12px; bottom: 12px; width: 44px; height: 44px; } }
+@media (prefers-reduced-motion: reduce) { .switch, .switch span, .preferencesTrigger { transition: none; } }
