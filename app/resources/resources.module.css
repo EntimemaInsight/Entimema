@@ -267,6 +267,7 @@
 .implication div { margin-top: 10px; font-size: 19px; line-height: 1.6; }
 .formula { padding: 28px; border-block: 1px solid var(--hairline); text-align: center; }
 .formula > div { overflow-x: auto; color: var(--brand-navy-900); font-family: Georgia, serif; font-size: clamp(20px, 3vw, 30px); }
+.equationExpression { min-width: 0; }
 
 /* Entimema Insights: shared financial-editorial architecture. */
 .fir15Editorial { background: #fffaf4; }
@@ -286,7 +287,7 @@
 .fir15Editorial .tocLabel { overflow-wrap: anywhere; }
 .fir15Editorial .toc a[aria-current="location"] { border-left: 0; color: var(--brand-navy-950); font-weight: 700; }
 .fir15Editorial .toc a[aria-current="location"] .tocNumber { color: var(--brand-orange-500); }
-.fir15Editorial .prose { max-width: 720px; color: var(--entimema-ink); font-family: var(--entimema-font-editorial); font-size: 20px; line-height: 1.72; letter-spacing: -.006em; }
+.fir15Editorial .prose { max-width: 720px; color: var(--entimema-ink); font-family: var(--entimema-font-editorial); font-size: 20px; line-height: 1.72; letter-spacing: -.006em; counter-reset: insight-equation; }
 .fir15Editorial .leadParagraph { max-width: 660px; font-family: var(--entimema-font-editorial); font-size: clamp(23px, 2vw, 28px); font-weight: 400; line-height: 1.52; letter-spacing: -.017em; }
 .fir15Editorial .prose p { margin-bottom: 1.42em; }
 .fir15Editorial .prose section { padding-top: clamp(64px, 7vw, 96px); border-top: 1px solid var(--hairline); }
@@ -323,10 +324,18 @@
 .fir15Editorial .framework ol { gap: 0; margin-top: 24px; border-top: 1px solid var(--brand-navy-900); }
 .fir15Editorial .framework li { align-self: stretch; padding: 13px 10px; border-bottom: 1px solid #cfd2d8; font-family: var(--font-sans); font-weight: 650; }
 .fir15Editorial .framework li span { padding: 0; border: 0; }
-.fir15Editorial .formula { position: relative; padding: 30px 26px 27px; border-top: 2px solid var(--brand-navy-950); border-bottom: 1px solid #aeb3bd; background: rgba(255,255,255,.48); text-align: left; box-shadow: 0 12px 30px rgba(4,19,63,.04); }
+.fir15Editorial .formula { position: relative; display: flex; flex-direction: column; padding: 27px 68px 29px 27px; overflow: hidden; border-top: 2px solid var(--brand-navy-950); border-bottom: 1px solid #aeb3bd; background: linear-gradient(112deg,rgba(255,255,255,.78),rgba(247,242,234,.58)); text-align: left; box-shadow: 0 12px 30px rgba(4,19,63,.04); counter-increment: insight-equation; }
 .fir15Editorial .formula::before { content: ""; position: absolute; top: -2px; left: 0; width: 68px; height: 2px; background: var(--brand-orange-500); }
-.fir15Editorial .formula > div { color: var(--brand-navy-950); font-family: var(--entimema-font-editorial); font-variant-numeric: lining-nums tabular-nums; }
-.fir15Editorial .formula figcaption { margin-top: 17px; padding-top: 11px; border-top: 1px solid #cfd2d8; font-family: var(--font-sans); font-size: 10px; letter-spacing: .04em; }
+.fir15Editorial .formula::after { content: "(" counter(insight-equation, decimal-leading-zero) ")"; position: absolute; top: 31px; right: 25px; color: #778094; font-family: var(--font-sans); font-size: 9px; font-weight: 650; letter-spacing: .08em; }
+.fir15Editorial .formula > .equationExpression { order: 2; padding: 20px 0 2px; overflow-x: auto; overflow-y: hidden; color: var(--brand-navy-950); font-family: "Cambria Math", "STIX Two Math", Georgia, serif; font-size: clamp(21px,2.35vw,30px); font-weight: 400; line-height: 1.72; letter-spacing: -.018em; white-space: normal; font-variant-numeric: lining-nums tabular-nums; scrollbar-width: none; }
+.fir15Editorial .formula > .equationExpression::-webkit-scrollbar { display: none; }
+.fir15Editorial .formula > .equationExpression * { color: inherit; font-family: inherit !important; font-size: inherit; font-weight: inherit; letter-spacing: inherit; }
+.fir15Editorial .formula > .equationExpression sub,
+.fir15Editorial .formula > .equationExpression sup { position: relative; font-size: .58em; line-height: 0; letter-spacing: 0; }
+.fir15Editorial .formula > .equationExpression sub { bottom: -.16em; }
+.fir15Editorial .formula > .equationExpression sup { top: -.42em; }
+.fir15Editorial .formula figcaption { order: 1; display: grid; gap: 5px; margin: 0; padding: 0 0 12px; border-bottom: 1px solid #cfd2d8; color: #596274; font-family: var(--font-sans); font-size: 10px; line-height: 1.42; letter-spacing: .025em; }
+.fir15Editorial .formula figcaption span:first-child { color: var(--brand-orange-600); font-size: 8px; font-weight: 800; letter-spacing: .16em; }
 .fir15Editorial .tableScroll { border-top: 3px solid var(--brand-navy-950); border-bottom: 1px solid var(--brand-navy-950); background: rgba(255,255,255,.45); box-shadow: 0 14px 36px rgba(4,19,63,.045); }
 .fir15Editorial .table { font-family: var(--font-sans); font-size: 13px; line-height: 1.5; font-variant-numeric: tabular-nums lining-nums; }
 .fir15Editorial .table caption { padding: 15px 12px 14px; border-bottom: 1px solid var(--brand-navy-950); color: var(--brand-navy-950); font-family: var(--entimema-font-editorial); font-size: 17px; font-weight: 400; letter-spacing: -.012em; text-transform: none; }

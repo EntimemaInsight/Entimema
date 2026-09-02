@@ -40,5 +40,10 @@ export function DecisionImplication({ children }: { children: ReactNode }) {
 }
 
 export function Formula({ label, children }: { label: string; children: ReactNode }) {
-  return <figure className={styles.formula}><div aria-label={label}>{children}</div><figcaption>{label}</figcaption></figure>;
+  return (
+    <figure className={styles.formula} aria-label={label}>
+      <div className={styles.equationExpression} role="math" aria-label={label}>{children}</div>
+      <figcaption><span>METHOD NOTE</span><span>{label}</span></figcaption>
+    </figure>
+  );
 }
