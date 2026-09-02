@@ -1,5 +1,10 @@
 # Concierge 2.0 Architecture Audit
 
+> **Historical / deprecated (2026-08-21).** This document records the architecture that led to
+> the Agent Platform Core. Concierge is no longer a public standalone product. Current decisions are
+> documented in [`agent-platform/architecture.md`](agent-platform/architecture.md) and
+> [`agent-platform/concierge-retirement-audit.md`](agent-platform/concierge-retirement-audit.md).
+
 ## Sprint 6 addendum — Human Financial Interaction Layer
 
 The live runtime now has an explicit, read-only `InteractionRealizer` boundary after
