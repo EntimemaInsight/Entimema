@@ -12,6 +12,8 @@ import ResourceSemanticText from "./ResourceSemanticText";
 import EngineeringPublicationCover from "./EngineeringPublicationCover";
 import FinancialIntelligenceSeries, { financialIntelligenceSlugs } from "./FinancialIntelligenceSeries";
 import ResearchAuthorityPath from "./ResearchAuthorityPath";
+import ArticleUtilities from "./ArticleUtilities";
+import EditorialSubscription from "./EditorialSubscription";
 
 export type ArticleSection = { id: string; label: string };
 
@@ -19,19 +21,28 @@ export default function ResourceArticle({ resource, sections, children, readingM
   const topic = getTopic(resource.topic);
   const relatedResources = getPublishedRelatedResources(resource);
   const isEngineering = resource.stream === "engineering";
-  const isFir15Editorial = resource.slug === "ai-financial-analysis-models-rules-controls";
+  const isInsights = resource.stream === "insights";
+  const articleBodyId = `article-body-${resource.slug}`;
 
   return (
     <main className="site-page">
       <AnnouncementBar />
       <Navbar active="resources" />
       <ResourceViewAnalytics resourceSlug={resource.slug} resourceTitle={resource.headline} resourceTopic={topic?.label ?? resource.topic} />
-      <article className={`${styles.article} ${isFir15Editorial ? styles.fir15Editorial : ""}`}>
+      <article className={`${styles.article} ${isInsights ? styles.fir15Editorial : ""}`}>
         <header className={`${styles.articleHeader} ${isEngineering ? styles.engineeringArticleHeader : ""}`}>
           <div className={styles.readingContainer}>
             <div className={styles.articleMeta}><span>{isEngineering ? "Engineering & Research" : topic?.label}</span><span>{readingMinutes ?? resource.readingMinutes} min read</span></div>
             {!isEngineering ? <h1><ResourceSemanticText text={resource.headline} emphasis={resource.headlineEmphasis} className={styles.headlineEmphasis} /></h1> : null}
-            <PublisherIdentity />
+            {isInsights ? (
+              <div className={styles.editorialIdentityRow}>
+                <PublisherIdentity />
+                <span aria-hidden="true">·</span>
+                <a href="https://www.linkedin.com/company/144795091/" rel="noopener noreferrer" target="_blank">Follow on LinkedIn <b aria-hidden="true">↗</b></a>
+                <span aria-hidden="true">·</span>
+                <a href="https://www.linkedin.com/in/alexander-dimitrov-entimema/" rel="author noopener noreferrer" target="_blank">Alexander Dimitrov · Founder <b aria-hidden="true">↗</b></a>
+              </div>
+            ) : <PublisherIdentity />}
           </div>
         </header>
 
@@ -40,9 +51,15 @@ export default function ResourceArticle({ resource, sections, children, readingM
         </div>
 
         <div className={styles.articleLayout}>
-          {sections && sections.length > 2 ? <ArticleContents sections={sections} /> : null}
-          <div className={styles.prose}>{children}</div>
+          {isInsights ? (
+            <div className={styles.articleLeftRail}>
+              <ArticleUtilities slug={resource.slug} title={resource.headline} targetId={articleBodyId} />
+              {sections && sections.length > 2 ? <ArticleContents sections={sections} /> : null}
+            </div>
+          ) : sections && sections.length > 2 ? <ArticleContents sections={sections} /> : null}
+          <div className={styles.prose} id={articleBodyId}>{children}</div>
         </div>
+        {isInsights ? <EditorialSubscription /> : null}
         {financialIntelligenceSlugs.has(resource.slug) ? <FinancialIntelligenceSeries currentSlug={resource.slug} /> : null}
         {!isEngineering ? <ResearchAuthorityPath resource={resource} /> : null}
       </article>

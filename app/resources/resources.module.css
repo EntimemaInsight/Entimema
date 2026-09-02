@@ -268,13 +268,14 @@
 .formula { padding: 28px; border-block: 1px solid var(--hairline); text-align: center; }
 .formula > div { overflow-x: auto; color: var(--brand-navy-900); font-family: Georgia, serif; font-size: clamp(20px, 3vw, 30px); }
 
-/* FIR-15: isolated financial-editorial architecture. */
+/* Entimema Insights: shared financial-editorial architecture. */
+.fir15Editorial { background: #fffaf4; }
 .fir15Editorial .articleHeader { padding-top: clamp(42px, 6vw, 84px); }
 .fir15Editorial .readingContainer { width: min(1180px, calc(100% - 96px)); }
 .fir15Editorial .articleMeta { justify-content: flex-start; margin-bottom: 24px; padding-bottom: 13px; border-bottom: 1px solid var(--hairline); }
 .fir15Editorial .articleHeader h1 { max-width: 18ch; margin: 0; font-family: var(--entimema-font-editorial); font-size: clamp(46px, 5.25vw, 76px); font-weight: 400; line-height: 1.01; letter-spacing: -.035em; text-align: left; text-wrap: balance; }
 .fir15Editorial .headlineEmphasis { color: inherit; }
-.fir15Editorial .publicationIdentity { justify-content: flex-start; margin-top: 24px; }
+.fir15Editorial .publicationIdentity { justify-content: flex-start; margin-top: 0; }
 .fir15Editorial .publicationCard { right: auto; left: 0; transform: none; }
 .fir15Editorial .articleCover { width: min(1280px, calc(100% - 96px)); margin-top: clamp(36px, 4vw, 56px); }
 .fir15Editorial .articleLayout { grid-template-columns: 210px minmax(0, 720px) minmax(120px, 1fr); column-gap: clamp(44px, 5vw, 76px); width: min(1320px, calc(100% - 96px)); margin-block: clamp(88px, 9vw, 132px); }
@@ -284,7 +285,7 @@
 .fir15Editorial .toc a { grid-template-columns: 25px 1fr; padding: 7px 0; border-left: 0; border-bottom: 1px solid rgba(203,208,213,.55); font-size: 11px; line-height: 1.35; }
 .fir15Editorial .toc a[aria-current="location"] { border-left: 0; color: var(--brand-navy-950); font-weight: 700; }
 .fir15Editorial .toc a[aria-current="location"] .tocNumber { color: var(--brand-orange-500); }
-.fir15Editorial .prose { max-width: 720px; color: var(--entimema-ink); font-family: var(--entimema-font-editorial); font-size: 18px; line-height: 1.76; letter-spacing: -.006em; }
+.fir15Editorial .prose { max-width: 720px; color: var(--entimema-ink); font-family: var(--entimema-font-editorial); font-size: 20px; line-height: 1.72; letter-spacing: -.006em; }
 .fir15Editorial .leadParagraph { max-width: 660px; font-family: var(--entimema-font-editorial); font-size: clamp(23px, 2vw, 28px); font-weight: 400; line-height: 1.52; letter-spacing: -.017em; }
 .fir15Editorial .prose p { margin-bottom: 1.42em; }
 .fir15Editorial .prose section { padding-top: clamp(64px, 7vw, 96px); border-top: 1px solid var(--hairline); }
@@ -321,6 +322,46 @@
 .fir15Editorial .table th { background: transparent; font-size: 11px; font-weight: 750; }
 .fir15Editorial .table tbody tr:last-child td { border-bottom: 0; }
 
+.editorialIdentityRow { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 24px; color: #677085; font-family: var(--font-sans); font-size: 12px; line-height: 1.4; }
+.editorialIdentityRow > span { color: #a3a9b5; }
+.editorialIdentityRow > a { color: var(--brand-navy-900); text-decoration: none; transition: color .2s ease; }
+.editorialIdentityRow > a:hover { color: var(--brand-orange-600); }
+.editorialIdentityRow > a:focus-visible { outline: 2px solid var(--brand-orange-500); outline-offset: 3px; }
+.editorialIdentityRow b { font-weight: 500; }
+
+.articleLeftRail { grid-column: 1; align-self: start; position: sticky; top: 112px; max-height: calc(100vh - 136px); overflow-y: auto; scrollbar-width: thin; }
+.articleLeftRail .toc { position: static; max-height: none; margin-top: 28px; overflow: visible; }
+.articleUtilities { display: grid; grid-template-columns: repeat(4, 40px); gap: 8px; align-items: center; padding-bottom: 22px; border-bottom: 1px solid var(--hairline); font-family: var(--font-sans); }
+.articleUtilities > a,
+.articleUtilities > button { width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; padding: 0; border: 1px solid #c8ccd3; color: var(--brand-navy-950); background: transparent; cursor: pointer; transition: border-color .2s ease, color .2s ease, background-color .2s ease; }
+.articleUtilities > a:hover,
+.articleUtilities > button:hover { border-color: var(--brand-navy-900); background: rgba(255,255,255,.7); }
+.articleUtilities > a:focus-visible,
+.articleUtilities > button:focus-visible { outline: 2px solid var(--brand-orange-500); outline-offset: 3px; }
+.articleUtilities > a svg,
+.articleUtilities > button svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.55; stroke-linecap: round; stroke-linejoin: round; }
+.articleUtilities > a:first-of-type svg { fill: currentColor; stroke: none; }
+.articleUtilities > a span,
+.articleUtilities > button span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.readingProgress { position: relative; grid-column: 1 / -1; width: 44px; height: 44px; display: grid; place-items: center; margin-bottom: 10px; color: var(--brand-navy-950); }
+.readingProgress svg { position: absolute; inset: 0; width: 44px; height: 44px; transform: rotate(-90deg); }
+.readingProgress circle { fill: none; stroke-width: 1.5; }
+.progressTrack { stroke: #d8d9dc; }
+.progressValue { stroke: var(--brand-orange-600); stroke-dasharray: 113.097; stroke-dashoffset: var(--reading-progress); stroke-linecap: round; transition: stroke-dashoffset .16s linear; }
+.readingProgress span { z-index: 1; font-family: var(--font-sans); font-size: 15px; font-weight: 700; }
+
+.editorialSubscription { width: min(1180px, calc(100% - 96px)); display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 64px; align-items: end; margin: 0 auto clamp(76px, 8vw, 118px); padding: clamp(34px, 4vw, 54px) 0; border-block: 1px solid var(--brand-navy-900); color: var(--brand-navy-950); }
+.editorialSubscription > div:first-child { max-width: 700px; }
+.editorialSubscription span { color: var(--brand-orange-600); font-family: var(--font-sans); font-size: 10px; font-weight: 750; letter-spacing: .14em; }
+.editorialSubscription h2 { margin: 12px 0 8px; font-family: var(--entimema-font-editorial); font-size: clamp(34px, 4vw, 52px); font-weight: 400; line-height: 1; letter-spacing: -.03em; }
+.editorialSubscription p { max-width: 650px; margin: 0; color: #515b70; font-family: var(--entimema-font-editorial); font-size: 19px; line-height: 1.55; }
+.subscriptionAction { display: grid; justify-items: start; gap: 9px; }
+.subscriptionAction button { min-height: 46px; display: inline-flex; align-items: center; justify-content: space-between; gap: 42px; padding: 0 18px; border: 1px solid var(--brand-navy-950); color: var(--brand-navy-950); background: transparent; font-family: var(--font-sans); font-size: 13px; font-weight: 650; cursor: pointer; transition: color .2s ease, background-color .2s ease; }
+.subscriptionAction button:hover { color: #fff; background: var(--brand-navy-950); }
+.subscriptionAction button:focus-visible { outline: 2px solid var(--brand-orange-500); outline-offset: 3px; }
+.subscriptionAction b { font-size: 18px; font-weight: 400; }
+.subscriptionAction small { color: #777f8f; font-family: var(--font-sans); font-size: 10px; }
+
 @media (max-width: 1224px) {
   .fir15Editorial .articleLayout { width: min(760px, calc(100% - 64px)); }
   .fir15Editorial .figure,
@@ -328,15 +369,25 @@
   .fir15Editorial .formula,
   .fir15Editorial .tableScroll { width: 100%; max-width: 100%; }
   .fir15Editorial .mobileToc { position: static; margin-bottom: 64px; }
+  .articleLeftRail { display: contents; }
+  .articleUtilities { grid-column: 1; display: flex; position: sticky; z-index: 6; top: 82px; margin-bottom: 28px; padding: 10px 0; border-block: 1px solid var(--hairline); background: rgba(255,250,244,.96); backdrop-filter: blur(12px); }
+  .articleUtilities .readingProgress { flex: 0 0 auto; grid-column: auto; width: 38px; height: 38px; margin: 0 8px 0 0; }
+  .articleUtilities .readingProgress svg { width: 38px; height: 38px; }
+  .articleUtilities > a,
+  .articleUtilities > button { width: 38px; height: 38px; }
 }
 
 @media (max-width: 800px) {
   .fir15Editorial .readingContainer { width: min(100% - 48px, 720px); }
   .fir15Editorial .articleHeader h1 { font-size: clamp(42px, 8vw, 58px); }
   .fir15Editorial .articleCover { width: min(100% - 32px, 760px); }
-  .fir15Editorial .prose { font-size: 17px; }
+  .fir15Editorial .prose { font-size: 18px; line-height: 1.72; }
   .fir15Editorial .prose section,
   .fir15Editorial .prose section + section { margin-top: 0; padding-top: 64px; }
+  .editorialIdentityRow { gap: 8px; }
+  .editorialIdentityRow > span { display: none; }
+  .editorialIdentityRow > a { width: 100%; }
+  .editorialSubscription { width: min(100% - 48px, 720px); grid-template-columns: 1fr; gap: 28px; align-items: start; }
 }
 
 @media (max-width: 480px) {
@@ -351,6 +402,15 @@
   .fir15Editorial .framework { padding-inline: 0; }
   .fir15Editorial .implication { padding-left: 14px; }
   .fir15Editorial .table { min-width: 520px; }
+  .articleUtilities { top: 70px; margin-bottom: 22px; }
+  .articleUtilities > a,
+  .articleUtilities > button { flex: 1; }
+  .editorialSubscription { width: calc(100% - 36px); }
+  .subscriptionAction button { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .progressValue { transition: none; }
 }
 
 .framework01 { width: 100%; }
