@@ -347,7 +347,8 @@
 .founderIdentityAction i { color: #687083; font-family: var(--font-sans); font-size: 9px; font-style: normal; font-weight: 560; letter-spacing: .03em; }
 .linkedinIdentityAction { gap: 11px; padding: 0 18px; font-size: 9px; font-weight: 720; letter-spacing: .065em; text-transform: uppercase; }
 
-.articleLeftRail { grid-column: 1; align-self: start; position: static; max-height: none; overflow: visible; }
+.articleLeftRail { grid-column: 1; align-self: start; position: sticky; top: 112px; max-height: calc(100vh - 136px); overflow-x: hidden; overflow-y: auto; scrollbar-width: none; -ms-overflow-style: none; }
+.articleLeftRail::-webkit-scrollbar { display: none; width: 0; height: 0; }
 .articleLeftRail .toc { position: static; max-height: none; margin-top: 28px; overflow: visible; }
 .articleUtilities { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 5px; align-items: center; padding: 18px 0 22px; border-block: 2px solid var(--brand-navy-950); font-family: var(--font-sans); }
 .articleUtilities > a,
