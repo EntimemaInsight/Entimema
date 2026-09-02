@@ -11,6 +11,7 @@ import ResourceCard from "./ResourceCard";
 import ResourceSemanticText from "./ResourceSemanticText";
 import EngineeringPublicationCover from "./EngineeringPublicationCover";
 import FinancialIntelligenceSeries, { financialIntelligenceSlugs } from "./FinancialIntelligenceSeries";
+import ResearchAuthorityPath from "./ResearchAuthorityPath";
 
 export type ArticleSection = { id: string; label: string };
 
@@ -42,6 +43,7 @@ export default function ResourceArticle({ resource, sections, children, readingM
           <div className={styles.prose}>{children}</div>
         </div>
         {financialIntelligenceSlugs.has(resource.slug) ? <FinancialIntelligenceSeries currentSlug={resource.slug} /> : null}
+        {!isEngineering ? <ResearchAuthorityPath resource={resource} /> : null}
       </article>
 
       {relatedResources.length ? (
