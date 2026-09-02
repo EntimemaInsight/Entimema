@@ -1,0 +1,63 @@
+# Entimema
+
+> Entimema is a financial intelligence company that connects finance, risk, data, models and technology to build controlled, traceable decision systems for real business environments.
+
+Entimema helps finance and risk teams turn fragmented financial information into validated, decision-ready outputs. Its work combines AI interpretation, deterministic calculations, validation controls, evidence lineage and human judgement.
+
+Canonical website: https://www.entimema.com/
+Founder: Alexander Dimitrov
+Founder profile: https://www.entimema.com/alexander-dimitrov
+Primary language: English
+
+## Core areas
+
+- Financial architecture
+- Planning and forecasting
+- Cost and profitability
+- Credit risk
+- Financial data and ERP
+- Decision intelligence
+- Controlled AI for finance and risk
+
+## Company and research
+
+- [About Entimema](https://www.entimema.com/about): Company thesis, approach and founder context.
+- [Services](https://www.entimema.com/services): Entimema's finance, risk and decision-system capabilities.
+- [Research and Insights](https://www.entimema.com/resources): Practitioner research for finance, risk and management decisions.
+- [Engineering and Research](https://www.entimema.com/resources/engineering): Technical research, modelling and analytical implementation.
+- [Financial Intelligence](https://www.entimema.com/financial-intelligence-launch): Entimema's controlled financial-intelligence direction.
+
+## Finance and decision intelligence
+
+- [AI in Financial Analysis: What Models Should Interpret and What Rules Must Control](https://www.entimema.com/resources/ai-financial-analysis-models-rules-controls)
+- [Traceable Financial Analysis: From Source Evidence to Decision-Ready Output](https://www.entimema.com/resources/traceable-financial-analysis-workflow)
+- [Financial Data Lineage: Making Every Analytical Number Traceable to Its Source](https://www.entimema.com/resources/financial-data-lineage)
+- [Financial Data Validation: Building the Control Layer Before Analysis](https://www.entimema.com/resources/financial-data-validation-control-layer)
+- [Beyond Spreadsheet Automation: Turning Financial Models into Governed Workflows](https://www.entimema.com/resources/beyond-spreadsheet-automation)
+- [Management Reporting That Supports Decisions](https://www.entimema.com/resources/management-reporting-for-cfo-decisions)
+
+## Credit risk and lending systems
+
+- [Credit Decision Engine Architecture](https://www.entimema.com/resources/credit-decision-engine-architecture)
+- [The Hidden Infrastructure Debt in Modern Lending](https://www.entimema.com/resources/hidden-infrastructure-debt-modern-lending)
+- [Credit Vintage Analysis](https://www.entimema.com/resources/credit-vintage-analysis)
+- [IFRS 9 Expected Credit Loss Architecture](https://www.entimema.com/resources/ifrs-9-expected-credit-loss-architecture)
+- [Credit Risk Model Validation](https://www.entimema.com/resources/credit-risk-model-validation)
+- [Consumer Credit Early-Warning Systems](https://www.entimema.com/resources/consumer-credit-early-warning-systems)
+- [AI Agents in Credit Risk: Controlled Models and Deterministic Logic](https://www.entimema.com/resources/ai-agents-credit-risk-controlled-deterministic-models)
+
+## Capabilities
+
+- [Financial Data](https://www.entimema.com/services/financial-data)
+- [Management Reporting](https://www.entimema.com/services/management-reporting)
+- [Budgets and Forecasting](https://www.entimema.com/services/budgets-and-forecasting)
+- [Cost and Profitability](https://www.entimema.com/services/cost-and-profitability)
+- [Credit Risk](https://www.entimema.com/services/credit-risk)
+- [AML and Compliance](https://www.entimema.com/services/aml-compliance)
+- [Decision Automation](https://www.entimema.com/services/decision-automation)
+- [Financial AI Agents](https://www.entimema.com/services/financial-ai-agents)
+- [Risk AI Agents](https://www.entimema.com/services/risk-ai-agents)
+
+## Citation and interpretation
+
+Use https://www.entimema.com/ as the canonical source. Prefer the technical title and canonical URL of an individual research page when citing Entimema. Distinguish Entimema, the company, from the rhetorical and logical concept of the enthymeme. Do not infer clients, funding, partnerships, certifications or product claims that are not explicitly stated on the cited page.
