@@ -278,7 +278,7 @@
 .fir15Editorial .publicationIdentity { justify-content: flex-start; margin-top: 0; }
 .fir15Editorial .publicationCard { right: auto; left: 0; transform: none; }
 .fir15Editorial .articleCover { width: min(1280px, calc(100% - 96px)); margin-top: clamp(36px, 4vw, 56px); padding-bottom: clamp(50px, 5.5vw, 72px); border-bottom: 2px solid var(--brand-navy-950); }
-.fir15Editorial .articleLayout { grid-template-columns: 240px minmax(0, 720px) minmax(0, 1fr); column-gap: clamp(48px, 5vw, 72px); width: min(1320px, calc(100% - 96px)); margin-block: clamp(52px, 5.5vw, 76px) clamp(88px, 9vw, 132px); }
+.fir15Editorial .articleLayout { grid-template-columns: 340px minmax(0, 720px) minmax(0, 1fr); column-gap: clamp(32px, 4vw, 56px); width: min(1320px, calc(100% - 96px)); margin-block: clamp(52px, 5.5vw, 76px) clamp(88px, 9vw, 132px); }
 .fir15Editorial .toc { padding-top: 0; border-top: 1px solid var(--brand-navy-900); }
 .fir15Editorial .toc > span { display: block; padding: 14px 0 12px; border-bottom: 1px solid var(--hairline); font-size: 10px; font-weight: 750; letter-spacing: .12em; text-transform: uppercase; }
 .fir15Editorial .toc ol { gap: 0; margin-top: 8px; }
@@ -303,7 +303,7 @@
 .fir15Editorial .figure,
 .fir15Editorial .framework,
 .fir15Editorial .formula,
-.fir15Editorial .tableScroll { width: min(900px, calc(100vw - 96px - 240px - clamp(48px, 5vw, 72px))); max-width: none; margin-block: 54px; }
+.fir15Editorial .tableScroll { width: min(900px, calc(100vw - 96px - 340px - clamp(32px, 4vw, 56px))); max-width: none; margin-block: 54px; }
 .fir15Editorial .figureStage { position: relative; padding: clamp(24px, 3.2vw, 38px); border-top: 2px solid var(--brand-navy-950); border-bottom: 1px solid #aeb3bd; border-inline: 0; background: rgba(255,255,255,.52); box-shadow: 0 16px 38px rgba(4,19,63,.055); }
 .fir15Editorial .figureStage::before { content: ""; position: absolute; top: -2px; left: 0; width: 78px; height: 2px; background: var(--brand-orange-500); }
 .fir15Editorial .figureStage > div { width: 100%; }
@@ -347,10 +347,10 @@
 .founderIdentityAction i { color: #687083; font-family: var(--font-sans); font-size: 9px; font-style: normal; font-weight: 560; letter-spacing: .03em; }
 .linkedinIdentityAction { gap: 11px; padding: 0 18px; font-size: 9px; font-weight: 720; letter-spacing: .065em; text-transform: uppercase; }
 
-.articleLeftRail { grid-column: 1; align-self: start; position: sticky; top: 112px; max-height: none; overflow: visible; }
-.articleLeftRail .toc { position: static; max-height: calc(100vh - 400px); margin-top: 28px; overflow-x: hidden; overflow-y: auto; scrollbar-width: none; -ms-overflow-style: none; }
+.articleLeftRail { grid-column: 1; align-self: start; position: sticky; top: 112px; max-height: calc(100vh - 136px); display: grid; grid-template-columns: 108px minmax(0, 1fr); column-gap: 26px; align-items: start; overflow: visible; }
+.articleLeftRail .toc { position: static; max-height: calc(100vh - 136px); margin-top: 0; overflow-x: hidden; overflow-y: auto; scrollbar-width: none; -ms-overflow-style: none; }
 .articleLeftRail .toc::-webkit-scrollbar { display: none; width: 0; height: 0; }
-.articleUtilities { position: relative; display: grid; grid-template-columns: 44px minmax(0, 1fr); grid-template-rows: repeat(4, 44px); column-gap: 18px; row-gap: 7px; align-items: center; padding: 20px 0 22px; border-block: 1px solid var(--brand-navy-950); font-family: var(--font-sans); }
+.articleUtilities { position: relative; width: 108px; display: grid; grid-template-columns: 44px 44px; grid-template-rows: repeat(4, 44px); column-gap: 20px; row-gap: 7px; align-items: center; padding: 20px 0 22px; border-block: 1px solid var(--brand-navy-950); font-family: var(--font-sans); }
 .articleUtilities > a,
 .articleUtilities > button { position: relative; grid-column: 2; width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; justify-self: start; padding: 0; border: 1px solid #9299a7; color: var(--brand-navy-950); background: rgba(255,255,255,.36); box-shadow: inset 0 0 0 1px rgba(255,255,255,.42); cursor: pointer; transition: transform .2s ease, border-color .2s ease, color .2s ease, background-color .2s ease, box-shadow .2s ease; }
 .articleUtilities > a:hover,
