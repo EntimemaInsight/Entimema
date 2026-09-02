@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import styles from "./resources.module.css";
 
 const circumference = 2 * Math.PI * 18;
@@ -16,6 +16,8 @@ export default function ArticleUtilities({ slug, title, targetId }: { slug: stri
   const [progress, setProgress] = useState(0);
   const [copied, setCopied] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [feedback, setFeedback] = useState("");
+  const feedbackTimer = useRef<number | null>(null);
   const canonicalUrl = `https://www.entimema.com/resources/${slug}`;
 
   useEffect(() => {
@@ -42,16 +44,32 @@ export default function ArticleUtilities({ slug, title, targetId }: { slug: stri
     };
   }, [slug, targetId]);
 
+  useEffect(() => () => {
+    if (feedbackTimer.current) window.clearTimeout(feedbackTimer.current);
+  }, []);
+
+  function announce(message: string) {
+    setFeedback(message);
+    if (feedbackTimer.current) window.clearTimeout(feedbackTimer.current);
+    feedbackTimer.current = window.setTimeout(() => setFeedback(""), 2400);
+  }
+
   async function copyLink() {
-    await navigator.clipboard.writeText(canonicalUrl);
-    setCopied(true);
-    window.setTimeout(() => setCopied(false), 1800);
+    try {
+      await navigator.clipboard.writeText(canonicalUrl);
+      setCopied(true);
+      announce("Article link copied");
+      window.setTimeout(() => setCopied(false), 1800);
+    } catch {
+      announce("Copy unavailable — use the address bar");
+    }
   }
 
   function toggleSaved() {
     const next = !saved;
     setSaved(next);
     window.localStorage.setItem(`entimema:saved:${slug}`, String(next));
+    announce(next ? "Saved in this browser" : "Removed from saved articles");
   }
 
   const progressStyle = { "--reading-progress": circumference * (1 - progress) } as CSSProperties;
@@ -66,10 +84,11 @@ export default function ArticleUtilities({ slug, title, targetId }: { slug: stri
         </svg>
         {complete ? <span aria-hidden="true">✓</span> : null}
       </div>
-      <a aria-label="Share on LinkedIn" href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(canonicalUrl)}`} rel="noopener noreferrer" target="_blank"><Icon name="linkedin" /><span>LinkedIn</span></a>
-      <a aria-label="Share by email" href={`mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(canonicalUrl)}`}><Icon name="email" /><span>Email</span></a>
-      <button aria-label={copied ? "Link copied" : "Copy article link"} onClick={copyLink} type="button"><Icon name="link" /><span>{copied ? "Copied" : "Copy link"}</span></button>
-      <button aria-pressed={saved} aria-label={saved ? "Remove saved article" : "Save article"} onClick={toggleSaved} type="button"><Icon name="save" /><span>{saved ? "Saved" : "Save"}</span></button>
+      <a aria-label="Share on LinkedIn" data-label="Share on LinkedIn" href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(canonicalUrl)}`} onClick={() => announce("Opening LinkedIn share")} rel="noopener noreferrer" target="_blank"><Icon name="linkedin" /><span>LinkedIn</span></a>
+      <a aria-label="Share by email" data-label="Share by email" href={`mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(canonicalUrl)}`} onClick={() => announce("Opening a new email")}><Icon name="email" /><span>Email</span></a>
+      <button aria-label={copied ? "Link copied" : "Copy article link"} data-label={copied ? "Copied" : "Copy article link"} data-state={copied ? "active" : undefined} onClick={copyLink} type="button"><Icon name="link" /><span>{copied ? "Copied" : "Copy link"}</span></button>
+      <button aria-pressed={saved} aria-label={saved ? "Remove saved article" : "Save article"} data-label={saved ? "Saved in this browser" : "Save in this browser"} onClick={toggleSaved} type="button"><Icon name="save" /><span>{saved ? "Saved" : "Save"}</span></button>
+      <div className={`${styles.utilityFeedback} ${feedback ? styles.utilityFeedbackVisible : ""}`} role="status" aria-live="polite">{feedback}</div>
     </aside>
   );
 }
