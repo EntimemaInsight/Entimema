@@ -19,13 +19,14 @@ export default function ResourceArticle({ resource, sections, children, readingM
   const topic = getTopic(resource.topic);
   const relatedResources = getPublishedRelatedResources(resource);
   const isEngineering = resource.stream === "engineering";
+  const isFir15Editorial = resource.slug === "ai-financial-analysis-models-rules-controls";
 
   return (
     <main className="site-page">
       <AnnouncementBar />
       <Navbar active="resources" />
       <ResourceViewAnalytics resourceSlug={resource.slug} resourceTitle={resource.headline} resourceTopic={topic?.label ?? resource.topic} />
-      <article className={styles.article}>
+      <article className={`${styles.article} ${isFir15Editorial ? styles.fir15Editorial : ""}`}>
         <header className={`${styles.articleHeader} ${isEngineering ? styles.engineeringArticleHeader : ""}`}>
           <div className={styles.readingContainer}>
             <div className={styles.articleMeta}><span>{isEngineering ? "Engineering & Research" : topic?.label}</span><span>{readingMinutes ?? resource.readingMinutes} min read</span></div>
