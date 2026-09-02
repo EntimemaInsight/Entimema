@@ -1,6 +1,7 @@
 "use client";
 
 import Script from "next/script";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { ANALYTICS_CONSENT_KEY, ANALYTICS_PREFERENCES_EVENT, ANALYTICS_READY_EVENT, ATTRIBUTION_KEY, CURRENT_PATH_KEY, ensureAcquisitionContext, isProductionAnalyticsHost } from "@/lib/analytics";
@@ -69,5 +70,20 @@ export default function AnalyticsConsent() {
   }, []);
 
   if (!enabled) return null;
-  return <>{consent === "granted" && validMeasurementId ? <Script src={`https://www.googletagmanager.com/gtag/js?id=${validMeasurementId}`} strategy="lazyOnload" /> : null}{consent === null || preferencesOpen ? <section aria-label="Analytics preferences" className={styles.banner} role="dialog"><div><strong>Privacy-conscious analytics</strong><p>With your permission, Entimema uses Google Analytics to understand broad acquisition paths, Resource engagement and successful inquiries. Form contents are never sent.</p></div><div className={styles.actions}><button className={styles.secondary} onClick={() => choose("denied")} type="button">Decline</button><button className={styles.primary} onClick={() => choose("granted")} type="button">Allow analytics</button></div></section> : null}</>;
+  const consentDialogOpen = consent === null || preferencesOpen;
+
+  return <>
+    {consent === "granted" && validMeasurementId ? <Script src={`https://www.googletagmanager.com/gtag/js?id=${validMeasurementId}`} strategy="lazyOnload" /> : null}
+    {consentDialogOpen ? <section aria-label="Analytics preferences" className={styles.banner} role="dialog">
+      <div>
+        <strong>Privacy-conscious analytics</strong>
+        <p>With your permission, Entimema uses Google Analytics to understand how the website is used and improve the experience. Form contents and uploaded financial data are never shared with Google Analytics.</p>
+        <Link className={styles.privacyLink} href="/privacy">Privacy Policy</Link>
+      </div>
+      <div className={styles.actions}>
+        <button className={styles.secondary} onClick={() => choose("denied")} type="button">Decline</button>
+        <button className={styles.primary} onClick={() => choose("granted")} type="button">Allow analytics</button>
+      </div>
+    </section> : <button className={styles.preferencesTrigger} onClick={() => setPreferencesOpen(true)} type="button">Privacy choices</button>}
+  </>;
 }
