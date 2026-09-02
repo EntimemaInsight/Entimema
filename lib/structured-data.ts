@@ -1,7 +1,7 @@
 export const SITE_URL = "https://www.entimema.com";
 export const ORGANIZATION_ID = `${SITE_URL}/#organization`;
 export const WEBSITE_ID = `${SITE_URL}/#website`;
-export const FOUNDER_ID = `${SITE_URL}/about#founder`;
+export const FOUNDER_ID = `${SITE_URL}/alexander-dimitrov#person`;
 
 type BreadcrumbItem = {
   name: string;
@@ -66,9 +66,13 @@ export function createFounderSchema() {
         "@type": "Person",
         "@id": FOUNDER_ID,
         name: "Alexander Dimitrov",
+        alternateName: ["Aleksandar Dimitrov", "Александър Димитров"],
+        givenName: "Alexander",
+        familyName: "Dimitrov",
         url: `${SITE_URL}/alexander-dimitrov`,
         jobTitle: "Founder",
         worksFor: { "@id": ORGANIZATION_ID },
+        sameAs: ["https://www.linkedin.com/in/alexander-dimitrov-entimema/"],
       },
       {
         "@type": "AboutPage",

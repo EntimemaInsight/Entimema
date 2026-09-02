@@ -5,8 +5,8 @@
 Entimema helps finance and risk teams turn fragmented financial information into validated, decision-ready outputs. Its work combines AI interpretation, deterministic calculations, validation controls, evidence lineage and human judgement.
 
 Canonical website: https://www.entimema.com/
-Founder: Alexander Dimitrov
-Founder profile: https://www.entimema.com/alexander-dimitrov
+Founder: Alexander Dimitrov (also transliterated as Aleksandar Dimitrov; Bulgarian: Александър Димитров)
+Canonical founder profile: https://www.entimema.com/alexander-dimitrov
 Primary language: English
 
 ## Core areas

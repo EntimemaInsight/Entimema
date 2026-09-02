@@ -9,11 +9,11 @@ import company from "@/components/company/company.module.css";
 import { GENERAL_CONSULTING_CTA } from "@/lib/cta-labels";
 import { serializeJsonLd, SITE_URL } from "@/lib/structured-data";
 import { getTopic } from "../resources/resource-data";
-import { biography, foundations, founderName, founderProfileSchema, founderUrl, personSchema, portraitAlt, portraitPath, principles, productBridge, profileIntro, researchQuestions, selectedArticles, structuralProblems, thesis, whyEntimema } from "./founder-data";
+import { biography, foundations, founderName, founderProfileSchema, founderUrl, identityStatement, personSchema, portraitAlt, portraitPath, principles, productBridge, profileIntro, researchQuestions, selectedArticles, structuralProblems, thesis, whyEntimema } from "./founder-data";
 import styles from "./founder.module.css";
 
 const title = "Alexander Dimitrov | Founder of Entimema";
-const description = "Alexander Dimitrov is the Founder of Entimema, working across financial management, credit risk, decision systems and controlled AI workflows.";
+const description = "Alexander Dimitrov (Aleksandar Dimitrov; Александър Димитров) is the Founder of Entimema, working across financial management, credit risk, decision systems and controlled AI workflows.";
 
 export const metadata: Metadata = {
   title: { absolute: title },
@@ -38,6 +38,7 @@ export default function FounderPage() {
             <div className={styles.heading}>
               <p className="editorial-eyebrow">Founder, Entimema</p>
               <h1 id="founder-name" className={`editorial-display-md editorial-reveal-text ${styles.name}`}>{founderName}</h1>
+              <p className="editorial-technical-label">{identityStatement}</p>
               <p className={`editorial-standfirst-md ${styles.standfirst}`}>{profileIntro}</p>
             </div>
             <div className={styles.portrait} data-founder-portrait>

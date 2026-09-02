@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
-import { founderName, profileIntro, biography, thesis, principles, whyEntimema, personSchema } from "../../app/alexander-dimitrov/founder-data";
+import { founderAlternateNames, founderName, identityStatement, profileIntro, biography, thesis, principles, whyEntimema, personSchema } from "../../app/alexander-dimitrov/founder-data";
 
 const page = readFileSync("app/alexander-dimitrov/page.tsx", "utf8");
 const frozen = JSON.parse(readFileSync("tests/company/founder-preservation.json", "utf8"));
@@ -19,7 +19,9 @@ test("Founder retains the introduction, six numbered sections and public English
   assert.equal((page.match(/<h1\b/g) ?? []).length, 1);
   assert.match(page, /<h1[^>]+>\{founderName\}<\/h1>/);
   assert.equal(founderName, "Alexander Dimitrov");
-  assert.doesNotMatch([page, profileIntro, ...biography, thesis, ...principles, ...whyEntimema].join(" "), /Aleksandar|SAP|years of experience/);
+  assert.deepEqual(founderAlternateNames, ["Aleksandar Dimitrov", "Александър Димитров"]);
+  assert.match(identityStatement, /Aleksandar Dimitrov; in Bulgarian, Александър Димитров/);
+  assert.doesNotMatch([page, profileIntro, ...biography, thesis, ...principles, ...whyEntimema].join(" "), /SAP|years of experience/);
 });
 
 test("Founder defines the category, workflow boundary, controlled reasoning and concluding belief", () => {
@@ -42,8 +44,10 @@ test("Founder metadata, JSON-LD vocabulary, portrait markup, publications and CT
   );
   for (const key of ["publications", "articles", "researchQuestions", "areas"]) assert.deepEqual(approved[key], frozen[key]);
   assert.deepEqual(personSchema, {
-    "@type": "Person", "@id": "https://www.entimema.com/about#founder",
-    name: "Alexander Dimitrov", url: "https://www.entimema.com/alexander-dimitrov",
+    "@type": "Person", "@id": "https://www.entimema.com/alexander-dimitrov#person",
+    name: "Alexander Dimitrov", alternateName: ["Aleksandar Dimitrov", "Александър Димитров"],
+    givenName: "Alexander", familyName: "Dimitrov", nationality: "Bulgarian",
+    url: "https://www.entimema.com/alexander-dimitrov",
     image: { "@id": "https://www.entimema.com/alexander-dimitrov#portrait" }, jobTitle: "Founder",
     worksFor: { "@id": "https://www.entimema.com/#organization" },
     sameAs: ["https://www.linkedin.com/in/alexander-dimitrov-entimema/"],

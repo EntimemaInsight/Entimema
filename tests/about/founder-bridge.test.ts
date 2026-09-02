@@ -12,7 +12,7 @@ const oldCopy = [
 const approvedCopy = [
   "The founder’s perspective",
   "The question behind the architecture.",
-  "Entimema is founded and led by Alexander Dimitrov. Its practitioner foundation begins with a question that precedes any individual model or technology: how financial reality becomes data, how that data acquires meaning, how uncertainty is represented, and how evidence becomes a decision an institution can explain, control and act upon."
+  "Entimema is founded and led by Alexander Dimitrov (also transliterated as Aleksandar Dimitrov; in Bulgarian, Александър Димитров). Its practitioner foundation begins with a question that precedes any individual model or technology: how financial reality becomes data, how that data acquires meaning, how uncertainty is represented, and how evidence becomes a decision an institution can explain, control and act upon."
 ];
 const hash = (value: string) => createHash("sha256").update(value.replace(/\r\n/g, "\n")).digest("hex");
 

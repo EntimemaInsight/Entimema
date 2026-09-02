@@ -2,6 +2,7 @@ import { publishedResources } from "../resources/resource-data";
 import { FOUNDER_ID, ORGANIZATION_ID, SITE_URL } from "@/lib/structured-data";
 
 export const founderName = "Alexander Dimitrov";
+export const founderAlternateNames = ["Aleksandar Dimitrov", "Александър Димитров"] as const;
 export const portraitPath = "/alexander-dimitrov-founder-natural.jpg";
 export const portraitAlt = "Alexander Dimitrov, Founder of Entimema";
 export const founderUrl = `${SITE_URL}/alexander-dimitrov`;
@@ -11,6 +12,7 @@ export const portraitId = `${founderUrl}#portrait`;
 // Practitioner facts are limited to the previously approved Founder biography.
 // The thematic passages below interpret those disciplines, not additional career history.
 export const profileIntro = "Founder of Entimema, a decision-intelligence company being built to connect financial evidence, quantitative models, deterministic controls, AI reasoning and human judgment within traceable Finance and Risk workflows.";
+export const identityStatement = "Alexander Dimitrov is also transliterated as Aleksandar Dimitrov; in Bulgarian, Александър Димитров.";
 export const biography = [
   "Alexander’s work is centred on a question that precedes any individual model or technology: how financial reality becomes data, how that data acquires meaning, how uncertainty is represented, and how evidence is transformed into decisions that an institution can explain, control and act upon.",
   "Entimema emerged from the conviction that better financial decisions require more than better models or greater automation. They require a coherent architecture through which evidence, analysis, judgment and action remain connected.",
@@ -67,12 +69,11 @@ const selectedSlugs = [
   "beyond-spreadsheet-automation",
 ];
 
-// The existing author record identifies the Founder by affiliation and profile
-// path. Match that identity without propagating the legacy name spelling or
-// changing shared Resources content during this sprint.
+// Author bylines may use the alternate Latin transliteration. Resolve both
+// spellings to the canonical Founder profile and Person entity.
 export const selectedArticles = selectedSlugs.flatMap((slug) => {
   const article = publishedResources.find((resource) => resource.slug === slug);
-  return article?.author.affiliation === "Entimema" && article.author.profilePath === "/about"
+  return article?.author.affiliation === "Entimema" && article.author.profilePath === "/alexander-dimitrov"
     ? [article]
     : [];
 });
@@ -81,6 +82,10 @@ export const personSchema = {
   "@type": "Person",
   "@id": FOUNDER_ID,
   name: founderName,
+  alternateName: founderAlternateNames,
+  givenName: "Alexander",
+  familyName: "Dimitrov",
+  nationality: "Bulgarian",
   url: founderUrl,
   image: { "@id": portraitId },
   jobTitle: "Founder",

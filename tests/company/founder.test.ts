@@ -9,6 +9,7 @@ test("Founder identity connects to the existing organization and person", () => 
   assert.equal(schema["@type"], "Person");
   assert.equal(schema["@id"], FOUNDER_ID);
   assert.equal(schema.name, "Alexander Dimitrov");
+  assert.deepEqual(schema.alternateName, ["Aleksandar Dimitrov", "Александър Димитров"]);
   assert.equal(schema.url, "https://www.entimema.com/alexander-dimitrov");
   assert.equal(schema.worksFor["@id"], ORGANIZATION_ID);
   assert.deepEqual(schema.sameAs, ["https://www.linkedin.com/in/alexander-dimitrov-entimema/"]);
@@ -41,7 +42,7 @@ test("Six selected articles exist, are published and explicitly identify the Fou
     assert.equal(article.status, "published");
     assert.ok(article.publishedAt);
     assert.equal(article.author.affiliation, "Entimema");
-    assert.equal(article.author.profilePath, "/about");
+    assert.equal(article.author.profilePath, "/alexander-dimitrov");
     assert.equal(article.canonicalPath, `/resources/${article.slug}`);
   }
 });

@@ -47,7 +47,7 @@ test("LinkedIn is a single named external link anchored directly inside the port
 
 test("Removing only the badge restores all Founder markup, copy, portrait and metadata", () => {
   const restored = page.replace(/\r\n/g, "\n").replace(/\n {14}<a className=\{styles.linkedinBadge\} data-founder-linkedin[\s\S]*?<\/a>/, "");
-  assert.equal(createHash("sha256").update(restored.replace(/\r\n/g, "\n")).digest("hex"), "d84874b0156d8895bccf4a6a695d77a4704615d615352fef71fe6e12888b89ac");
+  assert.equal(createHash("sha256").update(restored.replace(/\r\n/g, "\n")).digest("hex"), "50089c6ea5b47b5004228e0a0fec71bf92de7973480f6958ca717ef4e42d968f");
   assert.equal(portraitPath, "/alexander-dimitrov-founder-natural.jpg");
   assert.equal(portraitAlt, "Alexander Dimitrov, Founder of Entimema");
 });

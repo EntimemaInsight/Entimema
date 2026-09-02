@@ -114,7 +114,7 @@ const authors = {
   aleksandar: {
     name: "Aleksandar Dimitrov",
     affiliation: "Entimema",
-    profilePath: "/about",
+    profilePath: "/alexander-dimitrov",
   },
 } satisfies Record<string, ResourceAuthor>;
 
