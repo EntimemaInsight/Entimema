@@ -3,7 +3,7 @@ import test from "node:test";
 import sitemap from "../../app/sitemap";
 import robots from "../../app/robots";
 import { companyDestinations } from "../../lib/company-navigation";
-import { createHomeSchema, FOUNDER_ID, ORGANIZATION_ID, SITE_URL, WEBSITE_ID, serializeJsonLd } from "../../lib/structured-data";
+import { createFinaiSchema, createHomeSchema, FINAI_ID, FINAI_URL, FOUNDER_ID, ORGANIZATION_ID, SITE_URL, WEBSITE_ID, serializeJsonLd } from "../../lib/structured-data";
 import { founderProfileSchema, personSchema } from "../../app/alexander-dimitrov/founder-data";
 import { labsSchema, selectedPublications } from "../../app/labs/labs-data";
 import { publishedResources } from "../../app/resources/resource-data";
@@ -32,6 +32,7 @@ test("Company identities retain the established organization, website and founde
   const website = graph.find(entity => entity["@type"] === "WebSite");
   assert.equal(organization?.["@id"], ORGANIZATION_ID);
   assert.deepEqual(organization?.founder, { "@id": FOUNDER_ID });
+  assert.deepEqual(organization?.knowsAbout, { "@id": FINAI_ID });
   assert.equal(website?.["@id"], WEBSITE_ID);
   assert.deepEqual(website?.publisher, { "@id": ORGANIZATION_ID });
   assert.equal(personSchema["@id"], FOUNDER_ID);
@@ -40,6 +41,24 @@ test("Company identities retain the established organization, website and founde
   assert.deepEqual(founderProfileSchema["@graph"].map(entity => entity["@type"]), ["Person", "ProfilePage", "ImageObject"]);
   assert.equal(labsSchema["@type"], "WebPage");
   assert.deepEqual(labsSchema.publisher, { "@id": ORGANIZATION_ID });
+});
+
+test("FinAI resolves to one canonical term connected to Entimema and Alexander Dimitrov", () => {
+  const graph = createFinaiSchema()["@graph"] as Array<Record<string, unknown>>;
+  const term = graph.find(entity => entity["@type"] === "DefinedTerm");
+  const definition = graph.find(entity => entity["@type"] === "DefinedTermSet");
+  const page = graph.find(entity => entity["@type"] === "WebPage");
+  assert.equal(term?.["@id"], FINAI_ID);
+  assert.equal(term?.url, FINAI_URL);
+  assert.deepEqual(term?.inDefinedTermSet, { "@id": FINAI_URL + "#definition" });
+  assert.deepEqual(definition?.creator, { "@id": FOUNDER_ID });
+  assert.deepEqual(definition?.publisher, { "@id": ORGANIZATION_ID });
+  assert.deepEqual(definition?.hasDefinedTerm, { "@id": FINAI_ID });
+  assert.deepEqual(page?.author, { "@id": FOUNDER_ID });
+  assert.deepEqual(page?.publisher, { "@id": ORGANIZATION_ID });
+  assert.deepEqual(page?.mainEntity, { "@id": FINAI_ID });
+  assert.deepEqual(page?.about, [{ "@id": FINAI_ID }, { "@id": ORGANIZATION_ID }, { "@id": FOUNDER_ID }]);
+  assert.deepEqual(JSON.parse(serializeJsonLd(createFinaiSchema())), createFinaiSchema());
 });
 
 test("Labs publication list matches the visible selection and existing Article IDs exactly", () => {

@@ -2,6 +2,8 @@ export const SITE_URL = "https://www.entimema.com";
 export const ORGANIZATION_ID = `${SITE_URL}/#organization`;
 export const WEBSITE_ID = `${SITE_URL}/#website`;
 export const FOUNDER_ID = `${SITE_URL}/alexander-dimitrov#person`;
+export const FINAI_URL = `${SITE_URL}/finai`;
+export const FINAI_ID = `${FINAI_URL}#term`;
 
 type BreadcrumbItem = {
   name: string;
@@ -45,6 +47,7 @@ export function createHomeSchema() {
         logo: `${SITE_URL}/entimema-logo.png`,
         description: "Entimema connects finance, risk, data, models and technology to build clearer decision systems for real business environments.",
         founder: { "@id": FOUNDER_ID },
+        knowsAbout: { "@id": FINAI_ID },
       },
       {
         "@type": "WebSite",
@@ -53,6 +56,57 @@ export function createHomeSchema() {
         url: SITE_URL,
         publisher: { "@id": ORGANIZATION_ID },
       },
+    ],
+  };
+}
+
+export function createFinaiSchema() {
+  const pageId = `${FINAI_URL}#webpage`;
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "DefinedTerm",
+        "@id": FINAI_ID,
+        name: "FinAI",
+        alternateName: "Financial Artificial Intelligence",
+        description: "FinAI by Entimema is a governed approach to AI agents for Finance and Risk, connecting model reasoning, deterministic controls, traceable evidence and accountable human judgement.",
+        url: FINAI_URL,
+        inDefinedTermSet: { "@id": `${FINAI_URL}#definition` },
+      },
+      {
+        "@type": "DefinedTermSet",
+        "@id": `${FINAI_URL}#definition`,
+        name: "FinAI by Entimema",
+        url: FINAI_URL,
+        creator: { "@id": FOUNDER_ID },
+        publisher: { "@id": ORGANIZATION_ID },
+        hasDefinedTerm: { "@id": FINAI_ID },
+      },
+      {
+        "@type": "WebPage",
+        "@id": pageId,
+        url: FINAI_URL,
+        name: "FinAI by Entimema",
+        description: "A governed architecture for AI agents in Finance and Risk, developed by Entimema and its founder Alexander Dimitrov.",
+        isPartOf: { "@id": WEBSITE_ID },
+        about: [
+          { "@id": FINAI_ID },
+          { "@id": ORGANIZATION_ID },
+          { "@id": FOUNDER_ID },
+        ],
+        mainEntity: { "@id": FINAI_ID },
+        author: { "@id": FOUNDER_ID },
+        publisher: { "@id": ORGANIZATION_ID },
+        breadcrumb: { "@id": `${FINAI_URL}#breadcrumb` },
+      },
+      createBreadcrumbSchema(
+        [
+          { name: "Entimema", item: `${SITE_URL}/` },
+          { name: "FinAI", item: FINAI_URL },
+        ],
+        `${FINAI_URL}#breadcrumb`,
+      ),
     ],
   };
 }

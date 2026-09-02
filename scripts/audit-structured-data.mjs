@@ -18,7 +18,7 @@ const serviceSlugs = [
 const expected = {
   Organization: [`${site}/#organization`],
   WebSite: [`${site}/#website`],
-  Person: [`${site}/about#founder`],
+  Person: [`${site}/alexander-dimitrov#person`],
   Service: serviceSlugs.map((slug) => `${site}/services/${slug}#service`),
   Article: [
     "building-a-manufacturing-cost-architecture",

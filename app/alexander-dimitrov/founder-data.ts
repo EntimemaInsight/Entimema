@@ -1,5 +1,5 @@
 import { publishedResources } from "../resources/resource-data";
-import { FOUNDER_ID, ORGANIZATION_ID, SITE_URL } from "@/lib/structured-data";
+import { FINAI_ID, FOUNDER_ID, ORGANIZATION_ID, SITE_URL } from "@/lib/structured-data";
 
 export const founderName = "Alexander Dimitrov";
 export const founderAlternateNames = ["Aleksandar Dimitrov", "Александър Димитров"] as const;
@@ -11,7 +11,7 @@ export const portraitId = `${founderUrl}#portrait`;
 
 // Practitioner facts are limited to the previously approved Founder biography.
 // The thematic passages below interpret those disciplines, not additional career history.
-export const profileIntro = "Founder of Entimema, a decision-intelligence company connecting financial evidence, quantitative models, deterministic controls, AI reasoning and human judgment within traceable Finance and Risk workflows.";
+export const profileIntro = "Founder of Entimema and the FinAI thesis: governed AI agents connecting financial evidence, quantitative models, deterministic controls, AI reasoning and human judgment within traceable Finance and Risk workflows.";
 export const identityStatement = "Aleksandar Dimitrov · Александър Димитров";
 export const biography = [
   "Alexander’s work is centred on a question that precedes any individual model or technology: how financial reality becomes data, how that data acquires meaning, how uncertainty is represented, and how evidence is transformed into decisions that an institution can explain, control and act upon.",
@@ -91,7 +91,7 @@ export const personSchema = {
   jobTitle: "Founder",
   worksFor: { "@id": ORGANIZATION_ID },
   sameAs: ["https://www.linkedin.com/in/alexander-dimitrov-entimema/"],
-  knowsAbout: areas.map(({ title }) => title),
+  knowsAbout: [...areas.map(({ title }) => title), { "@id": FINAI_ID }],
 };
 
 /**

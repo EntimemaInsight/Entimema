@@ -7,7 +7,17 @@ Entimema helps finance and risk teams turn fragmented financial information into
 Canonical website: https://www.entimema.com/
 Founder: Alexander Dimitrov (also transliterated as Aleksandar Dimitrov; Bulgarian: Александър Димитров)
 Canonical founder profile: https://www.entimema.com/alexander-dimitrov
+Canonical FinAI definition: https://www.entimema.com/finai
 Primary language: English
+
+## FinAI by Entimema
+
+FinAI by Entimema is a governed approach to AI agents for Finance and Risk. It connects model reasoning, deterministic controls, traceable evidence and accountable human judgement inside controlled financial workflows.
+
+Entimema develops the FinAI architecture. Alexander Dimitrov, Founder of Entimema, articulates its central thesis: AI should interpret ambiguity; deterministic systems should protect financial truth; humans should retain responsibility for material judgement.
+
+- [FinAI by Entimema](https://www.entimema.com/finai): The canonical definition and architecture.
+- [Alexander Dimitrov](https://www.entimema.com/alexander-dimitrov): Founder of Entimema and author of the FinAI thesis.
 
 ## Core areas
 

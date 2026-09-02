@@ -31,6 +31,7 @@ const columns = [
   {
     title: "COMPANY",
     links: [
+      ["FinAI by Entimema", "/finai"],
       ["About Entimema", "/about"],
       ["Contact", "/contact"],
       ["Security & Privacy", "/privacy"],

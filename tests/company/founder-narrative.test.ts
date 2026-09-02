@@ -4,6 +4,7 @@ import test from "node:test";
 import { readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { founderAlternateNames, founderName, identityStatement, profileIntro, biography, thesis, principles, whyEntimema, personSchema } from "../../app/alexander-dimitrov/founder-data";
+import { FINAI_ID } from "../../lib/structured-data";
 
 const page = readFileSync("app/alexander-dimitrov/page.tsx", "utf8");
 const frozen = JSON.parse(readFileSync("tests/company/founder-preservation.json", "utf8"));
@@ -51,7 +52,7 @@ test("Founder metadata, JSON-LD vocabulary, portrait markup, publications and CT
     image: { "@id": "https://www.entimema.com/alexander-dimitrov#portrait" }, jobTitle: "Founder",
     worksFor: { "@id": "https://www.entimema.com/#organization" },
     sameAs: ["https://www.linkedin.com/in/alexander-dimitrov-entimema/"],
-    knowsAbout: frozen.areas.map((area: { title: string }) => area.title),
+    knowsAbout: [...frozen.areas.map((area: { title: string }) => area.title), { "@id": FINAI_ID }],
   });
 });
 

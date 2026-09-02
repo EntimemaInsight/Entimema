@@ -6,6 +6,7 @@ const routes = [
   "/agents",
   "/about",
   "/alexander-dimitrov",
+  "/finai",
   "/labs",
   "/contact",
   "/privacy",
