@@ -11,7 +11,7 @@ export const portraitId = `${founderUrl}#portrait`;
 
 // Practitioner facts are limited to the previously approved Founder biography.
 // The thematic passages below interpret those disciplines, not additional career history.
-export const profileIntro = "Founder of Entimema, a decision-intelligence company being built to connect financial evidence, quantitative models, deterministic controls, AI reasoning and human judgment within traceable Finance and Risk workflows.";
+export const profileIntro = "Founder of Entimema, a decision-intelligence company connecting financial evidence, quantitative models, deterministic controls, AI reasoning and human judgment within traceable Finance and Risk workflows.";
 export const identityStatement = "Aleksandar Dimitrov · Александър Димитров";
 export const biography = [
   "Alexander’s work is centred on a question that precedes any individual model or technology: how financial reality becomes data, how that data acquires meaning, how uncertainty is represented, and how evidence is transformed into decisions that an institution can explain, control and act upon.",
@@ -45,7 +45,7 @@ export const principles = [
   "The objective is not to remove professional judgment from Finance and Risk. It is to give that judgment a stronger evidential and operational structure.",
 ];
 export const whyEntimema = [
-  "Entimema is being built around an emerging category: Decision Intelligence for Finance and Risk.",
+  "Entimema operates within an emerging category: Decision Intelligence for Finance and Risk.",
   "Its purpose is to connect financial evidence, analytical models, deterministic rules, AI-assisted interpretation and human judgment within end-to-end workflows. The workflow—not an isolated model or AI agent—is the relevant product boundary.",
   "This means moving beyond the automation of individual tasks toward an institutional architecture in which data can be interpreted without losing its financial meaning, calculations can be controlled, uncertainty can be made explicit, exceptions can reach the right person and every material conclusion can be traced back to its evidence.",
   "Entimema turns that thesis into a programme of work across practitioner research, financial methodologies, decision workflows and Financial Intelligence products. The ambition is to make specialist reasoning reusable without making it opaque—and operational without separating it from human responsibility.",
