@@ -134,7 +134,7 @@ export default function FounderPage() {
               </div>
               <div className={`editorial-col-7 editorial-body-md ${styles.copy}`}>
                 <p>Entimema Research examines the methodological questions beneath financial and risk decisions: where a number comes from, what it represents, which assumptions shape it, how uncertainty enters the analysis and how a conclusion can remain traceable as it moves into operational use.</p>
-                <p>The publications make that reasoning available for scrutiny. Together, they provide evidence of the intellectual and methodological foundations on which Entimema is being built.</p>
+                <p>The publications make that reasoning available for scrutiny. Together, they provide evidence of the intellectual and methodological foundations of Entimema’s work.</p>
                 <Link className="editorial-link--arrow" href="/resources">Explore all research <span aria-hidden="true">→</span></Link>
               </div>
             </div>
