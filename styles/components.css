@@ -25,3 +25,21 @@
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
 }
+
+/* Zoom-stable, Taktile-calibrated texture for the homepage product scene. */
+.executive-intelligence__dots {
+  opacity: 1 !important;
+  background-image: radial-gradient(circle, rgba(57, 72, 160, .24) 0 var(--hero-grid-dot-radius), transparent var(--hero-grid-dot-edge)) !important;
+  background-size: var(--hero-grid-size) var(--hero-grid-size) !important;
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 48%, rgba(0, 0, 0, .78) 72%, transparent 96%) !important;
+  mask-image: radial-gradient(ellipse at center, #000 48%, rgba(0, 0, 0, .78) 72%, transparent 96%) !important;
+  animation: executive-grid-breathe var(--motion-grid-duration) cubic-bezier(.37, 0, .24, 1) infinite !important;
+}
+
+@media (max-width: 680px) {
+  .executive-intelligence__dots { opacity: .68 !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .executive-intelligence__dots { animation: none !important; }
+}
