@@ -10,7 +10,7 @@ function Icon({ name }: { name: "linkedin" | "email" | "link" | "save" }) {
   return <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5.5 3.5h13v17L12 16.4l-6.5 4.1v-17Z" /></svg>;
 }
 
-export default function ArticleUtilities({ slug, title, targetId }: { slug: string; title: string; targetId: string }) {
+export default function ArticleUtilities({ slug, title, targetId, variant = "insights" }: { slug: string; title: string; targetId: string; variant?: "insights" | "engineering" }) {
   const [progress, setProgress] = useState(0);
   const [copied, setCopied] = useState(false);
   const [saved, setSaved] = useState(false);
@@ -76,9 +76,9 @@ export default function ArticleUtilities({ slug, title, targetId }: { slug: stri
   const complete = progress >= 0.995;
 
   return (
-    <aside className={styles.articleUtilities} aria-label="Article tools">
+    <aside className={`${styles.articleUtilities} ${variant === "engineering" ? styles.engineeringUtilities : ""}`} aria-label="Article tools">
       <div className={styles.readingProgress} aria-label={complete ? "Article read" : `${Math.round(progress * 100)}% read`} role="img" style={progressStyle}>
-        <span className={styles.spineLabel} aria-hidden="true">READ</span>
+        <span className={styles.spineLabel} aria-hidden="true">{variant === "engineering" ? "TRACE" : "READ"}</span>
         <div className={styles.spineTrack} aria-hidden="true">
           <i className={styles.spineValue} />
           {Array.from({ length: sectionCount }, (_, index) => (
@@ -86,7 +86,7 @@ export default function ArticleUtilities({ slug, title, targetId }: { slug: stri
           ))}
           <i className={styles.spineCursor} />
         </div>
-        <span className={styles.spineStatus} aria-hidden="true">{complete ? "✓ READ" : `${Math.round(progress * 100)}%`}</span>
+        <span className={styles.spineStatus} aria-hidden="true">{complete ? (variant === "engineering" ? "✓ COMPLETE" : "✓ READ") : `${progress === 0 ? (variant === "engineering" ? "IDLE" : "0%") : `${Math.round(progress * 100)}%`}`}</span>
       </div>
       <a aria-label="Share on LinkedIn" data-label="Share on LinkedIn" href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(canonicalUrl)}`} onClick={() => announce("Opening LinkedIn share")} rel="noopener noreferrer" target="_blank"><Icon name="linkedin" /><span>LinkedIn</span></a>
       <a aria-label="Share by email" data-label="Share by email" href={`mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(canonicalUrl)}`} onClick={() => announce("Opening a new email")}><Icon name="email" /><span>Email</span></a>

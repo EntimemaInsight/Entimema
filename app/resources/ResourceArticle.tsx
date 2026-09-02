@@ -29,13 +29,13 @@ export default function ResourceArticle({ resource, sections, children, readingM
       <AnnouncementBar />
       <Navbar active="resources" />
       <ResourceViewAnalytics resourceSlug={resource.slug} resourceTitle={resource.headline} resourceTopic={topic?.label ?? resource.topic} />
-      <article className={`${styles.article} ${isInsights ? styles.fir15Editorial : ""}`}>
+      <article className={`${styles.article} ${isInsights ? styles.fir15Editorial : ""} ${isEngineering ? styles.engineeringEditorial : ""}`}>
         <header className={`${styles.articleHeader} ${isEngineering ? styles.engineeringArticleHeader : ""}`}>
           <div className={styles.readingContainer}>
             <div className={styles.articleMeta}><span>{isEngineering ? "Engineering & Research" : topic?.label}</span><span>{readingMinutes ?? resource.readingMinutes} min read</span></div>
             {!isEngineering ? <h1><ResourceSemanticText text={resource.headline} emphasis={resource.headlineEmphasis} className={styles.headlineEmphasis} /></h1> : null}
-            {isInsights ? (
-              <div className={styles.editorialIdentityRow}>
+            {isInsights || isEngineering ? (
+              <div className={`${styles.editorialIdentityRow} ${isEngineering ? styles.engineeringIdentityRow : ""}`}>
                 <PublisherIdentity />
                 <a className={styles.founderIdentityAction} href="https://www.linkedin.com/in/alexander-dimitrov-entimema/" rel="author noopener noreferrer" target="_blank"><span><small>WRITTEN BY</small>Alexander Dimitrov <i>Founder</i></span><b aria-hidden="true">↗</b></a>
                 <a className={styles.linkedinIdentityAction} href="https://www.linkedin.com/company/144795091/" rel="noopener noreferrer" target="_blank"><span>Follow Entimema on LinkedIn</span><b aria-hidden="true">↗</b></a>
@@ -49,9 +49,9 @@ export default function ResourceArticle({ resource, sections, children, readingM
         </div>
 
         <div className={styles.articleLayout}>
-          {isInsights ? (
+          {isInsights || isEngineering ? (
             <div className={styles.articleLeftRail}>
-              <ArticleUtilities slug={resource.slug} title={resource.headline} targetId={articleBodyId} />
+              <ArticleUtilities slug={resource.slug} title={resource.headline} targetId={articleBodyId} variant={isEngineering ? "engineering" : "insights"} />
               {sections && sections.length > 2 ? <ArticleContents sections={sections} /> : null}
             </div>
           ) : sections && sections.length > 2 ? <ArticleContents sections={sections} /> : null}
