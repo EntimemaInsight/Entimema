@@ -53,6 +53,21 @@
 .actions :global(.editorial-caption) { margin-top: var(--entimema-space-micro); }
 .secondaryActions { display: grid; justify-items: start; gap: var(--entimema-space-micro); }
 .tertiaryAction { color: var(--entimema-ink-muted); font-size: var(--entimema-metadata); }
+.nameVariants {
+  margin-top: var(--entimema-space-section);
+  padding-top: var(--entimema-space-micro);
+  border-top: 1px solid var(--entimema-rule);
+  color: var(--entimema-ink-muted);
+  font-size: var(--entimema-metadata);
+  letter-spacing: .01em;
+}
+.nameVariants span {
+  margin-right: .75rem;
+  color: var(--entimema-navy);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
 @media (min-width: 48rem) and (max-width: 63.999rem) {
   .introduction { grid-template-columns: minmax(0, 1fr) minmax(0, 32%); grid-template-areas: "heading portrait" "biography biography"; column-gap: var(--entimema-grid-gap); }
   .biography { max-width: var(--entimema-container-reading); }

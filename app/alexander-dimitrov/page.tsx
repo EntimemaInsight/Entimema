@@ -38,7 +38,6 @@ export default function FounderPage() {
             <div className={styles.heading}>
               <p className="editorial-eyebrow">Founder, Entimema</p>
               <h1 id="founder-name" className={`editorial-display-md editorial-reveal-text ${styles.name}`}>{founderName}</h1>
-              <p className="editorial-technical-label">{identityStatement}</p>
               <p className={`editorial-standfirst-md ${styles.standfirst}`}>{profileIntro}</p>
             </div>
             <div className={styles.portrait} data-founder-portrait>
@@ -176,6 +175,7 @@ export default function FounderPage() {
                 <Link className={`editorial-link--quiet ${styles.tertiaryAction}`} href="/contact">{GENERAL_CONSULTING_CTA} <span aria-hidden="true">→</span></Link>
               </div>
             </div>
+            <p className={styles.nameVariants}><span>Name variants</span> {identityStatement}</p>
           </section>
         </div>
       </main>

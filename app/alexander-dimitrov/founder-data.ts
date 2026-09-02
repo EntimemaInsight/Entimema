@@ -12,7 +12,7 @@ export const portraitId = `${founderUrl}#portrait`;
 // Practitioner facts are limited to the previously approved Founder biography.
 // The thematic passages below interpret those disciplines, not additional career history.
 export const profileIntro = "Founder of Entimema, a decision-intelligence company being built to connect financial evidence, quantitative models, deterministic controls, AI reasoning and human judgment within traceable Finance and Risk workflows.";
-export const identityStatement = "Alexander Dimitrov is also transliterated as Aleksandar Dimitrov; in Bulgarian, Александър Димитров.";
+export const identityStatement = "Aleksandar Dimitrov · Александър Димитров";
 export const biography = [
   "Alexander’s work is centred on a question that precedes any individual model or technology: how financial reality becomes data, how that data acquires meaning, how uncertainty is represented, and how evidence is transformed into decisions that an institution can explain, control and act upon.",
   "Entimema emerged from the conviction that better financial decisions require more than better models or greater automation. They require a coherent architecture through which evidence, analysis, judgment and action remain connected.",
