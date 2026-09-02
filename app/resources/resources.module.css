@@ -1,5 +1,5 @@
 .resourcesPage,
-.article { background: #fff; }
+.article { overflow-x: clip; background: #fff; }
 
 .wideContainer {
   width: min(1210px, calc(100% - 120px));
@@ -321,8 +321,9 @@
 .fir15Editorial .framework figcaption { gap: 5px; }
 .fir15Editorial .framework figcaption span { color: var(--brand-orange-600); font-size: 9px; letter-spacing: .16em; }
 .fir15Editorial .framework figcaption strong { font-family: var(--entimema-font-editorial); font-size: 24px; font-weight: 400; }
-.fir15Editorial .framework ol { gap: 0; margin-top: 24px; border-top: 1px solid var(--brand-navy-900); }
-.fir15Editorial .framework li { align-self: stretch; padding: 13px 10px; border-bottom: 1px solid #cfd2d8; font-family: var(--font-sans); font-weight: 650; }
+.fir15Editorial .framework ol { display: grid; grid-template-columns: repeat(auto-fit,minmax(124px,1fr)); align-items: stretch; gap: 0; margin-top: 24px; border-top: 1px solid var(--brand-navy-900); }
+.fir15Editorial .framework li { position: relative; min-width: 0; align-self: stretch; padding: 13px 10px; border-right: 1px solid #cfd2d8; border-bottom: 1px solid #cfd2d8; font-family: var(--font-sans); font-weight: 650; }
+.fir15Editorial .framework li:not(:last-child)::after { position: absolute; z-index: 2; top: 50%; right: -5px; width: 10px; height: 10px; display: grid; place-items: center; color: var(--brand-orange-500); background: #fffaf4; transform: translateY(-50%); }
 .fir15Editorial .framework li span { padding: 0; border: 0; }
 .fir15Editorial .formula { position: relative; display: flex; flex-direction: column; padding: 27px 68px 29px 27px; overflow: hidden; border-top: 2px solid var(--brand-navy-950); border-bottom: 1px solid #aeb3bd; background: linear-gradient(112deg,rgba(255,255,255,.78),rgba(247,242,234,.58)); text-align: left; box-shadow: 0 12px 30px rgba(4,19,63,.04); counter-increment: insight-equation; }
 .fir15Editorial .formula::before { content: ""; position: absolute; top: -2px; left: 0; width: 68px; height: 2px; background: var(--brand-orange-500); }
@@ -477,6 +478,19 @@
   [class*="__architecture"], [class*="__timeline"], [class*="__frontier"],
   [class*="__graph"], [class*="__funnel"]
 ) :where(h3,strong,b) { text-wrap:balance; }
+
+/* Nested plates belong to their editorial cell; only standalone plates may outdent. */
+.fir15Editorial .prose :where([class*="Grid"],[class*="grid"],[class*="metrics"],[class*="three"],[class*="fourUp"]) > :where(figure,[class*="tableScroll"]) { width:100%; max-width:100%; min-width:0; margin-block:0; }
+.fir15Editorial .prose :where([class*="Grid"],[class*="grid"],[class*="metrics"],[class*="three"],[class*="fourUp"]) > figure[class*="formula"] { padding:24px 52px 24px 20px; }
+.fir15Editorial .prose :where([class*="Grid"],[class*="grid"],[class*="metrics"],[class*="three"],[class*="fourUp"]) > figure[class*="formula"]::after { right:18px; }
+.fir15Editorial .prose :where([class*="Grid"],[class*="grid"],[class*="metrics"],[class*="three"],[class*="fourUp"]) > figure[class*="formula"] > [role="math"] { font-size:clamp(17px,1.75vw,23px); overflow-wrap:anywhere; }
+.fir15Editorial .prose :where([class*="Grid"],[class*="grid"],[class*="metrics"],[class*="three"],[class*="fourUp"]),
+.fir15Editorial .prose :where([class*="Grid"],[class*="grid"],[class*="metrics"],[class*="three"],[class*="fourUp"]) > * { min-width:0; max-width:100%; }
+
+.engineeringEditorial .prose,
+.engineeringEditorial .prose > div { min-width:0; max-width:100%; }
+.engineeringEditorial .prose :where([class*="__flow"],[class*="__chain"],[class*="__workflow"],[class*="__architecture"]) { max-width:100%; overflow-x:clip; }
+.engineeringEditorial .prose :where(pre,[class*="__code"]) { box-sizing:border-box; max-width:100%; overflow-x:auto; scrollbar-width:thin; scrollbar-color:#7c8597 transparent; }
 
 .editorialIdentityRow { width: fit-content; display: flex; flex-wrap: wrap; align-items: stretch; gap: 0; margin-top: 28px; border-block: 1px solid #aeb3bd; color: #677085; font-family: var(--font-sans); font-size: 12px; line-height: 1.4; }
 .editorialIdentityRow > span { display: none; }
