@@ -459,6 +459,16 @@
   [class*="__checklist"], [class*="__invariants"]
 ) :where(h3,strong,b) { color:var(--brand-navy-950); }
 .fir15Editorial .prose :where([class*="__warning"],[class*="__failure"],[class*="__diagnostic"]) > :where(span,small,b):first-child { color:#b84322; font-family:var(--font-sans); font-weight:780; letter-spacing:.1em; }
+.fir15Editorial .prose :where(
+  [class*="__decision"], [class*="__tension"], [class*="__beforeAfter"],
+  [class*="__contrast"], [class*="__paths"], [class*="__hysteresis"],
+  [class*="__tradeoff"], [class*="__distinction"]
+) { position:relative; border-top:2px solid var(--brand-navy-950); border-bottom:1px solid #aeb3bd; border-radius:0; color:var(--brand-navy-950); background:rgba(255,255,255,.42); box-shadow:0 14px 34px rgba(4,19,63,.04); }
+.fir15Editorial .prose :where(
+  [class*="__decision"], [class*="__tension"], [class*="__beforeAfter"],
+  [class*="__contrast"], [class*="__paths"], [class*="__hysteresis"],
+  [class*="__tradeoff"], [class*="__distinction"]
+)::before { content:""; position:absolute; z-index:2; top:-2px; left:0; width:72px; height:2px; background:var(--brand-orange-500); }
 
 .fir15Editorial .prose :where(
   [class*="__matrix"], [class*="__heatmap"], [class*="__contribution"],
