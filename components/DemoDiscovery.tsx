@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { createContext, type FormEvent, type ReactNode, useContext, useEffect, useRef, useState } from "react";
 import { PRIMARY_COMMERCIAL_CTA } from "@/lib/cta-labels";
-import { trackAnalyticsEvent } from "@/lib/analytics";
+import { ANALYTICS_READY_EVENT, previousInternalPath, trackAnalyticsEvent } from "@/lib/analytics";
 import { countryOptions } from "@/lib/countries";
 import { clientInquiryTypes, partnershipTypes } from "@/app/contact/contact-config";
 import styles from "./DemoDiscovery.module.css";
@@ -78,6 +78,32 @@ export function DemoDiscoveryProvider({ children }: { children: ReactNode }) {
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, [modalKind]);
+
+  useEffect(() => {
+    if (!modalKind || modalKind === "newsletter") return;
+    const form = modalRef.current?.querySelector("form");
+    if (!form) return;
+    let interacted = false;
+    let sent = false;
+    const send = () => {
+      if (!interacted || sent) return;
+      sent = trackAnalyticsEvent("form_start", {
+        form_type: modalKind,
+        topic: initialTopic || undefined,
+        previous_internal_path: previousInternalPath(),
+      });
+    };
+    const start = () => {
+      interacted = true;
+      send();
+    };
+    form.addEventListener("focusin", start, { once: true });
+    window.addEventListener(ANALYTICS_READY_EVENT, send);
+    return () => {
+      form.removeEventListener("focusin", start);
+      window.removeEventListener(ANALYTICS_READY_EVENT, send);
+    };
+  }, [initialTopic, modalKind]);
 
   const modalMeta = {
     demo: { titleId: "demo-discovery-title", closeLabel: "Close Discover Entimema" },
@@ -295,7 +321,13 @@ function showErrors(form: HTMLFormElement, errors: FieldErrors, setErrors: (erro
 async function send(data: FormData, inquiryType?: ContactKind): Promise<Status> {
   try {
     const response = await fetch("/api/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(Object.fromEntries(data.entries())) });
-    if (response.ok && inquiryType && response.headers.get("X-Entimema-Submission") === "accepted") trackAnalyticsEvent("contact_submit_success", { inquiry_type: inquiryType });
+    const intent = String(data.get("intent") ?? "");
+    if (response.ok && intent !== "newsletter" && response.headers.get("X-Entimema-Submission") === "accepted") trackAnalyticsEvent("contact_submit_success", {
+      inquiry_type: inquiryType ?? intent,
+      topic: String(data.get("topic") ?? "") || undefined,
+      agent_id: String(data.get("agentId") ?? "") || undefined,
+      previous_internal_path: previousInternalPath(),
+    });
     return response.ok ? "success" : "error";
   } catch { return "error"; }
 }

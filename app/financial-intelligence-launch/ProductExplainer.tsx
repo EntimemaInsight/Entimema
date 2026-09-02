@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
+import { FinancialIntelligenceCta } from "./FinancialIntelligenceAnalytics";
 import styles from "./launch.module.css";
 
 const steps = [
@@ -45,6 +45,6 @@ export default function ProductExplainer() {
       <div className={styles.stepColumn}>{steps.map(([heading, copy], index) => <section className={styles.explainerStep} data-step={index + 1} key={heading} aria-current={active === index + 1 ? "step" : undefined}><span>0{index + 1}</span><h3>{heading}</h3><p>{copy}</p><div className={styles.mobileVisual}><EvidenceVisual stage={index + 1} /></div></section>)}</div>
       <div className={styles.stickyVisual}><EvidenceVisual stage={active} /></div>
     </div>
-    <nav className={styles.explainerActions} aria-label="Explainer next steps"><Link href="/contact?topic=financial-data">Request a private walkthrough</Link><Link href="#old-condition">Explore the architecture</Link></nav>
+    <nav className={styles.explainerActions} aria-label="Explainer next steps"><FinancialIntelligenceCta href="/contact?topic=financial-data" kind="private_walkthrough" position="explainer">Request a private walkthrough</FinancialIntelligenceCta><FinancialIntelligenceCta href="#old-condition" kind="architecture" position="explainer">Explore the architecture</FinancialIntelligenceCta></nav>
   </section>;
 }

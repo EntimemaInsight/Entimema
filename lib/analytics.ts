@@ -4,7 +4,14 @@ export const ANALYTICS_PREFERENCES_EVENT = "entimema:analytics-preferences";
 export const ATTRIBUTION_KEY = "entimema_acquisition";
 export const CURRENT_PATH_KEY = "entimema_current_path";
 
-export type AnalyticsEventName = "resource_view" | "related_capability_click" | "contact_view" | "contact_submit_success";
+export type AnalyticsEventName =
+  | "resource_view"
+  | "related_capability_click"
+  | "financial_intelligence_view"
+  | "financial_intelligence_cta_click"
+  | "contact_view"
+  | "form_start"
+  | "contact_submit_success";
 type EventParameters = Record<string, string | number | boolean | undefined>;
 type AcquisitionContext = {
   source_category: "organic_search" | "organic_social" | "direct" | "referral" | "campaign";

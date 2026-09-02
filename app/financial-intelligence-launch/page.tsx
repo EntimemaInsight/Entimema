@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import { FOUNDER_ID, ORGANIZATION_ID, SITE_URL, WEBSITE_ID, createBreadcrumbSchema, serializeJsonLd } from "@/lib/structured-data";
 import styles from "./launch.module.css";
 import ProductExplainer from "./ProductExplainer";
+import { FinancialIntelligenceCta, FinancialIntelligenceViewAnalytics } from "./FinancialIntelligenceAnalytics";
 
 const path = "/financial-intelligence-launch";
 const url = `${SITE_URL}${path}`;
@@ -50,10 +51,11 @@ export default function FinancialIntelligenceLaunchPage() {
   return <>
     <Navbar />
     <main className={styles.page}>
+      <FinancialIntelligenceViewAnalytics />
       <article>
         <header className={styles.masthead}>
           <div className={styles.publication}><span>ENTIMEMA FINANCIAL INTELLIGENCE</span><span>LAUNCHING 9 SEPTEMBER 2026</span></div>
-          <div className={styles.heroGrid}><div className={styles.heroCopy}><h1><span>Financial documents in.</span><span>Validated analysis out.</span></h1><p className={styles.standfirst}>AI interprets the evidence. Deterministic controls verify the numbers. Humans resolve material exceptions.</p><nav className={styles.heroActions} aria-label="Launch actions"><Link href="/contact?topic=financial-data">Request a private walkthrough</Link><Link href="#how-it-works">See how it works</Link></nav></div>
+          <div className={styles.heroGrid}><div className={styles.heroCopy}><h1><span>Financial documents in.</span><span>Validated analysis out.</span></h1><p className={styles.standfirst}>AI interprets the evidence. Deterministic controls verify the numbers. Humans resolve material exceptions.</p><nav className={styles.heroActions} aria-label="Launch actions"><FinancialIntelligenceCta href="/contact?topic=financial-data" kind="private_walkthrough" position="hero">Request a private walkthrough</FinancialIntelligenceCta><FinancialIntelligenceCta href="#how-it-works" kind="workflow" position="hero">See how it works</FinancialIntelligenceCta></nav></div>
           <div className={styles.heroPipeline} role="img" aria-label="Financial documents are interpreted by AI, validated by deterministic controls, reviewed by a human when necessary, and delivered as validated analysis."><div className={styles.heroDocs}><span>PDF<small>Revenue · SRC–01</small></span><span>XLSX<small>FY 2025 · SRC–02</small></span><span>CSV<small>EUR · SRC–03</small></span></div><ol><li><b>AI INTERPRETATION</b><span>Meaning · period · definition · context</span></li><li><b>DETERMINISTIC CONTROL</b><span>Arithmetic · reconciliation · identities</span></li><li><b>HUMAN REVIEW</b><span>Material uncertainty is escalated—not concealed.</span></li></ol><div className={styles.heroResult}><b>VALIDATED ANALYSIS</b><span>Evidence linked</span><span>Controls passed</span><span>Exceptions resolved</span><strong>Ready for decision</strong></div><p className={styles.pipelineCaption}>PDF · XLSX · CSV → INTERPRET → VALIDATE → REVIEW → DECISION-READY ANALYSIS</p></div></div>
         </header>
 
@@ -133,7 +135,7 @@ export default function FinancialIntelligenceLaunchPage() {
 
         <section className={`${styles.chapter} ${styles.invitation}`} aria-labelledby="invitation">
           <Marker>VIII. THE INVITATION</Marker>
-          <div><h2 id="invitation">Bring the evidence. Leave with a decision-ready financial state.</h2><p>Entimema Financial Intelligence launches on 9 September 2026. We are preparing the first controlled workflows for teams that need financial analysis to be fast, traceable and accountable.</p><nav className={styles.actions} aria-label="Financial Intelligence next steps"><Link href="/contact?topic=financial-data">Request a private walkthrough</Link><Link href="/resources/traceable-financial-analysis-workflow">Explore Entimema Research</Link></nav></div>
+          <div><h2 id="invitation">Bring the evidence. Leave with a decision-ready financial state.</h2><p>Entimema Financial Intelligence launches on 9 September 2026. We are preparing the first controlled workflows for teams that need financial analysis to be fast, traceable and accountable.</p><nav className={styles.actions} aria-label="Financial Intelligence next steps"><FinancialIntelligenceCta href="/contact?topic=financial-data" kind="private_walkthrough" position="final">Request a private walkthrough</FinancialIntelligenceCta><FinancialIntelligenceCta href="/resources/traceable-financial-analysis-workflow" kind="research" position="final">Explore Entimema Research</FinancialIntelligenceCta></nav></div>
         </section>
       </article>
     </main>

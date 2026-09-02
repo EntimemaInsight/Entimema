@@ -6,6 +6,9 @@ const page = readFileSync("app/financial-intelligence-launch/page.tsx", "utf8");
 const explainer = readFileSync("app/financial-intelligence-launch/ProductExplainer.tsx", "utf8");
 const css = readFileSync("app/financial-intelligence-launch/launch.module.css", "utf8");
 const sitemap = readFileSync("app/sitemap.ts", "utf8");
+const analytics = readFileSync("app/financial-intelligence-launch/FinancialIntelligenceAnalytics.tsx", "utf8");
+const sharedAnalytics = readFileSync("lib/analytics.ts", "utf8");
+const forms = readFileSync("components/DemoDiscovery.tsx", "utf8");
 
 test("launch page is explicitly pre-launch and has no live-market claim", () => {
   assert.match(page, /LAUNCHING 9 SEPTEMBER 2026/);
@@ -41,6 +44,25 @@ test("conversion, Founder identity references, metadata and schema are canonical
   assert.match(page, /alternates: \{ canonical: url \}/);
   assert.match(page, /"@type": "WebPage"/);
   assert.doesNotMatch(page, /"@type": "Person"|"@type": "Organization"|"@type": "Product"/);
+});
+
+test("Financial Intelligence exposes a consent-gated commercial measurement funnel", () => {
+  assert.match(page, /FinancialIntelligenceViewAnalytics/);
+  assert.equal((page.match(/kind="private_walkthrough"/g) ?? []).length, 2);
+  assert.match(explainer, /kind="private_walkthrough" position="explainer"/);
+  assert.match(analytics, /financial_intelligence_view/);
+  assert.match(analytics, /financial_intelligence_cta_click/);
+  assert.match(analytics, /cta_position: position/);
+  assert.match(sharedAnalytics, /hasAnalyticsConsent\(\)/);
+  assert.match(sharedAnalytics, /isProductionAnalyticsHost\(\)/);
+});
+
+test("inquiry measurement records intent without sending form contents", () => {
+  assert.match(forms, /trackAnalyticsEvent\("form_start"/);
+  assert.match(forms, /trackAnalyticsEvent\("contact_submit_success"/);
+  assert.match(forms, /form_type: modalKind/);
+  assert.match(forms, /previous_internal_path: previousInternalPath\(\)/);
+  assert.doesNotMatch(forms, /(first_name|last_name|email|phone|message): String\(data\.get/);
 });
 
 test("public launch route is indexed without changing global navigation or adding an announcement", () => {
