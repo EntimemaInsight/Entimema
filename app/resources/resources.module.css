@@ -651,6 +651,55 @@
   .spineCursor { transition: none; }
 }
 
+/* Engineering — FT Technology Yearbook visual grammar. */
+.engineeringEditorial .prose { max-width:780px; color:#11172d; font-family:var(--font-sans); font-size:19px; line-height:1.7; letter-spacing:-.004em; counter-reset:engineering-equation; }
+.engineeringEditorial .prose p { margin-bottom:1.35em; }
+.engineeringEditorial .prose h2 { font-family:var(--entimema-font-editorial); font-weight:400; letter-spacing:-.026em; }
+.engineeringEditorial .prose h3 { font-size:clamp(19px,1.8vw,23px); }
+.engineeringEditorial .figure,.engineeringEditorial .framework,.engineeringEditorial .formula,.engineeringEditorial .tableScroll { box-sizing:border-box; width:100%; max-width:100%; margin-block:50px; }
+.engineeringEditorial .figureStage,.engineeringEditorial .framework,.engineeringEditorial .formula,.engineeringEditorial .tableScroll { position:relative; border-top:2px solid #11172d; border-bottom:1px solid #aeb6c8; border-inline:0; border-radius:0; background:rgba(255,255,255,.78); box-shadow:0 14px 34px rgba(17,23,45,.05); }
+.engineeringEditorial .figureStage::before,.engineeringEditorial .framework::before,.engineeringEditorial .formula::before,.engineeringEditorial .tableScroll::before { content:""; position:absolute; z-index:3; top:-2px; left:0; width:76px; height:2px; background:var(--engineering-accent); }
+.engineeringEditorial .figureStage { padding:clamp(24px,3vw,36px); }
+.engineeringEditorial .figureStage,.engineeringEditorial .figureStage * { box-sizing:border-box; min-width:0; }
+.engineeringEditorial .figureStage svg { display:block; width:100%; max-width:100%; height:auto; }
+.engineeringEditorial .figure > figcaption { display:grid; grid-template-columns:auto 1fr; gap:12px; padding:13px 0 15px; border-bottom:1px solid #c9ceda; color:#5d667b; font-family:var(--font-sans); font-size:12px; line-height:1.5; }
+.engineeringEditorial .figure > figcaption::before { content:"SYSTEM FIGURE"; color:var(--engineering-accent); font-family:var(--font-mono,monospace); font-size:9px; font-weight:800; letter-spacing:.12em; }
+.engineeringEditorial .framework { padding:28px 26px 26px; }
+.engineeringEditorial .framework figcaption span { color:var(--engineering-accent); font-family:var(--font-mono,monospace); font-size:9px; font-weight:800; letter-spacing:.14em; }
+.engineeringEditorial .framework figcaption strong { color:#11172d; font-family:var(--entimema-font-editorial); font-size:clamp(25px,2.6vw,32px); font-weight:400; }
+.engineeringEditorial .framework figcaption small { color:#5d667b; font-size:13px; }
+.engineeringEditorial .framework ol { display:grid; grid-template-columns:repeat(auto-fit,minmax(126px,1fr)); align-items:stretch; gap:0; margin-top:25px; border-top:1px solid #11172d; }
+.engineeringEditorial .framework li { position:relative; min-width:0; align-self:stretch; padding:15px 12px; border-right:1px solid #cbd0dc; border-bottom:1px solid #cbd0dc; font-family:var(--font-sans); font-size:12px; font-weight:680; line-height:1.35; }
+.engineeringEditorial .framework li span { padding:0; border:0; }
+.engineeringEditorial .framework li:not(:last-child)::after { position:absolute; z-index:2; top:50%; right:-5px; width:10px; height:10px; display:grid; place-items:center; color:var(--engineering-accent); background:#f8f9fc; transform:translateY(-50%); }
+.engineeringEditorial .formula { display:flex; flex-direction:column; padding:27px 68px 29px 27px; overflow:hidden; text-align:left; counter-increment:engineering-equation; }
+.engineeringEditorial .formula::after { content:"(" counter(engineering-equation,decimal-leading-zero) ")"; position:absolute; top:31px; right:25px; color:#727b91; font-family:var(--font-mono,monospace); font-size:9px; font-weight:700; letter-spacing:.08em; }
+.engineeringEditorial .formula > .equationExpression { order:2; padding:20px 0 2px; overflow-x:auto; overflow-y:hidden; color:#11172d; font-family:"Cambria Math","STIX Two Math",Georgia,serif; font-size:clamp(21px,2.3vw,29px); line-height:1.7; letter-spacing:-.016em; scrollbar-width:none; }
+.engineeringEditorial .formula > .equationExpression::-webkit-scrollbar { display:none; }
+.engineeringEditorial .formula > .equationExpression * { color:inherit; font-family:inherit!important; font-size:inherit; font-weight:inherit; }
+.engineeringEditorial .formula > .equationExpression sub,.engineeringEditorial .formula > .equationExpression sup { position:relative; font-size:.58em; line-height:0; }
+.engineeringEditorial .formula > .equationExpression sub { bottom:-.16em; }
+.engineeringEditorial .formula > .equationExpression sup { top:-.42em; }
+.engineeringEditorial .formula figcaption { order:1; display:grid; gap:5px; margin:0; padding:0 0 12px; border-bottom:1px solid #cbd0dc; color:#596277; font-family:var(--font-sans); font-size:11px; line-height:1.4; }
+.engineeringEditorial .formula figcaption span:first-child { color:var(--engineering-accent); font-family:var(--font-mono,monospace); font-size:9px; font-weight:800; letter-spacing:.14em; }
+.engineeringEditorial .tableScroll { overflow-x:auto; scrollbar-width:thin; scrollbar-color:#858da0 transparent; }
+.engineeringEditorial .table { min-width:620px; color:#11172d; font-family:var(--font-sans); font-size:14px; line-height:1.55; font-variant-numeric:tabular-nums lining-nums; }
+.engineeringEditorial .table caption { padding:16px 13px 14px; border-bottom:1px solid #11172d; color:#11172d; font-family:var(--entimema-font-editorial); font-size:19px; font-weight:400; letter-spacing:-.012em; text-transform:none; }
+.engineeringEditorial .table caption::before { content:"DATA TABLE"; display:block; margin-bottom:5px; color:var(--engineering-accent); font-family:var(--font-mono,monospace); font-size:9px; font-weight:800; letter-spacing:.14em; }
+.engineeringEditorial .table th { padding:12px 13px; border-bottom:1px solid #99a2b4; color:#11172d; background:#edf0f5; font-size:11px; font-weight:780; letter-spacing:.045em; text-transform:uppercase; }
+.engineeringEditorial .table td { padding:14px 13px; border-bottom:1px solid #d3d7e0; font-size:14px; }
+.engineeringEditorial .table tbody tr:nth-child(even) { background:#f6f7fa; }
+.engineeringEditorial .prose :where(pre,[class*="__code"]) { position:relative; box-sizing:border-box; max-width:100%; margin-block:38px; padding:42px 26px 25px; overflow-x:auto; border:0; border-top:2px solid var(--engineering-accent); border-bottom:1px solid #8790a5; border-radius:0!important; color:#f4f6fb; background:#11172d; box-shadow:none; font-family:var(--font-mono,ui-monospace,monospace)!important; font-size:14px!important; line-height:1.72!important; letter-spacing:0; tab-size:2; scrollbar-width:thin; scrollbar-color:#8992a7 #11172d; }
+.engineeringEditorial .prose :where(pre,[class*="__code"])::before { content:"SOURCE / EXECUTION LOG"; position:absolute; top:14px; left:26px; color:#a9b0ff; font-family:var(--font-mono,monospace); font-size:9px; font-weight:750; letter-spacing:.13em; }
+.engineeringEditorial .prose :where([class*="Grid"],[class*="grid"],[class*="Matrix"],[class*="matrix"],[class*="Flow"],[class*="flow"],[class*="Architecture"],[class*="architecture"],[class*="Diagram"],[class*="diagram"],[class*="Comparison"],[class*="comparison"],[class*="Panel"],[class*="panel"],[class*="Chart"],[class*="chart"],[class*="Timeline"],[class*="timeline"],[class*="Chain"],[class*="chain"],[class*="Stack"],[class*="stack"],[class*="metrics"],[class*="dependency"],[class*="machine"],[class*="retry"],[class*="window"],[class*="controls"]) { box-sizing:border-box; max-width:100%; min-width:0; border-color:#aeb6c8; border-radius:0!important; }
+.engineeringEditorial .prose :where([class*="Grid"],[class*="grid"],[class*="Matrix"],[class*="matrix"],[class*="Flow"],[class*="flow"],[class*="Architecture"],[class*="architecture"],[class*="Diagram"],[class*="diagram"],[class*="Comparison"],[class*="comparison"],[class*="Timeline"],[class*="timeline"],[class*="Chain"],[class*="chain"],[class*="Stack"],[class*="stack"],[class*="metrics"],[class*="dependency"]) > * { box-sizing:border-box; min-width:0; border-radius:0!important; }
+.engineeringEditorial .prose :where([class*="Grid"],[class*="grid"],[class*="Matrix"],[class*="matrix"],[class*="Flow"],[class*="flow"],[class*="Architecture"],[class*="architecture"],[class*="Diagram"],[class*="diagram"],[class*="Comparison"],[class*="comparison"],[class*="Timeline"],[class*="timeline"],[class*="Chain"],[class*="chain"],[class*="Stack"],[class*="stack"],[class*="metrics"],[class*="dependency"]) :where(span,small,b,dt) { font-size:clamp(11px,.82vw,13px)!important; line-height:1.4; }
+.engineeringEditorial .prose :where([class*="Grid"],[class*="grid"],[class*="Matrix"],[class*="matrix"],[class*="Flow"],[class*="flow"],[class*="Architecture"],[class*="architecture"],[class*="Diagram"],[class*="diagram"],[class*="Comparison"],[class*="comparison"],[class*="Panel"],[class*="panel"],[class*="Timeline"],[class*="timeline"],[class*="metrics"],[class*="dependency"]) :where(strong,dd) { font-size:clamp(12px,.95vw,15px)!important; line-height:1.38; }
+.engineeringEditorial .prose :where([class*="__humanNode"],[class*="__confirmed"],[class*="__total"]) { border-color:#11172d; color:#fff; background:#11172d; }
+.engineeringEditorial .prose :where([class*="__agentNode"],[class*="__escalated"],[class*="__warning"]) { border-color:var(--engineering-accent); }
+@media (max-width:800px) { .engineeringEditorial .prose{font-size:18px}.engineeringEditorial .framework ol{grid-template-columns:repeat(2,minmax(0,1fr))}.engineeringEditorial .table{min-width:560px} }
+@media (max-width:520px) { .engineeringEditorial .framework{padding:22px 18px}.engineeringEditorial .framework ol{grid-template-columns:1fr}.engineeringEditorial .framework li{border-right:0}.engineeringEditorial .framework li:not(:last-child)::after{top:auto;right:12px;bottom:-6px;transform:rotate(90deg)}.engineeringEditorial .formula{padding:23px 48px 24px 18px}.engineeringEditorial .formula::after{top:27px;right:16px}.engineeringEditorial .prose :where(pre,[class*="__code"]){padding:40px 18px 22px;font-size:13px!important} }
+
 .framework01 { width: 100%; }
 .frameworkSource { display: grid; gap: 5px; padding: 18px 20px; border: 1px solid var(--brand-blue-200); background: #fff; }
 .frameworkSource span,
