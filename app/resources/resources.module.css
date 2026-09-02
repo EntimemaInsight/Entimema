@@ -432,6 +432,34 @@
 .fir15Editorial .prose :where([class*="__formula"],[class*="__equation"]) { font-family:"Cambria Math","STIX Two Math",Georgia,serif !important; font-variant-numeric:lining-nums tabular-nums; }
 .fir15Editorial .prose :where([class*="__code"],[class*="__schema"]) { border-radius:0; box-shadow:none; }
 
+/* Pattern coverage catches rare article-specific names without touching prose or page layout. */
+.fir15Editorial .prose :where(
+  [class*="Grid"], [class*="Flow"], [class*="Matrix"], [class*="Architecture"],
+  [class*="Diagram"], [class*="Comparison"], [class*="Panel"], [class*="Chart"],
+  [class*="Curves"], [class*="Bars"], [class*="Bridge"], [class*="Timeline"],
+  [class*="Triangle"], [class*="Scale"], [class*="Stack"]
+) { box-sizing:border-box; border-color:#aeb3bd; color:var(--brand-navy-950); }
+.fir15Editorial .prose :where(
+  [class*="Grid"], [class*="Flow"], [class*="Matrix"], [class*="Architecture"],
+  [class*="Diagram"], [class*="Comparison"], [class*="Panel"], [class*="Chart"],
+  [class*="Curves"], [class*="Bars"], [class*="Bridge"], [class*="Timeline"],
+  [class*="Triangle"], [class*="Scale"], [class*="Stack"]
+) * { box-sizing:border-box; }
+
+.fir15Editorial .prose :where(
+  [class*="__warning"], [class*="__failure"], [class*="__diagnostic"],
+  [class*="__question"], [class*="__quote"], [class*="__tradeoff"],
+  [class*="__evidence"], [class*="__boundary"], [class*="__controls"],
+  [class*="__checklist"], [class*="__invariants"]
+) { position:relative; margin-block:42px; padding:22px 24px; border-top:1px solid var(--brand-navy-950); border-bottom:1px solid #aeb3bd; border-left:2px solid var(--brand-orange-500); border-radius:0; color:var(--brand-navy-950); background:rgba(255,255,255,.48); box-shadow:none; }
+.fir15Editorial .prose :where(
+  [class*="__warning"], [class*="__failure"], [class*="__diagnostic"],
+  [class*="__question"], [class*="__quote"], [class*="__tradeoff"],
+  [class*="__evidence"], [class*="__boundary"], [class*="__controls"],
+  [class*="__checklist"], [class*="__invariants"]
+) :where(h3,strong,b) { color:var(--brand-navy-950); }
+.fir15Editorial .prose :where([class*="__warning"],[class*="__failure"],[class*="__diagnostic"]) > :where(span,small,b):first-child { color:#b84322; font-family:var(--font-sans); font-weight:780; letter-spacing:.1em; }
+
 .fir15Editorial .prose :where(
   [class*="__matrix"], [class*="__heatmap"], [class*="__contribution"],
   [class*="__maturity"], [class*="__comparison"], [class*="__compare"],
