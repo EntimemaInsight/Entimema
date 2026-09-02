@@ -1,27 +1,37 @@
-.banner { position: fixed; z-index: 10000; right: 24px; bottom: 24px; width: min(620px, calc(100vw - 48px)); padding: 22px 24px; border: 1px solid var(--brand-blue-200); background: var(--brand-navy-950); box-shadow: 0 18px 48px rgba(5, 19, 33, .2); color: #fff; }
-.banner strong { font-size: 15px; }
-.banner p { max-width: 56ch; margin: 7px 0 0; color: rgba(255,255,255,.72); font-size: 13px; line-height: 1.55; }
-.intro { padding-right: 10px; }
-.privacyLink { display: inline-block; margin-top: 9px; color: rgba(255,255,255,.86); font-size: 12px; font-weight: 700; text-underline-offset: 3px; }
-.privacyLink:hover { color: #fff; }
-.preferenceList { display: grid; gap: 1px; margin-top: 18px; background: rgba(255,255,255,.12); }
-.preferenceRow { display: flex; align-items: center; justify-content: space-between; gap: 22px; padding: 14px 15px; background: rgba(255,255,255,.055); }
-.preferenceRow > div { display: grid; gap: 3px; }
-.preferenceRow strong { font-size: 13px; }
-.preferenceRow span { color: rgba(255,255,255,.66); font-size: 12px; line-height: 1.4; }
-.preferenceRow .alwaysActive { flex: 0 0 auto; color: rgba(255,255,255,.82); font-weight: 700; }
-.switch { position: relative; flex: 0 0 auto; width: 44px; height: 24px; padding: 0; border: 1px solid rgba(255,255,255,.42); border-radius: 999px; background: rgba(255,255,255,.14); cursor: pointer; transition: background .18s ease, border-color .18s ease; }
-.switch span { position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; border-radius: 50%; background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,.28); transition: transform .18s ease; }
-.switch[aria-checked="true"] { border-color: var(--brand-orange-500); background: var(--brand-orange-500); }
-.switch[aria-checked="true"] span { transform: translateX(20px); }
-.switch:focus-visible { outline: 3px solid var(--brand-blue-200); outline-offset: 3px; }
-.actions { display: flex; justify-content: flex-end; margin-top: 16px; }
-.actions button { min-height: 42px; padding: 0 15px; border: 1px solid rgba(255,255,255,.35); font: inherit; font-size: 12px; font-weight: 700; cursor: pointer; }
-.primary { border-color: var(--brand-orange-500) !important; background: var(--brand-orange-500); color: var(--brand-navy-950); }
-.actions button:focus-visible { outline: 3px solid var(--brand-blue-200); outline-offset: 3px; }
-.preferencesTrigger { position: fixed; z-index: 9999; left: 18px; bottom: 18px; display: grid; place-items: center; width: 48px; height: 48px; padding: 0; border: 1px solid rgba(255,255,255,.7); border-radius: 50%; background: var(--brand-blue-700, #4338ca); box-shadow: 0 10px 26px rgba(5,19,33,.2); color: #fff; cursor: pointer; transition: transform .18s ease, box-shadow .18s ease; }
+.backdrop { position: fixed; z-index: 10000; inset: 0; display: grid; place-items: center; padding: 28px; background: rgba(4, 19, 63, .42); backdrop-filter: blur(3px); }
+.modal { width: min(740px, 100%); max-height: calc(100dvh - 56px); overflow: auto; border: 1px solid rgba(7, 27, 82, .14); border-radius: 4px; background: #fff; box-shadow: 0 28px 80px rgba(4, 19, 63, .26); color: var(--brand-navy-950, #04133f); }
+.modalHeader { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; padding: 25px 28px 23px; border-bottom: 1px solid #e5e8ee; background: #f7f8fa; }
+.modalHeader h2 { max-width: 650px; margin: 5px 0 0; font-family: var(--font-serif, Georgia, serif); font-size: clamp(24px, 3vw, 34px); font-weight: 500; letter-spacing: -.025em; line-height: 1.12; }
+.eyebrow { color: #556078; font-size: 10px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+.closeButton { display: grid; flex: 0 0 auto; place-items: center; width: 36px; height: 36px; padding: 0; border: 1px solid #dce0e7; background: #fff; color: #26334f; cursor: pointer; font: inherit; }
+.closeButton span { margin-top: -2px; font-size: 25px; font-weight: 300; line-height: 1; }
+.modalBody { padding: 25px 28px 24px; }
+.intro h3 { margin: 0; font-size: 17px; line-height: 1.3; }
+.intro p { max-width: 68ch; margin: 8px 0 0; color: #44506a; font-size: 13px; line-height: 1.65; }
+.privacyLink { color: var(--brand-navy-950, #04133f); font-weight: 700; text-underline-offset: 3px; }
+.privacyLink:hover { color: var(--brand-orange-500, #f36b21); }
+.preferenceList { display: grid; gap: 8px; margin-top: 22px; }
+.preferenceRow { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 72px; padding: 14px 16px; border: 1px solid #e4e7ec; background: #f3f5f7; }
+.preferenceRow > div:first-child { display: grid; gap: 4px; }
+.preferenceRow strong { font-size: 14px; }
+.preferenceRow span { color: #59647a; font-size: 11px; line-height: 1.4; }
+.preferenceControl { display: flex; flex: 0 0 auto; align-items: center; gap: 10px; }
+.preferenceControl .alwaysActive { color: #27334c; font-weight: 700; }
+.switch { position: relative; flex: 0 0 auto; width: 44px; height: 24px; padding: 0; border: 1px solid #c3cad5; border-radius: 999px; background: #d2d7de; cursor: pointer; transition: background .18s ease, border-color .18s ease; }
+.switch span { position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; border-radius: 50%; background: #fff; box-shadow: 0 1px 4px rgba(4,19,63,.24); transition: transform .18s ease; }
+.switch[aria-checked="true"], .switchLocked { border-color: #9baada; background: #aeb9df; }
+.switch[aria-checked="true"] span, .switchLocked span { transform: translateX(20px); }
+.switchLocked { cursor: default; opacity: .74; }
+.switch:focus-visible, .closeButton:focus-visible, .primary:focus-visible { outline: 3px solid #9fb2e5; outline-offset: 3px; }
+.modalFooter { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-top: 25px; padding-top: 20px; border-top: 1px solid #e4e7ec; }
+.brand :global(.site-brand) { gap: 9px; }
+.brand :global(.site-brand__mark) { width: 38px; height: 38px; flex-basis: 38px; }
+.brand :global(.site-brand__word) { font-size: 25px; }
+.primary { min-height: 44px; padding: 0 18px; border: 1px solid var(--brand-navy-950, #04133f); background: var(--brand-navy-950, #04133f); color: #fff; cursor: pointer; font: inherit; font-size: 12px; font-weight: 800; transition: background .18s ease, border-color .18s ease, transform .18s ease; }
+.primary:hover { border-color: var(--brand-orange-500, #f36b21); background: var(--brand-orange-500, #f36b21); color: var(--brand-navy-950, #04133f); transform: translateY(-1px); }
+.preferencesTrigger { position: fixed; z-index: 9999; left: 18px; bottom: 18px; display: grid; place-items: center; width: 48px; height: 48px; padding: 0; border: 1px solid rgba(255,255,255,.78); border-radius: 50%; background: var(--brand-navy-950, #04133f); box-shadow: 0 10px 26px rgba(5,19,33,.2); color: #fff; cursor: pointer; transition: transform .18s ease, box-shadow .18s ease; }
 .preferencesTrigger svg { width: 28px; height: 28px; fill: none; stroke: currentColor; stroke-width: 1.55; stroke-linecap: round; stroke-linejoin: round; }
 .preferencesTrigger:hover { transform: translateY(-2px); box-shadow: 0 14px 30px rgba(5,19,33,.25); }
-.preferencesTrigger:focus-visible { outline: 3px solid var(--brand-blue-200); outline-offset: 3px; }
-@media (max-width: 640px) { .banner { right: 12px; bottom: 12px; width: calc(100vw - 24px); padding: 20px; } .preferenceRow { align-items: flex-start; } .actions button { width: 100%; } .preferencesTrigger { left: 12px; bottom: 12px; width: 44px; height: 44px; } }
-@media (prefers-reduced-motion: reduce) { .switch, .switch span, .preferencesTrigger { transition: none; } }
+.preferencesTrigger:focus-visible { outline: 3px solid #9fb2e5; outline-offset: 3px; }
+@media (max-width: 640px) { .backdrop { align-items: end; padding: 12px; } .modal { max-height: calc(100dvh - 24px); } .modalHeader { padding: 21px 20px 19px; } .modalBody { padding: 21px 20px 20px; } .preferenceRow { align-items: flex-start; } .preferenceControl { padding-top: 2px; } .modalFooter { align-items: stretch; flex-direction: column; } .primary { width: 100%; } .preferencesTrigger { left: 12px; bottom: 12px; width: 44px; height: 44px; } }
+@media (prefers-reduced-motion: reduce) { .switch, .switch span, .primary, .preferencesTrigger { transition: none; } }
