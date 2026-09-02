@@ -37,9 +37,8 @@ export default function ResourceArticle({ resource, sections, children, readingM
             {isInsights ? (
               <div className={styles.editorialIdentityRow}>
                 <PublisherIdentity />
-                <span aria-hidden="true">·</span>
-                <a className={styles.linkedinIdentityAction} href="https://www.linkedin.com/company/144795091/" rel="noopener noreferrer" target="_blank"><i aria-hidden="true">in</i><span>Follow Entimema</span><b aria-hidden="true">↗</b></a>
-                <a className={styles.founderIdentityAction} href="https://www.linkedin.com/in/alexander-dimitrov-entimema/" rel="author noopener noreferrer" target="_blank"><span><small>FOUNDER</small>Alexander Dimitrov</span><b aria-hidden="true">↗</b></a>
+                <a className={styles.founderIdentityAction} href="https://www.linkedin.com/in/alexander-dimitrov-entimema/" rel="author noopener noreferrer" target="_blank"><span><small>WRITTEN BY</small>Alexander Dimitrov <i>Founder</i></span><b aria-hidden="true">↗</b></a>
+                <a className={styles.linkedinIdentityAction} href="https://www.linkedin.com/company/144795091/" rel="noopener noreferrer" target="_blank"><span>Follow Entimema on LinkedIn</span><b aria-hidden="true">↗</b></a>
               </div>
             ) : <PublisherIdentity />}
           </div>

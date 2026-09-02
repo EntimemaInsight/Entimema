@@ -332,20 +332,20 @@
 .fir15Editorial .table tbody td:first-child { color: var(--brand-navy-950); font-weight: 650; }
 .fir15Editorial .table tbody tr:last-child td { border-bottom: 0; }
 
-.editorialIdentityRow { display: flex; flex-wrap: wrap; align-items: stretch; gap: 10px; margin-top: 26px; color: #677085; font-family: var(--font-sans); font-size: 12px; line-height: 1.4; }
+.editorialIdentityRow { width: fit-content; display: flex; flex-wrap: wrap; align-items: stretch; gap: 0; margin-top: 28px; border-block: 1px solid #aeb3bd; color: #677085; font-family: var(--font-sans); font-size: 12px; line-height: 1.4; }
 .editorialIdentityRow > span { display: none; }
-.editorialIdentityRow > a { min-height: 42px; display: inline-flex; align-items: center; color: var(--brand-navy-950); text-decoration: none; transition: transform .2s ease, color .2s ease, border-color .2s ease, background-color .2s ease, box-shadow .2s ease; }
-.editorialIdentityRow > a:hover { transform: translateY(-2px); }
+.editorialIdentityRow > a { min-height: 48px; display: inline-flex; align-items: center; color: var(--brand-navy-950); text-decoration: none; transition: color .2s ease, background-color .2s ease; }
+.editorialIdentityRow > a:hover { color: var(--brand-orange-600); background: rgba(255,255,255,.5); }
 .editorialIdentityRow > a:focus-visible { outline: 2px solid var(--brand-orange-500); outline-offset: 3px; }
-.editorialIdentityRow b { margin-left: 14px; font-size: 14px; font-weight: 400; }
-.linkedinIdentityAction { gap: 10px; padding: 0 15px 0 9px; border: 1px solid var(--brand-navy-950); border-radius: 999px; background: transparent; font-size: 11px; font-weight: 680; letter-spacing: .01em; }
-.linkedinIdentityAction i { width: 25px; height: 25px; display: inline-grid; place-items: center; border-radius: 50%; color: #fff; background: var(--brand-navy-950); font-size: 11px; font-style: normal; font-weight: 800; letter-spacing: -.03em; }
-.linkedinIdentityAction:hover { color: #fff; background: var(--brand-navy-950); box-shadow: 0 8px 20px rgba(4,19,63,.14); }
-.linkedinIdentityAction:hover i { color: var(--brand-navy-950); background: #fff; }
-.founderIdentityAction { gap: 14px; padding: 0 14px 0 15px; border-block: 1px solid #aeb3bd; background: rgba(255,255,255,.28); }
-.founderIdentityAction > span { display: grid; gap: 1px; font-family: var(--entimema-font-editorial); font-size: 15px; line-height: 1.05; }
-.founderIdentityAction small { color: var(--brand-orange-600); font-family: var(--font-sans); font-size: 7px; font-weight: 780; letter-spacing: .14em; }
-.founderIdentityAction:hover { border-color: var(--brand-navy-950); background: rgba(255,255,255,.72); box-shadow: 0 8px 22px rgba(4,19,63,.08); }
+.editorialIdentityRow b { margin-left: 13px; font-size: 13px; font-weight: 400; transition: transform .2s ease; }
+.editorialIdentityRow > a:hover b { transform: translate(2px,-2px); }
+.editorialIdentityRow .publicationIdentity { min-height: 48px; padding-right: 18px; }
+.editorialIdentityRow .publicationIdentity::after { content: ""; width: 1px; align-self: stretch; margin-left: 18px; background: #c6cad1; }
+.founderIdentityAction { gap: 16px; padding: 0 19px; border-right: 1px solid #c6cad1; }
+.founderIdentityAction > span { display: grid; grid-template-columns: auto auto; gap: 2px 7px; align-items: baseline; font-family: var(--entimema-font-editorial); font-size: 15px; line-height: 1.05; }
+.founderIdentityAction small { grid-column: 1 / -1; color: var(--brand-orange-600); font-family: var(--font-sans); font-size: 7px; font-weight: 780; letter-spacing: .16em; }
+.founderIdentityAction i { color: #687083; font-family: var(--font-sans); font-size: 9px; font-style: normal; font-weight: 560; letter-spacing: .03em; }
+.linkedinIdentityAction { gap: 11px; padding: 0 18px; font-size: 9px; font-weight: 720; letter-spacing: .065em; text-transform: uppercase; }
 
 .articleLeftRail { grid-column: 1; align-self: start; position: sticky; top: 112px; max-height: calc(100vh - 136px); overflow-y: auto; scrollbar-width: thin; }
 .articleLeftRail .toc { position: static; max-height: none; margin-top: 28px; overflow: visible; }
