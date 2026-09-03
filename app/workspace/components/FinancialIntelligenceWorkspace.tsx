@@ -1,17 +1,722 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
-import type { CanonicalConcept,FinancialRun } from "@/backend/financial-intelligence/schema";
+import type {
+  CanonicalConcept,
+  FinancialRun,
+} from "@/backend/financial-intelligence/schema";
+import type { FinancialAnalysis } from "@/backend/financial-intelligence/analysis";
 import { CANONICAL_CONCEPTS } from "@/backend/financial-intelligence/schema";
 import { DOCUMENT_CLASSIFIER_MAX_FILE_BYTES } from "@/lib/document-classifier-upload";
 
-const errorText:Record<string,string>={AUTHENTICATION_REQUIRED:"Your session expired. Sign in again.",ACCESS_FORBIDDEN:"Your account is not authorized for this workspace.",FILE_TOO_LARGE:"The file exceeds the 4.5 MB production boundary.",UNSUPPORTED_FILE_TYPE:"Use XLSX, XLSM, CSV, or a text-based PDF.",FILE_CORRUPT:"The document could not be safely read.",EXECUTION_RATE_LIMIT:"Too many executions. Try again shortly."};
-export function FinancialIntelligenceWorkspace({user}:{user:{name:string;email:string}}){const[file,setFile]=useState<File|null>(null),[run,setRun]=useState<FinancialRun|null>(null),[busy,setBusy]=useState(false),[error,setError]=useState(""),[stage,setStage]=useState("result"),[evidenceId,setEvidenceId]=useState<string|null>(null),[taskFilter,setTaskFilter]=useState("all"),[mobilePeriod,setMobilePeriod]=useState(0),[view,setView]=useState<"workflow"|"runs">("workflow"),[runs,setRuns]=useState<Array<{runId:string;filename:string;selectedStatement:string|null;status:string;periods:number;financialRows:number;openTasks:number;createdAt:string;updatedAt:string;revision:number}>>([]),[saveState,setSaveState]=useState("Saved");const evidence=run?.evidence.find(e=>e.id===evidenceId);const openTasks=run?.reviewTasks.filter(t=>t.state==="open")??[];
-  async function loadRuns(){setSaveState("Saving");try{const response=await fetch("/api/financial-intelligence/runs",{cache:"no-store"});if(!response.ok)throw new Error();setRuns(await response.json());setSaveState("Saved")}catch{setSaveState("Save failed")}}
-  async function openRun(id:string){setBusy(true);try{const response=await fetch(`/api/financial-intelligence/runs/${id}`,{cache:"no-store"});if(!response.ok)throw new Error();setRun(await response.json());setView("workflow");setSaveState("Saved")}catch{setError("The persisted run could not be opened safely.")}finally{setBusy(false)}}
-  async function execute(selectedSheet?:string){if(!file||busy)return;if(file.size>DOCUMENT_CLASSIFIER_MAX_FILE_BYTES){setError(errorText.FILE_TOO_LARGE);return}setBusy(true);setError("");try{const body=new FormData();body.set("file",file);if(selectedSheet)body.set("selectedSheet",selectedSheet);const response=await fetch("/api/financial-intelligence/run",{method:"POST",body});const data=await response.json();if(!response.ok)throw new Error(data.error_code??"FAILED");setRun(data);setStage("result");setSaveState("Saved");void loadRuns()}catch(e){setError(errorText[e instanceof Error?e.message:""]??"The execution could not be completed safely.")}finally{setBusy(false)}}
-  async function resolve(taskId:string,action:"accept"|"reject"|"remap",concept?:CanonicalConcept){if(!run||busy)return;setBusy(true);setSaveState("Saving");setError("");try{const response=await fetch(`/api/financial-intelligence/runs/${run.runId}/review`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({expectedRevision:run.revision,decision:{taskId,action,concept}})});const data=await response.json();if(!response.ok)throw new Error(data.error_code??"FAILED");setRun(data);setSaveState("Saved");void loadRuns()}catch(e){setSaveState(e instanceof Error&&e.message==="STALE_REVISION"?"Stale version — reload required":"Save failed");setError(errorText[e instanceof Error?e.message:""]??"The review decision could not be recalculated safely.")}finally{setBusy(false)}}
-  return <main className="fiWorkspace"><header className="fiTop"><Link href="/workspace" className="brand">ENTIMEMA</Link><div><small>FINANCIAL INTELLIGENCE</small><strong>Income Statement · v1</strong></div><span className="fiLive">● Live</span><button onClick={()=>execute()} disabled={!file||busy}>{busy?"Executing…":"Run workflow"}</button><details><summary>{user.name[0].toUpperCase()}</summary><p>{user.email}</p></details></header><nav className="fiRail"><Link href="/workspace/agents/document-classifier">Classifier</Link><button aria-current={view==="workflow"?"page":undefined} onClick={()=>setView("workflow")}>Execution</button><button aria-current={view==="runs"?"page":undefined} onClick={()=>{setView("runs");void loadRuns()}}>Runs</button><span>{saveState}</span></nav><section className="fiMain">{view==="runs"?<section className="fiStatement"><header><div><small>DURABLE WORKFLOW</small><h1>Financial runs</h1></div></header><div className="fiTable"><div className="fiTr fiTh"><span>File / statement</span><span>Status</span><span>Metrics</span><span>Updated / revision</span></div>{runs.map(item=><div className="fiTr" key={item.runId}><span><strong>{item.filename}</strong><small>{item.selectedStatement??"Statement not selected"}</small></span><span>{item.status.replaceAll("_"," ")}</span><span>{item.periods} periods · {item.financialRows} rows · {item.openTasks} open</span><button onClick={()=>openRun(item.runId)}>{item.status==="review_required"?"Resume":"Open"} · r{item.revision}</button></div>)}</div></section>:<><header><div><p className="eyebrow">Executable workflow</p><h1>Traceable Income Statement</h1><p>Upload once. Classification, extraction, mapping and controls reuse the inspected bytes in memory.</p></div><label className="fiUpload"><input type="file" accept=".xlsx,.xlsm,.csv,.pdf" onChange={e=>setFile(e.target.files?.[0]??null)}/><span>{file?file.name:"Choose financial statement"}</span><small>{file?`${(file.size/1e6).toFixed(2)} MB`:"XLSX, XLSM, CSV or text PDF · max 4.5 MB"}</small></label></header>{error&&<div role="alert" className="fiError">{error}</div>}<div className="fiFlow" id="workflow">{(run?.workflow??["File Intake","Document Classification","Statement Detection","Income Statement Extraction","Canonical Mapping","Financial Validation","Human Review","Validated Result"].map((label,i)=>({id:String(i),label,state:"idle" as const}))).map((s,i)=><button key={s.id} className={s.state} onClick={()=>setStage(s.id)}><i>{s.state==="completed"?"✓":s.state==="review_required"?"!":s.state==="blocked"?"×":i+1}</i><span><small>STAGE {i+1}</small><strong>{s.label}</strong><em>{s.state.replaceAll("_"," ")}</em></span></button>)}</div><div className="fiPanels"><section className="fiStatement"><header><div><small>CANONICAL INCOME STATEMENT</small><h2>{run?.source.selectedSection??"Awaiting execution"}</h2></div>{run&&<span className={`fiStatus ${run.status}`}>{run.status.replaceAll("_"," ")}</span>}</header>{!run?<Empty/>:<><div className="fiMeta"><span>Currency <b>{run.currency??"Unknown"}</b></span><span>Scale <b>{run.unitScale?.toLocaleString()??"Unknown"}</b></span><span>Periods <b>{run.metrics.periods}</b></span><span>Lines <b>{run.metrics.financialSourceRows}</b></span><span>Extracted values <b>{run.metrics.extractedValues}</b></span><span>Mapped rows <b>{run.metrics.canonicalMappedRows}</b></span></div>{run.statementCandidates.filter(c=>c.executable).length>1&&<label className="fiCandidate">Statement<select value={run.source.selectedSection??""} disabled={busy} onChange={e=>execute(e.target.value)}>{run.statementCandidates.filter(c=>c.executable).map(c=><option key={c.id} value={c.sheetName}>{c.sheetName} · {c.periodCount} periods</option>)}</select><small>{run.statementCandidates.filter(c=>c.executable).length} populated Income Statements detected; each is extracted separately.</small></label>}<label className="fiMobilePeriod">Period<select value={mobilePeriod} onChange={e=>setMobilePeriod(Number(e.target.value))}>{run.periods.map((p,i)=><option value={i} key={p.id}>{p.label}</option>)}</select></label><div className="fiTable" style={{"--mobile-period":mobilePeriod,"--fi-periods":run.periods.length} as React.CSSProperties}><div className="fiTr fiTh"><span>Reported line / mapping</span>{run.periods.map((p,pi)=><span className={pi===mobilePeriod?"mobileSelected":undefined} key={p.id}>{p.label}</span>)}</div>{group(run).map(row=><div className="fiTr" key={row.label}><span><strong>{row.label}</strong><small>{row.concept.replaceAll("_"," ")} · {row.method}</small></span>{run.periods.map((p,pi)=>{const v=row.values.find(x=>x.periodId===p.id);return <button className={pi===mobilePeriod?"mobileSelected":undefined} key={p.id} disabled={!v} onClick={()=>v&&setEvidenceId(v.evidenceId)}>{v?v.normalizedValue.toLocaleString():"—"}<small aria-label={v?"Inspect evidence":undefined}>{v?"⌕":""}</small></button>})}</div>)}</div></>}</section><aside className="fiInspector"><header><small>INSPECTOR</small><strong>{evidence?"Value evidence":stage==="review"?"Human review":"Execution readiness"}</strong></header>{evidence?<dl>{Object.entries(evidence).filter(([,v])=>v!==undefined).map(([k,v])=><div key={k}><dt>{k.replaceAll(/([A-Z])/g," $1")}</dt><dd>{String(v)}</dd></div>)}</dl>:run?<><div className="fiConfidence">{Object.entries(run.confidence).map(([k,v])=><label key={k}><span>{k.replaceAll(/([A-Z])/g," $1")} <b>{Math.round(v*100)}%</b></span><progress value={v} max="1"/></label>)}</div><h3>{openTasks.length} grouped review task{openTasks.length===1?"":"s"}</h3><select aria-label="Filter review tasks" value={taskFilter} onChange={e=>setTaskFilter(e.target.value)}><option value="all">All issues</option>{[...new Set(openTasks.map(t=>t.issueType))].map(x=><option key={x} value={x}>{x.replaceAll("_"," ")}</option>)}</select>{openTasks.filter(t=>taskFilter==="all"||t.issueType===taskFilter).map(t=><Review key={t.id} task={t} onResolve={resolve}/>)}</>:<Empty/>}</aside></div>{run&&<section className="fiControls"><header><small>DETERMINISTIC CONTROLS</small><b>{run.validationSummary.passed}/{run.validationSummary.applicable} applicable passed · {Math.round(run.validationSummary.coverage*100)}% coverage</b></header>{run.controls.map(c=><article key={c.id} className={c.status}><span>{c.status}</span><strong>{c.formula}</strong><code>{c.difference===null?"Not applicable":`difference ${c.difference.toLocaleString()} · tolerance ${c.tolerance}`}</code></article>)}</section>}{run?.auditEvents&&<section className="fiControls"><header><small>AUDIT TRAIL</small><b>Append-only material events</b></header>{run.auditEvents.map(e=><article key={e.eventId}><span>r{e.revision}</span><strong>{e.eventType.replaceAll("_"," ")}</strong><code>{e.actor} · {new Date(e.timestamp).toLocaleString()}</code></article>)}</section>}</>}<footer>Structured runs are persisted · uploaded document bytes are never retained · normal removal archives the run</footer></section></main>}
-function Empty(){return <div className="fiEmpty"><b>◇</b><strong>No financial result yet</strong><p>Run an eligible English Income Statement to inspect values and their source evidence.</p></div>}
-function group(run:FinancialRun){const rows=new Map<string,{label:string;concept:CanonicalConcept;method:string;values:FinancialRun["values"]}>();for(const v of run.values){const key=`${v.sourceLabel}:${v.concept}`;if(!rows.has(key))rows.set(key,{label:v.sourceLabel,concept:v.concept,method:v.mappingMethod,values:[]});rows.get(key)!.values.push(v)}return[...rows.values()]}
-function Review({task,onResolve}:{task:FinancialRun["reviewTasks"][number];onResolve:(id:string,a:"accept"|"reject"|"remap",c?:CanonicalConcept)=>void}){const[concept,setConcept]=useState<CanonicalConcept>(task.proposedConcept??"other_reported_line");return <article className="fiTask"><span>{task.issueType.replaceAll("_"," ")}</span><strong>{task.sourceLabel}</strong><p>{task.recommendedAction}</p>{task.valueId&&<><select value={concept} onChange={e=>setConcept(e.target.value as CanonicalConcept)}>{CANONICAL_CONCEPTS.map(c=><option key={c}>{c}</option>)}</select><div><button onClick={()=>onResolve(task.id,"accept")}>Accept</button><button onClick={()=>onResolve(task.id,"reject")}>Reject</button><button onClick={()=>onResolve(task.id,"remap",concept)}>Remap</button></div></>}</article>}
+const errorText: Record<string, string> = {
+  AUTHENTICATION_REQUIRED: "Your session expired. Sign in again.",
+  ACCESS_FORBIDDEN: "Your account is not authorized for this workspace.",
+  FILE_TOO_LARGE: "The file exceeds the 4.5 MB production boundary.",
+  UNSUPPORTED_FILE_TYPE: "Use XLSX, XLSM, CSV, or a text-based PDF.",
+  FILE_CORRUPT: "The document could not be safely read.",
+  EXECUTION_RATE_LIMIT: "Too many executions. Try again shortly.",
+};
+export function FinancialIntelligenceWorkspace({
+  user,
+}: {
+  user: { name: string; email: string };
+}) {
+  const [file, setFile] = useState<File | null>(null),
+    [run, setRun] = useState<FinancialRun | null>(null),
+    [analysis, setAnalysis] = useState<FinancialAnalysis | null>(null),
+    [busy, setBusy] = useState(false),
+    [error, setError] = useState(""),
+    [stage, setStage] = useState("result"),
+    [evidenceId, setEvidenceId] = useState<string | null>(null),
+    [taskFilter, setTaskFilter] = useState("all"),
+    [mobilePeriod, setMobilePeriod] = useState(0),
+    [view, setView] = useState<"workflow" | "runs">("workflow"),
+    [runs, setRuns] = useState<
+      Array<{
+        runId: string;
+        filename: string;
+        selectedStatement: string | null;
+        status: string;
+        periods: number;
+        financialRows: number;
+        openTasks: number;
+        createdAt: string;
+        updatedAt: string;
+        revision: number;
+      }>
+    >([]),
+    [saveState, setSaveState] = useState("Saved");
+  const evidence = run?.evidence.find((e) => e.id === evidenceId);
+  const openTasks = run?.reviewTasks.filter((t) => t.state === "open") ?? [];
+  async function loadRuns() {
+    setSaveState("Saving");
+    try {
+      const response = await fetch("/api/financial-intelligence/runs", {
+        cache: "no-store",
+      });
+      if (!response.ok) throw new Error();
+      setRuns(await response.json());
+      setSaveState("Saved");
+    } catch {
+      setSaveState("Save failed");
+    }
+  }
+  async function openRun(id: string) {
+    setBusy(true);
+    setAnalysis(null);
+    try {
+      const response = await fetch(`/api/financial-intelligence/runs/${id}`, {
+        cache: "no-store",
+      });
+      if (!response.ok) throw new Error();
+      setRun(await response.json());
+      setView("workflow");
+      setSaveState("Saved");
+    } catch {
+      setError("The persisted run could not be opened safely.");
+    } finally {
+      setBusy(false);
+    }
+  }
+  async function execute(selectedSheet?: string) {
+    if (!file || busy) return;
+    if (file.size > DOCUMENT_CLASSIFIER_MAX_FILE_BYTES) {
+      setError(errorText.FILE_TOO_LARGE);
+      return;
+    }
+    setBusy(true);
+    setError("");
+    try {
+      const body = new FormData();
+      body.set("file", file);
+      if (selectedSheet) body.set("selectedSheet", selectedSheet);
+      const response = await fetch("/api/financial-intelligence/run", {
+        method: "POST",
+        body,
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error_code ?? "FAILED");
+      setRun(data);
+      setStage("result");
+      setSaveState("Saved");
+      void loadRuns();
+    } catch (e) {
+      setError(
+        errorText[e instanceof Error ? e.message : ""] ??
+          "The execution could not be completed safely.",
+      );
+    } finally {
+      setBusy(false);
+    }
+  }
+  async function resolve(
+    taskId: string,
+    action: "accept" | "reject" | "remap",
+    concept?: CanonicalConcept,
+  ) {
+    if (!run || busy) return;
+    setBusy(true);
+    setSaveState("Saving");
+    setError("");
+    try {
+      const response = await fetch(
+        `/api/financial-intelligence/runs/${run.runId}/review`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            expectedRevision: run.revision,
+            decision: { taskId, action, concept },
+          }),
+        },
+      );
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error_code ?? "FAILED");
+      setRun(data);
+      setSaveState("Saved");
+      void loadRuns();
+    } catch (e) {
+      setSaveState(
+        e instanceof Error && e.message === "STALE_REVISION"
+          ? "Stale version — reload required"
+          : "Save failed",
+      );
+      setError(
+        errorText[e instanceof Error ? e.message : ""] ??
+          "The review decision could not be recalculated safely.",
+      );
+    } finally {
+      setBusy(false);
+    }
+  }
+  async function runAnalysis() {
+    if (!run || run.status !== "validated" || busy) return;
+    setBusy(true);
+    setError("");
+    try {
+      const response = await fetch(
+        `/api/financial-intelligence/runs/${run.runId}/analysis`,
+        { cache: "no-store" },
+      );
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error_code ?? "FAILED");
+      setAnalysis(data);
+    } catch (e) {
+      setError(
+        e instanceof Error && e.message === "ANALYSIS_BLOCKED"
+          ? "Financial analysis remains blocked until the Income Statement is validated."
+          : "The financial analysis could not be generated safely.",
+      );
+    } finally {
+      setBusy(false);
+    }
+  }
+  return (
+    <main className="fiWorkspace">
+      <header className="fiTop">
+        <Link href="/workspace" className="brand">
+          ENTIMEMA
+        </Link>
+        <div>
+          <small>FINANCIAL INTELLIGENCE</small>
+          <strong>Income Statement · v1</strong>
+        </div>
+        <span className="fiLive">● Live</span>
+        <button onClick={() => execute()} disabled={!file || busy}>
+          {busy ? "Executing…" : "Run workflow"}
+        </button>
+        <details>
+          <summary>{user.name[0].toUpperCase()}</summary>
+          <p>{user.email}</p>
+        </details>
+      </header>
+      <nav className="fiRail">
+        <Link href="/workspace/agents/document-classifier">Classifier</Link>
+        <button
+          aria-current={view === "workflow" ? "page" : undefined}
+          onClick={() => setView("workflow")}
+        >
+          Execution
+        </button>
+        <button
+          aria-current={view === "runs" ? "page" : undefined}
+          onClick={() => {
+            setView("runs");
+            void loadRuns();
+          }}
+        >
+          Runs
+        </button>
+        <span>{saveState}</span>
+      </nav>
+      <section className="fiMain">
+        {view === "runs" ? (
+          <section className="fiStatement">
+            <header>
+              <div>
+                <small>DURABLE WORKFLOW</small>
+                <h1>Financial runs</h1>
+              </div>
+            </header>
+            <div className="fiTable">
+              <div className="fiTr fiTh">
+                <span>File / statement</span>
+                <span>Status</span>
+                <span>Metrics</span>
+                <span>Updated / revision</span>
+              </div>
+              {runs.map((item) => (
+                <div className="fiTr" key={item.runId}>
+                  <span>
+                    <strong>{item.filename}</strong>
+                    <small>
+                      {item.selectedStatement ?? "Statement not selected"}
+                    </small>
+                  </span>
+                  <span>{item.status.replaceAll("_", " ")}</span>
+                  <span>
+                    {item.periods} periods · {item.financialRows} rows ·{" "}
+                    {item.openTasks} open
+                  </span>
+                  <button onClick={() => openRun(item.runId)}>
+                    {item.status === "review_required" ? "Resume" : "Open"} · r
+                    {item.revision}
+                  </button>
+                </div>
+              ))}
+            </div>
+          </section>
+        ) : (
+          <>
+            <header>
+              <div>
+                <p className="eyebrow">Executable workflow</p>
+                <h1>Traceable Income Statement</h1>
+                <p>
+                  Upload once. Classification, extraction, mapping and controls
+                  reuse the inspected bytes in memory.
+                </p>
+              </div>
+              <label className="fiUpload">
+                <input
+                  type="file"
+                  accept=".xlsx,.xlsm,.csv,.pdf"
+                  onChange={(e) => setFile(e.target.files?.[0] ?? null)}
+                />
+                <span>{file ? file.name : "Choose financial statement"}</span>
+                <small>
+                  {file
+                    ? `${(file.size / 1e6).toFixed(2)} MB`
+                    : "XLSX, XLSM, CSV or text PDF · max 4.5 MB"}
+                </small>
+              </label>
+            </header>
+            {error && (
+              <div role="alert" className="fiError">
+                {error}
+              </div>
+            )}
+            <div className="fiFlow" id="workflow">
+              {(
+                run?.workflow ??
+                [
+                  "File Intake",
+                  "Document Classification",
+                  "Statement Detection",
+                  "Income Statement Extraction",
+                  "Canonical Mapping",
+                  "Financial Validation",
+                  "Human Review",
+                  "Validated Result",
+                ].map((label, i) => ({
+                  id: String(i),
+                  label,
+                  state: "idle" as const,
+                }))
+              ).map((s, i) => (
+                <button
+                  key={s.id}
+                  className={s.state}
+                  onClick={() => setStage(s.id)}
+                >
+                  <i>
+                    {s.state === "completed"
+                      ? "✓"
+                      : s.state === "review_required"
+                        ? "!"
+                        : s.state === "blocked"
+                          ? "×"
+                          : i + 1}
+                  </i>
+                  <span>
+                    <small>STAGE {i + 1}</small>
+                    <strong>{s.label}</strong>
+                    <em>{s.state.replaceAll("_", " ")}</em>
+                  </span>
+                </button>
+              ))}
+            </div>
+            <div className="fiPanels">
+              <section className="fiStatement">
+                <header>
+                  <div>
+                    <small>CANONICAL INCOME STATEMENT</small>
+                    <h2>
+                      {run?.source.selectedSection ?? "Awaiting execution"}
+                    </h2>
+                  </div>
+                  {run && (
+                    <span className={`fiStatus ${run.status}`}>
+                      {run.status.replaceAll("_", " ")}
+                    </span>
+                  )}
+                </header>
+                {!run ? (
+                  <Empty />
+                ) : (
+                  <>
+                    <div className="fiMeta">
+                      <span>
+                        Currency <b>{run.currency ?? "Unknown"}</b>
+                      </span>
+                      <span>
+                        Scale{" "}
+                        <b>{run.unitScale?.toLocaleString() ?? "Unknown"}</b>
+                      </span>
+                      <span>
+                        Periods <b>{run.metrics.periods}</b>
+                      </span>
+                      <span>
+                        Lines <b>{run.metrics.financialSourceRows}</b>
+                      </span>
+                      <span>
+                        Extracted values <b>{run.metrics.extractedValues}</b>
+                      </span>
+                      <span>
+                        Mapped rows <b>{run.metrics.canonicalMappedRows}</b>
+                      </span>
+                    </div>
+                    {run.statementCandidates.filter((c) => c.executable)
+                      .length > 1 && (
+                      <label className="fiCandidate">
+                        Statement
+                        <select
+                          value={run.source.selectedSection ?? ""}
+                          disabled={busy}
+                          onChange={(e) => execute(e.target.value)}
+                        >
+                          {run.statementCandidates
+                            .filter((c) => c.executable)
+                            .map((c) => (
+                              <option key={c.id} value={c.sheetName}>
+                                {c.sheetName} · {c.periodCount} periods
+                              </option>
+                            ))}
+                        </select>
+                        <small>
+                          {
+                            run.statementCandidates.filter((c) => c.executable)
+                              .length
+                          }{" "}
+                          populated Income Statements detected; each is
+                          extracted separately.
+                        </small>
+                      </label>
+                    )}
+                    <label className="fiMobilePeriod">
+                      Period
+                      <select
+                        value={mobilePeriod}
+                        onChange={(e) =>
+                          setMobilePeriod(Number(e.target.value))
+                        }
+                      >
+                        {run.periods.map((p, i) => (
+                          <option value={i} key={p.id}>
+                            {p.label}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+                    <div
+                      className="fiTable"
+                      style={
+                        {
+                          "--mobile-period": mobilePeriod,
+                          "--fi-periods": run.periods.length,
+                        } as React.CSSProperties
+                      }
+                    >
+                      <div className="fiTr fiTh">
+                        <span>Reported line / mapping</span>
+                        {run.periods.map((p, pi) => (
+                          <span
+                            className={
+                              pi === mobilePeriod ? "mobileSelected" : undefined
+                            }
+                            key={p.id}
+                          >
+                            {p.label}
+                          </span>
+                        ))}
+                      </div>
+                      {group(run).map((row) => (
+                        <div className="fiTr" key={row.label}>
+                          <span>
+                            <strong>{row.label}</strong>
+                            <small>
+                              {row.concept.replaceAll("_", " ")} · {row.method}
+                            </small>
+                          </span>
+                          {run.periods.map((p, pi) => {
+                            const v = row.values.find(
+                              (x) => x.periodId === p.id,
+                            );
+                            return (
+                              <button
+                                className={
+                                  pi === mobilePeriod
+                                    ? "mobileSelected"
+                                    : undefined
+                                }
+                                key={p.id}
+                                disabled={!v}
+                                onClick={() => v && setEvidenceId(v.evidenceId)}
+                              >
+                                {v ? v.normalizedValue.toLocaleString() : "—"}
+                                <small
+                                  aria-label={
+                                    v ? "Inspect evidence" : undefined
+                                  }
+                                >
+                                  {v ? "⌕" : ""}
+                                </small>
+                              </button>
+                            );
+                          })}
+                        </div>
+                      ))}
+                    </div>
+                  </>
+                )}
+              </section>
+              <aside className="fiInspector">
+                <header>
+                  <small>INSPECTOR</small>
+                  <strong>
+                    {evidence
+                      ? "Value evidence"
+                      : stage === "review"
+                        ? "Human review"
+                        : "Execution readiness"}
+                  </strong>
+                </header>
+                {evidence ? (
+                  <dl>
+                    {Object.entries(evidence)
+                      .filter(([, v]) => v !== undefined)
+                      .map(([k, v]) => (
+                        <div key={k}>
+                          <dt>{k.replaceAll(/([A-Z])/g, " $1")}</dt>
+                          <dd>{String(v)}</dd>
+                        </div>
+                      ))}
+                  </dl>
+                ) : run ? (
+                  <>
+                    <div className="fiConfidence">
+                      {Object.entries(run.confidence).map(([k, v]) => (
+                        <label key={k}>
+                          <span>
+                            {k.replaceAll(/([A-Z])/g, " $1")}{" "}
+                            <b>{Math.round(v * 100)}%</b>
+                          </span>
+                          <progress value={v} max="1" />
+                        </label>
+                      ))}
+                    </div>
+                    <h3>
+                      {openTasks.length} grouped review task
+                      {openTasks.length === 1 ? "" : "s"}
+                    </h3>
+                    <select
+                      aria-label="Filter review tasks"
+                      value={taskFilter}
+                      onChange={(e) => setTaskFilter(e.target.value)}
+                    >
+                      <option value="all">All issues</option>
+                      {[...new Set(openTasks.map((t) => t.issueType))].map(
+                        (x) => (
+                          <option key={x} value={x}>
+                            {x.replaceAll("_", " ")}
+                          </option>
+                        ),
+                      )}
+                    </select>
+                    {openTasks
+                      .filter(
+                        (t) =>
+                          taskFilter === "all" || t.issueType === taskFilter,
+                      )
+                      .map((t) => (
+                        <Review key={t.id} task={t} onResolve={resolve} />
+                      ))}
+                  </>
+                ) : (
+                  <Empty />
+                )}
+              </aside>
+            </div>
+            {run && (
+              <section className="fiControls">
+                <header>
+                  <small>DETERMINISTIC CONTROLS</small>
+                  <b>
+                    {run.validationSummary.passed}/
+                    {run.validationSummary.applicable} applicable passed ·{" "}
+                    {Math.round(run.validationSummary.coverage * 100)}% coverage
+                  </b>
+                </header>
+                {run.controls.map((c) => (
+                  <article key={c.id} className={c.status}>
+                    <span>{c.status}</span>
+                    <strong>{c.formula}</strong>
+                    <code>
+                      {c.difference === null
+                        ? "Not applicable"
+                        : `difference ${c.difference.toLocaleString()} · tolerance ${c.tolerance}`}
+                    </code>
+                  </article>
+                ))}
+              </section>
+            )}
+            {run && (
+              <section className="fiAnalysis">
+                <header>
+                  <div>
+                    <small>TRACEABLE FINANCIAL ANALYSIS</small>
+                    <h2>
+                      {analysis
+                        ? "Analysis ready"
+                        : run.status === "validated"
+                          ? "Validated data ready"
+                          : "Analysis blocked"}
+                    </h2>
+                  </div>
+                  <button
+                    disabled={run.status !== "validated" || busy}
+                    onClick={() => void runAnalysis()}
+                  >
+                    {analysis ? "Regenerate analysis" : "Run analysis"}
+                  </button>
+                </header>
+                {analysis ? (
+                  <>
+                    <div className="fiAnalysisMetrics">
+                      {analysis.metrics
+                        .filter(
+                          (metric) =>
+                            metric.periodId === run.periods.at(-1)?.id,
+                        )
+                        .map((metric) => (
+                          <article key={metric.key}>
+                            <small>{metric.key.replaceAll("_", " ")}</small>
+                            <strong>
+                              {metric.unit === "ratio"
+                                ? `${(metric.value * 100).toFixed(1)}%`
+                                : metric.value.toLocaleString()}
+                            </strong>
+                            <span>{metric.formula}</span>
+                          </article>
+                        ))}
+                    </div>
+                    <div className="fiFindings">
+                      {analysis.findings.map((finding) => (
+                        <article key={finding.id}>
+                          <span>
+                            {finding.classification} · {finding.kind}
+                          </span>
+                          <strong>{finding.title}</strong>
+                          <p>{finding.statement}</p>
+                          <small>
+                            {finding.evidenceIds.length} evidence reference
+                            {finding.evidenceIds.length === 1 ? "" : "s"} ·
+                            confidence {Math.round(finding.confidence * 100)}%
+                          </small>
+                        </article>
+                      ))}
+                    </div>
+                  </>
+                ) : (
+                  <p>
+                    {run.status === "validated"
+                      ? "Generate deterministic KPIs, variances and evidence-linked findings from this immutable revision."
+                      : "Complete material review and validation before analysis can run."}
+                  </p>
+                )}
+              </section>
+            )}
+            {run?.auditEvents && (
+              <section className="fiControls">
+                <header>
+                  <small>AUDIT TRAIL</small>
+                  <b>Append-only material events</b>
+                </header>
+                {run.auditEvents.map((e) => (
+                  <article key={e.eventId}>
+                    <span>r{e.revision}</span>
+                    <strong>{e.eventType.replaceAll("_", " ")}</strong>
+                    <code>
+                      {e.actor} · {new Date(e.timestamp).toLocaleString()}
+                    </code>
+                  </article>
+                ))}
+              </section>
+            )}
+          </>
+        )}
+        <footer>
+          Structured runs are persisted · uploaded document bytes are never
+          retained · normal removal archives the run
+        </footer>
+      </section>
+    </main>
+  );
+}
+function Empty() {
+  return (
+    <div className="fiEmpty">
+      <b>◇</b>
+      <strong>No financial result yet</strong>
+      <p>
+        Run an eligible English Income Statement to inspect values and their
+        source evidence.
+      </p>
+    </div>
+  );
+}
+function group(run: FinancialRun) {
+  const rows = new Map<
+    string,
+    {
+      label: string;
+      concept: CanonicalConcept;
+      method: string;
+      values: FinancialRun["values"];
+    }
+  >();
+  for (const v of run.values) {
+    const key = `${v.sourceLabel}:${v.concept}`;
+    if (!rows.has(key))
+      rows.set(key, {
+        label: v.sourceLabel,
+        concept: v.concept,
+        method: v.mappingMethod,
+        values: [],
+      });
+    rows.get(key)!.values.push(v);
+  }
+  return [...rows.values()];
+}
+function Review({
+  task,
+  onResolve,
+}: {
+  task: FinancialRun["reviewTasks"][number];
+  onResolve: (
+    id: string,
+    a: "accept" | "reject" | "remap",
+    c?: CanonicalConcept,
+  ) => void;
+}) {
+  const [concept, setConcept] = useState<CanonicalConcept>(
+    task.proposedConcept ?? "other_reported_line",
+  );
+  return (
+    <article className="fiTask">
+      <span>{task.issueType.replaceAll("_", " ")}</span>
+      <strong>{task.sourceLabel}</strong>
+      <p>{task.recommendedAction}</p>
+      {task.valueId && (
+        <>
+          <select
+            value={concept}
+            onChange={(e) => setConcept(e.target.value as CanonicalConcept)}
+          >
+            {CANONICAL_CONCEPTS.map((c) => (
+              <option key={c}>{c}</option>
+            ))}
+          </select>
+          <div>
+            <button onClick={() => onResolve(task.id, "accept")}>Accept</button>
+            <button onClick={() => onResolve(task.id, "reject")}>Reject</button>
+            <button onClick={() => onResolve(task.id, "remap", concept)}>
+              Remap
+            </button>
+          </div>
+        </>
+      )}
+    </article>
+  );
+}
