@@ -56,6 +56,16 @@ test("fixed structured payload has deterministic hash and preserves missing valu
   assert.equal(first.payload.identity.unitScale, 1000);
 });
 
+test("automatically validated persisted runs use their creation time as validation time", async () => {
+  const run = await validatedFixture();
+  run.createdAt = "2026-09-03T08:59:00.000Z";
+  run.validatedAt = null;
+  withFinancialRunIntegrity(run);
+  const analysis = analyzeValidatedIncomeStatement(run, "2026-09-03T10:00:00.000Z");
+  const report = createFinancialReportPayload(run, analysis, "2026-09-03T10:00:00.000Z");
+  assert.equal(report.payload.validatedAt, run.createdAt);
+});
+
 test("PDF includes traceable report sections, values, lineage, and safe attachment name", async () => {
   const run = await validatedFixture();
   const report = createFinancialReportPayload(run, analyzeValidatedIncomeStatement(run, "2026-09-03T10:00:00.000Z"), "2026-09-03T10:00:00.000Z");

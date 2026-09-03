@@ -74,11 +74,12 @@ export function createFinancialReportPayload(
 ): HashedFinancialReport {
   const openMaterialReviewTasks = run.reviewTasks.filter((task) => task.material && task.state === "open").length;
   const failedMaterialControls = run.controls.filter((control) => control.material && control.status === "failed").length;
+  const validationTimestamp = run.validatedAt ?? (run.status === "validated" ? run.createdAt : undefined);
   if (run.status === "archived") throw new Error("REPORT_ARCHIVED");
   if (run.status !== "validated" || run.readiness.status !== "validated") throw new Error("REPORT_REQUIRES_VALIDATION");
   if (openMaterialReviewTasks) throw new Error("REPORT_OPEN_MATERIAL_REVIEW");
   if (failedMaterialControls) throw new Error("REPORT_FAILED_MATERIAL_CONTROL");
-  if (!run.currency || !run.unitScale || !run.validatedAt) throw new Error("REPORT_REQUIRES_VALIDATION");
+  if (!run.currency || !run.unitScale || !validationTimestamp) throw new Error("REPORT_REQUIRES_VALIDATION");
 
   const executivePeriod = run.periods.findLast((period) => period.type === "annual_total") ?? run.periods.at(-1);
   if (!executivePeriod) throw new Error("REPORT_REQUIRES_VALIDATION");
@@ -106,7 +107,7 @@ export function createFinancialReportPayload(
     revision: run.revision ?? 1,
     analysisVersion: analysis.analysisVersion,
     generatedAt,
-    validatedAt: run.validatedAt,
+    validatedAt: validationTimestamp,
     validatedSnapshotIntegrityReference: run.integrity,
     identity: {
       filename: run.source.filename,
