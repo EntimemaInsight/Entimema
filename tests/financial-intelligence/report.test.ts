@@ -66,7 +66,7 @@ test("automatically validated persisted runs use their creation time as validati
   assert.equal(report.payload.validatedAt, run.createdAt);
 });
 
-test("PDF includes traceable report sections, values, lineage, and safe attachment name", async () => {
+test("client PDF includes traceable analysis without the technical evidence register", async () => {
   const run = await validatedFixture();
   const report = createFinancialReportPayload(run, analyzeValidatedIncomeStatement(run, "2026-09-03T10:00:00.000Z"), "2026-09-03T10:00:00.000Z");
   const bytes = renderFinancialReportPdf(report);
@@ -80,11 +80,14 @@ test("PDF includes traceable report sections, values, lineage, and safe attachme
   assert.match(parsed.text, /Material movements/i);
   assert.match(parsed.text, /HYPOTHESIS/);
   assert.match(parsed.text, /LIMITATION/);
-  assert.match(parsed.text, /Evidence appendix/i);
-  assert.match(parsed.text, /[A-Z]+[0-9]+/);
+  assert.match(parsed.text, /TRACEABILITY/);
+  assert.match(parsed.text, /complete evidence register is\s+retained within the Entimema Financial Intelligence workflow/i);
+  assert.doesNotMatch(parsed.text, /Evidence appendix/i);
+  assert.doesNotMatch(parsed.text, /SOURCE CELL/);
+  assert.doesNotMatch(parsed.text, /Payload SHA-256/);
   assert.match(parsed.text, new RegExp(run.runId));
   assert.match(parsed.text, /Revision: 3/);
-  assert.match(parsed.text, new RegExp(report.payloadHash));
+  assert.equal(parsed.numpages, 5);
   assert.equal(safeReportFilename(run.source.filename), "CFO-income-entimema-report.pdf");
   assert.ok(parsed.numpages > 1);
 });
