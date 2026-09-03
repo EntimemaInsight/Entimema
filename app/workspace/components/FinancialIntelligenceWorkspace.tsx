@@ -25,6 +25,7 @@ export function FinancialIntelligenceWorkspace({
   const [file, setFile] = useState<File | null>(null),
     [run, setRun] = useState<FinancialRun | null>(null),
     [analysis, setAnalysis] = useState<FinancialAnalysis | null>(null),
+    [analysisError, setAnalysisError] = useState(""),
     [busy, setBusy] = useState(false),
     [error, setError] = useState(""),
     [stage, setStage] = useState("result"),
@@ -154,6 +155,7 @@ export function FinancialIntelligenceWorkspace({
     if (!run || run.status !== "validated" || busy) return;
     setBusy(true);
     setError("");
+    setAnalysisError("");
     try {
       const response = await fetch(
         `/api/financial-intelligence/runs/${run.runId}/analysis`,
@@ -163,11 +165,12 @@ export function FinancialIntelligenceWorkspace({
       if (!response.ok) throw new Error(data.error_code ?? "FAILED");
       setAnalysis(data);
     } catch (e) {
-      setError(
+      const message =
         e instanceof Error && e.message === "ANALYSIS_BLOCKED"
           ? "Financial analysis remains blocked until the Income Statement is validated."
-          : "The financial analysis could not be generated safely.",
-      );
+          : "The financial analysis could not be generated safely.";
+      setError(message);
+      setAnalysisError(message);
     } finally {
       setBusy(false);
     }
@@ -565,10 +568,15 @@ export function FinancialIntelligenceWorkspace({
                     </h2>
                   </div>
                   <button
+                    type="button"
                     disabled={run.status !== "validated" || busy}
                     onClick={() => void runAnalysis()}
                   >
-                    {analysis ? "Regenerate analysis" : "Run analysis"}
+                    {busy
+                      ? "Generating…"
+                      : analysis
+                        ? "Regenerate analysis"
+                        : "Run analysis"}
                   </button>
                 </header>
                 {analysis ? (
@@ -609,10 +617,11 @@ export function FinancialIntelligenceWorkspace({
                     </div>
                   </>
                 ) : (
-                  <p>
-                    {run.status === "validated"
-                      ? "Generate deterministic KPIs, variances and evidence-linked findings from this immutable revision."
-                      : "Complete material review and validation before analysis can run."}
+                  <p role={analysisError ? "alert" : undefined}>
+                    {analysisError ||
+                      (run.status === "validated"
+                        ? "Generate deterministic KPIs, variances and evidence-linked findings from this immutable revision."
+                        : "Complete material review and validation before analysis can run.")}
                   </p>
                 )}
               </section>
