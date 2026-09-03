@@ -9,12 +9,19 @@ create index if not exists financial_runs_owner_updated_idx on public.financial_
 create table if not exists public.financial_audit_events (
  event_id uuid primary key default gen_random_uuid(), run_id uuid not null references public.financial_runs(run_id), revision integer not null,
  actor_id text not null, event_type text not null, before_state jsonb, after_state jsonb, created_at timestamptz not null default now(),
- integrity_hash text generated always as (encode(digest(run_id::text || revision::text || actor_id || event_type || created_at::text || coalesce(before_state::text,'') || coalesce(after_state::text,''),'sha256'),'hex')) stored
+ integrity_hash text not null
 );
+create or replace function public.fi_set_audit_integrity_hash() returns trigger language plpgsql set search_path=public as $$ begin
+ new.integrity_hash := encode(extensions.digest(new.run_id::text || new.revision::text || new.actor_id || new.event_type || extract(epoch from new.created_at)::text || coalesce(new.before_state::text,'') || coalesce(new.after_state::text,''),'sha256'),'hex');
+ return new;
+end $$;
+drop trigger if exists financial_audit_events_integrity_hash on public.financial_audit_events;
+create trigger financial_audit_events_integrity_hash before insert on public.financial_audit_events for each row execute function public.fi_set_audit_integrity_hash();
 create table if not exists public.financial_validated_snapshots (
  run_id uuid not null references public.financial_runs(run_id), revision integer not null, snapshot jsonb not null, integrity_hash text not null, created_at timestamptz not null default now(), primary key(run_id,revision)
 );
 revoke update,delete on public.financial_audit_events,public.financial_validated_snapshots from public,anon,authenticated;
+grant select on public.financial_runs,public.financial_audit_events,public.financial_validated_snapshots to service_role;
 alter table public.financial_runs enable row level security; alter table public.financial_audit_events enable row level security; alter table public.financial_validated_snapshots enable row level security;
 create or replace function public.fi_create_run(p_owner_id text,p_run_id uuid,p_contract jsonb,p_event jsonb) returns setof public.financial_runs language plpgsql security definer set search_path=public as $$ begin
  insert into financial_runs(run_id,owner_id,status,revision,contract) values(p_run_id,p_owner_id,p_contract->>'status',1,p_contract);
