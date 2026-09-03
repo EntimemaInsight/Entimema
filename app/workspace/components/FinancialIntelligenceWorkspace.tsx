@@ -26,6 +26,8 @@ export function FinancialIntelligenceWorkspace({
     [run, setRun] = useState<FinancialRun | null>(null),
     [analysis, setAnalysis] = useState<FinancialAnalysis | null>(null),
     [analysisError, setAnalysisError] = useState(""),
+    [reportBusy, setReportBusy] = useState(false),
+    [reportError, setReportError] = useState(""),
     [busy, setBusy] = useState(false),
     [error, setError] = useState(""),
     [stage, setStage] = useState("result"),
@@ -173,6 +175,29 @@ export function FinancialIntelligenceWorkspace({
       setAnalysisError(message);
     } finally {
       setBusy(false);
+    }
+  }
+  async function downloadReport() {
+    if (!run || !analysis || reportBusy) return;
+    setReportBusy(true);
+    setReportError("");
+    try {
+      const response = await fetch(`/api/financial-intelligence/runs/${run.runId}/report`, { cache: "no-store" });
+      if (!response.ok) {
+        const data = await response.json() as { message?: string };
+        throw new Error(data.message ?? "Report generation failed");
+      }
+      const blobUrl = URL.createObjectURL(await response.blob());
+      const disposition = response.headers.get("content-disposition") ?? "";
+      const anchor = document.createElement("a");
+      anchor.href = blobUrl;
+      anchor.download = disposition.match(/filename="([^"]+)"/)?.[1] ?? "entimema-financial-intelligence-report.pdf";
+      anchor.click();
+      URL.revokeObjectURL(blobUrl);
+    } catch (error) {
+      setReportError(error instanceof Error ? error.message : "Report generation failed");
+    } finally {
+      setReportBusy(false);
     }
   }
   return (
@@ -581,6 +606,16 @@ export function FinancialIntelligenceWorkspace({
                 </header>
                 {analysis ? (
                   <>
+                    <div className="fiReportAction">
+                      <div>
+                        <strong>Client deliverable</strong>
+                        <small>Server-generated from this owned, validated revision.</small>
+                      </div>
+                      <button type="button" disabled={reportBusy} onClick={() => void downloadReport()}>
+                        {reportBusy ? "Generating report…" : "Download report"}
+                      </button>
+                      {reportError && <p role="alert">Report generation failed: {reportError}</p>}
+                    </div>
                     <div className="fiAnalysisMetrics">
                       {analysis.metrics
                         .filter(
@@ -623,6 +658,9 @@ export function FinancialIntelligenceWorkspace({
                         ? "Generate deterministic KPIs, variances and evidence-linked findings from this immutable revision."
                         : "Complete material review and validation before analysis can run.")}
                   </p>
+                )}
+                {!analysis && run.status !== "validated" && (
+                  <p className="fiReportBlocked">Report download is blocked until validation and financial analysis are complete.</p>
                 )}
               </section>
             )}
