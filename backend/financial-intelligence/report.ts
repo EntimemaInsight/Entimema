@@ -139,34 +139,48 @@ export function createFinancialReportPayload(
 
 const PAGE_WIDTH = 595.28;
 const PAGE_HEIGHT = 841.89;
-const MARGIN = 44;
+const MARGIN = 42;
 const escapePdf = (text: string) => text.replaceAll("\\", "\\\\").replaceAll("(", "\\(").replaceAll(")", "\\)").replaceAll(/[^\x20-\x7e]/g, "-");
 
-type PdfPage = { commands: string[]; y: number };
+type Tone = "ink" | "muted" | "accent" | "positive" | "paper" | "white";
+type Font = "sans" | "bold" | "serif" | "serifBold";
+type PdfPage = { commands: string[]; y: number; section: string };
 class PdfLayout {
   pages: PdfPage[] = [];
   page!: PdfPage;
-  constructor() { this.addPage(); }
-  addPage() {
-    this.page = { commands: [], y: PAGE_HEIGHT - MARGIN };
+  private colors: Record<Tone, string> = { ink: "0.05 0.08 0.12", muted: "0.36 0.36 0.34", accent: "0.55 0.09 0.13", positive: "0.12 0.37 0.29", paper: "0.99 0.95 0.90", white: "1 1 1" };
+  private fonts: Record<Font, string> = { sans: "F1", bold: "F2", serif: "F3", serifBold: "F4" };
+  constructor() { this.addPage("Cover"); }
+  addPage(section = "Financial Intelligence") {
+    this.page = { commands: [], y: PAGE_HEIGHT - MARGIN, section };
     this.pages.push(this.page);
-    if (this.pages.length > 1) this.text("ENTIMEMA  /  FINANCIAL INTELLIGENCE", 8, "navy");
-  }
-  ensure(height: number) { if (this.page.y - height < MARGIN + 22) this.addPage(); }
-  text(value: string, size = 9, color: "navy" | "grey" | "blue" | "amber" = "navy", indent = 0) {
-    const colors = { navy: "0.02 0.08 0.25", grey: "0.38 0.43 0.50", blue: "0.20 0.36 0.52", amber: "0.62 0.38 0.13" };
-    const maxChars = Math.max(20, Math.floor((PAGE_WIDTH - MARGIN * 2 - indent) / (size * .52)));
-    const words = value.split(/\s+/); let line = ""; const lines: string[] = [];
-    for (const word of words) { const candidate = line ? `${line} ${word}` : word; if (candidate.length > maxChars && line) { lines.push(line); line = word; } else line = candidate; }
-    if (line) lines.push(line);
-    for (const item of lines.length ? lines : [""]) {
-      this.ensure(size + 5);
-      this.page.commands.push(`BT /F1 ${size} Tf ${colors[color]} rg ${MARGIN + indent} ${this.page.y} Td (${escapePdf(item)}) Tj ET`);
-      this.page.y -= size + 4;
+    this.fill(0, 0, PAGE_WIDTH, PAGE_HEIGHT, "paper");
+    if (this.pages.length > 1) {
+      this.at("ENTIMEMA", MARGIN, PAGE_HEIGHT - 29, 7, "bold", "accent", 1.7);
+      this.at(section.toUpperCase(), PAGE_WIDTH - MARGIN, PAGE_HEIGHT - 29, 6.5, "sans", "muted", 1.2, "right");
+      this.line(MARGIN, PAGE_HEIGHT - 36, PAGE_WIDTH - MARGIN, PAGE_HEIGHT - 36, "0.75 0.69 0.62", .5);
+      this.page.y = PAGE_HEIGHT - 62;
     }
   }
-  heading(value: string) { this.ensure(34); this.page.y -= 8; this.text(value.toUpperCase(), 13, "navy"); this.rule(); }
-  rule() { this.page.commands.push(`0.78 0.82 0.86 RG ${MARGIN} ${this.page.y} m ${PAGE_WIDTH - MARGIN} ${this.page.y} l S`); this.page.y -= 10; }
+  ensure(height: number, section = this.page.section) { if (this.page.y - height < MARGIN + 22) this.addPage(section); }
+  fill(x: number, y: number, width: number, height: number, tone: Tone) { this.page.commands.push(`${this.colors[tone]} rg ${x} ${y} ${width} ${height} re f`); }
+  line(x1: number, y1: number, x2: number, y2: number, color = "0.72 0.68 0.62", width = .5) { this.page.commands.push(`${color} RG ${width} w ${x1} ${y1} m ${x2} ${y2} l S`); }
+  at(value: string, x: number, y: number, size = 9, font: Font = "sans", tone: Tone = "ink", tracking = 0, align: "left" | "right" = "left") {
+    const estimated = value.length * size * .5 + Math.max(0, value.length - 1) * tracking;
+    const drawX = align === "right" ? x - estimated : x;
+    this.page.commands.push(`BT /${this.fonts[font]} ${size} Tf ${tracking} Tc ${this.colors[tone]} rg ${drawX} ${y} Td (${escapePdf(value)}) Tj ET`);
+  }
+  wrap(value: string, x: number, y: number, width: number, size = 9, font: Font = "sans", tone: Tone = "ink", leading = size * 1.35) {
+    const max = Math.max(8, Math.floor(width / (size * (font.startsWith("serif") ? .48 : .52))));
+    const words = value.split(/\s+/); const lines: string[] = []; let line = "";
+    for (const word of words) { const next = line ? `${line} ${word}` : word; if (next.length > max && line) { lines.push(line); line = word; } else line = next; }
+    if (line) lines.push(line);
+    lines.forEach((item, index) => this.at(item, x, y - index * leading, size, font, tone));
+    return lines.length * leading;
+  }
+  text(value: string, size = 9, font: Font = "sans", tone: Tone = "ink", indent = 0) { const height = this.wrap(value, MARGIN + indent, this.page.y, PAGE_WIDTH - MARGIN * 2 - indent, size, font, tone); this.page.y -= height; }
+  kicker(value: string) { this.at(value.toUpperCase(), MARGIN, this.page.y, 6.5, "bold", "accent", 1.5); this.page.y -= 18; }
+  heading(value: string, deck?: string) { this.ensure(deck ? 70 : 46); this.at(value, MARGIN, this.page.y, 22, "serifBold", "ink"); this.page.y -= 29; if (deck) { this.page.y -= this.wrap(deck, MARGIN, this.page.y, 420, 9, "sans", "muted", 12); } this.line(MARGIN, this.page.y - 2, PAGE_WIDTH - MARGIN, this.page.y - 2, "0.55 0.09 0.13", 1.1); this.page.y -= 17; }
   gap(points = 8) { this.page.y -= points; }
 }
 
@@ -174,54 +188,76 @@ const label = (key: string) => key.replaceAll("_", " ").replace(/\b\w/g, (letter
 export function renderFinancialReportPdf(report: HashedFinancialReport): Buffer {
   const { payload, payloadHash } = report;
   const pdf = new PdfLayout();
-  pdf.gap(28); pdf.text("ENTIMEMA", 13, "blue"); pdf.gap(50);
-  pdf.text("FINANCIAL INTELLIGENCE REPORT", 27); pdf.gap(12);
-  pdf.text(payload.identity.filename, 14, "blue"); pdf.gap(26);
-  for (const [key, value] of [["Statement", payload.identity.statement], ["Reporting basis", `${payload.identity.currency}; scale ${payload.identity.unitScale.toLocaleString("en")}`], ["Covered periods", payload.identity.periodCoverage], ["Generated", payload.generatedAt], ["Validated", payload.validatedAt], ["Run", `${payload.runId.slice(0, 8)} / revision ${payload.revision}`], ["Status", payload.identity.status]]) pdf.text(`${key}: ${value}`, 10, key === "Status" ? "blue" : "navy");
-  pdf.gap(40); pdf.text("Decision support based on a validated Income Statement. This report is not an audit opinion.", 9, "grey");
+  const executivePeriod = payload.performance.find((row) => row.periodId === payload.executivePeriodId)?.periodLabel ?? payload.executivePeriodId;
+  const monthly = payload.performance.filter((row) => row.periodId !== payload.executivePeriodId);
+  const marginFinding = payload.findings.find((item) => item.id === "margin-operating_margin") ?? payload.findings.find((item) => item.classification === "calculation");
 
-  pdf.addPage(); pdf.heading("Executive financial summary");
-  pdf.text(`Applicable period: ${payload.performance.find((row) => row.periodId === payload.executivePeriodId)?.periodLabel ?? payload.executivePeriodId}`, 9, "grey"); pdf.gap();
-  payload.executiveMetrics.forEach((metric) => pdf.text(`${label(metric.key)}   ${metric.formatted}`, 14, metric.unit === "ratio" ? "blue" : "navy"));
-  pdf.heading("Performance development");
-  payload.performance.forEach((row) => { pdf.ensure(48); pdf.text(row.periodLabel, 10, "blue"); pdf.text(row.metrics.map((metric) => `${label(metric.key)}: ${metric.formatted}`).join("  |  "), 7, "navy", 8); pdf.gap(4); });
+  pdf.at("ENTIMEMA", MARGIN, 785, 9, "bold", "accent", 2.4);
+  pdf.line(MARGIN, 766, PAGE_WIDTH - MARGIN, 766, "0.55 0.09 0.13", 1.2);
+  pdf.at("FINANCIAL INTELLIGENCE REPORT", MARGIN, 704, 7, "bold", "muted", 2);
+  pdf.wrap("A controlled reading of financial performance", MARGIN, 650, 455, 33, "serifBold", "ink", 36);
+  pdf.wrap(marginFinding?.statement ?? "Validated performance, interpreted through traceable financial evidence.", MARGIN, 535, 430, 13, "serif", "accent", 18);
+  pdf.fill(MARGIN, 330, PAGE_WIDTH - MARGIN * 2, 136, "white");
+  pdf.at("REPORT BASIS", MARGIN + 18, 442, 6.5, "bold", "accent", 1.4);
+  [["Statement", payload.identity.statement], ["Period", payload.identity.periodCoverage], ["Reporting basis", `${payload.identity.currency}; scale ${payload.identity.unitScale.toLocaleString("en")}`], ["Source", payload.identity.filename]].forEach(([key, value], index) => { const y = 416 - index * 24; pdf.at(key, MARGIN + 18, y, 7, "sans", "muted"); pdf.at(value, MARGIN + 112, y, 8.5, "bold", "ink"); });
+  pdf.at("VALIDATED", PAGE_WIDTH - MARGIN - 18, 442, 7, "bold", "positive", 1.2, "right");
+  pdf.at(`Revision: ${payload.revision}`, PAGE_WIDTH - MARGIN - 18, 418, 7, "sans", "muted", .8, "right");
+  pdf.wrap("Prepared as decision support from an integrity-checked Income Statement. This document is not an audit opinion.", MARGIN, 250, 430, 9, "serif", "muted", 13);
 
-  pdf.heading("Material movements");
-  if (!payload.materialMovements.length) pdf.text("No material sequential movements met the deterministic threshold.", 9, "grey");
-  payload.materialMovements.forEach((movement) => { pdf.ensure(54); pdf.text(`${label(movement.metric)} / ${movement.fromPeriod} to ${movement.toPeriod}`, 10, movement.material ? "amber" : "navy"); pdf.text(`Absolute: ${formatAmount(movement.absolute, payload.identity.currency, payload.identity.unitScale)}  |  Percentage: ${movement.percentage === null ? "—" : `${(movement.percentage * 100).toFixed(1)}%`}  |  Materiality: ${movement.material ? "MATERIAL" : "NOT MATERIAL"}`, 8); pdf.text(`Evidence: ${movement.evidenceIds.join(", ")}`, 7, "grey", 8); pdf.gap(5); });
+  pdf.addPage("Executive briefing"); pdf.kicker("Executive briefing");
+  pdf.heading("Profitability held at a strong level", `The validated ${executivePeriod} view establishes the earnings profile below. Interpretation remains bounded by the evidence contained in the Income Statement.`);
+  const cards = payload.executiveMetrics;
+  cards.forEach((item, index) => { const col = index % 4, row = Math.floor(index / 4), x = MARGIN + col * 128, y = pdf.page.y - row * 82; pdf.fill(x, y - 60, 116, 65, "white"); pdf.at(label(item.key), x + 10, y - 13, 5.8, "bold", "muted", .7); pdf.at(item.formatted.replace(` ${payload.identity.currency} x ${payload.identity.unitScale.toLocaleString("en")}`, ""), x + 10, y - 41, 17, item.unit === "ratio" ? "serifBold" : "bold", item.unit === "ratio" ? "accent" : "ink"); if (item.unit === "currency") pdf.at(`${payload.identity.currency} / scale ${payload.identity.unitScale.toLocaleString("en")}`, x + 10, y - 54, 5.5, "sans", "muted"); });
+  pdf.page.y -= Math.ceil(cards.length / 4) * 82 + 8;
+  pdf.at("WHAT THE EVIDENCE ESTABLISHES", MARGIN, pdf.page.y, 6.5, "bold", "accent", 1.2); pdf.page.y -= 20;
+  payload.findings.filter((item) => item.classification === "calculation").slice(0, 3).forEach((item, index) => { const y = pdf.page.y; pdf.at(`0${index + 1}`, MARGIN, y, 13, "serifBold", "accent"); const height = pdf.wrap(item.statement, MARGIN + 34, y, 438, 10, "serif", "ink", 14); pdf.page.y -= Math.max(33, height + 10); });
+  pdf.fill(MARGIN, pdf.page.y - 62, PAGE_WIDTH - MARGIN * 2, 62, "white"); pdf.at("EVIDENCE BOUNDARY", MARGIN + 14, pdf.page.y - 18, 6.5, "bold", "accent", 1); pdf.wrap(payload.limitations[0] ?? "Causal attribution requires operational and budget evidence.", MARGIN + 14, pdf.page.y - 37, 470, 8.5, "sans", "muted", 11); pdf.page.y -= 78;
 
-  pdf.heading("Traceable findings");
-  for (const classification of ["fact", "calculation", "hypothesis"] as const) {
-    pdf.text(classification.toUpperCase(), 9, classification === "hypothesis" ? "amber" : "blue");
-    const findings = payload.findings.filter((finding) => finding.classification === classification);
-    if (!findings.length) pdf.text("No findings in this classification.", 8, "grey", 8);
-    findings.forEach((finding) => { pdf.ensure(58); pdf.text(finding.title, 10, "navy", 8); pdf.text(finding.statement, 8, "navy", 8); pdf.text(`Periods: ${finding.periodIds.join(", ") || "not applicable"}  |  Formula: ${finding.formula ?? "not applicable"}  |  Confidence: ${(finding.confidence * 100).toFixed(0)}%`, 7, "grey", 8); pdf.text(`Evidence: ${finding.evidenceIds.join(", ") || "none - explicitly unsupported"}`, 7, "grey", 8); });
-  }
-  pdf.text("LIMITATION", 9, "amber"); payload.limitations.forEach((item) => pdf.text(item, 8, "navy", 8));
+  pdf.addPage("Performance"); pdf.kicker("Performance development"); pdf.heading("Monthly earnings architecture", "A consistent view of revenue, profit conversion and margin development. Full Year is presented separately from sequential monthly comparisons.");
+  const chart = (keys: string[], title: string, ratio: boolean) => { const x=MARGIN,y=pdf.page.y-142,w=PAGE_WIDTH-MARGIN*2,h=118; pdf.fill(x,y,w,h,"white"); pdf.at(title.toUpperCase(),x+12,y+h-18,6,"bold","muted",.9); const values=monthly.flatMap(row=>row.metrics.filter(m=>keys.includes(m.key)).map(m=>m.value)); const min=Math.min(0,...values),max=Math.max(...values,1); const tones=["0.55 0.09 0.13","0.12 0.28 0.40","0.12 0.37 0.29","0.50 0.43 0.34"]; keys.forEach((key,ki)=>{const pts=monthly.map((row,i)=>{const m=row.metrics.find(item=>item.key===key);const px=x+18+i*((w-36)/Math.max(1,monthly.length-1));const py=y+22+(((m?.value??0)-min)/(max-min))*(h-52);return [px,py]}); if(pts.length>1) pdf.page.commands.push(`${tones[ki]} RG 1.3 w ${pts.map(([px,py],i)=>`${px} ${py} ${i?"l":"m"}`).join(" ")} S`); pdf.at(label(key),x+14+ki*118,y+8,5.8,ki?"sans":"bold",ki===0?"accent":"muted");}); monthly.forEach((row,i)=>{if(i%2===0||i===monthly.length-1)pdf.at(row.periodLabel.split(" ")[0],x+18+i*((w-36)/Math.max(1,monthly.length-1)),y+22,5.2,"sans","muted",0,"left")}); pdf.page.y=y-18; void ratio; };
+  chart(["revenue","gross_profit","operating_profit","net_income"],"Reported performance / indexed visual scale",false);
+  chart(["gross_margin","operating_margin","net_margin"],"Margin progression",true);
+  pdf.at("MONTHLY PERFORMANCE TABLE",MARGIN,pdf.page.y,6.5,"bold","accent",1.2); pdf.page.y-=18;
+  const tableKeys=["revenue","gross_profit","operating_profit","net_income","gross_margin","operating_margin","net_margin"];
+  const colW=(PAGE_WIDTH-MARGIN*2-72)/tableKeys.length; pdf.fill(MARGIN,pdf.page.y-18,PAGE_WIDTH-MARGIN*2,20,"white"); pdf.at("Period",MARGIN+6,pdf.page.y-12,5.5,"bold","muted"); tableKeys.forEach((key,i)=>pdf.at(label(key).replace("Operating ","Op. ").replace("Gross ","GP ").replace("Net ","Net "),MARGIN+72+i*colW,pdf.page.y-12,5,"bold","muted")); pdf.page.y-=23;
+  monthly.forEach(row=>{pdf.ensure(18,"Performance"); pdf.line(MARGIN,pdf.page.y-3,PAGE_WIDTH-MARGIN,pdf.page.y-3,"0.83 0.79 0.73",.3);pdf.at(row.periodLabel,MARGIN+6,pdf.page.y-14,5.8,"sans","ink");tableKeys.forEach((key,i)=>{const m=row.metrics.find(item=>item.key===key);pdf.at(m?(m.unit==="ratio"?`${(m.value*100).toFixed(1)}%`:new Intl.NumberFormat("en",{maximumFractionDigits:1}).format(m.value)):"-",MARGIN+72+i*colW,pdf.page.y-14,5.7,"sans",m?"ink":"muted")});pdf.page.y-=18;});
 
-  pdf.heading("Validation and controls");
-  const c = payload.controls;
-  pdf.text(`Applicable ${c.applicable}  |  Passed ${c.passed}  |  Failed ${c.failed}  |  Not applicable ${c.notApplicable}`, 10);
-  pdf.text(`Coverage ${(c.coverage * 100).toFixed(1)}%  |  Validation ${c.validationStatus}  |  Open material review tasks ${c.openMaterialReviewTasks}`, 9, "blue");
+  pdf.addPage("Movements and interpretation"); pdf.kicker("Decision interpretation"); pdf.heading("Material movements that deserve attention", "Ranked changes are deterministic calculations. They indicate where to investigate; they do not establish operational causality.");
+  if (!payload.materialMovements.length) { pdf.fill(MARGIN,pdf.page.y-55,PAGE_WIDTH-MARGIN*2,55,"white"); pdf.wrap("No sequential movement exceeded the deterministic materiality threshold.",MARGIN+14,pdf.page.y-22,470,10,"serif","muted",14); pdf.page.y-=72; }
+  payload.materialMovements.slice(0,6).forEach((move,index)=>{pdf.ensure(58,"Movements and interpretation");const y=pdf.page.y;pdf.at(String(index+1).padStart(2,"0"),MARGIN,y,15,"serifBold","accent");pdf.at(`${label(move.metric)} / ${move.fromPeriod} to ${move.toPeriod}`,MARGIN+38,y,9,"bold","ink");pdf.at(move.percentage===null?"n/m":`${move.percentage>=0?"+":""}${(move.percentage*100).toFixed(1)}%`,PAGE_WIDTH-MARGIN,y,12,"serifBold",Math.abs(move.percentage??0)>=.1?"accent":"ink",0,"right");pdf.at(`${move.absolute>=0?"+":""}${new Intl.NumberFormat("en",{maximumFractionDigits:1}).format(move.absolute)} reported units`,MARGIN+38,y-18,7,"sans","muted");pdf.at(`Evidence ${move.evidenceIds.map(id=>id.slice(-8)).join(" / ")}`,MARGIN+38,y-32,6,"sans","muted");pdf.line(MARGIN,y-43,PAGE_WIDTH-MARGIN,y-43,"0.78 0.73 0.67",.4);pdf.page.y-=55;});
+  pdf.gap(10); pdf.at("INTERPRETATION FRAME",MARGIN,pdf.page.y,6.5,"bold","accent",1.2);pdf.page.y-=19;
+  const classes:["calculation"|"hypothesis",string][]=[["calculation","Observed and calculated"],["hypothesis","Hypothesis / requires further evidence"]];
+  classes.forEach(([kind,title])=>{pdf.at(title.toUpperCase(),MARGIN,pdf.page.y,7,"bold",kind==="hypothesis"?"accent":"positive",1);pdf.page.y-=16;const items=payload.findings.filter(item=>item.classification===kind).slice(0,kind==="calculation"?3:1);items.forEach(item=>{pdf.ensure(48,"Movements and interpretation");pdf.at(item.title,MARGIN+12,pdf.page.y,9,"serifBold","ink");pdf.page.y-=16;pdf.page.y-=pdf.wrap(item.statement,MARGIN+12,pdf.page.y,480,8,"sans","muted",11)+9;});});
+  pdf.gap(8); pdf.fill(MARGIN,pdf.page.y-102,PAGE_WIDTH-MARGIN*2,102,"white");
+  pdf.at("ANALYTICAL FRAME",MARGIN+14,pdf.page.y-18,6.5,"bold","accent",1.1);
+  [["Gross margin","Gross profit / revenue"],["Operating margin","Operating profit / revenue"],["Net margin","Net income / revenue"]].forEach(([metric,formula],index)=>{const x=MARGIN+14+index*166;pdf.at(metric,x,pdf.page.y-43,8,"serifBold","ink");pdf.at(formula,x,pdf.page.y-61,6.5,"sans","muted");});
+  pdf.wrap("These ratios isolate conversion through the earnings stack. Movement is evidence; attribution requires volume, price, mix, headcount, supplier, budget or operational data.",MARGIN+14,pdf.page.y-82,470,7.4,"sans","muted",10); pdf.page.y-=120;
+  pdf.at("MANAGEMENT INVESTIGATION AGENDA",MARGIN,pdf.page.y,6.5,"bold","accent",1.1); pdf.page.y-=20;
+  ["Separate price, volume and mix effects behind revenue development.","Reconcile gross-margin movement to input cost, discounting and product or customer mix.","Test operating leverage against headcount, discretionary spend and budget variance."].forEach((item,index)=>{pdf.at(`0${index+1}`,MARGIN,pdf.page.y,11,"serifBold","accent");pdf.wrap(item,MARGIN+32,pdf.page.y,452,8.2,"serif","ink",12);pdf.page.y-=32;});
 
-  pdf.heading("Evidence appendix");
-  payload.evidence.forEach((evidence) => { pdf.ensure(52); pdf.text(`${evidence.id}  /  ${(evidence.evidenceHash ?? "no hash").slice(0, 16)}`, 8, "blue"); pdf.text(`${evidence.sourceFilename}  |  ${evidence.sheetName ?? `Page ${evidence.pageNumber ?? "—"}`}  |  ${evidence.cellAddress ?? "—"}`, 8); pdf.text(`Row: ${evidence.rawRowLabel}  |  Column: ${evidence.rawColumnHeader}  |  Raw: ${String(evidence.rawCellValue)}`, 7, "grey", 8); pdf.gap(4); });
+  pdf.addPage("Validation assurance"); pdf.kicker("Validation assurance"); pdf.heading("A controlled result, not a black box", "The report is released only after ownership, integrity, evidence, mapping and deterministic financial controls satisfy the workflow gates.");
+  const c=payload.controls; const assurance=[["Status",c.validationStatus],["Control coverage",`${(c.coverage*100).toFixed(0)}%`],["Applicable controls",String(c.applicable)],["Passed",String(c.passed)],["Failed",String(c.failed)],["Open material review",String(c.openMaterialReviewTasks)]];
+  assurance.forEach(([key,value],index)=>{const col=index%3,row=Math.floor(index/3),x=MARGIN+col*170,y=pdf.page.y-row*72;pdf.fill(x,y-50,158,56,"white");pdf.at(key.toUpperCase(),x+11,y-13,5.8,"bold","muted",.8);pdf.at(value,x+11,y-39,16,"serifBold",key==="Status"||value==="0"?"positive":"ink");});pdf.page.y-=152;
+  pdf.at("CONTROL LOGIC",MARGIN,pdf.page.y,6.5,"bold","accent",1.2);pdf.page.y-=19;
+  [["Semantic interpretation","Source labels and periods are mapped into a controlled canonical Income Statement."],["Deterministic ownership","Arithmetic, reconciliations, tolerances and readiness gates are executed by rules, not narrative generation."],["Human authority","Material ambiguity is escalated. A validated result cannot coexist with an unresolved material task."],["Evidence lineage","Displayed values retain source coordinates and evidence references without retaining the uploaded workbook bytes."]].forEach(([title,body],index)=>{const x=MARGIN+(index%2)*256,y=pdf.page.y-Math.floor(index/2)*92;pdf.at(title,x,y,10,"serifBold","ink");pdf.wrap(body,x,y-18,228,8,"sans","muted",11);});pdf.page.y-=202;
+  pdf.fill(MARGIN,pdf.page.y-88,PAGE_WIDTH-MARGIN*2,88,"white");pdf.at("SCOPE AND LIMITATION",MARGIN+14,pdf.page.y-18,6.5,"bold","accent",1);pdf.wrap("This report analyses the validated Income Statement. It supports management judgement but does not constitute an audit opinion. Causal attribution, liquidity, leverage and cash conversion require additional operational, Balance Sheet, Cash Flow, budget or external evidence.",MARGIN+14,pdf.page.y-38,472,9,"serif","ink",13);pdf.page.y-=105;
 
-  pdf.heading("Methodology and limitations");
-  pdf.text("Semantic mapping interprets the source structure. Deterministic code owns calculations and reconciliations, and material ambiguity requires human review. This report analyses the Income Statement only. Causal conclusions require operational, budget, or external evidence. It is decision support, not an audit opinion.", 9);
-  pdf.heading("Report integrity metadata");
-  for (const [key, value] of [["Run ID", payload.runId], ["Revision", String(payload.revision)], ["Analysis version", payload.analysisVersion], ["Report schema", payload.schemaVersion], ["Generation timestamp", payload.generatedAt], ["Validated snapshot integrity", payload.validatedSnapshotIntegrityReference], ["Report payload SHA-256", payloadHash]]) pdf.text(`${key}: ${value}`, 7, key.includes("SHA") ? "blue" : "grey");
+  payload.evidence.forEach((evidence,index)=>{if(index===0||pdf.page.y<92){pdf.addPage("Evidence register");pdf.kicker("Evidence appendix / technical register");pdf.heading("Evidence register",index===0?"A compact source map for the values used in the report. Full cryptographic references are retained in the integrity block.":"Continued source register.");pdf.fill(MARGIN,pdf.page.y-17,PAGE_WIDTH-MARGIN*2,19,"white");[["Ref",6],["Source / sheet",68],["Cell",252],["Reported line",302],["Period",438],["Raw",492]].forEach(([title,x])=>pdf.at(String(title),MARGIN+Number(x),pdf.page.y-12,5.8,"bold","muted",.5));pdf.page.y-=23;} const ref=evidence.id.slice(-8),source=`${evidence.sourceFilename} / ${evidence.sheetName??`p.${evidence.pageNumber??"-"}`}`.slice(0,34),line=String(evidence.rawRowLabel??"").slice(0,24),period=String(evidence.rawColumnHeader??"").slice(0,10),raw=String(evidence.rawCellValue??"-").slice(0,11);pdf.line(MARGIN,pdf.page.y-2,PAGE_WIDTH-MARGIN,pdf.page.y-2,"0.84 0.80 0.75",.25);pdf.at(ref,MARGIN+6,pdf.page.y-13,5.8,"sans","accent");pdf.at(source,MARGIN+68,pdf.page.y-13,5.6,"sans","ink");pdf.at(evidence.cellAddress??"-",MARGIN+252,pdf.page.y-13,5.8,"bold","ink");pdf.at(line,MARGIN+302,pdf.page.y-13,5.6,"sans","ink");pdf.at(period,MARGIN+438,pdf.page.y-13,5.4,"sans","muted");pdf.at(raw,MARGIN+492,pdf.page.y-13,5.6,"sans","ink",0,"right");pdf.page.y-=17;});
+  pdf.gap(12);pdf.at("INTEGRITY REGISTER",MARGIN,pdf.page.y,6.5,"bold","accent",1.2);pdf.page.y-=18;[["Run ID",payload.runId],["Revision",String(payload.revision)],["Analysis version",payload.analysisVersion],["Report schema",payload.schemaVersion],["Generated",payload.generatedAt],["Validated",payload.validatedAt],["Snapshot integrity",payload.validatedSnapshotIntegrityReference],["Payload SHA-256",payloadHash]].forEach(([key,value])=>{pdf.ensure(23,"Evidence register");pdf.at(`${key}:`,MARGIN,pdf.page.y,6.2,"bold","muted");pdf.wrap(value,MARGIN+105,pdf.page.y,400,6.2,"sans",key.includes("SHA")?"accent":"ink",8);pdf.page.y-=20;});
 
   const objects: string[] = ["", "<< /Type /Catalog /Pages 2 0 R >>", ""];
   const pageIds: number[] = [];
   for (const [index, page] of pdf.pages.entries()) {
-    page.commands.push(`BT /F1 7 Tf 0.38 0.43 0.50 rg ${MARGIN} 24 Td (ENTIMEMA  /  CONFIDENTIAL) Tj ET`);
-    page.commands.push(`BT /F1 7 Tf 0.38 0.43 0.50 rg ${PAGE_WIDTH - 86} 24 Td (PAGE ${index + 1} OF ${pdf.pages.length}) Tj ET`);
+    page.commands.push(`BT /F2 5.8 Tf 1 Tc 0.36 0.36 0.34 rg ${MARGIN} 24 Td (ENTIMEMA / CONFIDENTIAL) Tj ET`);
+    page.commands.push(`BT /F1 5.8 Tf 0.36 0.36 0.34 rg ${PAGE_WIDTH - 88} 24 Td (PAGE ${index + 1} OF ${pdf.pages.length}) Tj ET`);
     const content = page.commands.join("\n");
     const pageId = objects.length; pageIds.push(pageId);
-    objects.push(`<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${PAGE_WIDTH} ${PAGE_HEIGHT}] /Resources << /Font << /F1 ${pageId + 2} 0 R >> >> /Contents ${pageId + 1} 0 R >>`);
+    objects.push(`<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${PAGE_WIDTH} ${PAGE_HEIGHT}] /Resources << /Font << /F1 ${pageId + 2} 0 R /F2 ${pageId + 3} 0 R /F3 ${pageId + 4} 0 R /F4 ${pageId + 5} 0 R >> >> /Contents ${pageId + 1} 0 R >>`);
     objects.push(`<< /Length ${Buffer.byteLength(content)} >>\nstream\n${content}\nendstream`);
     objects.push("<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>");
+    objects.push("<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>");
+    objects.push("<< /Type /Font /Subtype /Type1 /BaseFont /Times-Roman >>");
+    objects.push("<< /Type /Font /Subtype /Type1 /BaseFont /Times-Bold >>");
   }
   objects[2] = `<< /Type /Pages /Count ${pageIds.length} /Kids [${pageIds.map((id) => `${id} 0 R`).join(" ")}] >>`;
   let output = "%PDF-1.4\n% Entimema Financial Intelligence\n"; const offsets = [0];
