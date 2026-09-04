@@ -21,6 +21,13 @@ test("mobile foundation protects narrow viewports and touch interactions", () =>
   assert.match(mobile, /executive-agent--right \{ display: none; \}/);
   assert.match(mobile, /-webkit-tap-highlight-color:/);
   assert.match(mobile, /@media \(max-width: 26\.875rem\)/);
+  assert.match(mobile, /Taktile-calibrated mobile chrome/);
+  assert.match(mobile, /--header-height-v2: 3\.5rem/);
+  assert.match(mobile, /--announcement-height-v2: 3rem/);
+  assert.match(mobile, /\.announcement__message[\s\S]*font-size: 1rem/);
+  assert.match(mobile, /@media \(max-width: 40rem\)[\s\S]*\.header-cta[\s\S]*min-height: 2rem[\s\S]*font-size: 0\.875rem/);
+  assert.doesNotMatch(mobile, /--announcement-height-v2: 3\.25rem/);
+  assert.doesNotMatch(mobile, /font-size: 0\.71875rem/);
 });
 
 test("mobile privacy and footer surfaces preserve usable controls", () => {
