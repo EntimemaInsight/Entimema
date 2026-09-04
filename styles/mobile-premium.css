@@ -1,0 +1,226 @@
+/*
+ * Entimema mobile quality layer
+ * A single final cascade for rhythm, touch, typography and motion across routes.
+ */
+
+@media (max-width: 47.5rem) {
+  :root {
+    --mobile-gutter: clamp(1.125rem, 5.25vw, 1.5rem);
+    --mobile-section-space: clamp(4rem, 15vw, 5.5rem);
+    --mobile-rule: rgba(7, 27, 82, .12);
+    --mobile-shadow: 0 14px 38px rgba(7, 27, 82, .07);
+    --mobile-ease: cubic-bezier(.22, 1, .36, 1);
+    --mobile-enter: 420ms;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    scroll-padding-top: calc(var(--header-height-v2) + 1rem);
+  }
+
+  html { overflow-x: clip; }
+  body {
+    min-width: 0;
+    overflow-x: clip;
+    font-size: 1rem;
+    line-height: 1.625;
+    -webkit-tap-highlight-color: rgba(7, 28, 87, .08);
+  }
+
+  .site-container {
+    width: auto;
+    max-width: none;
+    margin-inline: var(--mobile-gutter);
+  }
+
+  main,
+  main > *,
+  main section,
+  main article { min-width: 0; }
+
+  main section[id] { scroll-margin-top: calc(var(--header-height-v2) + 1rem); }
+
+  main :is(h1, h2, h3) {
+    overflow-wrap: break-word;
+    text-wrap: balance;
+  }
+
+  main :is(p, li, dd, figcaption) {
+    hanging-punctuation: first last;
+    text-wrap: pretty;
+  }
+
+  main :is(img, video, canvas, svg) { max-width: 100%; }
+  main :is(figure, table, pre, blockquote) { min-width: 0; }
+
+  :is(button, input, select, textarea) { font-size: max(1rem, 16px); }
+  :is(button, a, summary, input, select, textarea) { touch-action: manipulation; }
+  :is(button, a, summary):focus-visible {
+    outline: 2px solid var(--entimema-focus);
+    outline-offset: 3px;
+  }
+
+  /* Stable, notch-aware global chrome. */
+  .announcement {
+    height: auto;
+    min-height: var(--announcement-height-v2);
+    max-height: none;
+    overflow: clip;
+  }
+
+  .announcement__message {
+    width: 100%;
+    max-width: none;
+    min-height: var(--announcement-height-v2);
+    margin: 0;
+    padding: .5rem 3.25rem .5rem var(--mobile-gutter);
+    gap: .125rem .45rem;
+    align-content: center;
+    flex-wrap: wrap;
+    font-size: .875rem;
+    line-height: 1.35;
+    letter-spacing: -.006em;
+    text-align: center;
+    white-space: normal;
+  }
+
+  .announcement__message > span { width: 100%; }
+  .announcement__message .announcement__link { justify-content: center; }
+  .announcement__message .announcement__statement { white-space: normal; }
+  .announcement__close {
+    right: max(.75rem, env(safe-area-inset-right));
+    width: 2.75rem;
+    height: 2.75rem;
+    font-size: 1.45rem;
+    opacity: .88;
+  }
+
+  .site-header {
+    height: var(--header-height-v2);
+    min-height: var(--header-height-v2);
+    background: rgba(255, 255, 255, .94);
+    border-bottom-color: var(--mobile-rule);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, .85) inset;
+    backdrop-filter: blur(18px) saturate(130%);
+    -webkit-backdrop-filter: blur(18px) saturate(130%);
+  }
+
+  .site-header__inner--editorial {
+    min-height: var(--header-height-v2);
+    padding-inline: var(--mobile-gutter);
+  }
+
+  .site-header__left { flex: 0 1 auto; min-width: 0; }
+  .site-header__brand { min-width: 0; }
+  .site-header__actions {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: .625rem;
+    padding-left: .75rem;
+  }
+
+  .site-brand { min-width: 0; gap: .625rem; }
+  .site-brand__mark { width: 2.625rem; height: 2.625rem; flex-basis: 2.625rem; }
+  .site-brand__word {
+    min-width: 0;
+    font-size: clamp(1.45rem, 7vw, 1.7rem);
+    letter-spacing: -.045em;
+  }
+
+  .header-cta {
+    width: auto;
+    min-width: 7rem;
+    height: 2.75rem;
+    min-height: 2.75rem;
+    padding-inline: 1rem;
+    border-radius: .625rem;
+    box-shadow: 0 .45rem 1.1rem rgba(7, 27, 82, .11);
+    font-size: .9375rem;
+  }
+
+  /* Mobile editorial cadence across marketing and research routes. */
+  main > section:not([class*="hero"]) { scroll-margin-top: var(--header-height-v2); }
+  main section div[class*="sectionHeader"] { margin-bottom: clamp(2rem, 9vw, 3rem); }
+  main section div[class*="sectionHeader"] > h2 { letter-spacing: -.035em; }
+  main section div[class*="sectionHeader"] > p { line-height: 1.65; }
+
+  main :is(article, div)[class*="card" i] {
+    border-radius: clamp(.75rem, 3vw, .95rem);
+  }
+
+  /* Technical surfaces stay exact and scroll instead of compressing data. */
+  main [class*="tableScroll"],
+  main [class*="codeScroll"],
+  main [class*="formula"],
+  main [class*="diagram"],
+  main [class*="chart"] {
+    overscroll-behavior-inline: contain;
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  main :is(pre, code, table) { font-variant-numeric: tabular-nums lining-nums; }
+  main pre {
+    max-width: 100%;
+    tab-size: 2;
+    text-size-adjust: none;
+  }
+
+  /* Touch screens should feel composed, not retain desktop hover choreography. */
+  @media (hover: none), (pointer: coarse) {
+    :is(a, button, article, [class*="card" i], [class*="row" i]):hover {
+      transform: none !important;
+    }
+
+    :is(.approach-card, .service-card, .service-row, .linkedinLink):hover {
+      box-shadow: none;
+    }
+  }
+
+  /* One restrained entrance language: short travel, editorial timing. */
+  :is(.reveal, .methodology-reveal, [class*="reveal" i]) {
+    transform: translate3d(0, .75rem, 0);
+    transition-duration: var(--mobile-enter);
+    transition-timing-function: var(--mobile-ease);
+  }
+
+  :is(
+    .motion-reveal,
+    .motion-service-hero,
+    .motion-service-dashboard,
+    .motion-service-section,
+    .motion-service-heading,
+    .motion-service-body,
+    .motion-service-card,
+    .motion-service-step,
+    .motion-service-outcome,
+    .motion-service-story,
+    .motion-service-related,
+    .motion-service-cta
+  ) {
+    transition-duration: var(--mobile-enter);
+    transition-timing-function: var(--mobile-ease);
+  }
+}
+
+@media (max-width: 26.875rem) {
+  :root { --announcement-height-v2: 3.625rem; }
+  .announcement__message { padding-left: 1rem; padding-right: 3.25rem; font-size: .8125rem; }
+  .site-header__inner--editorial { padding-inline: 1rem; }
+  .site-header__actions { gap: .45rem; padding-left: .5rem; }
+  .site-brand__mark { width: 2.5rem; height: 2.5rem; flex-basis: 2.5rem; }
+  .site-brand__word { font-size: 1.4rem; }
+  .header-cta { min-width: 6.5rem; padding-inline: .75rem; font-size: .875rem; }
+}
+
+@media (max-width: 22.5rem) {
+  .site-brand__word { font-size: 1.3rem; }
+  .header-cta { min-width: 6rem; padding-inline: .625rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  :is(.reveal, .methodology-reveal, [class*="reveal" i]) {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

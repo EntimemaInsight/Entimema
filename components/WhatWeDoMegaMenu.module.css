@@ -220,14 +220,14 @@
   }
 
   .mobileRoot {
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     display: flex;
   }
 
   .mobileRoot .trigger {
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     justify-content: center;
     padding: 0;
     border: 0;
@@ -289,7 +289,7 @@
     display: block;
     flex: 1 1 auto;
     min-height: 0;
-    padding: 1.45rem 1rem 2rem;
+    padding: 1rem clamp(1.125rem, 5.25vw, 1.5rem) 2rem;
     overflow-y: auto;
     overscroll-behavior: contain;
     -webkit-overflow-scrolling: touch;
@@ -297,18 +297,18 @@
 
   .mobileTopLevel {
     width: 100%;
-    min-height: 3.4rem;
+    min-height: 3.75rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0;
     border: 0;
-    border-bottom: 0;
+    border-bottom: 1px solid rgba(4, 19, 63, .075);
     background: transparent;
     color: var(--brand-navy-950);
     font-family: var(--font-sans);
-    font-size: 1rem;
-    font-weight: 400;
+    font-size: 1.0625rem;
+    font-weight: 500;
     line-height: 1.5;
     letter-spacing: normal;
     cursor: pointer;
@@ -348,15 +348,15 @@
   }
 
   .mobileSolutions {
-    padding: 0 0 1.25rem 1rem;
+    padding: .25rem 0 1.5rem 1rem;
   }
 
-  .mobileResources { padding: 0 0 1.25rem 1rem; border-bottom: 0; }
+  .mobileResources { padding: .25rem 0 1.5rem 1rem; border-bottom: 1px solid rgba(4, 19, 63, .075); }
   .mobileResourceDestination { display: flex; align-items: center; justify-content: flex-start; gap: 22px; padding: 16px 0; border-bottom: 1px solid var(--hairline); font-family: var(--font-sans); }
   .mobileResourceDestination:last-child { border-bottom: 0; }
   .mobileResourceDestination > span { display: grid; gap: 6px; }
   .mobileResourceDestination strong { color: var(--brand-navy-950); font-size: 15px; letter-spacing: -.01em; }
-  .mobileResourceDestination small { max-width: 290px; color: var(--text-secondary); font-size: 11px; line-height: 1.45; }
+  .mobileResourceDestination small { max-width: 290px; color: var(--text-secondary); font-size: .8125rem; line-height: 1.5; }
   .mobileResourceDestination > .mobileChevron { color: var(--brand-navy-950); }
   .mobileResourceDestination:focus-visible { outline: 2px solid var(--brand-navy-800); outline-offset: -2px; }
   .mobileGroup {
@@ -371,7 +371,7 @@
   .mobileGroup h2 {
     margin: 0 0 8px;
     color: rgba(36, 44, 62, .58);
-    font-size: 11px;
+    font-size: .75rem;
     font-weight: 700;
     line-height: 1.4;
     letter-spacing: .1em;
@@ -382,13 +382,13 @@
   }
 
   .mobileServiceLink {
-    min-height: 44px;
+    min-height: 48px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
     color: var(--brand-navy-950);
     font-family: var(--font-sans);
-    font-size: 15px;
+    font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
     letter-spacing: normal;
@@ -406,13 +406,16 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    padding: 1rem 1rem max(1rem, env(safe-area-inset-bottom)) 5.5rem;
+    padding: .875rem clamp(1.125rem, 5.25vw, 1.5rem) max(.875rem, env(safe-area-inset-bottom));
     border-top: 1px solid rgba(4, 19, 63, .08);
-    background: #f4f4f5;
+    background: rgba(248, 249, 252, .96);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
   }
 
   .mobileDockContact {
-    min-width: 9.25rem;
+    width: 100%;
+    min-width: 0;
     min-height: 3.25rem;
     display: inline-flex;
     align-items: center;
@@ -430,7 +433,7 @@
     padding-inline: 1rem;
     color: #fff;
     background: var(--brand-navy-950);
-    box-shadow: 0 .5rem 1.25rem rgba(4, 19, 63, .16);
+    box-shadow: 0 .5rem 1.25rem rgba(4, 19, 63, .13);
   }
 
   .mobileTaxonomyLabel {
