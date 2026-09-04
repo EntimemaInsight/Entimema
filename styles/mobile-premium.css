@@ -173,7 +173,9 @@
   .executive-intelligence__output {
     width: calc(100% - 1rem);
     margin-inline: auto;
+    justify-content: center;
   }
+  .executive-intelligence__output > div { flex: 0 1 auto; }
   .executive-intelligence__switch button {
     min-width: 3.25rem;
     min-height: 2.75rem;
