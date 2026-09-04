@@ -281,7 +281,10 @@
     justify-content: center;
   }
 
-  /* Home: one deliberate visual axis from hero to final conversion. */
+  /*
+   * Taktile-style mobile alignment hierarchy:
+   * presentation copy is centred; evidence and working content stay left.
+   */
   .site-page:has(> .home-stage) :is(
     .hero__copy--editorial,
     .approach-section__inner,
@@ -318,61 +321,69 @@
   }
 
   .site-page:has(> .home-stage) .approach-tile {
-    align-items: center;
-    justify-items: center;
-    text-align: center;
+    align-items: stretch;
+    justify-items: start;
+    text-align: left;
   }
 
   .site-page:has(> .home-stage) :is(.philosophy-quote-card, .philosophy-metric-card) {
-    justify-items: center;
-    text-align: center;
+    justify-items: start;
+    text-align: left;
   }
 
   .site-page:has(> .home-stage) .philosophy-quote-card__principle {
-    justify-content: center;
+    justify-content: flex-start;
   }
 
   .site-page:has(> .home-stage) .philosophy-quote-card p,
   .site-page:has(> .home-stage) .philosophy-metric-card > span {
     max-width: 24ch;
-    margin-inline: auto;
-    padding-left: 0;
-    border-left: 0;
-    text-align: center;
+    margin-inline: 0;
+    text-align: left;
   }
 
   .site-page:has(> .home-stage) .process-quote {
     margin-inline: auto;
   }
 
-  .site-page:has(> .home-stage) [class*="ConversionTrustSection"] :is(
-    [class*="header"],
-    [class*="capability"],
-    [class*="problem"],
-    [class*="stages"] li
-  ) {
+  .site-page:has(> .home-stage) [class*="ConversionTrustSection"] [class*="header"] {
     justify-items: center;
     text-align: center;
   }
 
-  .site-page:has(> .home-stage) [class*="ConversionTrustSection"] [class*="header"] h2,
-  .site-page:has(> .home-stage) [class*="ConversionTrustSection"] :is(p, ul) {
+  .site-page:has(> .home-stage) [class*="ConversionTrustSection"] [class*="header"] :is(h2, p) {
     margin-inline: auto;
     text-align: center;
   }
 
-  .site-page:has(> .home-stage) [class*="ConversionTrustSection"] [class*="capability"] li::before {
-    content: none;
+  .site-page:has(> .home-stage) [class*="ConversionTrustSection"] :is(
+    [class*="capability"],
+    [class*="problem"],
+    [class*="stages"] li
+  ) {
+    justify-items: start;
+    text-align: left;
   }
 
   .site-page:has(> .home-stage) [class*="ConversionTrustSection"] [class*="stages"] li {
-    grid-template-columns: 1fr;
+    grid-template-columns: auto minmax(0, 1fr);
     gap: 0.75rem;
   }
 
   .site-page:has(> .home-stage) [class*="ConversionTrustSection"] [class*="link"] {
     width: 100%;
     text-align: center;
+  }
+
+  /* Editorial and operational reading surfaces always keep a clean left axis. */
+  .site-page :is(
+    article,
+    [class*="prose"],
+    [class*="articleBody"],
+    [class*="engineeringUtilities"],
+    [class*="mobileToc"]
+  ) :is(h2, h3, h4, p, li, dt, dd, figcaption) {
+    text-align: left;
   }
 
   /* Shared route hardening: prevent desktop grids and dashboards leaking out. */
