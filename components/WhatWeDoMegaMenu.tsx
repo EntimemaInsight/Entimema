@@ -253,7 +253,7 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
                       <div>
                         {group.items.map((item) => (
                           <Link className={styles.mobileServiceLink} href={item.href} key={item.href} onClick={close}>
-                            <span>{item.title}</span><MenuChevron />
+                            <span>{item.title}</span>
                           </Link>
                         ))}
                       </div>
@@ -261,18 +261,18 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
                   ))}
                 </div>
                 <Link className={styles.mobileTopLevel} href="/agents" onClick={close}>
-                  <span>Agent Library</span><MenuChevron />
+                  <span>Agent Library</span>
                 </Link>
                 <button aria-controls={`${menuId}-mobile-resources`} aria-expanded={mobileResourcesOpen} className={styles.mobileTopLevel} onClick={() => setMobileResourcesOpen((current) => !current)} type="button">
                   <span>Resources</span><MenuChevron direction="down" />
                 </button>
                 <div className={styles.mobileResources} hidden={!mobileResourcesOpen} id={`${menuId}-mobile-resources`}>
                   <Link className={styles.mobileResourceDestination} href="/resources" onClick={close}>
-                    <span><strong>View all research</strong><small>Browse the complete research library.</small></span><MenuChevron />
+                    <span><strong>View all research</strong><small>Browse the complete research library.</small></span>
                   </Link>
                   {Object.entries(resourceStreams).map(([key, stream]) => (
                     <Link className={styles.mobileResourceDestination} href={stream.href} key={key} onClick={close}>
-                      <span><strong>{stream.label}</strong><small>{stream.description}</small></span><MenuChevron />
+                      <span><strong>{stream.label}</strong><small>{stream.description}</small></span>
                     </Link>
                   ))}
                 </div>
@@ -281,18 +281,14 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
                 </button>
                 <div className={styles.mobileResources} hidden={!mobileCompanyOpen} id={`${menuId}-mobile-company`}>
                   {companyDestinations.map(item => <Link className={styles.mobileResourceDestination} href={item.href} key={item.href} onClick={close} aria-current={pathname.replace(/\/$/, "") === item.href ? "page" : undefined}>
-                    <span><strong>{item.title}</strong><small>{item.description}</small></span><MenuChevron />
+                    <span><strong>{item.title}</strong><small>{item.description}</small></span>
                   </Link>)}
                 </div>
                 <Link className={`${styles.mobileTopLevel} ${styles.mobileContact}`} href="/contact" onClick={close}>
-                  <span>Contact us</span><MenuChevron />
+                  <span>Contact us</span>
                 </Link>
               </div>
               <footer className={styles.mobileActionDock}>
-                <Link className={styles.mobileDataAction} href="/workspace/financial-intelligence" onClick={close}>
-                  <span className={styles.mobileDataMark} aria-hidden="true">D</span>
-                  <span>Data Analysis</span>
-                </Link>
                 <Link className={styles.mobileDockContact} href="/contact" onClick={close}>Contact us</Link>
               </footer>
             </>
