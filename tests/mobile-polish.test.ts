@@ -34,6 +34,8 @@ test("home mobile layout follows one centered visual axis", () => {
   assert.match(mobile, /\.site-page:has\(> \.home-stage\)/);
   assert.match(mobile, /\.approach-section__tiles[\s\S]*margin-inline: auto/);
   assert.match(mobile, /Taktile-style mobile alignment hierarchy/);
+  assert.match(mobile, /\.hero__title--editorial > span:first-child[\s\S]*width: 100%;[\s\S]*text-align: center/);
+  assert.match(mobile, /\.hero__title--editorial > \.hero__accent[\s\S]*margin-inline: auto/);
   assert.match(mobile, /\.approach-tile[\s\S]*text-align: left/);
   assert.match(mobile, /ConversionTrustSection[\s\S]*justify-items: start;[\s\S]*text-align: left/);
   assert.match(mobile, /Editorial and operational reading surfaces always keep a clean left axis/);
