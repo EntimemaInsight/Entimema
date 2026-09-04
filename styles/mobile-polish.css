@@ -102,20 +102,38 @@
     max-height: none;
   }
   .announcement__message {
-    max-width: calc(100% - 4rem);
-    padding-block: 0.5rem;
-    gap: 0.125rem 0.5rem;
+    width: 100%;
+    max-width: none;
+    padding: 0.5rem 2.5rem;
     font-size: 1rem;
     font-weight: 500;
     line-height: 1.5;
     letter-spacing: normal;
+    text-align: center;
+    text-decoration: none;
     text-wrap: balance;
+  }
+  .announcement__message > span,
+  .announcement__message .announcement__link {
+    display: inline;
+    height: auto;
+    color: inherit;
+    font: inherit;
+    letter-spacing: inherit;
+  }
+  .announcement__message .announcement__link { white-space: nowrap; }
+  .announcement__message .announcement__link b {
+    color: inherit;
+    font: inherit;
+    line-height: inherit;
   }
   .announcement__close {
     right: 0.5rem;
-    width: 2rem;
-    height: 2rem;
-    font-size: 1.5rem;
+    width: 2.75rem;
+    height: 2.75rem;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5;
   }
 
   /* Editorial type must feel deliberate, not like a scaled desktop poster. */

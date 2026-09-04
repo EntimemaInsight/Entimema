@@ -25,6 +25,9 @@ test("mobile foundation protects narrow viewports and touch interactions", () =>
   assert.match(mobile, /--header-height-v2: 3\.5rem/);
   assert.match(mobile, /--announcement-height-v2: 3rem/);
   assert.match(mobile, /\.announcement__message[\s\S]*font-size: 1rem/);
+  assert.match(mobile, /\.announcement__message[\s\S]*padding: 0\.5rem 2\.5rem/);
+  assert.match(mobile, /\.announcement__close[\s\S]*width: 2\.75rem;[\s\S]*height: 2\.75rem/);
+  assert.match(mobile, /\.announcement__message \.announcement__link b[\s\S]*color: inherit;[\s\S]*font: inherit/);
   assert.match(mobile, /@media \(max-width: 40rem\)[\s\S]*\.header-cta[\s\S]*min-height: 2rem[\s\S]*font-size: 0\.875rem/);
   assert.doesNotMatch(mobile, /--announcement-height-v2: 3\.25rem/);
   assert.doesNotMatch(mobile, /font-size: 0\.71875rem/);
