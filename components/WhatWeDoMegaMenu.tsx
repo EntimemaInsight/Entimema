@@ -267,9 +267,6 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
                   <span>Resources</span><MenuChevron direction="down" />
                 </button>
                 <div className={styles.mobileResources} hidden={!mobileResourcesOpen} id={`${menuId}-mobile-resources`}>
-                  <Link className={styles.mobileResourceDestination} href="/resources" onClick={close}>
-                    <span><strong>View all research</strong><small>Browse the complete research library.</small></span>
-                  </Link>
                   {Object.entries(resourceStreams).map(([key, stream]) => (
                     <Link className={styles.mobileResourceDestination} href={stream.href} key={key} onClick={close}>
                       <span><strong>{stream.label}</strong><small>{stream.description}</small></span>

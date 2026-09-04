@@ -116,7 +116,6 @@ export default function ResourcesMegaMenu({ active = false, variant = "resources
           <header className={styles.intro}>
             <span>RESOURCES</span>
             <h2 id={headingId}>Research for decisions.<br />Methods for implementation.</h2>
-            <Link className={styles.allResearch} href="/resources" onClick={hide}>View all research <b aria-hidden="true">→</b></Link>
           </header>
           <div className={styles.streams}>
             {Object.entries(resourceStreams).map(([key, stream], index) => (
