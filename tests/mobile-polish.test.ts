@@ -24,6 +24,7 @@ test("mobile foundation protects narrow viewports and touch interactions", () =>
   assert.match(mobile, /Taktile-calibrated mobile chrome/);
   assert.match(mobile, /--header-height-v2: 3\.5rem/);
   assert.match(mobile, /--announcement-height-v2: 3rem/);
+  assert.match(mobile, /\.announcement[\s\S]*width: 100vw;[\s\S]*margin-inline: calc\(50% - 50vw\)/);
   assert.match(mobile, /\.announcement__message[\s\S]*font-size: 1rem/);
   assert.match(mobile, /\.announcement__message[\s\S]*padding: 0\.5rem 2\.5rem/);
   assert.match(mobile, /\.announcement__close[\s\S]*width: 2\.75rem;[\s\S]*height: 2\.75rem/);
