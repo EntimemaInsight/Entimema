@@ -96,16 +96,22 @@ test("report endpoint authenticates, owner-scopes, ignores request payload ident
   const run = await validatedFixture(); const repository = new MemoryRepository(); await repository.create("owner", run);
   const service = new FinancialRunService(repository);
   const context = { params: Promise.resolve({ runId: run.runId }) };
+  const url = `http://test/report?${new URLSearchParams({ revision: String(run.revision), statement: run.source.selectedSection!, snapshot: run.integrity, schema: run.schemaVersion })}`;
   const unauthenticated = createReportHandler({ authorize: async () => { throw new AgentError("AUTHENTICATION_REQUIRED", 401); }, service });
   assert.equal((await unauthenticated(new Request("http://test/report"), context)).status, 401);
   const foreign = createReportHandler({ authorize: async () => ({ actorId: "foreign" }), service });
-  assert.equal((await foreign(new Request("http://test/report"), context)).status, 404);
+  assert.equal((await foreign(new Request(url), context)).status, 404);
   const owner = createReportHandler({ authorize: async () => ({ actorId: "owner" }), service });
-  const response = await owner(new Request("http://test/report", { headers: { "x-owner-id": "foreign" } }), context);
+  const response = await owner(new Request(url, { headers: { "x-owner-id": "foreign" } }), context);
   assert.equal(response.status, 200);
   assert.equal(response.headers.get("content-type"), "application/pdf");
   assert.match(response.headers.get("content-disposition") ?? "", /^attachment; filename="[a-zA-Z0-9_-]+\.pdf"$/);
   assert.match(response.headers.get("cache-control") ?? "", /no-store/);
+});
+
+test("report endpoint rejects stale revision and snapshot identities", async () => {
+  const run = await validatedFixture(); const repository = new MemoryRepository(); await repository.create("owner", run); const service = new FinancialRunService(repository); const handler = createReportHandler({ authorize: async () => ({ actorId: "owner" }), service }); const context = { params: Promise.resolve({ runId: run.runId }) };
+  for (const query of [{revision:String((run.revision??1)-1),statement:run.source.selectedSection!,snapshot:run.integrity,schema:run.schemaVersion},{revision:String(run.revision),statement:run.source.selectedSection!,snapshot:"another-run-snapshot",schema:run.schemaVersion}]) { const response=await handler(new Request(`http://test/report?${new URLSearchParams(query)}`),context); assert.equal(response.status,409); }
 });
 
 test("report generation blocks unvalidated, archived, invalid-integrity, open-review, and failed-material-control runs", async () => {

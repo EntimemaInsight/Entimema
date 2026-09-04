@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type {
   CanonicalConcept,
   FinancialRun,
@@ -50,6 +50,9 @@ export function FinancialIntelligenceWorkspace({
       }>
     >([]),
     [saveState, setSaveState] = useState("Saved");
+  const clearDerivedState = () => { setAnalysis(null); setAnalysisError(""); setReportError(""); setReportBusy(false); };
+  useEffect(() => { clearDerivedState(); }, [user.email]);
+  const analysisQuery = (current: FinancialRun) => new URLSearchParams({revision:String(current.revision ?? 1),statement:current.source.selectedSection ?? "",snapshot:current.integrity,schema:current.schemaVersion}).toString();
   const evidence = run?.evidence.find((e) => e.id === evidenceId);
   const openTasks = run?.reviewTasks.filter((t) => t.state === "open") ?? [];
   async function loadRuns() {
@@ -67,7 +70,7 @@ export function FinancialIntelligenceWorkspace({
   }
   async function openRun(id: string) {
     setBusy(true);
-    setAnalysis(null);
+    clearDerivedState();
     try {
       const response = await fetch(`/api/financial-intelligence/runs/${id}`, {
         cache: "no-store",
@@ -88,6 +91,7 @@ export function FinancialIntelligenceWorkspace({
       setError(errorText.FILE_TOO_LARGE);
       return;
     }
+    clearDerivedState();
     setBusy(true);
     setError("");
     try {
@@ -105,6 +109,7 @@ export function FinancialIntelligenceWorkspace({
       setSaveState("Saved");
       void loadRuns();
     } catch (e) {
+      clearDerivedState();
       setError(
         errorText[e instanceof Error ? e.message : ""] ??
           "The execution could not be completed safely.",
@@ -120,6 +125,7 @@ export function FinancialIntelligenceWorkspace({
   ) {
     if (!run || busy) return;
     setBusy(true);
+    clearDerivedState();
     setSaveState("Saving");
     setError("");
     try {
@@ -160,7 +166,7 @@ export function FinancialIntelligenceWorkspace({
     setAnalysisError("");
     try {
       const response = await fetch(
-        `/api/financial-intelligence/runs/${run.runId}/analysis`,
+        `/api/financial-intelligence/runs/${run.runId}/analysis?${analysisQuery(run)}`,
         { cache: "no-store" },
       );
       const data = await response.json();
@@ -182,7 +188,7 @@ export function FinancialIntelligenceWorkspace({
     setReportBusy(true);
     setReportError("");
     try {
-      const response = await fetch(`/api/financial-intelligence/runs/${run.runId}/report`, { cache: "no-store" });
+      const response = await fetch(`/api/financial-intelligence/runs/${run.runId}/report?${analysisQuery(run)}`, { cache: "no-store" });
       if (!response.ok) {
         const data = await response.json() as { message?: string };
         throw new Error(data.message ?? "Report generation failed");
@@ -290,7 +296,7 @@ export function FinancialIntelligenceWorkspace({
                 <input
                   type="file"
                   accept=".xlsx,.xlsm,.csv,.pdf"
-                  onChange={(e) => setFile(e.target.files?.[0] ?? null)}
+                  onChange={(e) => { clearDerivedState(); setRun(null); setFile(e.target.files?.[0] ?? null); }}
                 />
                 <span>{file ? file.name : "Choose financial statement"}</span>
                 <small>
@@ -604,7 +610,7 @@ export function FinancialIntelligenceWorkspace({
                         : "Run analysis"}
                   </button>
                 </header>
-                {analysis ? (
+                {analysis && run?.status === "validated" && analysis.runId === run.runId && analysis.revision === (run.revision ?? 1) && analysis.validatedSnapshotHash === run.integrity ? (
                   <>
                     <div className="fiReportAction">
                       <div>
