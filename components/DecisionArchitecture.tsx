@@ -1,9 +1,32 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
 
 type Mode = "finance" | "risk";
+
+const subscribeToMobile = (onChange: () => void) => {
+  const query = window.matchMedia("(max-width: 760px)");
+  query.addEventListener("change", onChange);
+  return () => query.removeEventListener("change", onChange);
+};
+const getMobileSnapshot = () => window.matchMedia("(max-width: 760px)").matches;
+const getServerMobileSnapshot = () => false;
+
+const subscribeToReducedMotion = (onChange: () => void) => {
+  const query = window.matchMedia("(prefers-reduced-motion: reduce)");
+  query.addEventListener("change", onChange);
+  return () => query.removeEventListener("change", onChange);
+};
+const getReducedMotionSnapshot = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const getServerReducedMotionSnapshot = () => false;
+
+const subscribeToPageVisibility = (onChange: () => void) => {
+  document.addEventListener("visibilitychange", onChange);
+  return () => document.removeEventListener("visibilitychange", onChange);
+};
+const getPageVisibilitySnapshot = () => document.visibilityState === "visible";
+const getServerPageVisibilitySnapshot = () => true;
 
 type Scene = {
   mode: Mode;
@@ -119,7 +142,13 @@ export default function DecisionArchitecture() {
   const [mode, setMode] = useState<Mode>("finance");
   const [activeStep, setActiveStep] = useState(0);
   const [transitioning, setTransitioning] = useState(false);
+  const [paused, setPaused] = useState(false);
+  const isMobile = useSyncExternalStore(subscribeToMobile, getMobileSnapshot, getServerMobileSnapshot);
+  const reduceMotion = useSyncExternalStore(subscribeToReducedMotion, getReducedMotionSnapshot, getServerReducedMotionSnapshot);
+  const pageVisible = useSyncExternalStore(subscribeToPageVisibility, getPageVisibilitySnapshot, getServerPageVisibilitySnapshot);
   const scene = scenes[mode];
+  const displayedStep = reduceMotion ? 3 : activeStep;
+  const mobileSequenceComplete = isMobile && displayedStep === 3;
 
   const requestMode = useCallback((nextMode: Mode) => {
     if (nextMode === mode || transitioning) return;
@@ -140,24 +169,32 @@ export default function DecisionArchitecture() {
   }, []);
 
   useEffect(() => {
-    if (!visible) return;
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) return;
+    if (!visible || isMobile || paused || reduceMotion || !pageVisible) return;
     switchTimer.current = window.setInterval(() => requestMode(mode === "finance" ? "risk" : "finance"), 9000);
     return () => {
       if (switchTimer.current) window.clearInterval(switchTimer.current);
     };
-  }, [visible, mode, requestMode]);
+  }, [visible, isMobile, paused, reduceMotion, pageVisible, mode, requestMode]);
 
   useEffect(() => {
-    if (!visible || transitioning) return;
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) return;
-    const id = window.setInterval(() => setActiveStep((current) => (current + 1) % 4), 1120);
-    return () => window.clearInterval(id);
-  }, [visible, mode, transitioning]);
+    if (!visible || transitioning || paused || reduceMotion || !pageVisible || mobileSequenceComplete) return;
+    const duration = isMobile ? 2600 : 1120;
+    const id = window.setTimeout(() => {
+      setActiveStep((current) => isMobile ? Math.min(current + 1, 3) : (current + 1) % 4);
+    }, duration);
+    return () => window.clearTimeout(id);
+  }, [visible, transitioning, paused, reduceMotion, pageVisible, mobileSequenceComplete, isMobile, mode, activeStep]);
 
-  const output = scene.outputStates[activeStep];
+  const output = scene.outputStates[displayedStep];
+
+  const handlePlayback = () => {
+    if (mobileSequenceComplete) {
+      setActiveStep(0);
+      setPaused(false);
+      return;
+    }
+    setPaused((current) => !current);
+  };
 
   return (
     <section className={`decision-architecture executive-intelligence is-${mode} ${visible ? "is-visible" : ""} ${transitioning ? "is-transitioning" : ""}`} id="analyses" ref={ref} aria-label="Interactive executive intelligence">
@@ -167,11 +204,11 @@ export default function DecisionArchitecture() {
           <div className="executive-intelligence__glow" aria-hidden="true" />
 
           <div className="executive-intelligence__layout">
-            <AgentPanel side="left" scene={scene} activeStep={activeStep} />
+            <AgentPanel side="left" scene={scene} activeStep={displayedStep} />
 
             <div className="executive-profile">
               <div className="executive-profile__image">
-                <Image src={scene.image} alt={`${scene.name}, ${scene.role}`} fill priority sizes="(max-width: 760px) 86vw, 420px" quality={96} />
+                <Image src={scene.image} alt={`${scene.name}, ${scene.role}`} fill loading="lazy" sizes="(max-width: 760px) 86vw, 420px" quality={92} />
                 <div className="executive-profile__veil" />
               </div>
               <div className="executive-profile__identity">
@@ -185,19 +222,31 @@ export default function DecisionArchitecture() {
               </div>
             </div>
 
-            <AgentPanel side="right" scene={scene} activeStep={(activeStep + 2) % 4} />
+            {!isMobile && <AgentPanel side="right" scene={scene} activeStep={(displayedStep + 2) % 4} />}
           </div>
 
-          <div className="executive-intelligence__output">
-            <span className="executive-intelligence__check">{activeStep === 3 ? "✓" : "·"}</span>
+          <div className="executive-intelligence__output" aria-live={visible ? "polite" : "off"} aria-atomic="true">
+            <span className="executive-intelligence__check">{displayedStep === 3 ? "✓" : "·"}</span>
             <div><strong>{output.title}</strong><small>{output.text}</small></div>
-            <span className="executive-intelligence__progress" aria-hidden="true"><i style={{ transform: `scaleX(${(activeStep + 1) / 4})` }} /></span>
+            <span className="executive-intelligence__progress" aria-hidden="true"><i style={{ transform: `scaleX(${(displayedStep + 1) / 4})` }} /></span>
           </div>
 
           <div className="executive-intelligence__switch" role="group" aria-label="Change profile">
             <button className={mode === "finance" ? "is-active" : ""} onClick={() => requestMode("finance")} aria-label="Show CFO profile">Finance</button>
             <button className={mode === "risk" ? "is-active" : ""} onClick={() => requestMode("risk")} aria-label="Show Risk Manager profile">Risk</button>
           </div>
+          {isMobile && !reduceMotion && (
+            <button
+              className="executive-intelligence__playback"
+              type="button"
+              aria-pressed={paused}
+              aria-label={mobileSequenceComplete ? "Replay animation" : paused ? "Play animation" : "Pause animation"}
+              onClick={handlePlayback}
+            >
+              <span aria-hidden="true">{mobileSequenceComplete ? "↻" : paused ? "▶" : "Ⅱ"}</span>
+              {mobileSequenceComplete ? "Replay" : paused ? "Play" : "Pause"}
+            </button>
+          )}
         </div>
       </div>
     </section>
