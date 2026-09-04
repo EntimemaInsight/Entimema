@@ -258,6 +258,100 @@
     justify-content: center;
   }
 
+  /* Home: one deliberate visual axis from hero to final conversion. */
+  .site-page:has(> .home-stage) :is(
+    .hero__copy--editorial,
+    .approach-section__inner,
+    .approach-section__intro,
+    .philosophy-section__inner,
+    .philosophy-section__title,
+    .process-section__inner,
+    .process-heading,
+    .case-cta__inner
+  ) {
+    align-items: center;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .site-page:has(> .home-stage) :is(
+    .hero__title--editorial,
+    .hero__description--editorial,
+    .approach-section h2,
+    .approach-section__lead,
+    .philosophy-section h2,
+    .process-heading h2,
+    .process-quote,
+    .case-cta h2,
+    .case-cta__support
+  ) {
+    margin-inline: auto;
+    text-align: center !important;
+  }
+
+  .site-page:has(> .home-stage) .approach-section__tiles {
+    width: min(100%, 23rem);
+    margin-inline: auto;
+  }
+
+  .site-page:has(> .home-stage) .approach-tile {
+    align-items: center;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .site-page:has(> .home-stage) :is(.philosophy-quote-card, .philosophy-metric-card) {
+    justify-items: center;
+    text-align: center;
+  }
+
+  .site-page:has(> .home-stage) .philosophy-quote-card__principle {
+    justify-content: center;
+  }
+
+  .site-page:has(> .home-stage) .philosophy-quote-card p,
+  .site-page:has(> .home-stage) .philosophy-metric-card > span {
+    max-width: 24ch;
+    margin-inline: auto;
+    padding-left: 0;
+    border-left: 0;
+    text-align: center;
+  }
+
+  .site-page:has(> .home-stage) .process-quote {
+    margin-inline: auto;
+  }
+
+  .site-page:has(> .home-stage) [class*="ConversionTrustSection"] :is(
+    [class*="header"],
+    [class*="capability"],
+    [class*="problem"],
+    [class*="stages"] li
+  ) {
+    justify-items: center;
+    text-align: center;
+  }
+
+  .site-page:has(> .home-stage) [class*="ConversionTrustSection"] [class*="header"] h2,
+  .site-page:has(> .home-stage) [class*="ConversionTrustSection"] :is(p, ul) {
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .site-page:has(> .home-stage) [class*="ConversionTrustSection"] [class*="capability"] li::before {
+    content: none;
+  }
+
+  .site-page:has(> .home-stage) [class*="ConversionTrustSection"] [class*="stages"] li {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .site-page:has(> .home-stage) [class*="ConversionTrustSection"] [class*="link"] {
+    width: 100%;
+    text-align: center;
+  }
+
   /* Shared route hardening: prevent desktop grids and dashboards leaking out. */
   main :is(section, article, div, header, footer) { min-width: 0; }
   main :is(h1, h2, h3, p, li, a, button, label, dt, dd) { overflow-wrap: break-word; }
