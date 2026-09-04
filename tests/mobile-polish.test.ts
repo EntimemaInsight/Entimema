@@ -1,0 +1,28 @@
+import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+import test from "node:test";
+
+const layout = readFileSync("app/layout.tsx", "utf8");
+const mobile = readFileSync("styles/mobile-polish.css", "utf8");
+const consent = readFileSync("components/AnalyticsConsent.module.css", "utf8");
+const footer = readFileSync("components/GlobalFooter.module.css", "utf8");
+
+test("mobile foundation loads after the historical global stylesheet", () => {
+  assert.ok(layout.indexOf('import "./globals.css"') < layout.indexOf('import "../styles/mobile-polish.css"'));
+});
+
+test("mobile foundation protects narrow viewports and touch interactions", () => {
+  assert.match(mobile, /@media \(max-width: 47\.5rem\)/);
+  assert.match(mobile, /--mobile-gutter:/);
+  assert.match(mobile, /overflow-x: clip/);
+  assert.match(mobile, /executive-agent--right \{ display: none; \}/);
+  assert.match(mobile, /-webkit-tap-highlight-color:/);
+  assert.match(mobile, /@media \(max-width: 26\.875rem\)/);
+});
+
+test("mobile privacy and footer surfaces preserve usable controls", () => {
+  assert.match(consent, /max-height: min\(92dvh, 720px\)/);
+  assert.match(consent, /min-width: 136px/);
+  assert.match(footer, /grid-template-columns: 1fr/);
+  assert.match(footer, /min-height: 44px/);
+});

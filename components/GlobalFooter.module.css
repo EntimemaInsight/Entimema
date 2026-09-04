@@ -146,7 +146,7 @@
 
 @media (max-width: 640px) {
   .footer {
-    padding-block: 48px 40px;
+    padding-block: 52px max(40px, env(safe-area-inset-bottom));
   }
 
   .inner {
@@ -164,12 +164,13 @@
   }
 
   .navigation {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 30px 22px;
+    grid-template-columns: 1fr;
+    gap: 0;
   }
 
-  .column:nth-child(-n + 2) {
-    grid-column: 1 / -1;
+  .column {
+    padding-block: 22px;
+    border-top: 1px solid var(--entimema-rule);
   }
 
   .columnLabel {
@@ -178,6 +179,8 @@
 
   .column a {
     min-height: 44px;
+    width: 100%;
+    padding-block: 10px;
   }
 }
 

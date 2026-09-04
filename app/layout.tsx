@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "../styles/mobile-polish.css";
 import ScrollExperience from "@/components/ScrollExperience";
 import GlobalFooter from "@/components/GlobalFooter";
 import AnalyticsConsent from "@/components/AnalyticsConsent";

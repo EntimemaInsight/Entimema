@@ -33,5 +33,32 @@
 .preferencesTrigger svg { width: 28px; height: 28px; fill: none; stroke: currentColor; stroke-width: 1.55; stroke-linecap: round; stroke-linejoin: round; }
 .preferencesTrigger:hover { transform: translateY(-2px); box-shadow: 0 14px 30px rgba(5,19,33,.25); }
 .preferencesTrigger:focus-visible { outline: 3px solid #9fb2e5; outline-offset: 3px; }
-@media (max-width: 640px) { .backdrop { align-items: end; padding: 12px; } .modal { max-height: calc(100dvh - 24px); } .modalHeader { padding: 21px 20px 19px; } .modalBody { padding: 21px 20px 20px; } .preferenceRow { align-items: flex-start; } .preferenceControl { padding-top: 2px; } .modalFooter { align-items: stretch; flex-direction: column; } .primary { width: 100%; } .preferencesTrigger { left: 12px; bottom: 12px; width: 44px; height: 44px; } }
+@media (max-width: 640px) {
+  .backdrop { align-items: end; padding: 0; background: rgba(4, 19, 63, .5); backdrop-filter: blur(2px); }
+  .modal { width: 100%; max-height: min(92dvh, 720px); border-width: 1px 0 0; border-radius: 14px 14px 0 0; box-shadow: 0 -18px 54px rgba(4, 19, 63, .2); }
+  .modalHeader { padding: 18px 20px 16px; }
+  .modalHeader h2 { max-width: 16ch; margin-top: 4px; font-size: clamp(22px, 6.7vw, 28px); line-height: 1.08; }
+  .modalBody { padding: 18px 20px max(18px, env(safe-area-inset-bottom)); }
+  .intro h3 { font-size: 15px; }
+  .intro p { font-size: 12px; line-height: 1.55; }
+  .preferenceList { margin-top: 16px; }
+  .preferenceRow { min-height: 64px; align-items: center; gap: 12px; padding: 12px; }
+  .preferenceRow strong { font-size: 13px; }
+  .preferenceRow span { font-size: 10px; }
+  .preferenceControl { padding-top: 0; gap: 7px; }
+  .modalFooter { align-items: center; flex-direction: row; gap: 14px; margin-top: 18px; padding-top: 16px; }
+  .brand :global(.site-brand__mark) { width: 32px; height: 32px; flex-basis: 32px; }
+  .brand :global(.site-brand__word) { font-size: 21px; }
+  .primary { width: auto; min-width: 136px; }
+  .preferencesTrigger { left: 12px; bottom: max(12px, env(safe-area-inset-bottom)); width: 44px; height: 44px; }
+}
+
+@media (max-width: 390px), (max-height: 700px) {
+  .modalHeader { padding-block: 14px; }
+  .modalBody { padding-top: 14px; }
+  .intro p { margin-top: 6px; }
+  .preferenceList { gap: 6px; margin-top: 12px; }
+  .preferenceRow { min-height: 58px; padding-block: 9px; }
+  .modalFooter { margin-top: 14px; padding-top: 12px; }
+}
 @media (prefers-reduced-motion: reduce) { .switch, .switch span, .primary, .preferencesTrigger { transition: none; } }

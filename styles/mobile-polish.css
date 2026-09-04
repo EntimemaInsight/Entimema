@@ -1,0 +1,304 @@
+/*
+ * Entimema mobile foundation
+ *
+ * This file is deliberately imported last. It provides a single, predictable
+ * mobile contract above the historical page-level sprints while leaving the
+ * desktop composition untouched.
+ */
+
+@media (max-width: 47.5rem) {
+  :root {
+    --mobile-gutter: clamp(1.125rem, 5vw, 1.5rem);
+    --mobile-section-space: clamp(4.5rem, 18vw, 6rem);
+    --mobile-section-space-tight: clamp(3.5rem, 14vw, 4.75rem);
+    --mobile-display: clamp(2.55rem, 11.7vw, 3.45rem);
+    --mobile-heading: clamp(2.15rem, 9.4vw, 2.85rem);
+    --mobile-card-radius: 0.875rem;
+  }
+
+  html {
+    scroll-padding-top: calc(var(--header-height-v2) + 1rem);
+  }
+
+  body {
+    min-width: 0;
+    overflow-x: clip;
+  }
+
+  :where(img, svg, video, canvas) {
+    max-width: 100%;
+  }
+
+  .site-page {
+    min-height: 100svh;
+  }
+
+  .site-container,
+  .executive-intelligence__inner {
+    width: auto;
+    max-width: none;
+    margin-inline: var(--mobile-gutter);
+  }
+
+  /* Compact chrome: brand recognition first, controls second. */
+  :root {
+    --header-height-v2: 3.75rem;
+    --announcement-height-v2: 2.75rem;
+  }
+
+  .site-header,
+  html.is-scrolled .site-header,
+  html.scrolling-down .site-header,
+  html.scrolling-up .site-header {
+    height: var(--header-height-v2);
+  }
+
+  .site-header__inner--editorial {
+    min-height: var(--header-height-v2);
+    padding-inline: var(--mobile-gutter);
+  }
+
+  .site-brand { gap: 0.625rem; }
+  .site-brand__mark {
+    width: 2.25rem;
+    height: 2.25rem;
+    flex-basis: 2.25rem;
+  }
+  .site-brand__word {
+    top: 0;
+    font-size: 1.45rem;
+    letter-spacing: -0.045em;
+  }
+  .site-header__actions { padding-left: 0.75rem; }
+  .header-cta { display: none; }
+
+  .announcement {
+    min-height: var(--announcement-height-v2);
+    max-height: none;
+  }
+  .announcement__message {
+    max-width: calc(100% - 4.75rem);
+    padding-block: 0.45rem;
+    gap: 0.125rem 0.45rem;
+    font-size: 0.75rem;
+    line-height: 1.3;
+    text-wrap: balance;
+  }
+  .announcement__close {
+    right: 0.625rem;
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+
+  /* Editorial type must feel deliberate, not like a scaled desktop poster. */
+  .hero__copy--editorial {
+    padding: clamp(3.25rem, 14vw, 4.75rem) 0 clamp(3.75rem, 16vw, 5.25rem);
+  }
+  .hero__title--editorial,
+  main > section[class*="hero"] div[class*="heroCopy"] > h1 {
+    max-width: 12ch !important;
+    font-size: var(--mobile-display) !important;
+    line-height: 0.99 !important;
+    letter-spacing: -0.057em;
+    text-wrap: balance;
+  }
+  .hero__description--editorial {
+    max-width: 28ch;
+    margin-top: 1.5rem;
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+  .hero__cta {
+    width: 100%;
+    max-width: 18rem;
+    min-height: 3.25rem;
+    margin-top: 1.75rem;
+  }
+
+  .approach-section,
+  .approach-section--tiles,
+  .philosophy-section,
+  .philosophy-section--split,
+  .process-section,
+  .case-cta {
+    min-height: 0;
+    padding-block: var(--mobile-section-space);
+  }
+
+  .approach-section h2,
+  .philosophy-section h2,
+  .process-heading h2,
+  .case-cta h2,
+  main section div[class*="sectionHeader"] > h2 {
+    max-width: 14ch;
+    font-size: var(--mobile-heading) !important;
+    line-height: 1.03 !important;
+    letter-spacing: -0.048em;
+    text-wrap: balance;
+  }
+
+  .approach-section__lead,
+  .process-quote,
+  main section div[class*="sectionHeader"] > p {
+    max-width: 31ch;
+    font-size: 1rem;
+    line-height: 1.58;
+    text-wrap: pretty;
+  }
+
+  /* The analytical scene becomes a concise, legible mobile story. */
+  .decision-architecture.executive-intelligence {
+    padding: 0 0 var(--mobile-section-space-tight);
+  }
+  .executive-intelligence__inner {
+    width: auto;
+  }
+  .executive-intelligence__canvas {
+    min-height: 0;
+    padding: 1rem 0.875rem 4.75rem;
+    border-radius: var(--mobile-card-radius);
+    box-shadow: 0 0.75rem 2rem rgba(4, 19, 63, 0.055);
+  }
+  .executive-intelligence__layout {
+    position: relative;
+    inset: auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.875rem;
+  }
+  .executive-profile {
+    grid-row: 1;
+    max-width: none;
+    border-width: 0.25rem;
+    border-radius: 0.75rem;
+  }
+  .executive-profile__image { aspect-ratio: 4 / 3; }
+  .executive-profile__identity { padding: 2.75rem 1rem 0.875rem; }
+  .executive-profile__identity > strong { font-size: 1.125rem; }
+  .executive-profile__identity > span { font-size: 0.75rem; }
+  .executive-profile dl { margin-top: 0.75rem; }
+  .executive-agent {
+    padding: 0.875rem;
+    border-radius: 0.75rem;
+    box-shadow: none;
+  }
+  .executive-agent--right { display: none; }
+  .executive-agent__header { margin-bottom: 0.75rem; }
+  .executive-agent__icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.625rem;
+  }
+  .executive-agent__header strong { font-size: 0.875rem; }
+  .executive-agent__header small { font-size: 0.6875rem; }
+  .executive-agent__steps {
+    padding: 0.625rem 0.75rem;
+    border-radius: 0.625rem;
+  }
+  .executive-agent__step { min-height: 2.25rem; font-size: 0.75rem; }
+  .executive-agent__result { margin-top: 0.625rem; }
+  .executive-intelligence__output {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    width: 100%;
+    margin-top: 0.875rem;
+    padding: 0.75rem 0.875rem;
+    gap: 0.75rem;
+    border-radius: 0.75rem;
+    transform: none;
+  }
+  .executive-intelligence.is-transitioning .executive-intelligence__output {
+    transform: none;
+  }
+  .executive-intelligence__check {
+    width: 2rem;
+    height: 2rem;
+    font-size: 1rem;
+  }
+  .executive-intelligence__output strong { font-size: 0.8125rem; }
+  .executive-intelligence__output small { font-size: 0.6875rem; line-height: 1.35; }
+  .executive-intelligence__switch {
+    right: 0.75rem;
+    bottom: 0.75rem;
+  }
+  .executive-intelligence__switch button {
+    min-height: 2rem;
+    padding-inline: 0.75rem;
+  }
+
+  .approach-section__tiles { gap: 0.875rem; }
+  .approach-tile {
+    min-height: 0;
+    padding: 1.5rem;
+    border-radius: var(--mobile-card-radius);
+  }
+  .philosophy-section__composition { gap: 1rem; }
+  .philosophy-quote-card {
+    padding: 2rem 1.5rem;
+    border-radius: var(--mobile-card-radius);
+  }
+  .philosophy-quote-card p { font-size: 1.05rem; line-height: 1.55; }
+  .philosophy-metrics { gap: 0.75rem; }
+  .philosophy-metric-card { padding-inline: 1.25rem; }
+
+  .case-cta__inner {
+    padding-inline: var(--mobile-gutter);
+    gap: 1.5rem;
+  }
+  .case-cta h2 { max-width: 15ch; }
+  .case-cta__support {
+    max-width: 29ch;
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+  .case-cta__link {
+    width: 100%;
+    max-width: 18rem;
+    justify-content: center;
+  }
+
+  /* Shared route hardening: prevent desktop grids and dashboards leaking out. */
+  main :is(section, article, div, header, footer) { min-width: 0; }
+  main :is(h1, h2, h3, p, li, a, button, label, dt, dd) { overflow-wrap: break-word; }
+  main [aria-label*="dashboard" i] {
+    max-width: 100%;
+    overflow: hidden;
+  }
+  main [aria-label*="dashboard" i] [class*="metrics"] {
+    grid-template-columns: 1fr 1fr;
+  }
+  main [aria-label*="dashboard" i] :is(
+    [class*="chartPanel"],
+    [class*="cashPanel"],
+    [class*="matrixPanel"],
+    [class*="funnelPanel"],
+    [class*="strategyPanel"]
+  ) {
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+  main :is(a, button, summary, input, select, textarea) {
+    -webkit-tap-highlight-color: rgba(7, 28, 87, 0.1);
+  }
+}
+
+@media (max-width: 26.875rem) {
+  :root {
+    --mobile-gutter: 1rem;
+    --mobile-display: clamp(2.35rem, 11.5vw, 3rem);
+    --mobile-heading: clamp(2rem, 9.5vw, 2.5rem);
+  }
+
+  :root { --announcement-height-v2: 3.25rem; }
+  .announcement__message { font-size: 0.71875rem; }
+  .site-brand__word { font-size: 1.35rem; }
+  .executive-profile dl { grid-template-columns: 1fr 1fr; }
+  .executive-profile dl > div:last-child { display: none; }
+  main [aria-label*="dashboard" i] [class*="metrics"] { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 47.5rem) and (prefers-reduced-motion: reduce) {
+  .executive-agent--right { display: none; }
+}
