@@ -31,3 +31,8 @@ test("mobile animation controls meet premium touch and type contracts", () => {
   assert.match(mobileCss, /\.executive-intelligence__playback \{[\s\S]*min-height: 2\.75rem/);
   assert.match(mobileCss, /\.executive-agent__step \{ min-height: 2\.75rem; font-size: \.8125rem/);
 });
+
+test("mobile output cannot inherit the desktop centering transform", () => {
+  assert.match(mobileCss, /\.executive-intelligence__output \{[\s\S]*animation: none !important;[\s\S]*transform: none !important;/);
+  assert.match(mobileCss, /\.executive-intelligence\.is-transitioning \.executive-intelligence__output \{[\s\S]*transform: none !important;/);
+});
