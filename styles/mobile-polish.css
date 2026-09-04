@@ -70,7 +70,19 @@
     letter-spacing: -0.045em;
   }
   .site-header__actions { padding-left: 0.75rem; }
-  .header-cta { display: none; }
+  .header-cta {
+    min-width: 0;
+    min-height: 2.75rem;
+    display: inline-flex;
+    order: 1;
+    padding-inline: clamp(1rem, 5vw, 1.4rem);
+    border-radius: .75rem;
+    font-size: .83rem;
+    white-space: nowrap;
+  }
+
+  .site-header__actions > :first-child { order: 2; }
+  .site-header__actions { gap: .6rem; padding-left: .5rem; }
 
   .announcement {
     min-height: var(--announcement-height-v2);

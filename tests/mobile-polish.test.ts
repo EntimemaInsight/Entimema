@@ -7,6 +7,8 @@ const mobile = readFileSync("styles/mobile-polish.css", "utf8");
 const consent = readFileSync("components/AnalyticsConsent.module.css", "utf8");
 const footer = readFileSync("components/GlobalFooter.module.css", "utf8");
 const resources = readFileSync("app/resources/resources.module.css", "utf8");
+const mobileMenu = readFileSync("components/WhatWeDoMegaMenu.tsx", "utf8");
+const mobileMenuStyles = readFileSync("components/WhatWeDoMegaMenu.module.css", "utf8");
 
 test("mobile foundation loads after the historical global stylesheet", () => {
   assert.ok(layout.indexOf('import "./globals.css"') < layout.indexOf('import "../styles/mobile-polish.css"'));
@@ -40,4 +42,14 @@ test("Insights and Engineering retain distinct premium mobile reading systems", 
   assert.match(resources, /\.engineeringEditorial \.engineeringHeroCover/);
   assert.match(resources, /\.engineeringUtilities \{ background:/);
   assert.match(resources, /grid-template-columns: repeat\(4, minmax\(0, 1fr\)\)/);
+});
+
+test("mobile navigation follows the full-screen action-drawer contract", () => {
+  assert.match(mobileMenu, /function MenuChevron/);
+  assert.doesNotMatch(mobileMenu, /mobileSolutionsOpen \? "−" : "\+"/);
+  assert.match(mobileMenu, /href="\/contact"/);
+  assert.match(mobileMenu, /href="\/workspace\/financial-intelligence"/);
+  assert.match(mobileMenu, />Data Analysis</);
+  assert.match(mobileMenuStyles, /\.mobileActionDock/);
+  assert.match(mobileMenuStyles, /position: fixed/);
 });

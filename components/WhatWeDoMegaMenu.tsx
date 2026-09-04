@@ -87,6 +87,10 @@ type WhatWeDoMegaMenuProps = {
   mobile?: boolean;
 };
 
+function MenuChevron({ direction = "right" }: { direction?: "down" | "right" }) {
+  return <span className={`${styles.mobileChevron} ${direction === "down" ? styles.mobileChevronDown : ""}`} aria-hidden="true" />;
+}
+
 export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMegaMenuProps) {
   const pathname = usePathname();
   const [mobileCompanyOpen, setMobileCompanyOpen] = useState(false);
@@ -231,7 +235,6 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
         <div className={`site-container ${styles.inner}`}>
           {mobile ? (
             <>
-              <div className={styles.mobileMenuHeader}><span>MENU</span></div>
               <div className={styles.mobileSiteNav}>
                 <button
                   aria-controls={`${menuId}-mobile-solutions`}
@@ -241,7 +244,7 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
                   type="button"
                 >
                   <span>Solutions</span>
-                  <span aria-hidden="true">{mobileSolutionsOpen ? "−" : "+"}</span>
+                  <MenuChevron direction="down" />
                 </button>
                 <div className={styles.mobileSolutions} hidden={!mobileSolutionsOpen} id={`${menuId}-mobile-solutions`}>
                   {serviceGroups.map((group) => (
@@ -250,7 +253,7 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
                       <div>
                         {group.items.map((item) => (
                           <Link className={styles.mobileServiceLink} href={item.href} key={item.href} onClick={close}>
-                            <span>{item.title}</span><b aria-hidden="true">→</b>
+                            <span>{item.title}</span><MenuChevron />
                           </Link>
                         ))}
                       </div>
@@ -258,33 +261,40 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
                   ))}
                 </div>
                 <Link className={styles.mobileTopLevel} href="/agents" onClick={close}>
-                  <span>Agent Library</span><span aria-hidden="true">→</span>
+                  <span>Agent Library</span><MenuChevron />
                 </Link>
                 <button aria-controls={`${menuId}-mobile-resources`} aria-expanded={mobileResourcesOpen} className={styles.mobileTopLevel} onClick={() => setMobileResourcesOpen((current) => !current)} type="button">
-                  <span>Resources</span><span aria-hidden="true">{mobileResourcesOpen ? "−" : "+"}</span>
+                  <span>Resources</span><MenuChevron direction="down" />
                 </button>
                 <div className={styles.mobileResources} hidden={!mobileResourcesOpen} id={`${menuId}-mobile-resources`}>
                   <Link className={styles.mobileResourceDestination} href="/resources" onClick={close}>
-                    <span><strong>View all research</strong><small>Browse the complete research library.</small></span><b aria-hidden="true">→</b>
+                    <span><strong>View all research</strong><small>Browse the complete research library.</small></span><MenuChevron />
                   </Link>
                   {Object.entries(resourceStreams).map(([key, stream]) => (
                     <Link className={styles.mobileResourceDestination} href={stream.href} key={key} onClick={close}>
-                      <span><strong>{stream.label}</strong><small>{stream.description}</small></span><b aria-hidden="true">→</b>
+                      <span><strong>{stream.label}</strong><small>{stream.description}</small></span><MenuChevron />
                     </Link>
                   ))}
                 </div>
                 <button aria-controls={`${menuId}-mobile-company`} aria-expanded={mobileCompanyOpen} className={`${styles.mobileTopLevel} ${isCompanyRoute(pathname) ? styles.active : ""}`} onClick={() => setMobileCompanyOpen(current => !current)} type="button">
-                  <span>Company</span><span aria-hidden="true">{mobileCompanyOpen ? "−" : "+"}</span>
+                  <span>Company</span><MenuChevron direction="down" />
                 </button>
                 <div className={styles.mobileResources} hidden={!mobileCompanyOpen} id={`${menuId}-mobile-company`}>
                   {companyDestinations.map(item => <Link className={styles.mobileResourceDestination} href={item.href} key={item.href} onClick={close} aria-current={pathname.replace(/\/$/, "") === item.href ? "page" : undefined}>
-                    <span><strong>{item.title}</strong><small>{item.description}</small></span><b aria-hidden="true">→</b>
+                    <span><strong>{item.title}</strong><small>{item.description}</small></span><MenuChevron />
                   </Link>)}
                 </div>
                 <Link className={`${styles.mobileTopLevel} ${styles.mobileContact}`} href="/contact" onClick={close}>
-                  <span>Contact us</span><span aria-hidden="true">→</span>
+                  <span>Contact us</span><MenuChevron />
                 </Link>
               </div>
+              <footer className={styles.mobileActionDock}>
+                <Link className={styles.mobileDataAction} href="/workspace/financial-intelligence" onClick={close}>
+                  <span className={styles.mobileDataMark} aria-hidden="true">D</span>
+                  <span>Data Analysis</span>
+                </Link>
+                <Link className={styles.mobileDockContact} href="/contact" onClick={close}>Contact us</Link>
+              </footer>
             </>
           ) : (
             <>
