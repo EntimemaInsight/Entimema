@@ -380,7 +380,7 @@ export function FinancialIntelligenceWorkspace({
                           </span>
                         ))}
                       </div>
-                      {group(run).map((row) => (
+                      {group(run, "p_and_l").map((row) => (
                         <div className="fiTr" key={row.label}>
                           <span>
                             <strong>{row.label}</strong>
@@ -579,7 +579,7 @@ function Empty() {
     </div>
   );
 }
-function group(run: FinancialRun) {
+function group(run: FinancialRun, section: FinancialRun["values"][number]["section"]) {
   const rows = new Map<
     string,
     {
@@ -589,7 +589,7 @@ function group(run: FinancialRun) {
       values: FinancialRun["values"];
     }
   >();
-  for (const v of run.values) {
+  for (const v of run.values.filter((value) => value.section === section)) {
     const key = `${v.sourceLabel}:${v.concept}`;
     if (!rows.has(key))
       rows.set(key, {
