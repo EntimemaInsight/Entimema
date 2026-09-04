@@ -115,32 +115,35 @@ export default function ApproachSection() {
           <div className="approach-carousel__viewport">
             <div
               className="approach-section__tiles"
-              style={{ "--approach-active-card": activeCard } as React.CSSProperties}
+              data-active-card={activeCard}
             >
               <SystemCard kind="finance" title={["Financial", "Architecture"]} href="/services/cfo-function" />
               <SystemCard kind="risk" title={["Decision", "Science"]} href="/services/credit-risk" />
             </div>
           </div>
-          <button
-            className="approach-carousel__control approach-carousel__control--previous"
-            type="button"
-            aria-label="Show previous discipline"
-            onClick={() => selectCard(-1)}
-          >
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="m14.5 5-7 7 7 7" />
-            </svg>
-          </button>
-          <button
-            className="approach-carousel__control approach-carousel__control--next"
-            type="button"
-            aria-label="Show next discipline"
-            onClick={() => selectCard(1)}
-          >
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="m9.5 5 7 7-7 7" />
-            </svg>
-          </button>
+          {activeCard === 1 ? (
+            <button
+              className="approach-carousel__control approach-carousel__control--previous"
+              type="button"
+              aria-label="Show Financial Architecture"
+              onClick={() => selectCard(-1)}
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="m14.5 5-7 7 7 7" />
+              </svg>
+            </button>
+          ) : (
+            <button
+              className="approach-carousel__control approach-carousel__control--next"
+              type="button"
+              aria-label="Show Decision Science"
+              onClick={() => selectCard(1)}
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="m9.5 5 7 7-7 7" />
+              </svg>
+            </button>
+          )}
           <span className="sr-only" aria-live="polite">
             {activeCard === 0 ? "Financial Architecture" : "Decision Science"}, slide {activeCard + 1} of 2
           </span>
