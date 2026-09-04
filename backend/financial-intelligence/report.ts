@@ -75,6 +75,7 @@ export function createFinancialReportPayload(
   const openMaterialReviewTasks = run.reviewTasks.filter((task) => task.material && task.state === "open").length;
   const failedMaterialControls = run.controls.filter((control) => control.material && control.status === "failed").length;
   const validationTimestamp = run.validatedAt ?? (run.status === "validated" ? run.createdAt : undefined);
+  if (analysis.runId !== run.runId || analysis.revision !== (run.revision ?? 1) || analysis.selectedStatement !== run.source.selectedSection || analysis.canonicalSchemaVersion !== run.schemaVersion) throw new Error("REPORT_STALE_ANALYSIS");
   if (run.status === "archived") throw new Error("REPORT_ARCHIVED");
   if (run.status !== "validated" || run.readiness.status !== "validated") throw new Error("REPORT_REQUIRES_VALIDATION");
   if (openMaterialReviewTasks) throw new Error("REPORT_OPEN_MATERIAL_REVIEW");

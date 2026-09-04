@@ -47,6 +47,9 @@ export type FinancialAnalysis = {
   analysisVersion: typeof FINANCIAL_ANALYSIS_VERSION;
   runId: string;
   revision: number;
+  selectedStatement: string;
+  canonicalSchemaVersion: string;
+  validatedSnapshotHash: string;
   status: "analysis_ready";
   generatedAt: string;
   currency: string;
@@ -85,6 +88,7 @@ const rounded = (value: number, places = 6) => Number(value.toFixed(places));
 export function analyzeValidatedIncomeStatement(
   run: FinancialRun,
   now = new Date().toISOString(),
+  validatedSnapshotHash = "legacy-local-snapshot",
 ): FinancialAnalysis {
   if (
     run.status !== "validated" ||
@@ -218,6 +222,9 @@ export function analyzeValidatedIncomeStatement(
     analysisVersion: FINANCIAL_ANALYSIS_VERSION,
     runId: run.runId,
     revision: run.revision ?? 1,
+    selectedStatement: run.source.selectedSection!,
+    canonicalSchemaVersion: run.schemaVersion,
+    validatedSnapshotHash,
     status: "analysis_ready" as const,
     generatedAt: now,
     currency: run.currency,
