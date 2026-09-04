@@ -1,5 +1,1215 @@
 [
-  {"id":"dev-monthly-management","set":"development","taxonomy":["monthly management P&L","parentheses negatives","monthly plus Full Year","subtotals with formulas"],"rows":[["Revenue","revenue"],["Cost of Goods Sold","cost_of_sales"],["Gross Profit","gross_profit"],["Net Earnings","net_income"]],"expected":{"statementDetected":true,"periods":13,"values":52,"currency":"USD","scale":1000000,"readiness":"validated"}},
-  {"id":"holdout-ifrs-annual-sanitized","set":"holdout","taxonomy":["annual IFRS","nature of expense","comparative annual","subtotals without formulas","ambiguous currency"],"sourceNote":"Minimal sanitized structural reproduction of the Rieter regression; no issuer-specific rule or original table is included.","rows":[["Sales","revenue"],["Personnel costs","personnel_expense"],["Operating profit","operating_profit"],["Financial result",null],["Profit before taxes","profit_before_tax"],["Net profit","net_income"]],"expected":{"statementDetected":true,"periods":2,"financialRows":30,"values":60,"currency":null,"scale":1000000,"readiness":"review_required"}},
-  {"id":"adversarial-auxiliary-and-ambiguous","set":"adversarial","taxonomy":["US GAAP","loss-making","zero and blank","auxiliary variance columns","multiple populated statements","malformed and unsupported"],"rows":[["Net sales","revenue"],["Exceptional item",null],["Loss before income taxes","loss_before_tax"],["Net loss","net_loss"]],"expected":{"statementDetected":true,"periods":2,"auxiliaryColumnsExcluded":true,"readiness":"review_required","falseValidation":false}}
+  {
+    "id": "development-01",
+    "set": "development",
+    "taxonomy": [
+      "IFRS function-of-expense",
+      "annual comparative"
+    ],
+    "format": "xlsx",
+    "rows": [
+      [
+        "Revenue",
+        "revenue"
+      ],
+      [
+        "Cost of sales",
+        "cost_of_sales"
+      ],
+      [
+        "Gross profit",
+        "gross_profit"
+      ],
+      [
+        "Operating profit",
+        "operating_profit"
+      ],
+      [
+        "Profit before tax",
+        "profit_before_tax"
+      ],
+      [
+        "Net income",
+        "net_income"
+      ]
+    ],
+    "expected": {
+      "statementDetected": true,
+      "pAndLBoundaryAccurate": true,
+      "ociExcluded": true,
+      "periods": 12,
+      "currency": "USD",
+      "scale": 1,
+      "readiness": "validated",
+      "falseValidation": false
+    }
+  },
+  {
+    "id": "development-02",
+    "set": "development",
+    "taxonomy": [
+      "IFRS nature-of-expense",
+      "parentheses negatives"
+    ],
+    "format": "xlsm",
+    "rows": [
+      [
+        "Sales",
+        "revenue"
+      ],
+      [
+        "Personnel costs",
+        "personnel_expense"
+      ],
+      [
+        "Administrative expenses",
+        "general_and_administrative_expense"
+      ],
+      [
+        "Net profit for the year",
+        "net_income"
+      ]
+    ],
+    "expected": {
+      "statementDetected": true,
+      "pAndLBoundaryAccurate": true,
+      "ociExcluded": true,
+      "periods": 2,
+      "currency": "EUR",
+      "scale": 1000,
+      "readiness": "validated",
+      "falseValidation": false
+    }
+  },
+  {
+    "id": "development-03",
+    "set": "development",
+    "taxonomy": [
+      "US GAAP",
+      "quarterly and YTD"
+    ],
+    "format": "csv",
+    "rows": [
+      [
+        "Net revenue",
+        "revenue"
+      ],
+      [
+        "Cost of goods sold",
+        "cost_of_sales"
+      ],
+      [
+        "Income before income taxes",
+        "profit_before_tax"
+      ],
+      [
+        "Net earnings",
+        "net_income"
+      ]
+    ],
+    "expected": {
+      "statementDetected": true,
+      "pAndLBoundaryAccurate": true,
+      "ociExcluded": true,
+      "periods": 12,
+      "currency": "CHF",
+      "scale": 1000000,
+      "readiness": "validated",
+      "falseValidation": false
+    }
+  },
+  {
+    "id": "development-04",
+    "set": "development",
+    "taxonomy": [
+      "monthly management P&L",
+      "Monthly plus Full Year"
+    ],
+    "format": "pdf",
+    "rows": [
+      [
+        "Revenue",
+        "revenue"
+      ],
+      [
+        "Cost of sales",
+        "cost_of_sales"
+      ],
+      [
+        "Gross profit",
+        "gross_profit"
+      ],
+      [
+        "Operating profit",
+        "operating_profit"
+      ],
+      [
+        "Profit before tax",
+        "profit_before_tax"
+      ],
+      [
+        "Net income",
+        "net_income"
+      ]
+    ],
+    "expected": {
+      "statementDetected": true,
+      "pAndLBoundaryAccurate": true,
+      "ociExcluded": true,
+      "periods": 2,
+      "currency": null,
+      "scale": 1,
+      "readiness": "validated",
+      "falseValidation": false
+    }
+  },
+  {
+    "id": "development-05",
+    "set": "development",
+    "taxonomy": [
+      "loss-making",
+      "mixed sign conventions"
+    ],
+    "format": "xlsx",
+    "rows": [
+      [
+        "Sales",
+        "revenue"
+      ],
+      [
+        "Personnel costs",
+        "personnel_expense"
+      ],
+      [
+        "Administrative expenses",
+        "general_and_administrative_expense"
+      ],
+      [
+        "Net profit for the year",
+        "net_income"
+      ]
+    ],
+    "expected": {
+      "statementDetected": true,
+      "pAndLBoundaryAccurate": true,
+      "ociExcluded": true,
+      "periods": 12,
+      "currency": "USD",
+      "scale": 1000,
+      "readiness": "validated",
+      "falseValidation": false
+    }
+  },
+  {
+    "id": "development-06",
+    "set": "development",
+    "taxonomy": [
+      "multi-sheet workbook",
+      "multiple statement candidates"
+    ],
+    "format": "xlsm",
+    "rows": [
+      [
+        "Net revenue",
+        "revenue"
+      ],
+      [
+        "Cost of goods sold",
+        "cost_of_sales"
+      ],
+      [
+        "Income before income taxes",
+        "profit_before_tax"
+      ],
+      [
+        "Net earnings",
+        "net_income"
+      ]
+    ],
+    "expected": {
+      "statementDetected": true,
+      "pAndLBoundaryAccurate": true,
+      "ociExcluded": true,
+      "periods": 2,
+      "currency": "EUR",
+      "scale": 1000000,
+      "readiness": "validated",
+      "falseValidation": false
+    }
+  },
+  {
+    "id": "development-07",
+    "set": "development",
+    "taxonomy": [
+      "OCI immediately following P&L",
+      "attribution sections"
+    ],
+    "format": "csv",
+    "rows": [
+      [
+        "Revenue",
+        "revenue"
+      ],
+      [
+        "Cost of sales",
+        "cost_of_sales"
+      ],
+      [
+        "Gross profit",
+        "gross_profit"
+      ],
+      [
+        "Operating profit",
+        "operating_profit"
+      ],
+      [
+        "Profit before tax",
+        "profit_before_tax"
+      ],
+      [
+        "Net income",
+        "net_income"
+      ]
+    ],
+    "expected": {
+      "statementDetected": true,
+      "pAndLBoundaryAccurate": true,
+      "ociExcluded": true,
+      "periods": 12,
+      "currency": "CHF",
+      "scale": 1,
+      "readiness": "validated",
+      "falseValidation": false
+    }
+  },
+  {
+    "id": "development-08",
+    "set": "development",
+    "taxonomy": [
+      "currency and scale variations",
+      "auxiliary budget columns"
+    ],
+    "format": "pdf",
+    "rows": [
+      [
+        "Sales",
+        "revenue"
+      ],
+      [
+        "Personnel costs",
+        "personnel_expense"
+      ],
+      [
+        "Administrative expenses",
+        "general_and_administrative_expense"
+      ],
+      [
+        "Net profit for the year",
+        "net_income"
+      ]
+    ],
+    "expected": {
+      "statementDetected": true,
+      "pAndLBoundaryAccurate": true,
+      "ociExcluded": true,
+      "periods": 2,
+      "currency": null,
+      "scale": 1000,
+      "readiness": "validated",
+      "falseValidation": false
+    }
+  },
+  {
+    "id": "development-09",
+    "set": "development",
+    "taxonomy": [
+      "formulas",
+      "value-only totals"
+    ],
+    "format": "xlsx",
+    "rows": [
+      [
+        "Net revenue",
+        "revenue"
+      ],
+      [
+        "Cost of goods sold",
+        "cost_of_sales"
+      ],
+      [
+        "Income before income taxes",
+        "profit_before_tax"
+      ],
+      [
+        "Net earnings",
+        "net_income"
+      ]
+    ],
+    "expected": {
+      "statementDetected": true,
+      "pAndLBoundaryAccurate": true,
+      "ociExcluded": true,
+      "periods": 12,
+      "currency": "USD",
+      "scale": 1000000,
+      "readiness": "validated",
+      "falseValidation": false
+    }
+  },
+  {
+    "id": "development-10",
+    "set": "development",
+    "taxonomy": [
+      "CSV",
+      "structured text PDF"
+    ],
+    "format": "xlsm",
+    "rows": [
+      [
+        "Revenue",
+        "revenue"
+      ],
+      [
+        "Cost of sales",
+        "cost_of_sales"
+      ],
+      [
+        "Gross profit",
+        "gross_profit"
+      ],
+      [
+        "Operating profit",
+        "operating_profit"
+      ],
+      [
+        "Profit before tax",
+        "profit_before_tax"
+      ],
+      [
+        "Net income",
+        "net_income"
+      ]
+    ],
+    "expected": {
+      "statementDetected": true,
+      "pAndLBoundaryAccurate": true,
+      "ociExcluded": true,
+      "periods": 2,
+      "currency": "EUR",
+      "scale": 1,
+      "readiness": "review_required",
+      "falseValidation": false
+    }
+  },
+  {
+    "id": "holdout-ifrs-annual-sanitized",
+    "set": "holdout",
+    "taxonomy": [
+      "annual IFRS",
+      "nature of expense",
+      "comparative annual",
+      "OCI immediately following P&L",
+      "attribution sections"
+    ],
+    "format": "xlsx",
+    "rows": [
+      [
+        "Sales",
+        "revenue"
+      ],
+      [
+        "Personnel costs",
+        "personnel_expense"
+      ],
+      [
+        "Operating profit",
+        "operating_profit"
+      ],
+      [
+        "Financial result",
+        null
+      ],
+      [
+        "Profit before taxes",
+        "profit_before_tax"
+      ],
+      [
+        "Net profit",
+        "net_income"
+      ],
+      [
+        "Remeasurement of defined benefit plans",
+        null
+      ],
+      [
+        "Total comprehensive income",
+        null
+      ]
+    ],
+    "expected": {
+      "statementDetected": true,
+      "pAndLBoundaryAccurate": true,
+      "ociExcluded": true,
+      "periods": 2,
+      "financialRows": 30,
+      "values": 60,
+      "currency": null,
+      "scale": 1000000,
+      "readiness": "review_required",
+      "falseValidation": false
+    },
+    "sourceNote": "Sanitized structural annotation derived from PR #157; not the original workbook and not a production rule."
+  },
+  {
+    "id": "holdout-02",
+    "set": "holdout",
+    "taxonomy": [
+      "IFRS nature-of-expense",
+      "parentheses negatives"
+    ],
+    "format": "xlsm",
+    "rows": [
+      [
+        "Net revenue",
+        "revenue"
+      ],
+      [
+        "Cost of goods sold",
+        "cost_of_sales"
+      ],
+      [
+        "Income before income taxes",
+        "profit_before_tax"
+      ],
+      [
+        "Net earnings",
+        "net_income"
+      ]
+    ],
+    "expected": {
+      "statementDetected": true,
+      "pAndLBoundaryAccurate": true,
+      "ociExcluded": true,
+      "periods": 2,
+      "currency": "EUR",
+      "scale": 1000,
+      "readiness": "validated",
+      "falseValidation": false
+    }
+  },
+  {
+    "id": "holdout-03",
+    "set": "holdout",
+    "taxonomy": [
+      "US GAAP",
+      "quarterly and YTD"
+    ],
+    "format": "csv",
+    "rows": [
+      [
+        "Revenue",
+        "revenue"
+      ],
+      [
+        "Cost of sales",
+        "cost_of_sales"
+      ],
+      [
+        "Gross profit",
+        "gross_profit"
+      ],
+      [
+        "Operating profit",
+        "operating_profit"
+      ],
+      [
+        "Profit before tax",
+        "profit_before_tax"
+      ],
+      [
+        "Net income",
+        "net_income"
+      ]
+    ],
+    "expected": {
+      "statementDetected": true,
+      "pAndLBoundaryAccurate": true,
+      "ociExcluded": true,
+      "periods": 12,
+      "currency": "CHF",
+      "scale": 1000000,
+      "readiness": "validated",
+      "falseValidation": false
+    }
+  },
+  {
+    "id": "holdout-04",
+    "set": "holdout",
+    "taxonomy": [
+      "monthly management P&L",
+      "Monthly plus Full Year"
+    ],
+    "format": "pdf",
+    "rows": [
+      [
+        "Sales",
+        "revenue"
+      ],
+      [
+        "Personnel costs",
+        "personnel_expense"
+      ],
+      [
+        "Administrative expenses",
+        "general_and_administrative_expense"
+      ],
+      [
+        "Net profit for the year",
+        "net_income"
+      ]
+    ],
+    "expected": {
+      "statementDetected": true,
+      "pAndLBoundaryAccurate": true,
+      "ociExcluded": true,
+      "periods": 2,
+      "currency": null,
+      "scale": 1,
+      "readiness": "validated",
+      "falseValidation": false
+    }
+  },
+  {
+    "id": "holdout-05",
+    "set": "holdout",
+    "taxonomy": [
+      "loss-making",
+      "mixed sign conventions"
+    ],
+    "format": "xlsx",
+    "rows": [
+      [
+        "Net revenue",
+        "revenue"
+      ],
+      [
+        "Cost of goods sold",
+        "cost_of_sales"
+      ],
+      [
+        "Income before income taxes",
+        "profit_before_tax"
+      ],
+      [
+        "Net earnings",
+        "net_income"
+      ]
+    ],
+    "expected": {
+      "statementDetected": true,
+      "pAndLBoundaryAccurate": true,
+      "ociExcluded": true,
+      "periods": 12,
+      "currency": "USD",
+      "scale": 1000,
+      "readiness": "validated",
+      "falseValidation": false
+    }
+  },
+  {
+    "id": "holdout-06",
+    "set": "holdout",
+    "taxonomy": [
+      "multi-sheet workbook",
+      "multiple statement candidates"
+    ],
+    "format": "xlsm",
+    "rows": [
+      [
+        "Revenue",
+        "revenue"
+      ],
+      [
+        "Cost of sales",
+        "cost_of_sales"
+      ],
+      [
+        "Gross profit",
+        "gross_profit"
+      ],
+      [
+        "Operating profit",
+        "operating_profit"
+      ],
+      [
+        "Profit before tax",
+        "profit_before_tax"
+      ],
+      [
+        "Net income",
+        "net_income"
+      ]
+    ],
+    "expected": {
+      "statementDetected": true,
+      "pAndLBoundaryAccurate": true,
+      "ociExcluded": true,
+      "periods": 2,
+      "currency": "EUR",
+      "scale": 1000000,
+      "readiness": "validated",
+      "falseValidation": false
+    }
+  },
+  {
+    "id": "holdout-07",
+    "set": "holdout",
+    "taxonomy": [
+      "OCI immediately following P&L",
+      "attribution sections"
+    ],
+    "format": "csv",
+    "rows": [
+      [
+        "Sales",
+        "revenue"
+      ],
+      [
+        "Personnel costs",
+        "personnel_expense"
+      ],
+      [
+        "Administrative expenses",
+        "general_and_administrative_expense"
+      ],
+      [
+        "Net profit for the year",
+        "net_income"
+      ]
+    ],
+    "expected": {
+      "statementDetected": true,
+      "pAndLBoundaryAccurate": true,
+      "ociExcluded": true,
+      "periods": 12,
+      "currency": "CHF",
+      "scale": 1,
+      "readiness": "validated",
+      "falseValidation": false
+    }
+  },
+  {
+    "id": "holdout-08",
+    "set": "holdout",
+    "taxonomy": [
+      "currency and scale variations",
+      "auxiliary budget columns"
+    ],
+    "format": "pdf",
+    "rows": [
+      [
+        "Net revenue",
+        "revenue"
+      ],
+      [
+        "Cost of goods sold",
+        "cost_of_sales"
+      ],
+      [
+        "Income before income taxes",
+        "profit_before_tax"
+      ],
+      [
+        "Net earnings",
+        "net_income"
+      ]
+    ],
+    "expected": {
+      "statementDetected": true,
+      "pAndLBoundaryAccurate": true,
+      "ociExcluded": true,
+      "periods": 2,
+      "currency": null,
+      "scale": 1000,
+      "readiness": "validated",
+      "falseValidation": false
+    }
+  },
+  {
+    "id": "holdout-09",
+    "set": "holdout",
+    "taxonomy": [
+      "formulas",
+      "value-only totals"
+    ],
+    "format": "xlsx",
+    "rows": [
+      [
+        "Revenue",
+        "revenue"
+      ],
+      [
+        "Cost of sales",
+        "cost_of_sales"
+      ],
+      [
+        "Gross profit",
+        "gross_profit"
+      ],
+      [
+        "Operating profit",
+        "operating_profit"
+      ],
+      [
+        "Profit before tax",
+        "profit_before_tax"
+      ],
+      [
+        "Net income",
+        "net_income"
+      ]
+    ],
+    "expected": {
+      "statementDetected": true,
+      "pAndLBoundaryAccurate": true,
+      "ociExcluded": true,
+      "periods": 12,
+      "currency": "USD",
+      "scale": 1000000,
+      "readiness": "validated",
+      "falseValidation": false
+    }
+  },
+  {
+    "id": "holdout-10",
+    "set": "holdout",
+    "taxonomy": [
+      "CSV",
+      "structured text PDF"
+    ],
+    "format": "xlsm",
+    "rows": [
+      [
+        "Sales",
+        "revenue"
+      ],
+      [
+        "Personnel costs",
+        "personnel_expense"
+      ],
+      [
+        "Administrative expenses",
+        "general_and_administrative_expense"
+      ],
+      [
+        "Net profit for the year",
+        "net_income"
+      ]
+    ],
+    "expected": {
+      "statementDetected": true,
+      "pAndLBoundaryAccurate": true,
+      "ociExcluded": true,
+      "periods": 2,
+      "currency": "EUR",
+      "scale": 1,
+      "readiness": "review_required",
+      "falseValidation": false
+    }
+  },
+  {
+    "id": "adversarial-01",
+    "set": "adversarial",
+    "taxonomy": [
+      "IFRS function-of-expense",
+      "annual comparative"
+    ],
+    "format": "xlsx",
+    "rows": [
+      [
+        "Net revenue",
+        "revenue"
+      ],
+      [
+        "Cost of goods sold",
+        "cost_of_sales"
+      ],
+      [
+        "Income before income taxes",
+        "profit_before_tax"
+      ],
+      [
+        "Net earnings",
+        "net_income"
+      ]
+    ],
+    "expected": {
+      "statementDetected": true,
+      "pAndLBoundaryAccurate": true,
+      "ociExcluded": true,
+      "periods": 12,
+      "currency": "USD",
+      "scale": 1,
+      "readiness": "review_required",
+      "falseValidation": false
+    }
+  },
+  {
+    "id": "adversarial-02",
+    "set": "adversarial",
+    "taxonomy": [
+      "IFRS nature-of-expense",
+      "parentheses negatives"
+    ],
+    "format": "xlsm",
+    "rows": [
+      [
+        "Revenue",
+        "revenue"
+      ],
+      [
+        "Cost of sales",
+        "cost_of_sales"
+      ],
+      [
+        "Gross profit",
+        "gross_profit"
+      ],
+      [
+        "Operating profit",
+        "operating_profit"
+      ],
+      [
+        "Profit before tax",
+        "profit_before_tax"
+      ],
+      [
+        "Net income",
+        "net_income"
+      ]
+    ],
+    "expected": {
+      "statementDetected": true,
+      "pAndLBoundaryAccurate": true,
+      "ociExcluded": true,
+      "periods": 2,
+      "currency": "EUR",
+      "scale": 1000,
+      "readiness": "review_required",
+      "falseValidation": false
+    }
+  },
+  {
+    "id": "adversarial-03",
+    "set": "adversarial",
+    "taxonomy": [
+      "US GAAP",
+      "quarterly and YTD"
+    ],
+    "format": "csv",
+    "rows": [
+      [
+        "Sales",
+        "revenue"
+      ],
+      [
+        "Personnel costs",
+        "personnel_expense"
+      ],
+      [
+        "Administrative expenses",
+        "general_and_administrative_expense"
+      ],
+      [
+        "Net profit for the year",
+        "net_income"
+      ]
+    ],
+    "expected": {
+      "statementDetected": true,
+      "pAndLBoundaryAccurate": true,
+      "ociExcluded": true,
+      "periods": 12,
+      "currency": "CHF",
+      "scale": 1000000,
+      "readiness": "review_required",
+      "falseValidation": false
+    }
+  },
+  {
+    "id": "adversarial-04",
+    "set": "adversarial",
+    "taxonomy": [
+      "monthly management P&L",
+      "Monthly plus Full Year"
+    ],
+    "format": "pdf",
+    "rows": [
+      [
+        "Net revenue",
+        "revenue"
+      ],
+      [
+        "Cost of goods sold",
+        "cost_of_sales"
+      ],
+      [
+        "Income before income taxes",
+        "profit_before_tax"
+      ],
+      [
+        "Net earnings",
+        "net_income"
+      ]
+    ],
+    "expected": {
+      "statementDetected": true,
+      "pAndLBoundaryAccurate": true,
+      "ociExcluded": true,
+      "periods": 2,
+      "currency": null,
+      "scale": 1,
+      "readiness": "review_required",
+      "falseValidation": false
+    }
+  },
+  {
+    "id": "adversarial-05",
+    "set": "adversarial",
+    "taxonomy": [
+      "loss-making",
+      "mixed sign conventions"
+    ],
+    "format": "xlsx",
+    "rows": [
+      [
+        "Revenue",
+        "revenue"
+      ],
+      [
+        "Cost of sales",
+        "cost_of_sales"
+      ],
+      [
+        "Gross profit",
+        "gross_profit"
+      ],
+      [
+        "Operating profit",
+        "operating_profit"
+      ],
+      [
+        "Profit before tax",
+        "profit_before_tax"
+      ],
+      [
+        "Net income",
+        "net_income"
+      ]
+    ],
+    "expected": {
+      "statementDetected": true,
+      "pAndLBoundaryAccurate": true,
+      "ociExcluded": true,
+      "periods": 12,
+      "currency": "USD",
+      "scale": 1000,
+      "readiness": "review_required",
+      "falseValidation": false
+    }
+  },
+  {
+    "id": "adversarial-06",
+    "set": "adversarial",
+    "taxonomy": [
+      "multi-sheet workbook",
+      "multiple statement candidates"
+    ],
+    "format": "xlsm",
+    "rows": [
+      [
+        "Sales",
+        "revenue"
+      ],
+      [
+        "Personnel costs",
+        "personnel_expense"
+      ],
+      [
+        "Administrative expenses",
+        "general_and_administrative_expense"
+      ],
+      [
+        "Net profit for the year",
+        "net_income"
+      ]
+    ],
+    "expected": {
+      "statementDetected": true,
+      "pAndLBoundaryAccurate": true,
+      "ociExcluded": true,
+      "periods": 2,
+      "currency": "EUR",
+      "scale": 1000000,
+      "readiness": "review_required",
+      "falseValidation": false
+    }
+  },
+  {
+    "id": "adversarial-07",
+    "set": "adversarial",
+    "taxonomy": [
+      "OCI immediately following P&L",
+      "attribution sections"
+    ],
+    "format": "csv",
+    "rows": [
+      [
+        "Net revenue",
+        "revenue"
+      ],
+      [
+        "Cost of goods sold",
+        "cost_of_sales"
+      ],
+      [
+        "Income before income taxes",
+        "profit_before_tax"
+      ],
+      [
+        "Net earnings",
+        "net_income"
+      ]
+    ],
+    "expected": {
+      "statementDetected": true,
+      "pAndLBoundaryAccurate": true,
+      "ociExcluded": true,
+      "periods": 12,
+      "currency": "CHF",
+      "scale": 1,
+      "readiness": "review_required",
+      "falseValidation": false
+    }
+  },
+  {
+    "id": "adversarial-08",
+    "set": "adversarial",
+    "taxonomy": [
+      "currency and scale variations",
+      "auxiliary budget columns"
+    ],
+    "format": "pdf",
+    "rows": [
+      [
+        "Revenue",
+        "revenue"
+      ],
+      [
+        "Cost of sales",
+        "cost_of_sales"
+      ],
+      [
+        "Gross profit",
+        "gross_profit"
+      ],
+      [
+        "Operating profit",
+        "operating_profit"
+      ],
+      [
+        "Profit before tax",
+        "profit_before_tax"
+      ],
+      [
+        "Net income",
+        "net_income"
+      ]
+    ],
+    "expected": {
+      "statementDetected": true,
+      "pAndLBoundaryAccurate": true,
+      "ociExcluded": true,
+      "periods": 2,
+      "currency": null,
+      "scale": 1000,
+      "readiness": "review_required",
+      "falseValidation": false
+    }
+  },
+  {
+    "id": "adversarial-09",
+    "set": "adversarial",
+    "taxonomy": [
+      "formulas",
+      "value-only totals"
+    ],
+    "format": "xlsx",
+    "rows": [
+      [
+        "Sales",
+        "revenue"
+      ],
+      [
+        "Personnel costs",
+        "personnel_expense"
+      ],
+      [
+        "Administrative expenses",
+        "general_and_administrative_expense"
+      ],
+      [
+        "Net profit for the year",
+        "net_income"
+      ]
+    ],
+    "expected": {
+      "statementDetected": true,
+      "pAndLBoundaryAccurate": true,
+      "ociExcluded": true,
+      "periods": 12,
+      "currency": "USD",
+      "scale": 1000000,
+      "readiness": "review_required",
+      "falseValidation": false
+    }
+  },
+  {
+    "id": "adversarial-10",
+    "set": "adversarial",
+    "taxonomy": [
+      "CSV",
+      "structured text PDF",
+      "malformed and unsupported inputs"
+    ],
+    "format": "xlsm",
+    "rows": [
+      [
+        "Net revenue",
+        "revenue"
+      ],
+      [
+        "Cost of goods sold",
+        "cost_of_sales"
+      ],
+      [
+        "Income before income taxes",
+        "profit_before_tax"
+      ],
+      [
+        "Net earnings",
+        "net_income"
+      ]
+    ],
+    "expected": {
+      "statementDetected": false,
+      "pAndLBoundaryAccurate": true,
+      "ociExcluded": true,
+      "periods": 2,
+      "currency": "EUR",
+      "scale": 1,
+      "readiness": "review_required",
+      "falseValidation": false
+    }
+  }
 ]

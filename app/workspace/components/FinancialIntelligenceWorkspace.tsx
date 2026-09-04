@@ -1,12 +1,8 @@
 "use client";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import type {
-  CanonicalConcept,
-  FinancialRun,
-} from "@/backend/financial-intelligence/schema";
+import { useState } from "react";
+import type { FinancialRun } from "@/backend/financial-intelligence/schema";
 import type { FinancialAnalysis } from "@/backend/financial-intelligence/analysis";
-import { CANONICAL_CONCEPTS } from "@/backend/financial-intelligence/schema";
 import { DOCUMENT_CLASSIFIER_MAX_FILE_BYTES } from "@/lib/document-classifier-upload";
 
 const errorText: Record<string, string> = {
@@ -32,7 +28,6 @@ export function FinancialIntelligenceWorkspace({
     [error, setError] = useState(""),
     [stage, setStage] = useState("result"),
     [evidenceId, setEvidenceId] = useState<string | null>(null),
-    [taskFilter, setTaskFilter] = useState("all"),
     [mobilePeriod, setMobilePeriod] = useState(0),
     [view, setView] = useState<"workflow" | "runs">("workflow"),
     [runs, setRuns] = useState<
@@ -51,10 +46,8 @@ export function FinancialIntelligenceWorkspace({
     >([]),
     [saveState, setSaveState] = useState("Saved");
   const clearDerivedState = () => { setAnalysis(null); setAnalysisError(""); setReportError(""); setReportBusy(false); };
-  useEffect(() => { clearDerivedState(); }, [user.email]);
   const analysisQuery = (current: FinancialRun) => new URLSearchParams({revision:String(current.revision ?? 1),statement:current.source.selectedSection ?? "",snapshot:current.integrity,schema:current.schemaVersion}).toString();
   const evidence = run?.evidence.find((e) => e.id === evidenceId);
-  const openTasks = run?.reviewTasks.filter((t) => t.state === "open") ?? [];
   async function loadRuns() {
     setSaveState("Saving");
     try {
@@ -113,47 +106,6 @@ export function FinancialIntelligenceWorkspace({
       setError(
         errorText[e instanceof Error ? e.message : ""] ??
           "The execution could not be completed safely.",
-      );
-    } finally {
-      setBusy(false);
-    }
-  }
-  async function resolve(
-    taskId: string,
-    action: "accept" | "reject" | "remap",
-    concept?: CanonicalConcept,
-  ) {
-    if (!run || busy) return;
-    setBusy(true);
-    clearDerivedState();
-    setSaveState("Saving");
-    setError("");
-    try {
-      const response = await fetch(
-        `/api/financial-intelligence/runs/${run.runId}/review`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            expectedRevision: run.revision,
-            decision: { taskId, action, concept },
-          }),
-        },
-      );
-      const data = await response.json();
-      if (!response.ok) throw new Error(data.error_code ?? "FAILED");
-      setRun(data);
-      setSaveState("Saved");
-      void loadRuns();
-    } catch (e) {
-      setSaveState(
-        e instanceof Error && e.message === "STALE_REVISION"
-          ? "Stale version — reload required"
-          : "Save failed",
-      );
-      setError(
-        errorText[e instanceof Error ? e.message : ""] ??
-          "The review decision could not be recalculated safely.",
       );
     } finally {
       setBusy(false);
@@ -391,33 +343,6 @@ export function FinancialIntelligenceWorkspace({
                         Mapped rows <b>{run.metrics.canonicalMappedRows}</b>
                       </span>
                     </div>
-                    {run.statementCandidates.filter((c) => c.executable)
-                      .length > 1 && (
-                      <label className="fiCandidate">
-                        Statement
-                        <select
-                          value={run.source.selectedSection ?? ""}
-                          disabled={busy}
-                          onChange={(e) => execute(e.target.value)}
-                        >
-                          {run.statementCandidates
-                            .filter((c) => c.executable)
-                            .map((c) => (
-                              <option key={c.id} value={c.sheetName}>
-                                {c.sheetName} · {c.periodCount} periods
-                              </option>
-                            ))}
-                        </select>
-                        <small>
-                          {
-                            run.statementCandidates.filter((c) => c.executable)
-                              .length
-                          }{" "}
-                          populated Income Statements detected; each is
-                          extracted separately.
-                        </small>
-                      </label>
-                    )}
                     <label className="fiMobilePeriod">
                       Period
                       <select
@@ -460,7 +385,7 @@ export function FinancialIntelligenceWorkspace({
                           <span>
                             <strong>{row.label}</strong>
                             <small>
-                              {row.concept.replaceAll("_", " ")} · {row.method}
+                              Interpreted financial line
                             </small>
                           </span>
                           {run.periods.map((p, pi) => {
@@ -502,7 +427,7 @@ export function FinancialIntelligenceWorkspace({
                     {evidence
                       ? "Value evidence"
                       : stage === "review"
-                        ? "Human review"
+                        ? "Verification status"
                         : "Execution readiness"}
                   </strong>
                 </header>
@@ -519,72 +444,17 @@ export function FinancialIntelligenceWorkspace({
                   </dl>
                 ) : run ? (
                   <>
-                    <div className="fiConfidence">
-                      {Object.entries(run.confidence).map(([k, v]) => (
-                        <label key={k}>
-                          <span>
-                            {k.replaceAll(/([A-Z])/g, " $1")}{" "}
-                            <b>{Math.round(v * 100)}%</b>
-                          </span>
-                          <progress value={v} max="1" />
-                        </label>
-                      ))}
-                    </div>
-                    <h3>
-                      {openTasks.length} grouped review task
-                      {openTasks.length === 1 ? "" : "s"}
-                    </h3>
-                    <select
-                      aria-label="Filter review tasks"
-                      value={taskFilter}
-                      onChange={(e) => setTaskFilter(e.target.value)}
-                    >
-                      <option value="all">All issues</option>
-                      {[...new Set(openTasks.map((t) => t.issueType))].map(
-                        (x) => (
-                          <option key={x} value={x}>
-                            {x.replaceAll("_", " ")}
-                          </option>
-                        ),
-                      )}
-                    </select>
-                    {openTasks
-                      .filter(
-                        (t) =>
-                          taskFilter === "all" || t.issueType === taskFilter,
-                      )
-                      .map((t) => (
-                        <Review key={t.id} task={t} onResolve={resolve} />
-                      ))}
+                    {run.status === "review_required" ? (
+                      <div className="fiTask"><strong>Specialist verification required</strong><p>Your document was received successfully, but Entimema needs to verify part of its financial structure before releasing the analysis.</p></div>
+                    ) : (
+                      <div className="fiTask"><strong>Analysis ready</strong><p>The statement was interpreted and its financial relationships were verified.</p></div>
+                    )}
                   </>
                 ) : (
                   <Empty />
                 )}
               </aside>
             </div>
-            {run && (
-              <section className="fiControls">
-                <header>
-                  <small>DETERMINISTIC CONTROLS</small>
-                  <b>
-                    {run.validationSummary.passed}/
-                    {run.validationSummary.applicable} applicable passed ·{" "}
-                    {Math.round(run.validationSummary.coverage * 100)}% coverage
-                  </b>
-                </header>
-                {run.controls.map((c) => (
-                  <article key={c.id} className={c.status}>
-                    <span>{c.status}</span>
-                    <strong>{c.formula}</strong>
-                    <code>
-                      {c.difference === null
-                        ? "Not applicable"
-                        : `difference ${c.difference.toLocaleString()} · tolerance ${c.tolerance}`}
-                    </code>
-                  </article>
-                ))}
-              </section>
-            )}
             {run && (
               <section className="fiAnalysis">
                 <header>
@@ -714,7 +584,7 @@ function group(run: FinancialRun) {
     string,
     {
       label: string;
-      concept: CanonicalConcept;
+      concept: FinancialRun["values"][number]["concept"];
       method: string;
       values: FinancialRun["values"];
     }
@@ -731,45 +601,4 @@ function group(run: FinancialRun) {
     rows.get(key)!.values.push(v);
   }
   return [...rows.values()];
-}
-function Review({
-  task,
-  onResolve,
-}: {
-  task: FinancialRun["reviewTasks"][number];
-  onResolve: (
-    id: string,
-    a: "accept" | "reject" | "remap",
-    c?: CanonicalConcept,
-  ) => void;
-}) {
-  const [concept, setConcept] = useState<CanonicalConcept>(
-    task.proposedConcept ?? "other_reported_line",
-  );
-  return (
-    <article className="fiTask">
-      <span>{task.issueType.replaceAll("_", " ")}</span>
-      <strong>{task.sourceLabel}</strong>
-      <p>{task.recommendedAction}</p>
-      {task.valueId && (
-        <>
-          <select
-            value={concept}
-            onChange={(e) => setConcept(e.target.value as CanonicalConcept)}
-          >
-            {CANONICAL_CONCEPTS.map((c) => (
-              <option key={c}>{c}</option>
-            ))}
-          </select>
-          <div>
-            <button onClick={() => onResolve(task.id, "accept")}>Accept</button>
-            <button onClick={() => onResolve(task.id, "reject")}>Reject</button>
-            <button onClick={() => onResolve(task.id, "remap", concept)}>
-              Remap
-            </button>
-          </div>
-        </>
-      )}
-    </article>
-  );
 }
