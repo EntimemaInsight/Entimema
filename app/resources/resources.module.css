@@ -926,6 +926,242 @@
     -webkit-overflow-scrolling: touch;
   }
 
+  /* Engineering mobile edition — FT Technology reading discipline. */
+  .engineeringEditorial {
+    --engineering-mobile-rule: #aeb6c8;
+    --engineering-mobile-paper: #f8f9fc;
+  }
+
+  .engineeringEditorial .articleLayout {
+    max-width: 41rem;
+  }
+
+  .engineeringEditorial .prose {
+    color: #11172d;
+    font-size: 1.0625rem;
+    line-height: 1.68;
+    letter-spacing: -0.006em;
+    text-rendering: optimizeLegibility;
+    font-kerning: normal;
+  }
+
+  .engineeringEditorial .prose p {
+    margin-bottom: 1.4em;
+    text-wrap: pretty;
+  }
+
+  .engineeringEditorial .prose :where(ul,ol) {
+    margin-bottom: 1.55em;
+    padding-left: 1.15em;
+  }
+
+  .engineeringEditorial .prose li {
+    margin-bottom: 0.62em;
+    padding-left: 0.2em;
+  }
+
+  .engineeringEditorial .prose section,
+  .engineeringEditorial .prose section + section {
+    margin-top: 0 !important;
+    padding-top: clamp(3.75rem, 16vw, 5rem);
+    border-top: 1px solid var(--engineering-mobile-rule);
+  }
+
+  .engineeringEditorial .prose h2 {
+    max-width: 19ch;
+    margin: 0 0 0.72em !important;
+    font-size: clamp(2rem, 9vw, 2.65rem) !important;
+    font-weight: 400 !important;
+    line-height: 1.04 !important;
+    letter-spacing: -0.031em !important;
+    text-wrap: balance;
+  }
+
+  .engineeringEditorial .prose h3 {
+    margin: 2.15em 0 0.62em !important;
+    font-size: clamp(1.2rem, 5.25vw, 1.42rem) !important;
+    font-weight: 680;
+    line-height: 1.23 !important;
+    letter-spacing: -0.021em !important;
+    text-wrap: pretty;
+  }
+
+  .engineeringEditorial .prose blockquote {
+    margin: 2.25rem 0;
+    padding: 1.1rem 0 1.1rem 1rem;
+    border-left: 2px solid var(--engineering-accent);
+    font-family: var(--entimema-font-editorial);
+    font-size: 1.35rem;
+    font-weight: 400;
+    line-height: 1.45;
+    letter-spacing: -0.018em;
+  }
+
+  .engineeringEditorial .figure,
+  .engineeringEditorial .framework,
+  .engineeringEditorial .formula,
+  .engineeringEditorial .tableScroll,
+  .engineeringEditorial .prose :where(pre,[class*="__code"]) {
+    margin-block: clamp(2.75rem, 12vw, 4rem);
+  }
+
+  .engineeringEditorial .figureStage {
+    min-height: 0;
+    display: block;
+    padding: 1.1rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-inline: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: #858da0 transparent;
+  }
+
+  .engineeringEditorial .figureStage > * {
+    width: 100%;
+    max-width: none;
+  }
+
+  .engineeringEditorial .figure > figcaption {
+    padding: 0.75rem 0 0.9rem;
+    font-size: 0.75rem;
+    line-height: 1.52;
+  }
+
+  .engineeringEditorial .framework {
+    padding: 1.35rem 1rem 1.2rem;
+  }
+
+  .engineeringEditorial .framework figcaption strong {
+    font-size: 1.65rem;
+    line-height: 1.12;
+  }
+
+  .engineeringEditorial .framework figcaption small {
+    font-size: 0.78rem;
+    line-height: 1.55;
+  }
+
+  .engineeringEditorial .framework ol {
+    grid-template-columns: 1fr;
+    margin-top: 1.25rem;
+  }
+
+  .engineeringEditorial .framework li {
+    padding: 0.82rem 0.7rem;
+    border-right: 0;
+    font-size: 0.78rem;
+    line-height: 1.4;
+    text-align: left;
+  }
+
+  .engineeringEditorial .formula {
+    min-width: 0;
+    padding: 1.25rem 2.8rem 1.35rem 1rem;
+  }
+
+  .engineeringEditorial .formula::after {
+    top: 1.45rem;
+    right: 0.9rem;
+  }
+
+  .engineeringEditorial .formula > .equationExpression {
+    max-width: 100%;
+    padding-top: 1.1rem;
+    font-size: clamp(1.12rem, 5.2vw, 1.4rem);
+    line-height: 1.6;
+    white-space: nowrap;
+    overscroll-behavior-inline: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .engineeringEditorial .formula figcaption {
+    padding-right: 0.4rem;
+    font-size: 0.7rem;
+  }
+
+  .engineeringEditorial .tableScroll {
+    width: calc(100% + (2 * var(--article-mobile-gutter)));
+    max-width: none;
+    margin-inline: calc(-1 * var(--article-mobile-gutter));
+    padding-inline: var(--article-mobile-gutter);
+    background: linear-gradient(90deg, var(--engineering-mobile-paper) 0, transparent 1.25rem, transparent calc(100% - 1.25rem), var(--engineering-mobile-paper) 100%);
+    scroll-padding-inline: var(--article-mobile-gutter);
+  }
+
+  .engineeringEditorial .table {
+    min-width: 36rem;
+    font-size: 0.8125rem;
+    line-height: 1.48;
+  }
+
+  .engineeringEditorial .table caption {
+    padding: 0.9rem 0.75rem 0.75rem;
+    font-size: 1.08rem;
+    line-height: 1.25;
+  }
+
+  .engineeringEditorial .table th {
+    padding: 0.7rem 0.75rem;
+    font-size: 0.67rem;
+    line-height: 1.35;
+  }
+
+  .engineeringEditorial .table td {
+    padding: 0.78rem 0.75rem;
+    font-size: 0.8125rem;
+    line-height: 1.48;
+  }
+
+  .engineeringEditorial .prose :where(pre,[class*="__code"]) {
+    width: calc(100% + (2 * var(--article-mobile-gutter)));
+    max-width: none;
+    margin-inline: calc(-1 * var(--article-mobile-gutter));
+    padding: 2.55rem var(--article-mobile-gutter) 1.35rem;
+    font-size: 0.75rem !important;
+    line-height: 1.65 !important;
+    white-space: pre;
+    word-break: normal;
+    overflow-wrap: normal;
+    overscroll-behavior-inline: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .engineeringEditorial .prose :where(pre,[class*="__code"])::before {
+    top: 0.85rem;
+    left: var(--article-mobile-gutter);
+    font-size: 0.5rem;
+  }
+
+  .engineeringEditorial .prose :where(
+    [class*="Grid"],[class*="grid"],[class*="Matrix"],[class*="matrix"],
+    [class*="Flow"],[class*="flow"],[class*="Architecture"],[class*="architecture"],
+    [class*="Diagram"],[class*="diagram"],[class*="Comparison"],[class*="comparison"],
+    [class*="Timeline"],[class*="timeline"],[class*="Chain"],[class*="chain"],
+    [class*="Stack"],[class*="stack"],[class*="metrics"],[class*="dependency"]
+  ) :where(span,small,b,dt) {
+    font-size: 0.7rem !important;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+  }
+
+  .engineeringEditorial .prose :where(
+    [class*="Grid"],[class*="grid"],[class*="Matrix"],[class*="matrix"],
+    [class*="Flow"],[class*="flow"],[class*="Architecture"],[class*="architecture"],
+    [class*="Diagram"],[class*="diagram"],[class*="Comparison"],[class*="comparison"],
+    [class*="Timeline"],[class*="timeline"],[class*="Panel"],[class*="panel"],
+    [class*="metrics"],[class*="dependency"]
+  ) :where(strong,dd) {
+    font-size: 0.8rem !important;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+  }
+
+  .engineeringEditorial .prose :where(svg) {
+    height: auto;
+    font-family: var(--font-sans);
+  }
+
   .articleContinuation { margin-top: 0; }
 }
 
