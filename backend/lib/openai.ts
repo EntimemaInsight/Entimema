@@ -4,6 +4,7 @@ import { AgentError } from "./errors";
 type ResponseBody = OpenAI.Responses.ResponseCreateParamsNonStreaming;
 type ResponseResult = OpenAI.Responses.Response;
 export type OpenAITransport = (body: ResponseBody, signal: AbortSignal) => Promise<ResponseResult>;
+export type OpenAIRequestConfig = { apiKey:string; timeoutMs:number; attempts:number };
 
 const positiveInt = (value: string | undefined, fallback: number, maximum: number) => {
   const parsed = Number(value);
@@ -37,6 +38,11 @@ const transient = (error: AgentError) => ["OPENAI_TIMEOUT", "OPENAI_RATE_LIMIT",
 
 export async function createResponse(body: ResponseBody, injectedTransport?: OpenAITransport) {
   const config = getDocumentClassifierConfig();
+  return createConfiguredResponse(body,config,injectedTransport);
+}
+
+/** Shared server-only Responses transport. Product features supply their own bounded configuration. */
+export async function createConfiguredResponse(body: ResponseBody, config:OpenAIRequestConfig, injectedTransport?: OpenAITransport) {
   const transport = injectedTransport ?? ((payload, signal) => {
     const client = new OpenAI({ apiKey: config.apiKey, maxRetries: 0 });
     return client.responses.create(payload, { signal }) as Promise<ResponseResult>;
