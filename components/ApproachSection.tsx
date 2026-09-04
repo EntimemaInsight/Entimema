@@ -1,12 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SectionHeader } from "./ui";
 
 type SystemCardProps = {
   kind: "finance" | "risk";
-  title: string;
+  title: [string, string];
   href: string;
 };
 
@@ -42,13 +42,22 @@ function SystemCard({ kind, title, href }: SystemCardProps) {
       <span className="approach-tile__icon">
         {kind === "finance" ? <FinanceIcon /> : <RiskIcon />}
       </span>
-      <span className="approach-tile__title">{title}</span>
+      <span className="approach-tile__title">
+        <span>{title[0]}</span>
+        <span>{title[1]}</span>
+      </span>
     </Link>
   );
 }
 
 export default function ApproachSection() {
   const ref = useRef<HTMLElement>(null);
+  const touchStartX = useRef<number | null>(null);
+  const [activeCard, setActiveCard] = useState(0);
+
+  const selectCard = (direction: -1 | 1) => {
+    setActiveCard((current) => (current + direction + 2) % 2);
+  };
 
   useEffect(() => {
     const el = ref.current;
@@ -88,9 +97,53 @@ export default function ApproachSection() {
             </>
           }
         />
-        <div className="approach-section__tiles reveal reveal--3">
-          <SystemCard kind="finance" title="Financial Architecture" href="/services/cfo-function" />
-          <SystemCard kind="risk" title="Decision Science" href="/services/credit-risk" />
+        <div
+          className="approach-carousel reveal reveal--3"
+          aria-label="Our disciplines"
+          aria-roledescription="carousel"
+          onTouchStart={(event) => {
+            touchStartX.current = event.touches[0]?.clientX ?? null;
+          }}
+          onTouchEnd={(event) => {
+            if (touchStartX.current === null) return;
+            const distance = event.changedTouches[0]?.clientX - touchStartX.current;
+            touchStartX.current = null;
+            if (Math.abs(distance) < 42) return;
+            selectCard(distance < 0 ? 1 : -1);
+          }}
+        >
+          <div className="approach-carousel__viewport">
+            <div
+              className="approach-section__tiles"
+              style={{ "--approach-active-card": activeCard } as React.CSSProperties}
+            >
+              <SystemCard kind="finance" title={["Financial", "Architecture"]} href="/services/cfo-function" />
+              <SystemCard kind="risk" title={["Decision", "Science"]} href="/services/credit-risk" />
+            </div>
+          </div>
+          <button
+            className="approach-carousel__control approach-carousel__control--previous"
+            type="button"
+            aria-label="Show previous discipline"
+            onClick={() => selectCard(-1)}
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m14.5 5-7 7 7 7" />
+            </svg>
+          </button>
+          <button
+            className="approach-carousel__control approach-carousel__control--next"
+            type="button"
+            aria-label="Show next discipline"
+            onClick={() => selectCard(1)}
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m9.5 5 7 7-7 7" />
+            </svg>
+          </button>
+          <span className="sr-only" aria-live="polite">
+            {activeCard === 0 ? "Financial Architecture" : "Decision Science"}, slide {activeCard + 1} of 2
+          </span>
         </div>
       </div>
     </section>
