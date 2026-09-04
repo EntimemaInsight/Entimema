@@ -49,11 +49,11 @@
   .site-page:has(> .home-stage) .approach-tile {
     grid-area: 1 / 1;
     min-width: 0;
-    min-height: 25rem;
-    padding: 2.25rem 2rem 2.5rem;
+    min-height: 20rem;
+    padding: 2.5rem 1.5rem 1.75rem;
     align-items: center;
-    justify-content: center;
-    gap: 2rem;
+    justify-content: space-between;
+    gap: 1.75rem;
     text-align: center;
     opacity: 0;
     visibility: hidden;
@@ -76,19 +76,60 @@
   }
 
   .approach-tile__title {
-    display: grid;
-    justify-items: center;
-    font-size: clamp(1.6rem, 7.2vw, 1.9rem);
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: .32em;
+    width: 100%;
+    font-size: clamp(1.3rem, 5.8vw, 1.55rem);
     font-weight: 650;
-    line-height: 1.04;
-    letter-spacing: -.035em;
-    text-wrap: balance;
+    line-height: 1.12;
+    letter-spacing: -.028em;
+    text-wrap: nowrap;
+    white-space: nowrap;
     overflow-wrap: normal;
     word-break: normal;
     hyphens: none;
   }
 
-  .approach-tile__title > span { display: block; }
+  .approach-tile__title > span { display: inline; }
+
+  .site-page:has(> .home-stage) .approach-tile__icon {
+    position: relative;
+    isolation: isolate;
+    width: clamp(9.5rem, 44vw, 11rem);
+    height: clamp(9.5rem, 44vw, 11rem);
+    margin: 0 auto;
+    flex: 0 0 auto;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, .78);
+    border-radius: clamp(1.75rem, 8vw, 2.25rem);
+    background:
+      radial-gradient(circle at 50% 42%, rgba(255, 255, 255, .98), rgba(247, 246, 255, .82) 72%),
+      rgba(255, 255, 255, .72);
+    box-shadow:
+      0 1.25rem 3.5rem rgba(84, 70, 190, .14),
+      inset 0 1px 0 rgba(255, 255, 255, .96);
+  }
+
+  .site-page:has(> .home-stage) .approach-tile__icon::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 18%;
+    border-radius: 50%;
+    background: rgba(104, 88, 226, .11);
+    filter: blur(1.25rem);
+  }
+
+  .site-page:has(> .home-stage) .approach-tile__icon svg {
+    width: 58%;
+    height: 58%;
+    stroke: #6253db;
+    stroke-width: 1.7;
+    filter: drop-shadow(0 .45rem .8rem rgba(87, 70, 199, .16));
+  }
 
   .approach-carousel__control {
     position: absolute;
