@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
-import type { FinancialRun } from "@/backend/financial-intelligence/schema";
+import { CANONICAL_CONCEPTS, type FinancialRun, type ReviewDecision } from "@/backend/financial-intelligence/schema";
 import type { FinancialAnalysis } from "@/backend/financial-intelligence/analysis";
 import { DOCUMENT_CLASSIFIER_MAX_FILE_BYTES } from "@/lib/document-classifier-upload";
 
@@ -16,8 +16,10 @@ const errorText: Record<string, string> = {
 };
 export function FinancialIntelligenceWorkspace({
   user,
+  operator,
 }: {
   user: { name: string; email: string };
+  operator: boolean;
 }) {
   const [file, setFile] = useState<File | null>(null),
     [run, setRun] = useState<FinancialRun | null>(null),
@@ -30,7 +32,7 @@ export function FinancialIntelligenceWorkspace({
     [stage, setStage] = useState("result"),
     [evidenceId, setEvidenceId] = useState<string | null>(null),
     [mobilePeriod, setMobilePeriod] = useState(0),
-    [view, setView] = useState<"workflow" | "runs">("workflow"),
+    [view, setView] = useState<"workflow" | "runs" | "review">("workflow"),
     [runs, setRuns] = useState<
       Array<{
         runId: string;
@@ -45,14 +47,17 @@ export function FinancialIntelligenceWorkspace({
         revision: number;
       }>
     >([]),
-    [saveState, setSaveState] = useState("Saved");
+    [saveState, setSaveState] = useState("Saved"),
+    [reviewDrafts, setReviewDrafts] = useState<Record<string,{action:ReviewDecision["action"];concept:string;confirmed:boolean}>>({}),
+    [reviewBusy, setReviewBusy] = useState<string | null>(null),
+    [reviewMessage, setReviewMessage] = useState("");
   const clearDerivedState = () => { setAnalysis(null); setAnalysisError(""); setReportError(""); setReportBusy(false); };
   const analysisQuery = (current: FinancialRun) => new URLSearchParams({revision:String(current.revision ?? 1),statement:current.source.selectedSection ?? "",snapshot:current.integrity,schema:current.schemaVersion}).toString();
   const evidence = run?.evidence.find((e) => e.id === evidenceId);
-  async function loadRuns() {
+  async function loadRuns(reviewQueue = false) {
     setSaveState("Saving");
     try {
-      const response = await fetch("/api/financial-intelligence/runs", {
+      const response = await fetch(reviewQueue ? "/api/financial-intelligence/runs/review" : "/api/financial-intelligence/runs", {
         cache: "no-store",
       });
       if (!response.ok) throw new Error();
@@ -66,7 +71,7 @@ export function FinancialIntelligenceWorkspace({
     setBusy(true);
     clearDerivedState();
     try {
-      const response = await fetch(`/api/financial-intelligence/runs/${id}`, {
+      const response = await fetch(`/api/financial-intelligence/runs/${id}${operator ? "/review" : ""}`, {
         cache: "no-store",
       });
       if (!response.ok) throw new Error();
@@ -78,6 +83,23 @@ export function FinancialIntelligenceWorkspace({
     } finally {
       setBusy(false);
     }
+  }
+  async function submitReview(taskId: string) {
+    if (!run || reviewBusy) return;
+    const draft=reviewDrafts[taskId];
+    if (!draft?.confirmed) return;
+    const decision:ReviewDecision={taskId,action:draft.action,...(draft.action==="remap"?{concept:draft.concept as ReviewDecision["concept"]}:{}),...(draft.action==="confirm_currency"?{currency:draft.concept}:{}),...(draft.action==="confirm_scale"?{unitScale:Number(draft.concept)}:{}),...(draft.action==="confirm_period"?{periodLabel:draft.concept}:{})};
+    setReviewBusy(taskId); setReviewMessage(""); setError("");
+    try {
+      const response=await fetch(`/api/financial-intelligence/runs/${run.runId}/review`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({expectedRevision:run.revision,decision})});
+      const data=await response.json();
+      if(!response.ok) throw new Error(data.error_code??"FAILED");
+      setRun(data); clearDerivedState();
+      setReviewMessage(data.status==="validated"?"Review applied. Deterministic controls passed and the validated revision is ready.":"Review applied. The revised statement was recalculated; further verification remains.");
+      setReviewDrafts(current=>{const next={...current};delete next[taskId];return next});
+      void loadRuns();
+    } catch(e) { setError(e instanceof Error&&e.message==="STALE_REVISION"?"This run changed. Reopen it before reviewing.":"The review decision could not be applied safely."); }
+    finally { setReviewBusy(null); }
   }
   async function execute(selectedSheet?: string) {
     if (!file || busy) return;
@@ -195,15 +217,16 @@ export function FinancialIntelligenceWorkspace({
         >
           Runs
         </button>
+        {operator && <button aria-current={view === "review" ? "page" : undefined} onClick={() => {setView("review");void loadRuns(true)}}>Review queue</button>}
         <span>{saveState}</span>
       </nav>
       <section className="fiMain">
-        {view === "runs" ? (
+        {view === "runs" || view === "review" ? (
           <section className="fiStatement">
             <header>
               <div>
-                <small>DURABLE WORKFLOW</small>
-                <h1>Financial runs</h1>
+                <small>{view === "review" ? "OPERATOR CONTROL" : "DURABLE WORKFLOW"}</small>
+                <h1>{view === "review" ? "Specialist review queue" : "Financial runs"}</h1>
               </div>
             </header>
             <div className="fiTable">
@@ -446,7 +469,8 @@ export function FinancialIntelligenceWorkspace({
                 ) : run ? (
                   <>
                     {run.status === "review_required" ? (
-                      <div className="fiTask"><strong>Specialist verification required</strong><p>Your document was received successfully, but Entimema needs to verify part of its financial structure before releasing the analysis.</p></div>
+                      operator && run.reviewTasks.length ? <OperatorReview run={run} drafts={reviewDrafts} setDrafts={setReviewDrafts} busy={reviewBusy} message={reviewMessage} submit={submitReview}/> :
+                      <div className="fiTask"><strong>Specialist verification required</strong><p>Your document was received successfully, but Entimema needs to verify part of its financial structure before releasing the analysis.</p>{operator&&<p>Reopen this run from Runs to load the protected operator review context.</p>}</div>
                     ) : (
                       <div className="fiTask"><strong>Analysis ready</strong><p>The statement was interpreted and its financial relationships were verified.</p></div>
                     )}
@@ -567,6 +591,26 @@ export function FinancialIntelligenceWorkspace({
       </section>
     </main>
   );
+}
+function OperatorReview({run,drafts,setDrafts,busy,message,submit}:{run:FinancialRun;drafts:Record<string,{action:ReviewDecision["action"];concept:string;confirmed:boolean}>;setDrafts:React.Dispatch<React.SetStateAction<Record<string,{action:ReviewDecision["action"];concept:string;confirmed:boolean}>>>;busy:string|null;message:string;submit:(taskId:string)=>Promise<void>}) {
+ const tasks=run.reviewTasks.filter(task=>task.state==="open");
+ return <div className="fiReview">
+  <div className="fiTask"><span>OPERATOR CONTROL</span><strong>{tasks.length} material decision{tasks.length===1?"":"s"} open</strong><p>Each decision creates a revision and reruns deterministic controls. It cannot set validation directly.</p>{message&&<p role="status">{message}</p>}</div>
+  {tasks.map(task=>{
+   const values=run.values.filter(value=>value.sourceRowId===task.sourceRowId);
+   const evidence=run.evidence.find(item=>item.id===task.evidenceId);
+   const isMapping=Boolean(task.sourceRowId);
+   const draft=drafts[task.id]??{action:(task.proposedConcept&&task.proposedConcept!=="other_reported_line"?"accept":"remap") as ReviewDecision["action"],concept:"",confirmed:false};
+   const update=(patch:Partial<typeof draft>)=>setDrafts(current=>({...current,[task.id]:{...draft,...patch,confirmed:patch.action||patch.concept!==undefined?false:draft.confirmed}}));
+   return <article className="fiTask" key={task.id}>
+    <span>{(task.reason??"OTHER").replaceAll("_"," ")}</span><strong>{task.sourceLabel}</strong>
+    {values.length>0&&<p>{values.map(value=>`${run.periods.find(period=>period.id===value.periodId)?.label}: ${value.normalizedValue.toLocaleString()}`).join(" · ")}</p>}
+    <dl><div><dt>Source</dt><dd>{evidence?.cellAddress??evidence?.pageNumber??"Statement row"} · {values[0]?.section??"unresolved"}</dd></div><div><dt>Proposal</dt><dd>{task.proposedConcept?.replaceAll("_"," ")??"None"} · {Math.round(task.confidence*100)}%</dd></div>{task.supportingEvidence?.length?<div><dt>Mapping evidence</dt><dd>{task.supportingEvidence.join("; ")}</dd></div>:null}</dl>
+    {isMapping ? <><label>Decision<select value={draft.action} onChange={event=>update({action:event.target.value as ReviewDecision["action"]})}>{task.proposedConcept&&task.proposedConcept!=="other_reported_line"&&<option value="accept">Accept proposal</option>}<option value="remap">Remap</option><option value="reject">Reject / unresolved</option></select></label>{draft.action==="remap"&&<label>Allowlisted concept<select value={draft.concept} onChange={event=>update({concept:event.target.value})}><option value="">Select concept…</option>{CANONICAL_CONCEPTS.filter(concept=>concept!=="other_reported_line").map(concept=><option key={concept} value={concept}>{concept.replaceAll("_"," ")}</option>)}</select></label>}</> : task.issueType==="unknown_currency"?<label>Currency<input value={draft.concept} onChange={event=>update({action:"confirm_currency",concept:event.target.value})}/></label>:task.issueType==="unknown_scale"?<label>Scale<select value={draft.concept} onChange={event=>update({action:"confirm_scale",concept:event.target.value})}><option value="">Select scale…</option>{[1,1000,1000000].map(scale=><option key={scale} value={scale}>{scale.toLocaleString()}</option>)}</select></label>:task.issueType==="ambiguous_period"?<label>Period label<input value={draft.concept} onChange={event=>update({action:"confirm_period",concept:event.target.value})}/></label>:<p>This control cannot be overridden. Correct prerequisite mappings or source evidence.</p>}
+    {(isMapping||["unknown_currency","unknown_scale","ambiguous_period"].includes(task.issueType))&&<><label className="fiReviewConfirm"><input type="checkbox" checked={draft.confirmed} onChange={event=>setDrafts(current=>({...current,[task.id]:{...draft,confirmed:event.target.checked}}))}/> Confirm this audited decision</label><button disabled={!draft.confirmed||Boolean(busy)||(draft.action==="remap"&&!draft.concept)||(["confirm_currency","confirm_scale","confirm_period"].includes(draft.action)&&!draft.concept)} onClick={()=>void submit(task.id)}>{busy===task.id?"Recalculating…":"Apply and recalculate"}</button></>}
+   </article>
+  })}
+ </div>
 }
 function Empty() {
   return (

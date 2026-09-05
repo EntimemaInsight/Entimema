@@ -60,18 +60,19 @@ export async function interpretWholeStatement(input:{rows:SourceRow[];periods:Pe
 
  // Phase A: produce one provisional mapping per source row. No equation is required yet.
  const provisional=new Map<number,Provisional>();
+ const rowRejections=new Map<number,string>();
  for(const row of input.rows){
   if(sections.get(row.rowNumber)!=="p_and_l")continue;
   const existing=input.values.find(v=>v.sourceRowId===`row-${row.rowNumber}`&&v.concept!=="other_reported_line");
   if(existing)continue;
   const semantic=resolved.get(row.rowNumber);if(!semantic?.concept)continue;
-  if(semantic.section!=="p_and_l"){reject("section_incompatible");continue}
+  if(semantic.section!=="p_and_l"){reject("section_incompatible");rowRejections.set(row.rowNumber,"section_incompatible");continue}
   const roleCompatible=financialRoles.has(semantic.role)&&financialRoles.has(row.role);
-  if(!roleCompatible){reject("structural_incompatible");continue}
+  if(!roleCompatible){reject("structural_incompatible");rowRejections.set(row.rowNumber,"structural_incompatible");continue}
   const structural=semantic.role===row.role ? .9 : .8,context=.8,sign=1;
   const combined=combineMappingConfidence({semantic:semantic.confidence,structural,context,sign,equation:null});
-  if(semantic.confidence<MAPPING_POLICY.medium){reject("semantic_confidence_below_threshold");continue}
-  if(combined<MAPPING_POLICY.high){reject("combined_confidence_below_threshold");continue}
+  if(semantic.confidence<MAPPING_POLICY.medium){reject("semantic_confidence_below_threshold");rowRejections.set(row.rowNumber,"semantic_confidence_below_threshold");continue}
+  if(combined<MAPPING_POLICY.high){reject("combined_confidence_below_threshold");rowRejections.set(row.rowNumber,"combined_confidence_below_threshold");continue}
   provisional.set(row.rowNumber,{rowNumber:row.rowNumber,concept:semantic.concept,semanticConfidence:semantic.confidence,structuralConfidence:structural,signConsistency:sign,contextConfidence:context,supportingEvidence:semantic.supportingEvidence,contradictions:semantic.contradictions,combinedConfidence:combined});
  }
 
@@ -92,7 +93,7 @@ export async function interpretWholeStatement(input:{rows:SourceRow[];periods:Pe
   if(section!=="p_and_l")return{...value,section,concept:"other_reported_line" as const,reviewState:"not_required" as const,excludedFromControls:true,mappingExplanation:`Preserved source evidence; excluded from canonical P&L (${section}).`,resolverVersion:resolution?.resolverVersion,contractVersion:"semantic-resolver.v2",acceptanceReason:"section_excluded"};
   if(value.concept!=="other_reported_line")return{...value,section,semanticConfidence:value.mappingConfidence,structuralConfidence:.9,signConsistency:1,evidenceReferences:[value.evidenceId],contractVersion:"semantic-resolver.v2",acceptanceReason:"deterministic_mapping"};
   if(proposal&&!contradictedRows.has(rowNo)){const equationScores=[...equationByPeriod.values()].map(x=>x[proposal.concept]).filter((x):x is number=>x!==undefined),equation=equationScores.length?Math.min(...equationScores):undefined,confidence=combineMappingConfidence({semantic:proposal.semanticConfidence,structural:proposal.structuralConfidence,context:proposal.contextConfidence,sign:proposal.signConsistency,equation});if(!acceptedRows.has(rowNo)){acceptedRows.add(rowNo);acceptedSemantic++}return{...value,section,concept:proposal.concept,mappingMethod:"model-assisted" as const,mappingConfidence:confidence,semanticConfidence:proposal.semanticConfidence,structuralConfidence:proposal.structuralConfidence,equationConsistency:equation,signConsistency:proposal.signConsistency,contradictions:proposal.contradictions,mappingExplanation:proposal.supportingEvidence.join("; ")||"Whole-statement semantic resolution verified.",evidenceReferences:[value.evidenceId],resolverVersion:resolution?.resolverVersion,contractVersion:"semantic-resolver.v2",reviewState:"not_required" as const,acceptanceReason:equation===1?"verified_by_equation":"accepted_without_equation_contradiction"};}
-  const rejection=contradictedRows.has(rowNo)?"equation_contradiction":semantic?.concept?"not_provisionally_accepted":reason??"unresolved";return{...value,section,semanticConfidence:semantic?.confidence??0,reviewState:"required" as const,mappingExplanation:`Specialist verification required (${rejection}).`,resolverVersion:resolution?.resolverVersion,contractVersion:"semantic-resolver.v2",acceptanceReason:rejection};
+  const rejection=contradictedRows.has(rowNo)?"equation_contradiction":rowRejections.get(rowNo)??(semantic?.concept?"not_provisionally_accepted":reason??"unresolved");return{...value,section,semanticConfidence:semantic?.confidence??0,reviewState:"required" as const,mappingExplanation:`Specialist verification required (${rejection}).`,resolverVersion:resolution?.resolverVersion,contractVersion:"semantic-resolver.v2",acceptanceReason:rejection};
  });
  const config=getFinancialResolverConfig(),pAndLRows=new Set(values.filter(v=>v.section==="p_and_l").map(v=>v.sourceRowId)),mappedRows=new Set(values.filter(v=>v.section==="p_and_l"&&v.concept!=="other_reported_line").map(v=>v.sourceRowId)),deterministicRows=new Set(values.filter(v=>v.section==="p_and_l"&&v.concept!=="other_reported_line"&&v.mappingMethod==="deterministic").map(v=>v.sourceRowId));
  const count=(key:string)=>rejectionReasons[key]??0,rejected=diagnostics.schemaRejected+diagnostics.allowlistRejected+Object.values(rejectionReasons).reduce((a,b)=>a+b,0);
