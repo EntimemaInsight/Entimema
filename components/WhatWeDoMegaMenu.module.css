@@ -247,12 +247,18 @@
   }
 
   .menu {
+    z-index: 49;
     bottom: 0;
     display: flex;
     min-height: 0;
     border-bottom: 0;
     background: #fff;
     box-shadow: none;
+  }
+
+  .backdrop {
+    z-index: 48;
+    touch-action: none;
   }
 
   .inner {
