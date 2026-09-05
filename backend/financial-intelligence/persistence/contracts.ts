@@ -6,5 +6,8 @@ export interface FinancialRunRepository {
  list(ownerId:string):Promise<RunListItem[]>;
  get(ownerId:string,runId:string):Promise<FinancialRun|null>;
  update(ownerId:string,run:FinancialRun,expectedRevision:number,event:PersistEvent,snapshot?:Record<string,unknown>):Promise<FinancialRun>;
+ listForReview?(operatorId:string):Promise<RunListItem[]>;
+ getForReview?(operatorId:string,runId:string):Promise<FinancialRun|null>;
+ updateForReview?(operatorId:string,run:FinancialRun,expectedRevision:number,event:PersistEvent,snapshot?:Record<string,unknown>):Promise<FinancialRun>;
 }
 export class PersistenceConflictError extends Error{}
