@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import "server-only";
 import { AgentError } from "../../lib/errors";
 import type { FinancialRun } from "../schema";
 import type { FinancialRunRepository,PersistEvent,RunListItem } from "./contracts";
@@ -8,7 +7,7 @@ const config=()=>{const url=process.env.FINANCIAL_DATABASE_REST_URL?.replace(/\/
 async function call(path:string,init:RequestInit={}){const{url,key}=config();const response=await fetch(`${url}/rest/v1/${path}`,{...init,headers:{apikey:key,Authorization:`Bearer ${key}`,"Content-Type":"application/json",...(init.headers??{})},cache:"no-store"});if(!response.ok){if(response.status===409)throw new PersistenceConflictError("Stale run revision");throw new Error(`Financial persistence request failed (${response.status})`)}return response.status===204?null:response.json()}
 const hydrate=(row:any):FinancialRun=>({...row.contract,revision:row.revision,createdAt:row.created_at,updatedAt:row.updated_at,validatedAt:row.validated_at??row.contract.validatedAt??null,auditEvents:row.audit_events??[]});
 export class SupabaseFinancialRunRepository implements FinancialRunRepository{
- private listRows(rows:any[]):RunListItem[]{return this.listRows(rows)}
+ private listRows(rows:any[]):RunListItem[]{return rows.map(row=>({runId:row.run_id,filename:row.contract?.source?.filename??"",selectedStatement:row.contract?.source?.selectedSection??null,status:row.status,periods:row.contract?.metrics?.periods??0,financialRows:row.contract?.metrics?.financialSourceRows??0,openTasks:Array.isArray(row.contract?.reviewTasks)?row.contract.reviewTasks.filter((task:any)=>task?.state==="open").length:0,createdAt:row.created_at,updatedAt:row.updated_at,revision:row.revision}))}
  async listForReview(operatorId:string){return this.listRows(await call("rpc/fi_operator_review_runs",{method:"POST",body:JSON.stringify({p_actor_id:operatorId})}))}
  async getForReview(operatorId:string,runId:string){const rows=await call("rpc/fi_operator_get_run",{method:"POST",body:JSON.stringify({p_actor_id:operatorId,p_run_id:runId})});return rows?.length?hydrate(rows[0]):null}
  async updateForReview(operatorId:string,run:FinancialRun,expectedRevision:number,event:PersistEvent,snapshot?:Record<string,unknown>){const rows=await call("rpc/fi_operator_update_run",{method:"POST",body:JSON.stringify({p_actor_id:operatorId,p_run_id:run.runId,p_expected_revision:expectedRevision,p_contract:run,p_status:run.status,p_event:event,p_snapshot:snapshot??null})});if(!rows?.length)throw new PersistenceConflictError("Stale run revision");return hydrate(rows[0])}
