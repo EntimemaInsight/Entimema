@@ -11,6 +11,7 @@ const errorText: Record<string, string> = {
   FILE_TOO_LARGE: "The file exceeds the 4.5 MB production boundary.",
   UNSUPPORTED_FILE_TYPE: "Use XLSX, XLSM, CSV, or a text-based PDF.",
   FILE_CORRUPT: "The document could not be safely read.",
+  PERSISTENCE_UNAVAILABLE: "Financial run storage is temporarily unavailable. Try again later.",
   EXECUTION_RATE_LIMIT: "Too many executions. Try again shortly.",
 };
 export function FinancialIntelligenceWorkspace({
