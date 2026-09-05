@@ -147,8 +147,8 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
 
     updateMenuPosition();
 
-    // On mobile the menu position is captured before opening. Keeping it stable
-    // avoids sticky-header geometry changing when the body scroll lock is applied.
+    // On mobile the menu position is captured as it opens. Keeping it stable
+    // prevents sticky-header geometry from drifting while the menu scrolls.
     if (mobile) return;
 
     window.addEventListener("resize", updateMenuPosition);
