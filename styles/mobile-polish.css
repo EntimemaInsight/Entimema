@@ -458,6 +458,31 @@
   }
 }
 
+/* Tablet hero: keep the complete opening statement on one optical axis. */
+@media (min-width: 47.501rem) and (max-width: 64rem) {
+  .site-page:has(> .home-stage) .hero__layout--editorial {
+    display: flex;
+    justify-content: center;
+  }
+
+  .site-page:has(> .home-stage) .hero__copy--editorial {
+    width: 100%;
+    margin-inline: auto;
+    align-items: center;
+    text-align: center;
+  }
+
+  .site-page:has(> .home-stage) .hero__title--editorial,
+  .site-page:has(> .home-stage) .hero__description--editorial {
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .site-page:has(> .home-stage) .hero__cta {
+    align-self: center;
+  }
+}
+
 @media (max-width: 40rem) {
   .header-cta {
     min-height: 2rem;
