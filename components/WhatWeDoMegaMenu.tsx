@@ -146,6 +146,11 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
     if (!isOpen) return;
 
     updateMenuPosition();
+
+    // On mobile the menu position is captured before opening. Keeping it stable
+    // avoids sticky-header geometry changing when the body scroll lock is applied.
+    if (mobile) return;
+
     window.addEventListener("resize", updateMenuPosition);
     window.addEventListener("scroll", updateMenuPosition, true);
 
@@ -165,7 +170,7 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
       resizeObserver?.disconnect();
       classObserver.disconnect();
     };
-  }, [isOpen, updateMenuPosition]);
+  }, [isOpen, mobile, updateMenuPosition]);
 
   useEffect(() => {
     if (!isOpen) return;
