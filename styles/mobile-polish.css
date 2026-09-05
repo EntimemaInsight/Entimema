@@ -482,3 +482,23 @@
 @media (max-width: 47.5rem) and (prefers-reduced-motion: reduce) {
   .executive-agent--right { display: none; }
 }
+
+/* Mobile visual atmosphere: quiet Taktile-like light instead of dot grids. */
+@media (max-width: 47.5rem) {
+  .executive-intelligence__dots,
+  .approach-section__dotfield {
+    display: none !important;
+  }
+
+  .executive-intelligence__canvas {
+    background:
+      radial-gradient(ellipse 92% 56% at 50% 48%, rgba(91, 105, 214, 0.115) 0%, rgba(132, 157, 225, 0.06) 42%, transparent 76%),
+      linear-gradient(180deg, #ffffff 0%, #f8f9ff 28%, #eef3ff 68%, #ffffff 100%);
+  }
+
+  .approach-section--tiles {
+    background:
+      radial-gradient(ellipse 96% 48% at 50% 68%, rgba(91, 105, 214, 0.105) 0%, rgba(134, 158, 225, 0.052) 44%, transparent 78%),
+      linear-gradient(180deg, #ffffff 0%, #fafbff 32%, #f0f4ff 74%, #ffffff 100%);
+  }
+}
