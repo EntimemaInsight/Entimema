@@ -222,10 +222,16 @@
 }
 
 @media (max-width:640px) {
-  .canvas { min-height:750px; border-radius:20px; }
+  .canvas {
+    min-height:750px;
+    border-radius:20px;
+    background:
+      radial-gradient(ellipse 92% 54% at 50% 48%, rgba(91,105,214,.115) 0%, rgba(132,157,225,.06) 43%, transparent 76%),
+      linear-gradient(180deg,#fff 0%,#f8f9ff 29%,#eef3ff 69%,#fff 100%);
+  }
   .status { top:15px; min-width:0; width:calc(100% - 28px); }
   .connections,.shimmers,.glowSecondary { display:none; }
-  .grid { opacity:.3; }
+  .grid { display:none; }
   .knowledgeCard { width:calc(50% - 21px); min-height:90px; padding:11px 11px 10px; animation:none!important; transition-duration:650ms; }
   .knowledgeCard > strong { font-size:12px; }
   .knowledgeCard > p { margin-bottom:8px; font-size:8.5px; }
