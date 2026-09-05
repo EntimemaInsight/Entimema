@@ -194,16 +194,6 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
     };
   }, [close, isOpen]);
 
-  useEffect(() => {
-    if (!mobile || !isOpen) return;
-
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = previousOverflow;
-    };
-  }, [isOpen, mobile]);
-
   useEffect(
     () => () => {
       clearExitTimer();
