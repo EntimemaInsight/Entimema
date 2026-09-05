@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import "server-only";
+import { AgentError } from "../../lib/errors";
 import type { FinancialRun } from "../schema";
 import type { FinancialRunRepository,PersistEvent,RunListItem } from "./contracts";
 import { PersistenceConflictError } from "./contracts";
-const config=()=>{const url=process.env.FINANCIAL_DATABASE_REST_URL?.replace(/\/$/,"");const key=process.env.FINANCIAL_DATABASE_SERVICE_KEY;if(!url||!key)throw new Error("Financial persistence is not configured");return{url,key}};
+const config=()=>{const url=process.env.FINANCIAL_DATABASE_REST_URL?.replace(/\/$/,"");const key=process.env.FINANCIAL_DATABASE_SERVICE_KEY;if(!url||!key)throw new AgentError("PERSISTENCE_UNAVAILABLE",503);return{url,key}};
 async function call(path:string,init:RequestInit={}){const{url,key}=config();const response=await fetch(`${url}/rest/v1/${path}`,{...init,headers:{apikey:key,Authorization:`Bearer ${key}`,"Content-Type":"application/json",...(init.headers??{})},cache:"no-store"});if(!response.ok){if(response.status===409)throw new PersistenceConflictError("Stale run revision");throw new Error(`Financial persistence request failed (${response.status})`)}return response.status===204?null:response.json()}
 const hydrate=(row:any):FinancialRun=>({...row.contract,revision:row.revision,createdAt:row.created_at,updatedAt:row.updated_at,validatedAt:row.validated_at??row.contract.validatedAt??null,auditEvents:row.audit_events??[]});
 export class SupabaseFinancialRunRepository implements FinancialRunRepository{

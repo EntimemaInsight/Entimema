@@ -1,4 +1,4 @@
-export const ERROR_CODES = ["AUTHENTICATION_REQUIRED", "ACCESS_FORBIDDEN", "EXECUTION_RATE_LIMIT", "FILE_MISSING", "FILE_TOO_LARGE", "WORKBOOK_LIMIT_EXCEEDED", "UNSUPPORTED_FILE_TYPE", "FILE_CORRUPT", "FILE_ENCRYPTED", "UPLOAD_AUTHORIZATION_EXPIRED", "UPLOAD_REFERENCE_INVALID", "UPLOAD_FAILED", "STORAGE_UNAVAILABLE", "PROCESSING_TIMEOUT", "MODEL_SERVICE_UNAVAILABLE", "OPENAI_TIMEOUT", "OPENAI_RATE_LIMIT", "OPENAI_RESPONSE_INVALID", "CLASSIFICATION_FAILED", "INTERNAL_ERROR"] as const;
+export const ERROR_CODES = ["AUTHENTICATION_REQUIRED", "ACCESS_FORBIDDEN", "EXECUTION_RATE_LIMIT", "FILE_MISSING", "FILE_TOO_LARGE", "WORKBOOK_LIMIT_EXCEEDED", "UNSUPPORTED_FILE_TYPE", "FILE_CORRUPT", "FILE_ENCRYPTED", "UPLOAD_AUTHORIZATION_EXPIRED", "UPLOAD_REFERENCE_INVALID", "UPLOAD_FAILED", "STORAGE_UNAVAILABLE", "PERSISTENCE_UNAVAILABLE", "PROCESSING_TIMEOUT", "MODEL_SERVICE_UNAVAILABLE", "OPENAI_TIMEOUT", "OPENAI_RATE_LIMIT", "OPENAI_RESPONSE_INVALID", "CLASSIFICATION_FAILED", "INTERNAL_ERROR"] as const;
 export type ErrorCode = (typeof ERROR_CODES)[number];
 const messages: Record<ErrorCode, string> = {
   AUTHENTICATION_REQUIRED: "Authentication is required.", ACCESS_FORBIDDEN: "This account is not authorized to use the workspace.",
@@ -7,6 +7,7 @@ const messages: Record<ErrorCode, string> = {
   UNSUPPORTED_FILE_TYPE: "This file type is not currently supported.", FILE_CORRUPT: "The uploaded file is corrupt or cannot be read.",
   FILE_ENCRYPTED: "Encrypted or password-protected files are not supported.", MODEL_SERVICE_UNAVAILABLE: "The classifier service is temporarily unavailable.", OPENAI_TIMEOUT: "Document classification timed out.",
   UPLOAD_AUTHORIZATION_EXPIRED: "The upload authorization has expired.", UPLOAD_REFERENCE_INVALID: "The upload reference is invalid.", UPLOAD_FAILED: "The file could not be uploaded.", STORAGE_UNAVAILABLE: "Private upload storage is temporarily unavailable.", PROCESSING_TIMEOUT: "Document processing timed out.",
+  PERSISTENCE_UNAVAILABLE: "Financial run storage is temporarily unavailable.",
   OPENAI_RATE_LIMIT: "Document classification is temporarily rate limited.", OPENAI_RESPONSE_INVALID: "The classifier returned an invalid response.",
   CLASSIFICATION_FAILED: "Document classification failed.", INTERNAL_ERROR: "An unexpected internal error occurred.",
 };
