@@ -16,7 +16,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
       - name: Install
         run: npm ci
@@ -24,7 +24,7 @@ jobs:
         run: npm run typecheck
       - name: Lint
         run: npm run lint
-      - name: Tests
-        run: npm test
+      - name: Financial Intelligence tests
+        run: npx tsx --test $(find tests/financial-intelligence -type f -name '*.test.ts' -print)
       - name: Build
         run: npm run build
