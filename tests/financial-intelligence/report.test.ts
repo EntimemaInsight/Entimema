@@ -71,7 +71,7 @@ test("fixed structured payload has deterministic hash and preserves missing valu
   assert.equal(first.payloadHash, hashFinancialReportPayload(first.payload));
   assert.match(first.payloadHash, /^[a-f0-9]{64}$/);
   assert.equal(first.payload.performance.find((row) => row.periodLabel === "Feb 2025")?.metrics.some((metric) => metric.key === "net_income"), false);
-  assert.equal(first.payload.executiveMetrics.find((metric) => metric.key === "gross_margin")?.value, 138 / 220);
+  assert.equal(first.payload.executiveMetrics.find((metric) => metric.key === "gross_margin")?.value, 0.627273);
   assert.equal(first.payload.identity.currency, "USD");
   assert.equal(first.payload.identity.unitScale, 1000);
 });
