@@ -5,6 +5,7 @@ import { evaluateReadiness,summarizeValidation,validate } from "./validation";
 import { buildWorkbookStructuralRepresentation } from "./structural-representation";
 import { hydrateUnderstanding, understandFinancials } from "./financial-understanding";
 import { hasValidIntegrity, withFinancialRunIntegrity } from "./integrity";
+export { hasValidIntegrity, withFinancialRunIntegrity };
 
 function mappingReviewReason(value:FinancialRun["values"][number],telemetry?:FinancialRun["resolverTelemetry"]):ReviewTask["reason"]{
  const reason=value.acceptanceReason;
