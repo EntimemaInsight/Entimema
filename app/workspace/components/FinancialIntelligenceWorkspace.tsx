@@ -264,8 +264,8 @@ export function FinancialIntelligenceWorkspace({
                 <p className="eyebrow">Executable workflow</p>
                 <h1>Traceable Income Statement</h1>
                 <p>
-                  Upload once. Classification, extraction, mapping and controls
-                  reuse the inspected bytes in memory.
+                  Upload once. AI understands the workbook in one pass, then
+                  deterministic controls validate every source-linked value.
                 </p>
               </div>
               <label className="fiUpload">
@@ -291,14 +291,11 @@ export function FinancialIntelligenceWorkspace({
               {(
                 run?.workflow ??
                 [
-                  "File Intake",
-                  "Document Classification",
-                  "Statement Detection",
-                  "Income Statement Extraction",
-                  "Canonical Mapping",
-                  "Financial Validation",
-                  "Human Review",
-                  "Validated Result",
+                  "Upload",
+                  "Understanding financials",
+                  "Validating",
+                  "Review if needed",
+                  "Analysis ready",
                 ].map((label, i) => ({
                   id: String(i),
                   label,
