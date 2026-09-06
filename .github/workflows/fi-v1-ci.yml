@@ -1,0 +1,30 @@
+name: FI V1 Branch CI
+
+on:
+  push:
+    branches:
+      - codex/fi-v1-ai-intake-clean-room
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install
+        run: npm ci
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Lint
+        run: npm run lint
+      - name: Financial Intelligence tests
+        run: npx tsx --test $(find tests/financial-intelligence -type f -name '*.test.ts' -print)
+      - name: Build
+        run: npm run build

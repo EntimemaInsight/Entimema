@@ -14,8 +14,6 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "test": "tsx --test $(find tests -type f -name '*.test.ts' -print)"
-    ,"evaluate:financial-intelligence": "tsx scripts/evaluate-financial-interpretation.ts",
-    "diagnose:financial-semantic": "tsx scripts/diagnose-financial-semantic-resolver.ts"
   },
   "dependencies": {
     "mammoth": "^1.12.1",

@@ -1,6 +1,7 @@
 import { createHash,randomUUID } from "node:crypto";
 import type { FinancialRun,ReviewDecision } from "../schema";
-import { hasValidIntegrity,replayFinancialReview,withFinancialRunIntegrity } from "../run";
+import { hasValidIntegrity,withFinancialRunIntegrity } from "../integrity";
+import { replayFinancialReview } from "../review";
 import type { FinancialRunRepository } from "./contracts";
 import { PersistenceConflictError } from "./contracts";
 import { analyzeValidatedIncomeStatement } from "../analysis";
