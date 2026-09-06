@@ -29,6 +29,7 @@ export function FinancialIntelligenceWorkspace({
     [reportError, setReportError] = useState(""),
     [busy, setBusy] = useState(false),
     [error, setError] = useState(""),
+    [failureWorkflow, setFailureWorkflow] = useState<FinancialRun["workflow"] | null>(null),
     [stage, setStage] = useState("result"),
     [evidenceId, setEvidenceId] = useState<string | null>(null),
     [mobilePeriod, setMobilePeriod] = useState(0),
@@ -110,6 +111,7 @@ export function FinancialIntelligenceWorkspace({
     clearDerivedState();
     setBusy(true);
     setError("");
+    setFailureWorkflow(null);
     try {
       const body = new FormData();
       body.set("file", file);
@@ -119,7 +121,10 @@ export function FinancialIntelligenceWorkspace({
         body,
       });
       const data = await response.json();
-      if (!response.ok) throw new Error(data.error_code ?? "FAILED");
+      if (!response.ok) {
+        if (Array.isArray(data.workflow)) setFailureWorkflow(data.workflow);
+        throw new Error(data.error_code ?? "FAILED");
+      }
       setRun(data);
       setStage("result");
       setSaveState("Saved");
@@ -289,7 +294,7 @@ export function FinancialIntelligenceWorkspace({
             )}
             <div className="fiFlow" id="workflow">
               {(
-                run?.workflow ??
+                run?.workflow ?? failureWorkflow ??
                 [
                   "Upload",
                   "Understanding financials",
