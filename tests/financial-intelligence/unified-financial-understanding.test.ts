@@ -140,7 +140,7 @@ test("hydration derives every number from deterministic source cells and rejects
   const hydrated = hydrateUnderstanding(source, structure, modelResult());
   assert.equal(hydrated.values[0].originalValue, 120);
   assert.equal(hydrated.evidence[0].cellAddress, "C3");
-  assert.equal(hydrated.evidence[0].extractionMethod, "deterministic-structural-cell-reference");
+  assert.equal(hydrated.evidence[0].extractionMethod, "deterministic-source-reference");
   const invented = modelResult();
   invented.financialLines[0].sourceValueRefs[0].cellRef = "Z99";
   assert.throws(() => hydrateUnderstanding(source, structure, invented), /UNVERIFIED_NUMERIC_LINEAGE/);
