@@ -1,6 +1,14 @@
 import { createHmac, timingSafeEqual } from "node:crypto";
 import type { FinancialRun } from "./schema";
 
+/**
+ * Neutral financial-run integrity boundary.
+ *
+ * This module is deliberately independent of both the legacy semantic-preparation
+ * coordinator and the AI-native intake coordinator so persistence, review,
+ * analysis and reporting can share one integrity contract without depending on
+ * either execution architecture.
+ */
 const integritySecret = () =>
   process.env.AUTH_SECRET ??
   process.env.NEXTAUTH_SECRET ??
