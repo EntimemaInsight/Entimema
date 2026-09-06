@@ -10,7 +10,7 @@ const source = (path: string) => readFileSync(resolve(repo, path), "utf8");
 
 const http = source("backend/api/financial-intelligence/http.ts");
 const coordinator = source("backend/financial-intelligence/ai-native-run.ts");
-const understanding = source("backend/financial-intelligence/financial-understanding.ts");
+const understanding = source("backend/financial-intelligence/financial-understanding-v2.ts");
 
 const legacySemanticModules = [
   "./extraction",
