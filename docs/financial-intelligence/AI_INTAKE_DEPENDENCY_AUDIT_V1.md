@@ -65,7 +65,7 @@ Deleting the old modules before migrating these tests would make `npm test` fail
 
 P0 order:
 
-1. lock the AI-native execution boundary with regression tests — **implemented**;
+1. lock the AI-native execution boundary with regression tests — **implemented, execution pending**;
 2. extract integrity signing/verification from `run.ts` into a neutral infrastructure module;
 3. extract review replay/finalization from the legacy execution module, preserving deterministic validation and human exception handling;
 4. update persistence and AI-native imports to the extracted modules;
@@ -80,6 +80,8 @@ Architecture boundary: IMPLEMENTED, awaiting test execution.
 Legacy physical retirement: BLOCKED by identified integrity/review/test dependencies.  
 Production acceptance: NOT YET VERIFIED.  
 Revenue OS capability status must remain Blocked until same-path production acceptance evidence exists.
+
+No GitHub Actions workflow run is currently available for this PR branch, so this audit does not claim that typecheck, lint, tests or build have passed.
 
 ## Epistemic status
 
