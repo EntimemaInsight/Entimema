@@ -43,9 +43,12 @@ not represented as completed AI interpretation.
 13. The customer Canonical Income Statement projects only `p_and_l` rows. OCI and
     attribution remain persisted source evidence for authorized internal review.
 
-The route is a Node.js dynamic route. Resolver timeout is capped at 60 seconds and the
-request is bounded to 200 rows / 60,000 context characters. The deployment's function
-limit must exceed `FINANCIAL_SEMANTIC_TIMEOUT_MS` plus extraction/persistence time.
+The route is a Node.js dynamic route with a requested 60-second maximum duration. The
+resolver uses a 45-second total request budget, capped at 60 seconds, and the request is
+bounded to 200 rows / 60,000 context characters. The remaining 15 seconds is reserved
+for extraction, validation, and persistence. Vercel is the repository-documented
+platform, but its production plan limit is not committed and must be verified before
+deployment; a platform may clamp the route declaration to a lower plan limit.
 
 ## Required production configuration
 
@@ -56,8 +59,8 @@ OPENAI_API_KEY=<secret>
 FINANCIAL_SEMANTIC_RESOLVER_ENABLED=true
 FINANCIAL_SEMANTIC_MODEL=gpt-5-mini
 FINANCIAL_SEMANTIC_RESOLVER_VERSION=2026-09-04
-FINANCIAL_SEMANTIC_TIMEOUT_MS=30000
-FINANCIAL_SEMANTIC_MAX_ATTEMPTS=2
+FINANCIAL_SEMANTIC_TIMEOUT_MS=45000
+FINANCIAL_SEMANTIC_MAX_ATTEMPTS=1
 FINANCIAL_SEMANTIC_MAX_ROWS=120
 FINANCIAL_SEMANTIC_MAX_CONTEXT_CHARS=32000
 FINANCIAL_DATABASE_REST_URL=<supabase project URL>
@@ -68,6 +71,11 @@ Verify a real post-deployment run internally: `requested=true`, `invoked=true`, 
 `success`, proposed/accepted counts non-zero, and model/version equal the deployed
 configuration. Production invocation, latency, token cost, and the external workbook gate
 cannot be certified from repository tests.
+
+The timeout and attempt variables must be changed in the Vercel Production environment
+and the deployment rebuilt; changing this runbook does not mutate production. If the
+production plan does not permit the route's requested 60 seconds, stop rather than raise
+the semantic timeout further.
 
 ## Migration 002
 

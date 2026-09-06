@@ -170,12 +170,12 @@ test("provider abort is classified as timeout with MODEL_FAILURE-safe unresolved
     assert.equal(result.resolverFailure, "timeout");
   }));
 
-test("a delayed valid response within the total budget returns classifications and proposals", () =>
-  withResolver("100", async () => {
+test("a >30-second-equivalent delayed response within a 45-second-equivalent budget succeeds", () =>
+  withResolver("45", async () => {
     const result = await interpretWholeStatement(
       { rows, values, periods: [], currency: null, scale: null, title: null },
       async () => {
-        await new Promise((resolve) => setTimeout(resolve, 10));
+        await new Promise((resolve) => setTimeout(resolve, 35));
         return validResponse();
       },
     );
@@ -190,6 +190,36 @@ test("a delayed valid response within the total budget returns classifications a
       false,
     );
   }));
+
+test("a retry receives only the remainder of the single total budget", async () => {
+  const observed = diagnostics();
+  let calls = 0;
+  const started = performance.now();
+  await assert.rejects(
+    createConfiguredResponse(
+      responseBody,
+      { apiKey: "secret", timeoutMs: 30, attempts: 2, diagnostics: observed },
+      async (_body, signal) => {
+        calls++;
+        if (calls === 1) {
+          await new Promise((resolve) => setTimeout(resolve, 20));
+          throw { status: 503 };
+        }
+        return new Promise((_resolve, reject) =>
+          signal.addEventListener(
+            "abort",
+            () => reject(new OpenAI.APIUserAbortError()),
+            { once: true },
+          ),
+        );
+      },
+    ),
+    { code: "OPENAI_TIMEOUT" },
+  );
+  assert.equal(calls, 2);
+  assert.equal(observed.timeoutTriggered, true);
+  assert.ok(performance.now() - started < 100);
+});
 
 test("provider 5xx exhaustion records a bounded safe reason without false mappings", () =>
   withResolver("100", async () => {
