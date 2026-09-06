@@ -18,7 +18,9 @@ import {
 } from "./structural-representation";
 
 export const FINANCIAL_UNDERSTANDING_CONTRACT_VERSION = "financial-understanding.v2" as const;
-export const FINANCIAL_UNDERSTANDING_TIMEOUT_MS = 45_000;
+// This is a product latency budget, not a reliability timeout. Exceeding it is
+// a truthful performance failure; callers must not extend it and keep waiting.
+export const FINANCIAL_UNDERSTANDING_TIMEOUT_MS = 7_000;
 
 export function getFinancialUnderstandingRequestConfig(apiKey: string) {
   const configuredTimeout = Number(process.env.FINANCIAL_UNDERSTANDING_TIMEOUT_MS);
@@ -64,6 +66,12 @@ export type FinancialUnderstandingTelemetry = {
   executionPathVersion: "financial-understanding.v2";
   financialUnderstandingInvoked: boolean;
   persistenceMs?: number;
+  uploadFormParsingMs?: number;
+  mechanicalReadMs: number;
+  payloadPreparationMs: number;
+  hydrationMs: number;
+  responseParsingMs: number;
+  timeToFirstUsefulResultMs: number;
   structuralScanMs: number;
   financialUnderstandingMs: number;
   validationMs: number;
@@ -237,8 +245,10 @@ export async function understandFinancials(structure: WorkbookStructuralRepresen
   const model = process.env.FINANCIAL_UNDERSTANDING_MODEL?.trim() || process.env.FINANCIAL_SEMANTIC_MODEL?.trim() || null;
   const apiKey = process.env.OPENAI_API_KEY?.trim();
   const enabled = process.env.FINANCIAL_UNDERSTANDING_ENABLED === "true" || process.env.FINANCIAL_SEMANTIC_RESOLVER_ENABLED === "true";
+  const payloadStarted = performance.now();
   const payload = compactWorkbookStructure(structure);
-  const maxOutputTokens = 3500;
+  const payloadPreparationMs = Math.round(performance.now() - payloadStarted);
+  const maxOutputTokens = 2200;
   const started = performance.now();
   if (!enabled || !model || !apiKey) throw new Error("FINANCIAL_UNDERSTANDING_PROVIDER_UNAVAILABLE");
 
@@ -252,7 +262,9 @@ export async function understandFinancials(structure: WorkbookStructuralRepresen
   }, getFinancialUnderstandingRequestConfig(apiKey), injected);
 
   if (response.status !== "completed") throw new Error("OPENAI_RESPONSE_INVALID");
+  const parsingStarted = performance.now();
   const result = parseFinancialUnderstandingResult(JSON.parse(response.output_text));
+  const responseParsingMs = Math.round(performance.now() - parsingStarted);
   if (result.documentType !== "financial_statement" || result.statementType !== "income_statement" || !result.periods.length || !result.financialLines.length) throw new Error("INVALID_FINANCIAL_UNDERSTANDING_OUTPUT");
   return {
     result,
@@ -263,5 +275,7 @@ export async function understandFinancials(structure: WorkbookStructuralRepresen
     outputTokens: response.usage?.output_tokens ?? null,
     modelCalls: 1,
     maxOutputTokens,
+    payloadPreparationMs,
+    responseParsingMs,
   };
 }

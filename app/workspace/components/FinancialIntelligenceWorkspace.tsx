@@ -104,7 +104,7 @@ export function FinancialIntelligenceWorkspace({
     } catch(e) { setError(e instanceof Error&&e.message==="STALE_REVISION"?"This run changed. Reopen it before reviewing.":"The review decision could not be applied safely."); }
     finally { setReviewBusy(null); }
   }
-  async function execute(selectedSheet?: string) {
+  async function execute() {
     if (!file || busy) return;
     if (file.size > DOCUMENT_CLASSIFIER_MAX_FILE_BYTES) {
       setError(errorText.FILE_TOO_LARGE);
@@ -118,7 +118,6 @@ export function FinancialIntelligenceWorkspace({
     try {
       const body = new FormData();
       body.set("file", file);
-      if (selectedSheet) body.set("selectedSheet", selectedSheet);
       const response = await fetch("/api/financial-intelligence/run", {
         method: "POST",
         body,
@@ -132,7 +131,9 @@ export function FinancialIntelligenceWorkspace({
         setError(safeExecutionErrorText(data));
         return;
       }
-      setRun(data);
+      const { analysis: firstAnalysis, ...financialRun } = data as FinancialRun & { analysis?: FinancialAnalysis | null };
+      setRun(financialRun);
+      setAnalysis(firstAnalysis ?? null);
       setStage("result");
       setSaveState("Saved");
       void loadRuns();
