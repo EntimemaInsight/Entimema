@@ -34,7 +34,7 @@ function fixture(validated = false): FinancialRun {
   const values: FinancialRun["values"] = [];
   const evidence: FinancialRun["evidence"] = [];
   rows.forEach(([concept, label, jan, feb], rowIndex) => {
-    [["p-jan", jan, "B"], ["p-feb", feb, "C"]] .forEach(([periodId, amount, column]) => {
+    [["p-jan", jan, "B", 2], ["p-feb", feb, "C", 3]].forEach(([periodId, amount, column, columnNumber]) => {
       const id = `ev-${concept}-${periodId}`;
       values.push({
         id: `value-${concept}-${periodId}`,
@@ -51,14 +51,27 @@ function fixture(validated = false): FinancialRun {
         periodId: String(periodId),
         currency: "USD",
         unitScale: 1,
-        mappingMethod: "semantic",
+        mappingMethod: "model-assisted",
         mappingConfidence: 1,
         mappingExplanation: "Source-verified AI fixture",
         reviewState: "accepted",
         evidenceId: id,
         section: "p_and_l",
       });
-      evidence.push({ id, kind: "spreadsheet", source: "analysis.xlsx", locator: `Income Statement!${column}${rowIndex + 3}`, excerpt: `${label} | ${amount}` });
+      evidence.push({
+        id,
+        sourceFilename: "analysis.xlsx",
+        kind: "spreadsheet",
+        sheetName: "Income Statement",
+        cellAddress: `${column}${rowIndex + 3}`,
+        rowNumber: rowIndex + 3,
+        columnNumber: Number(columnNumber),
+        rawRowLabel: label,
+        rawColumnHeader: String(periodId) === "p-jan" ? "Jan 2025" : "Feb 2025",
+        rawCellValue: Number(amount),
+        structuralContext: "Income Statement",
+        extractionMethod: "deterministic-structural-cell-reference",
+      });
     });
   });
   return makeFinancialRunFixture({
