@@ -3,6 +3,8 @@ import test from "node:test";
 import * as XLSX from "xlsx";
 import type { InspectedDocument } from "../../backend/lib/files";
 import {
+  FINANCIAL_UNDERSTANDING_TIMEOUT_MS,
+  getFinancialUnderstandingRequestConfig,
   hydrateUnderstanding,
   parseFinancialUnderstandingResult,
   understandFinancials,
@@ -12,6 +14,11 @@ import {
   buildWorkbookStructuralRepresentation,
   compactWorkbookStructure,
 } from "../../backend/financial-intelligence/structural-representation";
+
+const restoreEnv = (key: string, value: string | undefined) => {
+  if (value === undefined) delete process.env[key];
+  else process.env[key] = value;
+};
 
 function workbook(rows: unknown[][], name = "Data"): InspectedDocument {
   const book = XLSX.utils.book_new();
@@ -61,6 +68,89 @@ const modelResult = (): FinancialUnderstandingModelResult => ({
   ],
   excludedContent: [],
   ambiguities: [],
+});
+
+test("Financial Understanding uses one attempt and a safely bounded 45-second budget", () => {
+  const previous = process.env.FINANCIAL_UNDERSTANDING_TIMEOUT_MS;
+  try {
+    delete process.env.FINANCIAL_UNDERSTANDING_TIMEOUT_MS;
+    assert.equal(FINANCIAL_UNDERSTANDING_TIMEOUT_MS, 45_000);
+    assert.deepEqual(getFinancialUnderstandingRequestConfig("test-key"), {
+      apiKey: "test-key",
+      timeoutMs: 45_000,
+      attempts: 1,
+    });
+
+    process.env.FINANCIAL_UNDERSTANDING_TIMEOUT_MS = "90000";
+    assert.equal(getFinancialUnderstandingRequestConfig("test-key").timeoutMs, 45_000);
+    process.env.FINANCIAL_UNDERSTANDING_TIMEOUT_MS = "not-a-duration";
+    assert.equal(getFinancialUnderstandingRequestConfig("test-key").timeoutMs, 45_000);
+  } finally {
+    restoreEnv("FINANCIAL_UNDERSTANDING_TIMEOUT_MS", previous);
+  }
+});
+
+test("a delayed valid response inside the configured budget completes", async () => {
+  const previous = {
+    enabled: process.env.FINANCIAL_UNDERSTANDING_ENABLED,
+    key: process.env.OPENAI_API_KEY,
+    model: process.env.FINANCIAL_UNDERSTANDING_MODEL,
+    timeout: process.env.FINANCIAL_UNDERSTANDING_TIMEOUT_MS,
+  };
+  process.env.FINANCIAL_UNDERSTANDING_ENABLED = "true";
+  process.env.OPENAI_API_KEY = "test-key";
+  process.env.FINANCIAL_UNDERSTANDING_MODEL = "gpt-test";
+  process.env.FINANCIAL_UNDERSTANDING_TIMEOUT_MS = "100";
+  try {
+    const structure = buildWorkbookStructuralRepresentation(
+      workbook([["Example Ltd"], [null, "Period", "2025"], [null, "Revenue", 120]]),
+    );
+    const result = await understandFinancials(structure, async () => {
+      await new Promise((resolve) => setTimeout(resolve, 10));
+      return { status: "completed", output_text: JSON.stringify(modelResult()) } as never;
+    });
+    assert.equal(result.modelCalls, 1);
+  } finally {
+    restoreEnv("FINANCIAL_UNDERSTANDING_ENABLED", previous.enabled);
+    restoreEnv("OPENAI_API_KEY", previous.key);
+    restoreEnv("FINANCIAL_UNDERSTANDING_MODEL", previous.model);
+    restoreEnv("FINANCIAL_UNDERSTANDING_TIMEOUT_MS", previous.timeout);
+  }
+});
+
+test("execution beyond the configured budget aborts once with OPENAI_TIMEOUT", async () => {
+  const previous = {
+    enabled: process.env.FINANCIAL_UNDERSTANDING_ENABLED,
+    key: process.env.OPENAI_API_KEY,
+    model: process.env.FINANCIAL_UNDERSTANDING_MODEL,
+    timeout: process.env.FINANCIAL_UNDERSTANDING_TIMEOUT_MS,
+  };
+  process.env.FINANCIAL_UNDERSTANDING_ENABLED = "true";
+  process.env.OPENAI_API_KEY = "test-key";
+  process.env.FINANCIAL_UNDERSTANDING_MODEL = "gpt-test";
+  process.env.FINANCIAL_UNDERSTANDING_TIMEOUT_MS = "10";
+  let calls = 0;
+  try {
+    const structure = buildWorkbookStructuralRepresentation(
+      workbook([["Example Ltd"], [null, "Period", "2025"], [null, "Revenue", 120]]),
+    );
+    await assert.rejects(
+      understandFinancials(structure, async (_body, signal) => {
+        calls += 1;
+        await new Promise<void>((_resolve, reject) => {
+          signal.addEventListener("abort", () => reject(new DOMException("Aborted", "AbortError")), { once: true });
+        });
+        throw new Error("unreachable");
+      }),
+      (error: unknown) => Boolean(error && typeof error === "object" && "code" in error && error.code === "OPENAI_TIMEOUT"),
+    );
+    assert.equal(calls, 1);
+  } finally {
+    restoreEnv("FINANCIAL_UNDERSTANDING_ENABLED", previous.enabled);
+    restoreEnv("OPENAI_API_KEY", previous.key);
+    restoreEnv("FINANCIAL_UNDERSTANDING_MODEL", previous.model);
+    restoreEnv("FINANCIAL_UNDERSTANDING_TIMEOUT_MS", previous.timeout);
+  }
 });
 
 test("compact structural representation retains coordinates, formulas and merges without binary or styles", () => {
