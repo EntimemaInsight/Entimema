@@ -4,7 +4,8 @@ import { AgentError } from "./errors";
 type ResponseBody = OpenAI.Responses.ResponseCreateParamsNonStreaming;
 type ResponseResult = OpenAI.Responses.Response;
 export type OpenAITransport = (body: ResponseBody, signal: AbortSignal) => Promise<ResponseResult>;
-export type OpenAIRequestConfig = { apiKey:string; timeoutMs:number; attempts:number };
+export type OpenAIRequestDiagnostics = { attemptCount:number; attemptDurationsMs:number[]; providerStatusClass:string|null; providerErrorCode:string|null; timeoutTriggered:boolean };
+export type OpenAIRequestConfig = { apiKey:string; timeoutMs:number; attempts:number; diagnostics?:OpenAIRequestDiagnostics };
 
 const positiveInt = (value: string | undefined, fallback: number, maximum: number) => {
   const parsed = Number(value);
@@ -28,7 +29,7 @@ export function mapOpenAIError(error: unknown) {
   if (error instanceof AgentError) return error;
   const status = typeof error === "object" && error !== null && "status" in error ? Number(error.status) : 0;
   const name = error instanceof Error ? error.name : "";
-  if (error instanceof OpenAI.APIConnectionTimeoutError || name === "AbortError" || name === "TimeoutError") return new AgentError("OPENAI_TIMEOUT", 504, undefined, error);
+  if (error instanceof OpenAI.APIConnectionTimeoutError || error instanceof OpenAI.APIUserAbortError || name === "AbortError" || name === "TimeoutError") return new AgentError("OPENAI_TIMEOUT", 504, undefined, error);
   if (error instanceof OpenAI.RateLimitError || status === 429) return new AgentError("OPENAI_RATE_LIMIT", 429, undefined, error);
   if (status >= 500 || error instanceof OpenAI.APIConnectionError) return new AgentError("MODEL_SERVICE_UNAVAILABLE", 503, undefined, error);
   return new AgentError("CLASSIFICATION_FAILED", 502, undefined, error);
@@ -42,18 +43,88 @@ export async function createResponse(body: ResponseBody, injectedTransport?: Ope
 }
 
 /** Shared server-only Responses transport. Product features supply their own bounded configuration. */
-export async function createConfiguredResponse(body: ResponseBody, config:OpenAIRequestConfig, injectedTransport?: OpenAITransport) {
-  const transport = injectedTransport ?? ((payload, signal) => {
-    const client = new OpenAI({ apiKey: config.apiKey, maxRetries: 0 });
-    return client.responses.create(payload, { signal }) as Promise<ResponseResult>;
-  });
+export async function createConfiguredResponse(
+  body: ResponseBody,
+  config: OpenAIRequestConfig,
+  injectedTransport?: OpenAITransport,
+) {
+  const transport =
+    injectedTransport ??
+    ((payload, signal) => {
+      const client = new OpenAI({ apiKey: config.apiKey, maxRetries: 0 });
+      return client.responses.create(payload, {
+        signal,
+      }) as Promise<ResponseResult>;
+    });
+  const requestStarted = performance.now(),
+    diagnostics = config.diagnostics;
+  if (diagnostics)
+    Object.assign(diagnostics, {
+      attemptCount: 0,
+      attemptDurationsMs: [],
+      providerStatusClass: null,
+      providerErrorCode: null,
+      timeoutTriggered: false,
+    });
   let last: AgentError | undefined;
   for (let attempt = 1; attempt <= config.attempts; attempt++) {
+    const remaining =
+      config.timeoutMs - Math.round(performance.now() - requestStarted);
+    if (remaining <= 0) {
+      last = new AgentError("OPENAI_TIMEOUT", 504);
+      break;
+    }
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), config.timeoutMs);
-    try { return await transport(body, controller.signal); }
-    catch (error) { last = mapOpenAIError(error); if (!transient(last) || attempt === config.attempts) throw last; }
-    finally { clearTimeout(timeout); }
+    let timeoutTriggered = false;
+    const timeout = setTimeout(() => {
+        timeoutTriggered = true;
+        controller.abort();
+      }, remaining),
+      attemptStarted = performance.now();
+    if (diagnostics) diagnostics.attemptCount = attempt;
+    try {
+      return await transport(body, controller.signal);
+    } catch (error) {
+      last = mapOpenAIError(error);
+      if (diagnostics) {
+        diagnostics.timeoutTriggered ||=
+          timeoutTriggered || last.code === "OPENAI_TIMEOUT";
+        const providerStatus =
+          typeof error === "object" && error !== null && "status" in error
+            ? Number(error.status)
+            : 0;
+        diagnostics.providerErrorCode =
+          last.code === "OPENAI_TIMEOUT"
+            ? "timeout"
+            : last.code === "OPENAI_RATE_LIMIT"
+              ? "rate_limit"
+              : providerStatus >= 500
+                ? "provider_5xx"
+                : error instanceof OpenAI.APIConnectionError
+                  ? "provider_unavailable"
+                  : last.code === "CLASSIFICATION_FAILED"
+                    ? "invalid_request"
+                    : last.code;
+        diagnostics.providerStatusClass =
+          last.httpStatus >= 500
+            ? "5xx"
+            : last.httpStatus >= 400
+              ? "4xx"
+              : null;
+      }
+      if (
+        !transient(last) ||
+        attempt === config.attempts ||
+        performance.now() - requestStarted >= config.timeoutMs
+      )
+        throw last;
+    } finally {
+      clearTimeout(timeout);
+      if (diagnostics)
+        diagnostics.attemptDurationsMs.push(
+          Math.round(performance.now() - attemptStarted),
+        );
+    }
   }
   throw last ?? new AgentError("CLASSIFICATION_FAILED", 502);
 }
