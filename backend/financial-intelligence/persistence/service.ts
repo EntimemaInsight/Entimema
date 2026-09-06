@@ -6,10 +6,16 @@ import { PersistenceConflictError } from "./contracts";
 import { analyzeValidatedIncomeStatement } from "../analysis";
 import { createFinancialReportPayload, renderFinancialReportPdf, safeReportFilename } from "../report";
 export const validatedSnapshotIdentity=(run:FinancialRun)=>createHash("sha256").update(JSON.stringify({schemaVersion:run.schemaVersion,runId:run.runId,revision:run.revision??1,selectedStatement:run.source.selectedSection,periods:run.periods,values:run.values,currency:run.currency,unitScale:run.unitScale,evidence:run.evidence,controls:run.controls,validationSummary:run.validationSummary})).digest("hex");
+/** Rejects values that cannot be represented faithfully in the JSONB persistence contract. */
+export function jsonSafeFinancialRun(run:FinancialRun):FinancialRun {
+ const encoded=JSON.stringify(run,(_key,value)=>{if(typeof value==="bigint"||typeof value==="function"||typeof value==="symbol")throw new Error("FINANCIAL_RUN_NOT_JSON_SAFE");return value});
+ if(!encoded)throw new Error("FINANCIAL_RUN_NOT_JSON_SAFE");
+ return JSON.parse(encoded) as FinancialRun;
+}
 const snapshot=(run:FinancialRun,actor:string)=>{const payload={schemaVersion:run.schemaVersion,runId:run.runId,revision:run.revision??1,selectedStatement:run.source.selectedSection,periods:run.periods,values:run.values,currency:run.currency,unitScale:run.unitScale,evidence:run.evidence,reviewTasks:run.reviewTasks.filter(t=>t.state==="resolved"),controls:run.controls,validationSummary:run.validationSummary,validatedAt:new Date().toISOString(),validatedBy:actor};return{...payload,integrityHash:validatedSnapshotIdentity(run)}};
 export type AnalysisIdentity={revision:number;selectedStatement:string;snapshotHash:string;schemaVersion:string};
 export class FinancialRunService{constructor(private repository:FinancialRunRepository){}
- async create(actor:string,run:FinancialRun,file:{size:number;fingerprint:string}){const now=new Date().toISOString();const durable={...run,sessionScoped:false,source:{...run.source,fileSize:file.size,documentFingerprint:file.fingerprint},revision:1,createdAt:now,updatedAt:now,validatedAt:run.status==="validated"?now:run.validatedAt,lastCompletedStage:run.workflow.filter(x=>x.state==="completed").at(-1)?.id};withFinancialRunIntegrity(durable);return this.repository.create(actor,durable,{type:"run_created",after:{status:durable.status,filename:durable.source.filename}})}
+ async create(actor:string,run:FinancialRun,file:{size:number;fingerprint:string}){const now=new Date().toISOString();const durable={...run,sessionScoped:false,source:{...run.source,fileSize:file.size,documentFingerprint:file.fingerprint},revision:1,createdAt:now,updatedAt:now,validatedAt:run.status==="validated"?now:run.validatedAt,lastCompletedStage:run.workflow.filter(x=>x.state==="completed").at(-1)?.id};withFinancialRunIntegrity(durable);return this.repository.create(actor,jsonSafeFinancialRun(durable),{type:"run_created",after:{status:durable.status,filename:durable.source.filename}})}
  list(actor:string){return this.repository.list(actor)} get(actor:string,id:string){return this.repository.get(actor,id)}
  reviewQueue(actor:string){if(!this.repository.listForReview)throw new Error("OPERATOR_REVIEW_UNAVAILABLE");return this.repository.listForReview(actor)}
  reviewRun(actor:string,id:string){if(!this.repository.getForReview) return this.repository.get(actor,id);return this.repository.getForReview(actor,id)}
