@@ -4,6 +4,7 @@ import { useState } from "react";
 import { CANONICAL_CONCEPTS, type FinancialRun, type ReviewDecision } from "@/backend/financial-intelligence/schema";
 import type { FinancialAnalysis } from "@/backend/financial-intelligence/analysis";
 import { DOCUMENT_CLASSIFIER_MAX_FILE_BYTES } from "@/lib/document-classifier-upload";
+import { readFinancialIntelligenceFailure, safeExecutionErrorText, type FinancialIntelligenceFailure } from "./financial-intelligence-failure";
 
 const errorText: Record<string, string> = {
   AUTHENTICATION_REQUIRED: "Your session expired. Sign in again.",
@@ -29,6 +30,7 @@ export function FinancialIntelligenceWorkspace({
     [reportError, setReportError] = useState(""),
     [busy, setBusy] = useState(false),
     [error, setError] = useState(""),
+    [failure, setFailure] = useState<FinancialIntelligenceFailure | null>(null),
     [failureWorkflow, setFailureWorkflow] = useState<FinancialRun["workflow"] | null>(null),
     [stage, setStage] = useState("result"),
     [evidenceId, setEvidenceId] = useState<string | null>(null),
@@ -111,6 +113,7 @@ export function FinancialIntelligenceWorkspace({
     clearDerivedState();
     setBusy(true);
     setError("");
+    setFailure(null);
     setFailureWorkflow(null);
     try {
       const body = new FormData();
@@ -122,19 +125,20 @@ export function FinancialIntelligenceWorkspace({
       });
       const data = await response.json();
       if (!response.ok) {
-        if (Array.isArray(data.workflow)) setFailureWorkflow(data.workflow);
-        throw new Error(data.error_code ?? "FAILED");
+        const executionFailure = readFinancialIntelligenceFailure(data);
+        setFailure(executionFailure);
+        if (executionFailure?.workflow) setFailureWorkflow(executionFailure.workflow);
+        else if (Array.isArray(data.workflow)) setFailureWorkflow(data.workflow);
+        setError(safeExecutionErrorText(data));
+        return;
       }
       setRun(data);
       setStage("result");
       setSaveState("Saved");
       void loadRuns();
-    } catch (e) {
+    } catch {
       clearDerivedState();
-      setError(
-        errorText[e instanceof Error ? e.message : ""] ??
-          "The execution could not be completed safely.",
-      );
+      setError("The execution could not be completed safely.");
     } finally {
       setBusy(false);
     }
@@ -289,7 +293,8 @@ export function FinancialIntelligenceWorkspace({
             </header>
             {error && (
               <div role="alert" className="fiError">
-                {error}
+                <strong>{error}</strong>
+                {failure && <small className="fiFailureDiagnostic">Failed at {failure.failureStageLabel} · {failure.failureCode} · Run {failure.runId}</small>}
               </div>
             )}
             <div className="fiFlow" id="workflow">
