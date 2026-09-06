@@ -27,3 +27,16 @@ test("schema and ontology allowlist rejections are counted without exposing sour
  const rows:SourceRow[]=[{rowNumber:1,label:"Revenue",normalizedLabel:"revenue",role:"financial_line"}];const result=await interpretWholeStatement({rows,periods:[],values:[value(1,"Revenue","other_reported_line",100)],currency:"CHF",scale:1,title:"Income statement"},response([{rowNumber:1,section:"p_and_l",role:"financial_line",concept:"invented",confidence:1,supportingEvidence:[],contradictions:[]}]));
  assert.equal(result.telemetry.allowlistRejectedProposals,1);assert.equal(result.telemetry.outcome,"invalid_schema");assert.deepEqual(Object.keys(result.telemetry).some(key=>/label|value|prompt|key/i.test(key)),false);
 }));
+
+test("generic composite operating-expense language prioritizes an existing candidate and remains model-owned",()=>withResolver(async()=>{
+ const label="Selling, general, and administrative expenses",rows:SourceRow[]=[{rowNumber:1,label:"Income statement",normalizedLabel:"income statement",role:"title"},{rowNumber:2,label,normalizedLabel:label.toLowerCase(),role:"financial_line"}];let submitted:Record<string,unknown>|undefined;
+ const result=await interpretWholeStatement({rows,periods:[],values:[value(2,label,"other_reported_line",-203.4)],currency:"CHF",scale:1_000_000,title:"Income statement"},async body=>{submitted=JSON.parse((body as {input:string}).input);return(await response([{rowNumber:1,section:"header",role:"title",concept:null,confidence:1,supportingEvidence:[],contradictions:[]},{rowNumber:2,section:"p_and_l",role:"financial_line",concept:"general_and_administrative_expense",confidence:.92,supportingEvidence:["combined operating expense caption"],contradictions:[]}])())});
+ const candidates=(submitted!.rows as Array<{rowNumber:number;candidateConcepts:string[]}>).find(row=>row.rowNumber===2)!.candidateConcepts;
+ assert.equal(candidates[0],"general_and_administrative_expense");assert.equal(result.values[0].concept,"general_and_administrative_expense");assert.equal(result.values[0].reviewState,"not_required");
+}));
+
+test("ambiguous composite proposal stays reviewable and retains the model proposal",()=>withResolver(async()=>{
+ const label="Selling, general, and administrative expenses",rows:SourceRow[]=[{rowNumber:1,label,normalizedLabel:label.toLowerCase(),role:"financial_line"}];
+ const result=await interpretWholeStatement({rows,periods:[],values:[value(1,label,"other_reported_line",-10)],currency:"CHF",scale:1,title:"Income statement"},response([{rowNumber:1,section:"p_and_l",role:"financial_line",concept:"general_and_administrative_expense",confidence:.4,supportingEvidence:[],contradictions:[]}]));
+ assert.equal(result.values[0].concept,"other_reported_line");assert.equal(result.values[0].reviewState,"required");assert.equal(result.values[0].acceptanceReason,"semantic_confidence_below_threshold");assert.equal(result.values[0].originalProposal,"general_and_administrative_expense");
+}));
