@@ -5,7 +5,7 @@ import {
   understandFinancials,
   type FinancialUnderstandingTelemetry,
 } from "./financial-understanding";
-import { withFinancialRunIntegrity } from "./run";
+import { withFinancialRunIntegrity } from "./integrity";
 import {
   CANONICAL_INCOME_STATEMENT_VERSION,
   type FinancialRun,
