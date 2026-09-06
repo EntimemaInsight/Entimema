@@ -2,7 +2,7 @@ import type {OpenAITransport} from "../../lib/openai";
 import {CANONICAL_CONCEPTS,type CanonicalConcept,type CanonicalValue,type Period,type ResolverOutcome,type ResolverTelemetry,type RowRole,type SourceRow} from "../schema";
 import {MAPPING_POLICY,rankMappingCandidates} from "./ontology";
 import {equationEvidence,INCOME_STATEMENT_RELATIONSHIPS} from "./relationships";
-import {getFinancialResolverConfig,resolveWholeStatement,type StatementSection} from "./semantic-resolver";
+import {getFinancialResolverConfig,resolveWholeStatement,type SemanticContextRow,type StatementSection} from "./semantic-resolver";
 
 const ociStart=/other comprehensive income|remeasurement|not reclassified|may be reclassified|cash flow hedge|currency translation|foreign currency translation/i;
 const totalComprehensive=/^total comprehensive income/i;
@@ -43,9 +43,33 @@ export function combineMappingConfidence(parts:{semantic:number;structural:numbe
 
 type Provisional={rowNumber:number;concept:CanonicalConcept;semanticConfidence:number;structuralConfidence:number;signConsistency:number;contextConfidence:number;supportingEvidence:string[];contradictions:string[];combinedConfidence:number};
 
-export async function interpretWholeStatement(input:{rows:SourceRow[];periods:Period[];values:CanonicalValue[];currency:string|null;scale:number|null;title:string|null},transport?:OpenAITransport){
- const sections=deterministicSections(input.rows),candidates:Record<number,CanonicalConcept[]>={},signPatterns:Record<number,"positive"|"negative"|"mixed">={};
+/**
+ * Keep whole-statement awareness without asking the model to reclassify rows that
+ * deterministic extraction already resolved or that hard section boundaries exclude.
+ */
+export function prepareSemanticWorkset(input:{rows:SourceRow[];values:CanonicalValue[]}){
+ const sections=deterministicSections(input.rows);
+ const unresolved=new Set(input.values.filter(value=>value.concept==="other_reported_line").map(value=>Number(value.sourceRowId.replace("row-",""))));
+ const workRows=input.rows.filter(row=>sections.get(row.rowNumber)==="p_and_l"&&financialRoles.has(row.role)&&unresolved.has(row.rowNumber));
+ const workNumbers=new Set(workRows.map(row=>row.rowNumber));
+ const boundarySeen=new Set<StatementSection>();
+ const contextRows:SemanticContextRow[]=[];
  for(const row of input.rows){
+  const section=sections.get(row.rowNumber)??"unresolved";
+  const isStructural=(section==="header"||section==="p_and_l")&&!financialRoles.has(row.role)&&row.role!=="spacer"&&Boolean(row.label);
+  const isPandL=section==="p_and_l"&&financialRoles.has(row.role);
+  const isBoundary=section!=="p_and_l"&&section!=="header"&&!boundarySeen.has(section)&&Boolean(row.label);
+  const isParent=workRows.some(work=>work.parentRowNumber===row.rowNumber);
+  if(!isPandL&&!isStructural&&!isBoundary&&!isParent)continue;
+  if(isBoundary)boundarySeen.add(section);
+  contextRows.push({rowNumber:row.rowNumber,label:row.label.slice(0,160),role:row.role,indentation:row.indentation??0,parentRowNumber:row.parentRowNumber??null,section,mappingState:workNumbers.has(row.rowNumber)?"semantic_work":isPandL?"deterministic":"structural"});
+ }
+ return{sections,workRows,contextRows,excludedBeforeInference:input.rows.length-workRows.length};
+}
+
+export async function interpretWholeStatement(input:{rows:SourceRow[];periods:Period[];values:CanonicalValue[];currency:string|null;scale:number|null;title:string|null},transport?:OpenAITransport){
+ const prepared=prepareSemanticWorkset(input),sections=prepared.sections,candidates:Record<number,CanonicalConcept[]>={},signPatterns:Record<number,"positive"|"negative"|"mixed">={};
+ for(const row of prepared.workRows){
   const ranked=rankMappingCandidates({label:row.label,role:row.role});
   // Every P&L row receives the complete bounded ontology. Ranking changes order only;
   // it never prevents the provider from selecting a contextual non-lexical concept.
@@ -54,7 +78,7 @@ export async function interpretWholeStatement(input:{rows:SourceRow[];periods:Pe
   const signs=new Set(input.values.filter(v=>v.sourceRowId===`row-${row.rowNumber}`).map(v=>v.sourceSign).filter(x=>x!=="zero"));
   signPatterns[row.rowNumber]=signs.size===1?(signs.values().next().value as "positive"|"negative"):"mixed";
  }
- const providerResult=await resolveWholeStatement({title:input.title,rows:input.rows,periods:input.periods,currency:input.currency,scale:input.scale,candidates,signPatterns,relationships:INCOME_STATEMENT_RELATIONSHIPS.map(x=>x.id)},transport);
+ const providerResult=await resolveWholeStatement({title:input.title,rows:prepared.workRows,contextRows:prepared.contextRows,fullStatementRowCount:input.rows.length,periods:input.periods,currency:input.currency,scale:input.scale,candidates,signPatterns,relationships:INCOME_STATEMENT_RELATIONSHIPS.map(x=>x.id)},transport);
  const {resolution,reason,invoked,durationMs,diagnostics}=providerResult,resolved=new Map(resolution?.rows.map(x=>[x.rowNumber,x])??[]);
  const rejectionReasons:Record<string,number>={};const reject=(category:string)=>{rejectionReasons[category]=(rejectionReasons[category]??0)+1};
 
@@ -97,6 +121,6 @@ export async function interpretWholeStatement(input:{rows:SourceRow[];periods:Pe
  });
  const config=getFinancialResolverConfig(),pAndLRows=new Set(values.filter(v=>v.section==="p_and_l").map(v=>v.sourceRowId)),mappedRows=new Set(values.filter(v=>v.section==="p_and_l"&&v.concept!=="other_reported_line").map(v=>v.sourceRowId)),deterministicRows=new Set(values.filter(v=>v.section==="p_and_l"&&v.concept!=="other_reported_line"&&v.mappingMethod==="deterministic").map(v=>v.sourceRowId));
  const count=(key:string)=>rejectionReasons[key]??0,rejected=diagnostics.schemaRejected+diagnostics.allowlistRejected+Object.values(rejectionReasons).reduce((a,b)=>a+b,0);
- const telemetry:ResolverTelemetry={requested:config.requested,invoked,outcome:resolverOutcome(reason,Boolean(resolution)),resolverVersion:config.resolverVersion,model:config.model,durationMs,rowsSubmitted:Math.min(input.rows.length,config.maxRows),requestPayloadChars:diagnostics.requestPayloadChars,maxOutputTokens:diagnostics.maxOutputTokens,attemptCount:diagnostics.attemptCount,attemptDurationsMs:diagnostics.attemptDurationsMs,providerStatusClass:diagnostics.providerStatusClass,providerErrorCode:diagnostics.providerErrorCode,timeoutTriggered:diagnostics.timeoutTriggered,classificationsReturned:diagnostics.classificationsReturned,proposedMappings:diagnostics.proposalsReturned,schemaRejectedProposals:diagnostics.schemaRejected,allowlistRejectedProposals:diagnostics.allowlistRejected,sectionRejectedProposals:count("section_incompatible"),structuralRejectedProposals:count("structural_incompatible"),confidenceRejectedProposals:count("semantic_confidence_below_threshold")+count("combined_confidence_below_threshold"),signRejectedProposals:count("sign_contradiction"),equationRejectedProposals:count("equation_contradiction"),acceptedSemanticMappings:acceptedSemantic,acceptedDeterministicMappings:deterministicRows.size,unresolvedPAndLRows:pAndLRows.size-mappedRows.size,acceptedMappings:acceptedSemantic,rejectedMappings:rejected,rejectionReasons,automaticMappingCoverage:pAndLRows.size?mappedRows.size/pAndLRows.size:0};
+ const telemetry:ResolverTelemetry={requested:config.requested,invoked,outcome:resolverOutcome(reason,Boolean(resolution)),resolverVersion:config.resolverVersion,model:config.model,durationMs,rowsSubmitted:diagnostics.semanticWorksetRows,semanticWorksetRows:diagnostics.semanticWorksetRows,contextRows:diagnostics.contextRows,excludedBeforeInference:diagnostics.excludedBeforeInference,candidateSetCount:diagnostics.candidateSetCount,estimatedInputTokens:diagnostics.estimatedInputTokens,requestPayloadChars:diagnostics.requestPayloadChars,maxOutputTokens:diagnostics.maxOutputTokens,attemptCount:diagnostics.attemptCount,attemptDurationsMs:diagnostics.attemptDurationsMs,providerStatusClass:diagnostics.providerStatusClass,providerErrorCode:diagnostics.providerErrorCode,timeoutTriggered:diagnostics.timeoutTriggered,classificationsReturned:diagnostics.classificationsReturned,proposedMappings:diagnostics.proposalsReturned,schemaRejectedProposals:diagnostics.schemaRejected,allowlistRejectedProposals:diagnostics.allowlistRejected,sectionRejectedProposals:count("section_incompatible"),structuralRejectedProposals:count("structural_incompatible"),confidenceRejectedProposals:count("semantic_confidence_below_threshold")+count("combined_confidence_below_threshold"),signRejectedProposals:count("sign_contradiction"),equationRejectedProposals:count("equation_contradiction"),acceptedSemanticMappings:acceptedSemantic,acceptedDeterministicMappings:deterministicRows.size,unresolvedPAndLRows:pAndLRows.size-mappedRows.size,acceptedMappings:acceptedSemantic,rejectedMappings:rejected,rejectionReasons,automaticMappingCoverage:pAndLRows.size?mappedRows.size/pAndLRows.size:0};
  return{values,currency:resolution?.currency??input.currency,scale:resolution?.scale??input.scale,resolverFailure:resolution?null:reason,telemetry};
 }
