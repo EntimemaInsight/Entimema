@@ -41,17 +41,19 @@ These modules MUST NOT be reintroduced into the V1 upload execution path as fall
 
 ## Dependency extraction progress
 
-### Integrity — extracted
+### Integrity — extracted and AI-native decoupled
 
-Run-integrity signing and verification now live in the neutral infrastructure module:
+Run-integrity signing and verification live in the neutral infrastructure module:
 
 `backend/financial-intelligence/integrity.ts`
 
-`run.ts` retains only a temporary compatibility re-export while downstream imports are migrated.
+The AI-native coordinator now imports `withFinancialRunIntegrity` directly from `integrity.ts`, so loading the customer execution path no longer requires importing the legacy runner for integrity.
+
+`run.ts` retains only temporary compatibility behavior for legacy tests until they are migrated.
 
 ### Review replay / finalization — extracted
 
-Exception-review replay and review finalization now live in:
+Exception-review replay and review finalization live in:
 
 `backend/financial-intelligence/review.ts`
 
@@ -59,7 +61,7 @@ This module owns deterministic review task construction, review replay, post-rev
 
 ### Persistence — migrated
 
-`backend/financial-intelligence/persistence/service.ts` now imports:
+`backend/financial-intelligence/persistence/service.ts` imports:
 
 - integrity directly from `../integrity`;
 - review replay directly from `../review`.
@@ -68,9 +70,9 @@ Therefore durable persistence, analysis/report integrity checks, archive/revisio
 
 ## Remaining blockers to physical deletion
 
-The AI-native coordinator still has a temporary compatibility import for run integrity through `run.ts`; this must move directly to `integrity.ts` before deleting the legacy coordinator.
+The remaining blocker is now primarily test migration.
 
-The existing FI test suite also still contains direct tests of the retired architecture. Verified examples include:
+The existing FI test suite still contains direct tests of the retired architecture. Verified examples include:
 
 - `tests/financial-intelligence/income-statement.test.ts` importing `extract`, `mapLabel`, `model-mapping`, and legacy `runFinancialIntelligence`;
 - `tests/financial-intelligence/provider-reliability.test.ts` importing the old `interpretation/whole-statement` layer;
@@ -87,8 +89,8 @@ P0 order:
 2. extract integrity signing/verification from `run.ts` — **implemented**;
 3. extract review replay/finalization from the legacy execution module — **implemented**;
 4. migrate persistence imports to extracted integrity/review modules — **implemented**;
-5. migrate the AI-native coordinator's final compatibility integrity import directly to `integrity.ts` — **pending**;
-6. migrate FI golden-path/persistence/review tests to construct runs through AI-native contracts or purpose-built fixtures rather than the legacy parser — **pending**;
+5. migrate the AI-native coordinator integrity import directly to `integrity.ts` — **implemented**;
+6. migrate FI golden-path/persistence/review tests to purpose-built AI-native/source-verified fixtures rather than the legacy parser — **pending**;
 7. delete the legacy execution function and semantic-preparation modules once no production/test dependency remains — **pending**;
 8. run TypeScript, lint, FI tests and build — **pending**;
 9. execute the same production-equivalent path against Rieter Excel, unseen Excel and text-based PDF — **pending**.
@@ -97,6 +99,7 @@ P0 order:
 
 Architecture boundary: IMPLEMENTED, awaiting test execution.  
 Integrity extraction: IMPLEMENTED.  
+AI-native integrity decoupling: IMPLEMENTED.  
 Review extraction: IMPLEMENTED.  
 Persistence migration: IMPLEMENTED.  
 Legacy physical retirement: NOT YET COMPLETE.  
@@ -109,7 +112,7 @@ No passing claim is made until typecheck, lint, FI tests and build have actually
 
 Verified evidence: repository imports, current PR execution route, extracted modules and current test dependencies.  
 Assumption: none required for the dependency findings above.  
-Hypothesis: completing the final compatibility-import and test migration will permit physical legacy retirement without changing financial methodology.  
+Hypothesis: completing test migration will permit physical legacy retirement without changing financial methodology.  
 Decision: proceed dependency-safely; do not delete legacy modules merely to make the tree look clean.
 
 `DOMAIN_KNOWLEDGE_GAP: none` — this audit changes architecture boundaries only and introduces no new financial methodology or control rule.
