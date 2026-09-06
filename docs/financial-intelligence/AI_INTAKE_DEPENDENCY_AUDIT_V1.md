@@ -47,9 +47,9 @@ Run-integrity signing and verification live in the neutral infrastructure module
 
 `backend/financial-intelligence/integrity.ts`
 
-The AI-native coordinator now imports `withFinancialRunIntegrity` directly from `integrity.ts`, so loading the customer execution path no longer requires importing the legacy runner for integrity.
+The AI-native coordinator imports `withFinancialRunIntegrity` directly from `integrity.ts`, so loading the customer execution path no longer requires importing the legacy runner for integrity.
 
-`run.ts` retains only temporary compatibility behavior for legacy tests until they are migrated.
+`run.ts` retains temporary compatibility behavior only for remaining legacy tests.
 
 ### Review replay / finalization — extracted
 
@@ -61,25 +61,34 @@ This module owns deterministic review task construction, review replay, post-rev
 
 ### Persistence — migrated
 
-`backend/financial-intelligence/persistence/service.ts` imports:
+`backend/financial-intelligence/persistence/service.ts` imports integrity from `../integrity` and review replay from `../review`.
 
-- integrity directly from `../integrity`;
-- review replay directly from `../review`.
+Durable persistence, analysis/report integrity checks, archive/revision operations and human review therefore no longer require the legacy runner as their authoritative dependency.
 
-Therefore durable persistence, analysis/report integrity checks, archive/revision operations and human review no longer require the legacy runner as their authoritative dependency.
+### Test migration — started
+
+A purpose-built source-verified fixture now exists at:
+
+`tests/financial-intelligence/fixtures/financial-run.ts`
+
+`tests/financial-intelligence/persistence.test.ts` has been migrated away from:
+
+- `runFinancialIntelligence`;
+- XLSX construction used only to invoke the retired parser;
+- integrity imports through `run.ts`.
+
+It now tests persistence against a direct FinancialRun fixture representing the post-AI/source-verified contract.
 
 ## Remaining blockers to physical deletion
 
-The remaining blocker is now primarily test migration.
-
-The existing FI test suite still contains direct tests of the retired architecture. Verified examples include:
+Remaining legacy test dependencies include:
 
 - `tests/financial-intelligence/income-statement.test.ts` importing `extract`, `mapLabel`, `model-mapping`, and legacy `runFinancialIntelligence`;
 - `tests/financial-intelligence/provider-reliability.test.ts` importing the old `interpretation/whole-statement` layer;
 - `tests/financial-intelligence/semantic-acceptance-pipeline.test.ts` testing the old semantic acceptance pipeline;
-- `tests/financial-intelligence/review-golden-path.test.ts` and `persistence.test.ts` constructing fixtures through legacy `runFinancialIntelligence`.
+- `tests/financial-intelligence/review-golden-path.test.ts` constructing its review fixture through legacy `runFinancialIntelligence`.
 
-Deleting the old modules before migrating these tests would make `npm test` fail for reasons unrelated to the AI-native customer path.
+These tests must be migrated, replaced by AI-native boundary tests, or explicitly retired before physical deletion of the old modules.
 
 ## Dependency-safe retirement sequence
 
@@ -90,7 +99,7 @@ P0 order:
 3. extract review replay/finalization from the legacy execution module — **implemented**;
 4. migrate persistence imports to extracted integrity/review modules — **implemented**;
 5. migrate the AI-native coordinator integrity import directly to `integrity.ts` — **implemented**;
-6. migrate FI golden-path/persistence/review tests to purpose-built AI-native/source-verified fixtures rather than the legacy parser — **pending**;
+6. migrate FI golden-path/persistence/review tests to purpose-built AI-native/source-verified fixtures rather than the legacy parser — **in progress; persistence migrated**;
 7. delete the legacy execution function and semantic-preparation modules once no production/test dependency remains — **pending**;
 8. run TypeScript, lint, FI tests and build — **pending**;
 9. execute the same production-equivalent path against Rieter Excel, unseen Excel and text-based PDF — **pending**.
@@ -102,17 +111,18 @@ Integrity extraction: IMPLEMENTED.
 AI-native integrity decoupling: IMPLEMENTED.  
 Review extraction: IMPLEMENTED.  
 Persistence migration: IMPLEMENTED.  
+Legacy test migration: IN PROGRESS.  
 Legacy physical retirement: NOT YET COMPLETE.  
 Production acceptance: NOT YET VERIFIED.  
 Revenue OS capability status must remain Blocked until same-path production acceptance evidence exists.
 
-No passing claim is made until typecheck, lint, FI tests and build have actually executed.
+No passing claim is made until typecheck, lint, FI tests and build have actually executed. No GitHub Actions run is currently attached to the latest branch head.
 
 ## Epistemic status
 
-Verified evidence: repository imports, current PR execution route, extracted modules and current test dependencies.  
+Verified evidence: repository imports, current PR execution route, extracted modules and migrated persistence test dependency.  
 Assumption: none required for the dependency findings above.  
-Hypothesis: completing test migration will permit physical legacy retirement without changing financial methodology.  
+Hypothesis: completing the remaining test migration will permit physical legacy retirement without changing financial methodology.  
 Decision: proceed dependency-safely; do not delete legacy modules merely to make the tree look clean.
 
 `DOMAIN_KNOWLEDGE_GAP: none` — this audit changes architecture boundaries only and introduces no new financial methodology or control rule.
