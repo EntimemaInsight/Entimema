@@ -18,6 +18,16 @@ import {
 } from "./structural-representation";
 
 export const FINANCIAL_UNDERSTANDING_CONTRACT_VERSION = "financial-understanding.v2" as const;
+export const FINANCIAL_UNDERSTANDING_TIMEOUT_MS = 45_000;
+
+export function getFinancialUnderstandingRequestConfig(apiKey: string) {
+  const configuredTimeout = Number(process.env.FINANCIAL_UNDERSTANDING_TIMEOUT_MS);
+  const timeoutMs =
+    Number.isInteger(configuredTimeout) && configuredTimeout > 0
+      ? Math.min(configuredTimeout, FINANCIAL_UNDERSTANDING_TIMEOUT_MS)
+      : FINANCIAL_UNDERSTANDING_TIMEOUT_MS;
+  return { apiKey, timeoutMs, attempts: 1 as const };
+}
 
 export type FinancialUnderstandingModelResult = {
   documentType: "financial_statement" | "unsupported";
@@ -239,7 +249,7 @@ export async function understandFinancials(structure: WorkbookStructuralRepresen
     input: payload,
     max_output_tokens: maxOutputTokens,
     text: { format: { type: "json_schema", name: "financial_understanding", strict: true, schema } },
-  }, { apiKey, timeoutMs: 20_000, attempts: 1 }, injected);
+  }, getFinancialUnderstandingRequestConfig(apiKey), injected);
 
   if (response.status !== "completed") throw new Error("OPENAI_RESPONSE_INVALID");
   const result = parseFinancialUnderstandingResult(JSON.parse(response.output_text));
