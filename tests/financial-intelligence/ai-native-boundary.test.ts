@@ -11,6 +11,7 @@ const source = (path: string) => readFileSync(resolve(repo, path), "utf8");
 const http = source("backend/api/financial-intelligence/http.ts");
 const coordinator = source("backend/financial-intelligence/ai-native-run.ts");
 const understanding = source("backend/financial-intelligence/financial-understanding-v2.ts");
+const client = source("app/workspace/components/FinancialIntelligenceWorkspace.tsx");
 
 const legacySemanticModules = [
   "./extraction",
@@ -34,6 +35,13 @@ test("V1 Data Preparation accepts upload only", () => {
   assert.match(http, /key !== "file"/);
   assert.match(http, /form\.getAll\("file"\)\.length !== 1/);
   assert.equal(http.includes("selectedSheet"), false);
+  assert.equal(client.includes("selectedSheet"), false);
+});
+
+test("first useful result uses one model attempt and does not generate a PDF", () => {
+  assert.match(understanding, /attempts: 1 as const/);
+  assert.match(http, /analyzeValidatedIncomeStatement/);
+  assert.equal(http.includes("createReport"), false);
 });
 
 test("AI-native coordinator has no legacy semantic-preparation dependency", () => {

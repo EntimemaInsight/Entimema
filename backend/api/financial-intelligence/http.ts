@@ -10,6 +10,7 @@ import {
   runAiNativeFinancialIntelligence,
 } from "../../financial-intelligence/ai-native-run";
 import type { FinancialRunService } from "../../financial-intelligence/persistence/service";
+import { analyzeValidatedIncomeStatement } from "../../financial-intelligence/analysis";
 
 export function customerFinancialRun<T extends { resolverTelemetry?: unknown; reviewTasks?: unknown }>(run: T) {
   const { resolverTelemetry, reviewTasks, ...customer } = run;
@@ -64,6 +65,7 @@ export function createFinancialIntelligenceHandler(deps: {
   return async (request: Request) => {
     const runId = randomUUID();
     const totalStarted = performance.now();
+    let uploadFormParsingMs = 0;
     let actor: AuthorizedActor | undefined;
 
     try {
@@ -79,8 +81,10 @@ export function createFinancialIntelligenceHandler(deps: {
       }
 
       let form: FormData;
+      const formStarted = performance.now();
       try {
         form = await request.formData();
+        uploadFormParsingMs = Math.round(performance.now() - formStarted);
       } catch (error) {
         throw new AgentError("FILE_MISSING", 400, "Malformed multipart form data.", error);
       }
@@ -173,12 +177,19 @@ export function createFinancialIntelligenceHandler(deps: {
         event: "execution_completed",
         telemetry: {
           ...result.understandingTelemetry,
+          uploadFormParsingMs,
           persistenceMs: Math.round(performance.now() - persistenceStarted),
+          timeToFirstUsefulResultMs: Math.round(performance.now() - totalStarted),
           totalExecutionMs: Math.round(performance.now() - totalStarted),
         },
       });
 
-      return Response.json(customerFinancialRun(result), {
+      // Analysis is deterministic and cheap. Include it in the first response so
+      // the customer does not need a second request before seeing useful output.
+      const analysis = result.status === "validated"
+        ? analyzeValidatedIncomeStatement(result, new Date().toISOString(), result.integrity)
+        : null;
+      return Response.json({ ...customerFinancialRun(result), analysis }, {
         headers: { "Cache-Control": "no-store" },
       });
     } catch (error) {

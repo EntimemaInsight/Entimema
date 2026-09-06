@@ -70,21 +70,21 @@ const modelResult = (): FinancialUnderstandingModelResult => ({
   ambiguities: [],
 });
 
-test("Financial Understanding uses one attempt and a safely bounded 45-second budget", () => {
+test("Financial Understanding uses one attempt and enforces the seven-second product budget", () => {
   const previous = process.env.FINANCIAL_UNDERSTANDING_TIMEOUT_MS;
   try {
     delete process.env.FINANCIAL_UNDERSTANDING_TIMEOUT_MS;
-    assert.equal(FINANCIAL_UNDERSTANDING_TIMEOUT_MS, 45_000);
+    assert.equal(FINANCIAL_UNDERSTANDING_TIMEOUT_MS, 7_000);
     assert.deepEqual(getFinancialUnderstandingRequestConfig("test-key"), {
       apiKey: "test-key",
-      timeoutMs: 45_000,
+      timeoutMs: 7_000,
       attempts: 1,
     });
 
     process.env.FINANCIAL_UNDERSTANDING_TIMEOUT_MS = "90000";
-    assert.equal(getFinancialUnderstandingRequestConfig("test-key").timeoutMs, 45_000);
+    assert.equal(getFinancialUnderstandingRequestConfig("test-key").timeoutMs, 7_000);
     process.env.FINANCIAL_UNDERSTANDING_TIMEOUT_MS = "not-a-duration";
-    assert.equal(getFinancialUnderstandingRequestConfig("test-key").timeoutMs, 45_000);
+    assert.equal(getFinancialUnderstandingRequestConfig("test-key").timeoutMs, 7_000);
   } finally {
     restoreEnv("FINANCIAL_UNDERSTANDING_TIMEOUT_MS", previous);
   }
@@ -153,13 +153,16 @@ test("execution beyond the configured budget aborts once with OPENAI_TIMEOUT", a
   }
 });
 
-test("compact structural representation retains coordinates, formulas and merges without binary or styles", () => {
+test("compact structural representation retains coordinates and values without redundant workbook metadata", () => {
   const source = workbook([["Example Ltd"], [null, "Period", "2025"], [null, "Revenue", { f: "100+20", v: 120 }]]);
   const structure = buildWorkbookStructuralRepresentation(source);
   const payload = compactWorkbookStructure(structure);
   assert.equal(structure.sheets[0].cells.find((cell) => cell.ref === "C3")?.formula, "100+20");
   assert.deepEqual(structure.sheets[0].merges, ["A1:B1"]);
   assert.ok(payload.length < source.buffer.length * 2);
+  assert.equal(payload.includes("100+20"), false);
+  assert.equal(payload.includes("usedRange"), false);
+  assert.equal(payload.includes("merges"), false);
   assert.equal(payload.includes("cellStyles"), false);
   assert.equal(payload.includes(source.buffer.toString("base64").slice(0, 20)), false);
 });

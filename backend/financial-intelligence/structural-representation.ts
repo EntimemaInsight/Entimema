@@ -207,15 +207,18 @@ export function buildWorkbookStructuralRepresentation(
 
 export function compactWorkbookStructure(
   structure: WorkbookStructuralRepresentation,
-  maxChars = 55_000,
+  maxChars = 32_000,
 ) {
+  // Keep the lossless representation in-process for deterministic hydration, but
+  // send only coordinates and primitive cell values to the model. Row/column
+  // indexes, formulas, merge metadata and used-range metadata are mechanically
+  // recoverable and previously made the prompt substantially larger.
   const payload = JSON.stringify({
-    version: structure.version,
-    sheets: structure.sheets.map((sheet) => ({
-      name: sheet.name,
-      usedRange: sheet.usedRange,
-      cells: sheet.cells,
-      merges: sheet.merges,
+    v: 3,
+    s: structure.sheets.map((sheet, index) => ({
+      id: `s${index + 1}`,
+      n: sheet.name,
+      c: sheet.cells.map((cell) => [cell.ref, cell.kind[0], cell.value]),
     })),
   });
   if (payload.length > maxChars) throw new Error("FINANCIAL_SOURCE_TOO_LARGE");

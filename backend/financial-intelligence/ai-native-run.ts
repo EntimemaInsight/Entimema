@@ -292,7 +292,15 @@ export async function runAiNativeFinancialIntelligence(document: InspectedDocume
   const telemetry: Record<string, unknown> = {
     executionPathVersion: "financial-understanding.v2",
     sourceReadMs: 0,
+    mechanicalReadMs: 0,
+    payloadPreparationMs: 0,
+    hydrationMs: 0,
+    responseParsingMs: 0,
     financialUnderstandingInvoked: false,
+    modelCalls: 0,
+    requestPayloadChars: 0,
+    estimatedInputTokens: 0,
+    outputTokens: null,
     financialUnderstandingMs: 0,
     validationMs: 0,
     totalExecutionMs: 0,
@@ -309,6 +317,7 @@ export async function runAiNativeFinancialIntelligence(document: InspectedDocume
     structure = await buildFinancialSourceRepresentation(document);
     Object.assign(telemetry, {
       sourceReadMs: Math.round(performance.now() - sourceStarted),
+      mechanicalReadMs: Math.round(performance.now() - sourceStarted),
       sourceContainers: structure.stats.workbookSheets,
       structuralRows: structure.stats.structuralRows,
     });
@@ -319,6 +328,8 @@ export async function runAiNativeFinancialIntelligence(document: InspectedDocume
 
   let understanding;
   try {
+    telemetry.financialUnderstandingInvoked = true;
+    telemetry.modelCalls = 1;
     understanding = await understandFinancials(structure);
     Object.assign(telemetry, {
       financialUnderstandingInvoked: understanding.modelCalls > 0,
@@ -329,6 +340,8 @@ export async function runAiNativeFinancialIntelligence(document: InspectedDocume
       requestPayloadChars: understanding.requestPayloadChars,
       estimatedInputTokens: understanding.estimatedInputTokens,
       outputTokens: understanding.outputTokens,
+      payloadPreparationMs: understanding.payloadPreparationMs,
+      responseParsingMs: understanding.responseParsingMs,
     });
   } catch (error) {
     telemetry.totalExecutionMs = Math.round(performance.now() - totalStarted);
@@ -336,9 +349,12 @@ export async function runAiNativeFinancialIntelligence(document: InspectedDocume
   }
 
   let extracted;
+  const hydrationStarted = performance.now();
   try {
     extracted = hydrateUnderstanding(document, structure, understanding.result);
+    telemetry.hydrationMs = Math.round(performance.now() - hydrationStarted);
   } catch (error) {
+    telemetry.hydrationMs = Math.round(performance.now() - hydrationStarted);
     telemetry.totalExecutionMs = Math.round(performance.now() - totalStarted);
     throw new AiNativeExecutionError("FI_CONTRACT_BUILD_FAILURE", "contract_build", telemetry, error);
   }
@@ -365,6 +381,11 @@ export async function runAiNativeFinancialIntelligence(document: InspectedDocume
     executionPathVersion: "financial-understanding.v2",
     financialUnderstandingInvoked: understanding.modelCalls > 0,
     structuralScanMs: Number(telemetry.sourceReadMs),
+    mechanicalReadMs: Number(telemetry.mechanicalReadMs),
+    payloadPreparationMs: understanding.payloadPreparationMs,
+    hydrationMs: Number(telemetry.hydrationMs),
+    responseParsingMs: understanding.responseParsingMs,
+    timeToFirstUsefulResultMs: Number(telemetry.totalExecutionMs),
     financialUnderstandingMs: understanding.durationMs,
     validationMs: Number(telemetry.validationMs),
     totalExecutionMs: Number(telemetry.totalExecutionMs),
