@@ -39,16 +39,29 @@ The following code remains in the repository but is not part of the customer V1 
 
 These modules MUST NOT be reintroduced into the V1 upload execution path as fallback or compatibility behavior.
 
+## Dependency extraction progress
+
+Run-integrity signing and verification have now been physically extracted from the legacy execution coordinator into:
+
+`backend/financial-intelligence/integrity.ts`
+
+The extracted module owns:
+
+- deterministic canonical JSON signing;
+- `withFinancialRunIntegrity`;
+- `hasValidIntegrity`.
+
+`run.ts` currently retains only a compatibility re-export while downstream imports are migrated. This is intentionally transitional: the integrity implementation itself no longer lives in the legacy semantic execution module.
+
+The remaining material non-intake responsibility inside `run.ts` is exception-review replay/finalization (`replayFinancialReview`) plus the legacy `runFinancialIntelligence` execution function.
+
 ## Verified dependency blocker to physical deletion
 
-`run.ts` is not yet safe to delete because it also owns two non-intake responsibilities used by durable execution:
+`run.ts` is still not safe to delete because exception-review replay/finalization remains there and is consumed by durable persistence.
 
-- run-integrity signing / verification (`withFinancialRunIntegrity`, `hasValidIntegrity`);
-- exception-review replay (`replayFinancialReview`).
+`backend/financial-intelligence/persistence/service.ts` still imports review replay and integrity through the compatibility surface of `run.ts`. The AI-native coordinator also still imports the integrity helper through that compatibility surface.
 
-`backend/financial-intelligence/persistence/service.ts` imports those responsibilities from `run.ts`. The AI-native coordinator also currently imports `withFinancialRunIntegrity` from `run.ts`.
-
-Therefore physical deletion of `run.ts` before responsibility extraction would risk persistence, analysis/report integrity checks, archive/revision operations and review replay.
+Therefore the next dependency-safe step is to extract review replay/finalization, then move consumers to the neutral modules before deleting the legacy coordinator.
 
 ## Legacy test dependency blocker
 
@@ -66,9 +79,9 @@ Deleting the old modules before migrating these tests would make `npm test` fail
 P0 order:
 
 1. lock the AI-native execution boundary with regression tests — **implemented, execution pending**;
-2. extract integrity signing/verification from `run.ts` into a neutral infrastructure module;
-3. extract review replay/finalization from the legacy execution module, preserving deterministic validation and human exception handling;
-4. update persistence and AI-native imports to the extracted modules;
+2. extract integrity signing/verification from `run.ts` into a neutral infrastructure module — **implemented, execution pending**;
+3. extract review replay/finalization from the legacy execution module, preserving deterministic validation and human exception handling — **next**;
+4. update persistence and AI-native imports to the extracted modules and remove the compatibility re-export;
 5. migrate FI golden-path/persistence/review tests to construct runs through AI-native contracts or purpose-built fixtures rather than the legacy parser;
 6. delete or archive the legacy execution function and semantic-preparation modules once no production/test dependency remains;
 7. run TypeScript, lint, FI tests and build;
@@ -77,7 +90,8 @@ P0 order:
 ## Current validation status
 
 Architecture boundary: IMPLEMENTED, awaiting test execution.  
-Legacy physical retirement: BLOCKED by identified integrity/review/test dependencies.  
+Integrity extraction: IMPLEMENTED, awaiting test execution.  
+Legacy physical retirement: BLOCKED by review/test dependencies.  
 Production acceptance: NOT YET VERIFIED.  
 Revenue OS capability status must remain Blocked until same-path production acceptance evidence exists.
 
@@ -85,9 +99,9 @@ No GitHub Actions workflow run is currently available for this PR branch, so thi
 
 ## Epistemic status
 
-Verified evidence: repository imports, current PR execution route and current test dependencies.  
+Verified evidence: repository imports, current PR execution route, extracted integrity implementation and current test dependencies.  
 Assumption: none required for the dependency findings above.  
-Hypothesis: extracting integrity/review responsibilities will allow physical legacy retirement without changing financial methodology.  
+Hypothesis: extracting review responsibilities next will allow persistence and tests to detach from the legacy execution coordinator.  
 Decision: proceed dependency-safely; do not delete legacy modules merely to make the tree look clean.
 
 `DOMAIN_KNOWLEDGE_GAP: none` — this audit changes architecture boundaries only and introduces no new financial methodology or control rule.
