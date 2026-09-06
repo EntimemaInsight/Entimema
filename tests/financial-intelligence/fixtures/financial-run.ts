@@ -1,11 +1,11 @@
 import { randomUUID } from "node:crypto";
 import { withFinancialRunIntegrity } from "../../../backend/financial-intelligence/integrity";
-import type { FinancialRun } from "../../../backend/financial-intelligence/schema";
+import { CANONICAL_INCOME_STATEMENT_VERSION, type FinancialRun } from "../../../backend/financial-intelligence/schema";
 
 export function makeFinancialRunFixture(overrides: Partial<FinancialRun> = {}): FinancialRun {
   const run: FinancialRun = {
     runId: randomUUID(),
-    schemaVersion: "income-statement.v1",
+    schemaVersion: CANONICAL_INCOME_STATEMENT_VERSION,
     integrity: "",
     status: "review_required",
     readiness: {
@@ -15,12 +15,15 @@ export function makeFinancialRunFixture(overrides: Partial<FinancialRun> = {}): 
       gates: {},
     },
     validationSummary: {
-      total: 0,
       passed: 0,
+      warnings: 0,
       failed: 0,
-      reviewed: 0,
+      notApplicable: 0,
+      applicable: 0,
+      expected: 0,
       coverage: 0,
       passRate: 0,
+      materialFailures: 0,
     },
     sessionScoped: true,
     classification: {
@@ -132,7 +135,7 @@ export function makeFinancialRunFixture(overrides: Partial<FinancialRun> = {}): 
         year: 2025,
         month: null,
         quarter: null,
-        designation: "current",
+        designation: "actual",
         durationMonths: 12,
         sourceColumn: 2,
         confidence: 1,
@@ -157,7 +160,7 @@ export function makeFinancialRunFixture(overrides: Partial<FinancialRun> = {}): 
         periodId: "p-2025",
         currency: "USD",
         unitScale: 1,
-        mappingMethod: "semantic",
+        mappingMethod: "model-assisted",
         mappingConfidence: 1,
         mappingExplanation: "Fixture source-verified AI interpretation",
         reviewState: "accepted",
@@ -168,10 +171,17 @@ export function makeFinancialRunFixture(overrides: Partial<FinancialRun> = {}): 
     evidence: [
       {
         id: "ev-revenue-2025",
+        sourceFilename: "same.xlsx",
         kind: "spreadsheet",
-        source: "same.xlsx",
-        locator: "Income Statement!B2",
-        excerpt: "Revenue | 100",
+        sheetName: "Income Statement",
+        cellAddress: "B2",
+        rowNumber: 2,
+        columnNumber: 2,
+        rawRowLabel: "Revenue",
+        rawColumnHeader: "2025",
+        rawCellValue: 100,
+        structuralContext: "Income Statement",
+        extractionMethod: "deterministic-structural-cell-reference",
       },
     ],
     controls: [],
