@@ -141,6 +141,12 @@ A normal readable Income Statement returning `0 periods / 0 lines` is a Product 
 
 Do not mark the capability Demo Ready or Production Ready until production acceptance evidence exists for the above corpus.
 
+## Dependency retirement gate
+
+Physical deletion of legacy preparation modules is dependency-gated, not cosmetic. See `AI_INTAKE_DEPENDENCY_AUDIT_V1.md`.
+
+Current verified blockers are shared integrity/review responsibilities in legacy `run.ts` and tests that still exercise the retired parsing stack. Those responsibilities/tests must be migrated before deletion. The customer V1 execution boundary is separately guarded by `tests/financial-intelligence/ai-native-boundary.test.ts`.
+
 ## Finance Domain boundary
 
 No new financial methodology is introduced by this architecture. If implementation requires a new accounting rule, calculation convention, financial dependency or control methodology, stop and raise `DOMAIN_KNOWLEDGE_GAP` rather than inventing it in Product.
