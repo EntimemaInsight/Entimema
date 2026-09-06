@@ -1,7 +1,8 @@
 import { createHash } from "node:crypto";
-import pdfParse from "pdf-parse";
 import * as XLSX from "xlsx";
 import type { InspectedDocument } from "../lib/files";
+
+const pdfParse = require("pdf-parse/lib/pdf-parse.js") as typeof import("pdf-parse");
 
 export type StructuralCell = {
   ref: string;
