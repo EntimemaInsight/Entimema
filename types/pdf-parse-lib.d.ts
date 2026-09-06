@@ -1,1 +1,12 @@
-declare module "pdf-parse/lib/pdf-parse.js" { export default function pdf(dataBuffer: Buffer): Promise<{ text: string }>; }
+declare module "pdf-parse/lib/pdf-parse.js" {
+  export type PdfParseResult = {
+    text: string;
+    numpages: number;
+    numrender?: number;
+    info?: Record<string, unknown>;
+    metadata?: unknown;
+    version?: string;
+  };
+
+  export default function pdf(dataBuffer: Buffer): Promise<PdfParseResult>;
+}
