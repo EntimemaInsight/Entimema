@@ -1,11 +1,11 @@
 "use client";
 import Link from "next/link";
+import { FinancialIntelligenceResult } from "./FinancialIntelligenceResult";
 import { useState } from "react";
 import type { Result } from "@/backend/financial-intelligence/v1/contract";
 import { DOCUMENT_CLASSIFIER_MAX_FILE_BYTES } from "@/lib/document-classifier-upload";
 import styles from "./FinancialIntelligenceWorkspace.module.css";
 
-const number = new Intl.NumberFormat("en", { maximumFractionDigits: 6 });
 export function FinancialIntelligenceWorkspace({
   user,
 }: {
@@ -89,123 +89,7 @@ export function FinancialIntelligenceWorkspace({
           {error}
         </p>
       )}
-      {result && (
-        <section className={styles.result} aria-label="Result">
-          <p className={styles.eyebrow}>RESULT / INCOME STATEMENT</p>
-          <h2>{result.entity ?? "Income Statement"}</h2>
-          <dl className={styles.metadata}>
-            <div>
-              <dt>Currency</dt>
-              <dd>{result.currency ?? "Not stated"}</dd>
-            </div>
-            <div>
-              <dt>Scale</dt>
-              <dd>{result.scale ?? "Not stated"}</dd>
-            </div>
-            <div>
-              <dt>Periods</dt>
-              <dd>{result.periods.join(" · ")}</dd>
-            </div>
-          </dl>
-          <section className={styles.analysis}>
-            <h3>Executive Summary</h3>
-            <p>{result.analysis.executiveSummary}</p>
-          </section>
-          <h3>Key Performance Indicators</h3>
-          <div className={styles.kpis}>
-            {result.analysis.kpis.map((kpi) => (
-              <article key={kpi.id}>
-                <p>
-                  {kpi.label} · {kpi.currentPeriod}
-                </p>
-                <strong>
-                  {kpi.status === "valid"
-                    ? number.format(kpi.value) + "%"
-                    : kpi.status === "sign_change"
-                      ? "Sign change"
-                      : kpi.status === "not_meaningful"
-                        ? "Not meaningful"
-                        : "Unavailable"}
-                </strong>
-                {kpi.status === "sign_change" && (
-                  <p>
-                    {kpi.direction === "positive_to_negative"
-                      ? "Positive to negative"
-                      : "Negative to positive"}
-                    : {number.format(kpi.priorValue!)} →{" "}
-                    {number.format(kpi.currentValue!)} ({kpi.priorPeriod} →{" "}
-                    {kpi.currentPeriod})
-                  </p>
-                )}
-                {(kpi.status === "unavailable" ||
-                  kpi.status === "not_meaningful") && <p>{kpi.reason}</p>}
-              </article>
-            ))}
-          </div>
-          <section className={styles.analysis}>
-            <h3>Key Findings</h3>
-            <ul>
-              {result.analysis.findings.map((finding) => (
-                <li key={finding.id}>
-                  <strong>{finding.title}: </strong>
-                  {finding.statement}
-                </li>
-              ))}
-            </ul>
-          </section>
-          <h3>Verified Income Statement</h3>
-          <div
-            className={styles.table}
-            tabIndex={0}
-            role="region"
-            aria-label="Financial lines, scroll horizontally for all periods"
-          >
-            <table>
-              <caption>
-                Source financial lines · {result.verification.verifiedValues}{" "}
-                verified values
-              </caption>
-              <thead>
-                <tr>
-                  <th scope="col">Line item</th>
-                  {result.periods.map((period) => (
-                    <th scope="col" key={period}>
-                      {period}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {result.lines.map((line, i) => (
-                  <tr key={i}>
-                    <th scope="row">{line.label}</th>
-                    {result.periods.map((period) => {
-                      const value = line.values.find(
-                        (value) => value.period === period,
-                      );
-                      return (
-                        <td key={period}>
-                          {value ? (
-                            <>
-                              <span>{number.format(value.value)}</span>
-                              <details>
-                                <summary>Source evidence</summary>
-                                <small>{value.sourceRef}</small>
-                              </details>
-                            </>
-                          ) : (
-                            "—"
-                          )}
-                        </td>
-                      );
-                    })}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </section>
-      )}
+      {result && <FinancialIntelligenceResult result={result} />}
     </main>
   );
 }
