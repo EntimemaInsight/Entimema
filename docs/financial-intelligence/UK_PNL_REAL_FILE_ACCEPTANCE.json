@@ -1,0 +1,360 @@
+{
+  "date": "2026-09-07T12:40:35.808Z",
+  "status": "UK_PNL_REAL_FILE_ACCEPTANCE_FAILED",
+  "fileName": "profit-and-loss-template-uk.xlsx",
+  "fileBytes": 12814,
+  "sha256": "993effa7bd293d5633c133a7145ca5256690cc526931d5496950786b40bf8030",
+  "aiCalls": 1,
+  "model": "gpt-4.1-nano-2025-04-14",
+  "providerHttpStatus": 200,
+  "actualModel": "gpt-4.1-nano-2025-04-14",
+  "interpretation": {
+    "statementType": "income_statement",
+    "entity": "Example Trading Ltd",
+    "currency": "GBP",
+    "scale": "units",
+    "periods": [
+      "Year ended 31 March 2025"
+    ],
+    "lines": [
+      {
+        "sourceRow": 7,
+        "label": "TOTAL REVENUE",
+        "concept": "revenue",
+        "values": [
+          {
+            "period": "Year ended 31 March 2025",
+            "sourceRef": "P&L Statement!C7"
+          }
+        ]
+      },
+      {
+        "sourceRow": 11,
+        "label": "Sales / turnover",
+        "concept": null,
+        "values": [
+          {
+            "period": "Year ended 31 March 2025",
+            "sourceRef": "P&L Statement!C11"
+          }
+        ]
+      },
+      {
+        "sourceRow": 12,
+        "label": "Other income",
+        "concept": null,
+        "values": [
+          {
+            "period": "Year ended 31 March 2025",
+            "sourceRef": "P&L Statement!C12"
+          }
+        ]
+      },
+      {
+        "sourceRow": 13,
+        "label": "Total Revenue",
+        "concept": "revenue",
+        "values": [
+          {
+            "period": "Year ended 31 March 2025",
+            "sourceRef": "P&L Statement!C13"
+          }
+        ]
+      },
+      {
+        "sourceRow": 16,
+        "label": "Materials / cost of goods",
+        "concept": null,
+        "values": [
+          {
+            "period": "Year ended 31 March 2025",
+            "sourceRef": "P&L Statement!C16"
+          }
+        ]
+      },
+      {
+        "sourceRow": 17,
+        "label": "Subcontractors",
+        "concept": null,
+        "values": [
+          {
+            "period": "Year ended 31 March 2025",
+            "sourceRef": "P&L Statement!C17"
+          }
+        ]
+      },
+      {
+        "sourceRow": 18,
+        "label": "Direct labour",
+        "concept": null,
+        "values": [
+          {
+            "period": "Year ended 31 March 2025",
+            "sourceRef": "P&L Statement!C18"
+          }
+        ]
+      },
+      {
+        "sourceRow": 19,
+        "label": "Total Cost of Sales",
+        "concept": null,
+        "values": [
+          {
+            "period": "Year ended 31 March 2025",
+            "sourceRef": "P&L Statement!C19"
+          }
+        ]
+      },
+      {
+        "sourceRow": 21,
+        "label": "GROSS PROFIT",
+        "concept": "gross_profit",
+        "values": [
+          {
+            "period": "Year ended 31 March 2025",
+            "sourceRef": "P&L Statement!C21"
+          }
+        ]
+      },
+      {
+        "sourceRow": 22,
+        "label": "Gross margin %",
+        "concept": null,
+        "values": [
+          {
+            "period": "Year ended 31 March 2025",
+            "sourceRef": "P&L Statement!C22"
+          }
+        ]
+      },
+      {
+        "sourceRow": 25,
+        "label": "Wages and salaries",
+        "concept": null,
+        "values": [
+          {
+            "period": "Year ended 31 March 2025",
+            "sourceRef": "P&L Statement!C25"
+          }
+        ]
+      },
+      {
+        "sourceRow": 26,
+        "label": "Rent and rates",
+        "concept": null,
+        "values": [
+          {
+            "period": "Year ended 31 March 2025",
+            "sourceRef": "P&L Statement!C26"
+          }
+        ]
+      },
+      {
+        "sourceRow": 27,
+        "label": "Utilities",
+        "concept": null,
+        "values": [
+          {
+            "period": "Year ended 31 March 2025",
+            "sourceRef": "P&L Statement!C27"
+          }
+        ]
+      },
+      {
+        "sourceRow": 28,
+        "label": "Repairs and maintenance",
+        "concept": null,
+        "values": [
+          {
+            "period": "Year ended 31 March 2025",
+            "sourceRef": "P&L Statement!C28"
+          }
+        ]
+      },
+      {
+        "sourceRow": 29,
+        "label": "Vehicle costs",
+        "concept": null,
+        "values": [
+          {
+            "period": "Year ended 31 March 2025",
+            "sourceRef": "P&L Statement!C29"
+          }
+        ]
+      },
+      {
+        "sourceRow": 30,
+        "label": "Marketing and advertising",
+        "concept": null,
+        "values": [
+          {
+            "period": "Year ended 31 March 2025",
+            "sourceRef": "P&L Statement!C30"
+          }
+        ]
+      },
+      {
+        "sourceRow": 31,
+        "label": "IT and communications",
+        "concept": null,
+        "values": [
+          {
+            "period": "Year ended 31 March 2025",
+            "sourceRef": "P&L Statement!C31"
+          }
+        ]
+      },
+      {
+        "sourceRow": 32,
+        "label": "Professional fees",
+        "concept": null,
+        "values": [
+          {
+            "period": "Year ended 31 March 2025",
+            "sourceRef": "P&L Statement!C32"
+          }
+        ]
+      },
+      {
+        "sourceRow": 33,
+        "label": "Insurance",
+        "concept": null,
+        "values": [
+          {
+            "period": "Year ended 31 March 2025",
+            "sourceRef": "P&L Statement!C33"
+          }
+        ]
+      },
+      {
+        "sourceRow": 34,
+        "label": "Depreciation",
+        "concept": null,
+        "values": [
+          {
+            "period": "Year ended 31 March 2025",
+            "sourceRef": "P&L Statement!C34"
+          }
+        ]
+      },
+      {
+        "sourceRow": 35,
+        "label": "Other operating expenses",
+        "concept": null,
+        "values": [
+          {
+            "period": "Year ended 31 March 2025",
+            "sourceRef": "P&L Statement!C35"
+          }
+        ]
+      },
+      {
+        "sourceRow": 36,
+        "label": "Total Operating Expenses",
+        "concept": null,
+        "values": [
+          {
+            "period": "Year ended 31 March 2025",
+            "sourceRef": "P&L Statement!C36"
+          }
+        ]
+      },
+      {
+        "sourceRow": 38,
+        "label": "OPERATING PROFIT",
+        "concept": "operating_profit",
+        "values": [
+          {
+            "period": "Year ended 31 March 2025",
+            "sourceRef": "P&L Statement!C38"
+          }
+        ]
+      },
+      {
+        "sourceRow": 41,
+        "label": "Interest income",
+        "concept": null,
+        "values": [
+          {
+            "period": "Year ended 31 March 2025",
+            "sourceRef": "P&L Statement!C41"
+          }
+        ]
+      },
+      {
+        "sourceRow": 42,
+        "label": "Interest expense",
+        "concept": null,
+        "values": [
+          {
+            "period": "Year ended 31 March 2025",
+            "sourceRef": "P&L Statement!C42"
+          }
+        ]
+      },
+      {
+        "sourceRow": 43,
+        "label": "Net Other Income / (Expense)",
+        "concept": null,
+        "values": [
+          {
+            "period": "Year ended 31 March 2025",
+            "sourceRef": "P&L Statement!C43"
+          }
+        ]
+      },
+      {
+        "sourceRow": 45,
+        "label": "NET PROFIT BEFORE TAX",
+        "concept": null,
+        "values": [
+          {
+            "period": "Year ended 31 March 2025",
+            "sourceRef": "P&L Statement!C45"
+          }
+        ]
+      },
+      {
+        "sourceRow": 46,
+        "label": "Tax provision",
+        "concept": null,
+        "values": [
+          {
+            "period": "Year ended 31 March 2025",
+            "sourceRef": "P&L Statement!C46"
+          }
+        ]
+      },
+      {
+        "sourceRow": 48,
+        "label": "NET PROFIT AFTER TAX",
+        "concept": "net_income",
+        "values": [
+          {
+            "period": "Year ended 31 March 2025",
+            "sourceRef": "P&L Statement!C48"
+          }
+        ]
+      }
+    ]
+  },
+  "timings": {
+    "mechanicalReadMs": 28.32,
+    "aiMs": 9200.45,
+    "validationMs": 8.04,
+    "verificationMs": 1.64,
+    "calculationMs": 0,
+    "totalMs": 9238.5
+  },
+  "failureBoundary": "OPENAI_RESPONSE_INVALID",
+  "validation": {
+    "validationFailureCode": "SOURCE_LABEL_MISMATCH",
+    "failedPath": "lines[0].label",
+    "missingRequiredFields": [],
+    "expectedType": "source row label",
+    "receivedType": "different label",
+    "category": "source_association",
+    "jsonParsingSucceeded": true,
+    "schemaValidationSucceeded": true
+  }
+}
