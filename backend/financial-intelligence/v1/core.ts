@@ -16,9 +16,9 @@ import { calculate } from "./calculate";
 
 import { getV1ModelConfig } from "./model";
 export { MODEL } from "./model";
-export const AI_TIMEOUT_MS = 9_200;
-export const HTTP_DEADLINE_MS = 9_800;
-export const COMPLETION_RESERVE_MS = 300;
+export const AI_TIMEOUT_MS = 120_000;
+export const HTTP_DEADLINE_MS = 175_000;
+export const COMPLETION_RESERVE_MS = 5_000;
 export type ExecutionTelemetry = {
   timings: Timings;
   aiCalls: number;
