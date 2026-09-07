@@ -5,7 +5,10 @@ import path from "node:path";
 import { createFinancialIntelligenceHandler } from "../../backend/api/financial-intelligence/http";
 import { AgentError } from "../../backend/lib/errors";
 import { DOCUMENT_CLASSIFIER_MAX_REQUEST_BYTES } from "../../lib/document-classifier-upload";
-import { executeV1 } from "../../backend/financial-intelligence/v1/core";
+import {
+  executeV1,
+  CoreError,
+} from "../../backend/financial-intelligence/v1/core";
 import type { OpenAITransport } from "../../backend/lib/openai";
 import { goldDocument, goldModelStatement } from "./gold";
 async function form() {
@@ -142,4 +145,96 @@ test("repository-wide import guard prevents resurrection of retired FI architect
   );
   assert.match(route, /maxDuration = 10/);
   assert.doesNotMatch(route, /persistence/);
+});
+
+test("public FI Execute is wired directly to V1 without classifier execution", () => {
+  const page = readFileSync(
+    "app/workspace/financial-intelligence/page.tsx",
+    "utf8",
+  );
+  const ui = readFileSync(
+    "app/workspace/components/FinancialIntelligenceWorkspace.tsx",
+    "utf8",
+  );
+  const route = readFileSync(
+    "app/api/financial-intelligence/run/route.ts",
+    "utf8",
+  );
+  const http = readFileSync(
+    "backend/api/financial-intelligence/http.ts",
+    "utf8",
+  );
+  assert.match(page, /return <FinancialIntelligenceWorkspace/);
+  assert.match(ui, /onClick=\{\(\) => void execute\(\)\}/);
+  assert.deepEqual(
+    [...ui.matchAll(/fetch\("([^"]+)"/g)].map((m) => m[1]),
+    ["/api/financial-intelligence/run"],
+  );
+  assert.match(
+    route,
+    /export const POST = createFinancialIntelligenceHandler\(/,
+  );
+  assert.match(
+    http,
+    /import \{ CoreError, executeV1 \} from "\.\.\/\.\.\/financial-intelligence\/v1\/core"/,
+  );
+  assert.match(http, /await \(deps.execute \?\? executeV1\)\(document\)/);
+  for (const code of [page, ui, route, http]) {
+    // Shared upload-limit constants are infrastructure, not classifier execution.
+    assert.doesNotMatch(
+      code,
+      /(?:from|import\s*\(|require\s*\()\s*["'][^"']*(?:agents\/document-classifier|api\/document-classifier|financial-intake|persisted-http|ai-native-run)/,
+    );
+    assert.doesNotMatch(
+      code,
+      /\/api\/(?:workspace\/)?(?:agents\/)?document-classifier|classifyDocument|createDocumentClassifierHandler/,
+    );
+  }
+});
+
+test("V1 HTTP errors preserve timeout/status codes without classifier wording", async () => {
+  for (const [code, status] of [
+    ["OPENAI_TIMEOUT", 504],
+    ["OPENAI_RATE_LIMIT", 429],
+    ["MODEL_SERVICE_UNAVAILABLE", 503],
+    ["OPENAI_RESPONSE_INVALID", 422],
+    ["EXECUTION_RATE_LIMIT", 429],
+  ] as const) {
+    const handler = createFinancialIntelligenceHandler({
+      authorize: async () => ({ actorId: "customer" }),
+      rateLimiter: {
+        consume: async () => {
+          if (code === "EXECUTION_RATE_LIMIT")
+            throw new AgentError(code, status);
+        },
+      },
+      execute: async () => {
+        throw new CoreError(
+          new AgentError(code, status),
+          {
+            mechanicalReadMs: 1,
+            aiMs: 7000,
+            validationMs: 0,
+            verificationMs: 0,
+            calculationMs: 0,
+            totalMs: 7001,
+          },
+          1,
+        );
+      },
+    });
+    const response = await handler(request(await form()));
+    assert.equal(response.status, status);
+    const body = await response.json();
+    assert.equal(body.error_code, code);
+    assert.match(body.message, /financial/i);
+    assert.doesNotMatch(body.message, /classif/i);
+    if (code === "OPENAI_TIMEOUT")
+      assert.equal(body.message, "Financial intelligence execution timed out.");
+  }
+  // The separate classifier keeps its existing public contract.
+  assert.equal(
+    new AgentError("OPENAI_TIMEOUT", 504).message,
+    "Document classification timed out.",
+  );
 });

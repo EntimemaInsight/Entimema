@@ -1,11 +1,23 @@
 import { ValidationFailure } from "../../financial-intelligence/v1/diagnostics";
 import { randomUUID } from "node:crypto";
-import { AgentError } from "../../lib/errors";
+import { AgentError, type ErrorCode } from "../../lib/errors";
 import type { ExecutionRateLimiter } from "../../lib/rate-limit";
 import type { AuthorizedActor } from "../../../lib/execution-auth";
 import { DOCUMENT_CLASSIFIER_MAX_REQUEST_BYTES } from "../../../lib/document-classifier-upload";
 import { inspectUploadedFile } from "../../lib/files";
 import { CoreError, executeV1 } from "../../financial-intelligence/v1/core";
+
+// Shared transport errors keep their codes/statuses; FI owns customer-facing wording.
+const executionMessages: Partial<Record<ErrorCode, string>> = {
+  EXECUTION_RATE_LIMIT:
+    "Too many financial intelligence runs. Please try again later.",
+  MODEL_SERVICE_UNAVAILABLE:
+    "Financial intelligence provider access is temporarily unavailable.",
+  OPENAI_TIMEOUT: "Financial intelligence execution timed out.",
+  OPENAI_RATE_LIMIT:
+    "Financial intelligence provider requests are temporarily rate limited.",
+  OPENAI_RESPONSE_INVALID: "The financial response could not be verified.",
+};
 
 export function createFinancialIntelligenceHandler(deps: {
   authorize: () => Promise<AuthorizedActor>;
@@ -88,7 +100,10 @@ export function createFinancialIntelligenceHandler(deps: {
           }),
         );
       return Response.json(
-        { error_code: safe.code, message: safe.message },
+        {
+          error_code: safe.code,
+          message: executionMessages[safe.code] ?? safe.message,
+        },
         { status: safe.httpStatus, headers },
       );
     }
