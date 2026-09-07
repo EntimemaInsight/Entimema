@@ -4,7 +4,7 @@ import { AgentError } from "./errors";
 type ResponseBody = OpenAI.Responses.ResponseCreateParamsNonStreaming;
 type ResponseResult = OpenAI.Responses.Response;
 export type OpenAITransport = (body: ResponseBody, signal: AbortSignal) => Promise<ResponseResult>;
-export type OpenAIRequestDiagnostics = { attemptCount:number; attemptDurationsMs:number[]; providerStatusClass:string|null; providerErrorCode:string|null; timeoutTriggered:boolean };
+export type OpenAIRequestDiagnostics = { attemptCount:number; attemptDurationsMs:number[]; providerStatusClass:string|null; providerHttpStatus?:number|null; providerErrorCode:string|null; timeoutTriggered:boolean };
 export type OpenAIRequestConfig = { apiKey:string; timeoutMs:number; attempts:number; diagnostics?:OpenAIRequestDiagnostics };
 
 const positiveInt = (value: string | undefined, fallback: number, maximum: number) => {
@@ -52,9 +52,14 @@ export async function createConfiguredResponse(
     injectedTransport ??
     ((payload, signal) => {
       const client = new OpenAI({ apiKey: config.apiKey, maxRetries: 0 });
-      return client.responses.create(payload, {
-        signal,
-      }) as Promise<ResponseResult>;
+      return client.responses
+        .create(payload, { signal })
+        .withResponse()
+        .then(({ data, response }) => {
+          if (config.diagnostics)
+            config.diagnostics.providerHttpStatus = response.status;
+          return data;
+        });
     });
   const requestStarted = performance.now(),
     diagnostics = config.diagnostics;
@@ -63,6 +68,7 @@ export async function createConfiguredResponse(
       attemptCount: 0,
       attemptDurationsMs: [],
       providerStatusClass: null,
+      providerHttpStatus: null,
       providerErrorCode: null,
       timeoutTriggered: false,
     });
@@ -83,7 +89,11 @@ export async function createConfiguredResponse(
       attemptStarted = performance.now();
     if (diagnostics) diagnostics.attemptCount = attempt;
     try {
-      return await transport(body, controller.signal);
+      const result = await transport(body, controller.signal);
+      if (controller.signal.aborted)
+        throw new AgentError("OPENAI_TIMEOUT", 504);
+      if (diagnostics) diagnostics.providerStatusClass = "2xx";
+      return result;
     } catch (error) {
       last = mapOpenAIError(error);
       if (diagnostics) {
@@ -105,12 +115,9 @@ export async function createConfiguredResponse(
                   : last.code === "CLASSIFICATION_FAILED"
                     ? "invalid_request"
                     : last.code;
+        diagnostics.providerHttpStatus = providerStatus || null;
         diagnostics.providerStatusClass =
-          last.httpStatus >= 500
-            ? "5xx"
-            : last.httpStatus >= 400
-              ? "4xx"
-              : null;
+          providerStatus >= 500 ? "5xx" : providerStatus >= 400 ? "4xx" : null;
       }
       if (
         !transient(last) ||

@@ -5,7 +5,11 @@ import type { ExecutionRateLimiter } from "../../lib/rate-limit";
 import type { AuthorizedActor } from "../../../lib/execution-auth";
 import { DOCUMENT_CLASSIFIER_MAX_REQUEST_BYTES } from "../../../lib/document-classifier-upload";
 import { inspectUploadedFile } from "../../lib/files";
-import { CoreError, executeV1 } from "../../financial-intelligence/v1/core";
+import {
+  CoreError,
+  executeV1,
+  HTTP_DEADLINE_MS,
+} from "../../financial-intelligence/v1/core";
 
 // Shared transport errors keep their codes/statuses; FI owns customer-facing wording.
 const executionMessages: Partial<Record<ErrorCode, string>> = {
@@ -13,6 +17,7 @@ const executionMessages: Partial<Record<ErrorCode, string>> = {
     "Too many financial intelligence runs. Please try again later.",
   MODEL_SERVICE_UNAVAILABLE:
     "Financial intelligence provider access is temporarily unavailable.",
+  PROCESSING_TIMEOUT: "Financial intelligence execution timed out.",
   OPENAI_TIMEOUT: "Financial intelligence execution timed out.",
   OPENAI_RATE_LIMIT:
     "Financial intelligence provider requests are temporarily rate limited.",
@@ -25,11 +30,23 @@ export function createFinancialIntelligenceHandler(deps: {
   execute?: typeof executeV1;
 }) {
   return async (request: Request) => {
+    const httpStarted = performance.now();
+    const deadlineMs = httpStarted + HTTP_DEADLINE_MS;
+    const checkDeadline = () => {
+      if (performance.now() >= deadlineMs)
+        throw new AgentError(
+          "PROCESSING_TIMEOUT",
+          504,
+          "Financial intelligence execution timed out.",
+        );
+    };
     const runId = randomUUID();
     const headers = { "Cache-Control": "no-store" };
     try {
       const actor = await deps.authorize();
+      checkDeadline();
       await deps.rateLimiter.consume(actor.actorId);
+      checkDeadline();
       if (
         Number(request.headers.get("content-length")) >
         DOCUMENT_CLASSIFIER_MAX_REQUEST_BYTES
@@ -48,6 +65,10 @@ export function createFinancialIntelligenceHandler(deps: {
       let size = 0;
       while (true) {
         const { value, done } = await reader.read();
+        if (performance.now() >= deadlineMs) {
+          await reader.cancel();
+          checkDeadline();
+        }
         if (done) break;
         size += value.byteLength;
         if (size > DOCUMENT_CLASSIFIER_MAX_REQUEST_BYTES) {
@@ -78,7 +99,20 @@ export function createFinancialIntelligenceHandler(deps: {
           "Upload exactly one file. No preparation fields are accepted.",
         );
       const document = await inspectUploadedFile(form.get("file"));
-      const result = await (deps.execute ?? executeV1)(document);
+      checkDeadline();
+      const result = await (deps.execute ?? executeV1)(document, {
+        deadlineMs,
+        onTelemetry: (telemetry) =>
+          console.info(
+            JSON.stringify({
+              runId,
+              ...telemetry,
+              httpTotalMs:
+                Math.round((performance.now() - httpStarted) * 100) / 100,
+            }),
+          ),
+      });
+      checkDeadline();
       return Response.json(result, { headers });
     } catch (error) {
       const cause = error instanceof CoreError ? error.error : error;
@@ -94,6 +128,9 @@ export function createFinancialIntelligenceHandler(deps: {
             code: safe.code,
             aiCalls: error.aiCalls,
             timings: error.timings,
+            timeoutBoundary: error.telemetry?.timeoutBoundary ?? null,
+            providerHttpStatus: error.telemetry?.providerHttpStatus ?? null,
+            providerStatusClass: error.telemetry?.providerStatusClass ?? null,
             ...(cause instanceof ValidationFailure
               ? { validation: cause.diagnostics }
               : {}),

@@ -176,9 +176,9 @@ test("public FI Execute is wired directly to V1 without classifier execution", (
   );
   assert.match(
     http,
-    /import \{ CoreError, executeV1 \} from "\.\.\/\.\.\/financial-intelligence\/v1\/core"/,
+    /import \{\s*CoreError,\s*executeV1,\s*HTTP_DEADLINE_MS,?\s*\} from "\.\.\/\.\.\/financial-intelligence\/v1\/core"/,
   );
-  assert.match(http, /await \(deps.execute \?\? executeV1\)\(document\)/);
+  assert.match(http, /await \(deps.execute \?\? executeV1\)\(document,/);
   for (const code of [page, ui, route, http]) {
     // Shared upload-limit constants are infrastructure, not classifier execution.
     assert.doesNotMatch(
