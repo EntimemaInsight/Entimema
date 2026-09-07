@@ -14,7 +14,8 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "test": "tsx --test $(find tests -type f -name '*.test.ts' -print)",
-    "test:fi:v1-core-acceptance": "tsx scripts/fi-v1-core-acceptance.ts"
+    "test:fi:v1-core-acceptance": "tsx scripts/fi-v1-core-acceptance.ts",
+    "test:fi:rieter-acceptance": "tsx scripts/fi-v1-rieter-acceptance.ts"
   },
   "dependencies": {
     "mammoth": "^1.12.1",

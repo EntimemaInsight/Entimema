@@ -143,7 +143,7 @@ test("repository-wide import guard prevents resurrection of retired FI architect
     "app/api/financial-intelligence/run/route.ts",
     "utf8",
   );
-  assert.match(route, /maxDuration = 10/);
+  assert.match(route, /maxDuration = 180/);
   assert.doesNotMatch(route, /persistence/);
 });
 

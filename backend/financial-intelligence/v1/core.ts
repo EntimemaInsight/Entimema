@@ -1,3 +1,8 @@
+import {
+  normalizeIncomeStatement,
+  type SemanticNormalization,
+} from "./semantics";
+import { normalizeMetadata } from "./metadata";
 import { zodTextFormat } from "openai/helpers/zod";
 import { AgentError } from "../../lib/errors";
 import type { InspectedDocument } from "../../lib/files";
@@ -16,9 +21,9 @@ import { calculate } from "./calculate";
 
 import { getV1ModelConfig } from "./model";
 export { MODEL } from "./model";
-export const AI_TIMEOUT_MS = 9_200;
-export const HTTP_DEADLINE_MS = 9_800;
-export const COMPLETION_RESERVE_MS = 300;
+export const AI_TIMEOUT_MS = 120_000;
+export const HTTP_DEADLINE_MS = 175_000;
+export const COMPLETION_RESERVE_MS = 5_000;
 export type ExecutionTelemetry = {
   timings: Timings;
   aiCalls: number;
@@ -56,6 +61,7 @@ export async function executeV1(
     apiKey?: string;
     deadlineMs?: number;
     onTelemetry?: (telemetry: ExecutionTelemetry) => void;
+    onNormalization?: (normalization: SemanticNormalization) => void;
   } = {},
 ): Promise<Result> {
   const started = performance.now();
@@ -154,11 +160,23 @@ export async function executeV1(
         schemaValidationSucceeded: false,
       });
     }
-    const modelStatement = parseModelStatement(response.output_text);
+    const modelStatement = normalizeMetadata(
+      parseModelStatement(response.output_text),
+    );
     checkDeadline();
     next("verificationMs");
-    const statement = bindSourceValues(modelStatement, source);
-    const verifiedValues = verifyStatement(statement, source);
+    const bound = bindSourceValues(modelStatement, source);
+    // Verify every interpreted row before section normalization can exclude any of them.
+    verifyStatement(bound, source);
+    const { statement, normalization } = normalizeIncomeStatement(
+      bound,
+      source,
+    );
+    options.onNormalization?.(normalization);
+    const verifiedValues = statement.lines.reduce(
+      (count, line) => count + line.values.length,
+      0,
+    );
     checkDeadline();
     next("calculationMs");
     const analysis = firstAnalysis(statement, calculate(statement));

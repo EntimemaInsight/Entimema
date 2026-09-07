@@ -79,7 +79,7 @@ export function FinancialIntelligenceWorkspace({
       </section>
       <div role="status" aria-live="polite">
         {busy
-          ? "Processing your income statement…"
+          ? "Processing financial statement…"
           : result
             ? "Result ready. Financial values verified against your file."
             : ""}

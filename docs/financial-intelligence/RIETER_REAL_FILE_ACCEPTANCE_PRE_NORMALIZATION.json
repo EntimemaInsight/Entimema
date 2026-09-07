@@ -1,0 +1,28 @@
+{
+  "date": "2026-09-07T11:25:09.013Z",
+  "status": "RIETER_REAL_FILE_ACCEPTANCE_FAILED",
+  "fileName": "rieter-consolidated-income-statement-statement-of-comprehensive-income-2025-en.xlsx",
+  "fileBytes": 30904,
+  "sha256": "2d786b84c659b85faa7bb441b98abf5e2e55549253a7c90d8ed30a2b3b52e0bc",
+  "aiCalls": 1,
+  "providerHttpStatus": 200,
+  "model": "gpt-4.1-nano-2025-04-14",
+  "documentChars": 6784,
+  "inputChars": 9353,
+  "providerResponseStatus": "completed",
+  "actualModel": "gpt-4.1-nano-2025-04-14",
+  "inputTokens": 2621,
+  "outputTokens": 1139,
+  "timings": {
+    "mechanicalReadMs": 69.78,
+    "aiMs": 7771.72,
+    "validationMs": 7.96,
+    "verificationMs": 3.86,
+    "calculationMs": 155.15,
+    "totalMs": 8008.59
+  },
+  "returnedLines": 18,
+  "verifiedValues": 36,
+  "failureBoundary": "real_file_correctness_assertion",
+  "reason": "Expected values to be strictly equal:\n+ actual - expected\n\n+ 'CHF million'\n- 'CHF'\n      ^\n"
+}

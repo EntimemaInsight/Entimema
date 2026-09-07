@@ -1,0 +1,286 @@
+{
+  "mode": "offline regression against prior recorded response; not live acceptance",
+  "normalization": {
+    "inputLineCount": 30,
+    "outputLineCount": 18,
+    "excludedRows": [
+      {
+        "sourceRow": 30,
+        "label": "Net (loss) / profit",
+        "sourceRefs": [
+          "'Consolidated income statement'!B30",
+          "'Consolidated income statement'!C30"
+        ],
+        "section": "other_comprehensive_income"
+      },
+      {
+        "sourceRow": 31,
+        "label": "Remeasurement of defined benefit plans",
+        "sourceRefs": [
+          "'Consolidated income statement'!B31",
+          "'Consolidated income statement'!C31"
+        ],
+        "section": "other_comprehensive_income"
+      },
+      {
+        "sourceRow": 32,
+        "label": "Income taxes on remeasurement of defined benefit plans",
+        "sourceRefs": [
+          "'Consolidated income statement'!B32",
+          "'Consolidated income statement'!C32"
+        ],
+        "section": "other_comprehensive_income"
+      },
+      {
+        "sourceRow": 33,
+        "label": "Items that will not be reclassified to the income statement, net of taxes",
+        "sourceRefs": [
+          "'Consolidated income statement'!B33",
+          "'Consolidated income statement'!C33"
+        ],
+        "section": "other_comprehensive_income"
+      },
+      {
+        "sourceRow": 34,
+        "label": "Currency translation differences",
+        "sourceRefs": [
+          "'Consolidated income statement'!B34",
+          "'Consolidated income statement'!C34"
+        ],
+        "section": "other_comprehensive_income"
+      },
+      {
+        "sourceRow": 35,
+        "label": "Cash flow hedges",
+        "sourceRefs": [
+          "'Consolidated income statement'!B35",
+          "'Consolidated income statement'!C35"
+        ],
+        "section": "other_comprehensive_income"
+      },
+      {
+        "sourceRow": 36,
+        "label": "Income taxes on cash flow hedges",
+        "sourceRefs": [
+          "'Consolidated income statement'!B36",
+          "'Consolidated income statement'!C36"
+        ],
+        "section": "other_comprehensive_income"
+      },
+      {
+        "sourceRow": 37,
+        "label": "Items that may be reclassified to the income statement, net of taxes",
+        "sourceRefs": [
+          "'Consolidated income statement'!B37",
+          "'Consolidated income statement'!C37"
+        ],
+        "section": "other_comprehensive_income"
+      },
+      {
+        "sourceRow": 38,
+        "label": "Total other comprehensive income",
+        "sourceRefs": [
+          "'Consolidated income statement'!B38",
+          "'Consolidated income statement'!C38"
+        ],
+        "section": "other_comprehensive_income"
+      },
+      {
+        "sourceRow": 39,
+        "label": "Total comprehensive income",
+        "sourceRefs": [
+          "'Consolidated income statement'!B39",
+          "'Consolidated income statement'!C39"
+        ],
+        "section": "other_comprehensive_income"
+      },
+      {
+        "sourceRow": 40,
+        "label": "Attributable to shareholders of Rieter Holding Ltd.",
+        "sourceRefs": [
+          "'Consolidated income statement'!B40",
+          "'Consolidated income statement'!C40"
+        ],
+        "section": "other_comprehensive_income"
+      },
+      {
+        "sourceRow": 41,
+        "label": "Attributable to non-controlling interests",
+        "sourceRefs": [
+          "'Consolidated income statement'!B41",
+          "'Consolidated income statement'!C41"
+        ],
+        "section": "other_comprehensive_income"
+      }
+    ],
+    "conceptMappings": [
+      {
+        "sourceRow": 13,
+        "label": "Operating result before interest and taxes (EBIT)",
+        "from": "EBIT",
+        "to": "operating_profit"
+      }
+    ]
+  },
+  "audit": {
+    "passed": true,
+    "checks": [
+      {
+        "check": "model and one request",
+        "passed": true
+      },
+      {
+        "check": "statement type",
+        "passed": true
+      },
+      {
+        "check": "currency",
+        "passed": true
+      },
+      {
+        "check": "scale",
+        "passed": true
+      },
+      {
+        "check": "periods",
+        "passed": true
+      },
+      {
+        "check": "exactly 18 income-statement lines",
+        "passed": true
+      },
+      {
+        "check": "exactly 36 verified values",
+        "passed": true
+      },
+      {
+        "check": "source row 5: label and both values",
+        "passed": true
+      },
+      {
+        "check": "source row 6: label and both values",
+        "passed": true
+      },
+      {
+        "check": "source row 7: label and both values",
+        "passed": true
+      },
+      {
+        "check": "source row 8: label and both values",
+        "passed": true
+      },
+      {
+        "check": "source row 9: label and both values",
+        "passed": true
+      },
+      {
+        "check": "source row 10: label and both values",
+        "passed": true
+      },
+      {
+        "check": "source row 11: label and both values",
+        "passed": true
+      },
+      {
+        "check": "source row 12: label and both values",
+        "passed": true
+      },
+      {
+        "check": "source row 13: label and both values",
+        "passed": true
+      },
+      {
+        "check": "source row 14: label and both values",
+        "passed": true
+      },
+      {
+        "check": "source row 15: label and both values",
+        "passed": true
+      },
+      {
+        "check": "source row 16: label and both values",
+        "passed": true
+      },
+      {
+        "check": "source row 17: label and both values",
+        "passed": true
+      },
+      {
+        "check": "source row 18: label and both values",
+        "passed": true
+      },
+      {
+        "check": "source row 19: label and both values",
+        "passed": true
+      },
+      {
+        "check": "source row 20: label and both values",
+        "passed": true
+      },
+      {
+        "check": "source row 22: label and both values",
+        "passed": true
+      },
+      {
+        "check": "source row 23: label and both values",
+        "passed": true
+      },
+      {
+        "check": "concept at row 5",
+        "passed": true
+      },
+      {
+        "check": "concept at row 7",
+        "passed": true
+      },
+      {
+        "check": "concept at row 13",
+        "passed": true
+      },
+      {
+        "check": "concept at row 18",
+        "passed": true
+      },
+      {
+        "check": "Gross margin 2024",
+        "passed": true
+      },
+      {
+        "check": "Gross margin 2025",
+        "passed": true
+      },
+      {
+        "check": "Operating margin 2024",
+        "passed": true
+      },
+      {
+        "check": "Operating margin 2025",
+        "passed": true
+      },
+      {
+        "check": "Net margin 2024",
+        "passed": true
+      },
+      {
+        "check": "Net margin 2025",
+        "passed": true
+      },
+      {
+        "check": "Revenue growth 2025",
+        "passed": true
+      },
+      {
+        "check": "Operating profit growth 2025",
+        "passed": true
+      },
+      {
+        "check": "Net income growth 2025",
+        "passed": true
+      },
+      {
+        "check": "customer-visible summary/findings",
+        "passed": true
+      }
+    ]
+  }
+}
