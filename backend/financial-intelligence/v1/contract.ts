@@ -38,6 +38,43 @@ export const statementSchema = modelStatementSchema.extend({
 export type ModelStatement = z.infer<typeof modelStatementSchema>;
 export type Statement = z.infer<typeof statementSchema>;
 export type Kpi = { label: string; period: string; value: number; unit: "%" };
+export type AnalysisKpi = {
+  id: string;
+  label: string;
+  type: "margin" | "growth";
+  currentPeriod: string;
+  priorPeriod: string | null;
+  currentValue?: number;
+  priorValue?: number;
+  denominatorValue?: number;
+  sourceConcepts: string[];
+  evidence: {
+    concept: string;
+    period: string;
+    sourceRef: string;
+    value: number;
+  }[];
+} & (
+  | { status: "valid"; value: number; unit: "%" }
+  | { status: "unavailable" | "not_meaningful"; reason: string; value?: never }
+  | {
+      status: "sign_change";
+      direction: "positive_to_negative" | "negative_to_positive";
+      value?: never;
+    }
+);
+export type Finding = {
+  id: string;
+  title: string;
+  statement: string;
+  severity: "positive" | "attention" | "neutral";
+  evidence: { kpiIds: string[]; sourceConcepts: string[] };
+};
+export type Analysis = {
+  kpis: AnalysisKpi[];
+  executiveSummary: string;
+  findings: Finding[];
+};
 export type Timings = {
   mechanicalReadMs: number;
   aiMs: number;
@@ -47,6 +84,7 @@ export type Timings = {
   totalMs: number;
 };
 export type Result = Statement & {
+  analysis: Analysis;
   summary: string;
   findings: string[];
   kpis: Kpi[];

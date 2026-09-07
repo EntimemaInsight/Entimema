@@ -181,9 +181,10 @@ test("ambiguous revenue totals keep ratios unavailable; component values and lab
   );
   const ambiguous = structuredClone(bound);
   ambiguous.lines[2].label = "Revenue";
-  assert.equal(
-    calculate(normalizeIncomeStatement(ambiguous, source).statement).length,
-    0,
+  assert.ok(
+    calculate(normalizeIncomeStatement(ambiguous, source).statement).every(
+      (k) => k.status === "unavailable",
+    ),
   );
 });
 import { normalizeMetadata } from "../../backend/financial-intelligence/v1/metadata";

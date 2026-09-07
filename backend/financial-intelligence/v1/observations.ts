@@ -1,64 +1,113 @@
-import type { Kpi, Statement } from "./contract";
+import type {
+  Analysis,
+  AnalysisKpi,
+  Finding,
+  Kpi,
+  Statement,
+} from "./contract";
 
-/** Adds first-result observations; existing margin/revenue calculations stay unchanged. */
-export function firstAnalysis(statement: Statement, baseKpis: Kpi[]) {
-  const kpis = [...baseKpis],
-    findings: string[] = [];
-  const at = (concept: string, period: string) => {
-    const lines = statement.lines.filter((line) => line.concept === concept);
-    return lines.length === 1
-      ? lines[0].values.find((value) => value.period === period)?.value
-      : undefined;
-  };
-  const fmt = (value: number) =>
-    new Intl.NumberFormat("en", { maximumFractionDigits: 2 }).format(value);
-  const movement = (label: string, value: number) =>
-    value === 0
-      ? `${label} was unchanged`
-      : `${label} ${value > 0 ? "increased" : "decreased"} by ${fmt(Math.abs(value))}%`;
-  for (const period of [...statement.periods]
-    .filter((period) => /^\d{4}$/.test(period))
+const fmt = (value: number) =>
+  new Intl.NumberFormat("en", { maximumFractionDigits: 2 }).format(value);
+
+/** Templates interpret verified calculations only; no AI arithmetic or causal inference. */
+export function firstAnalysis(statement: Statement, calculated: AnalysisKpi[]) {
+  const candidates: { finding: Finding; rank: number }[] = [];
+  const annual = statement.periods
+    .filter((p) => /^\d{4}$/.test(p))
     .sort()
-    .reverse()) {
-    const prior = String(Number(period) - 1);
-    if (!statement.periods.includes(prior)) continue;
-    for (const [concept, label] of [
-      ["operating_profit", "Operating profit"],
-      ["net_income", "Net income"],
-    ]) {
-      const current = at(concept, period),
-        previous = at(concept, prior);
-      if (current === undefined || previous === undefined || previous <= 0)
-        continue;
-      const change =
-        Math.round(((current - previous) / previous) * 10000) / 100;
-      if (!Number.isFinite(change)) continue;
-      kpis.push({ label: `${label} growth`, period, value: change, unit: "%" });
-      findings.push(`${movement(label, change)} in ${period} versus ${prior}.`);
-    }
-    const revenue = kpis.find(
-      (kpi) => kpi.label === "Revenue growth" && kpi.period === period,
-    );
-    if (revenue)
-      findings.unshift(
-        `${movement("Revenue", revenue.value)} in ${period} versus ${prior}.`,
+    .reverse();
+  const latest = annual[0] ?? statement.periods[0];
+  for (const kpi of calculated.filter((k) => k.currentPeriod === latest)) {
+    const evidence = {
+      kpiIds: [kpi.id],
+      sourceConcepts: kpi.evidence
+        .map((e) => e.concept)
+        .filter((c, i, all) => all.indexOf(c) === i),
+    };
+    let text: string;
+    let rank = 0;
+    let severity: Finding["severity"] = "neutral";
+    if (kpi.status === "sign_change") {
+      const direction =
+        kpi.direction === "positive_to_negative"
+          ? "positive to negative"
+          : "negative to positive";
+      text = `${kpi.label.replace(" growth", "")} changed from ${direction} between ${kpi.priorPeriod} and ${latest}; a conventional growth percentage is not presented.`;
+      rank = 1000;
+      severity =
+        kpi.direction === "positive_to_negative" ? "attention" : "positive";
+    } else if (kpi.status !== "valid") {
+      // Missing source concepts are not financial claims. Explain the limitation explicitly.
+      text = `${kpi.label} for ${latest} is ${kpi.status === "not_meaningful" ? "not meaningful" : "unavailable"}: ${kpi.reason}`;
+      rank = -1;
+    } else if (kpi.type === "margin") {
+      const previous = calculated.find(
+        (k) =>
+          k.label === kpi.label &&
+          k.currentPeriod === String(Number(latest) - 1) &&
+          k.status === "valid",
       );
-    for (const label of ["Gross margin", "Operating margin", "Net margin"]) {
-      const current = kpis.find(
-          (kpi) => kpi.label === label && kpi.period === period,
-        )?.value,
-        previous = kpis.find(
-          (kpi) => kpi.label === label && kpi.period === prior,
-        )?.value;
-      if (current === undefined || previous === undefined) continue;
-      const delta = Math.round((current - previous) * 100) / 100;
-      findings.push(
-        `${label} moved from ${fmt(previous)}% to ${fmt(current)}% in ${period} (${delta > 0 ? "+" : ""}${fmt(delta)} pp).`,
-      );
+      if (previous?.status === "valid") {
+        evidence.kpiIds.push(previous.id);
+        const delta = kpi.value - previous.value;
+        text = `${kpi.label} moved from ${fmt(previous.value)}% to ${fmt(kpi.value)}% in ${latest}, indicating ${delta < 0 ? "weaker" : delta > 0 ? "stronger" : "unchanged"} ${kpi.label.replace(" margin", "").toLowerCase()} profitability.`;
+        rank = Math.abs(delta);
+        severity = delta < 0 ? "attention" : delta > 0 ? "positive" : "neutral";
+      } else {
+        text = `${kpi.label} was ${fmt(kpi.value)}% in ${latest}.`;
+        severity = kpi.value < 0 ? "attention" : "neutral";
+      }
+    } else {
+      // Do not describe a positive formula result on two losses as improving profit.
+      text =
+        kpi.priorValue! < 0
+          ? `${kpi.label} was ${fmt(kpi.value)}% in ${latest} under the signed-prior convention; the prior period was negative, so the percentage alone does not indicate improvement.`
+          : `${kpi.label.replace(" growth", "")} ${kpi.value === 0 ? "was unchanged" : `${kpi.value > 0 ? "increased" : "decreased"} by ${fmt(Math.abs(kpi.value))}%`} in ${latest} versus ${kpi.priorPeriod}.`;
+      rank = Math.abs(kpi.value);
+      severity =
+        kpi.priorValue! < 0
+          ? "neutral"
+          : kpi.value < 0
+            ? "attention"
+            : kpi.value > 0
+              ? "positive"
+              : "neutral";
     }
+    candidates.push({
+      finding: {
+        id: `finding:${kpi.id}`,
+        title: kpi.label,
+        statement: text,
+        severity,
+        evidence,
+      },
+      rank,
+    });
   }
-  const summary = findings.length
-    ? findings.slice(0, 2).join(" ")
-    : "Source values are verified. Comparable annual inputs are unavailable for year-over-year observations.";
-  return { kpis, summary, findings };
+  const findings = candidates
+    .sort((a, b) => b.rank - a.rank)
+    .slice(0, 5)
+    .map((c) => c.finding);
+  const executiveSummary =
+    findings
+      .slice(0, 3)
+      .map((f) => f.statement)
+      .join(" ") ||
+    "Verified source values are available, but analytical inputs are unavailable.";
+  const analysis: Analysis = { kpis: calculated, executiveSummary, findings };
+  // Compatibility projections, not a second calculation or interpretation path.
+  const kpis: Kpi[] = calculated
+    .filter((k) => k.status === "valid")
+    .map((k) => ({
+      label: k.label,
+      period: k.currentPeriod,
+      value: k.value!,
+      unit: "%",
+    }));
+  return {
+    analysis,
+    kpis,
+    summary: executiveSummary,
+    findings: findings.map((f) => f.statement),
+  };
 }
