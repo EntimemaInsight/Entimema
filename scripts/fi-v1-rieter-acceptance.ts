@@ -11,7 +11,8 @@ import {
 import { ValidationFailure } from "../backend/financial-intelligence/v1/diagnostics";
 import { inspectFileBuffer } from "../backend/lib/files";
 import type { OpenAITransport } from "../backend/lib/openai";
-import { assertRieter } from "../tests/financial-intelligence/rieter";
+import { auditRieter } from "../tests/financial-intelligence/rieter-audit";
+import { readMechanically } from "../backend/financial-intelligence/v1/reader";
 async function main() {
   loadEnvConfig(process.env.FI_ENV_DIR ?? process.cwd(), false, {
     info() {},
@@ -73,7 +74,13 @@ async function main() {
     evidence.verifiedValues = result.verification.verifiedValues;
     // The core has verified source values; retain its output even when semantic acceptance fails.
     evidence.result = result;
-    assertRieter(result);
+    // Post-run audit time is outside the measured production core execution.
+    const audit = auditRieter(result, await readMechanically(doc));
+    evidence.audit = audit;
+    assert.ok(
+      audit.passed,
+      "Rieter semantic acceptance failed; see every audit check",
+    );
     evidence.status = "RIETER_REAL_FILE_ACCEPTANCE_PASS";
   } catch (error) {
     if (error instanceof CoreError) {

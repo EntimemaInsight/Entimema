@@ -49,7 +49,7 @@ The returned statementType passed income_statement. The currency assertion faile
 
 The first failing assertion stops the semantic oracle. Periods, scale, exact expected row associations and KPI correctness were not independently accepted after that failure. The core did finish deterministic calculation (155.15 ms), but its exact KPI output and complete returned rows were not retained by the initial runner because they were assigned to the evidence after assertRieter. The runner is now corrected to retain an already source-verified result before semantic assertions on future runs. No second provider request was made. Do not infer missing output from the expected workbook.
 
-Machine-readable evidence: [RIETER_REAL_FILE_ACCEPTANCE.json](./RIETER_REAL_FILE_ACCEPTANCE.json).
+Historical pre-normalization evidence: [RIETER_REAL_FILE_ACCEPTANCE_PRE_NORMALIZATION.json](./RIETER_REAL_FILE_ACCEPTANCE_PRE_NORMALIZATION.json).
 
 ## Independently inspected source expectations (not claimed live output)
 
@@ -60,5 +60,9 @@ The first statement has 16 monetary rows in CHF million, plus basic/diluted EPS 
 Typecheck PASS; lint PASS (zero errors, one pre-existing classifier warning); FI suite 24/24 PASS; production build PASS (126 pages); git diff --check PASS. The regression suite verifies completion after 10 seconds, one AI request/no retries, source verification, safe provider and infrastructure failure, and no Finance Domain or classifier execution dependency.
 
 The next correctness issue is separating reported currency and scale without conflating them. Source-number verification does not validate metadata or guarantee complete semantic interpretation. This task preserves that evidence rather than claiming PASS. Longer synchronous requests still have finite provider/platform limits and may fail on provider outages or client/network interruption. No authenticated production acceptance or customer-delivered correct result is claimed; the current branch awaits review and deployment.
+
+## Currency/scale follow-up
+
+The subsequent metadata normalizer fixes CHF/millions. The real rerun continued through all checks and revealed extra comprehensive-income rows and missing operating-profit KPIs. See [normalization report](./HOTFIX_CURRENCY_SCALE_NORMALIZATION.md) and [latest full result/audit](./RIETER_REAL_FILE_ACCEPTANCE.json). The historical result above remains preserved; final real-file acceptance is still failed.
 
 RIETER_REAL_FILE_ACCEPTANCE_FAILED

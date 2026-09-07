@@ -1,3 +1,4 @@
+import { normalizeMetadata } from "./metadata";
 import { zodTextFormat } from "openai/helpers/zod";
 import { AgentError } from "../../lib/errors";
 import type { InspectedDocument } from "../../lib/files";
@@ -154,7 +155,9 @@ export async function executeV1(
         schemaValidationSucceeded: false,
       });
     }
-    const modelStatement = parseModelStatement(response.output_text);
+    const modelStatement = normalizeMetadata(
+      parseModelStatement(response.output_text),
+    );
     checkDeadline();
     next("verificationMs");
     const statement = bindSourceValues(modelStatement, source);
