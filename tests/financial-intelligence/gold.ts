@@ -35,6 +35,7 @@ export function goldStatement(): Statement {
     periods: ["2025", "2024"],
     lines: expectedRows.map(([label, a, b, concept], i) => ({
       sourceRow: i + 5,
+      aggregationRole: "detail" as const,
       label,
       concept,
       values: [

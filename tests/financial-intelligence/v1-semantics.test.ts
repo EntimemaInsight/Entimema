@@ -39,6 +39,7 @@ function fixture(rows: Row[]) {
     const sourceRef = put(row, 2, value);
     lines.push({
       sourceRow: row,
+      aggregationRole: "detail" as const,
       label,
       concept,
       values: [{ period: "2025", sourceRef, value }],

@@ -8,6 +8,7 @@ const lineSchema = z
     sourceRow: z.number().int().positive(),
     label: z.string().min(1),
     concept: z.string().nullable(),
+    aggregationRole: z.enum(["detail", "subtotal", "total"]),
     values: z.array(referenceSchema).min(1).max(24),
   })
   .strict();

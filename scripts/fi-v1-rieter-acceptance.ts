@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { MODEL } from "../backend/financial-intelligence/v1/model";
 import { readFile, writeFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import { basename } from "node:path";
@@ -33,6 +34,11 @@ async function main() {
   const transport: OpenAITransport = async (body, signal) => {
     evidence.aiCalls = Number(evidence.aiCalls) + 1;
     evidence.model = body.model;
+    evidence.promptContractSha256 = createHash("sha256")
+      .update(
+        JSON.stringify({ instructions: body.instructions, text: body.text }),
+      )
+      .digest("hex");
     evidence.documentChars = String(body.input).length;
     evidence.inputChars =
       String(body.input).length +
@@ -58,11 +64,9 @@ async function main() {
       throw error;
     }
   };
+  const expectedModel = process.env.FI_ACCEPTANCE_MODEL?.trim() || MODEL;
   try {
-    assert.equal(
-      process.env.FI_V1_MODEL?.trim() || "gpt-4.1-nano-2025-04-14",
-      "gpt-4.1-nano-2025-04-14",
-    );
+    assert.equal(process.env.FI_V1_MODEL?.trim() || MODEL, expectedModel);
     const doc = inspectFileBuffer(
       basename(path),
       "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
@@ -80,7 +84,11 @@ async function main() {
     // The core has verified source values; retain its output even when semantic acceptance fails.
     evidence.result = result;
     // Post-run audit time is outside the measured production core execution.
-    const audit = auditRieter(result, await readMechanically(doc));
+    const audit = auditRieter(
+      result,
+      await readMechanically(doc),
+      expectedModel,
+    );
     evidence.audit = audit;
     assert.ok(
       audit.passed,
@@ -112,7 +120,8 @@ async function main() {
     }
   }
   await writeFile(
-    "docs/financial-intelligence/RIETER_REAL_FILE_ACCEPTANCE.json",
+    process.env.FI_ACCEPTANCE_OUTPUT ??
+      "docs/financial-intelligence/RIETER_REAL_FILE_ACCEPTANCE.json",
     JSON.stringify(evidence, null, 2) + "\n",
   );
   console.log(JSON.stringify(evidence, null, 2));

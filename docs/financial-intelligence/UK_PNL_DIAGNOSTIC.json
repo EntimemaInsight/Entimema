@@ -1,0 +1,323 @@
+{
+  "production": [
+    {
+      "requestId": "xgrph-1788783628791-a418f3a04768",
+      "timestamp": 1788783628791,
+      "deploymentId": "dpl_CMUt12xrgTQxahVnfASPDKgvMwdZ",
+      "httpStatus": 422,
+      "events": [
+        {
+          "runId": "f170812f-db0e-4ffb-a7a4-2ffc6c5126a4",
+          "timings": {
+            "mechanicalReadMs": 10.58,
+            "aiMs": 44703.89,
+            "validationMs": 1.29,
+            "verificationMs": 0,
+            "calculationMs": 0,
+            "totalMs": 44715.77
+          },
+          "aiCalls": 1,
+          "timeoutBoundary": null,
+          "providerHttpStatus": 200,
+          "providerStatusClass": "2xx",
+          "httpTotalMs": 44720.95
+        },
+        {
+          "runId": "f170812f-db0e-4ffb-a7a4-2ffc6c5126a4",
+          "code": "OPENAI_RESPONSE_INVALID",
+          "aiCalls": 1,
+          "timings": {
+            "mechanicalReadMs": 10.58,
+            "aiMs": 44703.89,
+            "validationMs": 1.29,
+            "verificationMs": 0,
+            "calculationMs": 0,
+            "totalMs": 44715.77
+          },
+          "timeoutBoundary": null,
+          "providerHttpStatus": 200,
+          "providerStatusClass": "2xx",
+          "validation": {
+            "validationFailureCode": "METADATA_AMBIGUOUS",
+            "failedPath": "currency",
+            "missingRequiredFields": [],
+            "expectedType": "one explicit currency and a consistent scale",
+            "receivedType": "unsupported or conflicting metadata",
+            "category": "schema_contract",
+            "jsonParsingSucceeded": true,
+            "schemaValidationSucceeded": true
+          }
+        }
+      ]
+    },
+    {
+      "requestId": "2nc8t-1788783590891-f3ed10749131",
+      "timestamp": 1788783590891,
+      "deploymentId": "dpl_CMUt12xrgTQxahVnfASPDKgvMwdZ",
+      "httpStatus": 422,
+      "events": [
+        {
+          "runId": "47ba472e-3683-4032-952e-9ccd45d8a645",
+          "timings": {
+            "mechanicalReadMs": 30.2,
+            "aiMs": 23250.44,
+            "validationMs": 2.31,
+            "verificationMs": 0.24,
+            "calculationMs": 0,
+            "totalMs": 23283.24
+          },
+          "aiCalls": 1,
+          "timeoutBoundary": null,
+          "providerHttpStatus": 200,
+          "providerStatusClass": "2xx",
+          "httpTotalMs": 23306.33
+        },
+        {
+          "runId": "47ba472e-3683-4032-952e-9ccd45d8a645",
+          "code": "OPENAI_RESPONSE_INVALID",
+          "aiCalls": 1,
+          "timings": {
+            "mechanicalReadMs": 30.2,
+            "aiMs": 23250.44,
+            "validationMs": 2.31,
+            "verificationMs": 0.24,
+            "calculationMs": 0,
+            "totalMs": 23283.24
+          },
+          "timeoutBoundary": null,
+          "providerHttpStatus": 200,
+          "providerStatusClass": "2xx",
+          "validation": {
+            "validationFailureCode": "SOURCE_REF_FORMAT",
+            "failedPath": "lines[0].values[0].sourceRef",
+            "missingRequiredFields": [],
+            "expectedType": "qualified source reference",
+            "receivedType": "invalid format",
+            "category": "schema_contract",
+            "jsonParsingSucceeded": true,
+            "schemaValidationSucceeded": true
+          }
+        }
+      ]
+    },
+    {
+      "requestId": "rdw67-1788783444057-b871dda9e99a",
+      "timestamp": 1788783444057,
+      "deploymentId": "dpl_CMUt12xrgTQxahVnfASPDKgvMwdZ",
+      "httpStatus": 200,
+      "events": [
+        {
+          "runId": "f9583089-f8dd-4320-8f55-7a7f35da1695",
+          "timings": {
+            "mechanicalReadMs": 51.96,
+            "aiMs": 14333.38,
+            "validationMs": 4.99,
+            "verificationMs": 5.58,
+            "calculationMs": 52.16,
+            "totalMs": 14448.13
+          },
+          "aiCalls": 1,
+          "timeoutBoundary": null,
+          "providerHttpStatus": 200,
+          "providerStatusClass": "2xx",
+          "httpTotalMs": 14494.19
+        }
+      ]
+    }
+  ],
+  "localRuns": [
+    {
+      "date": "2026-09-07T12:29:10.429Z",
+      "status": "OPENAI_RESPONSE_INVALID",
+      "model": "gpt-4.1-nano-2025-04-14",
+      "actualModel": "gpt-4.1-nano-2025-04-14",
+      "aiCalls": 1,
+      "providerHttpStatus": 200,
+      "timings": {
+        "mechanicalReadMs": 13.88,
+        "aiMs": 13563.95,
+        "validationMs": 11.23,
+        "verificationMs": 1.11,
+        "calculationMs": 0,
+        "totalMs": 13590.27
+      },
+      "validation": {
+        "validationFailureCode": "SOURCE_REF_FORMAT",
+        "failedPath": "lines[0].values[0].sourceRef",
+        "missingRequiredFields": [],
+        "expectedType": "qualified source reference",
+        "receivedType": "invalid format",
+        "category": "schema_contract",
+        "jsonParsingSucceeded": true,
+        "schemaValidationSucceeded": true
+      },
+      "metadata": {
+        "currency": "GBP",
+        "scale": "units",
+        "periods": [
+          "Year ended 31 March 2025"
+        ]
+      },
+      "lineCount": 28,
+      "firstBinding": {
+        "sourceRow": 11,
+        "label": "Sales / turnover",
+        "concept": "revenue",
+        "values": [
+          {
+            "period": "Current Year £",
+            "sourceRef": "P&L Statement!C11"
+          },
+          {
+            "period": "Prior Year £",
+            "sourceRef": "P&L Statement!D11"
+          }
+        ]
+      }
+    },
+    {
+      "date": "2026-09-07T12:34:08.433Z",
+      "status": "UK_PNL_REAL_FILE_ACCEPTANCE_FAILED",
+      "model": "gpt-4.1-nano-2025-04-14",
+      "actualModel": "gpt-4.1-nano-2025-04-14",
+      "aiCalls": 1,
+      "providerHttpStatus": 200,
+      "timings": {
+        "mechanicalReadMs": 23.49,
+        "aiMs": 12910.88,
+        "validationMs": 14.58,
+        "verificationMs": 0,
+        "calculationMs": 0,
+        "totalMs": 12949.01
+      },
+      "validation": {
+        "validationFailureCode": "METADATA_AMBIGUOUS",
+        "failedPath": "currency",
+        "missingRequiredFields": [],
+        "expectedType": "one explicit currency and a consistent scale",
+        "receivedType": "unsupported or conflicting metadata",
+        "category": "schema_contract",
+        "jsonParsingSucceeded": true,
+        "schemaValidationSucceeded": true
+      },
+      "metadata": {
+        "currency": "£",
+        "scale": "units",
+        "periods": [
+          "Year ended 31 March 2025"
+        ]
+      },
+      "lineCount": 27,
+      "firstBinding": {
+        "sourceRow": 11,
+        "label": "Sales / turnover",
+        "concept": "revenue",
+        "values": [
+          {
+            "period": "Current Year £",
+            "sourceRef": "P&L Statement!C11"
+          },
+          {
+            "period": "Prior Year £",
+            "sourceRef": "P&L Statement!D11"
+          }
+        ]
+      }
+    },
+    {
+      "date": "2026-09-07T12:36:58.926Z",
+      "status": "UK_PNL_REAL_FILE_ACCEPTANCE_FAILED",
+      "model": "gpt-4.1-nano-2025-04-14",
+      "actualModel": "gpt-4.1-nano-2025-04-14",
+      "aiCalls": 1,
+      "providerHttpStatus": 200,
+      "timings": {
+        "mechanicalReadMs": 140.1,
+        "aiMs": 17529.87,
+        "validationMs": 9.58,
+        "verificationMs": 3.55,
+        "calculationMs": 0,
+        "totalMs": 17683.21
+      },
+      "validation": {
+        "validationFailureCode": "SOURCE_LABEL_MISMATCH",
+        "failedPath": "lines[0].label",
+        "missingRequiredFields": [],
+        "expectedType": "source row label",
+        "receivedType": "different label",
+        "category": "source_association",
+        "jsonParsingSucceeded": true,
+        "schemaValidationSucceeded": true
+      },
+      "metadata": {
+        "currency": "GBP",
+        "scale": "units",
+        "periods": [
+          "Year ended 31 March 2025"
+        ]
+      },
+      "lineCount": 29,
+      "firstBinding": {
+        "sourceRow": 7,
+        "label": "TOTAL REVENUE",
+        "concept": "revenue",
+        "values": [
+          {
+            "period": "Current Year £",
+            "sourceRef": "P&L Statement!C7"
+          },
+          {
+            "period": "Prior Year £",
+            "sourceRef": "P&L Statement!D7"
+          }
+        ]
+      }
+    },
+    {
+      "date": "2026-09-07T12:40:35.808Z",
+      "status": "UK_PNL_REAL_FILE_ACCEPTANCE_FAILED",
+      "model": "gpt-4.1-nano-2025-04-14",
+      "actualModel": "gpt-4.1-nano-2025-04-14",
+      "aiCalls": 1,
+      "providerHttpStatus": 200,
+      "timings": {
+        "mechanicalReadMs": 28.32,
+        "aiMs": 9200.45,
+        "validationMs": 8.04,
+        "verificationMs": 1.64,
+        "calculationMs": 0,
+        "totalMs": 9238.5
+      },
+      "validation": {
+        "validationFailureCode": "SOURCE_LABEL_MISMATCH",
+        "failedPath": "lines[0].label",
+        "missingRequiredFields": [],
+        "expectedType": "source row label",
+        "receivedType": "different label",
+        "category": "source_association",
+        "jsonParsingSucceeded": true,
+        "schemaValidationSucceeded": true
+      },
+      "metadata": {
+        "currency": "GBP",
+        "scale": "units",
+        "periods": [
+          "Year ended 31 March 2025"
+        ]
+      },
+      "lineCount": 29,
+      "firstBinding": {
+        "sourceRow": 7,
+        "label": "TOTAL REVENUE",
+        "concept": "revenue",
+        "values": [
+          {
+            "period": "Year ended 31 March 2025",
+            "sourceRef": "P&L Statement!C7"
+          }
+        ]
+      },
+      "instructionChange": "Explicitly states existing source row and period column constraints"
+    }
+  ]
+}

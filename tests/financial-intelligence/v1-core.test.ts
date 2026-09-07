@@ -253,6 +253,7 @@ test("text PDF has ordered page/line/token references and blank PDFs fail withou
     {
       label: "Revenue",
       sourceRow: 3,
+      aggregationRole: "detail" as const,
       concept: "revenue",
       values: [
         { period: "2025", sourceRef: "p1:l3:t2", value: 1200 },

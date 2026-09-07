@@ -128,10 +128,11 @@ test("repository-wide import guard prevents resurrection of retired FI architect
   const coreFiles = files.filter((file) =>
     file.replace(/\\/g, "/").startsWith("backend/financial-intelligence/v1/"),
   );
+  // Canonical concepts are permitted contract vocabulary; retired imports remain checked above.
   for (const file of coreFiles)
     assert.doesNotMatch(
       readFileSync(file, "utf8"),
-      /selectedSheet|airtable|ontology|financial-intake|canonical|semantic.mapping|report\.ts|finance.domain/i,
+      /selectedSheet|airtable|ontology|financial-intake|semantic.mapping|report\.ts|finance.domain/i,
     );
   const ui = readFileSync(
     "app/workspace/components/FinancialIntelligenceWorkspace.tsx",

@@ -178,6 +178,33 @@ export function normalizeIncomeStatement(
       "only other comprehensive income",
       "statement_selection",
     );
+  // An explicit total takes the aggregate concept; preserve every component line/value.
+  const revenues = lines.filter((line) => line.concept === "revenue");
+  const totals = revenues.filter((line) =>
+    /^total (?:revenue|sales|turnover)$/.test(words(line.label)),
+  );
+  if (revenues.length > 1 && totals.length === 1) {
+    const total = totals[0];
+    const totalCell = source.cells.get(total.values[0].sourceRef)!;
+    const components = revenues.filter((line) => line !== total);
+    if (
+      components.every((line) => {
+        const cell = source.cells.get(line.values[0].sourceRef)!;
+        return (
+          cell.sheet === totalCell.sheet &&
+          cell.row < totalCell.row &&
+          line.values.length === total.values.length &&
+          line.values.every((value) =>
+            total.values.some((v) => v.period === value.period),
+          )
+        );
+      })
+    )
+      for (const component of components) {
+        const index = lines.indexOf(component);
+        lines[index] = { ...component, concept: null };
+      }
+  }
   normalization.outputLineCount = lines.length;
   return { statement: { ...statement, lines }, normalization };
 }

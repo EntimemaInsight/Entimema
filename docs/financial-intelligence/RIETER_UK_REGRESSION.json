@@ -1,0 +1,270 @@
+{
+  "date": "2026-09-07T12:41:33.519Z",
+  "status": "RIETER_REAL_FILE_ACCEPTANCE_PASS",
+  "fileName": "rieter-consolidated-income-statement-statement-of-comprehensive-income-2025-en.xlsx",
+  "fileBytes": 30904,
+  "sha256": "2d786b84c659b85faa7bb441b98abf5e2e55549253a7c90d8ed30a2b3b52e0bc",
+  "aiCalls": 1,
+  "providerHttpStatus": 200,
+  "model": "gpt-4.1-nano-2025-04-14",
+  "documentChars": 6784,
+  "inputChars": 9545,
+  "providerResponseStatus": "completed",
+  "actualModel": "gpt-4.1-nano-2025-04-14",
+  "inputTokens": 2659,
+  "outputTokens": 1137,
+  "normalization": {
+    "inputLineCount": 18,
+    "outputLineCount": 18,
+    "excludedRows": [],
+    "conceptMappings": [
+      {
+        "sourceRow": 13,
+        "label": "Operating result before interest and taxes (EBIT)",
+        "from": "EBIT",
+        "to": "operating_profit"
+      }
+    ]
+  },
+  "timings": {
+    "mechanicalReadMs": 22.44,
+    "aiMs": 10347.08,
+    "validationMs": 10.19,
+    "verificationMs": 9.89,
+    "calculationMs": 58.15,
+    "totalMs": 10447.83
+  },
+  "returnedLines": 18,
+  "verifiedValues": 36,
+  "result": {
+    "statementType": "income_statement",
+    "currency": "CHF",
+    "scale": "millions",
+    "periods": [
+      "2024",
+      "2025"
+    ],
+    "lineCount": 18,
+    "verification": {
+      "verifiedValues": 36
+    },
+    "kpis": [
+      {
+        "label": "Gross margin",
+        "period": "2024",
+        "value": 30.66,
+        "unit": "%"
+      },
+      {
+        "label": "Operating margin",
+        "period": "2024",
+        "value": 3.26,
+        "unit": "%"
+      },
+      {
+        "label": "Net margin",
+        "period": "2024",
+        "value": 1.21,
+        "unit": "%"
+      },
+      {
+        "label": "Gross margin",
+        "period": "2025",
+        "value": 25.03,
+        "unit": "%"
+      },
+      {
+        "label": "Operating margin",
+        "period": "2025",
+        "value": -6.41,
+        "unit": "%"
+      },
+      {
+        "label": "Net margin",
+        "period": "2025",
+        "value": -9.25,
+        "unit": "%"
+      },
+      {
+        "label": "Revenue growth",
+        "period": "2025",
+        "value": -20.25,
+        "unit": "%"
+      },
+      {
+        "label": "Operating profit growth",
+        "period": "2025",
+        "value": -256.79,
+        "unit": "%"
+      },
+      {
+        "label": "Net income growth",
+        "period": "2025",
+        "value": -709.62,
+        "unit": "%"
+      }
+    ],
+    "summary": "Revenue decreased by 20.25% in 2025 versus 2024. Operating profit decreased by 256.79% in 2025 versus 2024."
+  },
+  "audit": {
+    "passed": true,
+    "checks": [
+      {
+        "check": "model and one request",
+        "passed": true
+      },
+      {
+        "check": "statement type",
+        "passed": true
+      },
+      {
+        "check": "currency",
+        "passed": true
+      },
+      {
+        "check": "scale",
+        "passed": true
+      },
+      {
+        "check": "periods",
+        "passed": true
+      },
+      {
+        "check": "exactly 18 income-statement lines",
+        "passed": true
+      },
+      {
+        "check": "exactly 36 verified values",
+        "passed": true
+      },
+      {
+        "check": "source row 5: label and both values",
+        "passed": true
+      },
+      {
+        "check": "source row 6: label and both values",
+        "passed": true
+      },
+      {
+        "check": "source row 7: label and both values",
+        "passed": true
+      },
+      {
+        "check": "source row 8: label and both values",
+        "passed": true
+      },
+      {
+        "check": "source row 9: label and both values",
+        "passed": true
+      },
+      {
+        "check": "source row 10: label and both values",
+        "passed": true
+      },
+      {
+        "check": "source row 11: label and both values",
+        "passed": true
+      },
+      {
+        "check": "source row 12: label and both values",
+        "passed": true
+      },
+      {
+        "check": "source row 13: label and both values",
+        "passed": true
+      },
+      {
+        "check": "source row 14: label and both values",
+        "passed": true
+      },
+      {
+        "check": "source row 15: label and both values",
+        "passed": true
+      },
+      {
+        "check": "source row 16: label and both values",
+        "passed": true
+      },
+      {
+        "check": "source row 17: label and both values",
+        "passed": true
+      },
+      {
+        "check": "source row 18: label and both values",
+        "passed": true
+      },
+      {
+        "check": "source row 19: label and both values",
+        "passed": true
+      },
+      {
+        "check": "source row 20: label and both values",
+        "passed": true
+      },
+      {
+        "check": "source row 22: label and both values",
+        "passed": true
+      },
+      {
+        "check": "source row 23: label and both values",
+        "passed": true
+      },
+      {
+        "check": "concept at row 5",
+        "passed": true
+      },
+      {
+        "check": "concept at row 7",
+        "passed": true
+      },
+      {
+        "check": "concept at row 13",
+        "passed": true
+      },
+      {
+        "check": "concept at row 18",
+        "passed": true
+      },
+      {
+        "check": "Gross margin 2024",
+        "passed": true
+      },
+      {
+        "check": "Gross margin 2025",
+        "passed": true
+      },
+      {
+        "check": "Operating margin 2024",
+        "passed": true
+      },
+      {
+        "check": "Operating margin 2025",
+        "passed": true
+      },
+      {
+        "check": "Net margin 2024",
+        "passed": true
+      },
+      {
+        "check": "Net margin 2025",
+        "passed": true
+      },
+      {
+        "check": "Revenue growth 2025",
+        "passed": true
+      },
+      {
+        "check": "Operating profit growth 2025",
+        "passed": true
+      },
+      {
+        "check": "Net income growth 2025",
+        "passed": true
+      },
+      {
+        "check": "customer-visible summary/findings",
+        "passed": true
+      }
+    ]
+  }
+}
