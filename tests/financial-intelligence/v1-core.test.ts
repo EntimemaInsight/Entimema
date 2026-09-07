@@ -133,33 +133,45 @@ test("arithmetic handles annual direction, absent concepts, zero denominators an
   const s = goldStatement();
   const kpis = calculate(s);
   assert.equal(
-    kpis.find((k) => k.label === "Gross margin" && k.period === "2024")?.value,
+    kpis.find((k) => k.label === "Gross margin" && k.currentPeriod === "2024")
+      ?.value,
     35,
   );
   assert.equal(
-    kpis.find((k) => k.label === "Net margin" && k.period === "2024")?.value,
+    kpis.find((k) => k.label === "Net margin" && k.currentPeriod === "2024")
+      ?.value,
     8.2,
   );
   s.periods.reverse();
   assert.equal(
-    calculate(s).find((k) => k.label === "Revenue growth")?.value,
+    calculate(s).find(
+      (k) => k.label === "Revenue growth" && k.currentPeriod === "2025",
+    )?.value,
     20,
   );
   s.lines[0].values[0].value = 0;
   assert.ok(
-    !calculate(s).some(
-      (k) => k.period === "2025" && k.label === "Gross margin",
+    calculate(s).some(
+      (k) =>
+        k.currentPeriod === "2025" &&
+        k.label === "Gross margin" &&
+        k.status === "unavailable",
     ),
   );
   s.lines[0].values[0].value = 1200;
   s.lines[8].values[0].value = -150;
   assert.equal(
-    calculate(s).find((k) => k.label === "Net margin" && k.period === "2025")
-      ?.value,
+    calculate(s).find(
+      (k) => k.label === "Net margin" && k.currentPeriod === "2025",
+    )?.value,
     -12.5,
   );
   s.lines[0].concept = null;
-  assert.deepEqual(calculate(s), []);
+  assert.ok(
+    calculate(s)
+      .filter((k) => k.type === "margin" || k.label === "Revenue growth")
+      .every((k) => k.status === "unavailable"),
+  );
 });
 test("CSV preserves primitive text; numeric parser never turns blanks, ambiguous text or percents into money", async () => {
   const source = await readMechanically(

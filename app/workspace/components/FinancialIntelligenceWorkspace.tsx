@@ -107,6 +107,53 @@ export function FinancialIntelligenceWorkspace({
               <dd>{result.periods.join(" · ")}</dd>
             </div>
           </dl>
+          <section className={styles.analysis}>
+            <h3>Executive Summary</h3>
+            <p>{result.analysis.executiveSummary}</p>
+          </section>
+          <h3>Key Performance Indicators</h3>
+          <div className={styles.kpis}>
+            {result.analysis.kpis.map((kpi) => (
+              <article key={kpi.id}>
+                <p>
+                  {kpi.label} · {kpi.currentPeriod}
+                </p>
+                <strong>
+                  {kpi.status === "valid"
+                    ? number.format(kpi.value) + "%"
+                    : kpi.status === "sign_change"
+                      ? "Sign change"
+                      : kpi.status === "not_meaningful"
+                        ? "Not meaningful"
+                        : "Unavailable"}
+                </strong>
+                {kpi.status === "sign_change" && (
+                  <p>
+                    {kpi.direction === "positive_to_negative"
+                      ? "Positive to negative"
+                      : "Negative to positive"}
+                    : {number.format(kpi.priorValue!)} →{" "}
+                    {number.format(kpi.currentValue!)} ({kpi.priorPeriod} →{" "}
+                    {kpi.currentPeriod})
+                  </p>
+                )}
+                {(kpi.status === "unavailable" ||
+                  kpi.status === "not_meaningful") && <p>{kpi.reason}</p>}
+              </article>
+            ))}
+          </div>
+          <section className={styles.analysis}>
+            <h3>Key Findings</h3>
+            <ul>
+              {result.analysis.findings.map((finding) => (
+                <li key={finding.id}>
+                  <strong>{finding.title}: </strong>
+                  {finding.statement}
+                </li>
+              ))}
+            </ul>
+          </section>
+          <h3>Verified Income Statement</h3>
           <div
             className={styles.table}
             tabIndex={0}
@@ -141,7 +188,10 @@ export function FinancialIntelligenceWorkspace({
                           {value ? (
                             <>
                               <span>{number.format(value.value)}</span>
-                              <small>{value.sourceRef}</small>
+                              <details>
+                                <summary>Source evidence</summary>
+                                <small>{value.sourceRef}</small>
+                              </details>
                             </>
                           ) : (
                             "—"
@@ -154,27 +204,6 @@ export function FinancialIntelligenceWorkspace({
               </tbody>
             </table>
           </div>
-          {result.kpis.length > 0 && (
-            <div className={styles.kpis}>
-              {result.kpis.map((kpi) => (
-                <article key={`${kpi.label}:${kpi.period}`}>
-                  <p>
-                    {kpi.label} · {kpi.period}
-                  </p>
-                  <strong>{number.format(kpi.value)}%</strong>
-                </article>
-              ))}
-            </div>
-          )}
-          <section className={styles.analysis}>
-            <h3>Financial interpretation</h3>
-            <p>{result.summary}</p>
-            <ul>
-              {result.findings.map((finding, i) => (
-                <li key={i}>{finding}</li>
-              ))}
-            </ul>
-          </section>
         </section>
       )}
     </main>

@@ -78,8 +78,6 @@ export function auditRieter(
     ["Net margin", "2024", pct(10.4, 859.1)],
     ["Net margin", "2025", pct(-63.4, 685.1)],
     ["Revenue growth", "2025", pct(685.1 - 859.1, 859.1)],
-    ["Operating profit growth", "2025", pct(-43.9 - 28, 28)],
-    ["Net income growth", "2025", pct(-63.4 - 10.4, 10.4)],
   ] as const)
     check(`${label} ${period}`, () =>
       assert.equal(
@@ -88,6 +86,14 @@ export function auditRieter(
         value,
       ),
     );
+  for (const id of ["operating_profit_growth:2025", "net_income_growth:2025"])
+    check(id, () => {
+      const kpi = result.analysis.kpis.find((k) => k.id === id);
+      assert.equal(kpi?.status, "sign_change");
+      assert.equal(kpi?.value, undefined);
+      if (kpi?.status === "sign_change")
+        assert.equal(kpi.direction, "positive_to_negative");
+    });
   check("customer-visible summary/findings", () => {
     assert.ok(result.summary.length > 30);
     assert.ok(result.findings.length > 0);
