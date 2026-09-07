@@ -1,0 +1,14 @@
+{
+  "status": "V1_CORE_ACCEPTANCE_BLOCKED_BY_PROVIDER_ACCESS",
+  "model": "gpt-4.1-mini-2025-04-14",
+  "aiCalls": 1,
+  "timings": {
+    "mechanicalReadMs": 22.22,
+    "aiMs": 489.15,
+    "verificationMs": 0,
+    "calculationMs": 0,
+    "totalMs": 511.4
+  },
+  "reason": "CLASSIFICATION_FAILED",
+  "providerStatus": 401
+}
