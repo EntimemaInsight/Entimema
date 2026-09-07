@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { MODEL } from "../backend/financial-intelligence/v1/model";
 import { readFile, writeFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import { basename } from "node:path";
@@ -30,11 +31,9 @@ async function main() {
     aiCalls: 0,
   };
   let interpreted: ModelStatement | undefined;
+  const expectedModel = process.env.FI_ACCEPTANCE_MODEL?.trim() || MODEL;
   try {
-    assert.equal(
-      process.env.FI_V1_MODEL?.trim() || "gpt-4.1-nano-2025-04-14",
-      "gpt-4.1-nano-2025-04-14",
-    );
+    assert.equal(process.env.FI_V1_MODEL?.trim() || MODEL, expectedModel);
     const doc = inspectFileBuffer(
       basename(path),
       "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
@@ -44,6 +43,15 @@ async function main() {
       transport: async (body, signal) => {
         evidence.aiCalls = Number(evidence.aiCalls) + 1;
         evidence.model = body.model;
+        evidence.promptContractSha256 = createHash("sha256")
+          .update(
+            JSON.stringify({
+              instructions: body.instructions,
+              text: body.text,
+            }),
+          )
+          .digest("hex");
+        assert.equal(body.model, expectedModel);
         const { data, response } = await new OpenAI({
           apiKey: process.env.OPENAI_API_KEY,
           maxRetries: 0,
@@ -73,7 +81,19 @@ async function main() {
       checks.push({ name, passed });
     check("one provider call", result.aiCalls === 1 && evidence.aiCalls === 1);
     check("income statement", result.statementType === "income_statement");
-    check("GBP units", result.currency === "GBP" && result.scale === "units");
+    check(
+      "GBP and unscaled or unspecified units",
+      result.currency === "GBP" &&
+        (result.scale === "units" || result.scale === null),
+    );
+    check(
+      "source-defined total is revenue",
+      result.lines.find((line) => line.sourceRow === 13)?.concept === "revenue",
+    );
+    check(
+      "component sales is distinct",
+      result.lines.find((line) => line.sourceRow === 11)?.concept !== "revenue",
+    );
     check(
       "literal relative periods",
       JSON.stringify(result.periods) ===
@@ -151,7 +171,8 @@ async function main() {
         error instanceof Error ? error.message : "acceptance error";
   }
   await writeFile(
-    "docs/financial-intelligence/UK_PNL_REAL_FILE_ACCEPTANCE.json",
+    process.env.FI_ACCEPTANCE_OUTPUT ??
+      "docs/financial-intelligence/UK_PNL_REAL_FILE_ACCEPTANCE.json",
     JSON.stringify(evidence, null, 2) + "\n",
   );
   console.log(

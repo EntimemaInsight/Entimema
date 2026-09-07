@@ -1,10 +1,15 @@
 import assert from "node:assert/strict";
+import { MODEL } from "../../backend/financial-intelligence/v1/model";
 import type { Result } from "../../backend/financial-intelligence/v1/contract";
 import type { Source } from "../../backend/financial-intelligence/v1/reader";
 import { rieterRows } from "./rieter";
 
 /** Acceptance-only audit: continue every check after a failed field; never alter the result. */
-export function auditRieter(result: Result, source: Source) {
+export function auditRieter(
+  result: Result,
+  source: Source,
+  expectedModel = MODEL,
+) {
   const checks: { check: string; passed: boolean; reason?: string }[] = [];
   const check = (name: string, run: () => void) => {
     try {
@@ -19,7 +24,7 @@ export function auditRieter(result: Result, source: Source) {
     }
   };
   check("model and one request", () => {
-    assert.equal(result.model, "gpt-4.1-nano-2025-04-14");
+    assert.equal(result.model, expectedModel);
     assert.equal(result.aiCalls, 1);
   });
   check("statement type", () =>

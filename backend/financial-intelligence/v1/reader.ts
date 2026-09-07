@@ -11,6 +11,14 @@ export type Cell = {
   raw: string | number | boolean;
   displayed: string;
   numeric: number | null;
+  structure?: {
+    formula?: string;
+    numberFormat?: string;
+    rowOutlineLevel?: number;
+    rowHidden?: boolean;
+    columnHidden?: boolean;
+    fill?: string;
+  };
 };
 export type Source = {
   text: string;
@@ -48,7 +56,11 @@ export function sourceRef(sheet: string, ref: string) {
   return `'${sheet.replace(/'/g, "''")}'!${ref}`;
 }
 
-function compact(cells: Map<string, Cell>, format: Source["format"]): Source {
+function compact(
+  cells: Map<string, Cell>,
+  format: Source["format"],
+  merges = new Map<string, string[]>(),
+): Source {
   if (!cells.size)
     throw new AgentError(
       "FILE_CORRUPT",
@@ -57,12 +69,41 @@ function compact(cells: Map<string, Cell>, format: Source["format"]): Source {
     );
   if (cells.size > MAX_CELLS)
     throw new AgentError("WORKBOOK_LIMIT_EXCEEDED", 413);
-  const text = [...cells.values()]
-    .map(
-      (cell) =>
-        `${cell.ref} | ${JSON.stringify(cell.raw)}${String(cell.raw) !== cell.displayed ? ` | displayed ${JSON.stringify(cell.displayed)}` : ""}`,
-    )
-    .join("\n");
+  const parts: string[] = [];
+  let priorSheet: string | undefined,
+    priorRow = 0;
+  for (const cell of cells.values()) {
+    if (format === "spreadsheet") {
+      if (cell.sheet !== priorSheet) {
+        parts.push(
+          "SHEET " +
+            JSON.stringify(cell.sheet) +
+            " | mergedRanges " +
+            JSON.stringify(merges.get(cell.sheet) ?? []),
+        );
+        priorSheet = cell.sheet;
+        priorRow = 0;
+      }
+      if (cell.row !== priorRow) {
+        if (cell.row > priorRow + 1)
+          parts.push("BLANK_ROWS " + (priorRow + 1) + ":" + (cell.row - 1));
+        parts.push("ROW " + cell.row);
+        priorRow = cell.row;
+      }
+    }
+    parts.push(
+      cell.ref +
+        " | " +
+        JSON.stringify(cell.raw) +
+        (String(cell.raw) !== cell.displayed
+          ? " | displayed " + JSON.stringify(cell.displayed)
+          : "") +
+        (cell.structure
+          ? " | structure " + JSON.stringify(cell.structure)
+          : ""),
+    );
+  }
+  const text = parts.join("\n");
   if (text.length > MAX_CHARS)
     throw new AgentError(
       "WORKBOOK_LIMIT_EXCEEDED",
@@ -163,12 +204,19 @@ export async function readMechanically(
       cellText: true,
       cellDates: false,
       cellFormula: true,
+      cellNF: true,
+      cellStyles: true,
       sheetRows: 2001,
     });
     if (workbook.SheetNames.length > 50)
       throw new AgentError("WORKBOOK_LIMIT_EXCEEDED", 413);
+    const merges = new Map<string, string[]>();
     for (const name of workbook.SheetNames) {
       const sheet = workbook.Sheets[name];
+      merges.set(
+        name,
+        (sheet["!merges"] ?? []).map((range) => XLSX.utils.encode_range(range)),
+      );
       if (sheet["!fullref"] && sheet["!fullref"] !== sheet["!ref"])
         throw new AgentError("WORKBOOK_LIMIT_EXCEEDED", 413);
       const refs = Object.keys(sheet)
@@ -190,6 +238,18 @@ export async function readMechanically(
         const coordinate = XLSX.utils.decode_cell(address),
           ref = sourceRef(name, address);
         const raw = cell.v as string | number | boolean;
+        const structure: NonNullable<Cell["structure"]> = {};
+        if (cell.f) structure.formula = cell.f;
+        if (cell.z && cell.z !== "General")
+          structure.numberFormat = String(cell.z);
+        const row = sheet["!rows"]?.[coordinate.r],
+          column = sheet["!cols"]?.[coordinate.c];
+        if (row?.level) structure.rowOutlineLevel = row.level;
+        if (row?.hidden) structure.rowHidden = true;
+        if (column?.hidden) structure.columnHidden = true;
+        const fill: unknown = cell.s?.fgColor?.rgb;
+        if (typeof fill === "string" && /^[0-9A-F]{6,8}$/i.test(fill))
+          structure.fill = fill;
         cells.set(ref, {
           ref,
           sheet: name,
@@ -198,12 +258,13 @@ export async function readMechanically(
           raw,
           displayed: cell.w ?? String(raw),
           numeric: cell.t === "e" ? null : sourceNumber(raw),
+          ...(Object.keys(structure).length ? { structure } : {}),
         });
         if (cells.size > MAX_CELLS)
           throw new AgentError("WORKBOOK_LIMIT_EXCEEDED", 413);
       }
     }
-    return compact(cells, "spreadsheet");
+    return compact(cells, "spreadsheet", merges);
   } catch (error) {
     if (error instanceof AgentError) throw error;
     throw new AgentError(

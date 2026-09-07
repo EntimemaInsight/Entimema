@@ -54,6 +54,7 @@ function fixture(sheetName = "Example Accounts", offset = 0) {
       sheet[`D${row + offset}`].f = `SUM(D${11 + offset}:D${12 + offset})`;
     return {
       sourceRow: row + offset,
+      aggregationRole: "detail" as const,
       label,
       concept,
       values: [
@@ -223,6 +224,7 @@ test("horizontal summary tiles cannot masquerade as a two-period revenue row", a
   const input = structuredClone(model);
   input.lines.unshift({
     sourceRow: 7,
+    aggregationRole: "detail" as const,
     label: "TOTAL REVENUE",
     concept: "revenue",
     values: [{ period: "Current Year £", sourceRef: "Example Accounts!B7" }],

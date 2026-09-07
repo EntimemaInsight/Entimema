@@ -52,6 +52,7 @@ const fields = new Set([
   "sourceRow",
   "label",
   "concept",
+  "aggregationRole",
   "values",
   "period",
   "sourceRef",
