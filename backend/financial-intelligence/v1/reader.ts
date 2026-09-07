@@ -1,3 +1,4 @@
+import { normalizePdfNumbers, pdfTokens } from "./pdf-numbers";
 import * as XLSX from "xlsx";
 import pdfParse from "pdf-parse/lib/pdf-parse.js";
 import type { InspectedDocument } from "../../lib/files";
@@ -164,7 +165,7 @@ export async function readMechanically(
               for (const item of row.items.sort(
                 (a, b) => a.transform[4] - b.transform[4],
               )) {
-                for (const token of item.str.trim().split(/\s+/)) {
+                for (const token of pdfTokens(item.str)) {
                   const ref = `p${page}:l${index + 1}:t${++column}`;
                   cells.set(ref, {
                     ref,
@@ -190,6 +191,7 @@ export async function readMechanically(
       if (pageFailure) throw pageFailure;
       if (parsed.numpages > 50 || parsed.numrender !== page)
         throw new AgentError("WORKBOOK_LIMIT_EXCEEDED", 413);
+      normalizePdfNumbers(cells);
       return compact(cells, "pdf");
     }
     if (![".xlsx", ".xls", ".csv"].includes(document.extension))

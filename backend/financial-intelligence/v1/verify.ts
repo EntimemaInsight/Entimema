@@ -1,3 +1,4 @@
+import { pdfPeriodMatches } from "./pdf-periods";
 import type { Statement } from "./contract";
 import type { Source } from "./reader";
 import { reject } from "./diagnostics";
@@ -133,13 +134,16 @@ export function verifyStatement(statement: Statement, source: Source): number {
           "unique source reference",
           "duplicate reference",
         );
-      const header = cells.some(
-        (cell) =>
-          cell.sheet === first.sheet &&
-          cell.row < first.row &&
-          (source.format === "pdf" || cell.column === actual.column) &&
-          normalized(cell.displayed).includes(normalized(value.period)),
-      );
+      const header =
+        source.format === "pdf"
+          ? pdfPeriodMatches(source, actual, value.period)
+          : cells.some(
+              (cell) =>
+                cell.sheet === first.sheet &&
+                cell.row < first.row &&
+                cell.column === actual.column &&
+                normalized(cell.displayed).includes(normalized(value.period)),
+            );
       if (!header)
         reject(
           "PERIOD_HEADER_MISMATCH",
