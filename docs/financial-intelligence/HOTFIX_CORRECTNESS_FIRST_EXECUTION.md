@@ -63,6 +63,10 @@ The next correctness issue is separating reported currency and scale without con
 
 ## Currency/scale follow-up
 
-The subsequent metadata normalizer fixes CHF/millions. The real rerun continued through all checks and revealed extra comprehensive-income rows and missing operating-profit KPIs. See [normalization report](./HOTFIX_CURRENCY_SCALE_NORMALIZATION.md) and [latest full result/audit](./RIETER_REAL_FILE_ACCEPTANCE.json). The historical result above remains preserved; final real-file acceptance is still failed.
+The subsequent metadata normalizer fixes CHF/millions. The real rerun continued through all checks and revealed extra comprehensive-income rows and missing operating-profit KPIs. See [normalization report](./HOTFIX_CURRENCY_SCALE_NORMALIZATION.md) and [historical pre-semantics result/audit](./RIETER_REAL_FILE_ACCEPTANCE_PRE_SEMANTICS.json). The historical result above remains preserved; final real-file acceptance is still failed.
 
-RIETER_REAL_FILE_ACCEPTANCE_FAILED
+## Boundary and EBIT follow-up
+
+The subsequent boundary/EBIT hotfix passed a fresh real execution: 18 intended P&L rows, 36 verified values and all nine KPIs. The previously recorded 30-row output also passes an offline 30-to-18 boundary regression. Earlier failures above are historical and superseded by the [current report](./HOTFIX_PNL_BOUNDARY_EBIT.md) and [latest live acceptance](./RIETER_REAL_FILE_ACCEPTANCE.json).
+
+RIETER_REAL_FILE_ACCEPTANCE_PASS

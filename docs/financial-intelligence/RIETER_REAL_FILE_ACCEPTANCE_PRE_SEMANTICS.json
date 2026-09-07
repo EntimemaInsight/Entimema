@@ -1,6 +1,6 @@
 {
-  "date": "2026-09-07T12:00:29.234Z",
-  "status": "RIETER_REAL_FILE_ACCEPTANCE_PASS",
+  "date": "2026-09-07T11:43:46.100Z",
+  "status": "RIETER_REAL_FILE_ACCEPTANCE_FAILED",
   "fileName": "rieter-consolidated-income-statement-statement-of-comprehensive-income-2025-en.xlsx",
   "fileBytes": 30904,
   "sha256": "2d786b84c659b85faa7bb441b98abf5e2e55549253a7c90d8ed30a2b3b52e0bc",
@@ -12,30 +12,17 @@
   "providerResponseStatus": "completed",
   "actualModel": "gpt-4.1-nano-2025-04-14",
   "inputTokens": 2621,
-  "outputTokens": 1137,
-  "normalization": {
-    "inputLineCount": 18,
-    "outputLineCount": 18,
-    "excludedRows": [],
-    "conceptMappings": [
-      {
-        "sourceRow": 13,
-        "label": "Operating result before interest and taxes (EBIT)",
-        "from": "EBIT",
-        "to": "operating_profit"
-      }
-    ]
-  },
+  "outputTokens": 1923,
   "timings": {
-    "mechanicalReadMs": 22.6,
-    "aiMs": 12749.74,
-    "validationMs": 7.84,
-    "verificationMs": 7.22,
-    "calculationMs": 57.33,
-    "totalMs": 12844.79
+    "mechanicalReadMs": 25.44,
+    "aiMs": 13805.28,
+    "validationMs": 8.8,
+    "verificationMs": 4.05,
+    "calculationMs": 145.92,
+    "totalMs": 13989.57
   },
-  "returnedLines": 18,
-  "verifiedValues": 36,
+  "returnedLines": 30,
+  "verifiedValues": 60,
   "result": {
     "statementType": "income_statement",
     "entity": null,
@@ -185,7 +172,7 @@
       {
         "sourceRow": 13,
         "label": "Operating result before interest and taxes (EBIT)",
-        "concept": "operating_profit",
+        "concept": "EBIT",
         "values": [
           {
             "period": "2024",
@@ -351,6 +338,210 @@
             "value": -1.26
           }
         ]
+      },
+      {
+        "sourceRow": 30,
+        "label": "Net (loss) / profit",
+        "concept": "net_income_statement",
+        "values": [
+          {
+            "period": "2024",
+            "sourceRef": "'Consolidated income statement'!B30",
+            "value": 10.4
+          },
+          {
+            "period": "2025",
+            "sourceRef": "'Consolidated income statement'!C30",
+            "value": -63.4
+          }
+        ]
+      },
+      {
+        "sourceRow": 31,
+        "label": "Remeasurement of defined benefit plans",
+        "concept": "remeasurement_defined_benefit_plans",
+        "values": [
+          {
+            "period": "2024",
+            "sourceRef": "'Consolidated income statement'!B31",
+            "value": 14.5
+          },
+          {
+            "period": "2025",
+            "sourceRef": "'Consolidated income statement'!C31",
+            "value": -9.9
+          }
+        ]
+      },
+      {
+        "sourceRow": 32,
+        "label": "Income taxes on remeasurement of defined benefit plans",
+        "concept": "income_taxes_on_remeasurement",
+        "values": [
+          {
+            "period": "2024",
+            "sourceRef": "'Consolidated income statement'!B32",
+            "value": -2.9
+          },
+          {
+            "period": "2025",
+            "sourceRef": "'Consolidated income statement'!C32",
+            "value": 1.9
+          }
+        ]
+      },
+      {
+        "sourceRow": 33,
+        "label": "Items that will not be reclassified to the income statement, net of taxes",
+        "concept": "items_not_reclassified",
+        "values": [
+          {
+            "period": "2024",
+            "sourceRef": "'Consolidated income statement'!B33",
+            "value": 11.6
+          },
+          {
+            "period": "2025",
+            "sourceRef": "'Consolidated income statement'!C33",
+            "value": -8
+          }
+        ]
+      },
+      {
+        "sourceRow": 34,
+        "label": "Currency translation differences",
+        "concept": "currency_translation_differences",
+        "values": [
+          {
+            "period": "2024",
+            "sourceRef": "'Consolidated income statement'!B34",
+            "value": 15.1
+          },
+          {
+            "period": "2025",
+            "sourceRef": "'Consolidated income statement'!C34",
+            "value": -16.9
+          }
+        ]
+      },
+      {
+        "sourceRow": 35,
+        "label": "Cash flow hedges",
+        "concept": "cash_flow_hedges",
+        "values": [
+          {
+            "period": "2024",
+            "sourceRef": "'Consolidated income statement'!B35",
+            "value": 6.3
+          },
+          {
+            "period": "2025",
+            "sourceRef": "'Consolidated income statement'!C35",
+            "value": -0.3
+          }
+        ]
+      },
+      {
+        "sourceRow": 36,
+        "label": "Income taxes on cash flow hedges",
+        "concept": "income_taxes_on_hedges",
+        "values": [
+          {
+            "period": "2024",
+            "sourceRef": "'Consolidated income statement'!B36",
+            "value": -1.3
+          },
+          {
+            "period": "2025",
+            "sourceRef": "'Consolidated income statement'!C36",
+            "value": 0.1
+          }
+        ]
+      },
+      {
+        "sourceRow": 37,
+        "label": "Items that may be reclassified to the income statement, net of taxes",
+        "concept": "items_reclassifiable",
+        "values": [
+          {
+            "period": "2024",
+            "sourceRef": "'Consolidated income statement'!B37",
+            "value": 20.099999999999998
+          },
+          {
+            "period": "2025",
+            "sourceRef": "'Consolidated income statement'!C37",
+            "value": -17.099999999999998
+          }
+        ]
+      },
+      {
+        "sourceRow": 38,
+        "label": "Total other comprehensive income",
+        "concept": "total_other_comprehensive_income",
+        "values": [
+          {
+            "period": "2024",
+            "sourceRef": "'Consolidated income statement'!B38",
+            "value": 31.699999999999996
+          },
+          {
+            "period": "2025",
+            "sourceRef": "'Consolidated income statement'!C38",
+            "value": -25.099999999999998
+          }
+        ]
+      },
+      {
+        "sourceRow": 39,
+        "label": "Total comprehensive income",
+        "concept": "total_comprehensive_income",
+        "values": [
+          {
+            "period": "2024",
+            "sourceRef": "'Consolidated income statement'!B39",
+            "value": 42.099999999999994
+          },
+          {
+            "period": "2025",
+            "sourceRef": "'Consolidated income statement'!C39",
+            "value": -88.5
+          }
+        ]
+      },
+      {
+        "sourceRow": 40,
+        "label": "Attributable to shareholders of Rieter Holding Ltd.",
+        "concept": "comprehensive_attributable_to_shareholders",
+        "values": [
+          {
+            "period": "2024",
+            "sourceRef": "'Consolidated income statement'!B40",
+            "value": 42.3
+          },
+          {
+            "period": "2025",
+            "sourceRef": "'Consolidated income statement'!C40",
+            "value": -88.4
+          }
+        ]
+      },
+      {
+        "sourceRow": 41,
+        "label": "Attributable to non-controlling interests",
+        "concept": "comprehensive_attributable_to_non_controlling_interests",
+        "values": [
+          {
+            "period": "2024",
+            "sourceRef": "'Consolidated income statement'!B41",
+            "value": -0.2
+          },
+          {
+            "period": "2025",
+            "sourceRef": "'Consolidated income statement'!C41",
+            "value": -0.1
+          }
+        ]
       }
     ],
     "kpis": [
@@ -358,12 +549,6 @@
         "label": "Gross margin",
         "period": "2024",
         "value": 30.66,
-        "unit": "%"
-      },
-      {
-        "label": "Operating margin",
-        "period": "2024",
-        "value": 3.26,
         "unit": "%"
       },
       {
@@ -379,12 +564,6 @@
         "unit": "%"
       },
       {
-        "label": "Operating margin",
-        "period": "2025",
-        "value": -6.41,
-        "unit": "%"
-      },
-      {
         "label": "Net margin",
         "period": "2025",
         "value": -9.25,
@@ -397,43 +576,37 @@
         "unit": "%"
       },
       {
-        "label": "Operating profit growth",
-        "period": "2025",
-        "value": -256.79,
-        "unit": "%"
-      },
-      {
         "label": "Net income growth",
         "period": "2025",
         "value": -709.62,
         "unit": "%"
       }
     ],
-    "summary": "Revenue decreased by 20.25% in 2025 versus 2024. Operating profit decreased by 256.79% in 2025 versus 2024.",
+    "summary": "Revenue decreased by 20.25% in 2025 versus 2024. Net income decreased by 709.62% in 2025 versus 2024.",
     "findings": [
       "Revenue decreased by 20.25% in 2025 versus 2024.",
-      "Operating profit decreased by 256.79% in 2025 versus 2024.",
       "Net income decreased by 709.62% in 2025 versus 2024.",
       "Gross margin moved from 30.66% to 25.03% in 2025 (-5.63 pp).",
-      "Operating margin moved from 3.26% to -6.41% in 2025 (-9.67 pp).",
       "Net margin moved from 1.21% to -9.25% in 2025 (-10.46 pp)."
     ],
     "verification": {
-      "verifiedValues": 36
+      "verifiedValues": 60
     },
     "model": "gpt-4.1-nano-2025-04-14",
     "aiCalls": 1,
     "timings": {
-      "mechanicalReadMs": 22.6,
-      "aiMs": 12749.74,
-      "validationMs": 7.84,
-      "verificationMs": 7.22,
-      "calculationMs": 57.33,
-      "totalMs": 12844.79
+      "mechanicalReadMs": 25.44,
+      "aiMs": 13805.28,
+      "validationMs": 8.8,
+      "verificationMs": 4.05,
+      "calculationMs": 145.92,
+      "totalMs": 13989.57
     }
   },
+  "failureBoundary": "real_file_correctness_assertion",
+  "reason": "Income statement must include all 18 reported rows, without comprehensive-income rows\n\n30 !== 18\n",
   "audit": {
-    "passed": true,
+    "passed": false,
     "checks": [
       {
         "check": "model and one request",
@@ -457,11 +630,13 @@
       },
       {
         "check": "exactly 18 income-statement lines",
-        "passed": true
+        "passed": false,
+        "reason": "Expected values to be strictly equal:\n\n30 !== 18\n"
       },
       {
         "check": "exactly 36 verified values",
-        "passed": true
+        "passed": false,
+        "reason": "Expected values to be strictly equal:\n\n60 !== 36\n"
       },
       {
         "check": "source row 5: label and both values",
@@ -545,7 +720,8 @@
       },
       {
         "check": "concept at row 13",
-        "passed": true
+        "passed": false,
+        "reason": "Expected values to be strictly equal:\n+ actual - expected\n\n+ 'EBIT'\n- 'operating_profit'\n"
       },
       {
         "check": "concept at row 18",
@@ -561,11 +737,13 @@
       },
       {
         "check": "Operating margin 2024",
-        "passed": true
+        "passed": false,
+        "reason": "Expected values to be strictly equal:\n+ actual - expected\n\n+ undefined\n- 3.26\n"
       },
       {
         "check": "Operating margin 2025",
-        "passed": true
+        "passed": false,
+        "reason": "Expected values to be strictly equal:\n+ actual - expected\n\n+ undefined\n- -6.41\n"
       },
       {
         "check": "Net margin 2024",
@@ -581,7 +759,8 @@
       },
       {
         "check": "Operating profit growth 2025",
-        "passed": true
+        "passed": false,
+        "reason": "Expected values to be strictly equal:\n+ actual - expected\n\n+ undefined\n- -256.79\n"
       },
       {
         "check": "Net income growth 2025",
@@ -592,5 +771,6 @@
         "passed": true
       }
     ]
-  }
+  },
+  "auditMode": "offline audit of the same saved live result; no additional provider request"
 }

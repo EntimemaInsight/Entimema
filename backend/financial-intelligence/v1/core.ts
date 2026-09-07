@@ -1,3 +1,7 @@
+import {
+  normalizeIncomeStatement,
+  type SemanticNormalization,
+} from "./semantics";
 import { normalizeMetadata } from "./metadata";
 import { zodTextFormat } from "openai/helpers/zod";
 import { AgentError } from "../../lib/errors";
@@ -57,6 +61,7 @@ export async function executeV1(
     apiKey?: string;
     deadlineMs?: number;
     onTelemetry?: (telemetry: ExecutionTelemetry) => void;
+    onNormalization?: (normalization: SemanticNormalization) => void;
   } = {},
 ): Promise<Result> {
   const started = performance.now();
@@ -160,8 +165,18 @@ export async function executeV1(
     );
     checkDeadline();
     next("verificationMs");
-    const statement = bindSourceValues(modelStatement, source);
-    const verifiedValues = verifyStatement(statement, source);
+    const bound = bindSourceValues(modelStatement, source);
+    // Verify every interpreted row before section normalization can exclude any of them.
+    verifyStatement(bound, source);
+    const { statement, normalization } = normalizeIncomeStatement(
+      bound,
+      source,
+    );
+    options.onNormalization?.(normalization);
+    const verifiedValues = statement.lines.reduce(
+      (count, line) => count + line.values.length,
+      0,
+    );
     checkDeadline();
     next("calculationMs");
     const analysis = firstAnalysis(statement, calculate(statement));

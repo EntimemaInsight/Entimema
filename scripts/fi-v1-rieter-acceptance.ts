@@ -68,7 +68,12 @@ async function main() {
       "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
       buffer,
     );
-    const result = await executeV1(doc, { transport });
+    const result = await executeV1(doc, {
+      transport,
+      onNormalization: (normalization) => {
+        evidence.normalization = normalization;
+      },
+    });
     evidence.timings = result.timings;
     evidence.returnedLines = result.lines.length;
     evidence.verifiedValues = result.verification.verifiedValues;
