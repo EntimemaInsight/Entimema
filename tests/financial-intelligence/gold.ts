@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { inspectFileBuffer } from "../../backend/lib/files";
 import type {
+  ModelStatement,
   Statement,
   Result,
 } from "../../backend/financial-intelligence/v1/contract";
@@ -41,11 +42,6 @@ export function goldStatement(): Statement {
         { period: "2024", sourceRef: `'P&L'!C${i + 5}`, value: b },
       ],
     })),
-    summary:
-      "Revenue growth and stronger gross profitability improved operating and net earnings.",
-    findings: [
-      "Operating expenses grew more slowly than gross profit, supporting stronger operating profitability.",
-    ],
   };
 }
 export function assertGold(result: Result) {
@@ -77,4 +73,20 @@ export function assertGold(result: Result) {
   assert.equal(kpi("Gross margin", "2025"), 40);
   assert.equal(kpi("Operating margin", "2025"), 19.17);
   assert.equal(kpi("Net margin", "2025"), 12.5);
+  assert.equal(kpi("Operating profit growth", "2025"), 76.92);
+  assert.equal(kpi("Net income growth", "2025"), 82.93);
+}
+
+export function goldModelStatement(): ModelStatement {
+  const statement = goldStatement();
+  return {
+    ...statement,
+    lines: statement.lines.map((line) => ({
+      ...line,
+      values: line.values.map(({ period, sourceRef }) => ({
+        period,
+        sourceRef,
+      })),
+    })),
+  };
 }

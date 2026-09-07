@@ -1,14 +1,270 @@
 {
-  "status": "V1_CORE_ACCEPTANCE_BLOCKED_BY_PROVIDER_ACCESS",
-  "model": "gpt-4.1-mini-2025-04-14",
+  "date": "2026-09-07T08:24:04.251Z",
+  "attempt": 1,
+  "status": "V1_CORE_ACCEPTANCE_PASS",
+  "model": "gpt-4.1-nano-2025-04-14",
+  "providerHttpStatus": 200,
   "aiCalls": 1,
-  "timings": {
-    "mechanicalReadMs": 22.22,
-    "aiMs": 489.15,
-    "verificationMs": 0,
-    "calculationMs": 0,
-    "totalMs": 511.4
+  "inputTokens": 857,
+  "outputTokens": 509,
+  "partialResponseObserved": false,
+  "validation": null,
+  "inputChars": 3243,
+  "documentChars": 674,
+  "promptChars": 1407,
+  "schemaChars": 1162,
+  "estimatedInputTokens": 811,
+  "reasoning": "omitted",
+  "actualModel": "gpt-4.1-nano-2025-04-14",
+  "result": {
+    "statementType": "income_statement",
+    "entity": null,
+    "currency": "EUR",
+    "scale": "thousands",
+    "periods": [
+      "2025",
+      "2024"
+    ],
+    "lines": [
+      {
+        "sourceRow": 5,
+        "label": "Revenue",
+        "concept": "revenue",
+        "values": [
+          {
+            "period": "2025",
+            "sourceRef": "'P&L'!B5",
+            "value": 1200
+          },
+          {
+            "period": "2024",
+            "sourceRef": "'P&L'!C5",
+            "value": 1000
+          }
+        ]
+      },
+      {
+        "sourceRow": 6,
+        "label": "Cost of Sales",
+        "concept": "cost_of_sales",
+        "values": [
+          {
+            "period": "2025",
+            "sourceRef": "'P&L'!B6",
+            "value": -720
+          },
+          {
+            "period": "2024",
+            "sourceRef": "'P&L'!C6",
+            "value": -650
+          }
+        ]
+      },
+      {
+        "sourceRow": 7,
+        "label": "Gross Profit",
+        "concept": "gross_profit",
+        "values": [
+          {
+            "period": "2025",
+            "sourceRef": "'P&L'!B7",
+            "value": 480
+          },
+          {
+            "period": "2024",
+            "sourceRef": "'P&L'!C7",
+            "value": 350
+          }
+        ]
+      },
+      {
+        "sourceRow": 8,
+        "label": "Operating Expenses",
+        "concept": "operating_expenses",
+        "values": [
+          {
+            "period": "2025",
+            "sourceRef": "'P&L'!B8",
+            "value": -250
+          },
+          {
+            "period": "2024",
+            "sourceRef": "'P&L'!C8",
+            "value": -220
+          }
+        ]
+      },
+      {
+        "sourceRow": 9,
+        "label": "Operating Profit",
+        "concept": "operating_profit",
+        "values": [
+          {
+            "period": "2025",
+            "sourceRef": "'P&L'!B9",
+            "value": 230
+          },
+          {
+            "period": "2024",
+            "sourceRef": "'P&L'!C9",
+            "value": 130
+          }
+        ]
+      },
+      {
+        "sourceRow": 10,
+        "label": "Finance Costs",
+        "concept": "finance_costs",
+        "values": [
+          {
+            "period": "2025",
+            "sourceRef": "'P&L'!B10",
+            "value": -30
+          },
+          {
+            "period": "2024",
+            "sourceRef": "'P&L'!C10",
+            "value": -20
+          }
+        ]
+      },
+      {
+        "sourceRow": 11,
+        "label": "Profit Before Tax",
+        "concept": "profit_before_tax",
+        "values": [
+          {
+            "period": "2025",
+            "sourceRef": "'P&L'!B11",
+            "value": 200
+          },
+          {
+            "period": "2024",
+            "sourceRef": "'P&L'!C11",
+            "value": 110
+          }
+        ]
+      },
+      {
+        "sourceRow": 12,
+        "label": "Income Tax",
+        "concept": "income_tax",
+        "values": [
+          {
+            "period": "2025",
+            "sourceRef": "'P&L'!B12",
+            "value": -50
+          },
+          {
+            "period": "2024",
+            "sourceRef": "'P&L'!C12",
+            "value": -28
+          }
+        ]
+      },
+      {
+        "sourceRow": 13,
+        "label": "Net Income",
+        "concept": "net_income",
+        "values": [
+          {
+            "period": "2025",
+            "sourceRef": "'P&L'!B13",
+            "value": 150
+          },
+          {
+            "period": "2024",
+            "sourceRef": "'P&L'!C13",
+            "value": 82
+          }
+        ]
+      }
+    ],
+    "kpis": [
+      {
+        "label": "Gross margin",
+        "period": "2025",
+        "value": 40,
+        "unit": "%"
+      },
+      {
+        "label": "Operating margin",
+        "period": "2025",
+        "value": 19.17,
+        "unit": "%"
+      },
+      {
+        "label": "Net margin",
+        "period": "2025",
+        "value": 12.5,
+        "unit": "%"
+      },
+      {
+        "label": "Revenue growth",
+        "period": "2025",
+        "value": 20,
+        "unit": "%"
+      },
+      {
+        "label": "Gross margin",
+        "period": "2024",
+        "value": 35,
+        "unit": "%"
+      },
+      {
+        "label": "Operating margin",
+        "period": "2024",
+        "value": 13,
+        "unit": "%"
+      },
+      {
+        "label": "Net margin",
+        "period": "2024",
+        "value": 8.2,
+        "unit": "%"
+      },
+      {
+        "label": "Operating profit growth",
+        "period": "2025",
+        "value": 76.92,
+        "unit": "%"
+      },
+      {
+        "label": "Net income growth",
+        "period": "2025",
+        "value": 82.93,
+        "unit": "%"
+      }
+    ],
+    "summary": "Revenue increased by 20% in 2025 versus 2024. Operating profit increased by 76.92% in 2025 versus 2024.",
+    "findings": [
+      "Revenue increased by 20% in 2025 versus 2024.",
+      "Operating profit increased by 76.92% in 2025 versus 2024.",
+      "Net income increased by 82.93% in 2025 versus 2024.",
+      "Gross margin moved from 35% to 40% in 2025 (+5 pp).",
+      "Operating margin moved from 13% to 19.17% in 2025 (+6.17 pp).",
+      "Net margin moved from 8.2% to 12.5% in 2025 (+4.3 pp)."
+    ],
+    "verification": {
+      "verifiedValues": 18
+    },
+    "model": "gpt-4.1-nano-2025-04-14",
+    "aiCalls": 1,
+    "timings": {
+      "mechanicalReadMs": 15.22,
+      "aiMs": 5757.44,
+      "validationMs": 4.42,
+      "verificationMs": 2.42,
+      "calculationMs": 102.14,
+      "totalMs": 5881.71
+    }
   },
-  "reason": "CLASSIFICATION_FAILED",
-  "providerStatus": 401
+  "timings": {
+    "mechanicalReadMs": 15.22,
+    "aiMs": 5757.44,
+    "validationMs": 4.42,
+    "verificationMs": 2.42,
+    "calculationMs": 102.14,
+    "totalMs": 5881.71
+  }
 }

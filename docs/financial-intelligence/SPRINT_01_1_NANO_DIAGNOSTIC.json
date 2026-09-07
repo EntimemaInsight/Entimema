@@ -1,0 +1,52 @@
+{
+  "date": "2026-09-07T08:01:20.673Z",
+  "baseline": {
+    "status": "V1_CORE_ACCEPTANCE_FAILED",
+    "model": "gpt-4.1-mini-2025-04-14",
+    "aiCalls": 1,
+    "timings": {
+      "mechanicalReadMs": 14.49,
+      "aiMs": 7040.36,
+      "verificationMs": 0,
+      "calculationMs": 0,
+      "totalMs": 7054.88
+    },
+    "reason": "OPENAI_TIMEOUT",
+    "providerStatus": null
+  },
+  "records": [
+    {
+      "model": "gpt-4.1-nano",
+      "reasoning": "not supported (omitted)",
+      "providerHttpStatus": null,
+      "actualModel": null,
+      "inputTokens": null,
+      "outputTokens": null,
+      "partialResponseObserved": false,
+      "responseStatus": null,
+      "aiCalls": 1,
+      "acceptance": "V1_CORE_ACCEPTANCE_FAILED",
+      "timeoutMs": 7000,
+      "documentChars": 674,
+      "promptChars": 1492,
+      "schemaChars": 1345,
+      "requestInputChars": 3511,
+      "estimatedInputTokens": 878,
+      "invariantHash": "557a9279ff8916b183e5b0aacc636a679c29b0a3151fa0b6ca836b2079570228",
+      "providerErrorCode": null,
+      "providerErrorType": null,
+      "providerErrorParam": null,
+      "timings": {
+        "mechanicalReadMs": 12.31,
+        "aiMs": 7021.18,
+        "verificationMs": 0,
+        "calculationMs": 0,
+        "totalMs": 7033.51
+      },
+      "failure": "OPENAI_TIMEOUT",
+      "failureDetail": "Document classification timed out.",
+      "failureBoundary": "provider_request",
+      "timedOut": true
+    }
+  ]
+}

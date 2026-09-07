@@ -1,3 +1,4 @@
+import { ValidationFailure } from "../../financial-intelligence/v1/diagnostics";
 import { randomUUID } from "node:crypto";
 import { AgentError } from "../../lib/errors";
 import type { ExecutionRateLimiter } from "../../lib/rate-limit";
@@ -81,6 +82,9 @@ export function createFinancialIntelligenceHandler(deps: {
             code: safe.code,
             aiCalls: error.aiCalls,
             timings: error.timings,
+            ...(cause instanceof ValidationFailure
+              ? { validation: cause.diagnostics }
+              : {}),
           }),
         );
       return Response.json(

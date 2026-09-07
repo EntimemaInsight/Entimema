@@ -1,13 +1,6 @@
 # Sprint 01 — Hard reset / Make it read
 
-Date: 7 September 2026. Branch: `codex/fi-v1-hard-reset`.
-Baseline: current `origin/main` at `07d4ed3` when the isolated worktree was created.
-
-## Acceptance outcome
-
-The real command `npm run test:fi:v1-core-acceptance` was executed with the existing authorized `OPENAI_API_KEY`. OpenAI returned HTTP **401**. The request was not authenticated; no model statement or useful analysis was returned. The key was not created, rotated, printed or copied. This sprint has **not** passed the real-file acceptance gate.
-
-Machine-readable evidence: [SPRINT_01_ACCEPTANCE.json](./SPRINT_01_ACCEPTANCE.json).
+Updated 7 September 2026 after Sprint 01.2 live acceptance. Branch: codex/fi-v1-hard-reset. Draft PR #174 remains unmerged.
 
 ## Deleted architecture
 
@@ -24,90 +17,47 @@ Retired components include structural representation, financial understanding v2
 - Database migrations, existing records and operator authorization infrastructure. No new run persistence or history is claimed by this sprint.
 - Independent document classifier, its financial-intake feature/tests, Python entimema-ai, public website, Insights, Engineering and unrelated user working changes.
 
-## New execution path
 
-`File → readMechanically → one OpenAI Responses request → verifyStatement → calculate → result`
+## Accepted execution path
 
-The production `app/api/financial-intelligence/run/route.ts` uses `createFinancialIntelligenceHandler`, which calls `executeV1` in `backend/financial-intelligence/v1/core.ts`. The real acceptance command imports and calls that exact same function without an injected transport. It does not use `goldStatement()` or any AI mock.
+File → readMechanically → one real OpenAI request → strict minimal-contract validation → sourceRef binding → verifyStatement → calculate and deterministic firstAnalysis → result. The production HTTP handler and acceptance both call executeV1. The workspace posts one file to that route. ZERO Finance Domain dependency. No mapping, sheet selection, legacy execution modules or second AI call.
 
-The only accepted multipart field is one `file`. The UI uses Upload → Processing → Result, renders statement/entity/currency/scale/periods, all returned source labels and values with references, deterministic KPIs and qualitative analysis. No second analysis request, mapping input, sheet choice, review workflow or PDF generation is present.
+Exact default and accepted model: gpt-4.1-nano-2025-04-14, reasoning omitted. One request, one attempt, zero retries, unchanged 7000 ms AI budget.
 
-The mechanical reader visits all workbook sheets and populated cells without financial classification, preserving qualified sheet/cell references and primitive raw/displayed values. CSV follows the same rule. Text PDFs use ordered page/line/token references. Limits fail explicitly instead of silently truncating content.
+## Gold result and verification
 
-The model response has only `statementType`, `entity`, `currency`, `scale`, `periods`, `lines`, `summary` and `findings`. Line fields preserve the source label, source row, optional concept and period/reference/value tuples. The HTTP result adds only KPIs, verification count, model/call metadata and timings.
+Real HTTP 200 acceptance passed: income_statement, EUR, thousands, periods 2025 and 2024. All nine lines and 18 numbers are correct and source-bound; deterministic verification passed.
 
-## ZERO Finance Domain dependency
+| Financial line | 2025 | 2024 | Source references |
+|---|---:|---:|---|
+| Revenue | 1200 | 1000 | 'P&L'!B5 / 'P&L'!C5 |
+| Cost of Sales | -720 | -650 | 'P&L'!B6 / 'P&L'!C6 |
+| Gross Profit | 480 | 350 | 'P&L'!B7 / 'P&L'!C7 |
+| Operating Expenses | -250 | -220 | 'P&L'!B8 / 'P&L'!C8 |
+| Operating Profit | 230 | 130 | 'P&L'!B9 / 'P&L'!C9 |
+| Finance Costs | -30 | -20 | 'P&L'!B10 / 'P&L'!C10 |
+| Profit Before Tax | 200 | 110 | 'P&L'!B11 / 'P&L'!C11 |
+| Income Tax | -50 | -28 | 'P&L'!B12 / 'P&L'!C12 |
+| Net Income | 150 | 82 | 'P&L'!B13 / 'P&L'!C13 |
 
-The new V1 core has **ZERO Finance Domain dependency**. It performs no Domain query, ontology lookup/compilation, relationship traversal or methodological-variant resolution. No Finance Domain base or records were modified. The repository-wide guard rejects imports of retired FI modules; the V1 boundary test rejects Domain/ontology/old intake/mapping/sheet-selection dependencies.
+Code owns sourceRef → number. The model returns no numeric value or prose; strict schema validation rejects extra values. Verification retains exact row/label/sheet/period/reference checks. Deterministic revenue growth is 20%; margins (2025/2024): gross 40%/35%, operating 19.17%/13%, net 12.5%/8.2%. Operating profit growth is 76.92%; net income growth is 82.93%. First observations are deterministic.
 
-## Model and request count
+## Latency
 
-Exact attempted model: **`gpt-4.1-mini-2025-04-14`**.
+| Stage | Milliseconds |
+|---|---:|
+| mechanicalReadMs | 15.22 |
+| aiMs | 5757.44 |
+| validationMs | 4.42 |
+| verificationMs | 2.42 |
+| calculationMs | 102.14 |
+| totalMs | 5881.71 |
 
-Exactly **one AI request per executable document**: one Responses call, one transport attempt, no SDK retries, no second analysis call. Invalid files or absent credentials stop before a request. The real acceptance attempted one request and received HTTP 401. No successful model generation occurred.
+## Tests and limitations
 
-The existing 7,000 ms AI budget and 10-second HTTP route ceiling were retained; no timeout was increased. OpenAI response storage is disabled with `store: false`.
+Typecheck PASS; FI tests 19/19 PASS; production build PASS (126 pages). Lint and final diff check are recorded in the Sprint 01.2 report. Only one successful live sample is claimed. No authenticated browser acceptance is claimed. OCR is unsupported; oversized and ambiguous inputs fail closed. Metadata/concepts remain model judgments. Growth requires comparable annual periods and positive prior denominators.
 
-## Gold-file result and source verification
-
-The controlled workbook exists at `tests/fixtures/financial-intelligence/minimal-income-statement.xlsx`, with one `P&L` sheet. Mechanical reading and unit/contract tests confirm all 33 populated cells, including 18 financial numeric values. Its visual preview was inspected.
-
-The table below is the **mechanically read fixture and unit-test evidence**, not a successful live AI output. Live gold output is unavailable because authentication failed.
-
-| Source row | Line | 2025 / column B | 2024 / column C |
-|---|---|---:|---:|
-| 5 | Revenue | 1200 | 1000 |
-| 6 | Cost of Sales | -720 | -650 |
-| 7 | Gross Profit | 480 | 350 |
-| 8 | Operating Expenses | -250 | -220 |
-| 9 | Operating Profit | 230 | 130 |
-| 10 | Finance Costs | -30 | -20 |
-| 11 | Profit Before Tax | 200 | 110 |
-| 12 | Income Tax | -50 | -28 |
-| 13 | Net Income | 150 | 82 |
-
-Source metadata: Income Statement, EUR, thousands, periods 2025 and 2024. Entity is unstated. Each numeric reference is sheet-qualified, for example `'P&L'!B5` is 1200 and `'P&L'!C13` is 82.
-
-The deterministic verifier performs exact numeric lookup/comparison and checks source row/label association, unique references and periods. Spreadsheet period headers must appear above the referenced value in the same column. Any mismatch fails the result closed; no unverified value is silently accepted or used for arithmetic. The core conservatively rejects mismatches instead of guessing that an AI association is valid and replacing its value.
-
-Tests prove that invented numbers/references, altered labels, duplicate rows/references, incorrect source rows and swapped periods fail. Strict contract validation rejects extra fields, non-finite values, invalid JSON and incomplete responses. Numeric digits/percent claims in analysis prose are rejected; findings are requested to be qualitative.
-
-Deterministic gold KPIs verified in unit tests: revenue growth 20%; gross margin 40% / 35%; operating margin 19.17% / 13%; net margin 12.5% / 8.2% for 2025 / 2024. Live verification/calculation/analysis were not reached.
-
-## Measured real-attempt latency
-
-| Measurement | Milliseconds | Meaning |
-|---|---:|---|
-| mechanicalReadMs | 22.22 | Gold XLSX mechanical read |
-| aiMs | 489.15 | Request rejected with HTTP 401 |
-| verificationMs | 0 | Not reached |
-| calculationMs | 0 | Not reached |
-| totalMs | 511.40 | Failed attempt, not successful time-to-result |
-
-The mechanical-read target passed. A successful total latency and live verification/calculation latency cannot be claimed. The exact blocker is provider authentication, not evidence of inference speed. No timeout was extended.
-
-## Quality gates
-
-- `npm run typecheck`: PASS, exit 0, after the PDF fix.
-- `npm run lint`: PASS, exit 0. One pre-existing warning in `backend/agents/document-classifier/validator.ts:8` (`_ignored` unused); zero errors.
-- `npx tsx --test tests/financial-intelligence/*.test.ts`: PASS, **16/16**. Covers XLSX/XLS/CSV/PDF, source references and verification, arithmetic, one-call/no-retry behavior, malformed responses, upload-only input, authentication/request-size boundary, empty PDFs, oversized workbook rejection and the repository-wide retirement guard.
-- `npm run build`: PASS, exit 0. Next.js 16.3.3 compiled successfully and generated 126 pages. The FI run route and workspace are present; retired FI endpoints are absent.
-- `git diff --check`: PASS, exit 0.
-- `npm run test:fi:v1-core-acceptance`: EXECUTED against the real provider, exit 1, HTTP 401 authentication failure. **Not mocked; not passed.**
-
-Installed Next.js docs were missing/empty. The installed agent-file generator and official Next.js route-handler documentation were inspected as fallback. The React boundary review confirms the UI imports only the V1 result type, with no server runtime bundled into the client.
-
-## Known limitations
-
-- Live extraction accuracy, useful AI findings and successful sub-10-second performance remain unverified until the existing provider-access configuration authenticates successfully. Re-run the same acceptance command after that external issue is resolved; no key rotation/creation was performed.
-- No saved run history, advanced review, PDF export, OCR, Balance Sheet, Cash Flow, Domain integration or subscriptions.
-- Safety limits: 4.5 MB upload, 50 sheets/pages, 20,000 populated cells/tokens, 120,000 compact text characters and 2,001 spreadsheet rows. Oversized inputs fail explicitly. Formula values use saved results; formulas without cached values fail instead of being calculated or invented.
-- Ambiguous textual numeric separators, nonstandard/multiline layouts, cross-page PDF headers and ambiguous multiple statements can fail closed. PDF period presence is checked, but PDF column semantics are not deterministically verified.
-- Financial concept, entity/currency/scale identification and qualitative interpretation remain model judgments. Exact numeric grounding does not prove every semantic association or qualitative statement. Prose is not independently financially audited.
-- Growth is calculated only for explicit consecutive annual labels with a positive prior revenue. Ratios require unique optional concepts and positive revenue; unavailable inputs produce no KPI. This deliberately avoids guessing comparable periods or manufacturing denominators.
-- Authenticated browser-to-provider acceptance could not be completed with the rejected credential. HTTP and UI wiring are covered by tests/build, not claimed as a successful authenticated browser session.
-- Rate limiting remains the existing best-effort per-process implementation.
-
+Historical recovery: original credential HTTP 401, then mini timeout; Sprint 01.1 candidates failed their gates. Sprint 01.2 is the first successful live acceptance. See [detailed report](./SPRINT_01_2_MINIMAL_OUTPUT_CONTRACT.md), [live evidence](./SPRINT_01_ACCEPTANCE.json), and historical benchmark JSON files.
 
 ## Exact file inventory
 
@@ -166,4 +116,7 @@ Created files (14):
 - `tests/financial-intelligence/v1-http-and-boundary.test.ts`
 - `tests/fixtures/financial-intelligence/minimal-income-statement.xlsx`
 
-V1_CORE_ACCEPTANCE_BLOCKED_BY_PROVIDER_ACCESS
+
+Additional Sprint 01.1/01.2 files: model.ts, bind.ts, diagnostics.ts, observations.ts, model benchmark script, model/diagnostic tests, benchmark reports/JSON and Sprint 01.2 report/attempt evidence.
+
+V1_CORE_ACCEPTANCE_PASS

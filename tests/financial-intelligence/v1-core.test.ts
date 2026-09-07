@@ -15,7 +15,12 @@ import {
   MODEL,
 } from "../../backend/financial-intelligence/v1/core";
 import type { OpenAITransport } from "../../backend/lib/openai";
-import { goldDocument, goldStatement, assertGold } from "./gold";
+import {
+  goldDocument,
+  goldStatement,
+  goldModelStatement,
+  assertGold,
+} from "./gold";
 const response = (data: unknown) =>
   ({ status: "completed", output_text: JSON.stringify(data) }) as Awaited<
     ReturnType<OpenAITransport>
@@ -43,7 +48,7 @@ test("one real core call uses exactly one transport request, a minimal schema an
         /ontology|canonicalConcept|selectedSheet|Finance Domain/,
       );
       assert.equal(body.tools, undefined);
-      return response(goldStatement());
+      return response(goldModelStatement());
     },
   });
   assertGold(result);
@@ -74,16 +79,7 @@ test("minimal contract rejects extra fields and non-finite values", () => {
   assert.equal(statementSchema.safeParse(statement).success, false);
   assert.deepEqual(
     Object.keys(goldStatement()).sort(),
-    [
-      "statementType",
-      "entity",
-      "currency",
-      "scale",
-      "periods",
-      "lines",
-      "summary",
-      "findings",
-    ].sort(),
+    ["statementType", "entity", "currency", "scale", "periods", "lines"].sort(),
   );
 });
 test("invented numbers, invented refs, altered labels, duplicate refs, rows and swapped periods fail closed", async () => {
@@ -120,8 +116,8 @@ test("invented numbers, invented refs, altered labels, duplicate refs, rows and 
 });
 test("numeric claims in prose, truncated output and invalid JSON cannot be returned", async () => {
   for (const output of [
-    response({ ...goldStatement(), summary: "Revenue was 999999." }),
-    { ...response(goldStatement()), status: "incomplete" },
+    response({ ...goldModelStatement(), summary: "Revenue was 999999." }),
+    { ...response(goldModelStatement()), status: "incomplete" },
     { status: "completed", output_text: "invalid" },
   ]) {
     await assert.rejects(
@@ -203,7 +199,7 @@ test("unsupported file types, empty or corrupt files fail before AI", async () =
   let calls = 0;
   const transport: OpenAITransport = async () => {
     calls++;
-    return response(goldStatement());
+    return response(goldModelStatement());
   };
   await assert.rejects(
     executeV1(

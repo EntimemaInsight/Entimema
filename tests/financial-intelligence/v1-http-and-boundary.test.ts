@@ -7,7 +7,7 @@ import { AgentError } from "../../backend/lib/errors";
 import { DOCUMENT_CLASSIFIER_MAX_REQUEST_BYTES } from "../../lib/document-classifier-upload";
 import { executeV1 } from "../../backend/financial-intelligence/v1/core";
 import type { OpenAITransport } from "../../backend/lib/openai";
-import { goldDocument, goldStatement } from "./gold";
+import { goldDocument, goldModelStatement } from "./gold";
 async function form() {
   const data = new FormData();
   const doc = await goldDocument();
@@ -36,7 +36,7 @@ test("HTTP accepts file only and invokes the shared core once", async () => {
         transport: async () =>
           ({
             status: "completed",
-            output_text: JSON.stringify(goldStatement()),
+            output_text: JSON.stringify(goldModelStatement()),
           }) as Awaited<ReturnType<OpenAITransport>>,
       });
     },
