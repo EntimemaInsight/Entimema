@@ -41,6 +41,7 @@ test("result hierarchy renders existing summary/findings; technical telemetry ne
     last = position;
   }
   assert.ok(html.includes(result.analysis.executiveSummary));
+  assert.match(html, />Download PDF<\/button>/);
   assert.doesNotMatch(html, /gpt-4\.1|aiCalls|totalMs|p1:l4:t2/);
   assert.equal(
     (html.match(/Calculated from verified values/g) ?? []).length,

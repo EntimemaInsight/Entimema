@@ -90,6 +90,8 @@ export function FinancialIntelligenceResult({ result }: { result: Result }) {
       .sort()
       .reverse()[0] ?? result.periods[0];
   const [period, setPeriod] = useState(defaultPeriod);
+  const [downloading, setDownloading] = useState(false);
+  const [downloadError, setDownloadError] = useState("");
   const kpis = result.analysis.kpis.filter((k) => k.currentPeriod === period);
   const context = `${result.currency ?? "Currency not stated"} · ${result.scale ?? "Scale not stated"}`;
   return (
@@ -116,6 +118,34 @@ export function FinancialIntelligenceResult({ result }: { result: Result }) {
         <p className={styles.verified}>
           Financial values verified against your file.
         </p>
+        <button
+          className={styles.download}
+          disabled={downloading}
+          onClick={async () => {
+            setDownloading(true);
+            setDownloadError("");
+            try {
+              const response = await fetch("/api/financial-intelligence/report", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(result),
+              });
+              if (!response.ok) throw new Error();
+              const blobUrl = URL.createObjectURL(await response.blob());
+              const disposition = response.headers.get("Content-Disposition") ?? "";
+              const link = document.createElement("a");
+              link.href = blobUrl;
+              link.download = /filename="([^"]+)"/.exec(disposition)?.[1] ?? "Entimema_Financial_Intelligence_Report.pdf";
+              link.click();
+              URL.revokeObjectURL(blobUrl);
+            } catch {
+              setDownloadError("The report could not be downloaded. Please try again.");
+            } finally { setDownloading(false); }
+          }}
+        >
+          {downloading ? "Preparing PDF…" : "Download PDF"}
+        </button>
+        {downloadError && <p className={styles.downloadError} role="alert">{downloadError}</p>}
       </header>
       <section className={styles.summary} aria-labelledby="fi-summary">
         <p className={styles.sectionNumber}>01 / Overview</p>
