@@ -46,7 +46,9 @@ export function FinancialIntelligenceWorkspace({
     }
   }
   return (
-    <main className={styles.workspace}>
+    <main
+      className={`${styles.workspace} financialIntelligenceWorkspace`}
+    >
       <header className={styles.header}>
         <Link href="/workspace">ENTIMEMA</Link>
         <span>{user.name}</span>

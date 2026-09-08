@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { mkdirSync } from "node:fs";
+import { mkdirSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { createRequire } from "node:module";
 import { buildSync } from "esbuild";
@@ -50,6 +50,32 @@ test("result hierarchy renders existing summary/findings; technical telemetry ne
   assert.equal((html.match(/<details/g) ?? []).length, 12);
   assert.doesNotMatch(html, /<details[^>]* open/);
   assert.deepEqual(result, before);
+});
+test("long successful results remain in the document scroll flow", () => {
+  const workspace = readFileSync(
+    "app/workspace/components/FinancialIntelligenceWorkspace.tsx",
+    "utf8",
+  );
+  const workspaceCss = readFileSync("app/workspace/workspace.css", "utf8");
+  const resultCss = readFileSync(
+    "app/workspace/components/FinancialIntelligenceResult.module.css",
+    "utf8",
+  );
+
+  assert.match(workspace, /financialIntelligenceWorkspace/);
+  assert.match(
+    workspaceCss,
+    /body:has\(\.workspaceRoot>\.financialIntelligenceWorkspace\)\{overflow-x:hidden;overflow-y:auto\}/,
+  );
+  assert.match(
+    workspaceCss,
+    /\.workspaceRoot:has\(>\.financialIntelligenceWorkspace\)\{position:relative;inset:auto;min-height:100svh\}/,
+  );
+  assert.match(resultCss, /\.tableScroll\s*\{\s*overflow-x:\s*auto;/);
+
+  const html = render(resultFixtures().rieter);
+  assert.ok(html.includes("Download PDF"));
+  assert.ok(html.indexOf("Executive Summary") < html.indexOf("Source Evidence"));
 });
 test("Rieter sign changes retain operands without conventional growth percentages", () => {
   const result = resultFixtures().rieter,
