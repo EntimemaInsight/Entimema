@@ -9,6 +9,7 @@ const productCss = readFileSync("components/ProductMegaMenu.module.css", "utf8")
 const resourcesMenu = readFileSync("components/ResourcesMegaMenu.tsx", "utf8");
 const resourcesCss = readFileSync("components/ResourcesMegaMenu.module.css", "utf8");
 const solutionsCss = readFileSync("components/WhatWeDoMegaMenu.module.css", "utf8");
+const editorialTokens = readFileSync("styles/editorial-tokens.css", "utf8");
 
 test("exposes Product as a first-class desktop navigation destination", () => {
   assert.match(navbar, /<ProductMegaMenu active=\{active === "product"\} \/>/);
@@ -56,4 +57,18 @@ test("solutions use destination-level copy without category descriptions", () =>
   assert.doesNotMatch(mobileMenu, /categoryDescription|Financial control, planning and performance|Risk assessment and controlled decision systems/);
   assert.match(mobileMenu, /Turn financial reporting into decision-ready management insight/);
   assert.match(mobileMenu, /Resolve investigations faster with structured evidence and AI assistance/);
+});
+
+test("all mega menus share one typographic scale", () => {
+  for (const token of ["menu-heading", "menu-intro", "menu-category", "menu-item", "menu-detail"]) {
+    assert.match(editorialTokens, new RegExp(`--entimema-${token}:`));
+  }
+
+  for (const stylesheet of [productCss, resourcesCss, solutionsCss]) {
+    assert.match(stylesheet, /font-family: var\(--entimema-font-interface\)/);
+    assert.match(stylesheet, /font-size: var\(--entimema-menu-heading\)/);
+    assert.match(stylesheet, /font-size: var\(--entimema-menu-category\)/);
+    assert.match(stylesheet, /font-size: var\(--entimema-menu-item\)/);
+    assert.match(stylesheet, /font-size: var\(--entimema-menu-detail\)/);
+  }
 });
