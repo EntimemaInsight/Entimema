@@ -19,11 +19,12 @@ test("GitHub OAuth is real, scoped and configuration-gated", () => {
 
 test("sign-in is a responsive Entimema authentication experience", () => {
   assert.match(signInPage, /Turn financial evidence into decisions/);
-  assert.match(signInPage, /<BrandLogo \/>/);
+  assert.match(signInPage, /<BrandLogo reversed \/>/);
   assert.match(signInPage, /Continue with Google/);
   assert.match(signInCss, /grid-template-columns: minmax\(0, \.92fr\) minmax\(560px, 1\.08fr\)/);
   assert.match(signInCss, /radial-gradient/);
+  assert.match(signInCss, /background: #041432/);
+  assert.match(signInCss, /color: #ff6b35/);
   assert.match(signInCss, /@media \(max-width: 960px\)/);
   assert.match(signInCss, /@media \(prefers-reduced-motion: reduce\)/);
 });
-

@@ -28,7 +28,7 @@ export default async function SignInPage({ searchParams }: { searchParams: Promi
 
   return <main className={styles.page}>
     <header className={styles.header}>
-      <Link href="/" aria-label="Entimema – home"><BrandLogo /></Link>
+      <Link href="/" aria-label="Entimema – home"><BrandLogo reversed /></Link>
       <span>Private beta</span>
     </header>
     <section className={styles.stage}>
