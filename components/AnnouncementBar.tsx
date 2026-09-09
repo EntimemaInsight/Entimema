@@ -26,7 +26,7 @@ export default function AnnouncementBar() {
     <aside className="announcement" aria-label="Current announcement">
       <Link className="announcement__message" href="/financial-intelligence-launch">
         <span>
-          Entimema launches Financial Intelligence V1 to power controlled, defensible financial decisions.{" "}
+          Entimema launches <strong className="announcement__product">Financial Intelligence V1</strong> to power controlled, defensible financial decisions.{" "}
           <span className="announcement__link">
             Explore V1 <b aria-hidden="true">→</b>
           </span>
