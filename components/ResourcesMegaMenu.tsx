@@ -94,13 +94,6 @@ export default function ResourcesMegaMenu({ active = false }: { active?: boolean
           </header>
           <div className={styles.groups}>
             <section className={styles.group}>
-              <h3>Explore</h3>
-              <Link className={styles.item} href="/resources" onClick={hide}>
-                <strong>All Resources</strong>
-                <small>Browse Entimema research and practitioner frameworks.</small>
-              </Link>
-            </section>
-            <section className={styles.group}>
               <h3>Research</h3>
               {Object.entries(resourceStreams).map(([key, stream]) => (
                 <Link className={styles.item} href={stream.href} key={key} onClick={hide}>
@@ -108,6 +101,17 @@ export default function ResourcesMegaMenu({ active = false }: { active?: boolean
                   <small>{stream.description}</small>
                 </Link>
               ))}
+            </section>
+            <section className={styles.group}>
+              <h3>Documentation</h3>
+              <Link className={styles.item} href="/financial-intelligence-launch#platform" onClick={hide}>
+                <strong>Product documentation</strong>
+                <small>View Entimema&apos;s product documentation.</small>
+              </Link>
+              <Link className={styles.item} href="/services/financial-data" onClick={hide}>
+                <strong>Integrations</strong>
+                <small>Learn about integrations on Entimema.</small>
+              </Link>
             </section>
             <section className={styles.group}>
               <h3>Company</h3>

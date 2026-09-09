@@ -15,14 +15,12 @@ test("exposes Product as a first-class desktop navigation destination", () => {
   assert.match(productMenu, /aria-label="Product"/);
 });
 
-test("product panel exposes the live product, workspace and control layers in one navigation hierarchy", () => {
+test("product panel exposes the platform, agent control and current product release", () => {
   assert.match(productMenu, /What&apos;s new/);
-  assert.match(productMenu, /Financial Intelligence/);
-  assert.match(productMenu, /Decision Workspace/);
-  for (const layer of ["Intelligent Intake", "Financial Context", "Validation Engine", "Exception Workspace"]) {
-    assert.match(productMenu, new RegExp(layer));
-  }
-  assert.match(productMenu, /contact\?topic=financial-data/);
+  assert.match(productMenu, /Financial Intelligence V1/);
+  assert.match(productMenu, /Platform overview/);
+  assert.match(productMenu, /AI Agent Control/);
+  assert.doesNotMatch(productMenu, /Decision Workspace|Intelligent Intake|Exception Workspace/);
   assert.doesNotMatch(productMenu, /€490|pilot-checkout/);
 });
 

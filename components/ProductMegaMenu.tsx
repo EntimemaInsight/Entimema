@@ -9,11 +9,7 @@ const subscribeToClientMount = () => () => {};
 
 const productDestinations = [
   ["Platform overview", "The complete controlled financial workflow.", "/financial-intelligence-launch#platform"],
-  ["Decision Workspace", "Secure client review and execution.", "/workspace/financial-intelligence"],
-  ["Intelligent Intake", "Ingest and structure financial evidence.", "/financial-intelligence-launch#platform"],
-  ["Financial Context", "Turn source data into decision context.", "/financial-intelligence-launch#platform"],
-  ["Validation Engine", "Apply controls, rules and evidence checks.", "/financial-intelligence-launch#platform"],
-  ["Exception Workspace", "Route material exceptions to human judgment.", "/financial-intelligence-launch#platform"],
+  ["AI Agent Control", "Configure, govern and review specialised financial agents.", "/financial-intelligence-launch#platform"],
 ] as const;
 
 export default function ProductMegaMenu({ active = false }: { active?: boolean }) {
@@ -99,7 +95,7 @@ export default function ProductMegaMenu({ active = false }: { active?: boolean }
           </header>
           <div className={styles.content}>
             <section className={styles.platform}>
-              <h3>See how it works</h3>
+              <h3>Product</h3>
               <div className={styles.links}>
                 {productDestinations.map(([title, description, href]) => (
                   <Link className={styles.item} href={href} key={title} onClick={close}>
@@ -114,10 +110,6 @@ export default function ProductMegaMenu({ active = false }: { active?: boolean }
               <Link href="/financial-intelligence-launch" onClick={close}>
                 <strong>Financial Intelligence V1</strong>
                 <small>From financial evidence to a controlled, reviewable decision state.</small>
-              </Link>
-              <Link href="/contact?topic=financial-data" onClick={close}>
-                <strong>Founding Pilot</strong>
-                <small>Discuss a controlled first execution with Entimema.</small>
               </Link>
             </aside>
           </div>

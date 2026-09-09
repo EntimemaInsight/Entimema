@@ -19,64 +19,38 @@ import { resourceStreams } from "@/app/resources/resource-data";
 const subscribeToClientMount = () => () => {};
 const serviceGroups = [
   {
-    category: "Financial Architecture",
-    description: "Build the financial system behind control, planning and performance.",
+    category: "Finance",
+    description: "Financial control, planning and performance.",
     items: [
       {
-        title: "CFO Advisory",
-        description: "Financial architecture, planning and management control for companies building or strengthening the CFO function.",
-        href: "/services/cfo-function",
-      },
-      {
-        title: "Planning & Forecasting",
-        description: "Data-driven financial planning built around business drivers and scenarios.",
-        href: "/services/budgets-and-forecasting",
-      },
-      {
-        title: "Management Reporting",
-        description: "Management information structured for timely, evidence-based decisions.",
+        title: "Financial Reporting & Analysis",
         href: "/services/management-reporting",
       },
       {
-        title: "Cost & Margin Management",
-        description: "Cost structures, margins and profitability drivers made visible and controllable.",
+        title: "Planning & Scenario Modelling",
+        href: "/services/budgets-and-forecasting",
+      },
+      {
+        title: "Cost & Margin Intelligence",
         href: "/services/cost-and-profitability",
       },
       {
-        title: "Financial Data",
-        description: "A unified data foundation for reporting, analysis and automation.",
-        href: "/services/financial-data",
-      },
-      {
-        title: "Finance AI Agents",
-        description: "Automated analysis and execution across recurring finance processes.",
-        href: "/services/financial-ai-agents",
+        title: "CFO Advisory",
+        href: "/services/cfo-function",
       },
     ],
   },
   {
-    category: "Decision Science",
-    description: "Measure uncertainty and build controlled decision systems.",
+    category: "Risk & Decisioning",
+    description: "Risk assessment and controlled decision systems.",
     items: [
       {
-        title: "Credit Risk",
-        description: "Scoring, policies and models for consistent credit decisions.",
+        title: "Credit Risk & Decisioning",
         href: "/services/credit-risk",
       },
       {
-        title: "AML & Compliance",
-        description: "AML architecture, customer due diligence and transaction monitoring for consistent regulatory control.",
+        title: "AML & Fraud Investigation",
         href: "/services/aml-compliance",
-      },
-      {
-        title: "Decision Intelligence",
-        description: "Models, rules and Decision Engine capabilities for consistent, controlled decision execution.",
-        href: "/services/decision-automation",
-      },
-      {
-        title: "Risk AI Agents",
-        description: "AI agents for monitoring, analysis and controlled execution across risk processes.",
-        href: "/services/risk-ai-agents",
       },
     ],
   },
@@ -243,14 +217,16 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
                 </button>
                 <div className={`${styles.mobileResources} ${styles.mobileProduct}`} hidden={!mobileProductOpen} id={`${menuId}-mobile-product`}>
                   <Link className={styles.mobileProductFeature} href="/financial-intelligence-launch" onClick={close}>
-                    <small>FOUNDING PILOT · LIVE</small>
-                    <strong>Financial Intelligence</strong>
+                    <small>WHAT&apos;S NEW</small>
+                    <strong>Financial Intelligence V1</strong>
                     <span>From financial evidence to a controlled decision state.</span>
                   </Link>
                   <Link className={styles.mobileResourceDestination} href="/financial-intelligence-launch#platform" onClick={close}>
-                    <span><strong>Platform overview</strong><small>The controlled financial workflow.</small></span>
+                      <span><strong>Platform overview</strong><small>The controlled financial workflow.</small></span>
                   </Link>
-                  <Link className={styles.mobileProductAction} href="/contact?topic=financial-data" onClick={close}>Discuss the pilot <b aria-hidden="true">→</b></Link>
+                  <Link className={styles.mobileResourceDestination} href="/financial-intelligence-launch#platform" onClick={close}>
+                    <span><strong>AI Agent Control</strong><small>Configure, govern and review specialised financial agents.</small></span>
+                  </Link>
                 </div>
                 <button
                   aria-controls={`${menuId}-mobile-solutions`}
@@ -289,6 +265,13 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
                       <span><strong>{stream.label}</strong><small>{stream.description}</small></span>
                     </Link>
                   ))}
+                  <h2 className={styles.mobileSectionLabel}>Documentation</h2>
+                  <Link className={styles.mobileResourceDestination} href="/financial-intelligence-launch#platform" onClick={close}>
+                    <span><strong>Product documentation</strong><small>View Entimema&apos;s product documentation.</small></span>
+                  </Link>
+                  <Link className={styles.mobileResourceDestination} href="/services/financial-data" onClick={close}>
+                    <span><strong>Integrations</strong><small>Learn about integrations on Entimema.</small></span>
+                  </Link>
                   <h2 className={styles.mobileSectionLabel}>Company</h2>
                   {companyDestinations.map(item => <Link className={styles.mobileResourceDestination} href={item.href} key={item.href} onClick={close} aria-current={pathname.replace(/\/$/, "") === item.href ? "page" : undefined}>
                     <span><strong>{item.title}</strong><small>{item.description}</small></span>
@@ -315,7 +298,7 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
                     <p className={styles.categoryDescription}>{group.description}</p>
                     <ul className={styles.items} aria-label={`${group.category} capabilities`}>
                       {group.items.map((item) => (
-                        <li key={item.href}><Link className={styles.item} href={item.href} onClick={close}><strong>{item.title}</strong><small>{item.description}</small></Link></li>
+                        <li key={item.href}><Link className={styles.item} href={item.href} onClick={close}><strong>{item.title}</strong></Link></li>
                       ))}
                     </ul>
                   </section>
