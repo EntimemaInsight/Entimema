@@ -26,16 +26,13 @@ export default async function SignInPage({ searchParams }: { searchParams: Promi
   const destination = safeDestination(params.callbackUrl);
   if (session?.user?.email && isWorkspaceAllowed(session.user.email)) redirect(destination);
 
-  return <main className={styles.page}>
+  return <main className={styles.page} data-auth-page>
     <header className={styles.header}>
-      <Link href="/" aria-label="Entimema – home"><BrandLogo reversed /></Link>
-      <span>Private beta</span>
+      <Link href="/" aria-label="Entimema – home"><BrandLogo /></Link>
     </header>
     <section className={styles.stage}>
       <div className={styles.statement}>
-        <p>ENTIMEMA FINANCIAL INTELLIGENCE</p>
         <h1>Turn financial evidence into decisions <em>you can defend.</em></h1>
-        <span>Controlled workflows. Traceable outputs. Human judgement where it matters.</span>
       </div>
       <div className={styles.authField}>
         <div className={styles.dotField} aria-hidden="true" />
@@ -58,9 +55,5 @@ export default async function SignInPage({ searchParams }: { searchParams: Promi
         </section>
       </div>
     </section>
-    <footer className={styles.footer}>
-      <span>© {new Date().getFullYear()} Entimema</span>
-      <Link href="/privacy">Privacy</Link>
-    </footer>
   </main>;
 }

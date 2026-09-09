@@ -23,7 +23,7 @@ const readStoredConsent = (): Consent => {
 export default function AnalyticsConsent() {
   const pathname = usePathname();
   const mounted = useSyncExternalStore(subscribeToClientMount, () => true, () => false);
-  const enabled = mounted && Boolean(validMeasurementId) && isProductionAnalyticsHost();
+  const enabled = mounted && pathname !== "/auth/sign-in" && Boolean(validMeasurementId) && isProductionAnalyticsHost();
   const [consent, setConsent] = useState<Consent>(readStoredConsent);
   const [analyticsSelected, setAnalyticsSelected] = useState(() => readStoredConsent() === "granted");
   const [preferencesOpen, setPreferencesOpen] = useState(false);

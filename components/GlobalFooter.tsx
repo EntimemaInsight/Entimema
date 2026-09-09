@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import BrandLogo from "./BrandLogo";
 import FooterHomeLink from "./FooterHomeLink";
 import styles from "./GlobalFooter.module.css";
@@ -40,6 +43,9 @@ const columns = [
 ] as const;
 
 export default function GlobalFooter() {
+  const pathname = usePathname();
+  if (pathname === "/auth/sign-in") return null;
+
   return (
     <footer className={styles.footer}>
       <div className={`site-container ${styles.inner}`}>
