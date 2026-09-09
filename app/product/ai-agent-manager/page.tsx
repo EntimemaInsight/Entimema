@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
 import { DemoTrigger } from "@/components/DemoDiscovery";
+import InteractiveAgentCards from "./InteractiveAgentCards";
 import styles from "./agent-manager.module.css";
 
 export const metadata: Metadata = {
@@ -57,11 +58,7 @@ export default function AgentManagerPage() {
 
     <section className={styles.agentLibrary} id="agents"><div className="site-container">
       <header className={styles.centerHeader}><span className={styles.badge}>Controlled agent architecture</span><h2>Specialist agents for work<br/><em>that finance needs to defend.</em></h2><p>Start with a bounded workflow. Keep every transformation, control and exception inspectable.</p></header>
-      <div className={styles.agentCards}>
-        <article><div><span>01 · FINANCIAL INTELLIGENCE</span><h3>Financial Statement Analysis Agent</h3><p>Turn a tested English Income Statement into structured financial data, deterministic KPIs and a traceable result.</p></div><div className={styles.miniFlow}><b>Statement</b><i>→</i><b>Interpret</b><i>→</i><b>Verify</b><i>→</i><b>Review</b></div></article>
-        <article><div><span>02 · CONTROL LAYER</span><h3>Financial Validation Agent</h3><p>Apply explicit financial relationships and surface mismatches instead of accepting plausible output as truth.</p></div><div className={styles.miniControl}><small>REVENUE − COST OF SALES</small><strong>= GROSS PROFIT</strong><em>✓ €0 DIFFERENCE</em></div></article>
-        <article><div><span>03 · HUMAN AUTHORITY</span><h3>Exception Review Agent</h3><p>Package material ambiguity with its evidence so a finance professional can resolve the judgement explicitly.</p></div><div className={styles.miniReview}><small>EXCEPTION 01</small><strong>Definition requires review</strong><span>Evidence attached · Human decision required</span></div></article>
-      </div>
+      <InteractiveAgentCards/>
     </div></section>
 
     <section className={styles.productSection}><div className="site-container"><header className={styles.centerHeader}><span className={styles.badge}>Agent workflow</span><h2>See the controlled workflow.<br/><em>From document to verified result.</em></h2><p>The interface makes execution visible instead of hiding the leap from upload to answer.</p></header><WorkflowMockup/></div></section>
