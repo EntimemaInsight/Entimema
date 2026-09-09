@@ -23,10 +23,10 @@ export default function EditorialExperience() {
       <header className={styles.hero}>
         <div className={styles.masthead}><span>ENTIMEMA</span><span>FINANCIAL INTELLIGENCE · V1</span><span>09 SEPTEMBER 2026</span></div>
         <div className={styles.heroGrid}>
-          <div className={styles.heroCopy}><p className={styles.kicker}>A controlled financial workflow</p><h1>Financial data deserves more than an AI answer.</h1><p className={styles.standfirst}>It deserves a chain of evidence, calculation and accountable judgement. This is the argument behind Financial Intelligence V1.</p></div>
-          <aside className={styles.heroNote}><span className={styles.issueNumber}>01</span><p>One document can contain hundreds of numbers. The decisive question is not whether a model can read them, but whether the result can survive examination.</p></aside>
+          <div className={styles.heroCopy}><p className={styles.kicker}>Controlled financial intelligence · Founding pilot</p><h1>Financial analysis you can verify.</h1><p className={styles.standfirst}>Bring an English Income Statement in XLSX or text-based PDF. Financial Intelligence V1 structures the statement, applies deterministic financial controls, surfaces exceptions and returns a traceable, human-reviewed result.</p></div>
+          <aside className={styles.heroNote}><span className={styles.issueNumber}>01</span><p>The first commercial scope is deliberately narrow. The question is not whether AI can produce an answer. It is whether finance can inspect how that answer was produced.</p></aside>
         </div>
-        <div className={styles.heroFooter}><span>Product release</span><span>Financial architecture · Evidence · Control</span></div>
+        <div className={styles.heroFooter}><span>Founding pilot</span><span>Income Statement · Evidence · Control</span></div>
       </header>
 
       <section className={styles.premise}>
@@ -35,8 +35,22 @@ export default function EditorialExperience() {
         <blockquote>“The useful output is not a number. It is a number whose meaning, arithmetic and origin can survive examination.”</blockquote>
       </section>
 
+      <section className={styles.output}>
+        <div className={styles.sectionLabel}><span>02</span><p>Founding pilot scope</p></div>
+        <div className={styles.sectionLead}><h2>Start with one Income Statement.</h2><p>V1 is being sold as a controlled pilot, not as universal document automation. The verified input scope is English-language Income Statements supplied as XLSX or text-based PDF.</p></div>
+        <div className={styles.report}>
+          <header><b>ENTIMEMA / V1 VERIFIED SCOPE</b><span>FOUNDING PILOT · 2026</span></header>
+          <div className={styles.reportTitle}><div><p>Commercial boundary</p><h3>Known scope before broad claims.</h3></div><span>One agreed statement<br />One controlled execution</span></div>
+          <div className={styles.reportRow}><span>Statement<small>Verified today</small></span><strong>Income Statement</strong><em>IN SCOPE</em></div>
+          <div className={styles.reportRow}><span>Language<small>Verified today</small></span><strong>English</strong><em>IN SCOPE</em></div>
+          <div className={styles.reportRow}><span>Formats<small>Verified today</small></span><strong>XLSX · text-based PDF</strong><em>IN SCOPE</em></div>
+          <div className={styles.reportRow}><span>Control model<small>Execution boundary</small></span><strong>AI semantics · deterministic arithmetic · human review</strong><em>CONTROLLED</em></div>
+          <footer>Not represented as verified: OCR or scanned documents · whole annual reports · multilingual statements · arbitrary financial statement types</footer>
+        </div>
+      </section>
+
       <section className={styles.evidence}>
-        <div className={styles.sectionLabel}><span>02</span><p>From document to evidence</p></div>
+        <div className={styles.sectionLabel}><span>03</span><p>From document to evidence</p></div>
         <div className={styles.sectionLead}><h2>The value and its source remain one object.</h2><p>Financial Intelligence does not detach a figure from the document that gives it meaning. The path back is part of the output.</p></div>
         <figure className={styles.evidenceSpread}>
           <div className={styles.document}><header><b>Income statement</b><span>SRC–01</span></header>{values.map(([name, value], index) => <div className={index === 0 ? styles.selectedRow : styles.documentRow} key={name}><span>{name}</span><strong>{value}</strong></div>)}<div className={styles.documentLines} aria-hidden="true"><i /><i /><i /><i /></div></div>
@@ -46,13 +60,13 @@ export default function EditorialExperience() {
       </section>
 
       <section className={styles.workflow}>
-        <div className={styles.sectionLabel}><span>03</span><p>The controlled workflow</p></div>
+        <div className={styles.sectionLabel}><span>04</span><p>The controlled workflow</p></div>
         <div className={styles.sectionLead}><h2>Intelligence where meaning is ambiguous. <em>Code where truth is arithmetic.</em></h2><p>One execution surface. Five explicit states. No hidden leap from upload to answer.</p></div>
         <div className={styles.stageTable}>{stages.map(([number, title, copy, owner]) => <div className={styles.stageRow} key={number}><span>{number}</span><p>{owner}</p><h3>{title}</h3><p>{copy}</p></div>)}</div>
       </section>
 
       <section className={styles.control}>
-        <div className={styles.sectionLabel}><span>04</span><p>Proof, not plausibility</p></div>
+        <div className={styles.sectionLabel}><span>05</span><p>Proof, not plausibility</p></div>
         <div className={styles.sectionLead}><h2>The model must show its work.</h2><p>Every fixed relationship is recalculated. Every mismatch becomes visible. Material ambiguity is escalated rather than invented away.</p></div>
         <div className={styles.controlSpread}>
           <div className={styles.equation}><div><span>Revenue</span><strong>€18.42m</strong></div><i>−</i><div><span>Cost of sales</span><strong>€12.91m</strong></div><i>=</i><div><span>Gross profit</span><strong>€5.51m</strong></div></div>
@@ -61,14 +75,14 @@ export default function EditorialExperience() {
       </section>
 
       <section className={styles.output}>
-        <div className={styles.sectionLabel}><span>05</span><p>The output</p></div>
+        <div className={styles.sectionLabel}><span>06</span><p>The output</p></div>
         <div className={styles.sectionLead}><h2>Not confidence theatre. <em>A defensible financial state.</em></h2><p>Comparable definitions, inspectable reconciliations and findings connected to evidence.</p></div>
         <div className={styles.report}><header><b>ENTIMEMA / VALIDATED FINANCIAL MODEL</b><span>FI–0024 · FY 2025</span></header><div className={styles.reportTitle}><div><p>Decision state</p><h3>Ready for decision</h3></div><span>12 controls passed<br />1 judgement recorded</span></div>{values.map(([name, value, period, confidence]) => <div className={styles.reportRow} key={name}><span>{name}<small>{period}</small></span><strong>{value}</strong><em>{confidence}</em></div>)}<footer>Full evidence lineage attached</footer></div>
       </section>
 
-      <section className={styles.manifesto}><p className={styles.kicker}>The manifesto</p><h2>AI should not ask finance to surrender control.</h2><div className={styles.manifestoLines}>{["Unknown is not an assumption.", "Extraction is not validation.", "Confidence is not evidence.", "A claim is not a fact.", "A result is not ready until it can be defended."].map((line, index) => <p key={line}><span>0{index + 1}</span>{line}</p>)}</div></section>
+      <section className={styles.manifesto}><p className={styles.kicker}>The operating principles</p><h2>AI should not ask finance to surrender control.</h2><div className={styles.manifestoLines}>{["Unknown is not an assumption.", "Extraction is not validation.", "Confidence is not evidence.", "A claim is not a fact.", "A result is not ready until it can be defended."].map((line, index) => <p key={line}><span>0{index + 1}</span>{line}</p>)}</div></section>
 
-      <section className={styles.cta} id="pilot-checkout"><p>Financial Intelligence V1 · Founding pilot</p><h2>Bring one financial problem. <em>Leave with a controlled result.</em></h2><div className={styles.ctaActions}><FinancialIntelligenceCta href="/contact?topic=financial-data" kind="start_pilot" position="final">Commission a pilot <span>↗</span></FinancialIntelligenceCta><Link href="/services/financial-data">Examine the methodology <span>→</span></Link></div><small>One verified business · One agreed scope · Human-reviewed delivery</small></section>
+      <section className={styles.cta} id="pilot-checkout"><p>Financial Intelligence V1 · Founding pilot</p><h2>Test it on your Income Statement. <em>Leave with a controlled result.</em></h2><div className={styles.ctaActions}><FinancialIntelligenceCta href="/contact?topic=financial-data" kind="start_pilot" position="final">Start with your statement <span>↗</span></FinancialIntelligenceCta><Link href="/services/financial-data">Examine the methodology <span>→</span></Link></div><small>Current verified input scope: English XLSX or text-based PDF Income Statement · Human-reviewed delivery</small></section>
     </article>
   </main>;
 }
