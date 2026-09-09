@@ -2,12 +2,12 @@ export const productDestinations = [
   {
     title: "Platform overview",
     description: "Explore the controlled financial workflow.",
-    href: "/financial-intelligence-launch#platform",
+    href: "/product/platform",
   },
   {
     title: "AI Agent Manager",
     description: "Build and govern financial AI agents.",
-    href: "/financial-intelligence-launch#platform",
+    href: "/product/ai-agent-manager",
   },
 ] as const;
 

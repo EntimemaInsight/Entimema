@@ -11,6 +11,8 @@ const routes = [
   "/contact",
   "/privacy",
   "/financial-intelligence-launch",
+  "/product/platform",
+  "/product/ai-agent-manager",
   "/resources",
   "/services",
   "/services/cfo-function",
