@@ -1,5 +1,10 @@
 import NextAuth from "next-auth";
+import GitHub from "next-auth/providers/github";
 import Google from "next-auth/providers/google";
+
+export const isGitHubAuthEnabled = Boolean(
+  process.env.AUTH_GITHUB_ID && process.env.AUTH_GITHUB_SECRET,
+);
 
 const allowlistedEmails = () => new Set(
   (process.env.WORKSPACE_ALLOWED_EMAILS ?? "")
@@ -13,7 +18,12 @@ export function isWorkspaceAllowed(email?: string | null) {
 }
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
-  providers: [Google],
+  providers: [
+    Google,
+    ...(isGitHubAuthEnabled
+      ? [GitHub({ authorization: { params: { scope: "read:user user:email" } } })]
+      : []),
+  ],
   pages: { signIn: "/auth/sign-in" },
   session: { strategy: "jwt", maxAge: 60 * 60 * 12 },
   callbacks: {
