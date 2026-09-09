@@ -65,11 +65,11 @@ export const resourceDocumentation = [
   {
     title: "Product documentation",
     description: "View Entimema's product documentation.",
-    href: "/financial-intelligence-launch#platform",
+    href: "/workspace/financial-intelligence",
   },
   {
     title: "Integrations",
     description: "Learn about integrations on Entimema.",
-    href: "/services/financial-data",
+    href: "/workspace/agents",
   },
 ] as const;

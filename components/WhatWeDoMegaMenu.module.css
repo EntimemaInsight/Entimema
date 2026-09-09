@@ -404,7 +404,8 @@
   .mobileActionDock {
     flex: 0 0 auto;
     display: flex;
-    justify-content: flex-end;
+    justify-content: stretch;
+    gap: .75rem;
     align-items: center;
     padding: .875rem clamp(1.125rem, 5.25vw, 1.5rem) max(.875rem, env(safe-area-inset-bottom));
     border-top: 1px solid rgba(4, 19, 63, .08);
@@ -414,7 +415,7 @@
   }
 
   .mobileDockContact {
-    width: 100%;
+    flex: 1 1 0;
     min-width: 0;
     min-height: 3.25rem;
     display: inline-flex;
@@ -434,6 +435,29 @@
     color: #fff;
     background: var(--brand-navy-950);
     box-shadow: 0 .5rem 1.25rem rgba(4, 19, 63, .13);
+  }
+
+  .mobileDockLogin {
+    flex: 0 0 6.5rem;
+    min-height: 3.25rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding-inline: 1rem;
+    border: 1px solid rgba(4, 19, 63, .18);
+    border-radius: .625rem;
+    color: var(--brand-navy-950);
+    background: #fff;
+    font-family: var(--entimema-font-interface);
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  .mobileDockLogin:hover,
+  .mobileDockLogin:focus-visible {
+    border-color: rgba(4, 19, 63, .42);
+    outline: none;
   }
 
   .mobileTaxonomyLabel {

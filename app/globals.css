@@ -7152,8 +7152,35 @@ html.is-scrolled .header-cta {
   font-weight: 400;
 }
 
+.header-login {
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 8px;
+  color: var(--brand-navy-950);
+  font-family: var(--entimema-font-interface);
+  font-size: var(--type-navigation);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: var(--tracking-action);
+  white-space: nowrap;
+}
+
+.header-login:hover { color: var(--brand-navy-800); }
+
+.header-login:focus-visible {
+  outline: 2px solid rgba(8, 34, 87, .35);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
 @media (max-width: 560px) {
   .announcement__message .announcement__statement { white-space: normal; }
+}
+
+@media (max-width: 900px) {
+  .header-login { display: none; }
 }
 
 /* Shared desktop navigation states: links and menu triggers use one control. */

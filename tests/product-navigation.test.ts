@@ -68,6 +68,13 @@ test("desktop and mobile menus consume the same navigation content", () => {
   assert.doesNotMatch(mobileMenu, /The controlled financial workflow|From financial evidence to a controlled decision state/);
 });
 
+test("documentation references and login enter the authenticated workspace", () => {
+  assert.match(menuContent, /title: "Product documentation",[\s\S]*?href: "\/workspace\/financial-intelligence"/);
+  assert.match(menuContent, /title: "Integrations",[\s\S]*?href: "\/workspace\/agents"/);
+  assert.match(navbar, /className="header-login"[\s\S]*?>\s*Login/);
+  assert.match(mobileMenu, /mobileDockLogin[\s\S]*?>Login</);
+});
+
 test("all mega menus share one typographic scale", () => {
   for (const token of ["menu-heading", "menu-intro", "menu-category", "menu-item", "menu-detail"]) {
     assert.match(editorialTokens, new RegExp(`--entimema-${token}:`));

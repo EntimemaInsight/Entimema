@@ -243,6 +243,7 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
                 </Link>
               </div>
               <footer className={styles.mobileActionDock}>
+                <Link className={styles.mobileDockLogin} href="/auth/sign-in?callbackUrl=%2Fworkspace%2Ffinancial-intelligence" onClick={close}>Login</Link>
                 <Link className={styles.mobileDockContact} href="/contact" onClick={close}>Contact us</Link>
               </footer>
             </>
