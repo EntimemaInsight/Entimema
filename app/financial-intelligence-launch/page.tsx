@@ -4,14 +4,13 @@ import Navbar from "@/components/Navbar";
 import { FOUNDER_ID, ORGANIZATION_ID, SITE_URL, WEBSITE_ID, createBreadcrumbSchema, serializeJsonLd } from "@/lib/structured-data";
 import styles from "./launch.module.css";
 import ProductExplainer from "./ProductExplainer";
+import PilotCheckout from "./PilotCheckout";
 import { FinancialIntelligenceCta, FinancialIntelligenceViewAnalytics } from "./FinancialIntelligenceAnalytics";
 
 const path = "/financial-intelligence-launch";
 const url = `${SITE_URL}${path}`;
-const title = "Controlled financial intelligence, from evidence to decision";
-const description = "A controlled B2B pilot that turns financial documents into validated, traceable and decision-ready financial outputs.";
-const bulgariaCheckoutUrl = "https://buy.stripe.com/eVq5kF4Yhe9ga8mb41dEs00";
-const internationalCheckoutUrl = "https://buy.stripe.com/6oU3cx8at9T0eoCegddEs01";
+const title = "Financial data you can actually make decisions with";
+const description = "A controlled B2B workflow that turns financial documents into validated, traceable and decision-ready financial outputs.";
 
 export const metadata: Metadata = {
   title: { absolute: `${title} | Entimema Financial Intelligence` }, description,
@@ -22,56 +21,50 @@ export const metadata: Metadata = {
 
 const schema = { "@context": "https://schema.org", "@graph": [{ "@type": "WebPage", "@id": `${url}#webpage`, url, name: title, description, isPartOf: { "@id": WEBSITE_ID }, publisher: { "@id": ORGANIZATION_ID }, about: [{ "@id": ORGANIZATION_ID }, { "@id": FOUNDER_ID }], breadcrumb: { "@id": `${url}#breadcrumb` }, datePublished: "2026-09-09" }, createBreadcrumbSchema([{ name: "Entimema", item: `${SITE_URL}/` }, { name: "Financial Intelligence", item: url }], `${url}#breadcrumb`)] };
 
-const outputs = [
-  ["Validated model", "A controlled financial state, not a generated answer."],
-  ["Visible exceptions", "Ambiguity is surfaced and routed for review."],
-  ["Evidence lineage", "Material values retain their path to source."],
+const layers = [
+  ["01", "Intelligent Intake", "Registers and understands the evidence.", "INTAKE"],
+  ["02", "Financial Context", "Aligns meaning, period, currency and unit.", "CONTEXT"],
+  ["03", "Validation Engine", "Recalculates, reconciles and applies fixed controls.", "CONTROL"],
+  ["04", "Exception Workspace", "Routes ambiguity and contradictions for review.", "REVIEW"],
+  ["05", "Decision Output", "Delivers the model, findings and evidence lineage.", "OUTPUT"],
 ] as const;
+
+const outcomes = [
+  ["Financial state", "Comparable periods and controlled financial definitions."],
+  ["Control state", "Reconciliations passed and material exceptions visible."],
+  ["Decision state", "Reviewed findings with the supporting evidence attached."],
+] as const;
+
+function DecisionWorkspace() {
+  return <div className={styles.workspace} aria-label="Financial Intelligence Decision Workspace demonstration">
+    <header><div className={styles.workspaceBrand}><b>E</b><span>Financial Intelligence</span><i>/</i><strong>FY 2025 review</strong></div><div><span className={styles.saved}>Saved</span><button type="button" tabIndex={-1}>Run workflow <b>▶</b></button></div></header>
+    <aside className={styles.sourcePanel}><small>SOURCES</small><div className={styles.sourceActive}><b>XLSX</b><span>Income statement<small>FY2025 · 184 values</small></span></div><div><b>PDF</b><span>Annual report<small>62 pages</small></span></div><div><b>CSV</b><span>Trial balance<small>2,841 rows</small></span></div><footer><i /> 3 sources registered</footer></aside>
+    <section className={styles.canvas} aria-label="Workflow canvas"><div className={styles.canvasTop}><span>Execution path</span><small>Run FI–0024</small></div><div className={styles.flow}>
+      <div className={styles.flowNode} data-kind="source"><span>01</span><div><small>INTAKE</small><b>Understand sources</b></div><em>184</em></div><i className={styles.connector} />
+      <div className={styles.flowNode} data-kind="model"><span>02</span><div><small>MODEL</small><b>Map financial values</b></div><em>98%</em></div><i className={styles.connector} />
+      <div className={styles.flowNode} data-kind="rules"><span>03</span><div><small>RULES</small><b>Validate &amp; reconcile</b></div><em>12/12</em></div><div className={styles.branch}><i /><span>1 exception</span></div>
+      <div className={styles.flowNode} data-kind="human"><span>04</span><div><small>HUMAN</small><b>Resolve exception</b></div><em>Open</em></div><i className={styles.connector} />
+      <div className={styles.flowNode} data-kind="output"><span>05</span><div><small>OUTPUT</small><b>Decision-ready model</b></div><em>Ready</em></div>
+    </div></section>
+    <aside className={styles.inspector}><div className={styles.inspectorHead}><span>VALUE INSPECTOR</span><b>×</b></div><small>SELECTED CONCEPT</small><h3>Revenue</h3><dl><div><dt>Value</dt><dd>€18,420,000</dd></div><div><dt>Period</dt><dd>FY 2025</dd></div><div><dt>Confidence</dt><dd><span className={styles.pass}>98.4%</span></dd></div><div><dt>Evidence</dt><dd>SRC–01 · Row 14</dd></div></dl><div className={styles.controlResult}><span><i /> CONTROL PASSED</span><p>Gross profit identity reconciles.</p></div></aside>
+  </div>;
+}
 
 export default function FinancialIntelligenceLaunchPage() {
   return <><Navbar /><main className={styles.page}><FinancialIntelligenceViewAnalytics />
     <header className={styles.hero}>
-      <div className={styles.heroCopy}>
-        <p className={styles.eyebrow}><span /> Financial Intelligence · Founding pilot</p>
-        <h1>Turn financial evidence into a <em>controlled decision.</em></h1>
-        <p className={styles.lead}>Entimema interprets financial documents, validates the numbers and surfaces every material exception before the result reaches a decision.</p>
-        <nav className={styles.heroActions} aria-label="Pilot actions">
-          <FinancialIntelligenceCta href="#pilot-checkout" kind="start_pilot" position="hero">Commission a pilot <span aria-hidden="true">↗</span></FinancialIntelligenceCta>
-          <FinancialIntelligenceCta href="#workflow" kind="workflow" position="hero">See the workflow <span aria-hidden="true">↓</span></FinancialIntelligenceCta>
-        </nav>
-        <div className={styles.heroMeta}><span>One company</span><span>One reporting scope</span><span>From €490</span></div>
-      </div>
-      <div className={styles.systemView} aria-label="Evidence to decision workflow">
-        <div className={styles.systemTop}><span>FI / CONTROLLED EXECUTION</span><span className={styles.live}><i /> SYSTEM READY</span></div>
-        <div className={styles.sourceNode}><small>INPUT</small><strong>Financial evidence</strong><span>PDF · XLSX · CSV</span></div>
-        <div className={styles.flowRail} aria-hidden="true"><i /><i /><i /><i /></div>
-        <div className={styles.nodes}>
-          <div><small>01</small><b>Interpret</b><span>Model</span></div>
-          <div><small>02</small><b>Validate</b><span>Rules</span></div>
-          <div><small>03</small><b>Review</b><span>Human</span></div>
-        </div>
-        <div className={styles.resultNode}><span><small>OUTPUT</small><strong>Decision-ready model</strong></span><b>CONTROLLED</b></div>
-        <div className={styles.systemFoot}><span>Evidence linked</span><span>Exceptions visible</span><span>Judgement retained</span></div>
-      </div>
+      <div className={styles.heroCopy}><p className={styles.productTag}>Financial Intelligence</p><h1>Financial data you can <span>actually make decisions with.</span></h1><p>Interpret inconsistent financial evidence, validate what must be exact and route material uncertainty for human review—all in one controlled workflow.</p><nav aria-label="Pilot actions"><FinancialIntelligenceCta href="#pilot-checkout" kind="start_pilot" position="hero">Commission a pilot <span>↗</span></FinancialIntelligenceCta><FinancialIntelligenceCta href="#platform" kind="workflow" position="hero">See how it works <span>↓</span></FinancialIntelligenceCta></nav><div className={styles.heroFacts}><span><i /> Verified business clients</span><span>One controlled scope</span><span>From €490</span></div></div>
+      <DecisionWorkspace />
     </header>
 
-    <section className={styles.promise} aria-label="Product definition"><p>Not another AI answer.</p><h2>A governed financial workflow where models interpret, rules control and humans decide.</h2></section>
+    <section id="platform" className={styles.platform} aria-labelledby="platform-title"><div className={styles.sectionLabel}>ENTIMEMA SYSTEM</div><div className={styles.platformHead}><h2 id="platform-title">One financial workflow.<br/><span>Five controlled layers.</span></h2><p>Purpose-built to preserve financial meaning, validation and human authority from source evidence to final decision.</p></div><div className={styles.stack}>{layers.map(([number, name, copy, state]) => <article key={number}><span>{number}</span><div><small>{state}</small><h3>{name}</h3><p>{copy}</p></div><b aria-hidden="true">→</b></article>)}</div></section>
+
     <ProductExplainer />
 
-    <section className={styles.outcome} aria-labelledby="outcome-title">
-      <div className={styles.sectionIntro}><p className={styles.eyebrow}><span /> The controlled output</p><h2 id="outcome-title">Built to be examined.<br/>Ready to be used.</h2></div>
-      <div className={styles.outputGrid}>{outputs.map(([outputTitle, copy], index) => <article key={outputTitle}><span>0{index + 1}</span><h3>{outputTitle}</h3><p>{copy}</p></article>)}</div>
-    </section>
+    <section className={styles.outcomes} aria-labelledby="outcomes-title"><div className={styles.sectionLabel}>CONTROLLED RESULT</div><div className={styles.outcomeHead}><h2 id="outcomes-title">Not another AI answer.<br/><span>A defensible financial state.</span></h2><p>The output is designed to be examined, explained and used—not merely accepted.</p></div><div className={styles.outcomeGrid}>{outcomes.map(([name, copy], index) => <article key={name}><span>0{index + 1}</span><div className={styles.outcomeIcon} aria-hidden="true"><i /><i /><i /></div><h3>{name}</h3><p>{copy}</p></article>)}</div></section>
 
-    <section id="pilot-checkout" className={styles.pilot} aria-labelledby="pilot-title">
-      <div className={styles.pilotHead}><div><p className={styles.eyebrow}><span /> Paid founding pilot</p><h2 id="pilot-title">Commission one controlled execution.</h2></div><p>After payment, Entimema confirms the scope and sends secure document-upload instructions. Processing starts only after the evidence set has been reviewed.</p></div>
-      <div className={styles.pricing}>
-        <article><div><span>BULGARIA B2B</span><strong>€588</strong><small>€490 + €98 VAT</small></div><h3>For a business established in Bulgaria.</h3><FinancialIntelligenceCta href={bulgariaCheckoutUrl} kind="domestic_checkout" position="pricing">Continue securely <b aria-hidden="true">↗</b></FinancialIntelligenceCta></article>
-        <article><div><span>INTERNATIONAL B2B</span><strong>€490</strong><small>Verified business status required</small></div><h3>For a business established outside Bulgaria.</h3><FinancialIntelligenceCta href={internationalCheckoutUrl} kind="international_checkout" position="pricing">Continue securely <b aria-hidden="true">↗</b></FinancialIntelligenceCta></article>
-      </div>
-      <div className={styles.pilotFoot}><p>Company registration and applicable tax details are collected in Stripe Checkout.</p><Link href="/contact?topic=financial-data">Discuss scope before payment <span aria-hidden="true">→</span></Link></div>
-    </section>
+    <PilotCheckout />
 
-    <footer className={styles.closing}><div><span>ENTIMEMA</span><p>Financial intelligence with control.</p></div><Link href="/alexander-dimitrov">Alexander Dimitrov · Founder <span aria-hidden="true">→</span></Link></footer>
+    <footer className={styles.closing}><div><b>ENTIMEMA</b><span>Financial Evidence-to-Decision Systems</span></div><nav><Link href="/resources">Research</Link><Link href="/alexander-dimitrov">Founder</Link><Link href="/contact?topic=financial-data">Contact</Link></nav></footer>
   </main><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(schema) }} /></>;
 }

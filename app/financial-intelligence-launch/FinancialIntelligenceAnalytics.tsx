@@ -14,7 +14,7 @@ export function FinancialIntelligenceViewAnalytics() {
     const send = () => {
       if (!elapsed.current || sent.current || document.visibilityState !== "visible") return;
       sent.current = trackAnalyticsEvent("financial_intelligence_view", {
-        page_variant: "launch_editorial",
+        page_variant: "decision_workspace",
       });
     };
     const timer = window.setTimeout(() => {

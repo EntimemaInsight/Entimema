@@ -4,21 +4,19 @@ import { useEffect, useState } from "react";
 import styles from "./launch.module.css";
 
 const stages = [
-  { number: "01", label: "Intelligence", title: "Interpret the evidence", copy: "Financial meaning, period, unit and context are resolved across the submitted sources.", owner: "MODEL", state: "SOURCE UNDERSTOOD" },
-  { number: "02", label: "Control", title: "Verify what must be exact", copy: "Totals, accounting identities and cross-document relationships are tested with deterministic logic.", owner: "RULES", state: "CONTROLS PASSED" },
-  { number: "03", label: "Judgement", title: "Escalate uncertainty", copy: "Contradictions and low-confidence mappings become explicit review tasks. Nothing material is silently guessed.", owner: "HUMAN", state: "EXCEPTION RESOLVED" },
-  { number: "04", label: "Decision", title: "Deliver with lineage", copy: "The validated model and findings are assembled into a result that retains its evidence path.", owner: "SYSTEM", state: "READY FOR DECISION" },
+  { number: "01", label: "Evidence", title: "Source registered", detail: "FY2025_Income_Statement.xlsx", metric: "184 values", state: "REGISTERED" },
+  { number: "02", label: "Meaning", title: "Revenue interpreted", detail: "Revenue · FY 2025 · EUR", metric: "98.4% confidence", state: "MAPPED" },
+  { number: "03", label: "Control", title: "Identity recalculated", detail: "Revenue − COGS = Gross profit", metric: "Difference €0", state: "PASSED" },
+  { number: "04", label: "Review", title: "Exception resolved", detail: "Other operating income definition", metric: "Evidence attached", state: "REVIEWED" },
+  { number: "05", label: "Decision", title: "Model validated", detail: "Financial model + findings + lineage", metric: "Ready for use", state: "READY" },
 ] as const;
 
 export default function ProductExplainer() {
   const [active, setActive] = useState(0);
-  useEffect(() => { if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return; const timer = window.setInterval(() => setActive((value) => (value + 1) % stages.length), 3200); return () => window.clearInterval(timer); }, []);
+  useEffect(() => { if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return; const timer = window.setInterval(() => setActive((value) => value === stages.length - 1 ? 0 : value + 1), 2200); return () => window.clearInterval(timer); }, []);
   const stage = stages[active];
-  return <section id="workflow" className={styles.workflow} aria-labelledby="workflow-title">
-    <div className={styles.workflowIntro}><p className={styles.eyebrow}><span /> One governed workflow</p><h2 id="workflow-title">From source to decision,<br/>without losing control.</h2><p>Each responsibility is explicit. Select a stage to inspect the execution logic.</p></div>
-    <div className={styles.workflowSurface}>
-      <ol>{stages.map((item, index) => <li key={item.number}><button aria-current={active === index ? "step" : undefined} onClick={() => setActive(index)} type="button"><span>{item.number}</span><b>{item.label}</b><i aria-hidden="true">→</i></button></li>)}</ol>
-      <div className={styles.stagePanel} aria-live="polite"><header><span>{stage.owner} RESPONSIBILITY</span><b>{stage.number} / 04</b></header><div><small>{stage.state}</small><h3>{stage.title}</h3><p>{stage.copy}</p><footer><span>SOURCE</span><i /><strong>{stage.owner}</strong><i /><b>DECISION</b></footer></div></div>
-    </div>
-  </section>;
+  return <section className={styles.execution} aria-labelledby="execution-title"><div className={styles.sectionLabel}>CONTROLLED EXECUTION</div><div className={styles.executionHead}><h2 id="execution-title">Follow one value from<br/><span>source to decision.</span></h2><p>Every transformation remains visible. Every material uncertainty has an owner.</p></div><div className={styles.executionSurface}>
+    <div className={styles.executionTabs} role="tablist" aria-label="Execution stages">{stages.map((item, index) => <button key={item.number} type="button" role="tab" aria-selected={active === index} onClick={() => setActive(index)}><span>{item.number}</span><b>{item.label}</b><i /></button>)}</div>
+    <div className={styles.executionDemo} role="tabpanel" aria-live="polite"><header><span>RUN FI–0024</span><b><i /> EXECUTION ACTIVE</b></header><div className={styles.valueJourney}><div className={styles.valueSource}><small>{stage.label.toUpperCase()}</small><h3>{stage.title}</h3><p>{stage.detail}</p></div><div className={styles.valuePath}><i /><span>{stage.number}</span><i /></div><div className={styles.valueState}><small>CURRENT STATE</small><strong>{stage.state}</strong><p>{stage.metric}</p></div></div><footer><span>Source lineage retained</span><span>Deterministic controls visible</span><span>Human judgement recorded</span></footer></div>
+  </div></section>;
 }
