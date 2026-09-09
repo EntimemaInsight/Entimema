@@ -5,8 +5,9 @@ import type { MouseEvent } from "react";
 import BrandLogo from "./BrandLogo";
 import WhatWeDoMegaMenu from "./WhatWeDoMegaMenu";
 import ResourcesMegaMenu from "./ResourcesMegaMenu";
+import ProductMegaMenu from "./ProductMegaMenu";
 
-type NavKey = "home" | "services" | "about" | "resources" | "agents" | "contact";
+type NavKey = "home" | "product" | "services" | "about" | "resources" | "agents" | "contact";
 
 export default function Navbar({ active = "home" }: { active?: NavKey }) {
   function handleBrandClick(event: MouseEvent<HTMLAnchorElement>) {
@@ -37,6 +38,7 @@ export default function Navbar({ active = "home" }: { active?: NavKey }) {
           </Link>
 
           <nav className="site-nav site-nav--editorial" aria-label="Main navigation">
+            <ProductMegaMenu active={active === "product"} />
             <WhatWeDoMegaMenu active={active === "services"} />
             <Link
               className={`site-nav__item${active === "agents" ? " is-active" : ""}`}

@@ -94,6 +94,7 @@ function MenuChevron({ direction = "right" }: { direction?: "down" | "right" }) 
 export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMegaMenuProps) {
   const pathname = usePathname();
   const [mobileCompanyOpen, setMobileCompanyOpen] = useState(false);
+  const [mobileProductOpen, setMobileProductOpen] = useState(false);
   const isMounted = useSyncExternalStore(subscribeToClientMount, () => true, () => false);
   const [isOpen, setIsOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
@@ -124,6 +125,7 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
     setIsOpen(false);
     setIsClosing(true);
     setMobileSolutionsOpen(false);
+    setMobileProductOpen(false);
     setMobileResourcesOpen(false);
     setMobileCompanyOpen(false);
     clearExitTimer();
@@ -231,6 +233,27 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
           {mobile ? (
             <>
               <div className={styles.mobileSiteNav}>
+                <button
+                  aria-controls={`${menuId}-mobile-product`}
+                  aria-expanded={mobileProductOpen}
+                  className={styles.mobileTopLevel}
+                  onClick={() => setMobileProductOpen((current) => !current)}
+                  type="button"
+                >
+                  <span>Product</span>
+                  <MenuChevron direction="down" />
+                </button>
+                <div className={`${styles.mobileResources} ${styles.mobileProduct}`} hidden={!mobileProductOpen} id={`${menuId}-mobile-product`}>
+                  <Link className={styles.mobileProductFeature} href="/financial-intelligence-launch" onClick={close}>
+                    <small>FOUNDING PILOT · LIVE</small>
+                    <strong>Financial Intelligence</strong>
+                    <span>From financial evidence to a controlled decision state.</span>
+                  </Link>
+                  <Link className={styles.mobileResourceDestination} href="/financial-intelligence-launch#platform" onClick={close}>
+                    <span><strong>Platform overview</strong><small>The controlled financial workflow.</small></span>
+                  </Link>
+                  <Link className={styles.mobileProductAction} href="/financial-intelligence-launch#pilot-checkout" onClick={close}>Commission a pilot <b aria-hidden="true">→</b></Link>
+                </div>
                 <button
                   aria-controls={`${menuId}-mobile-solutions`}
                   aria-expanded={mobileSolutionsOpen}

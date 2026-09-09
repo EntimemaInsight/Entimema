@@ -68,7 +68,7 @@ test("mobile navigation follows the full-screen action-drawer contract", () => {
   assert.match(mobileMenu, /href="\/contact"/);
   assert.doesNotMatch(mobileMenu, /href="\/workspace\/financial-intelligence"/);
   assert.doesNotMatch(mobileMenu, />Data Analysis</);
-  assert.equal((mobileMenu.match(/<MenuChevron direction="down"/g) ?? []).length, 3);
+  assert.equal((mobileMenu.match(/<MenuChevron direction="down"/g) ?? []).length, 4);
   assert.equal((mobileMenu.match(/<MenuChevron \/>/g) ?? []).length, 0);
   assert.match(mobileMenuStyles, /\.mobileActionDock/);
   assert.match(mobileMenuStyles, /position: fixed/);

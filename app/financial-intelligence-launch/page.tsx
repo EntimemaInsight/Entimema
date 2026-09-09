@@ -51,7 +51,7 @@ function DecisionWorkspace() {
 }
 
 export default function FinancialIntelligenceLaunchPage() {
-  return <><Navbar /><main className={styles.page}><FinancialIntelligenceViewAnalytics />
+  return <><Navbar active="product" /><main className={styles.page}><FinancialIntelligenceViewAnalytics />
     <header className={styles.hero}>
       <div className={styles.heroCopy}><p className={styles.productTag}>Financial Intelligence</p><h1>Financial data you can <span>actually make decisions with.</span></h1><p>Interpret inconsistent financial evidence, validate what must be exact and route material uncertainty for human review—all in one controlled workflow.</p><nav aria-label="Pilot actions"><FinancialIntelligenceCta href="#pilot-checkout" kind="start_pilot" position="hero">Commission a pilot <span>↗</span></FinancialIntelligenceCta><FinancialIntelligenceCta href="#platform" kind="workflow" position="hero">See how it works <span>↓</span></FinancialIntelligenceCta></nav><div className={styles.heroFacts}><span><i /> Verified business clients</span><span>One controlled scope</span><span>From €490</span></div></div>
       <DecisionWorkspace />
