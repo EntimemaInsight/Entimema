@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import styles from "./launch.module.css";
+import styles from "./conversion.module.css";
 
 const stages = [
   { number: "01", label: "Evidence", title: "Source registered", detail: "FY2025_Income_Statement.xlsx", metric: "184 values", state: "REGISTERED" },
@@ -13,10 +13,32 @@ const stages = [
 
 export default function ProductExplainer() {
   const [active, setActive] = useState(0);
-  useEffect(() => { if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return; const timer = window.setInterval(() => setActive((value) => value === stages.length - 1 ? 0 : value + 1), 2200); return () => window.clearInterval(timer); }, []);
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const timer = window.setInterval(() => setActive((value) => value === stages.length - 1 ? 0 : value + 1), 2200);
+    return () => window.clearInterval(timer);
+  }, []);
   const stage = stages[active];
-  return <section className={styles.execution} aria-labelledby="execution-title"><div className={styles.sectionLabel}>CONTROLLED EXECUTION</div><div className={styles.executionHead}><h2 id="execution-title">Follow one value from<br/><span>source to decision.</span></h2><p>Every transformation remains visible. Every material uncertainty has an owner.</p></div><div className={styles.executionSurface}>
-    <div className={styles.executionTabs} role="tablist" aria-label="Execution stages">{stages.map((item, index) => <button key={item.number} type="button" role="tab" aria-selected={active === index} onClick={() => setActive(index)}><span>{item.number}</span><b>{item.label}</b><i /></button>)}</div>
-    <div className={styles.executionDemo} role="tabpanel" aria-live="polite"><header><span>RUN FI–0024</span><b><i /> EXECUTION ACTIVE</b></header><div className={styles.valueJourney}><div className={styles.valueSource}><small>{stage.label.toUpperCase()}</small><h3>{stage.title}</h3><p>{stage.detail}</p></div><div className={styles.valuePath}><i /><span>{stage.number}</span><i /></div><div className={styles.valueState}><small>CURRENT STATE</small><strong>{stage.state}</strong><p>{stage.metric}</p></div></div><footer><span>Source lineage retained</span><span>Deterministic controls visible</span><span>Human judgement recorded</span></footer></div>
-  </div></section>;
+
+  return <section className={styles.execution} aria-labelledby="execution-title">
+    <div className={styles.sectionLabel}>CONTROLLED EXECUTION · PRODUCT IN ACTION</div>
+    <div className={styles.executionHead}>
+      <h2 id="execution-title">Follow one value from<br/><span>source to decision.</span></h2>
+      <p>This is the commercial difference: not a hidden jump from upload to answer, but an inspectable execution path where semantic interpretation, arithmetic control and human judgement remain explicit.</p>
+    </div>
+    <div className={styles.executionSurface}>
+      <div className={styles.executionTabs} role="tablist" aria-label="Execution stages">
+        {stages.map((item, index) => <button key={item.number} type="button" role="tab" aria-selected={active === index} onClick={() => setActive(index)}><span>{item.number}</span><b>{item.label}</b><i /></button>)}
+      </div>
+      <div className={styles.executionDemo} role="tabpanel" aria-live="polite">
+        <header><span>RUN FI–0024 · ILLUSTRATIVE EXECUTION</span><b><i /> EXECUTION ACTIVE</b></header>
+        <div className={styles.valueJourney}>
+          <div className={styles.valueSource}><small>{stage.label.toUpperCase()}</small><h3>{stage.title}</h3><p>{stage.detail}</p></div>
+          <div className={styles.valuePath}><i /><span>{stage.number}</span><i /></div>
+          <div className={styles.valueState}><small>CURRENT STATE</small><strong>{stage.state}</strong><p>{stage.metric}</p></div>
+        </div>
+        <footer><span>Source lineage retained</span><span>Deterministic controls visible</span><span>Human judgement recorded</span></footer>
+      </div>
+    </div>
+  </section>;
 }
