@@ -42,6 +42,7 @@ test("product mega-menu has responsive and reduced-motion contracts", () => {
   assert.match(productCss, /@media \(max-width: 900px\)/);
   assert.match(productCss, /@media \(prefers-reduced-motion:reduce\)/);
   assert.match(productCss, /grid-template-columns: minmax\(0,1\.9fr\)/);
+  assert.match(productCss, /height: 430px/);
 });
 
 test("resource columns follow Research, Company, Documentation order", () => {
@@ -59,6 +60,19 @@ test("solutions use destination-level copy without category descriptions", () =>
   assert.doesNotMatch(mobileMenu, /categoryDescription|Financial control, planning and performance|Risk assessment and controlled decision systems/);
   assert.match(menuContent, /Turn financial reporting into decision-ready management insight/);
   assert.match(menuContent, /Resolve investigations faster with structured evidence and AI assistance/);
+  assert.match(mobileMenu, /<aside className=\{styles\.featured\}>[\s\S]*?productFeature\.title/);
+});
+
+test("desktop mega menus use full-bleed geometry and aligned panel heights", () => {
+  for (const stylesheet of [productCss, resourcesCss, solutionsCss]) {
+    assert.match(stylesheet, /inset-inline: 0/);
+    assert.match(stylesheet, /height: 430px/);
+    assert.match(stylesheet, /border-top: 1px solid rgba\(4,\s*19,\s*63,\s*\.2\)/);
+  }
+  assert.match(productCss, /\.featured::before[\s\S]*?inset: 0 -100vw 0 0/);
+  assert.match(solutionsCss, /\.featured::before[\s\S]*?inset: 0 -100vw 0 0/);
+  assert.match(productCss, /\.featured h3 \{[^}]*color: var\(--brand-navy-950\);[^}]*font-size: var\(--entimema-menu-heading\)/);
+  assert.match(solutionsCss, /\.featured \.category \{[^}]*color: var\(--brand-navy-950\);[^}]*font-size: var\(--entimema-menu-heading\)/);
 });
 
 test("desktop and mobile menus consume the same navigation content", () => {

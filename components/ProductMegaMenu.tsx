@@ -85,11 +85,11 @@ export default function ProductMegaMenu({ active = false }: { active?: boolean }
       <button aria-label="Close product menu" className={styles.backdrop} onClick={close} style={{ top: menuTop }} tabIndex={-1} type="button" />
       <nav aria-label="Product" className={`${styles.menu} ${isClosing ? styles.menuClosing : ""}`} id={menuId} ref={menuRef} style={{ top: menuTop }}>
         <div className={`site-container ${styles.inner}`}>
-          <header className={styles.intro}>
-            <h2>Product</h2>
-            <p>Controlled financial workflows built for traceable, defensible decisions.</p>
-          </header>
-          <div className={styles.content}>
+          <div className={styles.primary}>
+            <header className={styles.intro}>
+              <h2>Product</h2>
+              <p>Controlled financial workflows built for traceable, defensible decisions.</p>
+            </header>
             <section className={styles.platform}>
               <h3>Product</h3>
               <div className={styles.links}>
@@ -101,14 +101,14 @@ export default function ProductMegaMenu({ active = false }: { active?: boolean }
                 ))}
               </div>
             </section>
-            <aside className={styles.featured}>
-              <h3>{productFeature.label}</h3>
-              <Link href={productFeature.href} onClick={close}>
-                <strong>{productFeature.title}</strong>
-                <small>{productFeature.description}</small>
-              </Link>
-            </aside>
           </div>
+          <aside className={styles.featured}>
+            <h3>{productFeature.label}</h3>
+            <Link href={productFeature.href} onClick={close}>
+              <strong>{productFeature.title}</strong>
+              <small>{productFeature.description}</small>
+            </Link>
+          </aside>
         </div>
       </nav>
     </>,

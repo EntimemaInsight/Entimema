@@ -213,6 +213,11 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
                       </div>
                     </section>
                   ))}
+                  <Link className={styles.mobileProductFeature} href={productFeature.href} onClick={close}>
+                    <small>{productFeature.label}</small>
+                    <strong>{productFeature.title}</strong>
+                    <span>{productFeature.description}</span>
+                  </Link>
                 </div>
                 <Link className={styles.mobileTopLevel} href="/agents" onClick={close}>
                   <span>Agent Library</span>
@@ -249,22 +254,31 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
             </>
           ) : (
             <>
-              <header className={styles.intro}>
-                <h2>Solutions</h2>
-                <p>Financial and risk systems structured around the decisions they need to improve.</p>
-              </header>
-              <div className={styles.panels}>
-                {serviceGroups.map((group) => (
-                  <section className={styles.panel} key={group.category}>
-                    <h2 className={styles.category}>{group.category}</h2>
-                    <ul className={styles.items} aria-label={`${group.category} capabilities`}>
-                      {group.items.map((item) => (
-                        <li key={item.href}><Link className={styles.item} href={item.href} onClick={close}><strong>{item.title}</strong><small>{item.description}</small></Link></li>
-                      ))}
-                    </ul>
-                  </section>
-                ))}
+              <div className={styles.primary}>
+                <header className={styles.intro}>
+                  <h2>Solutions</h2>
+                  <p>Financial and risk systems structured around the decisions they need to improve.</p>
+                </header>
+                <div className={styles.panels}>
+                  {serviceGroups.map((group) => (
+                    <section className={styles.panel} key={group.category}>
+                      <h2 className={styles.category}>{group.category}</h2>
+                      <ul className={styles.items} aria-label={`${group.category} capabilities`}>
+                        {group.items.map((item) => (
+                          <li key={item.href}><Link className={styles.item} href={item.href} onClick={close}><strong>{item.title}</strong><small>{item.description}</small></Link></li>
+                        ))}
+                      </ul>
+                    </section>
+                  ))}
+                </div>
               </div>
+              <aside className={styles.featured}>
+                <h2 className={styles.category}>{productFeature.label}</h2>
+                <Link className={styles.item} href={productFeature.href} onClick={close}>
+                  <strong>{productFeature.title}</strong>
+                  <small>{productFeature.description}</small>
+                </Link>
+              </aside>
             </>
           )}
         </div>
