@@ -15,50 +15,9 @@ import {
 } from "react";
 import styles from "./WhatWeDoMegaMenu.module.css";
 import { resourceStreams } from "@/app/resources/resource-data";
+import { productDestinations, productFeature, resourceDocumentation, serviceGroups } from "@/lib/mega-menu-content";
 
 const subscribeToClientMount = () => () => {};
-const serviceGroups = [
-  {
-    category: "Finance",
-    items: [
-      {
-        title: "Financial Reporting & Analysis",
-        description: "Turn financial reporting into decision-ready management insight.",
-        href: "/services/management-reporting",
-      },
-      {
-        title: "Planning & Scenario Modelling",
-        description: "Model plans and scenarios around the drivers that shape performance.",
-        href: "/services/budgets-and-forecasting",
-      },
-      {
-        title: "Cost & Margin Intelligence",
-        description: "See how costs, products and operations shape margin.",
-        href: "/services/cost-and-profitability",
-      },
-      {
-        title: "CFO Advisory",
-        description: "Strengthen finance leadership with focused analysis and controlled execution.",
-        href: "/services/cfo-function",
-      },
-    ],
-  },
-  {
-    category: "Risk & Decisioning",
-    items: [
-      {
-        title: "Credit Risk & Decisioning",
-        description: "Assess credit risk with consistent evidence, models and policy.",
-        href: "/services/credit-risk",
-      },
-      {
-        title: "AML & Fraud Investigation",
-        description: "Resolve investigations faster with structured evidence and AI assistance.",
-        href: "/services/aml-compliance",
-      },
-    ],
-  },
-] as const;
 
 type WhatWeDoMegaMenuProps = {
   active?: boolean;
@@ -220,17 +179,16 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
                   <MenuChevron direction="down" />
                 </button>
                 <div className={`${styles.mobileResources} ${styles.mobileProduct}`} hidden={!mobileProductOpen} id={`${menuId}-mobile-product`}>
-                  <Link className={styles.mobileProductFeature} href="/financial-intelligence-launch" onClick={close}>
-                    <small>WHAT&apos;S NEW</small>
-                    <strong>Financial Intelligence V1</strong>
-                    <span>From financial evidence to a controlled decision state.</span>
+                  <Link className={styles.mobileProductFeature} href={productFeature.href} onClick={close}>
+                    <small>{productFeature.label}</small>
+                    <strong>{productFeature.title}</strong>
+                    <span>{productFeature.description}</span>
                   </Link>
-                  <Link className={styles.mobileResourceDestination} href="/financial-intelligence-launch#platform" onClick={close}>
-                      <span><strong>Platform overview</strong><small>The controlled financial workflow.</small></span>
-                  </Link>
-                  <Link className={styles.mobileResourceDestination} href="/financial-intelligence-launch#platform" onClick={close}>
-                    <span><strong>AI Agent Control</strong><small>Configure, govern and review specialised financial agents.</small></span>
-                  </Link>
+                  {productDestinations.map((item) => (
+                    <Link className={styles.mobileResourceDestination} href={item.href} key={item.title} onClick={close}>
+                      <span><strong>{item.title}</strong><small>{item.description}</small></span>
+                    </Link>
+                  ))}
                 </div>
                 <button
                   aria-controls={`${menuId}-mobile-solutions`}
@@ -274,12 +232,11 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
                     <span><strong>{item.title}</strong><small>{item.description}</small></span>
                   </Link>)}
                   <h2 className={styles.mobileSectionLabel}>Documentation</h2>
-                  <Link className={styles.mobileResourceDestination} href="/financial-intelligence-launch#platform" onClick={close}>
-                    <span><strong>Product documentation</strong><small>View Entimema&apos;s product documentation.</small></span>
-                  </Link>
-                  <Link className={styles.mobileResourceDestination} href="/services/financial-data" onClick={close}>
-                    <span><strong>Integrations</strong><small>Learn about integrations on Entimema.</small></span>
-                  </Link>
+                  {resourceDocumentation.map((item) => (
+                    <Link className={styles.mobileResourceDestination} href={item.href} key={item.href} onClick={close}>
+                      <span><strong>{item.title}</strong><small>{item.description}</small></span>
+                    </Link>
+                  ))}
                 </div>
                 <Link className={`${styles.mobileTopLevel} ${styles.mobileContact}`} href="/contact" onClick={close}>
                   <span>Contact us</span>

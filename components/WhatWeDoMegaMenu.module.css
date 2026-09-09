@@ -294,7 +294,7 @@
     border-bottom: 1px solid rgba(4, 19, 63, .075);
     background: transparent;
     color: var(--brand-navy-950);
-    font-family: var(--font-sans);
+    font-family: var(--entimema-font-interface);
     font-size: 1.0625rem;
     font-weight: 500;
     line-height: 1.5;
@@ -348,7 +348,7 @@
   .mobileProductFeature span { max-width: 310px; color: rgba(4,19,63,.68); font-size: var(--entimema-menu-detail); font-weight: 400; line-height: var(--entimema-menu-leading-detail); letter-spacing: var(--entimema-menu-tracking-copy); }
   .mobileProductAction { min-height: 50px; display: flex; align-items: center; justify-content: space-between; color: var(--brand-navy-950); font-size: .9rem; font-weight: 650; }
   .mobileProductAction b { color: #5b4dff; }
-  .mobileResourceDestination { display: flex; align-items: center; justify-content: flex-start; gap: 22px; padding: 16px 0; border-bottom: 1px solid var(--hairline); font-family: var(--font-sans); }
+  .mobileResourceDestination { display: flex; align-items: center; justify-content: flex-start; gap: 22px; padding: 16px 0; border-bottom: 1px solid var(--hairline); font-family: var(--entimema-font-interface); }
   .mobileResourceDestination:last-child { border-bottom: 0; }
   .mobileResourceDestination > span { display: grid; gap: 6px; }
   .mobileResourceDestination strong { color: var(--brand-navy-950); font-size: var(--entimema-menu-item); font-weight: var(--entimema-menu-weight-item); line-height: var(--entimema-menu-leading-item); letter-spacing: var(--entimema-menu-tracking-item); }
@@ -383,7 +383,7 @@
     align-items: center;
     justify-content: flex-start;
     color: var(--brand-navy-950);
-    font-family: var(--font-sans);
+    font-family: var(--entimema-font-interface);
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
@@ -421,7 +421,7 @@
     align-items: center;
     justify-content: center;
     border-radius: .625rem;
-    font-family: var(--font-sans);
+    font-family: var(--entimema-font-interface);
     font-size: 1rem;
     font-weight: 500;
     line-height: 1.5;

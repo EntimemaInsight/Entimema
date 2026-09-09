@@ -10,6 +10,7 @@ const resourcesMenu = readFileSync("components/ResourcesMegaMenu.tsx", "utf8");
 const resourcesCss = readFileSync("components/ResourcesMegaMenu.module.css", "utf8");
 const solutionsCss = readFileSync("components/WhatWeDoMegaMenu.module.css", "utf8");
 const editorialTokens = readFileSync("styles/editorial-tokens.css", "utf8");
+const menuContent = readFileSync("lib/mega-menu-content.ts", "utf8");
 
 test("exposes Product as a first-class desktop navigation destination", () => {
   assert.match(navbar, /<ProductMegaMenu active=\{active === "product"\} \/>/);
@@ -20,10 +21,11 @@ test("exposes Product as a first-class desktop navigation destination", () => {
 });
 
 test("product panel exposes the platform, agent control and current product release", () => {
-  assert.match(productMenu, /What&apos;s new/);
-  assert.match(productMenu, /Financial Intelligence V1/);
-  assert.match(productMenu, /Platform overview/);
-  assert.match(productMenu, /AI Agent Control/);
+  assert.match(productMenu, /productDestinations/);
+  assert.match(productMenu, /productFeature/);
+  assert.match(menuContent, /Financial Intelligence V1/);
+  assert.match(menuContent, /Platform overview/);
+  assert.match(menuContent, /AI Agent Control/);
   assert.doesNotMatch(productMenu, /Decision Workspace|Intelligent Intake|Exception Workspace/);
   assert.doesNotMatch(productMenu, /€490|pilot-checkout/);
 });
@@ -32,7 +34,7 @@ test("mobile navigation includes a dedicated accessible Product section", () => 
   assert.match(mobileMenu, /aria-controls=\{`\$\{menuId\}-mobile-product`\}/);
   assert.match(mobileMenu, /aria-expanded=\{mobileProductOpen\}/);
   assert.match(mobileMenu, /id=\{`\$\{menuId\}-mobile-product`\}/);
-  assert.match(mobileMenu, /Platform overview/);
+  assert.match(mobileMenu, /productDestinations/);
   assert.doesNotMatch(mobileMenu, /href="\/workspace\/financial-intelligence"/);
 });
 
@@ -55,8 +57,15 @@ test("menu destinations use the Entimema navy hierarchy", () => {
 
 test("solutions use destination-level copy without category descriptions", () => {
   assert.doesNotMatch(mobileMenu, /categoryDescription|Financial control, planning and performance|Risk assessment and controlled decision systems/);
-  assert.match(mobileMenu, /Turn financial reporting into decision-ready management insight/);
-  assert.match(mobileMenu, /Resolve investigations faster with structured evidence and AI assistance/);
+  assert.match(menuContent, /Turn financial reporting into decision-ready management insight/);
+  assert.match(menuContent, /Resolve investigations faster with structured evidence and AI assistance/);
+});
+
+test("desktop and mobile menus consume the same navigation content", () => {
+  assert.match(productMenu, /import \{ productDestinations, productFeature \} from "@\/lib\/mega-menu-content"/);
+  assert.match(resourcesMenu, /import \{ resourceDocumentation \} from "@\/lib\/mega-menu-content"/);
+  assert.match(mobileMenu, /import \{ productDestinations, productFeature, resourceDocumentation, serviceGroups \} from "@\/lib\/mega-menu-content"/);
+  assert.doesNotMatch(mobileMenu, /The controlled financial workflow|From financial evidence to a controlled decision state/);
 });
 
 test("all mega menus share one typographic scale", () => {

@@ -6,6 +6,7 @@ import { companyDestinations, isCompanyRoute } from "@/lib/company-navigation";
 import { createPortal } from "react-dom";
 import { useCallback, useEffect, useId, useLayoutEffect, useRef, useState, useSyncExternalStore } from "react";
 import { resourceStreams } from "@/app/resources/resource-data";
+import { resourceDocumentation } from "@/lib/mega-menu-content";
 import styles from "./ResourcesMegaMenu.module.css";
 
 const subscribeToClientMount = () => () => undefined;
@@ -113,14 +114,12 @@ export default function ResourcesMegaMenu({ active = false }: { active?: boolean
             </section>
             <section className={styles.group}>
               <h3>Documentation</h3>
-              <Link className={styles.item} href="/financial-intelligence-launch#platform" onClick={hide}>
-                <strong>Product documentation</strong>
-                <small>View Entimema&apos;s product documentation.</small>
-              </Link>
-              <Link className={styles.item} href="/services/financial-data" onClick={hide}>
-                <strong>Integrations</strong>
-                <small>Learn about integrations on Entimema.</small>
-              </Link>
+              {resourceDocumentation.map((item) => (
+                <Link className={styles.item} href={item.href} key={item.href} onClick={hide}>
+                  <strong>{item.title}</strong>
+                  <small>{item.description}</small>
+                </Link>
+              ))}
             </section>
           </div>
         </div>

@@ -3,14 +3,10 @@
 import Link from "next/link";
 import { createPortal } from "react-dom";
 import { useCallback, useEffect, useId, useLayoutEffect, useRef, useState, useSyncExternalStore } from "react";
+import { productDestinations, productFeature } from "@/lib/mega-menu-content";
 import styles from "./ProductMegaMenu.module.css";
 
 const subscribeToClientMount = () => () => {};
-
-const productDestinations = [
-  ["Platform overview", "The complete controlled financial workflow.", "/financial-intelligence-launch#platform"],
-  ["AI Agent Control", "Configure, govern and review specialised financial agents.", "/financial-intelligence-launch#platform"],
-] as const;
 
 export default function ProductMegaMenu({ active = false }: { active?: boolean }) {
   const isMounted = useSyncExternalStore(subscribeToClientMount, () => true, () => false);
@@ -97,19 +93,19 @@ export default function ProductMegaMenu({ active = false }: { active?: boolean }
             <section className={styles.platform}>
               <h3>Product</h3>
               <div className={styles.links}>
-                {productDestinations.map(([title, description, href]) => (
-                  <Link className={styles.item} href={href} key={title} onClick={close}>
-                    <strong>{title}</strong>
-                    <small>{description}</small>
+                {productDestinations.map((item) => (
+                  <Link className={styles.item} href={item.href} key={item.title} onClick={close}>
+                    <strong>{item.title}</strong>
+                    <small>{item.description}</small>
                   </Link>
                 ))}
               </div>
             </section>
             <aside className={styles.featured}>
-              <h3>What&apos;s new</h3>
-              <Link href="/financial-intelligence-launch" onClick={close}>
-                <strong>Financial Intelligence V1</strong>
-                <small>From financial evidence to a controlled, reviewable decision state.</small>
+              <h3>{productFeature.label}</h3>
+              <Link href={productFeature.href} onClick={close}>
+                <strong>{productFeature.title}</strong>
+                <small>{productFeature.description}</small>
               </Link>
             </aside>
           </div>
