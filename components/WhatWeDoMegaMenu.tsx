@@ -20,36 +20,40 @@ const subscribeToClientMount = () => () => {};
 const serviceGroups = [
   {
     category: "Finance",
-    description: "Financial control, planning and performance.",
     items: [
       {
         title: "Financial Reporting & Analysis",
+        description: "Turn financial reporting into decision-ready management insight.",
         href: "/services/management-reporting",
       },
       {
         title: "Planning & Scenario Modelling",
+        description: "Model plans and scenarios around the drivers that shape performance.",
         href: "/services/budgets-and-forecasting",
       },
       {
         title: "Cost & Margin Intelligence",
+        description: "See how costs, products and operations shape margin.",
         href: "/services/cost-and-profitability",
       },
       {
         title: "CFO Advisory",
+        description: "Strengthen finance leadership with focused analysis and controlled execution.",
         href: "/services/cfo-function",
       },
     ],
   },
   {
     category: "Risk & Decisioning",
-    description: "Risk assessment and controlled decision systems.",
     items: [
       {
         title: "Credit Risk & Decisioning",
+        description: "Assess credit risk with consistent evidence, models and policy.",
         href: "/services/credit-risk",
       },
       {
         title: "AML & Fraud Investigation",
+        description: "Resolve investigations faster with structured evidence and AI assistance.",
         href: "/services/aml-compliance",
       },
     ],
@@ -245,7 +249,7 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
                       <div>
                         {group.items.map((item) => (
                           <Link className={styles.mobileServiceLink} href={item.href} key={item.href} onClick={close}>
-                            <span>{item.title}</span>
+                            <span><strong>{item.title}</strong><small>{item.description}</small></span>
                           </Link>
                         ))}
                       </div>
@@ -265,6 +269,10 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
                       <span><strong>{stream.label}</strong><small>{stream.description}</small></span>
                     </Link>
                   ))}
+                  <h2 className={styles.mobileSectionLabel}>Company</h2>
+                  {companyDestinations.map(item => <Link className={styles.mobileResourceDestination} href={item.href} key={item.href} onClick={close} aria-current={pathname.replace(/\/$/, "") === item.href ? "page" : undefined}>
+                    <span><strong>{item.title}</strong><small>{item.description}</small></span>
+                  </Link>)}
                   <h2 className={styles.mobileSectionLabel}>Documentation</h2>
                   <Link className={styles.mobileResourceDestination} href="/financial-intelligence-launch#platform" onClick={close}>
                     <span><strong>Product documentation</strong><small>View Entimema&apos;s product documentation.</small></span>
@@ -272,10 +280,6 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
                   <Link className={styles.mobileResourceDestination} href="/services/financial-data" onClick={close}>
                     <span><strong>Integrations</strong><small>Learn about integrations on Entimema.</small></span>
                   </Link>
-                  <h2 className={styles.mobileSectionLabel}>Company</h2>
-                  {companyDestinations.map(item => <Link className={styles.mobileResourceDestination} href={item.href} key={item.href} onClick={close} aria-current={pathname.replace(/\/$/, "") === item.href ? "page" : undefined}>
-                    <span><strong>{item.title}</strong><small>{item.description}</small></span>
-                  </Link>)}
                 </div>
                 <Link className={`${styles.mobileTopLevel} ${styles.mobileContact}`} href="/contact" onClick={close}>
                   <span>Contact us</span>
@@ -295,10 +299,9 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
                 {serviceGroups.map((group) => (
                   <section className={styles.panel} key={group.category}>
                     <h2 className={styles.category}>{group.category}</h2>
-                    <p className={styles.categoryDescription}>{group.description}</p>
                     <ul className={styles.items} aria-label={`${group.category} capabilities`}>
                       {group.items.map((item) => (
-                        <li key={item.href}><Link className={styles.item} href={item.href} onClick={close}><strong>{item.title}</strong></Link></li>
+                        <li key={item.href}><Link className={styles.item} href={item.href} onClick={close}><strong>{item.title}</strong><small>{item.description}</small></Link></li>
                       ))}
                     </ul>
                   </section>

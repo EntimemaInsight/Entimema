@@ -103,6 +103,15 @@ export default function ResourcesMegaMenu({ active = false }: { active?: boolean
               ))}
             </section>
             <section className={styles.group}>
+              <h3>Company</h3>
+              {companyDestinations.map((item) => (
+                <Link className={styles.item} href={item.href} key={item.href} onClick={hide} aria-current={pathname.replace(/\/$/, "") === item.href ? "page" : undefined}>
+                  <strong>{item.title}</strong>
+                  <small>{item.description}</small>
+                </Link>
+              ))}
+            </section>
+            <section className={styles.group}>
               <h3>Documentation</h3>
               <Link className={styles.item} href="/financial-intelligence-launch#platform" onClick={hide}>
                 <strong>Product documentation</strong>
@@ -112,15 +121,6 @@ export default function ResourcesMegaMenu({ active = false }: { active?: boolean
                 <strong>Integrations</strong>
                 <small>Learn about integrations on Entimema.</small>
               </Link>
-            </section>
-            <section className={styles.group}>
-              <h3>Company</h3>
-              {companyDestinations.map((item) => (
-                <Link className={styles.item} href={item.href} key={item.href} onClick={hide} aria-current={pathname.replace(/\/$/, "") === item.href ? "page" : undefined}>
-                  <strong>{item.title}</strong>
-                  <small>{item.description}</small>
-                </Link>
-              ))}
             </section>
           </div>
         </div>

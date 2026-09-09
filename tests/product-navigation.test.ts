@@ -6,6 +6,9 @@ const navbar = readFileSync("components/Navbar.tsx", "utf8");
 const productMenu = readFileSync("components/ProductMegaMenu.tsx", "utf8");
 const mobileMenu = readFileSync("components/WhatWeDoMegaMenu.tsx", "utf8");
 const productCss = readFileSync("components/ProductMegaMenu.module.css", "utf8");
+const resourcesMenu = readFileSync("components/ResourcesMegaMenu.tsx", "utf8");
+const resourcesCss = readFileSync("components/ResourcesMegaMenu.module.css", "utf8");
+const solutionsCss = readFileSync("components/WhatWeDoMegaMenu.module.css", "utf8");
 
 test("exposes Product as a first-class desktop navigation destination", () => {
   assert.match(navbar, /<ProductMegaMenu active=\{active === "product"\} \/>/);
@@ -36,4 +39,21 @@ test("product mega-menu has responsive and reduced-motion contracts", () => {
   assert.match(productCss, /@media \(max-width: 900px\)/);
   assert.match(productCss, /@media \(prefers-reduced-motion:reduce\)/);
   assert.match(productCss, /grid-template-columns: minmax\(0,1\.9fr\)/);
+});
+
+test("resource columns follow Research, Company, Documentation order", () => {
+  assert.ok(resourcesMenu.indexOf("<h3>Research</h3>") < resourcesMenu.indexOf("<h3>Company</h3>"));
+  assert.ok(resourcesMenu.indexOf("<h3>Company</h3>") < resourcesMenu.indexOf("<h3>Documentation</h3>"));
+});
+
+test("menu destinations use the Entimema navy hierarchy", () => {
+  assert.match(resourcesCss, /\.item strong \{[^}]*color: var\(--brand-navy-950\)/);
+  assert.match(productCss, /\.item strong,\.featured strong \{[^}]*color: var\(--brand-navy-950\)/);
+  assert.match(solutionsCss, /\.item \{[\s\S]*?color: var\(--brand-navy-950\)/);
+});
+
+test("solutions use destination-level copy without category descriptions", () => {
+  assert.doesNotMatch(mobileMenu, /categoryDescription|Financial control, planning and performance|Risk assessment and controlled decision systems/);
+  assert.match(mobileMenu, /Turn financial reporting into decision-ready management insight/);
+  assert.match(mobileMenu, /Resolve investigations faster with structured evidence and AI assistance/);
 });
