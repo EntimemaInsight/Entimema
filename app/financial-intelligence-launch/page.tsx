@@ -4,7 +4,6 @@ import Navbar from "@/components/Navbar";
 import { FOUNDER_ID, ORGANIZATION_ID, SITE_URL, WEBSITE_ID, createBreadcrumbSchema, serializeJsonLd } from "@/lib/structured-data";
 import styles from "./launch.module.css";
 import ProductExplainer from "./ProductExplainer";
-import PilotCheckout from "./PilotCheckout";
 import { FinancialIntelligenceCta, FinancialIntelligenceViewAnalytics } from "./FinancialIntelligenceAnalytics";
 
 const path = "/financial-intelligence-launch";
@@ -53,7 +52,7 @@ function DecisionWorkspace() {
 export default function FinancialIntelligenceLaunchPage() {
   return <><Navbar active="product" /><main className={styles.page}><FinancialIntelligenceViewAnalytics />
     <header className={styles.hero}>
-      <div className={styles.heroCopy}><p className={styles.productTag}>Financial Intelligence</p><h1>Financial data you can <span>actually make decisions with.</span></h1><p>Interpret inconsistent financial evidence, validate what must be exact and route material uncertainty for human review—all in one controlled workflow.</p><nav aria-label="Pilot actions"><FinancialIntelligenceCta href="#pilot-checkout" kind="start_pilot" position="hero">Commission a pilot <span>↗</span></FinancialIntelligenceCta><FinancialIntelligenceCta href="#platform" kind="workflow" position="hero">See how it works <span>↓</span></FinancialIntelligenceCta></nav><div className={styles.heroFacts}><span><i /> Verified business clients</span><span>One controlled scope</span><span>From €490</span></div></div>
+      <div className={styles.heroCopy}><p className={styles.productTag}>Financial Intelligence</p><h1>Financial data you can <span>actually make decisions with.</span></h1><p>Interpret inconsistent financial evidence, validate what must be exact and route material uncertainty for human review—all in one controlled workflow.</p><nav aria-label="Pilot actions"><FinancialIntelligenceCta href="/contact?topic=financial-data" kind="start_pilot" position="hero">Discuss the pilot <span>↗</span></FinancialIntelligenceCta><FinancialIntelligenceCta href="#platform" kind="workflow" position="hero">See how it works <span>↓</span></FinancialIntelligenceCta></nav><div className={styles.heroFacts}><span><i /> Verified business clients</span><span>One controlled scope</span><span>Human-reviewed output</span></div></div>
       <DecisionWorkspace />
     </header>
 
@@ -63,7 +62,7 @@ export default function FinancialIntelligenceLaunchPage() {
 
     <section className={styles.outcomes} aria-labelledby="outcomes-title"><div className={styles.sectionLabel}>CONTROLLED RESULT</div><div className={styles.outcomeHead}><h2 id="outcomes-title">Not another AI answer.<br/><span>A defensible financial state.</span></h2><p>The output is designed to be examined, explained and used—not merely accepted.</p></div><div className={styles.outcomeGrid}>{outcomes.map(([name, copy], index) => <article key={name}><span>0{index + 1}</span><div className={styles.outcomeIcon} aria-hidden="true"><i /><i /><i /></div><h3>{name}</h3><p>{copy}</p></article>)}</div></section>
 
-    <PilotCheckout />
+    <section id="pilot" className={styles.pilot} aria-labelledby="pilot-title"><div className={styles.pilotShell}><div className={styles.pilotCopy}><p className={styles.productTag}>Founding pilot</p><h2 id="pilot-title">One controlled financial execution.</h2><p>We are refining the pilot experience before reopening direct checkout. If the workflow fits a live financial problem, we will define the scope with you first.</p><ul><li>Controlled source intake</li><li>Financial interpretation and mapping</li><li>Deterministic validation</li><li>Exception and human review</li><li>Validated model and findings</li></ul></div><div className={styles.pilotContact}><span>FOUNDING PILOT</span><h3>Start with the financial problem.</h3><p>Share the documents, decision context and expected output. We will confirm whether the pilot is the right fit.</p><FinancialIntelligenceCta href="/contact?topic=financial-data" kind="start_pilot" position="final">Discuss the pilot <span>→</span></FinancialIntelligenceCta></div></div></section>
 
     <footer className={styles.closing}><div><b>ENTIMEMA</b><span>Financial Evidence-to-Decision Systems</span></div><nav><Link href="/resources">Research</Link><Link href="/alexander-dimitrov">Founder</Link><Link href="/contact?topic=financial-data">Contact</Link></nav></footer>
   </main><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(schema) }} /></>;

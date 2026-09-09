@@ -22,7 +22,8 @@ test("product panel distinguishes the live product, workspace and control layers
   for (const layer of ["Intelligent Intake", "Financial Context", "Validation Engine", "Exception Workspace"]) {
     assert.match(productMenu, new RegExp(layer));
   }
-  assert.match(productMenu, /financial-intelligence-launch#pilot-checkout/);
+  assert.match(productMenu, /contact\?topic=financial-data/);
+  assert.doesNotMatch(productMenu, /€490|pilot-checkout/);
 });
 
 test("mobile navigation includes a dedicated accessible Product section", () => {

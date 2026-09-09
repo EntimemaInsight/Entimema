@@ -252,7 +252,7 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
                   <Link className={styles.mobileResourceDestination} href="/financial-intelligence-launch#platform" onClick={close}>
                     <span><strong>Platform overview</strong><small>The controlled financial workflow.</small></span>
                   </Link>
-                  <Link className={styles.mobileProductAction} href="/financial-intelligence-launch#pilot-checkout" onClick={close}>Commission a pilot <b aria-hidden="true">→</b></Link>
+                  <Link className={styles.mobileProductAction} href="/contact?topic=financial-data" onClick={close}>Discuss the pilot <b aria-hidden="true">→</b></Link>
                 </div>
                 <button
                   aria-controls={`${menuId}-mobile-solutions`}

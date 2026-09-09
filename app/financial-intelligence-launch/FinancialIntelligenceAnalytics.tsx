@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useRef, type ReactNode } from "react";
 import { ANALYTICS_READY_EVENT, trackAnalyticsEvent } from "@/lib/analytics";
 
-type CtaKind = "start_pilot" | "workflow" | "architecture" | "research" | "domestic_checkout" | "international_checkout";
+type CtaKind = "start_pilot" | "workflow" | "architecture" | "research";
 
 export function FinancialIntelligenceViewAnalytics() {
   const elapsed = useRef(false);

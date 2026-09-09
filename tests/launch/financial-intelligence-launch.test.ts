@@ -4,23 +4,19 @@ import test from "node:test";
 
 const page = readFileSync("app/financial-intelligence-launch/page.tsx", "utf8");
 const explainer = readFileSync("app/financial-intelligence-launch/ProductExplainer.tsx", "utf8");
-const checkout = readFileSync("app/financial-intelligence-launch/PilotCheckout.tsx", "utf8");
 const css = readFileSync("app/financial-intelligence-launch/launch.module.css", "utf8");
 const sitemap = readFileSync("app/sitemap.ts", "utf8");
 const analytics = readFileSync("app/financial-intelligence-launch/FinancialIntelligenceAnalytics.tsx", "utf8");
 const sharedAnalytics = readFileSync("lib/analytics.ts", "utf8");
 
-test("the live pilot keeps both controlled B2B checkout routes", () => {
-  assert.match(checkout, /Business established in Bulgaria/);
-  assert.match(checkout, /Business established outside Bulgaria/);
-  assert.match(checkout, /€490 \+ €98 Bulgarian VAT/);
-  assert.match(checkout, /verified business status/i);
-  assert.equal((checkout.match(/https:\/\/buy\.stripe\.com\//g) ?? []).length, 2);
-  assert.match(checkout, /contact\?topic=financial-data/);
+test("direct pricing and checkout stay private while the pilot is refined", () => {
+  assert.doesNotMatch(page, /€490|€588|buy\.stripe\.com|secure checkout/i);
+  assert.match(page, /Discuss the pilot/);
+  assert.match(page, /contact\?topic=financial-data/);
 });
 
 test("the product page communicates a financial evidence-to-decision system", () => {
-  const sections = ["Financial Intelligence", "ENTIMEMA SYSTEM", "<ProductExplainer />", "CONTROLLED RESULT", "<PilotCheckout />"];
+  const sections = ["Financial Intelligence", "ENTIMEMA SYSTEM", "<ProductExplainer />", "CONTROLLED RESULT", "Founding pilot"];
   let cursor = -1;
   for (const section of sections) { const next = page.indexOf(section); assert.ok(next > cursor, `${section} follows the prior section`); cursor = next; }
   for (const layer of ["Intelligent Intake", "Financial Context", "Validation Engine", "Exception Workspace", "Decision Output"]) assert.match(page, new RegExp(layer));
@@ -47,8 +43,6 @@ test("the controlled execution preserves model, rules and human responsibility",
 test("conversion and metadata remain measurable and canonical", () => {
   assert.match(page, /FinancialIntelligenceViewAnalytics/);
   assert.match(page, /kind="start_pilot"/);
-  assert.match(checkout, /domestic_checkout/);
-  assert.match(checkout, /international_checkout/);
   assert.match(analytics, /decision_workspace/);
   assert.match(analytics, /financial_intelligence_view/);
   assert.match(analytics, /financial_intelligence_cta_click/);

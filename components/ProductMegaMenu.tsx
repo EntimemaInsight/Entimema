@@ -123,8 +123,8 @@ export default function ProductMegaMenu({ active = false }: { active?: boolean }
         </div>
         <div className={styles.footer}>
           <div className={`site-container ${styles.footerInner}`}>
-            <span>Verified business clients · Fixed-scope pilot · From €490</span>
-            <Link href="/financial-intelligence-launch#pilot-checkout" onClick={close}>Commission a pilot <b aria-hidden="true">→</b></Link>
+            <span>Verified business clients · Fixed scope · Controlled execution</span>
+            <Link href="/contact?topic=financial-data" onClick={close}>Discuss the pilot <b aria-hidden="true">→</b></Link>
           </div>
         </div>
       </nav>
