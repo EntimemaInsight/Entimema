@@ -10,10 +10,13 @@ const analytics = readFileSync("app/financial-intelligence-launch/FinancialIntel
 const sharedAnalytics = readFileSync("lib/analytics.ts", "utf8");
 const forms = readFileSync("components/DemoDiscovery.tsx", "utf8");
 
-test("launch page is explicitly pre-launch and has no live-market claim", () => {
-  assert.match(page, /LAUNCHING 9 SEPTEMBER 2026/);
-  assert.match(page, /launches on 9 September 2026/);
-  assert.doesNotMatch(page, /Now live|Available now/i);
+test("launch page exposes the live B2B pilot and its two controlled checkout routes", () => {
+  assert.match(page, /B2B PILOT · AVAILABLE NOW/);
+  assert.match(page, /BULGARIA B2B/);
+  assert.match(page, /INTERNATIONAL B2B/);
+  assert.match(page, /€490 \+ €98 VAT/);
+  assert.match(page, /Tax treatment subject to business status/);
+  assert.equal((page.match(/https:\/\/buy\.stripe\.com\//g) ?? []).length, 2);
 });
 
 test("narrative and all governed workflow stages remain in order", () => {
@@ -48,8 +51,10 @@ test("conversion, Founder identity references, metadata and schema are canonical
 
 test("Financial Intelligence exposes a consent-gated commercial measurement funnel", () => {
   assert.match(page, /FinancialIntelligenceViewAnalytics/);
-  assert.equal((page.match(/kind="private_walkthrough"/g) ?? []).length, 2);
-  assert.match(explainer, /kind="private_walkthrough" position="explainer"/);
+  assert.equal((page.match(/kind="start_pilot"/g) ?? []).length, 2);
+  assert.match(explainer, /kind="start_pilot" position="explainer"/);
+  assert.match(page, /kind="domestic_checkout" position="pricing"/);
+  assert.match(page, /kind="international_checkout" position="pricing"/);
   assert.match(analytics, /financial_intelligence_view/);
   assert.match(analytics, /financial_intelligence_cta_click/);
   assert.match(analytics, /cta_position: position/);
@@ -78,13 +83,13 @@ test("responsive and reduced-motion rules preserve narrow layouts", () => {
   assert.match(css, /@media\(prefers-reduced-motion:reduce\)/);
 });
 
-test("first viewport states the complete pre-launch product promise", () => {
+test("first viewport states the complete product promise and offers a pilot path", () => {
   assert.match(page, /Financial documents in\./);
   assert.match(page, /Validated analysis out\./);
   assert.match(page, /AI interprets the evidence\. Deterministic controls verify the numbers\. Humans resolve material exceptions\./);
   for (const stage of ["PDF", "XLSX", "CSV", "AI INTERPRETATION", "DETERMINISTIC CONTROL", "HUMAN REVIEW", "VALIDATED ANALYSIS"]) assert.match(page, new RegExp(stage));
   assert.match(page, /Evidence linked/); assert.match(page, /Controls passed/); assert.match(page, /Exceptions resolved/); assert.match(page, /Ready for decision/);
-  assert.doesNotMatch(page, /Run your first analysis/);
+  assert.match(page, /Start the pilot/);
 });
 
 test("visual explainer keeps five plain-language stages and evidence lineage", () => {

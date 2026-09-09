@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useRef, type ReactNode } from "react";
 import { ANALYTICS_READY_EVENT, trackAnalyticsEvent } from "@/lib/analytics";
 
-type CtaKind = "private_walkthrough" | "workflow" | "architecture" | "research";
+type CtaKind = "start_pilot" | "workflow" | "architecture" | "research" | "domestic_checkout" | "international_checkout";
 
 export function FinancialIntelligenceViewAnalytics() {
   const elapsed = useRef(false);
@@ -42,7 +42,7 @@ export function FinancialIntelligenceCta({
   children: ReactNode;
   href: string;
   kind: CtaKind;
-  position: "hero" | "explainer" | "final";
+  position: "hero" | "explainer" | "pricing" | "final";
 }) {
   return (
     <Link

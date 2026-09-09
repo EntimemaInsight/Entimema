@@ -9,7 +9,9 @@ import { FinancialIntelligenceCta, FinancialIntelligenceViewAnalytics } from "./
 const path = "/financial-intelligence-launch";
 const url = `${SITE_URL}${path}`;
 const title = "Financial documents in. Validated analysis out.";
-const description = "Launching 9 September 2026: Entimema Financial Intelligence transforms financial documents and data into validated, traceable and decision-ready analysis.";
+const description = "Entimema Financial Intelligence transforms financial documents and data into validated, traceable and decision-ready analysis. The B2B pilot is available now.";
+const bulgariaCheckoutUrl = "https://buy.stripe.com/eVq5kF4Yhe9ga8mb41dEs00";
+const internationalCheckoutUrl = "https://buy.stripe.com/6oU3cx8at9T0eoCegddEs01";
 
 export const metadata: Metadata = {
   title: { absolute: `${title} | Entimema Financial Intelligence` }, description,
@@ -54,12 +56,38 @@ export default function FinancialIntelligenceLaunchPage() {
       <FinancialIntelligenceViewAnalytics />
       <article>
         <header className={styles.masthead}>
-          <div className={styles.publication}><span>ENTIMEMA FINANCIAL INTELLIGENCE</span><span>LAUNCHING 9 SEPTEMBER 2026</span></div>
-          <div className={styles.heroGrid}><div className={styles.heroCopy}><h1><span>Financial documents in.</span><span>Validated analysis out.</span></h1><p className={styles.standfirst}>AI interprets the evidence. Deterministic controls verify the numbers. Humans resolve material exceptions.</p><nav className={styles.heroActions} aria-label="Launch actions"><FinancialIntelligenceCta href="/contact?topic=financial-data" kind="private_walkthrough" position="hero">Request a private walkthrough</FinancialIntelligenceCta><FinancialIntelligenceCta href="#how-it-works" kind="workflow" position="hero">See how it works</FinancialIntelligenceCta></nav></div>
+          <div className={styles.publication}><span>ENTIMEMA FINANCIAL INTELLIGENCE</span><span>B2B PILOT · AVAILABLE NOW</span></div>
+          <div className={styles.heroGrid}><div className={styles.heroCopy}><h1><span>Financial documents in.</span><span>Validated analysis out.</span></h1><p className={styles.standfirst}>AI interprets the evidence. Deterministic controls verify the numbers. Humans resolve material exceptions.</p><nav className={styles.heroActions} aria-label="Launch actions"><FinancialIntelligenceCta href="#pilot-checkout" kind="start_pilot" position="hero">Start the pilot</FinancialIntelligenceCta><FinancialIntelligenceCta href="#how-it-works" kind="workflow" position="hero">See how it works</FinancialIntelligenceCta></nav></div>
           <div className={styles.heroPipeline} role="img" aria-label="Financial documents are interpreted by AI, validated by deterministic controls, reviewed by a human when necessary, and delivered as validated analysis."><div className={styles.heroDocs}><span>PDF<small>Revenue · SRC–01</small></span><span>XLSX<small>FY 2025 · SRC–02</small></span><span>CSV<small>EUR · SRC–03</small></span></div><ol><li><b>AI INTERPRETATION</b><span>Meaning · period · definition · context</span></li><li><b>DETERMINISTIC CONTROL</b><span>Arithmetic · reconciliation · identities</span></li><li><b>HUMAN REVIEW</b><span>Material uncertainty is escalated—not concealed.</span></li></ol><div className={styles.heroResult}><b>VALIDATED ANALYSIS</b><span>Evidence linked</span><span>Controls passed</span><span>Exceptions resolved</span><strong>Ready for decision</strong></div><p className={styles.pipelineCaption}>PDF · XLSX · CSV → INTERPRET → VALIDATE → REVIEW → DECISION-READY ANALYSIS</p></div></div>
         </header>
 
         <ProductExplainer />
+
+        <section id="pilot-checkout" className={styles.pilot} aria-labelledby="pilot-title">
+          <div className={styles.pilotLead}>
+            <p className={styles.marker}>START THE FINANCIAL INTELLIGENCE PILOT</p>
+            <h2 id="pilot-title">One controlled execution. A result you can inspect and use.</h2>
+            <p>Choose the route that matches the legal establishment of the purchasing business. Checkout is completed securely in Stripe; Entimema then sends the controlled document-upload instructions and confirms the execution scope by email.</p>
+          </div>
+          <div className={styles.pilotOptions}>
+            <article>
+              <div className={styles.pilotOptionHeader}><span>BULGARIA B2B</span><strong>€588</strong><small>€490 + €98 VAT</small></div>
+              <h3>Business established in Bulgaria</h3>
+              <p>For Bulgarian business customers. The displayed price includes 20% Bulgarian VAT.</p>
+              <ul><li>One Financial Intelligence pilot execution</li><li>Controlled intake and validation</li><li>Human review of material exceptions</li><li>Traceable financial output</li></ul>
+              <FinancialIntelligenceCta href={bulgariaCheckoutUrl} kind="domestic_checkout" position="pricing">Continue to secure payment</FinancialIntelligenceCta>
+            </article>
+            <article>
+              <div className={styles.pilotOptionHeader}><span>INTERNATIONAL B2B</span><strong>€490</strong><small>Tax treatment subject to business status</small></div>
+              <h3>Business established outside Bulgaria</h3>
+              <p>For verified foreign business customers. A valid company registration or applicable business tax identifier is required.</p>
+              <ul><li>One Financial Intelligence pilot execution</li><li>Controlled intake and validation</li><li>Human review of material exceptions</li><li>Traceable financial output</li></ul>
+              <FinancialIntelligenceCta href={internationalCheckoutUrl} kind="international_checkout" position="pricing">Continue to secure payment</FinancialIntelligenceCta>
+            </article>
+          </div>
+          <p className={styles.pilotNote}><strong>Not sure which route applies?</strong> Do not complete payment yet. <Link href="/contact?topic=financial-data">Contact Entimema</Link> so we can confirm the correct treatment. If the submitted business or tax information cannot be validated, additional tax may become due or the order may be cancelled and refunded.</p>
+        </section>
+
         <div className={styles.articleBridge}><small>ENTIMEMA · FINANCIAL INTELLIGENCE · SPECIAL TECHNOLOGY REPORT</small><span>THE ARCHITECTURE BEHIND THE RESULT</span><p>The explainer shows what the product does. The report below examines why its architecture matters.</p><div className={styles.byline}><p>By <Link href="/alexander-dimitrov">Alexander Dimitrov</Link><span>Founder, Entimema</span></p><time dateTime="2026-08-31">31 August 2026</time></div></div>
 
         <section className={`${styles.chapter} ${styles.opening}`} aria-labelledby="old-condition">
@@ -135,7 +163,7 @@ export default function FinancialIntelligenceLaunchPage() {
 
         <section className={`${styles.chapter} ${styles.invitation}`} aria-labelledby="invitation">
           <Marker>VIII. THE INVITATION</Marker>
-          <div><h2 id="invitation">Bring the evidence. Leave with a decision-ready financial state.</h2><p>Entimema Financial Intelligence launches on 9 September 2026. We are preparing the first controlled workflows for teams that need financial analysis to be fast, traceable and accountable.</p><nav className={styles.actions} aria-label="Financial Intelligence next steps"><FinancialIntelligenceCta href="/contact?topic=financial-data" kind="private_walkthrough" position="final">Request a private walkthrough</FinancialIntelligenceCta><FinancialIntelligenceCta href="/resources/traceable-financial-analysis-workflow" kind="research" position="final">Explore Entimema Research</FinancialIntelligenceCta></nav></div>
+          <div><h2 id="invitation">Bring the evidence. Leave with a decision-ready financial state.</h2><p>The Financial Intelligence pilot is available to verified business customers that need financial analysis to be fast, traceable and accountable.</p><nav className={styles.actions} aria-label="Financial Intelligence next steps"><FinancialIntelligenceCta href="#pilot-checkout" kind="start_pilot" position="final">Start the pilot</FinancialIntelligenceCta><FinancialIntelligenceCta href="/resources/traceable-financial-analysis-workflow" kind="research" position="final">Explore Entimema Research</FinancialIntelligenceCta></nav></div>
         </section>
       </article>
     </main>
