@@ -91,7 +91,7 @@ export default function ProductMegaMenu({ active = false }: { active?: boolean }
               <p>Controlled financial workflows built for traceable, defensible decisions.</p>
             </header>
             <section className={styles.platform}>
-              <h3>Product</h3>
+              <h3>See how it works</h3>
               <div className={styles.links}>
                 {productDestinations.map((item) => (
                   <Link className={styles.item} href={item.href} key={item.title} onClick={close}>

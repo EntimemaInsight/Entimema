@@ -1,12 +1,12 @@
 export const productDestinations = [
   {
     title: "Platform overview",
-    description: "The complete controlled financial workflow.",
+    description: "Explore the controlled financial workflow.",
     href: "/financial-intelligence-launch#platform",
   },
   {
-    title: "AI Agent Control",
-    description: "Configure, govern and review specialised financial agents.",
+    title: "AI Agent Manager",
+    description: "Build and govern financial AI agents.",
     href: "/financial-intelligence-launch#platform",
   },
 ] as const;
@@ -14,7 +14,7 @@ export const productDestinations = [
 export const productFeature = {
   label: "What's new",
   title: "Financial Intelligence V1",
-  description: "From financial evidence to a controlled, reviewable decision state.",
+  description: "Turn financial evidence into controlled decisions.",
   href: "/financial-intelligence-launch",
 } as const;
 
