@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import styles from "./agent-manager.module.css";
+import styles from "./interactive-agent-cards.module.css";
 
 const agents = [
   {
