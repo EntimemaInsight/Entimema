@@ -112,7 +112,7 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(54px, 7vw, 104px);
-  margin-top: 31px;
+  margin-top: 25px;
 }
 
 .featured {
@@ -149,7 +149,7 @@
 .items {
   display: grid;
   grid-template-columns: 1fr;
-  margin: 8px 0 0;
+  margin: 6px 0 0;
   padding: 0;
   list-style: none;
 }
@@ -157,7 +157,7 @@
 .item {
   display: grid;
   gap: 4px;
-  padding: 9px 0;
+  padding: 7px 0;
   color: var(--brand-navy-950);
   cursor: pointer;
 }

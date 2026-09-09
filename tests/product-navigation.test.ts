@@ -29,7 +29,7 @@ test("product panel exposes the platform, agent control and current product rele
   assert.match(productMenu, /<h3>See how it works<\/h3>/);
   assert.match(menuContent, /Explore the controlled financial workflow/);
   assert.match(menuContent, /Build and govern financial AI agents/);
-  assert.match(menuContent, /Turn financial evidence into controlled decisions/);
+  assert.match(menuContent, /See how financial evidence becomes a controlled, reviewable decision/);
   assert.doesNotMatch(productMenu, /Decision Workspace|Intelligent Intake|Exception Workspace/);
   assert.doesNotMatch(productMenu, /€490|pilot-checkout/);
 });
@@ -62,8 +62,9 @@ test("menu destinations use the Entimema navy hierarchy", () => {
 
 test("solutions use destination-level copy without category descriptions", () => {
   assert.doesNotMatch(mobileMenu, /categoryDescription|Financial control, planning and performance|Risk assessment and controlled decision systems/);
-  assert.match(menuContent, /Turn financial reporting into decision-ready management insight/);
-  assert.match(menuContent, /Resolve investigations faster with structured evidence and AI assistance/);
+  assert.match(menuContent, /Turn reporting into decision-ready insight/);
+  assert.match(menuContent, /Resolve investigations faster with AI assistance/);
+  assert.match(menuContent, /See how financial evidence becomes a controlled, reviewable decision/);
   assert.match(mobileMenu, /<aside className=\{styles\.featured\}>[\s\S]*?productFeature\.title/);
 });
 
