@@ -7,11 +7,13 @@ import styles from "./ProductMegaMenu.module.css";
 
 const subscribeToClientMount = () => () => {};
 
-const controlLayers = [
-  ["Intelligent Intake", "Ingest and structure financial evidence."],
-  ["Financial Context", "Turn source data into decision context."],
-  ["Validation Engine", "Apply controls, rules and evidence checks."],
-  ["Exception Workspace", "Route material exceptions to human judgment."],
+const productDestinations = [
+  ["Platform overview", "The complete controlled financial workflow.", "/financial-intelligence-launch#platform"],
+  ["Decision Workspace", "Secure client review and execution.", "/workspace/financial-intelligence"],
+  ["Intelligent Intake", "Ingest and structure financial evidence.", "/financial-intelligence-launch#platform"],
+  ["Financial Context", "Turn source data into decision context.", "/financial-intelligence-launch#platform"],
+  ["Validation Engine", "Apply controls, rules and evidence checks.", "/financial-intelligence-launch#platform"],
+  ["Exception Workspace", "Route material exceptions to human judgment.", "/financial-intelligence-launch#platform"],
 ] as const;
 
 export default function ProductMegaMenu({ active = false }: { active?: boolean }) {
@@ -91,40 +93,33 @@ export default function ProductMegaMenu({ active = false }: { active?: boolean }
       <button aria-label="Close product menu" className={styles.backdrop} onClick={close} style={{ top: menuTop }} tabIndex={-1} type="button" />
       <nav aria-label="Product" className={`${styles.menu} ${isClosing ? styles.menuClosing : ""}`} id={menuId} ref={menuRef} style={{ top: menuTop }}>
         <div className={`site-container ${styles.inner}`}>
-          <Link className={styles.featured} href="/financial-intelligence-launch" onClick={close}>
-            <span className={styles.eyebrow}>FOUNDING PILOT · LIVE</span>
-            <h2>Financial Intelligence</h2>
-            <p>From financial evidence to a controlled, reviewable decision state.</p>
-            <span className={styles.featuredAction}>Explore the product <b aria-hidden="true">↗</b></span>
-            <span className={styles.signal} aria-hidden="true"><i /><i /><i /><i /><i /></span>
-          </Link>
-
-          <section className={styles.column}>
-            <span className={styles.columnLabel}>PLATFORM</span>
-            <Link className={styles.primaryLink} href="/financial-intelligence-launch#platform" onClick={close}>
-              <span><strong>Platform overview</strong><small>The complete controlled workflow.</small></span><b aria-hidden="true">→</b>
-            </Link>
-            <Link className={styles.primaryLink} href="/workspace/financial-intelligence" onClick={close}>
-              <span><strong>Decision Workspace</strong><small>Secure client review and execution.</small></span><b aria-hidden="true">→</b>
-            </Link>
-          </section>
-
-          <section className={styles.column}>
-            <span className={styles.columnLabel}>CONTROL LAYERS</span>
-            <div className={styles.layers}>
-              {controlLayers.map(([title, description], index) => (
-                <Link className={styles.layer} href={`/financial-intelligence-launch#platform`} key={title} onClick={close}>
-                  <span className={styles.layerNumber}>0{index + 1}</span>
-                  <span><strong>{title}</strong><small>{description}</small></span>
-                </Link>
-              ))}
-            </div>
-          </section>
-        </div>
-        <div className={styles.footer}>
-          <div className={`site-container ${styles.footerInner}`}>
-            <span>Verified business clients · Fixed scope · Controlled execution</span>
-            <Link href="/contact?topic=financial-data" onClick={close}>Discuss the pilot <b aria-hidden="true">→</b></Link>
+          <header className={styles.intro}>
+            <h2>Product</h2>
+            <p>Controlled financial workflows built for traceable, defensible decisions.</p>
+          </header>
+          <div className={styles.content}>
+            <section className={styles.platform}>
+              <h3>See how it works</h3>
+              <div className={styles.links}>
+                {productDestinations.map(([title, description, href]) => (
+                  <Link className={styles.item} href={href} key={title} onClick={close}>
+                    <strong>{title}</strong>
+                    <small>{description}</small>
+                  </Link>
+                ))}
+              </div>
+            </section>
+            <aside className={styles.featured}>
+              <h3>What&apos;s new</h3>
+              <Link href="/financial-intelligence-launch" onClick={close}>
+                <strong>Financial Intelligence V1</strong>
+                <small>From financial evidence to a controlled, reviewable decision state.</small>
+              </Link>
+              <Link href="/contact?topic=financial-data" onClick={close}>
+                <strong>Founding Pilot</strong>
+                <small>Discuss a controlled first execution with Entimema.</small>
+              </Link>
+            </aside>
           </div>
         </div>
       </nav>

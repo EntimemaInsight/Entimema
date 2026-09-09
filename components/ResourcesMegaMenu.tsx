@@ -10,21 +10,18 @@ import styles from "./ResourcesMegaMenu.module.css";
 
 const subscribeToClientMount = () => () => undefined;
 
-export default function ResourcesMegaMenu({ active = false, variant = "resources" }: { active?: boolean; variant?: "resources" | "company" }) {
+export default function ResourcesMegaMenu({ active = false }: { active?: boolean }) {
   const pathname = usePathname();
-  const company = variant === "company";
-  const label = company ? "Company" : "Resources";
-  const selected = company ? isCompanyRoute(pathname) : active;
+  const selected = active || isCompanyRoute(pathname);
   const mounted = useSyncExternalStore(subscribeToClientMount, () => true, () => false);
   const [open, setOpen] = useState(false);
   const [closing, setClosing] = useState(false);
   const [menuTop, setMenuTop] = useState(0);
-  const [menuLeft, setMenuLeft] = useState(0);
   const rootRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLElement>(null);
   const exitTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const menuId = `${variant}-menu-${useId().replaceAll(":", "")}`;
+  const menuId = `resources-menu-${useId().replaceAll(":", "")}`;
   const headingId = `${menuId}-heading`;
 
   const clearTimer = useCallback(() => {
@@ -34,14 +31,9 @@ export default function ResourcesMegaMenu({ active = false, variant = "resources
   const position = useCallback(() => {
     const header = triggerRef.current?.closest("header");
     if (header) {
-      // Fixed portal coordinates account for the existing desktop root zoom.
-      const zoom = company ? Number.parseFloat(getComputedStyle(document.documentElement).zoom) || 1 : 1;
-      setMenuTop(header.getBoundingClientRect().bottom / zoom);
-      if (company && triggerRef.current) {
-        setMenuLeft(Math.max(24, Math.min(triggerRef.current.getBoundingClientRect().left / zoom, window.innerWidth / zoom - 414)));
-      }
+      setMenuTop(header.getBoundingClientRect().bottom);
     }
-  }, [company]);
+  }, []);
   const show = useCallback(() => {
     clearTimer();
     position();
@@ -75,17 +67,6 @@ export default function ResourcesMegaMenu({ active = false, variant = "resources
       if (!rootRef.current?.contains(target) && !menuRef.current?.contains(target)) hide();
     };
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (company && event.key === "Tab") {
-        const links = menuRef.current?.querySelectorAll<HTMLAnchorElement>("a");
-        const atStart = event.shiftKey && document.activeElement === links?.[0];
-        const atEnd = !event.shiftKey && document.activeElement === links?.[links.length - 1];
-        if (atStart || atEnd) {
-          event.preventDefault();
-          hide();
-          if (atStart) triggerRef.current?.focus();
-          else triggerRef.current?.closest("header")?.querySelector<HTMLAnchorElement>(".header-cta")?.focus();
-        }
-      }
       if (event.key === "Escape") {
         hide();
         triggerRef.current?.focus();
@@ -98,42 +79,51 @@ export default function ResourcesMegaMenu({ active = false, variant = "resources
       document.removeEventListener("pointerdown", handlePointerDown);
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [company, hide, open]);
+  }, [hide, open]);
 
   useEffect(() => clearTimer, [clearTimer]);
 
   const portal = mounted && (open || closing) ? createPortal(
     <>
-      <button aria-label={`Close ${label} menu`} className={styles.backdrop} onClick={hide} style={{ top: menuTop }} tabIndex={-1} type="button" />
-      <nav inert={!open} aria-label={company ? "Company" : undefined} aria-labelledby={company ? undefined : headingId} className={`${styles.menu} ${company ? styles.companyMenu : ""} ${closing ? styles.closing : ""}`} id={menuId} ref={menuRef} style={{ top: menuTop, left: company ? menuLeft : undefined }}>
-        <div className={company ? styles.companyInner : `site-container ${styles.inner}`}>
-          {company ? companyDestinations.map(item => (
-            <Link className={styles.companyLink} href={item.href} key={item.href} onClick={hide} aria-current={pathname.replace(/\/$/, "") === item.href ? "page" : undefined}>
-              <span><strong>{item.title}</strong><small>{item.description}</small></span><b aria-hidden="true">→</b>
-            </Link>
-          )) : <>
-
+      <button aria-label="Close Resources menu" className={styles.backdrop} onClick={hide} style={{ top: menuTop }} tabIndex={-1} type="button" />
+      <nav inert={!open} aria-labelledby={headingId} className={`${styles.menu} ${closing ? styles.closing : ""}`} id={menuId} ref={menuRef} style={{ top: menuTop }}>
+        <div className={`site-container ${styles.inner}`}>
           <header className={styles.intro}>
-            <span>RESOURCES</span>
-            <h2 id={headingId}>Research for decisions.<br />Methods for implementation.</h2>
+            <h2 id={headingId}>Resources</h2>
+            <p>Research, technical methods and information about Entimema.</p>
           </header>
-          <div className={styles.streams}>
-            {Object.entries(resourceStreams).map(([key, stream], index) => (
-              <section className={styles.stream} key={key}>
-                <span className={styles.number}>0{index + 1}</span>
-                <Link className={styles.streamLink} href={stream.href} onClick={hide}>
-                  <h3><span>{stream.label}</span><b aria-hidden="true">→</b></h3>
-                  <p>{stream.description}</p>
+          <div className={styles.groups}>
+            <section className={styles.group}>
+              <h3>Explore</h3>
+              <Link className={styles.item} href="/resources" onClick={hide}>
+                <strong>All Resources</strong>
+                <small>Browse Entimema research and practitioner frameworks.</small>
+              </Link>
+            </section>
+            <section className={styles.group}>
+              <h3>Research</h3>
+              {Object.entries(resourceStreams).map(([key, stream]) => (
+                <Link className={styles.item} href={stream.href} key={key} onClick={hide}>
+                  <strong>{stream.label}</strong>
+                  <small>{stream.description}</small>
                 </Link>
-              </section>
-            ))}
+              ))}
+            </section>
+            <section className={styles.group}>
+              <h3>Company</h3>
+              {companyDestinations.map((item) => (
+                <Link className={styles.item} href={item.href} key={item.href} onClick={hide} aria-current={pathname.replace(/\/$/, "") === item.href ? "page" : undefined}>
+                  <strong>{item.title}</strong>
+                  <small>{item.description}</small>
+                </Link>
+              ))}
+            </section>
           </div>
-          </>}
         </div>
       </nav>
     </>,
     document.body,
   ) : null;
 
-  return <><div className={styles.root} ref={rootRef}><button aria-current={!company && active ? "page" : undefined} aria-controls={menuId} aria-expanded={open} aria-haspopup="true" className={`${styles.trigger} site-nav__item ${selected ? styles.active : ""}`} onClick={() => { if (open) hide(); else show(); }} ref={triggerRef} type="button">{label} <span aria-hidden="true" /></button></div>{portal}</>;
+  return <><div className={styles.root} ref={rootRef}><button aria-current={selected ? "page" : undefined} aria-controls={menuId} aria-expanded={open} aria-haspopup="true" className={`${styles.trigger} site-nav__item ${selected ? styles.active : ""}`} onClick={() => { if (open) hide(); else show(); }} ref={triggerRef} type="button">Resources <span aria-hidden="true" /></button></div>{portal}</>;
 }

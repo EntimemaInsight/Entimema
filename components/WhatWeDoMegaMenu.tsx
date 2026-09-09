@@ -93,7 +93,6 @@ function MenuChevron({ direction = "right" }: { direction?: "down" | "right" }) 
 
 export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMegaMenuProps) {
   const pathname = usePathname();
-  const [mobileCompanyOpen, setMobileCompanyOpen] = useState(false);
   const [mobileProductOpen, setMobileProductOpen] = useState(false);
   const isMounted = useSyncExternalStore(subscribeToClientMount, () => true, () => false);
   const [isOpen, setIsOpen] = useState(false);
@@ -127,7 +126,6 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
     setMobileSolutionsOpen(false);
     setMobileProductOpen(false);
     setMobileResourcesOpen(false);
-    setMobileCompanyOpen(false);
     clearExitTimer();
     const exitDuration = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 180;
     exitTimerRef.current = setTimeout(() => setIsClosing(false), exitDuration);
@@ -281,20 +279,17 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
                 <Link className={styles.mobileTopLevel} href="/agents" onClick={close}>
                   <span>Agent Library</span>
                 </Link>
-                <button aria-controls={`${menuId}-mobile-resources`} aria-expanded={mobileResourcesOpen} className={styles.mobileTopLevel} onClick={() => setMobileResourcesOpen((current) => !current)} type="button">
+                <button aria-controls={`${menuId}-mobile-resources`} aria-expanded={mobileResourcesOpen} className={`${styles.mobileTopLevel} ${isCompanyRoute(pathname) ? styles.active : ""}`} onClick={() => setMobileResourcesOpen((current) => !current)} type="button">
                   <span>Resources</span><MenuChevron direction="down" />
                 </button>
                 <div className={styles.mobileResources} hidden={!mobileResourcesOpen} id={`${menuId}-mobile-resources`}>
+                  <h2 className={styles.mobileSectionLabel}>Research</h2>
                   {Object.entries(resourceStreams).map(([key, stream]) => (
                     <Link className={styles.mobileResourceDestination} href={stream.href} key={key} onClick={close}>
                       <span><strong>{stream.label}</strong><small>{stream.description}</small></span>
                     </Link>
                   ))}
-                </div>
-                <button aria-controls={`${menuId}-mobile-company`} aria-expanded={mobileCompanyOpen} className={`${styles.mobileTopLevel} ${isCompanyRoute(pathname) ? styles.active : ""}`} onClick={() => setMobileCompanyOpen(current => !current)} type="button">
-                  <span>Company</span><MenuChevron direction="down" />
-                </button>
-                <div className={styles.mobileResources} hidden={!mobileCompanyOpen} id={`${menuId}-mobile-company`}>
+                  <h2 className={styles.mobileSectionLabel}>Company</h2>
                   {companyDestinations.map(item => <Link className={styles.mobileResourceDestination} href={item.href} key={item.href} onClick={close} aria-current={pathname.replace(/\/$/, "") === item.href ? "page" : undefined}>
                     <span><strong>{item.title}</strong><small>{item.description}</small></span>
                   </Link>)}
@@ -310,18 +305,17 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
           ) : (
             <>
               <header className={styles.intro}>
-                <span>SOLUTIONS</span>
-                <h2>Systems for better<br />financial decisions.</h2>
+                <h2>Solutions</h2>
+                <p>Financial and risk systems structured around the decisions they need to improve.</p>
               </header>
               <div className={styles.panels}>
-                {serviceGroups.map((group, index) => (
+                {serviceGroups.map((group) => (
                   <section className={styles.panel} key={group.category}>
-                    <span className={styles.number}>0{index + 1}</span>
                     <h2 className={styles.category}>{group.category}</h2>
                     <p className={styles.categoryDescription}>{group.description}</p>
                     <ul className={styles.items} aria-label={`${group.category} capabilities`}>
                       {group.items.map((item) => (
-                        <li key={item.href}><Link className={styles.item} href={item.href} onClick={close}><span>{item.title}</span><b aria-hidden="true">→</b></Link></li>
+                        <li key={item.href}><Link className={styles.item} href={item.href} onClick={close}><strong>{item.title}</strong><small>{item.description}</small></Link></li>
                       ))}
                     </ul>
                   </section>

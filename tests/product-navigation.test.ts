@@ -15,8 +15,8 @@ test("exposes Product as a first-class desktop navigation destination", () => {
   assert.match(productMenu, /aria-label="Product"/);
 });
 
-test("product panel distinguishes the live product, workspace and control layers", () => {
-  assert.match(productMenu, /FOUNDING PILOT · LIVE/);
+test("product panel exposes the live product, workspace and control layers in one navigation hierarchy", () => {
+  assert.match(productMenu, /What&apos;s new/);
   assert.match(productMenu, /Financial Intelligence/);
   assert.match(productMenu, /Decision Workspace/);
   for (const layer of ["Intelligent Intake", "Financial Context", "Validation Engine", "Exception Workspace"]) {
@@ -36,6 +36,6 @@ test("mobile navigation includes a dedicated accessible Product section", () => 
 
 test("product mega-menu has responsive and reduced-motion contracts", () => {
   assert.match(productCss, /@media \(max-width: 900px\)/);
-  assert.match(productCss, /@media \(prefers-reduced-motion: reduce\)/);
-  assert.match(productCss, /grid-template-columns: minmax\(300px/);
+  assert.match(productCss, /@media \(prefers-reduced-motion:reduce\)/);
+  assert.match(productCss, /grid-template-columns: minmax\(0,1\.9fr\)/);
 });

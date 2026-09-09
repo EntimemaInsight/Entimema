@@ -49,7 +49,6 @@ export default function Navbar({ active = "home" }: { active?: NavKey }) {
               Agent Library
             </Link>
             <ResourcesMegaMenu active={active === "resources"} />
-            <ResourcesMegaMenu variant="company" />
           </nav>
         </div>
 
