@@ -68,6 +68,7 @@ const layers = [
   },
 ] as const;
 
+/*
 const statement = [
   ["Revenue", "revenue", "1,200", "1,000"],
   ["Cost of Sales", "cost_of_sales", "(720)", "(650)"],
@@ -319,6 +320,18 @@ function ProductScreen({ active }: { active: number }) {
     </div>
   );
 }
+*/
+
+function EvidenceLabels({ active }: { active: number }) {
+  const sets = [
+    [<div key="agent"><span>Financial document intake</span><strong>Read submitted statements</strong></div>, <div key="file" className={styles.micro}><i>XLSX</i><strong>Source file ingested</strong></div>, <div key="check"><span>Source verification</span><strong>Are all material values traceable?</strong></div>],
+    [<div key="period"><span>Reporting context</span><strong>2025 / 2024 · EUR thousands</strong></div>, <div key="map" className={styles.micro}><i>↳</i><strong>9 lines canonicalised</strong></div>, <div key="meaning"><span>Source meaning retained</span><strong>Reported label ↔ canonical concept</strong></div>],
+    [<div key="rule"><span>Deterministic rule</span><strong>Revenue − Cost of Sales = Gross Profit</strong></div>, <div key="pass" className={styles.micro}><i>✓</i><strong>0.00 difference · Pass</strong></div>, <div key="exception"><span>Exception policy</span><strong>No material exception detected</strong></div>],
+    [<div key="kpi"><span>Verified analysis</span><strong>Gross margin&nbsp; 40.0%</strong></div>, <div key="growth" className={styles.micro}><i>↗</i><strong>Revenue growth&nbsp; 20.0%</strong></div>, <div key="review"><span>Human review</span><strong>Evidence remains one click away</strong></div>],
+    [<div key="record"><span>Decision record</span><strong>Analysis, statement and lineage</strong></div>, <div key="values" className={styles.micro}><i>✓</i><strong>18 / 18 values verified</strong></div>, <div key="output"><span>Controlled output</span><strong>Ready for financial review</strong></div>],
+  ];
+  return <div className={styles.evidenceLabels} key={active}>{sets[active]}</div>;
+}
 
 function ArchitectureStack({
   active,
@@ -336,24 +349,17 @@ function ArchitectureStack({
         className={styles.stack}
         aria-label={`Active architecture layer: ${layers[active].label}`}
       >
-        {layers.map((layer, index) => (
-          <div
+      {layers.map((layer, index) => (
+        <div
             className={`${styles.stackLayer} ${index === active ? styles.activeLayer : ""} ${index < active ? styles.passedLayer : ""}`}
             style={{ "--layer": index } as CSSProperties}
             key={layer.label}
           >
-            <span>{layer.number}</span>
-            <strong>{layer.label}</strong>
-          </div>
-        ))}
-      </div>
-      <div className={styles.screenFrame}>
-        <div className={styles.screenLabel}>
-          <span>LIVE PRODUCT SURFACE</span>
-          <b>{layers[active].proof}</b>
+          <strong>{layer.label}</strong>
         </div>
-        <ProductScreen active={active} />
-      </div>
+      ))}
+    </div>
+    <EvidenceLabels active={active} />
     </div>
   );
 }
@@ -463,18 +469,9 @@ export default function PlatformExperience() {
                 }}
                 key={layer.label}
               >
-                <div className={styles.stepTop}>
-                  <span>{layer.number}</span>
-                  <i />
-                  <b>{layer.label}</b>
-                </div>
+                <div className={styles.stepTop}><b>{layer.label}</b></div>
                 <h3>{layer.title}</h3>
                 <p>{layer.copy}</p>
-                <ul>
-                  {layer.benefits.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
                 <small>{layer.proof}</small>
               </article>
             ))}
