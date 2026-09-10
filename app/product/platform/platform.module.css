@@ -145,7 +145,7 @@
 .stack {
   position: absolute;
   z-index: 8;
-  right: clamp(50px, 8vw, 110px);
+  right: clamp(120px, 12vw, 175px);
   top: 1%;
   width: clamp(320px, 24vw, 390px);
   height: 500px;
@@ -199,8 +199,8 @@
 .stackLayer strong {
   position: absolute;
   z-index: 3;
-  right: 31px;
-  bottom: 25px;
+  right: 18px;
+  bottom: 14px;
   width: max-content;
   max-width: 78%;
   margin: 0;
@@ -1000,7 +1000,7 @@
     height: 455px;
   }
   .stack {
-    right: 0;
+    right: 42px;
     transform: translate(var(--stack-x), var(--stack-y)) scale(0.58);
     transform-origin: top right;
   }
