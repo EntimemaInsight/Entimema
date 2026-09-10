@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { DemoTrigger } from "@/components/DemoDiscovery";
 import styles from "./platform.module.css";
@@ -319,79 +320,138 @@ function ProductScreen({ active }: { active: number }) {
 
 function EvidenceLabels({ active }: { active: number }) {
   const sets = [
-    [
-      <div key="agent">
-        <span>Financial document intake</span>
+    <div className={styles.intakeMoment} key="intake">
+      <article className={styles.momentCard}>
+        <span>Financial Intelligence</span>
         <strong>Read submitted statements</strong>
-      </div>,
-      <div key="file" className={styles.micro}>
-        <i>XLSX</i>
+      </article>
+      <i className={styles.momentConnector} />
+      <article className={`${styles.momentCard} ${styles.compactMoment}`}>
+        <b className={styles.fileIcon}>XLSX</b>
         <strong>Source file ingested</strong>
-      </div>,
-      <div key="check">
-        <span>Source verification</span>
-        <strong>Are all material values traceable?</strong>
-      </div>,
-    ],
-    [
-      <div key="period">
-        <span>Reporting context</span>
-        <strong>2025 / 2024 · EUR thousands</strong>
-      </div>,
-      <div key="map" className={styles.micro}>
-        <i>↳</i>
-        <strong>9 lines canonicalised</strong>
-      </div>,
-      <div key="meaning">
-        <span>Source meaning retained</span>
-        <strong>Reported label ↔ canonical concept</strong>
-      </div>,
-    ],
-    [
-      <div key="rule">
-        <span>Deterministic rule</span>
-        <strong>Revenue − Cost of Sales = Gross Profit</strong>
-      </div>,
-      <div key="pass" className={styles.micro}>
-        <i>✓</i>
-        <strong>0.00 difference · Pass</strong>
-      </div>,
-      <div key="exception">
-        <span>Exception policy</span>
-        <strong>No material exception detected</strong>
-      </div>,
-    ],
-    [
-      <div key="kpi">
-        <span>Verified analysis</span>
-        <strong>Gross margin&nbsp; 40.0%</strong>
-      </div>,
-      <div key="growth" className={styles.micro}>
-        <i>↗</i>
-        <strong>Revenue growth&nbsp; 20.0%</strong>
-      </div>,
-      <div key="review">
-        <span>Human review</span>
-        <strong>Evidence remains one click away</strong>
-      </div>,
-    ],
-    [
-      <div key="record">
-        <span>Decision record</span>
-        <strong>Analysis, statement and lineage</strong>
-      </div>,
-      <div key="values" className={styles.micro}>
-        <i>✓</i>
-        <strong>18 / 18 values verified</strong>
-      </div>,
-      <div key="output">
-        <span>Controlled output</span>
-        <strong>Ready for financial review</strong>
-      </div>,
-    ],
+        <em>Complete</em>
+      </article>
+      <i className={styles.momentConnector} />
+      <article className={`${styles.momentCard} ${styles.questionMoment}`}>
+        <b className={styles.checkIcon}>✓</b>
+        <div>
+          <span>Source verification</span>
+          <strong>Are all material values traceable?</strong>
+        </div>
+      </article>
+    </div>,
+    <div className={styles.routingMoment} key="routing">
+      <article className={styles.routeCard}>
+        <b className={styles.periodIcon}>24</b>
+        <div>
+          <span>Reporting context</span>
+          <strong>FY 2025 / FY 2024</strong>
+        </div>
+      </article>
+      <article className={styles.routeCard}>
+        <b className={styles.mapIcon}>↳</b>
+        <div>
+          <span>Canonical mapping</span>
+          <strong>9 lines structured</strong>
+        </div>
+      </article>
+      <article className={styles.routeCard}>
+        <b className={styles.scaleIcon}>€</b>
+        <div>
+          <span>Unit &amp; scale</span>
+          <strong>EUR thousands</strong>
+        </div>
+      </article>
+    </div>,
+    <div className={styles.controlMoment} key="controls">
+      <article className={styles.chartCard}>
+        <header>
+          <strong>Deterministic controls</strong>
+          <span>6 checks</span>
+        </header>
+        <div
+          className={styles.barChart}
+          aria-label="Six financial controls passed"
+        >
+          {[72, 88, 56, 94, 78, 86].map((height, index) => (
+            <i
+              key={height}
+              style={
+                {
+                  "--bar-height": `${height}%`,
+                  "--bar-delay": `${index * 65}ms`,
+                } as CSSProperties
+              }
+            />
+          ))}
+        </div>
+        <footer>
+          <span>01</span>
+          <span>02</span>
+          <span>03</span>
+          <span>04</span>
+          <span>05</span>
+          <span>06</span>
+        </footer>
+      </article>
+      <article className={styles.chartCallout}>
+        <span>Reconciliation state</span>
+        <strong>0.00 difference</strong>
+        <em>All controls passed</em>
+      </article>
+    </div>,
+    <div className={styles.reviewerMoment} key="reviewer">
+      <div className={styles.reviewerPortrait}>
+        <Image
+          src="/product/platform/human-reviewer.webp"
+          alt="Fictional finance reviewer in a sanitised product demonstration"
+          fill
+          sizes="240px"
+        />
+      </div>
+      <span className={`${styles.dataTag} ${styles.tagOne}`}>
+        Source evidence
+      </span>
+      <span className={`${styles.dataTag} ${styles.tagTwo}`}>
+        Control results
+      </span>
+      <span className={`${styles.dataTag} ${styles.tagThree}`}>
+        Material exception
+      </span>
+      <span className={`${styles.dataTag} ${styles.tagFour}`}>
+        Reviewer decision
+      </span>
+    </div>,
+    <div className={styles.outputMoment} key="output">
+      <article className={styles.outputCard}>
+        <header>
+          <span>ENTIMEMA / CONTROLLED OUTPUT</span>
+          <b>VERIFIED</b>
+        </header>
+        <div>
+          <small>Decision state</small>
+          <strong>Ready for financial review</strong>
+        </div>
+        <dl>
+          <div>
+            <dt>Values verified</dt>
+            <dd>18 / 18</dd>
+          </div>
+          <div>
+            <dt>Controls passed</dt>
+            <dd>6 / 6</dd>
+          </div>
+          <div>
+            <dt>Evidence lineage</dt>
+            <dd>Attached</dd>
+          </div>
+        </dl>
+      </article>
+      <span className={styles.outputPulse}>Traceable PDF ready</span>
+    </div>,
   ];
   return (
-    <div className={styles.evidenceLabels} key={active}>
+    <div className={styles.evidenceLabels} data-moment={active} key={active}>
       {sets[active]}
     </div>
   );
