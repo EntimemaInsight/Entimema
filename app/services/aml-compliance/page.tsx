@@ -9,18 +9,18 @@ import AmlOperationsDashboard from "./AmlOperationsDashboard";
 import styles from "../credit-risk/credit-risk.module.css";
 
 export const metadata: Metadata = {
-  title: "AML & Compliance | Entimema",
-  description: "Build a traceable AML control architecture connecting KYC, screening, transaction monitoring, investigations, escalation and regulatory evidence.",
+  title: "AML & Fraud Investigation | Entimema",
+  description: "Design consistent, reviewable AML and fraud workflows across customer risk, screening, transaction monitoring, alert triage and investigation.",
   alternates: { canonical: "/services/aml-compliance" },
 };
 
 const capabilities = [
-  ["KYC & CUSTOMER DUE DILIGENCE", "Define identification, risk assessment and periodic review processes around customer risk."],
-  ["SANCTIONS & PEP SCREENING", "Structure screening rules, escalation logic and evidence around sanctions and PEP exposure."],
-  ["TRANSACTION MONITORING", "Design scenarios, thresholds and controls that detect behaviour requiring investigation."],
-  ["CASE MANAGEMENT", "Move alerts through a traceable process from analyst review to escalation and regulatory filing."],
-  ["AML ANALYTICS", "Measure alert quality, false-positive rates, investigation flow and control effectiveness."],
-  ["AML AI AGENTS", "Use governed AI agents within defined roles, rules and authorised systems to support screening, investigation and monitoring, with validation, escalation and human review."],
+  ["KYC & CUSTOMER RISK", "Define identification, risk assessment and periodic review processes around customer risk."],
+  ["SANCTIONS & PEP SCREENING WORKFLOWS", "Structure screening rules, evidence and escalation paths for sanctions and PEP exposure."],
+  ["TRANSACTION MONITORING SCENARIOS", "Design scenarios, thresholds and controls that identify behaviour requiring investigation."],
+  ["ALERT TRIAGE & PRIORITISATION", "Route alerts by risk, materiality and the review required."],
+  ["CONTROL EFFECTIVENESS & INVESTIGATION ANALYTICS", "Measure alert quality, false-positive rates, investigation flow and control effectiveness."],
+  ["INVESTIGATION WORKFLOW DESIGN", "Define how alerts, evidence, analyst review, escalation and final disposition move through one controlled process."],
 ];
 
 const process = [
@@ -44,8 +44,8 @@ const useCases = [
 ];
 
 const related = [
-  ["Credit Risk", "Models, policy and portfolio controls connected across the full credit lifecycle.", "/services/credit-risk"],
-  ["AML & Compliance", "KYC, monitoring, investigations and evidence connected in one control architecture.", "/services/aml-compliance"],
+  ["Credit Risk & Decisioning", "Scorecards, policy, decision strategies and portfolio monitoring across the credit lifecycle.", "/services/credit-risk"],
+  ["AML & Fraud Investigation", "Customer risk, monitoring, triage and investigations connected in reviewable workflows.", "/services/aml-compliance"],
   ["Decision Intelligence", "Data, models and policy translated into traceable automated decisions.", "/services/decision-automation"],
 ];
 
@@ -56,23 +56,23 @@ function SectionHeader({ label, title, intro }: { label: string; title: ReactNod
 export default function AmlCompliancePage() {
   return (
     <main className={styles.page}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(createServicePageSchema({ path: "/services/aml-compliance", name: "AML & Compliance Consulting", description: "Build a traceable AML control architecture connecting KYC, screening, transaction monitoring, investigations, escalation and regulatory evidence.", breadcrumbName: "AML & Compliance" })) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(createServicePageSchema({ path: "/services/aml-compliance", name: "AML & Fraud Investigation", description: "Design consistent, reviewable AML and fraud workflows across customer risk, screening, transaction monitoring, alert triage and investigation.", breadcrumbName: "AML & Fraud Investigation" })) }} />
       <AnnouncementBar />
       <Navbar active="services" />
       <section className={styles.hero} aria-labelledby="aml-compliance-title"><div className={`site-container ${styles.heroInner}`}>
         <div className={styles.heroCopy}>
-          <nav className={styles.breadcrumb} aria-label="Breadcrumb"><Link href="/">Home</Link><span>/</span><span>Decision Science</span><span>/</span><Link href="/services/aml-compliance" aria-current="page">AML & Compliance</Link></nav>
-          <span className={styles.category}>AML & COMPLIANCE</span>
-          <h1 id="aml-compliance-title">Compliance is not the goal.<br />Control is.</h1>
-          <p className={styles.lead}>Build an AML operating system that connects KYC, screening, transaction monitoring, case management and regulatory evidence into one traceable control architecture.</p>
-          <p className={styles.support}><strong>An alert is not a finding. It is the start of an investigation.</strong> Connect risk signals, scenarios, escalation and regulatory action so every alert follows a clear, defensible path.</p>
-          <DemoTrigger className={styles.primaryButton} initialInterest="Other" />
+          <nav className={styles.breadcrumb} aria-label="Breadcrumb"><Link href="/">Home</Link><span>/</span><span>Risk &amp; Decisioning</span><span>/</span><Link href="/services/aml-compliance" aria-current="page">AML &amp; Fraud Investigation</Link></nav>
+          <span className={styles.category}>AML &amp; FRAUD INVESTIGATION</span>
+          <h1 id="aml-compliance-title">Turn alerts into consistent, reviewable investigations.</h1>
+          <p className={styles.lead}>Design AML and fraud workflows that connect customer risk, screening, transaction monitoring, alert triage, case management and escalation—without losing the evidence behind each decision.</p>
+          <p className={styles.support}><strong>An alert is not a finding.</strong> Give investigators the context, controls and review path required to reach a defensible disposition.</p>
+          <DemoTrigger className={styles.primaryButton} initialInterest="Other">Discuss your investigation workflow</DemoTrigger>
         </div>
         <AmlOperationsDashboard />
       </div></section>
 
       <section className={styles.section} aria-labelledby="capabilities-title"><div className="site-container">
-        <SectionHeader label="WHAT IT INCLUDES" title={<>One AML architecture.<br />Across the full control lifecycle.</>} />
+        <SectionHeader label="WHAT IT INCLUDES" title={<>One investigation workflow.<br />From alert to disposition.</>} />
         <div className={styles.capabilityGrid}>{capabilities.map(([title, copy], index) => <article className={styles.capability} key={title}><span>0{index + 1}</span><h3>{title}</h3><p>{copy}</p></article>)}</div>
       </div></section>
 
@@ -95,7 +95,7 @@ export default function AmlCompliancePage() {
       </div></section>
 
       <section className={`${styles.section} ${styles.tinted}`} aria-labelledby="applications-title"><div className="site-container">
-        <SectionHeader label="WHERE IT APPLIES" title="Where does AML architecture create the most value?" intro="If you can detect the alert but cannot trace the decision, the control is incomplete." />
+        <SectionHeader label="WHERE IT APPLIES" title="Where do controlled investigations create the most value?" intro="If you can detect the alert but cannot trace the decision, the control is incomplete." />
         <div className={styles.useCaseGrid}>{useCases.map(([title, copy]) => <article key={title}><h3>{title}</h3><p>{copy}</p></article>)}</div>
       </div></section>
 
@@ -104,7 +104,7 @@ export default function AmlCompliancePage() {
         <div className={styles.relatedGrid}>{related.map(([title, copy, href]) => <Link href={href} key={title}><span><strong>{title}</strong><small>{copy}</small></span><b aria-hidden="true">↗</b></Link>)}</div>
       </div></section>
 
-      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>AML & COMPLIANCE</span><h2 id="cta-title">AML should do more than detect risk.<br />It should control what happens next.</h2><p>Build one AML architecture around policy, scenarios, investigations, evidence and regulatory action.</p><DemoTrigger className={styles.ctaButton} initialInterest="Other" /></div></div></section>
+      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>AML &amp; FRAUD INVESTIGATION</span><h2 id="cta-title">Build a clearer path from alert to defensible disposition.</h2><p>Connect risk signals, evidence, analyst review and escalation in one controlled investigation workflow.</p><DemoTrigger className={styles.ctaButton} initialInterest="Other">Discuss your investigation workflow</DemoTrigger></div></div></section>
     </main>
   );
 }

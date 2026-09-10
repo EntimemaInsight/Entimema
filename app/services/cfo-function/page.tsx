@@ -8,18 +8,18 @@ import { createServiceMetadata } from "@/lib/seo";
 import { createServicePageSchema, serializeJsonLd } from "@/lib/structured-data";
 
 export const metadata = createServiceMetadata({
-  title: "Fractional CFO Services & Advisory | Entimema",
-  description: "Build senior finance capability, management information and decision processes without committing to a full CFO organisation from day one.",
+  title: "CFO Advisory | Entimema",
+  description: "Strengthen financial control, planning, reporting, cash visibility and decision support as your business grows.",
   path: "/services/cfo-function",
 });
 
 const capabilities = [
   ["FINANCIAL PLANNING", "Budgets, forecasts and scenarios connected to the drivers of the business."],
   ["MANAGEMENT REPORTING", "Clear management information built around the decisions that need to be made."],
-  ["CASH & LIQUIDITY", "Visibility over cash generation, working capital and future funding needs."],
-  ["COST & MARGIN CONTROL", "Understand where value is created, where margin is lost and what drives profitability."],
+  ["CASH & WORKING CAPITAL", "Visibility over cash generation, working capital and future funding needs."],
+  ["COST & PROFITABILITY CONTROL", "Understand where value is created, where margin is lost and what drives profitability."],
   ["PERFORMANCE MANAGEMENT", "KPIs and financial measures connected to operational performance."],
-  ["FINANCIAL CONTROL", "Processes, responsibilities and controls that make financial information reliable."],
+  ["FINANCIAL CONTROLS & ACCOUNTABILITY", "Processes, responsibilities and controls that make financial information reliable."],
 ];
 const process = [
   ["01", "UNDERSTAND", "We identify the decisions management needs to make and the financial information those decisions require."],
@@ -40,8 +40,8 @@ const useCases = [
   ["DECISIONS STILL DEPEND ON ONE PERSON", "Different teams work with different versions of the numbers. Cash surprises management. The CEO is still acting as the financial decision hub."],
 ];
 const related = [
-  ["Planning & Forecasting", "Budgets, forecasts and scenarios connected to the drivers of the business.", "/services/budgets-and-forecasting"],
-  ["Management Reporting", "Clear management information built around the decisions that need to be made.", "/services/management-reporting"],
+  ["Planning, Forecasting & Scenarios", "Driver-based plans, rolling forecasts and scenarios connected to cash and operational outcomes.", "/services/budgets-and-forecasting"],
+  ["Financial Reporting & Analysis", "Reliable reporting, governed KPIs and decision-ready variance analysis.", "/services/management-reporting"],
   ["Financial Data", "One reliable foundation for reporting, analysis and financial control.", "/services/financial-data"],
 ];
 
@@ -52,7 +52,7 @@ function SectionHeader({ label, title, intro }: { label: string; title: React.Re
 export default function CfoFunctionPage() {
   return (
     <main className={styles.page}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(createServicePageSchema({ path: "/services/cfo-function", name: "Fractional CFO Services & Advisory", description: "Build senior finance capability, management information and decision processes without committing to a full CFO organisation from day one.", breadcrumbName: "CFO Advisory" })) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(createServicePageSchema({ path: "/services/cfo-function", name: "CFO Advisory", description: "Strengthen financial control, planning, reporting, cash visibility and decision support as your business grows.", breadcrumbName: "CFO Advisory" })) }} />
       <AnnouncementBar />
       <Navbar active="services" />
       <section className={styles.hero} aria-labelledby="cfo-title">
@@ -60,10 +60,10 @@ export default function CfoFunctionPage() {
           <div className={styles.heroCopy}>
             <nav className={styles.breadcrumb} aria-label="Breadcrumb"><Link href="/">Home</Link><span>/</span><span>Finance</span><span>/</span><span aria-current="page">CFO Advisory</span></nav>
             <span className={styles.category}>CFO ADVISORY</span>
-            <h1 id="cfo-title">You don&apos;t always need a CFO.</h1>
-            <p className={styles.lead}>You need the financial system behind one.</p>
-            <p className={styles.support}>Build the financial structure, management information and decision processes your business needs — without building a full CFO organisation from day one.</p>
-            <DemoTrigger className={styles.primaryButton} initialInterest="CFO & Financial Management" />
+            <h1 id="cfo-title">Build the finance function your next stage requires.</h1>
+            <p className={styles.lead}>Strengthen financial control, planning, reporting, cash visibility and decision support—without building a full CFO organisation from day one.</p>
+            <p className={styles.support}>Entimema combines CFO-level advisory with practical implementation of the models, controls and management routines your business needs now.</p>
+            <DemoTrigger className={styles.primaryButton} initialInterest="CFO & Financial Management">Talk to a finance advisor</DemoTrigger>
           </div>
           <CfoDashboard />
         </div>
@@ -102,7 +102,7 @@ export default function CfoFunctionPage() {
         <div className={styles.relatedGrid}>{related.map(([title, copy, href]) => <Link href={href} key={title}><span><strong>{title}</strong><small>{copy}</small></span><b aria-hidden="true">↗</b></Link>)}</div>
       </div></section>
 
-      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>CFO ADVISORY</span><h2 id="cta-title">Your finance function doesn&apos;t have to grow all at once.</h2><p>Start with the decisions, processes and information your business needs now. Build from there.</p><DemoTrigger className={styles.ctaButton} initialInterest="CFO & Financial Management" /></div></div></section>
+      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>CFO ADVISORY</span><h2 id="cta-title">Build the financial capability your business needs now.</h2><p>Strengthen control, visibility and decision support with a practical finance operating model.</p><DemoTrigger className={styles.ctaButton} initialInterest="CFO & Financial Management">Talk to a finance advisor</DemoTrigger></div></div></section>
     </main>
   );
 }

@@ -8,18 +8,18 @@ import { createServiceMetadata } from "@/lib/seo";
 import { createServicePageSchema, serializeJsonLd } from "@/lib/structured-data";
 
 export const metadata = createServiceMetadata({
-  title: "Financial Forecasting Consulting | Entimema",
+  title: "Planning, Forecasting & Scenarios | Entimema",
   description: "Replace static plans with driver-based forecasting, rolling updates and scenarios that connect operations, financial outcomes and cash decisions.",
   path: "/services/budgets-and-forecasting",
 });
 
 const capabilities = [
-  ["BUDGET ARCHITECTURE", "A clear planning structure, ownership, calendar and rules for the entire budget cycle."],
-  ["DRIVER-BASED MODELS", "Forecast revenue, costs and margins through the business drivers that actually move them."],
-  ["ROLLING FORECASTS", "Update expectations as actual performance changes — not once a year."],
-  ["SCENARIO PLANNING", "Test how different assumptions change performance, liquidity and decision options."],
-  ["CASH FLOW PLANNING", "Connect operational plans to future cash requirements and funding needs."],
-  ["PLANNING AUTOMATION & AI", "Automate data collection, forecast updates and variance analysis where it adds real value."],
+  ["BUDGET & FORECAST MODELS", "Connect financial plans to the operating assumptions and business drivers behind them."],
+  ["DRIVER-BASED PLANNING", "Forecast revenue, costs and margins through the factors that actually move them."],
+  ["ROLLING FORECASTS", "Refresh expectations as actual performance and assumptions change."],
+  ["SCENARIO & SENSITIVITY ANALYSIS", "Test how alternative assumptions affect performance, liquidity and decision options."],
+  ["CASH-FLOW & LIQUIDITY FORECASTING", "Connect operational plans to future cash requirements and funding needs."],
+  ["PLANNING WORKFLOW AUTOMATION", "Automate data preparation, forecast updates and recurring variance analysis where the process is sufficiently defined and controlled."],
 ];
 const process = [
   ["01", "DIAGNOSE", "We assess the current planning process, data sources, assumptions and ownership."],
@@ -41,7 +41,7 @@ const useCases = [
 ];
 const related = [
   ["CFO Advisory", "The financial structure, management information and decision processes behind a CFO function.", "/services/cfo-function"],
-  ["Management Reporting", "Clear management information built around the decisions that need to be made.", "/services/management-reporting"],
+  ["Financial Reporting & Analysis", "Reliable reporting, governed KPIs and decision-ready variance analysis.", "/services/management-reporting"],
   ["Financial Data", "One reliable foundation for reporting, analysis and financial control.", "/services/financial-data"],
 ];
 
@@ -52,17 +52,17 @@ function SectionHeader({ label, title, intro }: { label: string; title: React.Re
 export default function BudgetsAndForecastingPage() {
   return (
     <main className={styles.page}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(createServicePageSchema({ path: "/services/budgets-and-forecasting", name: "Financial Forecasting Consulting", description: "Replace static plans with driver-based forecasting, rolling updates and scenarios that connect operations, financial outcomes and cash decisions.", breadcrumbName: "Planning & Forecasting" })) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(createServicePageSchema({ path: "/services/budgets-and-forecasting", name: "Planning, Forecasting & Scenarios", description: "Replace static plans with driver-based forecasting, rolling updates and scenarios that connect operations, financial outcomes and cash decisions.", breadcrumbName: "Planning, Forecasting & Scenarios" })) }} />
       <AnnouncementBar />
       <Navbar active="services" />
       <section className={styles.hero} aria-labelledby="budgets-title"><div className={`site-container ${styles.heroInner}`}>
         <div className={styles.heroCopy}>
-          <nav className={styles.breadcrumb} aria-label="Breadcrumb"><Link href="/">Home</Link><span>/</span><span>Finance</span><span>/</span><span aria-current="page">Planning &amp; Forecasting</span></nav>
-          <span className={styles.category}>PLANNING &amp; FORECASTING</span>
-          <h1 id="budgets-title">A budget is a snapshot.</h1>
-          <p className={styles.lead}>Your business isn&apos;t.</p>
-          <p className={styles.support}>Build a planning system that moves with the business — connecting operational drivers, financial outcomes and cash before reality makes the plan obsolete.</p>
-          <DemoTrigger className={styles.primaryButton} initialInterest="Budgets & Forecasting" />
+          <nav className={styles.breadcrumb} aria-label="Breadcrumb"><Link href="/">Home</Link><span>/</span><span>Finance</span><span>/</span><span aria-current="page">Planning, Forecasting &amp; Scenarios</span></nav>
+          <span className={styles.category}>PLANNING, FORECASTING &amp; SCENARIOS</span>
+          <h1 id="budgets-title">Build forecasts that move with the business.</h1>
+          <p className={styles.lead}>Connect operational drivers, financial outcomes and cash in one planning model—then update forecasts and scenarios as conditions change.</p>
+          <p className={styles.support}>Create a repeatable planning process with visible assumptions, clear ownership and a current view of performance and liquidity.</p>
+          <DemoTrigger className={styles.primaryButton} initialInterest="Budgets & Forecasting">Discuss your planning model</DemoTrigger>
         </div>
         <PlanningDashboard />
       </div></section>
@@ -100,7 +100,7 @@ export default function BudgetsAndForecastingPage() {
         <div className={styles.relatedGrid}>{related.map(([title, copy, href]) => <Link href={href} key={title}><span><strong>{title}</strong><small>{copy}</small></span><b aria-hidden="true">↗</b></Link>)}</div>
       </div></section>
 
-      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>PLANNING &amp; FORECASTING</span><h2 id="cta-title">Your forecast should change before the business forces it to.</h2><p>Build a planning system around the drivers, scenarios and cash decisions that matter now.</p><DemoTrigger className={styles.ctaButton} initialInterest="Budgets & Forecasting" /></div></div></section>
+      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>PLANNING, FORECASTING &amp; SCENARIOS</span><h2 id="cta-title">Build a planning model that stays useful as conditions change.</h2><p>Connect drivers, scenarios, forecasts and cash decisions in one repeatable process.</p><DemoTrigger className={styles.ctaButton} initialInterest="Budgets & Forecasting">Discuss your planning model</DemoTrigger></div></div></section>
     </main>
   );
 }

@@ -9,18 +9,18 @@ import { createServiceMetadata } from "@/lib/seo";
 import { createServicePageSchema, serializeJsonLd } from "@/lib/structured-data";
 
 export const metadata = createServiceMetadata({
-  title: "Credit Risk Consulting & Modelling | Entimema",
-  description: "Strengthen credit decisions with specialist consulting across risk models, policy, portfolio analytics and controlled implementation.",
+  title: "Credit Risk & Decisioning | Entimema",
+  description: "Connect scorecards, credit policy, decision strategies and portfolio monitoring across the full credit lifecycle.",
   path: "/services/credit-risk",
 });
 
 const capabilities = [
-  ["APPLICATION SCORING", "Assess new applicants through models built around risk differentiation and credit policy."],
-  ["BEHAVIOURAL SCORING", "Reassess customers as behaviour, exposure and repayment patterns change."],
-  ["PORTFOLIO MONITORING", "Track DPD migration, vintage performance, roll rates and portfolio quality over time."],
-  ["DECISION STRATEGIES", "Translate models and policy into cut-offs, rules, champion/challenger strategies and automated decisions."],
-  ["PORTFOLIO SIMULATION", "Test transition matrices, stress scenarios and expected portfolio outcomes before changing policy."],
-  ["AI RISK AUTOMATION", "Use governed AI agents to analyse, monitor and support recurring credit-risk workflows."],
+  ["APPLICATION SCORECARDS & RISK SEGMENTATION", "Assess new applicants through models and segments aligned with risk appetite and credit policy."],
+  ["CREDIT POLICY & DECISION STRATEGIES", "Translate risk appetite into cut-offs, rules, limits and approval paths."],
+  ["BEHAVIOURAL SCORING & EARLY WARNING", "Reassess customers as behaviour, exposure and repayment patterns change."],
+  ["VINTAGE, ROLL-RATE & MIGRATION ANALYSIS", "Track origination quality, delinquency movement and portfolio performance over time."],
+  ["MODEL MONITORING & CALIBRATION", "Measure discrimination, stability and strategy outcomes and recalibrate where evidence supports change."],
+  ["CONTROLLED DECISION WORKFLOW DESIGN", "Connect models, policy, exceptions, approvals and monitoring in a controlled decision process."],
 ];
 
 const process = [
@@ -44,8 +44,8 @@ const useCases = [
 ];
 
 const related = [
-  ["Credit Risk", "Models, policy and portfolio controls connected across the full credit lifecycle.", "/services/credit-risk"],
-  ["AML & Compliance", "Policies, scenarios and models for controlled, traceable AML processes.", "/services/aml-compliance"],
+  ["Credit Risk & Decisioning", "Scorecards, policy, decision strategies and portfolio monitoring across the credit lifecycle.", "/services/credit-risk"],
+  ["AML & Fraud Investigation", "Customer risk, monitoring, triage and investigations connected in reviewable workflows.", "/services/aml-compliance"],
   ["Decision Intelligence", "Data, models and policy translated into traceable automated decisions.", "/services/decision-automation"],
 ];
 
@@ -56,23 +56,23 @@ function SectionHeader({ label, title, intro }: { label: string; title: ReactNod
 export default function CreditRiskPage() {
   return (
     <main className={styles.page}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(createServicePageSchema({ path: "/services/credit-risk", name: "Credit Risk Consulting", description: "Strengthen credit decisions with specialist consulting across risk models, policy, portfolio analytics and controlled implementation.", breadcrumbName: "Credit Risk" })) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(createServicePageSchema({ path: "/services/credit-risk", name: "Credit Risk & Decisioning", description: "Connect scorecards, credit policy, decision strategies and portfolio monitoring across the full credit lifecycle.", breadcrumbName: "Credit Risk & Decisioning" })) }} />
       <AnnouncementBar />
       <Navbar active="services" />
       <section className={styles.hero} aria-labelledby="credit-risk-title"><div className={`site-container ${styles.heroInner}`}>
         <div className={styles.heroCopy}>
-          <nav className={styles.breadcrumb} aria-label="Breadcrumb"><Link href="/">Home</Link><span>/</span><span>Decision Science</span><span>/</span><Link href="/services/credit-risk" aria-current="page">Credit Risk</Link></nav>
-          <span className={styles.category}>CREDIT RISK</span>
-          <h1 id="credit-risk-title">Credit risk consulting that sees risk before it becomes expensive.</h1>
-          <p className={styles.lead}>Build credit risk models, decision strategies and portfolio controls that identify risk earlier, apply policy consistently and make every credit decision traceable.</p>
-          <p className={styles.support}><strong>A score is not a decision. It is one input into one.</strong> Connect scoring, policy, cut-offs, portfolio behaviour and decision logic into one credit architecture — so risk is measured consistently from application to portfolio performance.</p>
-          <DemoTrigger className={styles.primaryButton} initialInterest="Credit Risk" />
+          <nav className={styles.breadcrumb} aria-label="Breadcrumb"><Link href="/">Home</Link><span>/</span><span>Risk &amp; Decisioning</span><span>/</span><Link href="/services/credit-risk" aria-current="page">Credit Risk &amp; Decisioning</Link></nav>
+          <span className={styles.category}>CREDIT RISK &amp; DECISIONING</span>
+          <h1 id="credit-risk-title">Make credit decisions consistently—and see how they shape portfolio risk.</h1>
+          <p className={styles.lead}>Connect scorecards, credit policy, decision strategies and portfolio monitoring across the full credit lifecycle.</p>
+          <p className={styles.support}>From application assessment to behavioural monitoring, every decision should be explainable, measurable and linked to observed portfolio outcomes.</p>
+          <DemoTrigger className={styles.primaryButton} initialInterest="Credit Risk">Discuss your credit-risk challenge</DemoTrigger>
         </div>
         <CreditRiskDashboard />
       </div></section>
 
       <section className={styles.section} aria-labelledby="capabilities-title"><div className="site-container">
-        <SectionHeader label="WHAT IT INCLUDES" title={<>One risk architecture.<br />Across the full credit lifecycle.</>} />
+        <SectionHeader label="WHAT IT INCLUDES" title={<>One controlled decision framework.<br />Across the full credit lifecycle.</>} />
         <div className={styles.capabilityGrid}>{capabilities.map(([title, copy], index) => <article className={styles.capability} key={title}><span>0{index + 1}</span><h3>{title}</h3><p>{copy}</p></article>)}</div>
       </div></section>
 
@@ -95,7 +95,7 @@ export default function CreditRiskPage() {
       </div></section>
 
       <section className={`${styles.section} ${styles.tinted}`} aria-labelledby="applications-title"><div className="site-container">
-        <SectionHeader label="WHERE IT APPLIES" title="Where does credit risk architecture create the most value?" intro="If you can explain the score but not the decision, the architecture is incomplete." />
+        <SectionHeader label="WHERE IT APPLIES" title="Where does controlled credit decisioning create the most value?" intro="If you can explain the score but not the decision, the workflow is incomplete." />
         <div className={styles.useCaseGrid}>{useCases.map(([title, copy]) => <article key={title}><h3>{title}</h3><p>{copy}</p></article>)}</div>
       </div></section>
 
@@ -104,7 +104,7 @@ export default function CreditRiskPage() {
         <div className={styles.relatedGrid}>{related.map(([title, copy, href]) => <Link href={href} key={title}><span><strong>{title}</strong><small>{copy}</small></span><b aria-hidden="true">↗</b></Link>)}</div>
       </div></section>
 
-      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>CREDIT RISK</span><h2 id="cta-title">A credit model should do more than rank risk.<br />It should shape the decision.</h2><p>Build one credit architecture around models, policy, automation and portfolio performance.</p><DemoTrigger className={styles.ctaButton} initialInterest="Credit Risk" /></div></div></section>
+      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>CREDIT RISK &amp; DECISIONING</span><h2 id="cta-title">Connect every credit decision to policy, evidence and portfolio outcomes.</h2><p>Strengthen risk methodology and build controlled workflows across the credit lifecycle.</p><DemoTrigger className={styles.ctaButton} initialInterest="Credit Risk">Discuss your credit-risk challenge</DemoTrigger></div></div></section>
     </main>
   );
 }

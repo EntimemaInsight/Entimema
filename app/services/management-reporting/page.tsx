@@ -8,18 +8,18 @@ import { createServiceMetadata } from "@/lib/seo";
 import { createServicePageSchema, serializeJsonLd } from "@/lib/structured-data";
 
 export const metadata = createServiceMetadata({
-  title: "Management Reporting Consulting | Entimema",
-  description: "Turn fragmented financial and operational reporting into timely management information, clear KPIs and decision-ready performance analysis.",
+  title: "Financial Reporting & Analysis | Entimema",
+  description: "Connect actuals, budgets, forecasts and operational drivers in reliable reporting and decision-ready financial analysis.",
   path: "/services/management-reporting",
 });
 
 const capabilities = [
-  ["MANAGEMENT KPIs", "Metrics defined around how the business is actually managed."],
-  ["EXECUTIVE DASHBOARDS", "Management views organised around decisions, not accounting statements."],
-  ["FINANCIAL ANALYSIS", "Variance, trend and driver analysis that explains what is behind the result."],
-  ["OPERATIONAL REPORTING", "Connect financial outcomes with production, sales and operational performance."],
-  ["REPORTING FRAMEWORK", "Standard reports, clear ownership, publication rhythm and one information structure."],
-  ["AUTOMATION & AI", "Automate data collection, validation and distribution where it improves reliability and speed."],
+  ["MANAGEMENT REPORTING FRAMEWORK", "Define reports, ownership, reporting calendars and consistent financial logic."],
+  ["KPI DEFINITIONS & GOVERNANCE", "Establish clear definitions, calculations, sources and accountability for management KPIs."],
+  ["ACTUAL VS BUDGET & FORECAST", "Compare performance against expectations and isolate material deviations."],
+  ["VARIANCE & DRIVER ANALYSIS", "Explain how volume, price, mix, cost and operational drivers affect results."],
+  ["EXECUTIVE DASHBOARDS", "Present the measures and exceptions management needs to act."],
+  ["REPORTING AUTOMATION & CONTROLS", "Reduce manual preparation while preserving validation, reconciliation and review."],
 ];
 const process = [
   ["01", "DIAGNOSE", "We assess how management uses information today and where visibility breaks down."],
@@ -41,7 +41,7 @@ const useCases = [
 ];
 const related = [
   ["CFO Advisory", "The financial structure, management information and decision processes behind a CFO function.", "/services/cfo-function"],
-  ["Planning & Forecasting", "Budgets, forecasts and scenarios connected to the drivers of the business.", "/services/budgets-and-forecasting"],
+  ["Planning, Forecasting & Scenarios", "Driver-based plans, rolling forecasts and scenarios connected to cash and operational outcomes.", "/services/budgets-and-forecasting"],
   ["Financial Data", "One reliable foundation for reporting, analysis and financial control.", "/services/financial-data"],
 ];
 
@@ -52,17 +52,17 @@ function SectionHeader({ label, title, intro }: { label: string; title: React.Re
 export default function ManagementReportingPage() {
   return (
     <main className={styles.page}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(createServicePageSchema({ path: "/services/management-reporting", name: "Management Reporting Consulting", description: "Turn fragmented financial and operational reporting into timely management information, clear KPIs and decision-ready performance analysis.", breadcrumbName: "Management Reporting" })) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(createServicePageSchema({ path: "/services/management-reporting", name: "Financial Reporting & Analysis", description: "Connect actuals, budgets, forecasts and operational drivers in reliable reporting and decision-ready financial analysis.", breadcrumbName: "Financial Reporting & Analysis" })) }} />
       <AnnouncementBar />
       <Navbar active="services" />
       <section className={styles.hero} aria-labelledby="management-reporting-title"><div className={`site-container ${styles.heroInner}`}>
         <div className={styles.heroCopy}>
-          <nav className={styles.breadcrumb} aria-label="Breadcrumb"><Link href="/">Home</Link><span>/</span><span>Finance</span><span>/</span><span aria-current="page">Management Reporting</span></nav>
-          <span className={styles.category}>MANAGEMENT REPORTING</span>
-          <h1 id="management-reporting-title">More reports don&apos;t mean more clarity.</h1>
-          <p className={styles.lead}>See the business the way management needs to see it.</p>
-          <p className={styles.support}>Build management reporting around the decisions your business needs to make — connecting financial performance, operational drivers and management action in one consistent view.</p>
-          <DemoTrigger className={styles.primaryButton} initialInterest="Management Reporting" />
+          <nav className={styles.breadcrumb} aria-label="Breadcrumb"><Link href="/">Home</Link><span>/</span><span>Finance</span><span>/</span><span aria-current="page">Financial Reporting &amp; Analysis</span></nav>
+          <span className={styles.category}>FINANCIAL REPORTING &amp; ANALYSIS</span>
+          <h1 id="management-reporting-title">Turn fragmented financial data into one reliable management view.</h1>
+          <p className={styles.lead}>Connect actuals, budgets, forecasts and operational drivers—so management can see what changed, why it changed and where action is required.</p>
+          <p className={styles.support}>From KPI definitions and variance analysis to executive dashboards and recurring reporting workflows, every material output remains consistent, traceable and reviewable.</p>
+          <DemoTrigger className={styles.primaryButton} initialInterest="Management Reporting">Discuss your reporting workflow</DemoTrigger>
         </div>
         <ManagementDashboard />
       </div></section>
@@ -72,7 +72,7 @@ export default function ManagementReportingPage() {
       <section className={styles.section} aria-labelledby="outcomes-title"><div className="site-container"><SectionHeader label="WHAT YOU GET" title={<>Less reporting friction.<br />More management visibility.</>} /><div className={styles.outcomeGrid}>{outcomes.map(([title, copy]) => <article key={title}><span aria-hidden="true">✓</span><div><h3>{title}</h3><p>{copy}</p></div></article>)}</div><aside className={styles.caseExample} aria-labelledby="case-example-title"><div className={styles.caseExampleIntro}><span>ILLUSTRATIVE SCENARIO</span><h3 id="case-example-title">When finance and operations tell different stories, management loses the picture.</h3></div><dl><div><dt>SCENARIO</dt><dd>A manufacturing company prepares financial and operational reporting separately, with no shared KPI framework and limited ability to explain variances.</dd></div><div><dt>ENTIMEMA APPROACH</dt><dd>We connect ERP data, management KPIs and executive dashboards into one reporting structure.</dd></div><div><dt>RESULT</dt><dd>Management gets a timely, consistent and reliable view of performance for day-to-day decisions. Our research on <Link href="/resources/from-erp-data-to-management-intelligence">ERP data for management intelligence</Link> explains the information layers beneath that reporting view.</dd></div></dl></aside></div></section>
       <section className={`${styles.section} ${styles.tinted}`} aria-labelledby="applications-title"><div className="site-container"><SectionHeader label="WHERE IT APPLIES" title="When does reporting stop supporting management?" intro="If management has to reconcile the reports before it can use them, the reporting system is already too slow." /><div className={styles.useCaseGrid}>{useCases.map(([title, copy]) => <article key={title}><h3>{title}</h3><p>{copy}</p></article>)}</div></div></section>
       <section className={styles.section} aria-labelledby="related-title"><div className="site-container"><SectionHeader label="NEXT STEP" title="Related services" /><div className={styles.relatedGrid}>{related.map(([title, copy, href]) => <Link href={href} key={title}><span><strong>{title}</strong><small>{copy}</small></span><b aria-hidden="true">↗</b></Link>)}</div></div></section>
-      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>MANAGEMENT REPORTING</span><h2 id="cta-title">Your reporting should answer the question before management has to ask twice.</h2><p>Build a management information system around the decisions, KPIs and reporting rhythm your business actually needs.</p><DemoTrigger className={styles.ctaButton} initialInterest="Management Reporting" /></div></div></section>
+      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>FINANCIAL REPORTING &amp; ANALYSIS</span><h2 id="cta-title">Turn reporting into a reliable management process.</h2><p>Connect the numbers, drivers and controls behind every material management view.</p><DemoTrigger className={styles.ctaButton} initialInterest="Management Reporting">Discuss your reporting workflow</DemoTrigger></div></div></section>
     </main>
   );
 }
