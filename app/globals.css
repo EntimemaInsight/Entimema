@@ -5930,8 +5930,7 @@ html.is-scrolled .site-brand__word { font-size: clamp(30px, 2.15vw, 36px); }
   max-height: 56px;
   transition: opacity 220ms ease-out, transform 360ms var(--motion-reveal-ease);
 }
-.announcement::after,
-.site-header::after {
+.announcement::after {
   content: "";
   position: absolute;
   inset: auto 0 0;
@@ -7242,8 +7241,16 @@ html.is-scrolled .header-cta {
   }
 }
 
-/* Editorial foundation: shared chrome only; geometry and menu logic retained. */
-.site-header { border-bottom-color: var(--entimema-rule); }
+/* Editorial foundation: one stable, Taktile-style divider owns the header edge. */
+.site-header,
+html.announcement-collapsed .site-header,
+html.is-scrolled .site-header,
+html.scrolling-down .site-header,
+html.scrolling-up .site-header {
+  border-bottom: 1px solid var(--entimema-rule);
+  box-shadow: none;
+}
+.site-header::after { content: none; }
 .site-nav--editorial .site-nav__item {
   font-family: var(--entimema-font-interface);
   transition-duration: var(--entimema-motion-hover);

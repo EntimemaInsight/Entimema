@@ -9,6 +9,7 @@ const productCss = readFileSync("components/ProductMegaMenu.module.css", "utf8")
 const resourcesMenu = readFileSync("components/ResourcesMegaMenu.tsx", "utf8");
 const resourcesCss = readFileSync("components/ResourcesMegaMenu.module.css", "utf8");
 const solutionsCss = readFileSync("components/WhatWeDoMegaMenu.module.css", "utf8");
+const globalCss = readFileSync("app/globals.css", "utf8");
 const editorialTokens = readFileSync("styles/editorial-tokens.css", "utf8");
 const menuContent = readFileSync("lib/mega-menu-content.ts", "utf8");
 
@@ -76,12 +77,14 @@ test("solutions use destination-level copy without category descriptions", () =>
   assert.match(mobileMenu, /<aside className=\{styles\.featured\}>[\s\S]*?productFeature\.title/);
 });
 
-test("desktop mega menus use full-bleed geometry and aligned panel heights", () => {
+test("desktop mega menus use full-bleed geometry and one stable header divider", () => {
   for (const stylesheet of [productCss, resourcesCss, solutionsCss]) {
     assert.match(stylesheet, /inset-inline: 0/);
     assert.match(stylesheet, /height: 430px/);
-    assert.match(stylesheet, /border-top: 1px solid rgba\(4,\s*19,\s*63,\s*\.2\)/);
+    assert.match(stylesheet, /border-top: 0/);
   }
+  assert.match(globalCss, /border-bottom: 1px solid var\(--entimema-rule\)/);
+  assert.match(globalCss, /\.site-header::after \{ content: none; \}/);
   assert.match(productCss, /\.featured::before[\s\S]*?inset: 0 -100vw 0 0/);
   assert.match(solutionsCss, /\.featured::before[\s\S]*?inset: 0 -100vw 0 0/);
   assert.match(productCss, /\.featured h3 \{[^}]*color: var\(--brand-navy-950\);[^}]*font-size: var\(--entimema-menu-heading\)/);

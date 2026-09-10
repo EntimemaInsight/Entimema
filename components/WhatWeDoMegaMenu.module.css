@@ -66,7 +66,7 @@
   width: auto;
   max-width: none;
   height: 430px;
-  border-top: 1px solid rgba(4, 19, 63, .2);
+  border-top: 0;
   border-bottom: 1px solid var(--hairline);
   background: #fff;
   box-shadow: 0 8px 18px rgba(4, 19, 63, 0.035);

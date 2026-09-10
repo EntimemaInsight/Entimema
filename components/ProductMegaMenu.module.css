@@ -5,7 +5,7 @@
 .chevron { width: 7px; height: 7px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg) translateY(-2px); transition: transform 180ms var(--ease-standard); }
 .trigger[aria-expanded="true"] .chevron { transform: rotate(225deg) translate(-1px,-1px); }
 .backdrop { position: fixed; z-index: 1000; inset-inline: 0; bottom: 0; padding: 0; border: 0; background: rgba(4,19,63,.045); cursor: default; }
-.menu { position: fixed; z-index: 1001; inset-inline: 0; width: auto; max-width: none; height: 430px; border-top: 1px solid rgba(4,19,63,.2); border-bottom: 1px solid var(--hairline); background: #fff; box-shadow: 0 8px 18px rgba(4,19,63,.035); font-family: var(--entimema-font-interface); text-rendering: optimizeLegibility; animation: reveal 220ms var(--ease-standard) both; overflow: hidden; }
+.menu { position: fixed; z-index: 1001; inset-inline: 0; width: auto; max-width: none; height: 430px; border-top: 0; border-bottom: 1px solid var(--hairline); background: #fff; box-shadow: 0 8px 18px rgba(4,19,63,.035); font-family: var(--entimema-font-interface); text-rendering: optimizeLegibility; animation: reveal 220ms var(--ease-standard) both; overflow: hidden; }
 .menuClosing { pointer-events: none; animation: conceal 180ms ease-out both; }
 .inner { height: 100%; display: grid; grid-template-columns: minmax(0,1.9fr) minmax(280px,.85fr); gap: clamp(52px,7vw,112px); }
 .primary { min-width: 0; padding: 38px 0 42px; }
