@@ -136,7 +136,7 @@
   background:
     radial-gradient(
       circle at 72% 31%,
-      rgba(214, 255, 105, 0.12),
+      rgba(232, 230, 168, 0.09),
       transparent 26%
     ),
     radial-gradient(
@@ -235,9 +235,9 @@
   border-radius: 23px;
   background: linear-gradient(
       112deg,
-      #e6ff56 0%,
-      #d8ff69 24%,
-      rgba(216, 255, 105, 0.38) 34%,
+      #f1efc1 0%,
+      #e8e6a8 24%,
+      rgba(232, 230, 168, 0.3) 34%,
       transparent 45%
     )
     border-box;
@@ -245,7 +245,7 @@
     linear-gradient(#000 0 0) padding-box,
     linear-gradient(#000 0 0);
   mask-composite: exclude;
-  filter: drop-shadow(0 0 6px rgba(216, 255, 105, 0.45));
+  filter: drop-shadow(0 0 5px rgba(232, 230, 168, 0.36));
   pointer-events: none;
 }
 .stackLayer span {
@@ -305,18 +305,18 @@
   border: 2px solid transparent;
   background: linear-gradient(
       112deg,
-      #d8ff69 0%,
-      #f4ff8b 18%,
+      #e8e6a8 0%,
+      #f4f2c2 18%,
       transparent 38%,
-      #82d7e8 68%,
-      #f36d2f 100%
+      #a8dce8 70%,
+      rgba(243, 109, 47, 0.72) 100%
     )
     border-box;
   mask:
     linear-gradient(#000 0 0) padding-box,
     linear-gradient(#000 0 0);
   mask-composite: exclude;
-  filter: drop-shadow(0 0 8px rgba(103, 92, 211, 0.48));
+  filter: drop-shadow(0 0 7px rgba(168, 220, 232, 0.4));
 }
 .passedLayer {
   filter: saturate(0.78) brightness(1.03);
@@ -347,7 +347,7 @@
   scale: 1.006;
 }
 .stack .hoveredLayer::before {
-  filter: drop-shadow(0 0 11px rgba(216, 255, 105, 0.78));
+  filter: drop-shadow(0 0 8px rgba(244, 242, 194, 0.62));
 }
 .stack .hoveredLayer strong {
   text-shadow:
