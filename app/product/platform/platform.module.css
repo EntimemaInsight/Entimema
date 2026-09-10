@@ -145,7 +145,7 @@
 .stack {
   position: absolute;
   z-index: 8;
-  right: 0;
+  right: clamp(48px, 7.35vw, 100px);
   top: 1%;
   width: clamp(390px, 32.5vw, 475px);
   height: 500px;
@@ -980,6 +980,7 @@
     height: 455px;
   }
   .stack {
+    right: 0;
     transform: translate(var(--stack-x), var(--stack-y)) scale(0.58);
     transform-origin: top right;
   }
