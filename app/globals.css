@@ -7247,6 +7247,7 @@ html.announcement-collapsed .site-header,
 html.is-scrolled .site-header,
 html.scrolling-down .site-header,
 html.scrolling-up .site-header {
+  z-index: 1002;
   border-bottom: 1px solid var(--entimema-rule);
   box-shadow: none;
 }

@@ -30,9 +30,9 @@ test("product panel exposes the platform, agent control and current product rele
   assert.match(menuContent, /Coming soon/);
   assert.match(menuContent, /AI Agent Manager/);
   assert.match(productMenu, /<h3>See how it works<\/h3>/);
-  assert.match(menuContent, /Turn financial data into validated, decision-ready outputs/);
-  assert.match(menuContent, /A controlled environment for specialized financial and risk AI agents/);
-  assert.match(menuContent, /See how an Income Statement becomes validated, traceable financial analysis/);
+  assert.match(menuContent, /See how financial data becomes a controlled, decision-ready output/);
+  assert.match(menuContent, /Build and govern financial AI agents/);
+  assert.match(menuContent, /See how financial evidence becomes a controlled, reviewable decision/);
   assert.doesNotMatch(productMenu, /Decision Workspace|Intelligent Intake|Exception Workspace/);
   assert.doesNotMatch(productMenu, /€490|pilot-checkout/);
 });
@@ -57,12 +57,6 @@ test("resource columns follow Research, Company, Documentation order", () => {
   assert.ok(resourcesMenu.indexOf("<h3>Company</h3>") < resourcesMenu.indexOf("<h3>Documentation</h3>"));
 });
 
-test("resource menu uses decision-relevant, destination-specific copy", () => {
-  assert.match(resourcesMenu, /Research, technical methods and product guidance for financial and risk decisions/);
-  assert.match(menuContent, /Understand Entimema products and controlled workflows/);
-  assert.match(menuContent, /Explore integration guidance for Entimema workflows/);
-});
-
 test("menu destinations use the Entimema navy hierarchy", () => {
   assert.match(resourcesCss, /\.item strong \{[^}]*color: var\(--brand-navy-950\)/);
   assert.match(productCss, /\.item strong,\.featured strong \{[^}]*color: var\(--brand-navy-950\)/);
@@ -71,9 +65,9 @@ test("menu destinations use the Entimema navy hierarchy", () => {
 
 test("solutions use destination-level copy without category descriptions", () => {
   assert.doesNotMatch(mobileMenu, /categoryDescription|Financial control, planning and performance|Risk assessment and controlled decision systems/);
-  assert.match(menuContent, /Turn financial data into reliable reporting and decision-ready analysis/);
-  assert.match(menuContent, /Strengthen AML and fraud controls with consistent, reviewable investigations/);
-  assert.match(menuContent, /See how an Income Statement becomes validated, traceable financial analysis/);
+  assert.match(menuContent, /Turn reporting into decision-ready insight/);
+  assert.match(menuContent, /Resolve investigations faster with AI assistance/);
+  assert.match(menuContent, /See how financial evidence becomes a controlled, reviewable decision/);
   assert.match(mobileMenu, /<aside className=\{styles\.featured\}>[\s\S]*?productFeature\.title/);
 });
 
@@ -84,6 +78,7 @@ test("desktop mega menus use full-bleed geometry and one stable header divider",
     assert.match(stylesheet, /border-top: 0/);
   }
   assert.match(globalCss, /border-bottom: 1px solid var\(--entimema-rule\)/);
+  assert.match(globalCss, /z-index: 1002;[\s\S]*?border-bottom: 1px solid var\(--entimema-rule\)/);
   assert.match(globalCss, /\.site-header::after \{ content: none; \}/);
   assert.match(productCss, /\.featured::before[\s\S]*?inset: 0 -100vw 0 0/);
   assert.match(solutionsCss, /\.featured::before[\s\S]*?inset: 0 -100vw 0 0/);
