@@ -192,6 +192,28 @@
     box-shadow 0.65s ease,
     border-color 0.55s ease;
 }
+.stackLayer::before {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  inset: -2px;
+  border: 2px solid transparent;
+  border-radius: 23px;
+  background: linear-gradient(
+      112deg,
+      #e6ff56 0%,
+      #d8ff69 24%,
+      rgba(216, 255, 105, 0.38) 34%,
+      transparent 45%
+    )
+    border-box;
+  mask:
+    linear-gradient(#000 0 0) padding-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  filter: drop-shadow(0 0 6px rgba(216, 255, 105, 0.45));
+  pointer-events: none;
+}
 .stackLayer span {
   font-size: 12px;
   font-weight: 800;
@@ -264,6 +286,44 @@
 .passedLayer {
   filter: saturate(0.78) brightness(1.03);
   opacity: 1;
+}
+.stack:has(.stackLayer:hover) .stackLayer:not(:hover) {
+  filter: saturate(0.7) brightness(0.98);
+  opacity: 0.7;
+}
+.stackLayer:has(~ .stackLayer:hover) {
+  transform: translate(-5px, -5px) rotateX(59deg) rotateZ(-45deg) translateZ(0);
+}
+.stackLayer:hover ~ .stackLayer {
+  transform: translate(6px, 9px) rotateX(59deg) rotateZ(-45deg) translateZ(0);
+}
+.stack .stackLayer:hover {
+  z-index: 20 !important;
+  filter: saturate(1.16) brightness(1.07);
+  opacity: 1;
+  border-color: rgba(255, 255, 255, 0.82);
+  background:
+    radial-gradient(
+      circle at 18% 4%,
+      rgba(255, 255, 255, 0.3),
+      transparent 34%
+    ),
+    linear-gradient(145deg, #766ce0 0%, #6559ca 55%, #574bb7 100%);
+  box-shadow:
+    0 46px 70px rgba(69, 58, 168, 0.34),
+    0 10px 0 #5045a6,
+    0 0 48px rgba(105, 94, 220, 0.3),
+    inset 0 1px rgba(255, 255, 255, 0.4);
+  transform: translate(-12px, -18px) rotateX(59deg) rotateZ(-45deg)
+    translateZ(34px);
+}
+.stack .stackLayer:hover::before {
+  filter: drop-shadow(0 0 11px rgba(216, 255, 105, 0.78));
+}
+.stack .stackLayer:hover strong {
+  text-shadow:
+    0 1px 9px rgba(30, 24, 92, 0.5),
+    0 0 14px rgba(255, 255, 255, 0.32);
 }
 .evidenceLabels {
   position: absolute;
