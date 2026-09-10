@@ -407,11 +407,13 @@ function ArchitectureStack({
   progress,
   entryProgress,
   labelsProgress,
+  onSelect,
 }: {
   active: number;
   progress: number;
   entryProgress: number;
   labelsProgress: number;
+  onSelect: (index: number) => void;
 }) {
   const layerGap = 62 + entryProgress * 5 + progress * 7;
   const firstMicro = 1 / 3;
@@ -444,7 +446,8 @@ function ArchitectureStack({
         aria-label={`Active architecture layer: ${layers[active].label}`}
       >
         {layers.map((layer, index) => (
-          <div
+          <button
+            type="button"
             className={`${styles.stackLayer} ${index === active ? styles.activeLayer : ""} ${index < active ? styles.passedLayer : ""}`}
             style={
               {
@@ -453,9 +456,11 @@ function ArchitectureStack({
               } as CSSProperties
             }
             key={layer.label}
+            onClick={() => onSelect(index)}
+            aria-label={`View ${layer.label}`}
           >
             <strong>{layer.label}</strong>
-          </div>
+          </button>
         ))}
       </div>
       <EvidenceLabels active={active} />
@@ -520,6 +525,18 @@ export default function PlatformExperience() {
       if (frame) cancelAnimationFrame(frame);
     };
   }, []);
+
+  const selectLayer = (index: number) => {
+    const step = steps.current[index];
+    if (!step) return;
+
+    setActive(index);
+    const rect = step.getBoundingClientRect();
+    const top =
+      window.scrollY + rect.top + rect.height * 0.5 - window.innerHeight * 0.52;
+    window.scrollTo({ top, behavior: "smooth" });
+  };
+
   return (
     <div className={styles.page}>
       <section
@@ -580,6 +597,7 @@ export default function PlatformExperience() {
               progress={progress}
               entryProgress={entryProgress}
               labelsProgress={labelsProgress}
+              onSelect={selectLayer}
             />
           </div>
         </div>
