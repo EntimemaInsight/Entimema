@@ -1,0 +1,14 @@
+{
+  "source": "scripts/agent-manager-preview/workspace.html",
+  "viewport": {
+    "width": 1440,
+    "height": 820
+  },
+  "type": "Browser capture of original interface preview",
+  "data": "Fictional Northline Industries fixture",
+  "screens": [
+    "analysis.webp",
+    "controls.webp",
+    "review.webp"
+  ]
+}

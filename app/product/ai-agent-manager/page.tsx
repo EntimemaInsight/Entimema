@@ -8,7 +8,7 @@ import theme from "./theme.module.css";
 
 export const metadata: Metadata = {
   title: "AI Agent Manager for Controlled Financial Workflows | Entimema",
-  description: "Configure specialist financial AI agents around evidence, deterministic controls and human review from one governed workspace.",
+  description: "Explore the Entimema AI Agent Manager interface preview: financial analysis, source evidence, deterministic controls and human review.",
   alternates: { canonical: "https://www.entimema.com/product/ai-agent-manager" },
 };
 
@@ -27,12 +27,13 @@ export default function AgentManagerPage() {
       <div className="site-container">
         <span className={styles.badge}>AI Agent Manager</span>
         <h1>Put specialist AI agents to work.<br/><em>Keep financial control.</em></h1>
-        <p>Configure governed agents for financial workflows — combining AI interpretation, deterministic controls, evidence and accountable human review.</p>
+        <p>Explore a governed workspace for financial workflows — combining AI interpretation, deterministic controls, evidence and accountable human review.</p>
         <div className={styles.actions}>
           <DemoTrigger className={styles.primaryCta} initialInterest="AI Agent Manager"/>
           <a href="#agents">Explore the product <span>→</span></a>
         </div>
         <div className={styles.scope}>FINANCE-LED · EVIDENCE-GROUNDED · HUMAN-CONTROLLED</div>
+        <p className={styles.previewScope}>Product preview. Financial Intelligence V1 is a controlled pilot for tested English XLSX and text-based PDF income statements.</p>
       </div>
     </section>
 
