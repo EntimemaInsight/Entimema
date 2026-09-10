@@ -21,7 +21,7 @@
   background: #fff;
 }
 
-.header a { display: inline-flex; }
+.brand { display: inline-flex; cursor: default; user-select: none; }
 .stage { min-height: 650px; display: grid; grid-template-columns: minmax(0, .92fr) minmax(560px, 1.08fr); }
 
 .statement {

@@ -1,6 +1,5 @@
 import { auth, isGitHubAuthEnabled, isWorkspaceAllowed, signIn } from "@/auth";
 import BrandLogo from "@/components/BrandLogo";
-import Link from "next/link";
 import { redirect } from "next/navigation";
 import styles from "./sign-in.module.css";
 
@@ -28,7 +27,7 @@ export default async function SignInPage({ searchParams }: { searchParams: Promi
 
   return <main className={styles.page} data-auth-page>
     <header className={styles.header}>
-      <Link href="/" aria-label="Entimema – home"><BrandLogo /></Link>
+      <div className={styles.brand} role="img" aria-label="Entimema"><BrandLogo /></div>
     </header>
     <section className={styles.stage}>
       <div className={styles.statement}>

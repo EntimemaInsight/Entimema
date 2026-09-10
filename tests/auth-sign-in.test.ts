@@ -33,6 +33,8 @@ test("sign-in is a responsive Entimema authentication experience", () => {
 
 test("auth route removes secondary chrome and analytics controls", () => {
   assert.doesNotMatch(signInPage, /ENTIMEMA FINANCIAL INTELLIGENCE|Private beta|Controlled workflows|className=\{styles\.footer\}/);
+  assert.doesNotMatch(signInPage, /import Link from "next\/link"|<Link|href="\/"/);
+  assert.match(signInPage, /className=\{styles\.brand\} role="img" aria-label="Entimema"/);
   assert.match(analyticsConsent, /pathname !== "\/auth\/sign-in"/);
-  assert.match(globalFooter, /pathname === "\/auth\/sign-in"/);
+  assert.match(globalFooter, /normalizedPathname === "\/auth\/sign-in"/);
 });
