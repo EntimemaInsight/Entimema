@@ -185,14 +185,14 @@
   backface-visibility: hidden;
   transition:
     inset 0.08s linear,
-    transform 0.72s cubic-bezier(0.16, 1, 0.3, 1),
-    translate 0.72s cubic-bezier(0.16, 1, 0.3, 1),
-    scale 0.72s cubic-bezier(0.16, 1, 0.3, 1),
-    opacity 0.55s ease,
-    filter 0.55s ease,
-    background 0.55s ease,
-    box-shadow 0.65s ease,
-    border-color 0.55s ease;
+    transform 0.64s cubic-bezier(0.16, 1, 0.3, 1),
+    translate 0.64s cubic-bezier(0.16, 1, 0.3, 1),
+    scale 0.64s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.64s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.64s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.64s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.64s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.64s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .stackLayer::before {
   content: "";
@@ -261,9 +261,9 @@
     0 9px 0 #5349a8,
     0 0 42px rgba(103, 92, 211, 0.22),
     inset 0 1px rgba(255, 255, 255, 0.32);
-  transform: rotateX(59deg) rotateZ(-45deg) translateZ(18px);
-  translate: -24px -2px 18px;
-  scale: 1.006;
+  transform: rotateX(59deg) rotateZ(-45deg);
+  translate: -20px 0;
+  scale: 1.004;
 }
 .activeLayer:after {
   content: "";
@@ -291,8 +291,8 @@
   opacity: 1;
 }
 .hoverMuted {
-  filter: saturate(0.7) brightness(0.98);
-  opacity: 0.7;
+  filter: saturate(0.82) brightness(1);
+  opacity: 0.82;
 }
 .stack .hoveredLayer {
   z-index: 20 !important;
@@ -311,8 +311,8 @@
     0 10px 0 #5045a6,
     0 0 48px rgba(105, 94, 220, 0.3),
     inset 0 1px rgba(255, 255, 255, 0.4);
-  translate: -38px -3px 34px;
-  scale: 1.008;
+  translate: -36px 0;
+  scale: 1.006;
 }
 .stack .hoveredLayer::before {
   filter: drop-shadow(0 0 11px rgba(216, 255, 105, 0.78));
