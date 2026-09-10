@@ -72,12 +72,12 @@ export const serviceGroups = [
 export const resourceDocumentation = [
   {
     title: "Product documentation",
-    description: "View Entimema's product documentation.",
+    description: "Understand Entimema products and controlled workflows.",
     href: "/workspace/financial-intelligence",
   },
   {
     title: "Integrations",
-    description: "Learn about integrations on Entimema.",
+    description: "Explore integration guidance for Entimema workflows.",
     href: "/workspace/agents",
   },
 ] as const;

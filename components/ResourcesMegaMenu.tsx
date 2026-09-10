@@ -91,7 +91,7 @@ export default function ResourcesMegaMenu({ active = false }: { active?: boolean
         <div className={`site-container ${styles.inner}`}>
           <header className={styles.intro}>
             <h2 id={headingId}>Resources</h2>
-            <p>Research, technical methods and information about Entimema.</p>
+            <p>Research, technical methods and product guidance for financial and risk decisions.</p>
           </header>
           <div className={styles.groups}>
             <section className={styles.group}>

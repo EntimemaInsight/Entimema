@@ -56,6 +56,12 @@ test("resource columns follow Research, Company, Documentation order", () => {
   assert.ok(resourcesMenu.indexOf("<h3>Company</h3>") < resourcesMenu.indexOf("<h3>Documentation</h3>"));
 });
 
+test("resource menu uses decision-relevant, destination-specific copy", () => {
+  assert.match(resourcesMenu, /Research, technical methods and product guidance for financial and risk decisions/);
+  assert.match(menuContent, /Understand Entimema products and controlled workflows/);
+  assert.match(menuContent, /Explore integration guidance for Entimema workflows/);
+});
+
 test("menu destinations use the Entimema navy hierarchy", () => {
   assert.match(resourcesCss, /\.item strong \{[^}]*color: var\(--brand-navy-950\)/);
   assert.match(productCss, /\.item strong,\.featured strong \{[^}]*color: var\(--brand-navy-950\)/);
