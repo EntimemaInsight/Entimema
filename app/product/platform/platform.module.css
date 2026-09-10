@@ -4,18 +4,30 @@
   --orange: #f36d2f;
   --paper: #f4f7fa;
   --muted: #65748a;
-  background: #fff;
+  background: linear-gradient(180deg, #ffffff 0%, #f5fafe 58%, #ffffff 100%);
   color: var(--blue);
   overflow: clip;
 }
 .journey {
   background:
     radial-gradient(
-      circle at 86% 8%,
-      rgba(243, 109, 47, 0.12),
-      transparent 18%
+      circle at 84% 9%,
+      rgba(116, 188, 220, 0.19),
+      transparent 23%
     ),
-    linear-gradient(180deg, #fff 0%, #f8fafc 17%, var(--paper) 34%);
+    radial-gradient(
+      circle at 14% 48%,
+      rgba(204, 231, 243, 0.32),
+      transparent 28%
+    ),
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #f7fbfe 18%,
+      #eef6fa 52%,
+      #f8fbfd 82%,
+      #ffffff 100%
+    );
 }
 .journeyGrid {
   display: grid;
@@ -62,6 +74,9 @@
   align-items: center;
   gap: 28px;
   margin-top: 36px;
+}
+.hero .actions {
+  margin-top: 24px;
 }
 .actions a,
 .finalActions a {
