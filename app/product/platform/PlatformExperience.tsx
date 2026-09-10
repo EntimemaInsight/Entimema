@@ -414,6 +414,15 @@ function ArchitectureStack({
   labelsProgress: number;
 }) {
   const layerGap = 18 + entryProgress * 20 + progress * 19;
+  const firstMicro = 1 / 3;
+  const secondMicro = 2 / 3;
+  const entryOffset =
+    entryProgress <= firstMicro
+      ? (entryProgress / firstMicro) * 8.22
+      : entryProgress <= secondMicro
+        ? 8.22 + ((entryProgress - firstMicro) / firstMicro) * (28.17 - 8.22)
+        : 28.17 +
+          ((entryProgress - secondMicro) / firstMicro) * (46.26 - 28.17);
 
   return (
     <div
@@ -421,7 +430,7 @@ function ArchitectureStack({
       style={
         {
           "--progress": progress,
-          "--stack-x": `${entryProgress * 42 + progress * 12}px`,
+          "--stack-x": `${entryOffset + progress * 12}px`,
           "--stack-y": `${entryProgress * 2}px`,
           "--active-lift": `${10 + progress * 17}px`,
           "--labels-opacity": labelsProgress,
@@ -494,7 +503,7 @@ export default function PlatformExperience() {
         const entryRaw = Math.min(1, travelled / 240);
         const revealRaw = Math.max(0, Math.min(1, (travelled - 420) / 240));
         setProgress(rawProgress);
-        setEntryProgress(Math.pow(entryRaw, 1.5));
+        setEntryProgress(entryRaw);
         setLabelsProgress(revealRaw * revealRaw * (3 - 2 * revealRaw));
       }
     };
