@@ -14,16 +14,14 @@ export default function Hero() {
           subtitleClassName="hero__description hero__description--editorial"
           title={
             <>
-              <span>See the decision</span>
-              <span className="hero__accent">before you make it.</span>
+              <span>Turn financial data into</span>
+              <span className="hero__accent">decisions you can defend.</span>
             </>
           }
           subtitle={
             <>
-              Model the numbers.<br />
-              Measure the risk.<br />
-              Understand the consequences.<br />
-              Then decide.
+              Entimema combines specialized AI, deterministic controls and human review<br />
+              to produce validated, traceable and decision-ready financial outputs.
             </>
           }
         >

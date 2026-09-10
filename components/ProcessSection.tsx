@@ -16,7 +16,7 @@ export default function ProcessSection() {
               <em>understand what moves the outcome.</em>
             </>
           }
-          subtitle={<>The context changes.<br />The logic shouldn&apos;t.</>}
+          subtitle={<>The context changes.<br />The controls remain explicit.</>}
         />
 
         <DynamicArchitectureCanvas />

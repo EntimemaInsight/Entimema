@@ -5,14 +5,14 @@ import { SectionHeader } from "./ui";
 
 const metrics = [
   {
-    title: "Connected Data",
-    description: "Faster decisions through a shared information structure",
+    title: "Structured Financial Data",
+    description: "Reported values, definitions and periods brought into one consistent view.",
     href: "#about",
     ariaLabel: "Go to the financial architecture and connected data section",
   },
   {
-    title: "Intelligent Automation",
-    description: "Less manual work across financial and risk processes",
+    title: "Controlled Analysis",
+    description: "AI interpretation combined with deterministic validation, exceptions and human review.",
     href: "#approach",
     ariaLabel: "Go to the automation and decision architecture section",
   },
@@ -90,11 +90,10 @@ export default function PhilosophySection() {
             <span className="philosophy-quote-card__mark" aria-hidden="true">“</span>
             <div className="philosophy-quote-card__principle"><i /><span>PRINCIPLE</span></div>
             <p>
-              <span>The numbers are rarely the problem.</span>
-              <span className="philosophy-quote-card__muted">The structure behind them is.</span>
-              <span>Businesses rarely lack information.</span>
-              <span>What they often lack is the <em>structure</em> to turn that information into</span>
-              <span><strong>clear, consistent and defensible decisions.</strong></span>
+              <span>Businesses rarely lack financial information.</span>
+              <span className="philosophy-quote-card__muted">What they lack is a controlled way</span>
+              <span>to turn it into validated, consistent</span>
+              <span><strong>and decision-ready outputs.</strong></span>
             </p>
           </blockquote>
 

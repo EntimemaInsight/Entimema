@@ -45,7 +45,7 @@ export function createHomeSchema() {
         name: "Entimema",
         url: SITE_URL,
         logo: `${SITE_URL}/entimema-logo.png`,
-        description: "Entimema connects finance, risk, data, models and technology to build clearer decision systems for real business environments.",
+        description: "Entimema turns financial and risk data into validated, traceable and decision-ready outputs through specialized AI, deterministic controls and human review.",
         founder: { "@id": FOUNDER_ID },
         knowsAbout: { "@id": FINAI_ID },
       },

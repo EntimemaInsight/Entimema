@@ -84,16 +84,15 @@ export default function ApproachSection() {
           subtitleClassName="approach-section__lead reveal reveal--2"
           title={
             <>
-              <span>Your numbers are connected.</span>
-              <span className="approach-section__accent">Your decisions should be too.</span>
+              <span>Financial data is only useful when</span>
+              <span className="approach-section__accent">the decision logic is clear.</span>
             </>
           }
           subtitle={
             <>
-              Margins affect cash.<br />
-              Cash changes risk.<br />
-              Risk changes decisions.<br />
-              We connect the system behind them.
+              Performance affects cash. Cash changes risk.<br />
+              Entimema connects financial evidence, validation and expert review<br />
+              around the decisions that follow.
             </>
           }
         />

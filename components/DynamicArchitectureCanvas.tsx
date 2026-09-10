@@ -12,12 +12,12 @@ type Card = {
 };
 
 const cards: readonly Card[] = [
-  { title: "Financial Data", meta: "P&L · Cash Flow · Budget", eyebrow: "SOURCE 01", statuses: ["Syncing", "Validated", "Modeled", "Live"], group: "finance" },
-  { title: "Operating Signals", meta: "Process · Capacity · KPI", eyebrow: "SOURCE 02", statuses: ["Reading", "Mapped", "Connected", "Live"], group: "operations" },
+  { title: "Source Evidence", meta: "P&L · Cash Flow · Budget", eyebrow: "SOURCE 01", statuses: ["Registered", "Validated", "Mapped", "Reviewed"], group: "finance" },
+  { title: "Business Drivers", meta: "Process · Capacity · KPI", eyebrow: "SOURCE 02", statuses: ["Registered", "Mapped", "Aligned", "Reviewed"], group: "operations" },
   { title: "Business Context", meta: "Goals · Constraints · Priorities", eyebrow: "CONTEXT", statuses: ["Parsing", "Structured", "Aligned", "Ready"], group: "operations" },
-  { title: "Risk Factors", meta: "Exposure · Scenarios · Controls", eyebrow: "RISK CORE", statuses: ["Scanning", "Flagged", "Stress-tested", "Controlled"], group: "risk" },
-  { title: "Market Environment", meta: "Trends · Competition · Demand", eyebrow: "EXTERNAL", statuses: ["Tracking", "Compared", "Weighted", "Current"], group: "finance" },
-  { title: "Decision Criteria", meta: "Impact · Resilience · Velocity", eyebrow: "GOVERNANCE", statuses: ["Defining", "Scored", "Prioritized", "Approved"], group: "risk" },
+  { title: "Risk & Scenarios", meta: "Exposure · Scenarios · Controls", eyebrow: "RISK CORE", statuses: ["Registered", "Mapped", "Evaluated", "Reviewed"], group: "risk" },
+  { title: "External Context", meta: "Trends · Competition · Demand", eyebrow: "EXTERNAL", statuses: ["Registered", "Mapped", "Aligned", "Reviewed"], group: "finance" },
+  { title: "Review & Approval", meta: "Impact · Resilience · Materiality", eyebrow: "GOVERNANCE", statuses: ["Registered", "Mapped", "Reviewed", "Approved"], group: "risk" },
 ] as const;
 
 const phaseLabels = [
@@ -39,9 +39,9 @@ const paths = [
 ] as const;
 
 const layers = [
-  ["01", "Trusted Context", "Normalized inputs. Shared definitions. One source of truth."],
-  ["02", "Decision Models", "Dependencies, scenarios and trade-offs made visible."],
-  ["03", "Governance Logic", "Clear controls, ownership and measurable decision criteria."],
+  ["01", "Trusted Context", "Source data, definitions and assumptions remain visible."],
+  ["02", "Validated Analysis", "AI interpretation is checked through deterministic financial and risk logic."],
+  ["03", "Human Control", "Exceptions, material judgement and approval remain explicit."],
 ] as const;
 
 export default function DynamicArchitectureCanvas() {
@@ -157,8 +157,8 @@ export default function DynamicArchitectureCanvas() {
       <section className={styles.architecture} aria-label="Management architecture">
         <header className={styles.architectureHeader}>
           <span className={styles.architectureIcon} aria-hidden="true"><i /><i /><i /></span>
-          <span><small>ENTIMEMA INTELLIGENCE</small><strong>Decision Architecture</strong></span>
-          <b>LIVE</b>
+          <span><small>ENTIMEMA INTELLIGENCE</small><strong>Controlled Decision Workflow</strong></span>
+          <b>Illustrative framework</b>
         </header>
         <div className={styles.layers}>
           {layers.map(([number, title, description], index) => (
@@ -172,7 +172,7 @@ export default function DynamicArchitectureCanvas() {
 
       <div className={styles.decision}>
         <span className={styles.decisionIcon} aria-hidden="true">✓</span>
-        <span><small>OUTPUT / VERIFIED</small><strong>Decision Ready</strong><span>Clear.<br />Measurable.<br />Ready for action.</span></span>
+        <span><small>DECISION-READY / TRACEABLE</small><strong>Validated Output</strong><span>Clear.<br />Reviewable.<br />Ready to use.</span></span>
         <i className={styles.decisionSignal} aria-hidden="true" />
       </div>
     </div>

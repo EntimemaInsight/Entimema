@@ -11,8 +11,8 @@ import CaseCtaSection from "@/components/CaseCtaSection";
 import { createHomeSchema, serializeJsonLd } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
-  title: "Entimema | Financial Architecture, Decision Science & AI",
-  description: "Financial architecture, decision science and AI agents for better financial, risk and management decisions.",
+  title: "Entimema | Controlled AI Workflows for Finance & Risk",
+  description: "Entimema turns financial and risk data into validated, traceable and decision-ready outputs through specialized AI, deterministic controls and human review.",
   alternates: { canonical: "/" },
 };
 

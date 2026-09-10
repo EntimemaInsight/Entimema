@@ -50,25 +50,25 @@ type Scene = {
 const scenes: Record<Mode, Scene> = {
   finance: {
     mode: "finance",
-    name: "Illustrative CFO Workspace",
-    role: "Chief Financial Officer",
+    name: "Illustrative Financial Review Workspace",
+    role: "Finance team",
     image: "/elena-angelova-v2.webp",
     company: "Example Scenario",
     industry: "Manufacturing",
     period: "FY 2026",
-    leftTitle: "Financial Intelligence",
-    leftSteps: ["Connecting to ERP…", "Reading financial data…", "Checking consistency…", "Detecting anomalies…"],
-    leftResult: "Insights generated.",
-    leftMeta: "8 key findings.",
-    rightTitle: "Management Intelligence",
-    rightSteps: ["Analyzing performance…", "Running scenarios…", "Evaluating key drivers…", "Generating insights…"],
-    rightResult: "Performance view ready.",
-    rightMeta: "5 actions recommended.",
+    leftTitle: "Financial Intelligence · Controlled workflow",
+    leftSteps: ["Reading source document…", "Structuring financial values…", "Running deterministic checks…", "Linking outputs to evidence…"],
+    leftResult: "Validated financial output ready.",
+    leftMeta: "Source evidence linked.",
+    rightTitle: "Financial Analysis · Controlled workflow",
+    rightSteps: ["Analysing performance…", "Calculating verified KPIs…", "Reviewing material changes…", "Preparing traceable findings…"],
+    rightResult: "Decision-ready analysis prepared.",
+    rightMeta: "Findings ready for review.",
     outputStates: [
-      { title: "Collecting data…", text: "ERP, budget and operational inputs are being synchronized." },
-      { title: "Building financial model…", text: "Drivers, margins and cash-flow dependencies are being mapped." },
-      { title: "Running scenarios…", text: "Base, stress and opportunity cases are being evaluated." },
-      { title: "Decision Ready", text: "Management decision is ready for executive review." },
+      { title: "Preparing source data…", text: "Source documents and financial data are being prepared for controlled analysis." },
+      { title: "Structuring financial values…", text: "Reported values, periods and units are being aligned." },
+      { title: "Running validation checks…", text: "Deterministic controls and material exceptions are being evaluated." },
+      { title: "Validated Output Ready", text: "Traceable financial analysis is ready for human review." },
     ],
   },
   risk: {
@@ -118,7 +118,7 @@ function AgentPanel({ side, scene, activeStep }: { side: "left" | "right"; scene
     <article className={`executive-agent executive-agent--${side} executive-agent--${accent}`}>
       <header className="executive-agent__header">
         <span className="executive-agent__icon"><MiniIcon type={side === "left" ? "brain" : finance ? "chart" : "shield"} /></span>
-        <span><strong>{title}</strong><small>AI Agent · Live</small></span>
+        <span><strong>{title}</strong><small>Specialized AI · Human review</small></span>
         <i className="executive-agent__live" aria-hidden="true" />
       </header>
       <div className="executive-agent__steps">

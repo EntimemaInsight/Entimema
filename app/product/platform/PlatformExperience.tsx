@@ -620,7 +620,7 @@ export default function PlatformExperience() {
           <div className={styles.copyColumn}>
             <header className={styles.hero}>
               <h1>
-                Turn financial data into decisions you can <em>defend.</em>
+                Turn financial data into <em>validated, decision-ready outputs.</em>
               </h1>
               <p className={styles.heroLead}>
                 One controlled platform for turning financial documents and
