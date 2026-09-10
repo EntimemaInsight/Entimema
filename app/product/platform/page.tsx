@@ -4,9 +4,9 @@ import Navbar from "@/components/Navbar";
 import PlatformExperience from "./PlatformExperience";
 
 export const metadata: Metadata = {
-  title: "Controlled Financial Intelligence Platform | Entimema",
+  title: "Entimema Finance Platform | Controlled Financial Intelligence",
   description:
-    "One controlled architecture connecting financial evidence, canonical context, deterministic validation, human review and decision-ready workflows.",
+    "Turn financial documents and data into validated, traceable and decision-ready outputs with the Entimema Finance Platform.",
   alternates: { canonical: "https://www.entimema.com/product/platform" },
 };
 

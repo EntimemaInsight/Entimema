@@ -24,10 +24,10 @@ test("product panel exposes the platform, agent control and current product rele
   assert.match(productMenu, /productDestinations/);
   assert.match(productMenu, /productFeature/);
   assert.match(menuContent, /Financial Intelligence V1/);
-  assert.match(menuContent, /Platform overview/);
+  assert.match(menuContent, /Entimema Finance Platform/);
   assert.match(menuContent, /AI Agent Manager/);
   assert.match(productMenu, /<h3>See how it works<\/h3>/);
-  assert.match(menuContent, /Explore the controlled financial workflow/);
+  assert.match(menuContent, /See how financial data becomes a controlled, decision-ready output/);
   assert.match(menuContent, /Build and govern financial AI agents/);
   assert.match(menuContent, /See how financial evidence becomes a controlled, reviewable decision/);
   assert.doesNotMatch(productMenu, /Decision Workspace|Intelligent Intake|Exception Workspace/);

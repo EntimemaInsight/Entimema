@@ -8,58 +8,58 @@ import styles from "./platform.module.css";
 const layers = [
   {
     number: "01",
-    label: "Evidence Infrastructure",
-    title: "Every conclusion begins with evidence.",
+    label: "Source Evidence & Lineage",
+    title: "Every financial result starts with its source.",
     benefits: [
-      ["Bind every value", "to its source file, sheet, cell or page."],
-      ["Preserve original meaning", "across extraction and normalization."],
-      ["Review the evidence", "before any conclusion reaches a decision."],
+      ["Trace every value", "to its original file, sheet, cell or page."],
+      ["Preserve reported meaning", "throughout extraction and transformation."],
+      ["Review the supporting evidence", "behind every material output."],
     ],
   },
   {
     number: "02",
-    label: "Financial Context Layer",
-    title: "Different documents. One financial language.",
+    label: "Financial Data & Context",
+    title: "Different formats. One consistent financial structure.",
     benefits: [
-      ["Align every period", "without breaking the connection to source."],
-      ["Normalize definitions", "into one controlled financial language."],
-      ["Retain reported labels", "beside every canonical mapping."],
+      ["Align periods and units", "while preserving the original source."],
+      ["Map reported data", "into a consistent financial structure."],
+      ["Keep original labels visible", "beside every standardized value."],
     ],
   },
   {
     number: "03",
-    label: "Control & Validation Engine",
-    title: "AI interprets. Controls determine what can be trusted.",
+    label: "Validation & Control Engine",
+    title: "AI interprets the data. Deterministic controls verify the result.",
     benefits: [
-      ["Recalculate every total", "with deterministic, code-owned logic."],
-      ["Expose every difference", "as an explicit, reviewable exception."],
-      ["Block unsupported outputs", "before they reach decision-makers."],
+      ["Recalculate totals and KPIs", "using code-owned financial logic."],
+      ["Surface discrepancies", "as explicit, reviewable exceptions."],
+      ["Block unsupported results", "before they enter the decision process."],
     ],
   },
   {
     number: "04",
-    label: "Decision Workspace",
-    title: "Uncertainty is surfaced—not hidden.",
+    label: "Human Review Workspace",
+    title: "Exceptions are resolved before results are approved.",
     benefits: [
       [
-        "See the full context",
-        "with findings, calculations and evidence together.",
+        "Review findings, calculations and evidence",
+        "in one workspace.",
       ],
-      ["Investigate exceptions", "without leaving the decision record."],
-      ["Keep authority human", "wherever material judgment is required."],
+      ["Investigate material exceptions", "without losing their context."],
+      ["Keep expert judgment in control", "wherever interpretation is required."],
     ],
   },
   {
     number: "05",
-    label: "Decision-ready Output",
-    title: "A result that can survive the next question.",
+    label: "Decision-ready Outputs",
+    title: "Validated financial intelligence, ready to use.",
     benefits: [
       [
-        "Deliver verified analysis",
-        "with every conclusion linked to evidence.",
+        "Receive structured financial outputs",
+        "backed by source evidence.",
       ],
-      ["Export one controlled record", "for review, challenge and reuse."],
-      ["Defend the result", "with complete lineage from source to decision."],
+      ["Export a controlled record", "for review, analysis and reuse."],
+      ["Trace every material result", "from the final output back to source."],
     ],
   },
 ] as const;
@@ -611,7 +611,7 @@ export default function PlatformExperience() {
     <div className={styles.page}>
       <section
         className={styles.journey}
-        aria-label="Financial intelligence platform architecture"
+        aria-label="Entimema Finance Platform architecture"
       >
         <div
           className={`site-container ${styles.journeyGrid}`}
@@ -620,16 +620,16 @@ export default function PlatformExperience() {
           <div className={styles.copyColumn}>
             <header className={styles.hero}>
               <h1>
-                Financial intelligence, built to be <em>defended.</em>
+                Turn financial data into decisions you can <em>defend.</em>
               </h1>
               <p className={styles.heroLead}>
-                From source evidence to a decision-ready output—inside one
-                controlled, traceable system.
+                One controlled platform for turning financial documents and
+                data into validated, traceable and decision-ready outputs.
               </p>
               <div className={styles.actions}>
                 <DemoTrigger
                   className="primary-cta hero__cta"
-                  initialInterest="Platform overview"
+                  initialInterest="Entimema Finance Platform"
                 />
               </div>
             </header>
@@ -669,8 +669,8 @@ export default function PlatformExperience() {
       <section className={styles.finalCta}>
         <div className="site-container">
           <h2>
-            Turn financial documents into verified intelligence your team can
-            defend.
+            Turn financial documents into validated outputs your team can
+            trust—and defend.
           </h2>
           <div className={styles.finalActions}>
             <DemoTrigger

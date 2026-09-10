@@ -1,7 +1,7 @@
 export const productDestinations = [
   {
-    title: "Platform overview",
-    description: "Explore the controlled financial workflow.",
+    title: "Entimema Finance Platform",
+    description: "See how financial data becomes a controlled, decision-ready output.",
     href: "/product/platform",
   },
   {
