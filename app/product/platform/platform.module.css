@@ -163,7 +163,10 @@
   height: 690px;
   width: 100%;
   isolation: isolate;
-  background-image: radial-gradient(rgba(108, 107, 222, 0.14) 1px, transparent 1px);
+  background-image: radial-gradient(
+    rgba(108, 107, 222, 0.14) 1px,
+    transparent 1px
+  );
   background-size: 13px 13px;
   mask-image: linear-gradient(90deg, transparent 0%, #000 13%, #000 100%);
 }
@@ -174,27 +177,28 @@
   inset: 8% -8% 3% 9%;
   border-radius: 50%;
   background:
-    radial-gradient(circle at 72% 31%, rgba(214, 255, 105, 0.12), transparent 26%),
+    radial-gradient(
+      circle at 72% 31%,
+      rgba(214, 255, 105, 0.12),
+      transparent 26%
+    ),
     radial-gradient(circle at 62% 48%, rgba(102, 91, 201, 0.2), transparent 53%);
   filter: blur(34px);
 }
 .stack {
   position: absolute;
   z-index: 8;
-  right: -1%;
+  right: 0;
   top: 1%;
-  width: 54%;
+  width: clamp(370px, 31vw, 450px);
   height: 500px;
   perspective: 1500px;
-  transform: translate(
-    calc(var(--progress) * 18px),
-    calc(var(--progress) * 5px)
-  );
+  transform: translate(var(--stack-x), var(--stack-y));
   transform-style: preserve-3d;
 }
 .stackLayer {
   position: absolute;
-  inset: calc(var(--layer) * 58px) 0 auto;
+  inset: var(--layer-y) 0 auto;
   height: auto;
   aspect-ratio: 1;
   padding: 24px 26px;
@@ -204,7 +208,11 @@
   border: 1px solid rgba(234, 232, 255, 0.34);
   border-radius: 22px;
   background:
-    radial-gradient(circle at 22% 4%, rgba(255, 255, 255, 0.28), transparent 34%),
+    radial-gradient(
+      circle at 22% 4%,
+      rgba(255, 255, 255, 0.28),
+      transparent 34%
+    ),
     linear-gradient(145deg, #aaa7ef 0%, #8d89da 54%, #7773c5 100%);
   color: rgba(255, 255, 255, 0.78);
   box-shadow:
@@ -216,6 +224,7 @@
   transform-origin: center;
   backface-visibility: hidden;
   transition:
+    inset 0.08s linear,
     transform 0.72s cubic-bezier(0.16, 1, 0.3, 1),
     opacity 0.55s ease,
     filter 0.55s ease,
@@ -239,14 +248,19 @@
   color: #fff;
   border-color: rgba(255, 255, 255, 0.72);
   background:
-    radial-gradient(circle at 18% 4%, rgba(255, 255, 255, 0.24), transparent 34%),
+    radial-gradient(
+      circle at 18% 4%,
+      rgba(255, 255, 255, 0.24),
+      transparent 34%
+    ),
     linear-gradient(145deg, #7167d9 0%, #665bc9 55%, #5b50bc 100%);
   box-shadow:
     0 38px 58px rgba(80, 71, 175, 0.3),
     0 9px 0 #5349a8,
     0 0 42px rgba(103, 92, 211, 0.22),
     inset 0 1px rgba(255, 255, 255, 0.32);
-  transform: translate(-8px, -27px) rotateX(59deg) rotateZ(-45deg) translateZ(18px);
+  transform: translate(-6px, calc(-1 * var(--active-lift))) rotateX(59deg)
+    rotateZ(-45deg) translateZ(18px);
 }
 .activeLayer:after {
   content: "";
@@ -331,8 +345,14 @@
   font-weight: 800;
 }
 @keyframes labelsIn {
-  from { opacity: 0; transform: translate(-12px, 12px); }
-  to { opacity: 1; transform: none; }
+  from {
+    opacity: 0;
+    transform: translate(-12px, 12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 .screenFrame {
   position: absolute;
