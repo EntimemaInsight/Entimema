@@ -8,22 +8,24 @@
   color: var(--blue);
   overflow: clip;
 }
+.journey {
+  background:
+    radial-gradient(
+      circle at 86% 8%,
+      rgba(243, 109, 47, 0.12),
+      transparent 18%
+    ),
+    linear-gradient(180deg, #fff 0%, #f8fafc 17%, var(--paper) 34%);
+}
+.journeyGrid {
+  display: grid;
+  grid-template-columns: minmax(420px, 0.84fr) minmax(560px, 1.16fr);
+  align-items: start;
+  gap: clamp(48px, 6vw, 100px);
+}
 .hero {
   min-height: calc(100vh - 90px);
   padding: clamp(100px, 10vw, 155px) 0 70px;
-  background:
-    radial-gradient(
-      circle at 86% 22%,
-      rgba(243, 109, 47, 0.12),
-      transparent 25%
-    ),
-    linear-gradient(180deg, #fff, #f8fafc);
-}
-.heroGrid {
-  display: grid;
-  grid-template-columns: minmax(420px, 0.84fr) minmax(560px, 1.16fr);
-  align-items: center;
-  gap: clamp(48px, 6vw, 100px);
 }
 .eyebrow,
 .architectureIntro > p,
@@ -104,40 +106,14 @@
   font-weight: 740;
   letter-spacing: 0.08em;
 }
-.heroVisual {
-  position: relative;
-  height: 650px;
-}
-.heroHalo {
-  position: absolute;
-  inset: 4% 2% 3%;
-  background:
-    radial-gradient(
-      circle at 46% 40%,
-      rgba(243, 109, 47, 0.16),
-      transparent 34%
-    ),
-    radial-gradient(circle at 68% 45%, rgba(7, 27, 77, 0.22), transparent 54%);
-  filter: blur(45px);
-}
-.architecture {
-  padding: 0;
-  background: var(--paper);
-}
-.architectureGrid {
-  display: grid;
-  grid-template-columns: minmax(360px, 0.68fr) minmax(760px, 1.32fr);
-  gap: clamp(34px, 3.8vw, 68px);
-  margin-top: 0;
-}
 .stickyColumn {
   position: sticky;
-  top: 88px;
-  height: calc(100vh - 88px);
+  top: 54px;
+  height: calc(100vh - 54px);
   min-height: 680px;
   display: grid;
   align-items: start;
-  padding-top: 18px;
+  padding-top: 42px;
 }
 .visualStage {
   position: relative;
@@ -171,7 +147,7 @@
   z-index: 8;
   right: 0;
   top: 1%;
-  width: clamp(370px, 31vw, 450px);
+  width: clamp(390px, 32.5vw, 475px);
   height: 500px;
   perspective: 1500px;
   transform: translate(var(--stack-x), var(--stack-y));
@@ -945,20 +921,17 @@
   }
 }
 @media (max-width: 1180px) {
-  .heroGrid {
+  .journeyGrid {
     grid-template-columns: 1fr;
+    gap: 0;
   }
-  .hero {
-    min-height: auto;
-  }
-  .heroVisual {
-    height: 700px;
-  }
-  .architectureGrid {
-    grid-template-columns: 1fr;
+  .copyColumn {
+    z-index: 3;
+    grid-area: 1 / 1;
   }
   .stickyColumn {
     z-index: 2;
+    grid-area: 1 / 1;
     height: 72vh;
     min-height: 650px;
     margin-inline: -24px;
@@ -970,12 +943,9 @@
     height: 650px;
     margin: auto;
   }
-  .copyColumn {
-    z-index: 3;
-  }
   .storyStep {
     max-width: 760px;
-    margin-left: auto;
+    margin-left: 0;
     padding: 48vh 0 12vh;
   }
   .proofGrid {
@@ -989,9 +959,6 @@
   .hero h1 {
     font-size: clamp(50px, 14vw, 68px);
   }
-  .heroGrid {
-    gap: 40px;
-  }
   .heroLead {
     font-size: 17px;
   }
@@ -1003,21 +970,6 @@
     flex-direction: column;
     gap: 10px;
   }
-  .heroVisual {
-    height: 430px;
-  }
-  .heroVisual .stack {
-    transform: scale(0.72);
-    transform-origin: top left;
-  }
-  .heroVisual .screenFrame {
-    width: 104%;
-    right: -6%;
-    bottom: 0;
-  }
-  .architectureGrid {
-    margin-top: 0;
-  }
   .stickyColumn {
     height: 56vh;
     min-height: 460px;
@@ -1028,8 +980,8 @@
     height: 455px;
   }
   .stack {
-    transform: scale(0.58);
-    transform-origin: top left;
+    transform: translate(var(--stack-x), var(--stack-y)) scale(0.58);
+    transform-origin: top right;
   }
   .screenFrame {
     width: 105%;
