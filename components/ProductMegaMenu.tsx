@@ -93,12 +93,18 @@ export default function ProductMegaMenu({ active = false }: { active?: boolean }
             <section className={styles.platform}>
               <h3>See how it works</h3>
               <div className={styles.links}>
-                {productDestinations.map((item) => (
-                  <Link className={styles.item} href={item.href} key={item.title} onClick={close}>
-                    <strong>{item.title}</strong>
-                    <small>{item.description}</small>
-                  </Link>
-                ))}
+                <div className={styles.linkColumn}>
+                  {productDestinations.filter((item) => item.group === "platform").map((item) => "href" in item ? (
+                    <Link className={styles.item} href={item.href} key={item.title} onClick={close}><strong>{item.title}</strong><small>{item.description}</small></Link>
+                  ) : (
+                    <div className={`${styles.item} ${styles.upcomingItem}`} key={item.title}><div className={styles.itemHeading}><strong>{item.title}</strong><span>{item.status}</span></div><small>{item.description}</small></div>
+                  ))}
+                </div>
+                <div className={styles.linkColumn}>
+                  {productDestinations.filter((item) => item.group === "capability").map((item) => "href" in item ? (
+                    <Link className={styles.item} href={item.href} key={item.title} onClick={close}><strong>{item.title}</strong><small>{item.description}</small></Link>
+                  ) : null)}
+                </div>
               </div>
             </section>
           </div>

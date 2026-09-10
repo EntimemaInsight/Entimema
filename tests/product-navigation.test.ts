@@ -25,6 +25,8 @@ test("product panel exposes the platform, agent control and current product rele
   assert.match(productMenu, /productFeature/);
   assert.match(menuContent, /Financial Intelligence V1/);
   assert.match(menuContent, /Entimema Finance Platform/);
+  assert.match(menuContent, /Entimema Risk Platform/);
+  assert.match(menuContent, /Coming soon/);
   assert.match(menuContent, /AI Agent Manager/);
   assert.match(productMenu, /<h3>See how it works<\/h3>/);
   assert.match(menuContent, /See how financial data becomes a controlled, decision-ready output/);

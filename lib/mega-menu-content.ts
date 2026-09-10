@@ -3,11 +3,19 @@ export const productDestinations = [
     title: "Entimema Finance Platform",
     description: "See how financial data becomes a controlled, decision-ready output.",
     href: "/product/platform",
+    group: "platform",
+  },
+  {
+    title: "Entimema Risk Platform",
+    description: "Controlled infrastructure for credit and risk decision workflows.",
+    status: "Coming soon",
+    group: "platform",
   },
   {
     title: "AI Agent Manager",
     description: "Build and govern financial AI agents.",
     href: "/product/ai-agent-manager",
+    group: "capability",
   },
 ] as const;
 
