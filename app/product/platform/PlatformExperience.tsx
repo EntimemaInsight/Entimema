@@ -413,7 +413,7 @@ function ArchitectureStack({
   entryProgress: number;
   labelsProgress: number;
 }) {
-  const layerGap = 18 + entryProgress * 20 + progress * 19;
+  const layerGap = 62 + entryProgress * 5 + progress * 7;
   const firstMicro = 1 / 3;
   const secondMicro = 2 / 3;
   const entryOffset =
@@ -449,6 +449,7 @@ function ArchitectureStack({
             style={
               {
                 "--layer-y": `${index * layerGap}px`,
+                zIndex: layers.length - index,
               } as CSSProperties
             }
             key={layer.label}
