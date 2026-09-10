@@ -405,10 +405,16 @@ function EvidenceLabels({ active }: { active: number }) {
 function ArchitectureStack({
   active,
   progress,
+  showLabels = true,
 }: {
   active: number;
   progress: number;
+  showLabels?: boolean;
 }) {
+  const labelsProgress = showLabels
+    ? Math.max(0, Math.min(1, progress / 0.07))
+    : 0;
+
   return (
     <div
       className={styles.visualStage}
@@ -418,6 +424,9 @@ function ArchitectureStack({
           "--stack-x": `${progress * 34}px`,
           "--stack-y": `${progress * 4}px`,
           "--active-lift": `${10 + progress * 17}px`,
+          "--labels-opacity": labelsProgress,
+          "--labels-x": `${(1 - labelsProgress) * -22}px`,
+          "--labels-blur": `${(1 - labelsProgress) * 5}px`,
         } as CSSProperties
       }
     >
@@ -439,7 +448,7 @@ function ArchitectureStack({
           </div>
         ))}
       </div>
-      <EvidenceLabels active={active} />
+      {showLabels && <EvidenceLabels active={active} />}
     </div>
   );
 }
@@ -527,7 +536,7 @@ export default function PlatformExperience() {
           </div>
           <div className={styles.heroVisual}>
             <div className={styles.heroHalo} />
-            <ArchitectureStack active={0} progress={0} />
+            <ArchitectureStack active={0} progress={0} showLabels={false} />
           </div>
         </div>
       </section>
@@ -535,7 +544,7 @@ export default function PlatformExperience() {
         className={styles.architecture}
         aria-labelledby="architecture-heading"
       >
-        <div className={styles.architectureIntro}>
+        <div className={`site-container ${styles.architectureIntro}`}>
           <p>ONE CONTROLLED ARCHITECTURE</p>
           <h2 id="architecture-heading">
             Five connected layers.
