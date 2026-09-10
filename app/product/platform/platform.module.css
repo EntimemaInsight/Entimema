@@ -158,9 +158,9 @@
   transform-style: preserve-3d;
 }
 .stackLayer {
-  --layer-highlight: #719ab6;
-  --layer-mid: #496f90;
-  --layer-shadow: #2e5372;
+  --layer-highlight: #234e80;
+  --layer-mid: #123665;
+  --layer-shadow: #071b4d;
   appearance: none;
   position: absolute;
   inset: var(--layer-y) 0 auto;
@@ -207,24 +207,24 @@
     border-color 0.64s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .stackLayer:nth-child(2) {
-  --layer-highlight: #789fba;
-  --layer-mid: #4f7898;
-  --layer-shadow: #315875;
+  --layer-highlight: #b8c6e6;
+  --layer-mid: #97a7d2;
+  --layer-shadow: #7184b7;
 }
 .stackLayer:nth-child(3) {
-  --layer-highlight: #83a9c2;
-  --layer-mid: #587f9e;
-  --layer-shadow: #365d78;
+  --layer-highlight: #b4c2e2;
+  --layer-mid: #92a3cd;
+  --layer-shadow: #6c7fb2;
 }
 .stackLayer:nth-child(4) {
-  --layer-highlight: #8eb2c8;
-  --layer-mid: #6389a5;
-  --layer-shadow: #42667f;
+  --layer-highlight: #b0bdde;
+  --layer-mid: #8c9cc7;
+  --layer-shadow: #6679ac;
 }
 .stackLayer:nth-child(5) {
-  --layer-highlight: #99bccf;
-  --layer-mid: #6d92ab;
-  --layer-shadow: #4c7087;
+  --layer-highlight: #acb8d9;
+  --layer-mid: #8797c1;
+  --layer-shadow: #6173a5;
 }
 .stackLayer::before {
   content: "";
