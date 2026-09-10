@@ -154,6 +154,7 @@
   transform-style: preserve-3d;
 }
 .stackLayer {
+  appearance: none;
   position: absolute;
   inset: var(--layer-y) 0 auto;
   height: auto;
@@ -171,6 +172,9 @@
     ),
     linear-gradient(145deg, #aaa7ef 0%, #8d89da 54%, #7773c5 100%);
   color: rgba(255, 255, 255, 0.78);
+  font: inherit;
+  text-align: initial;
+  cursor: pointer;
   box-shadow:
     0 28px 36px rgba(83, 77, 160, 0.18),
     0 8px 0 #706cbd,
@@ -195,19 +199,26 @@
 .stackLayer strong {
   position: absolute;
   z-index: 3;
-  right: 24px;
-  bottom: 19px;
+  right: 31px;
+  bottom: 25px;
   width: max-content;
   max-width: 78%;
   margin: 0;
   color: #fff;
-  font-size: clamp(12px, 0.9vw, 14px);
-  font-weight: 760;
+  font-size: clamp(15px, 1.06vw, 17px);
+  font-weight: 720;
   line-height: 1.2;
   letter-spacing: 0.005em;
   white-space: nowrap;
   text-align: right;
   text-shadow: 0 1px 8px rgba(30, 24, 92, 0.42);
+}
+.stackLayer:hover {
+  filter: saturate(1.06) brightness(1.04);
+}
+.stackLayer:focus-visible {
+  outline: 3px solid rgba(243, 109, 47, 0.88);
+  outline-offset: 5px;
 }
 .activeLayer {
   z-index: 12 !important;
