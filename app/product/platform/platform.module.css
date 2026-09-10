@@ -121,32 +121,14 @@
   filter: blur(45px);
 }
 .architecture {
-  padding: 120px 0 0;
+  padding: 0;
   background: var(--paper);
-}
-.architectureIntro {
-  text-align: left;
-}
-.architectureIntro h2 {
-  max-width: 1050px;
-  margin: 24px 0 20px;
-  font-size: clamp(48px, 5.3vw, 82px);
-  font-weight: 620;
-  line-height: 1.01;
-  letter-spacing: -0.06em;
-}
-.architectureIntro > span {
-  color: #78869a;
-  font-size: 12px;
-  font-weight: 650;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
 }
 .architectureGrid {
   display: grid;
   grid-template-columns: minmax(360px, 0.68fr) minmax(760px, 1.32fr);
   gap: clamp(34px, 3.8vw, 68px);
-  margin-top: 78px;
+  margin-top: 0;
 }
 .stickyColumn {
   position: sticky;
@@ -1033,14 +1015,8 @@
     right: -6%;
     bottom: 0;
   }
-  .architecture {
-    padding-top: 82px;
-  }
-  .architectureIntro h2 {
-    font-size: clamp(41px, 11vw, 57px);
-  }
   .architectureGrid {
-    margin-top: 30px;
+    margin-top: 0;
   }
   .stickyColumn {
     height: 56vh;
