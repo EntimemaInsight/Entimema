@@ -479,7 +479,10 @@ export default function PlatformExperience() {
         last = steps.current.at(-1),
         grid = architectureGrid.current;
       if (first && last && grid) {
-        const start = grid.getBoundingClientRect().top + window.scrollY - 88;
+        const start =
+          grid.getBoundingClientRect().top +
+          window.scrollY -
+          window.innerHeight * 0.35;
         const end =
           last.getBoundingClientRect().bottom +
           window.scrollY -
@@ -488,8 +491,7 @@ export default function PlatformExperience() {
           0,
           Math.min(1, (window.scrollY - start) / Math.max(1, end - start)),
         );
-        const easedProgress = rawProgress * rawProgress * (3 - 2 * rawProgress);
-        setProgress(easedProgress);
+        setProgress(rawProgress);
       }
     };
     const onScroll = () => {
@@ -542,20 +544,12 @@ export default function PlatformExperience() {
       </section>
       <section
         className={styles.architecture}
-        aria-labelledby="architecture-heading"
+        aria-label="Financial intelligence architecture"
       >
-        <div className={`site-container ${styles.architectureIntro}`}>
-          <p>ONE CONTROLLED ARCHITECTURE</p>
-          <h2 id="architecture-heading">
-            Five connected layers.
-            <br />
-            <em>One standard of financial truth.</em>
-          </h2>
-          <span>Scroll through a real sanitised V1 acceptance run</span>
-        </div>
         <div
           className={`site-container ${styles.architectureGrid}`}
           ref={architectureGrid}
+          aria-label="Five connected financial intelligence layers"
         >
           <div className={styles.copyColumn}>
             {layers.map((layer, index) => (
