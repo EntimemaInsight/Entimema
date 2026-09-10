@@ -16,13 +16,13 @@ export const resourceStreams = {
   insights: {
     label: "Insights",
     href: "/resources",
-    description: "Practitioner-grade analysis for financial, risk and management decisions.",
+    description: "Practitioner research for finance, risk and management decisions.",
     themes: ["Credit Risk", "CFO & Finance", "Forecasting", "Cost & Profitability", "Financial Data & ERP", "Decision Intelligence"],
   },
   engineering: {
     label: "Engineering & Research",
     href: "/resources/engineering",
-    description: "Technical methods for reliable financial and decision systems.",
+    description: "Technical research, modelling and analytical implementation.",
     themes: ["Credit Risk Modelling", "Data Science", "Model Validation", "Decision Engines", "Analytical Automation"],
   },
 } as const satisfies Record<ResourceStream, { label: string; href: string; description: string; themes: readonly string[] }>;

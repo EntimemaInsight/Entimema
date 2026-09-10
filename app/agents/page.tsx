@@ -32,25 +32,25 @@ export default function AgentsPage() {
           <div className={`site-container ${styles.heroInner}`}>
             <div className={styles.proposition}>
               <h1 id="agents-title">
-                <span>Applied financial intelligence,</span>
-                <span className={styles.emphasis}>built for real decisions.</span>
+                <span>Specialized AI agents</span>
+                <span className={styles.emphasis}>for finance and risk.</span>
               </h1>
-              <p>Transform labor-intensive workflows that once took days into automated decisions delivered in moments—reducing cost, friction, and human error.</p>
+              <p>Explore focused capabilities designed to extract, validate, analyse and monitor financial and risk information within controlled, reviewable workflows.</p>
               <DemoTrigger className={styles.demoCta}>Get a demo</DemoTrigger>
             </div>
             <div className={styles.values} aria-label="Why Entimema agents">
               <div className={styles.valueGrid}>
                 <article className={styles.valuePanel}>
-                  <h2>Deploy faster.</h2>
-                  <p>Turn established financial and risk methodologies into operational workflows without rebuilding the analytical logic from scratch.</p>
+                  <h2>Start with proven methods.</h2>
+                  <p>Use finance and risk logic as the foundation for controlled workflows—not generic prompts or disconnected automation.</p>
                 </article>
                 <article className={styles.valuePanel}>
-                  <h2>Adapt to your decisions.</h2>
-                  <p>Configure inputs, thresholds, policies and decision logic around the way your institution actually operates.</p>
+                  <h2>Fit the operating model.</h2>
+                  <p>Design inputs, mappings, thresholds and review steps around your data, policies and materiality—not a generic process.</p>
                 </article>
                 <article className={styles.valuePanel}>
-                  <h2>Keep every decision accountable.</h2>
-                  <p>Preserve evidence, logic and outputs in a transparent workflow designed for review, governance and human oversight.</p>
+                  <h2>Keep every output traceable.</h2>
+                  <p>Connect outputs to source evidence, validation checks, exceptions and human review in one controlled workflow.</p>
                 </article>
               </div>
             </div>
