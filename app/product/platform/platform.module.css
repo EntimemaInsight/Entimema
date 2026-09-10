@@ -125,11 +125,10 @@
   background: var(--paper);
 }
 .architectureIntro {
-  width: min(1100px, calc(100% - 48px));
-  margin: auto;
-  text-align: center;
+  text-align: left;
 }
 .architectureIntro h2 {
+  max-width: 1050px;
   margin: 24px 0 20px;
   font-size: clamp(48px, 5.3vw, 82px);
   font-weight: 620;
@@ -295,7 +294,11 @@
   width: 35%;
   display: grid;
   gap: 15px;
-  animation: labelsIn 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: var(--labels-opacity);
+  filter: blur(var(--labels-blur));
+  transform: translateX(var(--labels-x));
+  pointer-events: none;
+  will-change: opacity, filter, transform;
 }
 .evidenceLabels > div {
   width: max-content;
@@ -343,16 +346,6 @@
   font-size: 11px;
   font-style: normal;
   font-weight: 800;
-}
-@keyframes labelsIn {
-  from {
-    opacity: 0;
-    transform: translate(-12px, 12px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
 }
 .screenFrame {
   position: absolute;
@@ -935,7 +928,7 @@
     ),
     var(--navy);
   color: #fff;
-  text-align: center;
+  text-align: left;
 }
 .finalCta h2 {
   margin: 25px 0 20px;
@@ -949,7 +942,7 @@
   font-size: 17px;
 }
 .finalActions {
-  justify-content: center;
+  justify-content: flex-start;
 }
 .lightCta {
   border-color: #fff;
