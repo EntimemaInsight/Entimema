@@ -142,9 +142,9 @@
   transform-style: preserve-3d;
 }
 .stackLayer {
-  --layer-highlight: #234e80;
-  --layer-mid: #123665;
-  --layer-shadow: #071b4d;
+  --layer-highlight: #dbeef6;
+  --layer-mid: #b8d5e4;
+  --layer-shadow: #88afc4;
   appearance: none;
   position: absolute;
   inset: var(--layer-y) 0 auto;
