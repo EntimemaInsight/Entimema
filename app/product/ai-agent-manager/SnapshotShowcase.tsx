@@ -4,6 +4,7 @@ import { useEffect, useRef, type ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./snapshot-showcase.module.css";
+import SourceDocuments from "./SourceDocuments";
 
 const screens = [
   {
@@ -67,7 +68,7 @@ export default function SnapshotShowcase() {
               <div className={styles.cardTop}><span>0{index + 1} / {screen.role}</span><span>Interface preview</span></div>
               <h3>{screen.agent}</h3>
               <p>{screen.summary}</p>
-              <div className={styles.cardImage}><Image src={`/product/ai-agent-manager/${screen.id}.webp`} alt="" width={1440} height={820} sizes="(max-width: 800px) 90vw, 400px" quality={90}/></div>
+              <SourceDocuments kind={screen.id}/>
             </article>)}
           </div>
         </Reveal>

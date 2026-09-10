@@ -31,3 +31,5 @@
 @media(prefers-reduced-motion:reduce){.reveal>.header,.reveal>.libraryGrid,.reveal>.snapshotWrap,.reveal[data-pending="true"]>.header,.reveal[data-pending="true"]>.libraryGrid,.reveal[data-pending="true"]>.snapshotWrap{opacity:1;transform:none;transition:none}}
 
 .libraryAction a{justify-content:center;text-align:center}
+
+.imageFrame{padding:clamp(7px,1.05vw,15px);border:2px solid #8c9098;border-radius:clamp(18px,2.8vw,38px);background:linear-gradient(135deg,#25282d 0%,#07090d 35%,#15191f 100%);box-shadow:0 0 0 1px #07101b,0 2px 2px #ffffff80 inset,0 30px 70px -25px #071b4d50,0 10px 22px -14px #071b4d40}.screenshot{border-radius:clamp(10px,1.7vw,23px);outline:1px solid #ffffff20}.libraryCard>p{min-height:68px}
