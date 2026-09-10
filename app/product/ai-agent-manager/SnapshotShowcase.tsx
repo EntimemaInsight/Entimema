@@ -8,25 +8,25 @@ import SourceDocuments from "./SourceDocuments";
 
 const screens = [
   {
-    id: "analysis", eyebrow: "Financial analysis",
-    title: "From source statement to financial understanding.",
-    copy: "Explore an income statement with structured values, deterministic KPIs and the source evidence alongside each result.",
+    id: "analysis", eyebrow: "Workflow orchestration",
+    title: "See the workflow—not just the agent response.",
+    copy: "Track inputs, evidence, controls, exceptions, review and outputs across one visible execution path.",
     agent: "Financial Statement Analysis Agent", role: "Structure & interpret",
     summary: "Source-grounded values and supported financial KPIs within the verified pilot scope.",
     alt: "Entimema income statement workspace showing FY2025 revenue of €12.48m, a twelve-row financial table and the Gross Profit source-cell inspector.",
   },
   {
-    id: "controls", eyebrow: "Financial controls",
-    title: "Every financial relationship. Open to inspection.",
-    copy: "See the arithmetic, source references and result of each deterministic check. Keep reconciliation separate from interpretation.",
+    id: "controls", eyebrow: "Agent configuration",
+    title: "Define responsibilities, controls and escalation paths.",
+    copy: "Set what each agent may interpret, which deterministic checks apply, when execution must stop and where human review is required.",
     agent: "Financial Validation / Control Agent", role: "Reconcile & validate",
     summary: "A proposed specialist surface for deterministic checks and explicit exceptions.",
     alt: "Entimema Controls workspace with eight validation results, six passes, two review items and an inspector showing Revenue minus Cost of Sales equals Gross Profit with a €0 difference.",
   },
   {
-    id: "review", eyebrow: "Human review",
-    title: "Keep judgement with the people accountable for it.",
-    copy: "Bring the exception, materiality and source context into one review surface, with the proposed interpretation ready for a human decision.",
+    id: "review", eyebrow: "Monitoring & review",
+    title: "Monitor execution quality and resolve exceptions.",
+    copy: "Review run status, validation results, confidence and material exceptions before outputs are approved.",
     agent: "Exception Review Agent", role: "Inspect & resolve",
     summary: "A proposed review workspace for material exceptions and accountable human judgement.",
     alt: "Entimema Human Review workspace showing two exceptions, a €312,000 expense at 2.5% of revenue, source evidence, a proposed interpretation and reviewer approval controls.",
@@ -60,8 +60,8 @@ export default function SnapshotShowcase() {
         <Reveal>
           <header className={styles.header}>
             <span>Agent Library</span>
-            <h2>Specialist financial agents.<br/><em>One controlled execution system.</em></h2>
-            <p>Explore financial analysis, deterministic control and human review as connected workflow components in the Entimema Agent Library.</p>
+            <h2>Specialized agents for defined<br/><em>finance and risk workflows.</em></h2>
+            <p>Start with focused agent roles designed around evidence, validation, exceptions and review—not a generic prompt.</p>
           </header>
           <div className={styles.libraryGrid}>
             {screens.map((screen, index) => <article key={screen.id} className={styles.libraryCard}>

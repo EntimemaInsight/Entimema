@@ -8,15 +8,15 @@ import styles from "./agent-manager.module.css";
 import theme from "./theme.module.css";
 
 export const metadata: Metadata = {
-  title: "AI Agent Manager for Controlled Financial Workflows | Entimema",
-  description: "Explore the Entimema AI Agent Manager interface preview: financial analysis, source evidence, deterministic controls and human review.",
+  title: "AI Agent Manager for Finance & Risk Workflows | Entimema",
+  description: "A controlled environment for specialized AI agents across finance and risk workflows—connecting evidence, deterministic controls, exceptions and human review.",
   alternates: { canonical: "https://www.entimema.com/product/ai-agent-manager" },
 };
 
 const pillars = [
-  ["01", "Domain-driven, finance-led.", "Specialist agents work inside defined financial tasks, evidence requirements and decision responsibilities."],
-  ["02", "Configurable to your controls.", "Set context, tools, deterministic checks and escalation logic around each controlled workflow."],
-  ["03", "Traceable and reviewable.", "Keep source evidence, control results and material human judgement visible throughout execution."],
+  ["01", "Specialized by workflow.", "Agents are defined around recurring finance and risk tasks, with explicit inputs, outputs and responsibilities."],
+  ["02", "Governed by your controls.", "Connect evidence requirements, deterministic checks, thresholds, exceptions and review steps to each workflow."],
+  ["03", "Visible through execution.", "Inspect source evidence, validation results, exceptions and material human decisions from one workspace."],
 ] as const;
 
 const pillarIcons = [
@@ -33,10 +33,10 @@ export default function AgentManagerPage() {
     <section className={styles.hero}>
       <div className="site-container">
         <span className={styles.badge}>AI Agent Manager</span>
-        <h1>Put specialist AI agents to work.<br/><em>Keep financial control.</em></h1>
-        <p>Explore a governed workspace for financial workflows — combining AI interpretation, deterministic controls, evidence and accountable human review.</p>
+        <h1>Put specialized AI agents to work.<br/><em>Keep every workflow under control.</em></h1>
+        <p>Bring specialized agent roles, source evidence, deterministic checks, exceptions and human review into one visible workflow.</p>
         <div className={styles.actions}>
-          <DemoTrigger className={styles.primaryCta} initialInterest="AI Agent Manager"/>
+          <DemoTrigger className={styles.primaryCta} initialInterest="AI Agent Manager">Discuss your first workflow</DemoTrigger>
         </div>
       </div>
     </section>
@@ -53,8 +53,8 @@ export default function AgentManagerPage() {
 
     <section className={styles.finalCta}>
       <div className="site-container">
-        <h2>Start with one controlled<br/>financial workflow.</h2>
-        <div className={styles.finalActions}><DemoTrigger className="primary-cta primary-cta--light" initialInterest="AI Agent Manager"/></div>
+        <h2>Start with one controlled<br/>finance or risk workflow.</h2>
+        <div className={styles.finalActions}><DemoTrigger className="primary-cta primary-cta--light" initialInterest="AI Agent Manager">Discuss your first workflow</DemoTrigger></div>
       </div>
     </section>
   </main>;
