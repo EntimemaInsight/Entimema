@@ -88,7 +88,7 @@ export default function ProductMegaMenu({ active = false }: { active?: boolean }
           <div className={styles.primary}>
             <header className={styles.intro}>
               <h2>Product</h2>
-              <p>Controlled financial workflows built for traceable, defensible decisions.</p>
+              <p>Controlled AI workflows for financial and risk decisions you can trace, review and defend.</p>
             </header>
             <section className={styles.platform}>
               <h3>See how it works</h3>

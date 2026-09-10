@@ -257,7 +257,7 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
               <div className={styles.primary}>
                 <header className={styles.intro}>
                   <h2>Solutions</h2>
-                  <p>Financial and risk systems structured around the decisions they need to improve.</p>
+                  <p>Specialist financial and risk solutions for better control, clearer insight and stronger decisions.</p>
                 </header>
                 <div className={styles.panels}>
                   {serviceGroups.map((group) => (

@@ -29,9 +29,9 @@ test("product panel exposes the platform, agent control and current product rele
   assert.match(menuContent, /Coming soon/);
   assert.match(menuContent, /AI Agent Manager/);
   assert.match(productMenu, /<h3>See how it works<\/h3>/);
-  assert.match(menuContent, /See how financial data becomes a controlled, decision-ready output/);
-  assert.match(menuContent, /Build and govern financial AI agents/);
-  assert.match(menuContent, /See how financial evidence becomes a controlled, reviewable decision/);
+  assert.match(menuContent, /Turn financial data into validated, decision-ready outputs/);
+  assert.match(menuContent, /A controlled environment for specialized financial and risk AI agents/);
+  assert.match(menuContent, /See how an Income Statement becomes validated, traceable financial analysis/);
   assert.doesNotMatch(productMenu, /Decision Workspace|Intelligent Intake|Exception Workspace/);
   assert.doesNotMatch(productMenu, /€490|pilot-checkout/);
 });
@@ -64,9 +64,9 @@ test("menu destinations use the Entimema navy hierarchy", () => {
 
 test("solutions use destination-level copy without category descriptions", () => {
   assert.doesNotMatch(mobileMenu, /categoryDescription|Financial control, planning and performance|Risk assessment and controlled decision systems/);
-  assert.match(menuContent, /Turn reporting into decision-ready insight/);
-  assert.match(menuContent, /Resolve investigations faster with AI assistance/);
-  assert.match(menuContent, /See how financial evidence becomes a controlled, reviewable decision/);
+  assert.match(menuContent, /Turn financial data into reliable reporting and decision-ready analysis/);
+  assert.match(menuContent, /Strengthen AML and fraud controls with consistent, reviewable investigations/);
+  assert.match(menuContent, /See how an Income Statement becomes validated, traceable financial analysis/);
   assert.match(mobileMenu, /<aside className=\{styles\.featured\}>[\s\S]*?productFeature\.title/);
 });
 

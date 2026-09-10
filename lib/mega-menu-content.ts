@@ -1,19 +1,19 @@
 export const productDestinations = [
   {
     title: "Entimema Finance Platform",
-    description: "See how financial data becomes a controlled, decision-ready output.",
+    description: "Turn financial data into validated, decision-ready outputs.",
     href: "/product/platform",
     group: "platform",
   },
   {
     title: "Entimema Risk Platform",
-    description: "Controlled infrastructure for credit and risk decision workflows.",
+    description: "Build consistent, explainable credit and risk decision workflows.",
     status: "Coming soon",
     group: "platform",
   },
   {
     title: "AI Agent Manager",
-    description: "Build and govern financial AI agents.",
+    description: "A controlled environment for specialized financial and risk AI agents.",
     href: "/product/ai-agent-manager",
     group: "capability",
   },
@@ -22,7 +22,7 @@ export const productDestinations = [
 export const productFeature = {
   label: "What's new",
   title: "Financial Intelligence V1",
-  description: "See how financial evidence becomes a controlled, reviewable decision.",
+  description: "See how an Income Statement becomes validated, traceable financial analysis.",
   href: "/financial-intelligence-launch",
 } as const;
 
@@ -32,22 +32,22 @@ export const serviceGroups = [
     items: [
       {
         title: "Financial Reporting & Analysis",
-        description: "Turn reporting into decision-ready insight.",
+        description: "Turn financial data into reliable reporting and decision-ready analysis.",
         href: "/services/management-reporting",
       },
       {
         title: "Planning & Scenario Modelling",
-        description: "Model plans around the drivers that shape performance.",
+        description: "Build driver-based plans, forecasts and scenarios.",
         href: "/services/budgets-and-forecasting",
       },
       {
-        title: "Cost & Margin Intelligence",
-        description: "See what drives cost and margin.",
+        title: "Cost & Profitability Analysis",
+        description: "Understand cost drivers, margins and product profitability.",
         href: "/services/cost-and-profitability",
       },
       {
         title: "CFO Advisory",
-        description: "Strengthen finance leadership and execution.",
+        description: "Strengthen financial control, decision support and finance execution.",
         href: "/services/cfo-function",
       },
     ],
@@ -57,12 +57,12 @@ export const serviceGroups = [
     items: [
       {
         title: "Credit Risk & Decisioning",
-        description: "Make faster, more consistent credit decisions.",
+        description: "Improve credit decisions with stronger risk methodology and controlled workflows.",
         href: "/services/credit-risk",
       },
       {
         title: "AML & Fraud Investigation",
-        description: "Resolve investigations faster with AI assistance.",
+        description: "Strengthen AML and fraud controls with consistent, reviewable investigations.",
         href: "/services/aml-compliance",
       },
     ],
