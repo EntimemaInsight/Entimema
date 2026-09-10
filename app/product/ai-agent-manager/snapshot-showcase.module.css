@@ -2,7 +2,7 @@
 .library,.sectionAlt{background:linear-gradient(180deg,#f7f9fc,#fff)}.section{background:#fff}
 .container{width:min(1320px,calc(100% - 80px));margin:0 auto}
 .header{max-width:980px;margin:0 auto 64px;text-align:center}
-.header>span{display:inline-flex;padding:7px 12px;border-radius:6px;background:#fff0e9;color:#be4218;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.header>span{display:inline-flex;align-items:center;padding:7px 12px;border:1px solid rgba(7,27,77,.06);border-radius:5px;background:#f1ee9f;color:#071b4d;box-shadow:0 8px 22px rgba(7,27,77,.06);font-size:12px;font-weight:690;line-height:1.2;letter-spacing:-.01em;text-transform:none}
 .header h2{margin:24px auto 20px;color:#071b4d;font-size:clamp(42px,4.8vw,70px);line-height:1.06;letter-spacing:-.05em;font-weight:660}
 .header h2 em{color:#ff5b24;font-style:normal}.header p{max-width:740px;margin:0 auto;color:#5d6b85;font-size:18px;line-height:1.6}
 .libraryGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}

@@ -30,10 +30,7 @@ export default function AgentManagerPage() {
         <p>Explore a governed workspace for financial workflows — combining AI interpretation, deterministic controls, evidence and accountable human review.</p>
         <div className={styles.actions}>
           <DemoTrigger className={styles.primaryCta} initialInterest="AI Agent Manager"/>
-          <a href="#agents">Explore the product <span>→</span></a>
         </div>
-        <div className={styles.scope}>FINANCE-LED · EVIDENCE-GROUNDED · HUMAN-CONTROLLED</div>
-        <p className={styles.previewScope}>Product preview. Financial Intelligence V1 is a controlled pilot for tested English XLSX and text-based PDF income statements.</p>
       </div>
     </section>
 
