@@ -481,7 +481,7 @@ export default function PlatformExperience() {
         last = steps.current.at(-1),
         grid = architectureGrid.current;
       if (first && last && grid) {
-        const start = grid.getBoundingClientRect().top + window.scrollY;
+        const start = grid.getBoundingClientRect().top + window.scrollY - 80;
         const travelled = Math.max(0, window.scrollY - start);
         const end =
           last.getBoundingClientRect().bottom +
