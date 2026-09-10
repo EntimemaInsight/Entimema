@@ -1,7 +1,20 @@
 .footer {
   padding: clamp(64px, 6vw, 88px) 0 clamp(52px, 5vw, 72px);
   border-top: 1px solid var(--entimema-rule);
-  background: var(--entimema-paper);
+  background:
+    radial-gradient(
+      circle at 18% 48%,
+      rgba(196, 226, 240, 0.26),
+      transparent 34%
+    ),
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #f7fbfd 20%,
+      #eaf4f9 52%,
+      #f8fbfd 82%,
+      #ffffff 100%
+    );
   color: var(--brand-navy-950);
 }
 
@@ -49,7 +62,10 @@
   border-radius: 13px;
   background: var(--brand-navy-950);
   color: #fff;
-  transition: opacity var(--entimema-motion-hover) var(--entimema-motion-ease), box-shadow var(--entimema-motion-hover) var(--entimema-motion-ease), transform var(--entimema-motion-hover) var(--entimema-motion-ease);
+  transition:
+    opacity var(--entimema-motion-hover) var(--entimema-motion-ease),
+    box-shadow var(--entimema-motion-hover) var(--entimema-motion-ease),
+    transform var(--entimema-motion-hover) var(--entimema-motion-ease);
 }
 
 .linkedinLink svg {
@@ -114,12 +130,19 @@
   text-decoration: underline;
   text-decoration-color: transparent;
   text-underline-offset: 4px;
-  transition: color var(--entimema-motion-hover) var(--entimema-motion-ease), text-decoration-color var(--entimema-motion-hover) var(--entimema-motion-ease);
+  transition:
+    color var(--entimema-motion-hover) var(--entimema-motion-ease),
+    text-decoration-color var(--entimema-motion-hover)
+      var(--entimema-motion-ease);
 }
 
 .column a:hover {
   color: var(--brand-navy-950);
-  text-decoration-color: color-mix(in srgb, var(--brand-navy-900) 45%, transparent);
+  text-decoration-color: color-mix(
+    in srgb,
+    var(--brand-navy-900) 45%,
+    transparent
+  );
 }
 
 @media (max-width: 1100px) {
@@ -175,19 +198,25 @@
 
   .columnLabel {
     margin-bottom: 12px;
-    font-size: .75rem;
-    letter-spacing: .085em;
+    font-size: 0.75rem;
+    letter-spacing: 0.085em;
   }
 
   .column a {
     min-height: 44px;
     width: 100%;
     padding-block: 11px;
-    font-size: .9375rem;
+    font-size: 0.9375rem;
   }
 
-  .linkedinLink { width: 52px; height: 52px; border-radius: 12px; }
-  .copyright { font-size: .8125rem; }
+  .linkedinLink {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+  }
+  .copyright {
+    font-size: 0.8125rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

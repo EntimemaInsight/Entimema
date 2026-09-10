@@ -44,7 +44,15 @@ const columns = [
 
 export default function GlobalFooter() {
   const pathname = usePathname();
-  if (pathname === "/auth/sign-in") return null;
+  const normalizedPathname = pathname.replace(/\/$/, "") || "/";
+
+  if (
+    normalizedPathname === "/auth/sign-in" ||
+    normalizedPathname === "/alexander-dimitrov" ||
+    normalizedPathname === "/labs"
+  ) {
+    return null;
+  }
 
   return (
     <footer className={styles.footer}>
@@ -75,7 +83,9 @@ export default function GlobalFooter() {
               <div className={styles.columnLabel}>{column.title}</div>
               <ul>
                 {column.links.map(([label, href]) => (
-                  <li key={href}><Link href={href}>{label}</Link></li>
+                  <li key={href}>
+                    <Link href={href}>{label}</Link>
+                  </li>
                 ))}
               </ul>
             </section>
