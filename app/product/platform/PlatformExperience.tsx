@@ -415,6 +415,7 @@ function ArchitectureStack({
   labelsProgress: number;
   onSelect: (index: number) => void;
 }) {
+  const [hovered, setHovered] = useState<number | null>(null);
   const layerGap = 62 + entryProgress * 5 + progress * 7;
   const firstMicro = 1 / 3;
   const secondMicro = 2 / 3;
@@ -448,7 +449,7 @@ function ArchitectureStack({
         {layers.map((layer, index) => (
           <button
             type="button"
-            className={`${styles.stackLayer} ${index === active ? styles.activeLayer : ""} ${index < active ? styles.passedLayer : ""}`}
+            className={`${styles.stackLayer} ${index === active ? styles.activeLayer : ""} ${index < active ? styles.passedLayer : ""} ${hovered === index ? styles.hoveredLayer : ""} ${hovered !== null && hovered !== index ? styles.hoverMuted : ""} ${hovered !== null && index < hovered ? styles.hoverBefore : ""} ${hovered !== null && index > hovered ? styles.hoverAfter : ""}`}
             style={
               {
                 "--layer-y": `${index * layerGap}px`,
@@ -457,6 +458,8 @@ function ArchitectureStack({
             }
             key={layer.label}
             onClick={() => onSelect(index)}
+            onMouseEnter={() => setHovered(index)}
+            onMouseLeave={() => setHovered(null)}
             aria-label={`View ${layer.label}`}
           >
             <strong>{layer.label}</strong>
