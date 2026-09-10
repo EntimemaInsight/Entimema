@@ -147,7 +147,7 @@
   z-index: 8;
   right: clamp(50px, 8vw, 110px);
   top: 1%;
-  width: clamp(390px, 32.5vw, 475px);
+  width: clamp(320px, 24vw, 390px);
   height: 500px;
   perspective: 1500px;
   transform: translate(var(--stack-x), var(--stack-y));
@@ -159,9 +159,8 @@
   height: auto;
   aspect-ratio: 1;
   padding: 24px 26px;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+  display: block;
+  overflow: visible;
   border: 1px solid rgba(234, 232, 255, 0.34);
   border-radius: 22px;
   background:
@@ -194,11 +193,21 @@
   font-weight: 800;
 }
 .stackLayer strong {
-  margin-left: auto;
-  max-width: 76%;
-  font-size: 14px;
-  line-height: 1.25;
+  position: absolute;
+  z-index: 3;
+  right: 24px;
+  bottom: 19px;
+  width: max-content;
+  max-width: 78%;
+  margin: 0;
+  color: #fff;
+  font-size: clamp(12px, 0.9vw, 14px);
+  font-weight: 760;
+  line-height: 1.2;
+  letter-spacing: 0.005em;
+  white-space: nowrap;
   text-align: right;
+  text-shadow: 0 1px 8px rgba(30, 24, 92, 0.42);
 }
 .activeLayer {
   z-index: 12 !important;
@@ -241,8 +250,8 @@
   filter: drop-shadow(0 0 8px rgba(103, 92, 211, 0.48));
 }
 .passedLayer {
-  filter: saturate(0.72) brightness(1.02);
-  opacity: 0.56;
+  filter: saturate(0.78) brightness(1.03);
+  opacity: 1;
 }
 .evidenceLabels {
   position: absolute;
