@@ -435,9 +435,9 @@ export default function PlatformExperience() {
               </Link>
             </div>
             <div className={styles.trustLine}>
-              <span>01 · SOURCE-BOUND</span>
-              <span>02 · DETERMINISTICALLY VALIDATED</span>
-              <span>03 · HUMAN-REVIEWABLE</span>
+              <span>SOURCE-BOUND</span>
+              <span>DETERMINISTICALLY VALIDATED</span>
+              <span>HUMAN-REVIEWABLE</span>
             </div>
           </div>
           <div className={styles.heroVisual}>
