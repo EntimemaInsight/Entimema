@@ -238,7 +238,7 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
                   </Link>)}
                   <h2 className={styles.mobileSectionLabel}>Documentation</h2>
                   {resourceDocumentation.map((item) => (
-                    <Link className={styles.mobileResourceDestination} href={item.href} key={item.href} onClick={close}>
+                    <Link className={styles.mobileResourceDestination} href={item.href} key={item.href} onClick={close} target="_blank" rel="noopener noreferrer">
                       <span><strong>{item.title}</strong><small>{item.description}</small></span>
                     </Link>
                   ))}
@@ -248,7 +248,7 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
                 </Link>
               </div>
               <footer className={styles.mobileActionDock}>
-                <Link className={styles.mobileDockLogin} href="/auth/sign-in?callbackUrl=%2Fworkspace%2Ffinancial-intelligence" onClick={close}>Login</Link>
+                <Link className={styles.mobileDockLogin} href="/auth/sign-in?callbackUrl=%2Fworkspace%2Ffinancial-intelligence" onClick={close} target="_blank" rel="noopener noreferrer">Login</Link>
                 <Link className={styles.mobileDockContact} href="/contact" onClick={close}>Contact us</Link>
               </footer>
             </>

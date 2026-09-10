@@ -115,7 +115,7 @@ export default function ResourcesMegaMenu({ active = false }: { active?: boolean
             <section className={styles.group}>
               <h3>Documentation</h3>
               {resourceDocumentation.map((item) => (
-                <Link className={styles.item} href={item.href} key={item.href} onClick={hide}>
+                <Link className={styles.item} href={item.href} key={item.href} onClick={hide} target="_blank" rel="noopener noreferrer">
                   <strong>{item.title}</strong>
                   <small>{item.description}</small>
                 </Link>
