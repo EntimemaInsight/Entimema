@@ -2,7 +2,7 @@ import { ORGANIZATION_ID, SITE_URL, WEBSITE_ID } from "../../lib/structured-data
 import { publishedResources } from "../resources/resource-data";
 
 export const labsTitle = "Entimema Labs | Financial Intelligence, Credit Risk and Decision Systems";
-export const labsDescription = "Entimema Labs develops practitioner research, controlled financial workflows and traceable decision systems across financial intelligence and credit risk.";
+export const labsDescription = "Entimema Labs develops the methods, validation logic and decision architectures behind controlled financial and risk workflows.";
 export const labsUrl = `${SITE_URL}/labs`;
 
 // Resolve canonical records without copying or changing shared publication metadata.
@@ -20,7 +20,7 @@ export const evidenceStates = [
 export const domains = [
   {
     id: "financial-intelligence", title: "Financial Intelligence",
-    question: "How can heterogeneous financial information become an analytical model without losing accounting meaning?",
+    question: "How does financial evidence become validated, traceable analysis?",
     investigations: [
       "Canonical schemas, data normalisation and the meaning of periods, currencies and units.",
       "Reporting, planning and forecasting logic connected to the decisions they support.",
@@ -31,7 +31,7 @@ export const domains = [
   },
   {
     id: "credit-risk", title: "Credit Risk",
-    question: "How should predictive risk models connect to decision strategy, monitoring and governance?",
+    question: "How do data, models, policy and monitoring become controlled credit decisions?",
     investigations: [
       "Scorecards, probability of default and calibration: what a risk estimate does and does not establish.",
       "Portfolio monitoring, decision strategies and early-warning signals across the credit lifecycle.",
@@ -42,7 +42,7 @@ export const domains = [
   },
   {
     id: "decision-systems", title: "Decision Systems",
-    question: "How can model interpretation, deterministic controls and human judgement form one auditable decision system?",
+    question: "How do AI interpretation, deterministic controls and human judgement operate in one accountable workflow?",
     investigations: [
       "The relationships between source evidence, claims, assumptions and unresolved unknowns.",
       "Confidence, materiality, exceptions and the conditions for escalation or abstention.",
@@ -54,7 +54,7 @@ export const domains = [
 ] as const;
 export const process = [
   { title: "Observe", description: "Identify a recurring practitioner problem and the operating conditions in which it appears." },
-  { title: "Formalise", description: "Separate evidence, definitions, assumptions, calculations and judgement so each can be examined." },
+  { title: "Structure", description: "Separate evidence, definitions, assumptions, calculations and judgement so each can be examined." },
   { title: "Test", description: "Challenge methodology, calculations and controls through analytical examples and explicit failure modes." },
   { title: "Operationalise", description: "Translate elements that meet their stated checks into workflows, rules or analytical systems, preserving the limits of those checks." },
   { title: "Improve", description: "Use observed exceptions and validated corrections to identify where a method or implementation needs refinement." },

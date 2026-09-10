@@ -20,7 +20,10 @@
 .problemItem:first-child { padding-top: 0; border-top: 0; }
 .problemItem:last-child { padding-bottom: 0; }
 .problemItem p { margin-top: var(--entimema-space-paragraph); max-width: 58ch; }
-.thesis { border-block: 1px solid var(--entimema-rule); }
+.thesis { border-block: 1px solid var(--entimema-rule); background: #081a3a; color: #f7f9fc; }
+.thesis :global(.editorial-eyebrow), .thesis a { color: #ff8a00; }
+.thesis p, .thesis dd, .thesis :global(.editorial-metadata) { color: #dce5f2; }
+.thesis .disciplines, .thesis .disciplines > div, .thesis .thesisClosing { border-color: rgba(255,255,255,.24); }
 .thesisIntro { align-self: end; max-width: 48ch; }
 .disciplines { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0; margin-block: var(--entimema-space-section) 0; border-top: 1px solid var(--entimema-rule-strong); }
 .disciplines > div { min-width: 0; padding: var(--entimema-space-component); padding-left: 0; }

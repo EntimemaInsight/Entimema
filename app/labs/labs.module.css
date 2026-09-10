@@ -58,6 +58,10 @@
 .process h3, .applicationChain h3 { font-size: 1rem; line-height: 1.5; font-weight: 600; }
 .process p { font-size: .9375rem; line-height: 1.65; margin-top: .5rem; }
 .application .sectionHeader { max-width: 72ch; }
+.application { margin-inline: calc(50% - 50vw); padding-inline: max(calc((100vw - var(--entimema-container-editorial)) / 2), 1rem); background: #081a3a; color: #f7f9fc; border-top: 0; }
+.application :global(.editorial-eyebrow), .application :global(.editorial-technical-label), .application a { color: #ff8a00; }
+.application :global(.editorial-body-md), .application p { color: #dce5f2; }
+.applicationChain li { border-top-color: rgba(255,255,255,.24); }
 .page .exampleLabel { display: inline-block; padding: .3rem .6rem; border: 1px solid var(--entimema-rule-strong); color: var(--entimema-navy); }
 .applicationChain { list-style: none; padding: 0; margin: 2rem 0 0; }
 .applicationChain li { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: var(--entimema-grid-gap); padding-block: 1.25rem .75rem; border-top: 1px solid var(--entimema-rule); }

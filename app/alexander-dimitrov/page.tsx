@@ -36,23 +36,16 @@ export default function FounderPage() {
         <div className={`editorial-container editorial-container--editorial ${styles.container}`}>
           <section className={styles.introduction} aria-labelledby="founder-name">
             <div className={styles.heading}>
-              <p className="editorial-eyebrow">Founder, Entimema</p>
+              <p className="editorial-eyebrow">Founder of Entimema</p>
               <h1 id="founder-name" className={`editorial-display-md editorial-reveal-text ${styles.name}`}>{founderName}</h1>
               <p className={`editorial-standfirst-md ${styles.standfirst}`}>{profileIntro}</p>
+              <a className={styles.linkedinLink} data-founder-linkedin href={personSchema.sameAs[0]} target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
             </div>
             <div className={styles.portrait} data-founder-portrait>
               {/* Preserve the original 400px JPEG bytes and square source-size cap. */}
               <Image src={portraitPath} alt={portraitAlt} fill unoptimized
                 sizes="(max-width: 767px) calc(100vw - 32px), (max-width: 1279px) 32vw, 400px"
                 loading="eager" fetchPriority="high" />
-              <a className={styles.linkedinBadge} data-founder-linkedin
-                href={personSchema.sameAs[0]} target="_blank" rel="noopener noreferrer"
-                aria-label="View Alexander Dimitrov on LinkedIn">
-                {/* Font Awesome Free 6.7.2 by @fontawesome — https://fontawesome.com; icon: CC BY 4.0 — https://creativecommons.org/licenses/by/4.0/; Copyright 2024 Fonticons, Inc. */}
-                <svg viewBox="0 0 448 512" width="24" height="28" fill="currentColor" aria-hidden="true" focusable="false">
-                  <path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
-                </svg>
-              </a>
             </div>
             <div className={`editorial-body-md ${styles.biography}`}>{biography.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</div>
           </section>
@@ -62,9 +55,9 @@ export default function FounderPage() {
             <div className={`editorial-grid editorial-grid--desktop ${styles.sectionHeader}`}>
               <div className="editorial-col-5 editorial-stack">
                 <p className="editorial-eyebrow">01 / Practitioner foundations</p>
-                <h2 id="areas-heading" className="editorial-headline-xl">Different disciplines.<br />One decision.</h2>
+                <h2 id="areas-heading" className="editorial-headline-xl">Experience across the financial decision lifecycle.</h2>
               </div>
-              <p className={`editorial-col-7 editorial-body-md ${styles.sectionIntro}`}>Alexander’s perspective has been shaped at the intersection of finance, risk, quantitative modelling and enterprise decision systems. These disciplines approach financial decisions from different directions, but ultimately confront the same problem: how to preserve meaning, uncertainty and accountability as reality is transformed into data, analysis and institutional action.</p>
+              <p className={`editorial-col-7 editorial-body-md ${styles.sectionIntro}`}>The perspective combines finance leadership, accounting, systems, risk methodology and applied AI—disciplines that must work together when an analytical result becomes an operational decision.</p>
             </div>
             <ol className={`editorial-index ${styles.foundations}`} role="list">
               {foundations.map((foundation) => <li key={foundation.title}>
@@ -80,12 +73,11 @@ export default function FounderPage() {
             <div className={`editorial-grid editorial-grid--desktop ${styles.sectionHeader}`}>
               <div className="editorial-col-5 editorial-stack">
                 <p className="editorial-eyebrow">02 / The recurring problem</p>
-                <h2 id="problem-heading" className="editorial-headline-xl">The missing layer is decision structure.</h2>
+                <h2 id="problem-heading" className="editorial-headline-xl">Why good analysis still fails in practice.</h2>
               </div>
               <div className={`editorial-col-7 editorial-body-md ${styles.copy}`}>
-                <p>Finance and Risk organizations generate vast amounts of data, models, rules and analysis. Yet these elements do not automatically form a coherent decision architecture.</p>
-                <p>Accounting definitions may diverge from analytical definitions. Models may abstract away operational context. Rules may encode assumptions that are no longer visible. Conclusions may become progressively detached from their original evidence as they pass between spreadsheets, systems, reports and decision-makers.</p>
-                <p>The result is not merely fragmented information. It is fragmented reasoning.</p>
+                <p>Finance and risk teams have more data, models and automation than ever. Yet definitions diverge, assumptions disappear and conclusions become detached from their evidence as they pass between spreadsheets, systems and decision-makers.</p>
+                <p>The result is fragmented reasoning: outputs may be technically correct but difficult to reproduce, review or defend.</p>
                 <dl className={styles.observations}>{structuralProblems.map((problem) => <div key={problem.title}>
                   <dt className="editorial-technical-label">{problem.title}</dt>
                   <dd>{problem.description}</dd>

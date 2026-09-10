@@ -9,8 +9,8 @@ import { ORGANIZATION_ID, WEBSITE_ID, serializeJsonLd } from "@/lib/structured-d
 import styles from "./institutional.module.css";
 import legacy from "./about.module.css";
 
-const title = "About Entimema | Controlled Financial Decision Systems";
-const description = "Entimema builds controlled financial and credit-risk decision systems that connect evidence, model intelligence, deterministic logic and human judgement.";
+const title = "About Entimema | Financial Intelligence for Trusted Decisions";
+const description = "Entimema builds controlled AI workflows that turn financial and risk data into validated, traceable and decision-ready outputs.";
 const url = "https://www.entimema.com/about";
 export const metadata: Metadata = {
   title: { absolute: title }, description,
@@ -20,24 +20,23 @@ export const metadata: Metadata = {
 };
 
 const tensions = [
-  ["Information without a common structure", "Spreadsheets, ERP systems, models, reports and documents describe the same business in different ways. Reconstructing that picture still depends on manual interpretation."],
-  ["Reporting without the reasoning", "Reports record what happened. The assumptions behind a forecast, the meaning of an exception and the case for action often remain implicit."],
-  ["Finance and risk in parallel", "Economic performance and risk are assessed through separate frameworks, even when they inform the same decision."],
-  ["More analysis, less visibility", "AI expands what can be interpreted. Without explicit controls, it can also obscure how a conclusion was reached and whether it can be trusted."],
+  ["Fragmented financial data", "Spreadsheets, ERP systems, reports and documents describe the same business in different formats and definitions."],
+  ["Analysis without visible reasoning", "Assumptions, exceptions and the basis for action often remain implicit as information moves between teams and systems."],
+  ["Automation without sufficient control", "AI can accelerate interpretation, but speed is not assurance. Material outputs still need independent checks, evidence and review."],
 ];
 const disciplines = [
-  ["Finance", "Economic structure and measurement."],
-  ["Risk", "Uncertainty, controls and decision boundaries."],
-  ["Decision Science", "The reasoning architecture connecting evidence to action."],
-  ["Research", "Methodological depth and testable foundations."],
-  ["AI Systems", "Scalable interpretation and execution within governed workflows."],
+  ["Financial expertise", "Preserve accounting meaning, materiality and management context."],
+  ["Specialized AI", "Interpret documents and data within a defined financial or risk task."],
+  ["Deterministic controls", "Verify arithmetic, reconciliations and fixed business rules independently."],
+  ["Human review", "Direct ambiguity and material exceptions to accountable experts."],
+  ["Traceable outputs", "Keep every material result connected to its source and review history."],
 ];
 const method = [
   ["Evidence", "Begin with the source.", "Evidence precedes inference. Facts, claims and their origins remain distinguishable."],
   ["Interpretation", "Make meaning explicit.", "Models interpret context. Unknowns remain visible rather than becoming untested assumptions."],
   ["Validation", "Separate inference from control.", "Deterministic rules test arithmetic, reconciliations and financial constraints independently of model interpretation."],
-  ["Decision", "Keep judgment accountable.", "Material ambiguity goes to human review. A decision retains the evidence, controls and reasoning that support it."],
-  ["Execution", "Carry the evidence forward.", "Approved decisions move into action through traceable workflows. Outcomes inform the next review."],
+  ["Review", "Keep judgement accountable.", "Material ambiguity and exceptions go to human review with their context intact."],
+  ["Output", "Make the result decision-ready.", "Approved outputs retain the evidence, controls and review record behind them."],
 ];
 
 export default function AboutPage() {
@@ -48,19 +47,18 @@ export default function AboutPage() {
       <div className="editorial-container">
         <section className={`editorial-hero ${styles.hero}`} aria-labelledby="about-heading" data-company-scene>
           <DecisionConstellation variant="about" />
-          <p className="editorial-eyebrow">Entimema / Decision Intelligence</p>
+          <p className="editorial-eyebrow">Entimema / Financial Intelligence</p>
           <h1 id="about-heading" className={`editorial-display-lg editorial-reveal-text ${styles.heroTitle}`}>
-            <span>Financial decisions are becoming more complex.</span>
-            <span>The systems supporting them should become more intelligent.</span>
+            <span>Financial intelligence built for decisions that must be trusted.</span>
           </h1>
           <div className={`editorial-grid editorial-grid--desktop ${styles.heroContext}`}>
-            <p className={`editorial-col-4 editorial-technical-label ${styles.positioning}`}>Finance × Risk<br />Decision Science × Research</p>
-            <p className="editorial-col-8 editorial-standfirst-md">Entimema is a practitioner-led financial intelligence and decision systems company. We combine finance, risk, research and applied AI to improve how organizations understand, govern and execute financial decisions.</p>
+            <p className={`editorial-col-4 editorial-technical-label ${styles.positioning}`}>Financial expertise<br />Controlled AI workflows</p>
+            <p className="editorial-col-8 editorial-standfirst-md">Entimema builds controlled AI workflows that turn financial and risk data into validated, traceable and decision-ready outputs.</p>
           </div>
           <nav className={`editorial-metadata ${styles.chapterLinks}`} aria-label="About page sections">
             <Link className="editorial-link--quiet" href="#about-problem">01 / The problem</Link>
-            <Link className="editorial-link--quiet" href="#about-thesis">02 / The thesis</Link>
-            <Link className="editorial-link--quiet" href="#about-method">03 / The method</Link>
+            <Link className="editorial-link--quiet" href="#about-thesis">02 / What we build</Link>
+            <Link className="editorial-link--quiet" href="#about-method">03 / How it works</Link>
           </nav>
           <hr className="editorial-rule-strong editorial-reveal-rule" />
         </section>
@@ -83,10 +81,10 @@ export default function AboutPage() {
         <div className="editorial-container">
           <div className="editorial-grid editorial-grid--desktop">
             <div className="editorial-col-7 editorial-stack">
-              <p className="editorial-eyebrow">02 / The transformation</p>
-              <h2 id="about-thesis" className="editorial-display-md">From financial reporting to decision intelligence.</h2>
+              <p className="editorial-eyebrow">02 / What Entimema does</p>
+              <h2 id="about-thesis" className="editorial-display-md">From specialist financial reasoning to controlled execution.</h2>
             </div>
-            <p className={`editorial-col-5 editorial-standfirst-md ${styles.thesisIntro}`}>A useful decision system connects what a business knows, what it assumes, what it can verify and what it is prepared to do.</p>
+            <p className={`editorial-col-5 editorial-standfirst-md ${styles.thesisIntro}`}>Entimema is a practitioner-led financial intelligence company combining specialized AI, deterministic controls and human review across financial and risk workflows.</p>
           </div>
           <dl className={styles.disciplines}>
             {disciplines.map(([name, role], index) => <div key={name}>
@@ -95,8 +93,8 @@ export default function AboutPage() {
             </div>)}
           </dl>
           <div className={`editorial-grid editorial-grid--desktop ${styles.thesisClosing}`}>
-            <p className="editorial-col-8 editorial-body-lg">These are parts of one reasoning architecture. Entimema brings them together so that financial interpretation, risk boundaries and execution remain connected to the same evidence.</p>
-            <div className={`editorial-col-4 ${styles.alignEnd}`}><Link className="editorial-link--arrow" href="/services">Explore our work <span aria-hidden="true">→</span></Link></div>
+            <p className="editorial-col-8 editorial-body-lg">Financial expertise → Controlled workflows → Decision-ready outputs</p>
+            <div className={`editorial-col-4 ${styles.alignEnd}`}><Link className="editorial-link--arrow" href="/product/platform">Explore the Finance Platform <span aria-hidden="true">→</span></Link></div>
           </div>
         </div>
       </section>
@@ -105,10 +103,10 @@ export default function AboutPage() {
         <section className={`editorial-major-section editorial-reveal-fade ${styles.section}`} aria-labelledby="about-method">
           <div className="editorial-grid editorial-grid--desktop">
             <div className="editorial-col-7 editorial-stack">
-              <p className="editorial-eyebrow">03 / The method</p>
-              <h2 id="about-method" className="editorial-headline-xl">A decision is only as sound as the path behind it.</h2>
+              <p className="editorial-eyebrow">03 / The controlled workflow</p>
+              <h2 id="about-method" className="editorial-headline-xl">Every output should preserve the path behind it.</h2>
             </div>
-            <p className={`editorial-col-5 editorial-body-lg ${styles.thesisIntro}`}>Each stage has a distinct responsibility. Interpretation does not replace validation, and automation does not remove human accountability.</p>
+            <p className={`editorial-col-5 editorial-body-lg ${styles.thesisIntro}`}>AI interprets context. Deterministic logic owns arithmetic and fixed controls. Experts review material ambiguity.</p>
           </div>
           <ol className={`editorial-index editorial-reveal-metadata ${styles.method}`} role="list">
             {method.map(([stage, heading, copy]) => <li key={stage}>
@@ -123,18 +121,18 @@ export default function AboutPage() {
         <section className={`editorial-section ${styles.research}`} aria-labelledby="about-research">
           <div className="editorial-section-header editorial-stack">
             <p className="editorial-eyebrow">04 / Research × Product</p>
-            <h2 id="about-research" className="editorial-display-md">Research is not separate from the product.</h2>
-            <p className="editorial-standfirst-md">Methodology becomes useful when it can operate inside a real financial workflow. Execution reveals where that methodology needs to improve.</p>
+            <h2 id="about-research" className="editorial-display-md">Research becomes useful when it works in practice.</h2>
+            <p className="editorial-standfirst-md">Entimema Labs develops the methods. The product turns selected methods into controlled financial workflows. Evidence from execution informs what should improve next.</p>
           </div>
           <div className={`editorial-grid editorial-grid--desktop ${styles.researchLoop}`}>
             <div className="editorial-col-6 editorial-stack">
               <h3 className="editorial-headline-lg">Research defines the logic.</h3>
-              <p className="editorial-body-md">Entimema Research develops methodology and intellectual property: frameworks, validation methods and decision logic that can be examined and tested.</p>
+              <p className="editorial-body-md">Entimema Labs develops frameworks, validation methods and decision logic that can be examined and tested.</p>
               <p className={`editorial-technical-label ${styles.sequence}`}>Methodology → Frameworks → Validation → Decision logic</p>
             </div>
             <div className="editorial-col-6 editorial-stack">
               <h3 className="editorial-headline-lg">Product puts it to work.</h3>
-              <p className="editorial-body-md">Financial Intelligence operationalizes that methodology in end-to-end workflows, from source intake and interpretation to controls, review and execution.</p>
+              <p className="editorial-body-md">Entimema Finance Platform operationalises selected methods from source intake and interpretation to controls, review and decision-ready output.</p>
               <p className={`editorial-technical-label ${styles.sequence}`}>Intake → Interpretation → Controls → Review → Execution</p>
             </div>
           </div>
@@ -146,13 +144,12 @@ export default function AboutPage() {
 
         <section className={`editorial-major-section editorial-grid editorial-grid--desktop ${styles.section}`} aria-labelledby="about-direction">
           <div className="editorial-col-5 editorial-stack">
-            <p className="editorial-eyebrow">05 / The resolve</p>
-            <h2 id="about-direction" className="editorial-headline-xl">Building the operating layer for financial decisions.</h2>
+            <p className="editorial-eyebrow">05 / Our product boundary</p>
+            <h2 id="about-direction" className="editorial-headline-xl">The workflow—not the chatbot—is the product.</h2>
           </div>
           <div className={`editorial-col-7 editorial-stack ${styles.directionCopy}`}>
-            <p className="editorial-standfirst-md">The unit of work is a governed financial workflow—not a chatbot, an isolated model or a collection of disconnected agents.</p>
-            <p className="editorial-body-md">Our direction is toward financial and risk workflows that are structured, traceable and auditable. As they adapt and become more autonomous in bounded tasks, consequential decisions remain human-governed.</p>
-            <p className="editorial-body-md">Entimema combines finance, risk, decision science, research and AI-enabled workflows to improve the quality, traceability and execution of financial decisions.</p>
+            <p className="editorial-standfirst-md">A controlled workflow connects the source, interpretation, calculations, exceptions and human review required to produce a usable result.</p>
+            <p className="editorial-body-md">This makes specialist reasoning reusable without making it opaque—and operational without separating it from human responsibility.</p>
           </div>
         </section>
 
@@ -160,14 +157,14 @@ export default function AboutPage() {
           <div className="editorial-grid editorial-grid--desktop">
             <div className={`editorial-col-6 editorial-item editorial-stack ${styles.labsBridge}`}>
               <p className="editorial-eyebrow">The research agenda</p>
-              <h2 className="editorial-headline-lg">The inquiry behind the systems.</h2>
-              <p className="editorial-body-md">Entimema Labs develops the research agenda behind the systems. The company sets the institutional mission; Labs develops the methods; Financial Intelligence brings them into execution.</p>
+              <h2 className="editorial-headline-lg">Methods built to withstand scrutiny.</h2>
+              <p className="editorial-body-md">Entimema Labs develops the methodology, validation logic and decision architectures behind controlled financial and risk workflows.</p>
               <Link className="editorial-link--arrow" href="/labs">Explore Entimema Labs <span aria-hidden="true">→</span></Link>
             </div>
             <div className={`editorial-col-6 editorial-item editorial-stack ${styles.practitionerBridge}`}>
               <p className="editorial-eyebrow">The founder’s perspective</p>
-              <h2 className="editorial-headline-lg">The question behind the architecture.</h2>
-              <p className="editorial-body-md">Entimema is founded and led by Alexander Dimitrov (also transliterated as Aleksandar Dimitrov; in Bulgarian, Александър Димитров). Its practitioner foundation begins with a question that precedes any individual model or technology: how financial reality becomes data, how that data acquires meaning, how uncertainty is represented, and how evidence becomes a decision an institution can explain, control and act upon.</p>
+              <h2 className="editorial-headline-lg">Built from finance and risk practice.</h2>
+              <p className="editorial-body-md">Founder Alexander Dimitrov brings experience across finance leadership, accounting, controlling, financial systems, credit risk and IFRS 9 to the design of controlled financial workflows.</p>
               <Link className="editorial-link--arrow" href="/alexander-dimitrov">About the Founder <span aria-hidden="true">→</span></Link>
             </div>
           </div>
@@ -176,10 +173,10 @@ export default function AboutPage() {
 
       <section className={`editorial-major-section editorial-surface--institutional ${styles.closing}`} aria-labelledby="about-closing">
         <div className="editorial-container editorial-stack">
-          <p className="editorial-eyebrow">From the thesis to the work</p>
-          <h2 id="about-closing" className="editorial-display-md">Follow the reasoning. Explore the workflow.</h2>
+          <p className="editorial-eyebrow">See the approach in practice</p>
+          <h2 id="about-closing" className="editorial-display-md">Turn financial data into decisions you can defend.</h2>
           <div className={styles.actions}>
-            <div><CompanyCta className={`editorial-link--research ${styles.primaryAction}`} href="/workspace/financial-intelligence">Explore Financial Intelligence <span aria-hidden="true">→</span></CompanyCta><p className="editorial-caption">Secure workspace · sign-in required</p></div>
+            <div><CompanyCta className={`editorial-link--research ${styles.primaryAction}`} href="/product/platform">Explore Entimema Finance Platform <span aria-hidden="true">→</span></CompanyCta></div>
             <div className={styles.secondaryActions}>
               <Link className="editorial-link--arrow" href="/resources">Read Entimema Research <span aria-hidden="true">→</span></Link>
               <Link className={`editorial-link--quiet ${styles.tertiaryAction}`} href="/contact">Start a conversation <span aria-hidden="true">→</span></Link>

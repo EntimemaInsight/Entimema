@@ -11,13 +11,13 @@ export const portraitId = `${founderUrl}#portrait`;
 
 // Practitioner facts are limited to the previously approved Founder biography.
 // The thematic passages below interpret those disciplines, not additional career history.
-export const profileIntro = "Founder of Entimema and the FinAI thesis: governed AI agents connecting financial evidence, quantitative models, deterministic controls, AI reasoning and human judgment within traceable Finance and Risk workflows.";
+export const profileIntro = "Founder of Entimema · Finance, Financial Intelligence and Credit Risk";
 export const identityStatement = "Aleksandar Dimitrov · Александър Димитров";
 export const biography = [
-  "Alexander’s work is centred on a question that precedes any individual model or technology: how financial reality becomes data, how that data acquires meaning, how uncertainty is represented, and how evidence is transformed into decisions that an institution can explain, control and act upon.",
-  "Entimema emerged from the conviction that better financial decisions require more than better models or greater automation. They require a coherent architecture through which evidence, analysis, judgment and action remain connected.",
+  "Alexander Dimitrov is a finance and risk practitioner whose experience spans CFO leadership, accounting, controlling, SAP-enabled financial management, credit risk and IFRS 9. He founded Entimema to turn specialist financial reasoning into controlled, traceable workflows that can operate in practice.",
+  "His perspective is shaped by recurring operating problems: fragmented source data, inconsistent definitions, spreadsheet-dependent analysis, opaque model outputs and decisions that are difficult to reproduce or defend.",
 ];
-export const thesis = "The value of a model is not determined by complexity alone. It is determined by whether the model can operate responsibly inside a real institution—across its data, definitions, systems, constraints and decision accountabilities.";
+export const thesis = "Financial AI becomes useful only when it preserves meaning, exposes uncertainty and remains accountable to evidence.";
 
 // Preserve the existing Person-schema vocabulary and shared identity conventions.
 export const areas = [
@@ -28,10 +28,12 @@ export const areas = [
 ];
 
 export const foundations = [
-  { title: "Financial meaning", description: "Financial data is not a neutral representation of reality. Definitions, recognition rules, classifications, periods and management perspectives determine what a number means before it enters any model. Reliable decisions begin by preserving that meaning as information moves from source transactions to analysis." },
-  { title: "Data and representation", description: "Analytical work transforms financial events into variables, structures and comparable observations. That transformation requires choices about granularity, time, missing information, reconciliation and measurement. Unless those choices remain visible, analytical precision can conceal uncertainty in the underlying evidence." },
-  { title: "Risk and uncertainty", description: "Quantitative models make patterns, probabilities and decision boundaries explicit, but a model is always a representation rather than the decision itself. Its outputs acquire institutional meaning only when assumptions, limitations, uncertainty and consequences are understood in the context in which the model is used." },
-  { title: "Systems and decision execution", description: "Enterprise systems and workflows determine how evidence, models and rules operate beyond the analytical environment. A decision becomes institutionally usable when its inputs can be traced, its calculations controlled, its uncertainty surfaced and material exceptions directed to human judgment." },
+  { title: "Finance leadership", description: "Management reporting, planning, performance analysis and the practical requirements of CFO decision support." },
+  { title: "Accounting & controlling", description: "Accounting meaning, reconciliations, cost and margin structures, controls and management information." },
+  { title: "SAP FI/CO & financial systems", description: "How financial definitions, processes and controls operate across enterprise data and systems." },
+  { title: "Credit risk & IFRS 9", description: "Risk methodology, quantitative analysis, model outputs, governance and their connection to credit decisions." },
+  { title: "Financial modelling", description: "Models and scenarios designed around the decisions, assumptions and limitations they need to support." },
+  { title: "Applied AI", description: "Specialized AI operating inside controlled financial workflows with deterministic validation and human review." },
 ];
 export const structuralProblems = [
   { title: "Data", description: "Availability does not establish meaning. The origin, definition and transformation of financial data determine what can legitimately be concluded from it." },
@@ -40,15 +42,14 @@ export const structuralProblems = [
   { title: "Automation", description: "Execution does not, by itself, establish control. A faster process can reproduce the same ambiguity at greater speed and scale." },
 ];
 export const principles = [
-  "Models can interpret patterns, estimate uncertainty and support judgment. Deterministic controls must continue to own arithmetic, reconciliations, accounting identities and fixed decision constraints.",
-  "Human judgment remains necessary where evidence is incomplete, definitions conflict or consequences are material. Traceability keeps the path from source evidence to conclusion open to examination. Practical usability allows the reasoning to survive beyond the analytical environment in which it was created.",
-  "The objective is not to remove professional judgment from Finance and Risk. It is to give that judgment a stronger evidential and operational structure.",
+  "Financial meaning precedes modelling. A number must retain its definition, period, unit and source before it can support analysis.",
+  "A model is not a decision. Models interpret patterns and context; deterministic logic owns arithmetic, reconciliations and fixed controls.",
+  "Human judgement remains necessary where evidence is incomplete, definitions conflict or consequences are material.",
 ];
 export const whyEntimema = [
-  "Entimema operates within an emerging category: Decision Intelligence for Finance and Risk.",
-  "Its purpose is to connect financial evidence, analytical models, deterministic rules, AI-assisted interpretation and human judgment within end-to-end workflows. The workflow—not an isolated model or AI agent—is the relevant product boundary.",
-  "This means moving beyond the automation of individual tasks toward an institutional architecture in which data can be interpreted without losing its financial meaning, calculations can be controlled, uncertainty can be made explicit, exceptions can reach the right person and every material conclusion can be traced back to its evidence.",
-  "Entimema turns that thesis into a programme of work across practitioner research, financial methodologies, decision workflows and Financial Intelligence products. The ambition is to make specialist reasoning reusable without making it opaque—and operational without separating it from human responsibility.",
+  "Entimema was founded to turn specialist finance and risk reasoning into controlled, repeatable workflows.",
+  "The workflow—not an isolated model or AI agent—is the commercial boundary. It connects source evidence, interpretation, calculations, exceptions and human review in one accountable process.",
+  "The objective is to make specialist reasoning reusable without making it opaque, and operational without separating it from human responsibility.",
 ];
 export const productBridge = "The same concerns—financial meaning, data representation, reconciliation, evidence lineage, model interpretation, deterministic controls, explicit uncertainty and human review—come together in Entimema Financial Intelligence as operational financial workflows.";
 export const researchQuestions: Record<string, string> = {

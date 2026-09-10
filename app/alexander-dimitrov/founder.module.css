@@ -1,5 +1,7 @@
 /* Founder-only editorial composition. Shared primitives and the validated portrait stay unchanged. */
 .page { padding-top: var(--header-height-v2); }
+.linkedinLink { display: inline-flex; width: fit-content; align-items: center; gap: .45rem; margin-top: 1rem; color: var(--entimema-navy); font-size: .875rem; font-weight: 650; letter-spacing: .04em; text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: .2rem; }
+.linkedinLink:hover { color: #e76f00; }
 .container { min-width: 0; }
 .page p { margin-block: 0; }
 .page :is(h1, h2, h3) { scroll-margin-top: calc(var(--header-height-v2) + var(--entimema-space-component)); }
