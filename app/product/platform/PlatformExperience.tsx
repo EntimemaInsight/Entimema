@@ -324,13 +324,82 @@ function ProductScreen({ active }: { active: number }) {
 
 function EvidenceLabels({ active }: { active: number }) {
   const sets = [
-    [<div key="agent"><span>Financial document intake</span><strong>Read submitted statements</strong></div>, <div key="file" className={styles.micro}><i>XLSX</i><strong>Source file ingested</strong></div>, <div key="check"><span>Source verification</span><strong>Are all material values traceable?</strong></div>],
-    [<div key="period"><span>Reporting context</span><strong>2025 / 2024 · EUR thousands</strong></div>, <div key="map" className={styles.micro}><i>↳</i><strong>9 lines canonicalised</strong></div>, <div key="meaning"><span>Source meaning retained</span><strong>Reported label ↔ canonical concept</strong></div>],
-    [<div key="rule"><span>Deterministic rule</span><strong>Revenue − Cost of Sales = Gross Profit</strong></div>, <div key="pass" className={styles.micro}><i>✓</i><strong>0.00 difference · Pass</strong></div>, <div key="exception"><span>Exception policy</span><strong>No material exception detected</strong></div>],
-    [<div key="kpi"><span>Verified analysis</span><strong>Gross margin&nbsp; 40.0%</strong></div>, <div key="growth" className={styles.micro}><i>↗</i><strong>Revenue growth&nbsp; 20.0%</strong></div>, <div key="review"><span>Human review</span><strong>Evidence remains one click away</strong></div>],
-    [<div key="record"><span>Decision record</span><strong>Analysis, statement and lineage</strong></div>, <div key="values" className={styles.micro}><i>✓</i><strong>18 / 18 values verified</strong></div>, <div key="output"><span>Controlled output</span><strong>Ready for financial review</strong></div>],
+    [
+      <div key="agent">
+        <span>Financial document intake</span>
+        <strong>Read submitted statements</strong>
+      </div>,
+      <div key="file" className={styles.micro}>
+        <i>XLSX</i>
+        <strong>Source file ingested</strong>
+      </div>,
+      <div key="check">
+        <span>Source verification</span>
+        <strong>Are all material values traceable?</strong>
+      </div>,
+    ],
+    [
+      <div key="period">
+        <span>Reporting context</span>
+        <strong>2025 / 2024 · EUR thousands</strong>
+      </div>,
+      <div key="map" className={styles.micro}>
+        <i>↳</i>
+        <strong>9 lines canonicalised</strong>
+      </div>,
+      <div key="meaning">
+        <span>Source meaning retained</span>
+        <strong>Reported label ↔ canonical concept</strong>
+      </div>,
+    ],
+    [
+      <div key="rule">
+        <span>Deterministic rule</span>
+        <strong>Revenue − Cost of Sales = Gross Profit</strong>
+      </div>,
+      <div key="pass" className={styles.micro}>
+        <i>✓</i>
+        <strong>0.00 difference · Pass</strong>
+      </div>,
+      <div key="exception">
+        <span>Exception policy</span>
+        <strong>No material exception detected</strong>
+      </div>,
+    ],
+    [
+      <div key="kpi">
+        <span>Verified analysis</span>
+        <strong>Gross margin&nbsp; 40.0%</strong>
+      </div>,
+      <div key="growth" className={styles.micro}>
+        <i>↗</i>
+        <strong>Revenue growth&nbsp; 20.0%</strong>
+      </div>,
+      <div key="review">
+        <span>Human review</span>
+        <strong>Evidence remains one click away</strong>
+      </div>,
+    ],
+    [
+      <div key="record">
+        <span>Decision record</span>
+        <strong>Analysis, statement and lineage</strong>
+      </div>,
+      <div key="values" className={styles.micro}>
+        <i>✓</i>
+        <strong>18 / 18 values verified</strong>
+      </div>,
+      <div key="output">
+        <span>Controlled output</span>
+        <strong>Ready for financial review</strong>
+      </div>,
+    ],
   ];
-  return <div className={styles.evidenceLabels} key={active}>{sets[active]}</div>;
+  return (
+    <div className={styles.evidenceLabels} key={active}>
+      {sets[active]}
+    </div>
+  );
 }
 
 function ArchitectureStack({
@@ -343,23 +412,34 @@ function ArchitectureStack({
   return (
     <div
       className={styles.visualStage}
-      style={{ "--progress": progress } as CSSProperties}
+      style={
+        {
+          "--progress": progress,
+          "--stack-x": `${progress * 34}px`,
+          "--stack-y": `${progress * 4}px`,
+          "--active-lift": `${10 + progress * 17}px`,
+        } as CSSProperties
+      }
     >
       <div
         className={styles.stack}
         aria-label={`Active architecture layer: ${layers[active].label}`}
       >
-      {layers.map((layer, index) => (
-        <div
+        {layers.map((layer, index) => (
+          <div
             className={`${styles.stackLayer} ${index === active ? styles.activeLayer : ""} ${index < active ? styles.passedLayer : ""}`}
-            style={{ "--layer": index } as CSSProperties}
+            style={
+              {
+                "--layer-y": `${index * (18 + progress * 39)}px`,
+              } as CSSProperties
+            }
             key={layer.label}
           >
-          <strong>{layer.label}</strong>
-        </div>
-      ))}
-    </div>
-    <EvidenceLabels active={active} />
+            <strong>{layer.label}</strong>
+          </div>
+        ))}
+      </div>
+      <EvidenceLabels active={active} />
     </div>
   );
 }
@@ -368,6 +448,7 @@ export default function PlatformExperience() {
   const [active, setActive] = useState(0);
   const [progress, setProgress] = useState(0);
   const steps = useRef<Array<HTMLElement | null>>([]);
+  const architectureGrid = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     let frame = 0;
     const update = () => {
@@ -386,16 +467,20 @@ export default function PlatformExperience() {
       });
       setActive(best);
       const first = steps.current[0],
-        last = steps.current.at(-1);
-      if (first && last) {
-        const start = first.getBoundingClientRect().top + window.scrollY;
+        last = steps.current.at(-1),
+        grid = architectureGrid.current;
+      if (first && last && grid) {
+        const start = grid.getBoundingClientRect().top + window.scrollY - 88;
         const end =
           last.getBoundingClientRect().bottom +
           window.scrollY -
           window.innerHeight;
-        setProgress(
-          Math.max(0, Math.min(1, (window.scrollY - start) / (end - start))),
+        const rawProgress = Math.max(
+          0,
+          Math.min(1, (window.scrollY - start) / Math.max(1, end - start)),
         );
+        const easedProgress = rawProgress * rawProgress * (3 - 2 * rawProgress);
+        setProgress(easedProgress);
       }
     };
     const onScroll = () => {
@@ -459,7 +544,10 @@ export default function PlatformExperience() {
           </h2>
           <span>Scroll through a real sanitised V1 acceptance run</span>
         </div>
-        <div className={`site-container ${styles.architectureGrid}`}>
+        <div
+          className={`site-container ${styles.architectureGrid}`}
+          ref={architectureGrid}
+        >
           <div className={styles.copyColumn}>
             {layers.map((layer, index) => (
               <article
@@ -469,7 +557,9 @@ export default function PlatformExperience() {
                 }}
                 key={layer.label}
               >
-                <div className={styles.stepTop}><b>{layer.label}</b></div>
+                <div className={styles.stepTop}>
+                  <b>{layer.label}</b>
+                </div>
                 <h3>{layer.title}</h3>
                 <p>{layer.copy}</p>
                 <small>{layer.proof}</small>
