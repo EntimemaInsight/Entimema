@@ -145,7 +145,7 @@
 .stack {
   position: absolute;
   z-index: 8;
-  right: clamp(48px, 7.35vw, 100px);
+  right: clamp(50px, 8vw, 110px);
   top: 1%;
   width: clamp(390px, 32.5vw, 475px);
   height: 500px;
