@@ -207,24 +207,24 @@
     border-color 0.64s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .stackLayer:nth-child(2) {
-  --layer-highlight: #b8c6e6;
-  --layer-mid: #97a7d2;
-  --layer-shadow: #7184b7;
+  --layer-highlight: #dbeef6;
+  --layer-mid: #b8d5e4;
+  --layer-shadow: #88afc4;
 }
 .stackLayer:nth-child(3) {
-  --layer-highlight: #b4c2e2;
-  --layer-mid: #92a3cd;
-  --layer-shadow: #6c7fb2;
+  --layer-highlight: #d5eaf4;
+  --layer-mid: #afd0e0;
+  --layer-shadow: #80aabe;
 }
 .stackLayer:nth-child(4) {
-  --layer-highlight: #b0bdde;
-  --layer-mid: #8c9cc7;
-  --layer-shadow: #6679ac;
+  --layer-highlight: #cfe6f1;
+  --layer-mid: #a7cadb;
+  --layer-shadow: #78a2b9;
 }
 .stackLayer:nth-child(5) {
-  --layer-highlight: #acb8d9;
-  --layer-mid: #8797c1;
-  --layer-shadow: #6173a5;
+  --layer-highlight: #c8e0ed;
+  --layer-mid: #9fc3d5;
+  --layer-shadow: #719bb2;
 }
 .stackLayer::before {
   content: "";
