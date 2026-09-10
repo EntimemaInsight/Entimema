@@ -289,17 +289,17 @@
   filter: saturate(0.78) brightness(1.03);
   opacity: 1;
 }
-.stack:hover .stackLayer:not(:hover) {
+.hoverMuted {
   filter: saturate(0.7) brightness(0.98);
   opacity: 0.7;
 }
-.stackLayer:has(~ .stackLayer:hover) {
+.hoverBefore {
   translate: -5px -5px;
 }
-.stackLayer:hover ~ .stackLayer {
+.hoverAfter {
   translate: 6px 9px;
 }
-.stack .stackLayer:hover {
+.stack .hoveredLayer {
   z-index: 20 !important;
   filter: saturate(1.16) brightness(1.07);
   opacity: 1;
@@ -319,10 +319,10 @@
   translate: -12px -18px 34px;
   scale: 1.015;
 }
-.stack .stackLayer:hover::before {
+.stack .hoveredLayer::before {
   filter: drop-shadow(0 0 11px rgba(216, 255, 105, 0.78));
 }
-.stack .stackLayer:hover strong {
+.stack .hoveredLayer strong {
   text-shadow:
     0 1px 9px rgba(30, 24, 92, 0.5),
     0 0 14px rgba(255, 255, 255, 0.32);
