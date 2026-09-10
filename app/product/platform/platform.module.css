@@ -199,8 +199,9 @@
 .stackLayer strong {
   position: absolute;
   z-index: 3;
-  right: 18px;
+  right: auto;
   bottom: 14px;
+  left: 22px;
   width: max-content;
   max-width: 78%;
   margin: 0;
@@ -210,7 +211,7 @@
   line-height: 1.2;
   letter-spacing: 0.005em;
   white-space: nowrap;
-  text-align: right;
+  text-align: left;
   text-shadow: 0 1px 8px rgba(30, 24, 92, 0.42);
 }
 .stackLayer:hover {
