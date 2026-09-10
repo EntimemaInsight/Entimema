@@ -405,15 +405,15 @@ function EvidenceLabels({ active }: { active: number }) {
 function ArchitectureStack({
   active,
   progress,
-  showLabels = true,
+  entryProgress,
+  labelsProgress,
 }: {
   active: number;
   progress: number;
-  showLabels?: boolean;
+  entryProgress: number;
+  labelsProgress: number;
 }) {
-  const labelsProgress = showLabels
-    ? Math.max(0, Math.min(1, progress / 0.07))
-    : 0;
+  const layerGap = 18 + entryProgress * 20 + progress * 19;
 
   return (
     <div
@@ -421,8 +421,8 @@ function ArchitectureStack({
       style={
         {
           "--progress": progress,
-          "--stack-x": `${progress * 34}px`,
-          "--stack-y": `${progress * 4}px`,
+          "--stack-x": `${entryProgress * 42 + progress * 12}px`,
+          "--stack-y": `${entryProgress * 2}px`,
           "--active-lift": `${10 + progress * 17}px`,
           "--labels-opacity": labelsProgress,
           "--labels-x": `${(1 - labelsProgress) * -22}px`,
@@ -439,7 +439,7 @@ function ArchitectureStack({
             className={`${styles.stackLayer} ${index === active ? styles.activeLayer : ""} ${index < active ? styles.passedLayer : ""}`}
             style={
               {
-                "--layer-y": `${index * (18 + progress * 39)}px`,
+                "--layer-y": `${index * layerGap}px`,
               } as CSSProperties
             }
             key={layer.label}
@@ -448,7 +448,7 @@ function ArchitectureStack({
           </div>
         ))}
       </div>
-      {showLabels && <EvidenceLabels active={active} />}
+      <EvidenceLabels active={active} />
     </div>
   );
 }
@@ -456,6 +456,8 @@ function ArchitectureStack({
 export default function PlatformExperience() {
   const [active, setActive] = useState(0);
   const [progress, setProgress] = useState(0);
+  const [entryProgress, setEntryProgress] = useState(0);
+  const [labelsProgress, setLabelsProgress] = useState(0);
   const steps = useRef<Array<HTMLElement | null>>([]);
   const architectureGrid = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
@@ -479,10 +481,8 @@ export default function PlatformExperience() {
         last = steps.current.at(-1),
         grid = architectureGrid.current;
       if (first && last && grid) {
-        const start =
-          grid.getBoundingClientRect().top +
-          window.scrollY -
-          window.innerHeight * 0.35;
+        const start = grid.getBoundingClientRect().top + window.scrollY;
+        const travelled = Math.max(0, window.scrollY - start);
         const end =
           last.getBoundingClientRect().bottom +
           window.scrollY -
@@ -491,7 +491,11 @@ export default function PlatformExperience() {
           0,
           Math.min(1, (window.scrollY - start) / Math.max(1, end - start)),
         );
+        const entryRaw = Math.min(1, travelled / 240);
+        const revealRaw = Math.max(0, Math.min(1, (travelled - 420) / 240));
         setProgress(rawProgress);
+        setEntryProgress(Math.pow(entryRaw, 1.5));
+        setLabelsProgress(revealRaw * revealRaw * (3 - 2 * revealRaw));
       }
     };
     const onScroll = () => {
@@ -508,50 +512,41 @@ export default function PlatformExperience() {
   }, []);
   return (
     <div className={styles.page}>
-      <section className={styles.hero}>
-        <div className={`site-container ${styles.heroGrid}`}>
-          <div>
-            <p className={styles.eyebrow}>
-              THE CONTROLLED FINANCIAL INTELLIGENCE PLATFORM
-            </p>
-            <h1>
-              Financial intelligence, built to be <em>defended.</em>
-            </h1>
-            <p className={styles.heroLead}>
-              From source evidence to a decision-ready output—inside one
-              controlled, traceable system.
-            </p>
-            <div className={styles.actions}>
-              <DemoTrigger
-                className={styles.primaryCta}
-                initialInterest="Platform overview"
-              />
-              <Link href="/financial-intelligence-launch">
-                Explore the live V1 workflow <span>→</span>
-              </Link>
-            </div>
-            <div className={styles.trustLine}>
-              <span>SOURCE-BOUND</span>
-              <span>DETERMINISTICALLY VALIDATED</span>
-              <span>HUMAN-REVIEWABLE</span>
-            </div>
-          </div>
-          <div className={styles.heroVisual}>
-            <div className={styles.heroHalo} />
-            <ArchitectureStack active={0} progress={0} showLabels={false} />
-          </div>
-        </div>
-      </section>
       <section
-        className={styles.architecture}
-        aria-label="Financial intelligence architecture"
+        className={styles.journey}
+        aria-label="Financial intelligence platform architecture"
       >
         <div
-          className={`site-container ${styles.architectureGrid}`}
+          className={`site-container ${styles.journeyGrid}`}
           ref={architectureGrid}
-          aria-label="Five connected financial intelligence layers"
         >
           <div className={styles.copyColumn}>
+            <header className={styles.hero}>
+              <p className={styles.eyebrow}>
+                THE CONTROLLED FINANCIAL INTELLIGENCE PLATFORM
+              </p>
+              <h1>
+                Financial intelligence, built to be <em>defended.</em>
+              </h1>
+              <p className={styles.heroLead}>
+                From source evidence to a decision-ready output—inside one
+                controlled, traceable system.
+              </p>
+              <div className={styles.actions}>
+                <DemoTrigger
+                  className={styles.primaryCta}
+                  initialInterest="Platform overview"
+                />
+                <Link href="/financial-intelligence-launch">
+                  Explore the live V1 workflow <span>→</span>
+                </Link>
+              </div>
+              <div className={styles.trustLine}>
+                <span>SOURCE-BOUND</span>
+                <span>DETERMINISTICALLY VALIDATED</span>
+                <span>HUMAN-REVIEWABLE</span>
+              </div>
+            </header>
             {layers.map((layer, index) => (
               <article
                 className={`${styles.storyStep} ${index === active ? styles.activeStep : ""}`}
@@ -570,7 +565,12 @@ export default function PlatformExperience() {
             ))}
           </div>
           <div className={styles.stickyColumn}>
-            <ArchitectureStack active={active} progress={progress} />
+            <ArchitectureStack
+              active={active}
+              progress={progress}
+              entryProgress={entryProgress}
+              labelsProgress={labelsProgress}
+            />
           </div>
         </div>
       </section>
