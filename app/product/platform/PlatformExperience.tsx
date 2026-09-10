@@ -449,7 +449,7 @@ function ArchitectureStack({
         {layers.map((layer, index) => (
           <button
             type="button"
-            className={`${styles.stackLayer} ${index === active ? styles.activeLayer : ""} ${index < active ? styles.passedLayer : ""} ${hovered === index ? styles.hoveredLayer : ""} ${hovered !== null && hovered !== index ? styles.hoverMuted : ""} ${hovered !== null && index < hovered ? styles.hoverBefore : ""} ${hovered !== null && index > hovered ? styles.hoverAfter : ""}`}
+            className={`${styles.stackLayer} ${index === active ? styles.activeLayer : ""} ${index < active ? styles.passedLayer : ""} ${hovered === index ? styles.hoveredLayer : ""} ${hovered !== null && hovered !== index ? styles.hoverMuted : ""}`}
             style={
               {
                 "--layer-y": `${index * layerGap}px`,
@@ -459,15 +459,8 @@ function ArchitectureStack({
                   hovered === null || hovered === index
                     ? undefined
                     : "saturate(.7) brightness(.98)",
-                translate:
-                  hovered === index
-                    ? "-12px -18px 34px"
-                    : hovered !== null && index < hovered
-                      ? "-5px -5px"
-                      : hovered !== null && index > hovered
-                        ? "6px 9px"
-                        : undefined,
-                scale: hovered === index ? "1.015" : undefined,
+                translate: hovered === index ? "-38px -3px 34px" : undefined,
+                scale: hovered === index ? "1.008" : undefined,
               } as CSSProperties
             }
             key={layer.label}
