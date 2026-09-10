@@ -21,7 +21,7 @@
 .item small,.featured small { max-width: 380px; color: rgba(4,19,63,.68); font-size: var(--entimema-menu-detail); font-weight: 400; line-height: var(--entimema-menu-leading-detail); letter-spacing: var(--entimema-menu-tracking-copy); }
 .upcomingItem { cursor: default; }
 .itemHeading { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
-.itemHeading span { display: inline-flex; align-items: center; min-height: 20px; padding: 2px 7px; border: 1px solid rgba(16,43,112,.16); border-radius: 999px; background: #edf7fc; color: var(--brand-navy-800); font-size: .625rem; font-weight: 700; line-height: 1; letter-spacing: .055em; text-transform: uppercase; }
+.itemHeading span { display: inline-flex; align-items: center; min-height: 20px; padding: 2px 7px; border: 1px solid rgba(7,27,77,.06); border-radius: 5px; background: #f1ee9f; color: var(--brand-navy-950); box-shadow: 0 8px 22px rgba(7,27,77,.06); font-size: .625rem; font-weight: 700; line-height: 1; letter-spacing: .055em; text-transform: uppercase; }
 .featured { position: relative; isolation: isolate; min-width: 0; padding: 38px 0 42px clamp(34px,4vw,58px); }
 .featured::before { content: ""; position: absolute; z-index: -1; inset: 0 -100vw 0 0; background: #f3f5f8; }
 .item:hover strong,.featured a:hover strong { color: var(--brand-navy-800); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }

@@ -187,7 +187,7 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
                   {productDestinations.map((item) => "href" in item ? (
                     <Link className={styles.mobileResourceDestination} href={item.href} key={item.title} onClick={close}><span><strong>{item.title}</strong><small>{item.description}</small></span></Link>
                   ) : (
-                    <div className={styles.mobileResourceDestination} key={item.title}><span><strong>{item.title} · {item.status}</strong><small>{item.description}</small></span></div>
+                    <div className={styles.mobileResourceDestination} key={item.title}><span><strong>{item.title} <em className={styles.mobileComingSoon}>{item.status}</em></strong><small>{item.description}</small></span></div>
                   ))}
                 </div>
                 <button
