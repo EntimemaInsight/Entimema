@@ -454,13 +454,18 @@ function ArchitectureStack({
               {
                 "--layer-y": `${index * layerGap}px`,
                 zIndex: layers.length - index,
-                opacity: hovered === null || hovered === index ? 1 : 0.7,
+                opacity: hovered === null || hovered === index ? 1 : 0.82,
                 filter:
                   hovered === null || hovered === index
                     ? undefined
-                    : "saturate(.7) brightness(.98)",
-                translate: hovered === index ? "-38px -3px 34px" : undefined,
-                scale: hovered === index ? "1.008" : undefined,
+                    : "saturate(.82) brightness(1)",
+                translate:
+                  hovered === index
+                    ? "-36px 0"
+                    : hovered !== null
+                      ? "-6px 0"
+                      : undefined,
+                scale: hovered === index ? "1.006" : undefined,
               } as CSSProperties
             }
             key={layer.label}
