@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { DemoTrigger } from "@/components/DemoDiscovery";
 import styles from "./platform.module.css";
@@ -10,61 +9,57 @@ const layers = [
     number: "01",
     label: "Evidence Infrastructure",
     title: "Every conclusion begins with evidence.",
-    copy: "Bring the source file, extracted value and exact location into one controlled record.",
     benefits: [
-      "Native XLSX, CSV and text-based PDF intake",
-      "Cell-level lineage for every material value",
-      "Original source meaning remains intact",
+      ["Bind every value", "to its source file, sheet, cell or page."],
+      ["Preserve original meaning", "across extraction and normalization."],
+      ["Review the evidence", "before any conclusion reaches a decision."],
     ],
-    proof: "18 / 18 values bound to source",
   },
   {
     number: "02",
     label: "Financial Context Layer",
     title: "Different documents. One financial language.",
-    copy: "Align periods, definitions and reported values without disconnecting them from the source.",
     benefits: [
-      "Canonical concepts applied to reported lines",
-      "Currency, scale and period context preserved",
-      "Source labels remain visible beside mappings",
+      ["Align every period", "without breaking the connection to source."],
+      ["Normalize definitions", "into one controlled financial language."],
+      ["Retain reported labels", "beside every canonical mapping."],
     ],
-    proof: "9 financial lines canonicalised",
   },
   {
     number: "03",
     label: "Control & Validation Engine",
     title: "AI interprets. Controls determine what can be trusted.",
-    copy: "Run deterministic calculations and reconciliations before an output reaches a decision-maker.",
     benefits: [
-      "Code-owned financial calculations",
-      "Material differences become explicit exceptions",
-      "No plausible answer silently passes as verified",
+      ["Recalculate every total", "with deterministic, code-owned logic."],
+      ["Expose every difference", "as an explicit, reviewable exception."],
+      ["Block unsupported outputs", "before they reach decision-makers."],
     ],
-    proof: "0.00 reconciliation difference",
   },
   {
     number: "04",
     label: "Decision Workspace",
     title: "Uncertainty is surfaced—not hidden.",
-    copy: "Review findings, calculations and source evidence in the same professional workspace.",
     benefits: [
-      "Calculated KPIs with visible provenance",
-      "Exceptions arrive with decision context",
-      "Human review authority remains explicit",
+      [
+        "See the full context",
+        "with findings, calculations and evidence together.",
+      ],
+      ["Investigate exceptions", "without leaving the decision record."],
+      ["Keep authority human", "wherever material judgment is required."],
     ],
-    proof: "6 deterministic KPIs ready for review",
   },
   {
     number: "05",
     label: "Decision-ready Output",
     title: "A result that can survive the next question.",
-    copy: "Deliver the analysis, verified statement and evidence trail as one reviewable decision record.",
     benefits: [
-      "Executive findings linked to source values",
-      "Verified statement and traceability in one view",
-      "Controlled PDF output for downstream review",
+      [
+        "Deliver verified analysis",
+        "with every conclusion linked to evidence.",
+      ],
+      ["Export one controlled record", "for review, challenge and reuse."],
+      ["Defend the result", "with complete lineage from source to decision."],
     ],
-    proof: "Financial Statements Intelligence V1 · live",
   },
 ] as const;
 
@@ -564,9 +559,6 @@ export default function PlatformExperience() {
         >
           <div className={styles.copyColumn}>
             <header className={styles.hero}>
-              <p className={styles.eyebrow}>
-                THE CONTROLLED FINANCIAL INTELLIGENCE PLATFORM
-              </p>
               <h1>
                 Financial intelligence, built to be <em>defended.</em>
               </h1>
@@ -576,17 +568,9 @@ export default function PlatformExperience() {
               </p>
               <div className={styles.actions}>
                 <DemoTrigger
-                  className={styles.primaryCta}
+                  className="primary-cta hero__cta"
                   initialInterest="Platform overview"
                 />
-                <Link href="/financial-intelligence-launch">
-                  Explore the live V1 workflow <span>→</span>
-                </Link>
-              </div>
-              <div className={styles.trustLine}>
-                <span>SOURCE-BOUND</span>
-                <span>DETERMINISTICALLY VALIDATED</span>
-                <span>HUMAN-REVIEWABLE</span>
               </div>
             </header>
             {layers.map((layer, index) => (
@@ -601,8 +585,13 @@ export default function PlatformExperience() {
                   <b>{layer.label}</b>
                 </div>
                 <h3>{layer.title}</h3>
-                <p>{layer.copy}</p>
-                <small>{layer.proof}</small>
+                <ul>
+                  {layer.benefits.map(([lead, detail]) => (
+                    <li key={lead}>
+                      <strong>{lead}</strong> {detail}
+                    </li>
+                  ))}
+                </ul>
               </article>
             ))}
           </div>
@@ -617,70 +606,17 @@ export default function PlatformExperience() {
           </div>
         </div>
       </section>
-      <section className={styles.systemProof}>
-        <div className={`site-container ${styles.proofGrid}`}>
-          <div>
-            <p className={styles.eyebrow}>CONTROL THAT SURVIVES THE HANDOFF</p>
-            <h2>
-              Not another AI layer.
-              <br />
-              <em>A financial control system.</em>
-            </h2>
-          </div>
-          <div className={styles.proofList}>
-            <article>
-              <span>01</span>
-              <div>
-                <strong>Evidence remains attached</strong>
-                <p>
-                  Every material output preserves the source location that
-                  produced it.
-                </p>
-              </div>
-            </article>
-            <article>
-              <span>02</span>
-              <div>
-                <strong>Arithmetic remains deterministic</strong>
-                <p>
-                  Code—not prose—owns calculations, reconciliations and fixed
-                  rules.
-                </p>
-              </div>
-            </article>
-            <article>
-              <span>03</span>
-              <div>
-                <strong>Authority remains human</strong>
-                <p>
-                  Material uncertainty is routed for review with its context
-                  intact.
-                </p>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
       <section className={styles.finalCta}>
         <div className="site-container">
-          <p>FINANCIAL STATEMENTS INTELLIGENCE V1 · AVAILABLE NOW</p>
           <h2>
-            See the product.
-            <br />
-            <em>Interrogate the evidence.</em>
+            Turn financial documents into verified intelligence your team can
+            defend.
           </h2>
-          <span>
-            Start with one controlled income-statement workflow. Prove the
-            value. Expand from evidence.
-          </span>
           <div className={styles.finalActions}>
             <DemoTrigger
-              className={styles.lightCta}
+              className="primary-cta primary-cta--light"
               initialInterest="Financial Intelligence V1"
             />
-            <Link href="/financial-intelligence-launch">
-              See the V1 workflow <b>→</b>
-            </Link>
           </div>
         </div>
       </section>
