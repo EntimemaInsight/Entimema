@@ -6,27 +6,28 @@
 .header h2{margin:24px auto 20px;color:#071b4d;font-size:clamp(42px,4.8vw,70px);line-height:1.06;letter-spacing:-.05em;font-weight:660}
 .header h2 em{color:#ff5b24;font-style:normal}.header p{max-width:740px;margin:0 auto;color:#5d6b85;font-size:18px;line-height:1.6}
 .libraryGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
-.libraryCard{display:flex;flex-direction:column;min-width:0;border:1px solid #dfe5ef;border-radius:12px;overflow:hidden;background:#fff;color:#071b4d;box-shadow:0 12px 36px rgba(7,27,77,.035);transition:transform .25s ease,box-shadow .25s ease}
-.libraryCard:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(7,27,77,.08)}
+.libraryCard{display:flex;flex-direction:column;min-width:0;border:1px solid #dfe5ef;border-radius:12px;overflow:hidden;background:#fff;color:#071b4d;box-shadow:0 12px 36px rgba(7,27,77,.035)}
+
 .cardTop{display:flex;justify-content:space-between;gap:8px;padding:24px 24px 0;font-size:9px;line-height:1.5;color:#66758e}
 .cardTop>span:first-child{color:#a44421;font-weight:650}.cardTop>span:last-child{white-space:nowrap}
 .libraryCard h3{margin:25px 24px 14px;font-size:25px;line-height:1.15;letter-spacing:-.03em;max-width:300px}
 .libraryCard>p{margin:0 24px 24px;color:#64718a;font-size:14px;line-height:1.6;flex:1}
-.cardImage{margin:0 24px;border:1px solid #e1e6ef;border-radius:5px;overflow:hidden}.cardImage img{display:block;width:100%;height:auto}
-.libraryCard footer{display:flex;justify-content:space-between;margin:20px 24px;padding:17px 0 0;border-top:1px solid #e8edf3;font-size:12px;font-weight:600}.libraryCard footer span{color:#cc4b20}
-.libraryNote{text-align:center;color:#788397;font-size:12px;line-height:1.6;margin:26px auto 0;max-width:660px}
-.libraryAction{display:flex;justify-content:center;margin-top:26px}.libraryAction a{display:inline-flex;align-items:center;gap:12px;min-height:52px;padding:0 26px;border-radius:8px;background:#071b4d;color:#fff;font-weight:600;font-size:14px;transition:transform .22s ease}.libraryAction a span{color:#ff916b}.libraryAction a:hover{transform:translateY(-2px)}
+.cardImage{margin:0 24px 24px;border:1px solid #e1e6ef;border-radius:5px;overflow:hidden}.cardImage img{display:block;width:100%;height:auto}
+
+
+.libraryAction{display:flex;justify-content:center;margin-top:26px}
 .snapshotWrap{position:relative;margin:0}.snapshotGlow{position:absolute;inset:20% 9% 8%;background:radial-gradient(ellipse at 70% 40%,rgba(255,91,36,.12),transparent 60%);filter:blur(45px);pointer-events:none}
-.imageLink{position:relative;display:block;border:1px solid rgba(7,27,77,.15);border-radius:12px;box-shadow:0 26px 70px -22px rgba(7,27,77,.24),0 3px 10px rgba(7,27,77,.04);overflow:hidden;transition:transform .35s ease,box-shadow .35s ease}
+.imageFrame{position:relative;display:block;border:1px solid rgba(7,27,77,.15);border-radius:12px;box-shadow:0 26px 70px -22px rgba(7,27,77,.24),0 3px 10px rgba(7,27,77,.04);overflow:hidden}
 .screenshot{display:block;width:100%;height:auto;background:#f6f8fa}
-.snapshotWrap figcaption{display:flex;justify-content:space-between;align-items:start;gap:24px;margin-top:24px;color:#68758b;font-size:12px;line-height:1.6}
-.previewLabel{display:inline-block;font-size:10px;font-weight:650;letter-spacing:.04em;color:#59677c;background:#f0f3f7;border:1px solid #e1e6ec;padding:3px 8px;border-radius:4px}
-.snapshotWrap figcaption p{margin:10px 0 0;max-width:840px}.snapshotWrap figcaption>a{flex-shrink:0;display:flex;align-items:center;gap:12px;min-height:40px;color:#071b4d}.snapshotWrap figcaption>a span{color:#c14b24}
-.imageLink:focus-visible,.libraryCard:focus-visible,.libraryAction a:focus-visible,.snapshotWrap figcaption>a:focus-visible{outline:2px solid #ff5b24;outline-offset:5px}
+
+
+
+.libraryAction a:focus-visible{outline:2px solid #ff5b24;outline-offset:5px}
 .reveal>.header,.reveal>.libraryGrid,.reveal>.snapshotWrap{opacity:1;transform:none;transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)}.reveal>.libraryGrid,.reveal>.snapshotWrap{transition-delay:.16s}
-.reveal[data-pending="true"]>.header{opacity:0;transform:translateY(14px)}.reveal[data-pending="true"]>.libraryGrid,.reveal[data-pending="true"]>.snapshotWrap{opacity:0;transform:translateY(22px) scale(.992)}
-@media(hover:hover){.imageLink:hover{transform:translateY(-3px);box-shadow:0 30px 75px -22px rgba(7,27,77,.27)}}
-@media(max-width:1050px){.cardTop{flex-direction:column}.libraryCard h3{font-size:21px;margin-top:20px}.libraryCard>p{font-size:13px}.cardTop,.libraryCard h3,.libraryCard>p,.cardImage,.libraryCard footer{margin-left:18px;margin-right:18px}.cardTop{padding-left:0;padding-right:0}}
+.reveal[data-pending="true"]>.header{opacity:0;transform:translateY(14px)}.reveal[data-pending="true"]>.libraryGrid,.reveal[data-pending="true"]>.snapshotWrap{opacity:0;transform:none}
+@media(max-width:1050px){.cardTop{flex-direction:column}.libraryCard h3{font-size:21px;margin-top:20px}.libraryCard>p{font-size:13px}.cardTop,.libraryCard h3,.libraryCard>p,.cardImage{margin-left:18px;margin-right:18px}.cardTop{padding-left:0;padding-right:0}}
 @media(max-width:800px){.libraryGrid{grid-template-columns:1fr;max-width:540px;margin:0 auto}.cardTop{flex-direction:row}.libraryCard h3{font-size:27px;max-width:350px}.libraryCard>p{font-size:15px}.cardImage{margin-top:4px}.header{margin-bottom:44px}}
-@media(max-width:700px){.container{width:calc(100% - 32px)}.library,.section,.sectionAlt{padding:76px 0;scroll-margin-top:90px}.header h2{font-size:clamp(36px,10vw,52px)}.header p{font-size:16px}.imageLink{border-radius:6px}.snapshotWrap figcaption{flex-direction:column;gap:8px;margin-top:18px}.snapshotWrap figcaption p{font-size:12px}.libraryAction a{width:100%;justify-content:center}.header br{display:none}}
-@media(prefers-reduced-motion:reduce){.reveal>.header,.reveal>.libraryGrid,.reveal>.snapshotWrap,.reveal[data-pending="true"]>.header,.reveal[data-pending="true"]>.libraryGrid,.reveal[data-pending="true"]>.snapshotWrap{opacity:1;transform:none;transition:none}.imageLink,.libraryCard,.libraryAction a{transition:none}.imageLink:hover,.libraryCard:hover,.libraryAction a:hover{transform:none}}
+@media(max-width:700px){.container{width:calc(100% - 32px)}.library,.section,.sectionAlt{padding:76px 0;scroll-margin-top:90px}.header h2{font-size:clamp(36px,10vw,52px)}.header p{font-size:16px}.imageFrame{border-radius:6px}.header br{display:none}}
+@media(prefers-reduced-motion:reduce){.reveal>.header,.reveal>.libraryGrid,.reveal>.snapshotWrap,.reveal[data-pending="true"]>.header,.reveal[data-pending="true"]>.libraryGrid,.reveal[data-pending="true"]>.snapshotWrap{opacity:1;transform:none;transition:none}}
+
+.libraryAction a{justify-content:center;text-align:center}
