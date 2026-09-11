@@ -9,8 +9,8 @@ export const metadata: Metadata = {
   alternates: { canonical: "/contact" },
 };
 
-export default async function ContactPage({ searchParams }: { searchParams: Promise<{ topic?: string }> }) {
-  const { topic } = await searchParams;
+export default async function ContactPage({ searchParams }: { searchParams: Promise<{ topic?: string; intent?: string }> }) {
+  const { topic, intent } = await searchParams;
 
   return (
     <main className={styles.page}>
@@ -21,7 +21,7 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
             <h1 id="contact-title">Contact us</h1>
             <p>We&apos;re here to help answer your questions.</p>
           </header>
-          <ContactExperience initialTopic={topic} />
+          <ContactExperience initialIntent={intent === "client" ? "client" : undefined} initialTopic={topic} />
         </div>
       </section>
     </main>

@@ -27,17 +27,18 @@ const paths = [
   { intent: "client" as const, title: "Support", Icon: SupportMark },
 ];
 
-export default function ContactExperience({ initialTopic }: { initialTopic?: string }) {
+export default function ContactExperience({ initialIntent, initialTopic }: { initialIntent?: "client"; initialTopic?: string }) {
   const validTopic = initialTopic && isTopicKey(initialTopic) ? initialTopic : undefined;
   const openContact = useContactModal();
   const openedInitialTopic = useRef(false);
   const triggerRefs = useRef<Record<Intent, HTMLButtonElement | null>>({ project: null, partnership: null, client: null });
 
   useEffect(() => {
-    if (!validTopic || openedInitialTopic.current || !triggerRefs.current.project) return;
+    const intent = validTopic ? "project" : initialIntent;
+    if (!intent || openedInitialTopic.current || !triggerRefs.current[intent]) return;
     openedInitialTopic.current = true;
-    openContact("project", triggerRefs.current.project, validTopic);
-  }, [openContact, validTopic]);
+    openContact(intent, triggerRefs.current[intent], validTopic);
+  }, [initialIntent, openContact, validTopic]);
 
   useEffect(() => {
     let sent = false;

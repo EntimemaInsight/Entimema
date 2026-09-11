@@ -8,10 +8,10 @@ const page = readFileSync("app/finai/page.tsx", "utf8");
 const footer = readFileSync("components/GlobalFooter.tsx", "utf8");
 const llms = readFileSync("public/llms.txt", "utf8");
 
-test("FinAI has one indexable canonical page and a site-wide discovery path", () => {
+test("FinAI has one indexable canonical page and remains discoverable to models", () => {
   assert.equal(sitemap().filter(entry => entry.url === FINAI_URL).length, 1);
   assert.match(page, /alternates: \{ canonical: FINAI_URL \}/);
-  assert.match(footer, /\["FinAI by Entimema", "\/finai"\]/);
+  assert.doesNotMatch(footer, /FinAI by Entimema/);
   assert.match(llms, new RegExp(`${SITE_URL.replaceAll(".", "\\.")}\\/finai`));
 });
 

@@ -29,19 +29,26 @@ const columns = [
   },
   {
     title: "RESOURCES",
-    links: [["All Resources", "/resources"]],
+    links: [
+      { label: "Insights", href: "/resources" },
+      { label: "Engineering & Resources", href: "/resources/engineering" },
+      { label: "Entimema Docs & Help Center", href: "/contact?intent=client" },
+      { label: "Integrations", status: "Coming soon" },
+      { label: "Security & Trust", href: "/security" },
+      { label: "Privacy Notice", href: "/privacy" },
+    ],
   },
   {
     title: "COMPANY",
     links: [
-      ["FinAI by Entimema", "/finai"],
-      ["About Entimema", "/about"],
-      ["Contact", "/contact"],
-      ["Security & Trust", "/security"],
-      ["Privacy Notice", "/privacy"],
+      { label: "About Entimema", href: "/about" },
+      { label: "Contact", href: "/contact" },
     ],
   },
-] as const;
+] satisfies ReadonlyArray<{
+  title: string;
+  links: ReadonlyArray<readonly [string, string] | { label: string; href: string } | { label: string; status: string }>;
+}>;
 
 export default function GlobalFooter() {
   const pathname = usePathname();
@@ -83,11 +90,19 @@ export default function GlobalFooter() {
             <section className={styles.column} key={column.title}>
               <div className={styles.columnLabel}>{column.title}</div>
               <ul>
-                {column.links.map(([label, href]) => (
-                  <li key={href}>
-                    <Link href={href}>{label}</Link>
-                  </li>
-                ))}
+                {column.links.map((item) => {
+                  if ("label" in item) {
+                    if ("href" in item && item.href) return <li key={item.href}><Link href={item.href}>{item.label}</Link></li>;
+                    return (
+                      <li key={item.label}>
+                        <span aria-disabled="true" className={styles.upcoming}>
+                          <span>{item.label}</span><span className={styles.status}>{item.status}</span>
+                        </span>
+                      </li>
+                    );
+                  }
+                  return <li key={item[1]}><Link href={item[1]}>{item[0]}</Link></li>;
+                })}
               </ul>
             </section>
           ))}
