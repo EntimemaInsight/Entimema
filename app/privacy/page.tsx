@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import Image from "next/image";
 import AnalyticsPreferencesButton from "@/components/AnalyticsPreferencesButton";
+import { DemoTrigger } from "@/components/DemoDiscovery";
 import Navbar from "@/components/Navbar";
 import styles from "../trust-page.module.css";
 
@@ -26,15 +27,26 @@ export default function PrivacyPage() {
     <main className={styles.page}>
       <Navbar />
       <article>
-        <header className={styles.hero}>
-          <p className={styles.eyebrow}>Our commitment to privacy</p>
-          <h1>How Entimema handles personal data.</h1>
-          <p className={styles.intro}>
-            This notice explains how personal data is processed when you visit
-            entimema.com, submit an inquiry or communicate with Entimema.
-          </p>
+        <header className={styles.securityHero}>
+          <div className={styles.heroVisual}>
+            <Image
+              src="/privacy-controls.png"
+              alt="Six illustrated privacy controls: organisational responsibility, individual rights, consent, data separation, retention and privacy requests."
+              width={1296}
+              height={1032}
+              priority
+            />
+          </div>
+          <div className={styles.heroCopy}>
+            <p className={styles.securityEyebrow}>Our commitment to privacy</p>
+            <h1>How Entimema handles personal data.</h1>
+            <p className={styles.securityIntro}>
+              This notice explains how personal data is processed when you visit
+              entimema.com, submit an inquiry or communicate with Entimema.
+            </p>
+          </div>
         </header>
-        <div className={styles.content}>
+        <div className={styles.securityContent}>
           <section>
             <h2>Scope</h2>
             <p>
@@ -165,17 +177,10 @@ export default function PrivacyPage() {
           </section>
         </div>
       </article>
-      <aside className={styles.reference}>
-        <div>
-          <p>
-            Privacy and controlled data handling are part of the same trust
-            boundary.
-          </p>
-          <Link href="/security">
-            Read Security &amp; Trust <span aria-hidden="true">→</span>
-          </Link>
-        </div>
-      </aside>
+      <section className={styles.securityCta} aria-labelledby="privacy-cta-title">
+        <h2 id="privacy-cta-title">Ready to see Entimema in action?</h2>
+        <DemoTrigger className={styles.securityCtaButton}>Get a demo</DemoTrigger>
+      </section>
     </main>
   );
 }
