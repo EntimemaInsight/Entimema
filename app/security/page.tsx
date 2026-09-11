@@ -29,6 +29,7 @@ export default function SecurityPage() {
               width={1536}
               height={1024}
               priority
+              unoptimized
             />
           </div>
           <div className={styles.heroCopy}>
