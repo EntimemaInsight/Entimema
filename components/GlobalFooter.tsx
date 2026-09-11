@@ -8,23 +8,19 @@ import styles from "./GlobalFooter.module.css";
 
 const columns = [
   {
-    title: "FINANCIAL ARCHITECTURE",
+    title: "FINANCE",
     links: [
+      ["Financial Reporting & Analysis", "/services/management-reporting"],
+      ["Planning & Scenario Modelling", "/services/budgets-and-forecasting"],
+      ["Cost & Profitability Analysis", "/services/cost-and-profitability"],
       ["CFO Advisory", "/services/cfo-function"],
-      ["Planning & Forecasting", "/services/budgets-and-forecasting"],
-      ["Management Reporting", "/services/management-reporting"],
-      ["Cost & Margin Management", "/services/cost-and-profitability"],
-      ["Financial Data", "/services/financial-data"],
-      ["Finance AI Agents", "/services/financial-ai-agents"],
     ],
   },
   {
-    title: "DECISION SCIENCE",
+    title: "RISK & DECISIONING",
     links: [
-      ["Credit Risk", "/services/credit-risk"],
-      ["AML & Compliance", "/services/aml-compliance"],
-      ["Decision Intelligence", "/services/decision-automation"],
-      ["Risk AI Agents", "/services/risk-ai-agents"],
+      ["Credit Risk & Decisioning", "/services/credit-risk"],
+      ["AML & Fraud Investigation", "/services/aml-compliance"],
     ],
   },
   {
@@ -34,7 +30,7 @@ const columns = [
       { label: "Engineering & Resources", href: "/resources/engineering" },
       { label: "Entimema Docs & Help Center", href: "/contact?intent=client" },
       { label: "Integrations" },
-      { label: "Security & Trust", href: "/security" },
+      { label: "Security", href: "/security" },
       { label: "Privacy Notice", href: "/privacy" },
     ],
   },
