@@ -65,41 +65,6 @@
   font-size: var(--entimema-metadata);
   letter-spacing: .01em;
 }
-
-/* 2026 executive-profile refinement: authority without a CV silhouette. */
-.page {
-  --company-paper: #f7fbff;
-  --company-surface: #fff;
-  --company-duration: 520ms;
-  --company-step: 55ms;
-  --company-distance: 8px;
-  background: linear-gradient(180deg, #fff 0, #f1f7fd 42rem, #fff 72rem);
-}
-.container { max-width: 1180px; }
-.introduction { grid-template-columns: minmax(280px, 38%) minmax(0, 1fr); grid-template-areas: "portrait heading" "portrait biography"; column-gap: clamp(2.5rem, 6vw, 6rem); row-gap: 1.75rem; padding-block: clamp(4.5rem, 9vh, 7.5rem); }
-.name { margin-top: 1.25rem; font-family: var(--entimema-font-interface); font-size: clamp(3rem, 5vw, 5.25rem); font-weight: 570; line-height: .98; letter-spacing: -.055em; }
-.page .standfirst { margin-top: 1.75rem; max-width: 43ch; font-family: var(--entimema-font-interface); font-size: clamp(1.2rem, 1.05rem + .4vw, 1.45rem); line-height: 1.48; color: var(--entimema-ink-muted); }
-.portrait { max-width: 430px; justify-self: start; border-radius: 20px; background: #eaf2fa; box-shadow: 0 28px 70px rgba(8,26,58,.12); }
-.biography { font-size: 1.0625rem; line-height: 1.75; }
-.section { padding-block: clamp(3.5rem, 7vw, 6rem); }
-.articlesHeader h2 { font-family: var(--entimema-font-interface); font-weight: 560; letter-spacing: -.035em; }
-.articles article { border-top: 0; }
-.researchEntry { margin-top: .75rem; padding: 1.25rem; border: 1px solid #dce8f5; border-radius: 14px; background: rgba(255,255,255,.86); transition: border-color 180ms ease, background-color 180ms ease, transform 180ms ease, box-shadow 180ms ease; }
-@media (hover: hover) {
-  .researchEntry:hover { border-color: #a9bfd8; background: #fff; transform: translateY(-2px); box-shadow: 0 14px 36px rgba(8,26,58,.07); }
-}
-@media (min-width: 48rem) and (max-width: 63.999rem) {
-  .introduction { grid-template-columns: minmax(250px, 36%) minmax(0, 1fr); grid-template-areas: "portrait heading" "portrait biography"; }
-}
-@media (max-width: 47.999rem) {
-  .introduction { grid-template-columns: minmax(0, 1fr); grid-template-areas: "heading" "portrait" "biography"; }
-  .portrait { max-width: 360px; border-radius: 16px; }
-  .name { font-size: clamp(2.75rem, 14vw, 4rem); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .researchEntry { transition: none; }
-  .researchEntry:hover { transform: none; }
-}
 .nameVariants span {
   margin-right: .75rem;
   color: var(--entimema-navy);
@@ -149,17 +114,4 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .page .linkedinBadge { transition: none; transform: none; }
-}
-
-/* Final cascade: preserve the executive-profile silhouette across breakpoints. */
-@media (min-width: 64rem) {
-  .introduction { grid-template-columns: minmax(280px, 38%) minmax(0, 1fr); grid-template-areas: "portrait heading" "portrait biography"; }
-}
-@media (min-width: 48rem) and (max-width: 63.999rem) {
-  .introduction { grid-template-columns: minmax(250px, 36%) minmax(0, 1fr); grid-template-areas: "portrait heading" "portrait biography"; column-gap: var(--entimema-grid-gap); }
-}
-@media (max-width: 47.999rem) {
-  .introduction { grid-template-columns: minmax(0, 1fr); grid-template-areas: "heading" "portrait" "biography"; }
-  .portrait { max-width: 360px; border-radius: 16px; }
-  .name { font-size: clamp(2.75rem, 14vw, 4rem); }
 }
