@@ -114,11 +114,16 @@ export default function ResourcesMegaMenu({ active = false }: { active?: boolean
             </section>
             <section className={styles.group}>
               <h3>Documentation</h3>
-              {resourceDocumentation.map((item) => (
-                <Link className={styles.item} href={item.href} key={item.href} onClick={hide} target="_blank" rel="noopener noreferrer">
+              {resourceDocumentation.map((item) => "href" in item ? (
+                <Link className={styles.item} href={item.href} key={item.title} onClick={hide} target="_blank" rel="noopener noreferrer">
                   <strong>{item.title}</strong>
                   <small>{item.description}</small>
                 </Link>
+              ) : (
+                <div aria-disabled="true" className={`${styles.item} ${styles.upcomingItem}`} key={item.title}>
+                  <div className={styles.itemHeading}><strong>{item.title}</strong><span>{item.status}</span></div>
+                  <small>{item.description}</small>
+                </div>
               ))}
             </section>
           </div>

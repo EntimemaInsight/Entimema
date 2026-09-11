@@ -80,4 +80,9 @@ export const resourceDocumentation = [
     description: "Understand how access, documents and processing are controlled.",
     href: "/workspace/data-security",
   },
+  {
+    title: "Integrations",
+    description: "Learn about integrations on Entimema.",
+    status: "Coming soon",
+  },
 ] as const;

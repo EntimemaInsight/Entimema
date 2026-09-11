@@ -383,6 +383,9 @@
   .mobileResourceDestination > span { display: grid; gap: 6px; }
   .mobileResourceDestination strong { color: var(--brand-navy-950); font-size: var(--entimema-menu-item); font-weight: var(--entimema-menu-weight-item); line-height: var(--entimema-menu-leading-item); letter-spacing: var(--entimema-menu-tracking-item); }
   .mobileResourceDestination small { max-width: 290px; color: rgba(4,19,63,.68); font-size: var(--entimema-menu-detail); font-weight: 400; line-height: var(--entimema-menu-leading-detail); letter-spacing: var(--entimema-menu-tracking-copy); }
+  .mobileUpcomingDestination { cursor: default; }
+  .mobileItemHeading { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+  .mobileItemHeading > span { display: inline-flex; align-items: center; min-height: 20px; padding: 2px 7px; border: 1px solid rgba(7,27,77,.06); border-radius: 5px; background: #f1ee9f; color: var(--brand-navy-950); box-shadow: 0 8px 22px rgba(7,27,77,.06); font-size: .625rem; font-weight: 700; line-height: 1; letter-spacing: .055em; text-transform: uppercase; }
   .mobileResourceDestination > .mobileChevron { color: var(--brand-navy-950); }
   .mobileResourceDestination:focus-visible { outline: 2px solid var(--brand-navy-800); outline-offset: -2px; }
   .mobileGroup {

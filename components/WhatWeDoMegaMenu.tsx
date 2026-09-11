@@ -237,10 +237,14 @@ export default function WhatWeDoMegaMenu({ active, mobile = false }: WhatWeDoMeg
                     <span><strong>{item.title}</strong><small>{item.description}</small></span>
                   </Link>)}
                   <h2 className={styles.mobileSectionLabel}>Documentation</h2>
-                  {resourceDocumentation.map((item) => (
-                    <Link className={styles.mobileResourceDestination} href={item.href} key={item.href} onClick={close} target="_blank" rel="noopener noreferrer">
+                  {resourceDocumentation.map((item) => "href" in item ? (
+                    <Link className={styles.mobileResourceDestination} href={item.href} key={item.title} onClick={close} target="_blank" rel="noopener noreferrer">
                       <span><strong>{item.title}</strong><small>{item.description}</small></span>
                     </Link>
+                  ) : (
+                    <div aria-disabled="true" className={`${styles.mobileResourceDestination} ${styles.mobileUpcomingDestination}`} key={item.title}>
+                      <span><span className={styles.mobileItemHeading}><strong>{item.title}</strong><span>{item.status}</span></span><small>{item.description}</small></span>
+                    </div>
                   ))}
                 </div>
                 <Link className={`${styles.mobileTopLevel} ${styles.mobileContact}`} href="/contact" onClick={close}>
