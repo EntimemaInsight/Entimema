@@ -68,7 +68,16 @@
 .applicationStage { display: flex; gap: 1rem; align-items: baseline; }
 .applicationChain p { font-size: 1.0625rem; line-height: 1.7; max-width: 64ch; }
 .applicationChain a { display: inline-block; margin-top: .5rem; font-size: .9375rem; line-height: 1.65; }
-.applicationBoundary a { min-height: 44px; align-items: center; }
+.page .applicationBoundary {
+  background: rgba(255,255,255,.055);
+  border: 1px solid rgba(255,255,255,.18);
+  border-left: 2px solid #ff8a00;
+  color: #dce5f2;
+}
+.page .applicationBoundary strong { color: #fff; }
+.page .applicationBoundary p { color: #dce5f2; }
+.page .applicationBoundary :global(.editorial-caption) { color: #aebed2; }
+.applicationBoundary a { min-height: 44px; align-items: center; color: #ff8a00; }
 .publications { margin-top: 2rem; }
 .publication { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 3fr); gap: var(--entimema-grid-gap); border-top: 1px solid var(--company-rule-internal); padding-block: var(--company-space-block); }
 .publicationMeta { display: grid; align-content: start; gap: .35rem; }
