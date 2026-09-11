@@ -57,7 +57,7 @@ export function WorkspaceFrame({
         )}
       </header>
 
-      <nav className="workspaceRail clientWorkspaceRail" aria-label="Client workspace">
+      <aside className="workspaceRail clientWorkspaceRail" aria-label="Client workspace navigation">
         <p>WORKSPACE</p>
         {navigation.map((item) => (
           <Link key={item.id} aria-current={active === item.id ? "page" : undefined} href={item.href}>
@@ -74,7 +74,7 @@ export function WorkspaceFrame({
             </button>
           </form>
         </div>
-      </nav>
+      </aside>
 
       <section className="workspaceContent clientWorkspaceContent">{children}</section>
     </main>
