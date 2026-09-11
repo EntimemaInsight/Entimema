@@ -60,6 +60,41 @@
   border-top: 1px solid var(--company-rule-major);
   padding: var(--company-space-block);
 }
+
+/* 2026 market-facing About refinement: product clarity over manifesto styling. */
+.page {
+  --company-paper: #f7fbff;
+  --company-surface: #fff;
+  --company-duration: 560ms;
+  --company-step: 62ms;
+  --company-distance: 10px;
+  background: linear-gradient(180deg, #fff 0, #f3f8fe 36rem, #fff 60rem);
+}
+.hero { min-height: min(760px, calc(100vh - var(--header-height-v2))); padding-block: clamp(4.5rem, 9vh, 7.5rem) 0; display: flex; flex-direction: column; justify-content: center; }
+.heroTitle { position: relative; max-width: 20ch; margin-top: 1.5rem; padding-bottom: 1.5rem; font-family: var(--entimema-font-interface); font-size: clamp(3.25rem, 5.6vw, 5.75rem); font-weight: 560; line-height: .99; letter-spacing: -.055em; text-wrap: balance; }
+.heroTitle::after { content: ""; position: absolute; left: 0; bottom: 0; width: 4.5rem; height: 4px; border-radius: 99px; background: #ff7900; }
+.heroContext { margin-top: clamp(2rem, 5vh, 3.75rem); }
+.positioning { color: var(--entimema-navy); font-weight: 650; }
+.problemItem { padding: 1.5rem; border: 1px solid #dce8f5; border-radius: 16px; background: rgba(255,255,255,.86); box-shadow: 0 12px 36px rgba(8,26,58,.035); }
+.problemItem + .problemItem { margin-top: 1rem; }
+.problemItem:first-child { padding-top: 1.5rem; border-top: 1px solid #dce8f5; }
+.problemItem:last-child { padding-bottom: 1.5rem; }
+.thesis { border-block: 0; background: linear-gradient(135deg, #061733 0%, #0b2856 100%); }
+.disciplines { gap: .75rem; border-top: 0; }
+.disciplines > div { padding: 1.25rem; border: 1px solid rgba(255,255,255,.16); border-radius: 12px; background: rgba(255,255,255,.045); }
+.disciplines > div + div { padding-left: 1.25rem; border-left: 1px solid rgba(255,255,255,.16); }
+.method { display: grid; gap: .75rem; border-bottom: 0; }
+.method > li { padding: 1.5rem; border: 1px solid #dce8f5; border-radius: 14px; background: #f8fbff; }
+.research h2 { font-family: var(--entimema-font-editorial); font-weight: 400; }
+.labsBridge, .practitionerBridge { border: 1px solid #dce8f5; border-radius: 16px; padding: 1.75rem; background: #f8fbff; }
+.practitionerBridge { background: #fff; }
+.closing { border-top: 0; background: #eef6ff; }
+.closing h2 { font-family: var(--entimema-font-interface); font-weight: 560; letter-spacing: -.04em; }
+@media (max-width: 47.999rem) {
+  .hero { min-height: auto; padding-top: 4rem; }
+  .heroTitle { font-size: clamp(2.6rem, 13vw, 3.5rem); line-height: 1.02; letter-spacing: -.045em; }
+  .disciplines > div:nth-child(n) { padding: 1.25rem; border: 1px solid rgba(255,255,255,.16); }
+}
 .bridges h2 { max-width: 24ch; }
 .bridges p:not(:global(.editorial-eyebrow)) { max-width: 52ch; }
 .page .bridges a { align-self: flex-start; margin-top: auto; padding-top: var(--company-space-block); }
@@ -121,3 +156,11 @@
   .actions { grid-template-columns: minmax(0, 1fr); }
   .secondaryActions { width: 100%; border-top: 1px solid var(--entimema-rule); padding-top: var(--entimema-space-component); }
 }
+
+/* Final cascade: keep the market-facing treatment above legacy responsive rules. */
+.hero { min-height: min(760px, calc(100vh - var(--header-height-v2))); padding-block: clamp(4.5rem, 9vh, 7.5rem) 0; display: flex; flex-direction: column; justify-content: center; }
+.heroTitle { position: relative; max-width: 20ch; margin-top: 1.5rem; padding-bottom: 1.5rem; font-family: var(--entimema-font-interface); font-size: clamp(3.25rem, 5.6vw, 5.75rem); font-weight: 560; line-height: .99; letter-spacing: -.055em; text-wrap: balance; }
+.closing { border-top: 0; background: #eef6ff; }
+.closing h2 { font-family: var(--entimema-font-interface); font-weight: 560; letter-spacing: -.04em; }
+@media (max-width: 63.999rem) { .heroTitle { max-width: 20ch; font-size: clamp(3rem, 8vw, 4.75rem); } }
+@media (max-width: 47.999rem) { .hero { min-height: auto; padding-top: 4rem; } .heroTitle { font-size: clamp(2.6rem, 13vw, 3.5rem); line-height: 1.02; letter-spacing: -.045em; } }
