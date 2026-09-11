@@ -4,8 +4,8 @@ import AnalyticsPreferencesButton from "@/components/AnalyticsPreferencesButton"
 import Navbar from "@/components/Navbar";
 import styles from "./privacy.module.css";
 
-const title = "Security, Privacy & Responsible AI | Entimema";
-const description = "The unified security, privacy and Responsible AI framework governing every Entimema Agent, client workflow and data-processing lifecycle.";
+const title = "Privacy Notice | Entimema";
+const description = "How Entimema processes personal data when you visit the website, submit an inquiry or communicate with us.";
 
 export const metadata: Metadata = {
   title,
@@ -15,228 +15,33 @@ export const metadata: Metadata = {
   twitter: { card: "summary", title, description },
 };
 
-const assurances = [
-  ["standard", "Unified security standard", "One framework across every agent and workflow."],
-  ["contexts", "Isolated client contexts", "Client, workspace and job data remain separated."],
-  ["lifecycle", "Protected data lifecycle", "Encrypted transport, controlled storage and deletion."],
-  ["purpose", "Purpose-limited processing", "Agents receive only the data required for the task."],
-  ["trace", "Traceable execution", "Material actions, exceptions and interventions remain reviewable."],
-  ["accountability", "Human accountability", "Uncertainty is exposed and material decisions remain accountable."],
-];
-
-const lifecycle = [
-  ["Authorised access", "The client enters through an authenticated and authorised account or approved workflow."],
-  ["Secure intake", "Documents and data are submitted through protected channels and associated with the correct client and job context."],
-  ["Isolated processing", "The agent processes information only within the authorised client, workspace and task context."],
-  ["Purpose-limited analysis", "The agent receives only the information required to perform its defined capability."],
-  ["Validation and exception handling", "Uncertainty, missing evidence, contradictions and low-confidence results remain visible and are routed for review."],
-  ["Controlled delivery", "Results are delivered only to the authorised client context through controlled access and export mechanisms."],
-  ["Retention or deletion", "Source documents and generated results follow disclosed retention and deletion rules."],
-];
-
-const toc = [
-  ["Framework", "framework"], ["Lifecycle", "lifecycle"], ["Data controls", "data-controls"],
-  ["Responsible AI", "responsible-ai"], ["Platform governance", "platform-governance"],
-  ["Privacy notice", "privacy-notice"], ["Enterprise & reporting", "enterprise"],
-];
-
-function RuleList({ children }: { children: React.ReactNode }) {
-  return <ul className={styles.ruleList}>{children}</ul>;
-}
-
-function SectionHeading({ eyebrow, title, intro }: { eyebrow: string; title: string; intro?: string }) {
-  return <header className={styles.sectionHeader}><p className={styles.eyebrow}>{eyebrow}</p><h2>{title}</h2>{intro && <p className={styles.sectionIntro}>{intro}</p>}</header>;
-}
-
-function ArrowModel({ items, label }: { items: string[]; label: string }) {
-  return <div className={styles.arrowModel} aria-label={label}>{items.map((item, index) => <div className={styles.arrowItem} key={item}><span>{item}</span>{index < items.length - 1 && <b aria-hidden="true">→</b>}</div>)}</div>;
-}
-
-function AssuranceIllustration({ type }: { type: string }) {
-  const sharedProps = { fill: "none", stroke: "currentColor", strokeWidth: 1.35, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
-
-  return <svg className={styles.assuranceIllustration} viewBox="0 0 320 190" aria-hidden="true">
-    <g {...sharedProps}>
-      {type === "standard" && <>
-        <path d="M160 41v27M91 113H63v29M229 113h28v29M160 122v27" />
-        <rect className={styles.systemFill} x="106" y="68" width="108" height="54" rx="6" />
-        <path d="M125 86h70M125 96h46M125 106h58" />
-        <circle className={styles.dataFill} cx="63" cy="151" r="13" /><circle className={styles.dataFill} cx="160" cy="158" r="13" /><circle className={styles.dataFill} cx="257" cy="151" r="13" />
-        <circle cx="160" cy="32" r="9" />
-      </>}
-      {type === "contexts" && <>
-        <rect x="29" y="45" width="76" height="112" rx="7" /><rect x="122" y="45" width="76" height="112" rx="7" /><rect x="215" y="45" width="76" height="112" rx="7" />
-        <path d="M29 69h76M122 69h76M215 69h76" />
-        <circle className={styles.dataFill} cx="50" cy="57" r="4" /><circle className={styles.dataFill} cx="143" cy="57" r="4" /><circle className={styles.dataFill} cx="236" cy="57" r="4" />
-        <rect className={styles.systemFill} x="44" y="89" width="46" height="13" rx="3" /><rect className={styles.systemFill} x="137" y="89" width="46" height="13" rx="3" /><rect className={styles.systemFill} x="230" y="89" width="46" height="13" rx="3" />
-        <circle cx="54" cy="127" r="5" /><circle cx="68" cy="127" r="5" /><circle cx="82" cy="127" r="5" /><circle cx="147" cy="127" r="5" /><circle cx="161" cy="127" r="5" /><circle cx="175" cy="127" r="5" /><circle cx="240" cy="127" r="5" /><circle cx="254" cy="127" r="5" /><circle cx="268" cy="127" r="5" />
-      </>}
-      {type === "lifecycle" && <>
-        <path d="M113 42a69 69 0 0 1 95 23M226 83a69 69 0 0 1-19 77M188 171a69 69 0 0 1-89-29M90 124a69 69 0 0 1 9-64" />
-        <path d="m202 55 8 11-14 1M220 75l7 10-13 3M216 151l-10 10-3-14M109 153l-11-10 14-3M91 72l8-12 5 13" />
-        <path className={styles.systemFill} d="M143 73h34l17 17v39h-51z" /><path d="M177 73v17h17M153 105h30M153 115h22" />
-        <text x="79" y="38">UPLOAD</text><text x="232" y="94">PROCESS</text><text x="177" y="184">DELIVER</text><text x="37" y="130">DELETE</text>
-      </>}
-      {type === "purpose" && <>
-        <path d="M34 48h119l51 47-51 47H34" />
-        <circle className={styles.dataFill} cx="58" cy="70" r="6" /><circle className={styles.dataFill} cx="89" cy="63" r="6" /><circle className={styles.dataFill} cx="123" cy="76" r="6" /><circle className={styles.dataFill} cx="68" cy="103" r="6" /><circle className={styles.dataFill} cx="109" cy="105" r="6" /><circle className={styles.dataFill} cx="82" cy="132" r="6" /><circle className={styles.dataFill} cx="137" cy="126" r="6" />
-        <path d="M204 95h34" /><rect className={styles.systemFill} x="238" y="70" width="54" height="50" rx="7" /><circle cx="265" cy="89" r="7" /><path d="M252 108h26" />
-        <circle className={styles.validFill} cx="182" cy="95" r="5" />
-      </>}
-      {type === "trace" && <>
-        <path d="M53 95h214" />
-        <circle className={styles.dataFill} cx="59" cy="95" r="11" /><circle className={styles.dataFill} cx="126" cy="95" r="11" /><circle className={styles.reviewFill} cx="194" cy="95" r="11" /><circle className={styles.validFill} cx="261" cy="95" r="11" />
-        <path d="m255 95 4 4 8-9M194 89v7M194 102h.01" />
-        <text x="41" y="127">INPUT</text><text x="99" y="127">PROCESS</text><text x="168" y="127">EXCEPTION</text><text x="236" y="127">COMPLETE</text>
-        <path d="M59 76v-9h67v9M194 76V62h67v14" />
-      </>}
-      {type === "accountability" && <>
-        <rect className={styles.systemFill} x="32" y="70" width="64" height="54" rx="7" /><circle cx="64" cy="89" r="7" /><path d="M50 111h28M96 97h46" />
-        <path d="m134 91 9 6-9 6M142 97h27" />
-        <rect className={styles.reviewFill} x="169" y="55" width="62" height="84" rx="8" /><circle cx="200" cy="81" r="9" /><path d="M184 108c7-12 25-12 32 0M231 97h31" />
-        <path d="m254 91 9 6-9 6M262 97h25" /><circle className={styles.validFill} cx="291" cy="97" r="8" /><path d="m287 97 3 3 6-7" />
-        <text x="177" y="155">REVIEW</text>
-      </>}
-    </g>
-  </svg>;
-}
+const sections = [
+  ["scope", "Scope"], ["data", "Data processed"], ["purposes", "Purposes and legal bases"],
+  ["providers", "Service providers"], ["retention", "Retention"], ["rights", "Data-subject rights"],
+  ["contact", "Privacy contact and updates"],
+] as const;
 
 export default function PrivacyPage() {
-  return <main className={styles.page}>
-    <Navbar />
-
-    <header className={styles.hero}>
-      <div className={styles.heroGrid}>
-        <div>
-          <p className={styles.eyebrow}>SECURITY, PRIVACY &amp; RESPONSIBLE AI</p>
-          <h1>Financial intelligence requires disciplined data handling.</h1>
-          <p className={styles.heroLead}>Every Entimema Agent operates within one unified framework for controlled access, isolated processing, traceable execution, data protection and meaningful human oversight.</p>
-          <p className={styles.heroSecondary}>The same standard applies across every client, workflow and agent capability—without exceptions or agent-specific security shortcuts.</p>
-          <div className={styles.actions}><Link className={styles.primary} href="/contact">Discuss your security requirements</Link><Link className={styles.secondary} href="/agents">Explore Entimema Agents <span aria-hidden="true">↗</span></Link></div>
-        </div>
-        <div className={styles.heroArchitecture} aria-hidden="true"><span>ACCESS</span><i /><span>PROCESS</span><i /><span>VALIDATE</span><i /><span>DELIVER</span></div>
-      </div>
-      <p className={styles.platformStatement}>One platform. One security standard. Every agent.</p>
-    </header>
-
-    <section className={styles.assuranceSection} aria-labelledby="assurance-heading">
-      <header className={styles.assuranceHeader}>
-        <p className={styles.eyebrow}>INHERITED BY EVERY ENTIMEMA AGENT</p>
-        <h2 id="assurance-heading">One standard, enforced across the platform.</h2>
-        <p>Every agent operates within the same controls for data isolation, purpose-limited processing, traceability and accountable decision support.</p>
+  return (
+    <main className={styles.page}>
+      <Navbar />
+      <header className={styles.hero}>
+        <div><p className={styles.eyebrow}>PRIVACY NOTICE</p><h1>How Entimema handles personal data.</h1><p className={styles.intro}>This notice explains how personal data is processed when you visit entimema.com, submit an inquiry or communicate with Entimema.</p></div>
+        <aside><span>Privacy contact</span><a href="mailto:office@entimema.com">office@entimema.com</a><Link href="/security">Security &amp; Trust <span aria-hidden="true">→</span></Link></aside>
       </header>
-      <div className={styles.assuranceGrid}>
-        {assurances.map(([type, heading, copy], index) => <article className={styles.assuranceCard} key={heading}>
-          <div className={styles.cardTopline}><span>{String(index + 1).padStart(2, "0")}</span><span>PERMANENT CONTROL</span></div>
-          <AssuranceIllustration type={type} />
-          <div className={styles.cardCopy}><h3>{heading}</h3><p>{copy}</p></div>
-        </article>)}
+
+      <div className={styles.noticeLayout}>
+        <nav className={styles.toc} aria-label="Privacy Notice sections"><p>ON THIS PAGE</p><ol>{sections.map(([id,label],index)=><li key={id}><a href={`#${id}`}><span>{String(index+1).padStart(2,"0")}</span>{label}</a></li>)}</ol></nav>
+        <article className={styles.notice}>
+          <section id="scope"><p className={styles.number}>01</p><h2>Scope</h2><p>This notice applies to personal data processed through Entimema’s public website, inquiry forms and direct business communications. It does not describe customer-document processing inside a product workflow; see <Link href="/security">Security &amp; Trust</Link> for the current workflow assurance scope.</p></section>
+          <section id="data"><p className={styles.number}>02</p><h2>Data processed</h2><p>Depending on how you interact with Entimema, we may process:</p><ul><li>contact details, such as your name, business email address, organisation and role;</li><li>the contents of an inquiry and subsequent correspondence;</li><li>technical and security information, such as IP address, browser, device and request logs;</li><li>cookie and usage data where you have enabled optional analytics.</li></ul><p>Please avoid including unnecessary personal or confidential information in an inquiry.</p></section>
+          <section id="purposes"><p className={styles.number}>03</p><h2>Purposes and legal bases</h2><div className={styles.table}><div><strong>Purpose</strong><strong>Legal basis</strong></div><div><span>Respond to inquiries and communicate about requested services</span><span>Steps requested before a contract and legitimate interests in business communication</span></div><div><span>Operate, secure and diagnose the website</span><span>Legitimate interests in providing a reliable and secure website</span></div><div><span>Maintain business correspondence and records</span><span>Legitimate interests and applicable legal obligations</span></div><div><span>Measure website use through optional analytics</span><span>Consent, which you can withdraw through analytics preferences</span></div></div></section>
+          <section id="providers"><p className={styles.number}>04</p><h2>Service providers</h2><p>Entimema uses service providers where needed to operate the website and handle communications. Current website providers confirmed for these activities are:</p><ul><li><strong>Vercel</strong> for website hosting and delivery;</li><li><strong>Resend</strong> for contact-form transmission;</li><li><strong>Google Workspace</strong> for business correspondence;</li><li><strong>Google Analytics</strong> for consent-based website analytics.</li></ul><p>Providers process data according to their role and applicable contractual terms. Optional Google Analytics is activated only after consent.</p><AnalyticsPreferencesButton className={styles.preferencesButton} /></section>
+          <section id="retention"><p className={styles.number}>05</p><h2>Retention</h2><p>Personal data is kept only for as long as reasonably needed for the purpose for which it was collected, including responding to and maintaining an appropriate record of communications, operating and securing the website, resolving disputes and meeting legal obligations. Retention periods vary with the data, purpose and relevant requirements.</p></section>
+          <section id="rights"><p className={styles.number}>06</p><h2>Data-subject rights</h2><p>Depending on applicable law, you may have rights to request access to, correction or deletion of your personal data, restriction of or objection to processing, and data portability. Where processing relies on consent, you may withdraw that consent without affecting earlier lawful processing. You may also have the right to complain to an applicable data-protection authority.</p><p>We may need information to verify your identity and understand the request before responding.</p></section>
+          <section id="contact"><p className={styles.number}>07</p><h2>Privacy contact and updates</h2><p>Entimema is the contact for the website processing described in this notice. To ask a privacy question or exercise a data-subject right, email <a href="mailto:office@entimema.com">office@entimema.com</a>.</p><p>This notice may be updated when website processing, providers or applicable requirements change. The current version is published on this page.</p><div className={styles.securityLink}><span>Product assurance</span><p>For data handling, scope boundaries and human review in the current Financial Intelligence workflow, read our security overview.</p><Link href="/security">Read Security &amp; Trust <span aria-hidden="true">→</span></Link></div></section>
+        </article>
       </div>
-    </section>
-
-    <section className={styles.lifecycleOverview} id="lifecycle" aria-label="Unified processing lifecycle">
-      <SectionHeading eyebrow="UNIFIED PROCESSING LIFECYCLE" title="One controlled lifecycle across every Entimema Agent" />
-      <ol className={styles.lifecycle}>{lifecycle.map(([heading, copy], index) => <li key={heading}><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{heading}</h3><p>{copy}</p></div></li>)}</ol>
-    </section>
-
-    <div className={styles.indexLayout}>
-      <nav className={styles.toc} aria-label="Security and privacy section index"><p>ON THIS PAGE</p><ol>{toc.map(([label, id]) => <li key={id}><a href={`#${id}`}>{label}</a></li>)}</ol></nav>
-      <article className={styles.memorandum}>
-        <section className={styles.section} id="framework">
-          <SectionHeading eyebrow="01 / UNIFIED FRAMEWORK" title="One permanent standard for every agent." intro="This standard governs every current and future Entimema Agent, every client and the complete lifecycle: Access → Upload → Isolated Processing → Analysis → Validation → Delivery → Retention or Deletion." />
-          <div className={styles.callout}><strong>Platform invariant</strong><p>Every Entimema Agent operates within the same unified security, privacy and Responsible AI framework. A new agent inherits the framework by default and cannot bypass, weaken or redefine it.</p></div>
-        </section>
-
-        <section className={styles.section} id="data-controls">
-          <SectionHeading eyebrow="03 / CONTEXT BOUNDARIES" title="Client data remains within its authorised context." intro="Agents share a common platform. They do not share client data contexts." />
-          <ArrowModel label="Client data context architecture" items={["Client", "Workspace", "Job", "Agent execution", "Controlled result"]} />
-          <RuleList><li>Every uploaded file remains associated with a specific client and processing job.</li><li>Access requires authentication and authorisation at the client and job level.</li><li>One client must not access another client&apos;s documents, results or job metadata.</li><li>Files and results must not use predictable public URLs; temporary access links must be time-limited.</li><li>Processing context must not be reused across unrelated clients.</li><li>Administrative access requires a legitimate operational purpose.</li><li>Client context remains preserved through upload, processing, review, export and deletion.</li></RuleList>
-        </section>
-
-        <section className={`${styles.section} ${styles.tint}`}>
-          <SectionHeading eyebrow="DATA PROTECTION" title="Protection throughout the data lifecycle" />
-          <div className={styles.controlGrid}>
-            <article><h3>Encryption in transit</h3><p>Information transmitted between the client, Entimema services and authorised processors must use encrypted transport.</p></article>
-            <article><h3>Encryption at rest</h3><p>Stored customer documents, processing data and generated results must use the encryption capabilities of approved infrastructure.</p></article>
-            <article><h3>Data minimisation</h3><p>The platform collects and processes only information required for the selected workflow.</p></article>
-            <article><h3>Secure secret management</h3><p>Credentials, tokens and platform secrets must remain outside public source code, client-side code and downloadable files.</p></article>
-            <article><h3>Sensitive logging restrictions</h3><p>Logs must avoid unnecessary document contents, personal data, credentials and confidential financial information.</p></article>
-            <article><h3>Controlled deletion</h3><p>Documents and results must be capable of deletion under applicable retention rules or a valid client request.</p></article>
-          </div>
-        </section>
-
-        <section className={styles.section}>
-          <SectionHeading eyebrow="RETENTION & DELETION" title="Data should not remain longer than the workflow requires." />
-          <div className={styles.metricRow}><div><b>24h</b><span>Target for source-file deletion after completed processing</span></div><div><b>30d</b><span>Maximum default availability target for generated results</span></div></div>
-          <RuleList><li>Source documents are retained only long enough to complete processing and make the result available.</li><li>The default operational target is automatic source-file deletion within 24 hours after completed processing.</li><li>Generated results may remain available for up to 30 days.</li><li>Clients may request or initiate earlier deletion where the interface permits.</li><li>Different periods may apply when expressly agreed for an enterprise engagement or required by law; longer retention must never be introduced silently.</li><li>Availability of storage is not a basis for indefinite retention.</li></RuleList>
-          <p className={styles.implementationNote}><strong>Implementation scope.</strong> These periods govern services that persist workflow data. The currently published agent endpoint processes uploaded files in request memory and returns its result without a repository-level persistence store. A central retention scheduler and deletion ledger are required before any future persisted workflow can claim automated enforcement of these periods.</p>
-        </section>
-
-        <section className={`${styles.section} ${styles.dark}`}>
-          <SectionHeading eyebrow="AI MODEL POLICY" title="Customer data is not a shared training asset." intro="Customer documents and financial data are processed only for the requested workflow." />
-          <RuleList><li>Entimema must not use customer documents to train a shared Entimema model without separate, explicit and informed permission.</li><li>Client data must not become available to another client through prompts, context, outputs or retrieval systems.</li><li>Agents receive only the minimum information required for their task.</li><li>Provider access and retention behaviour must be assessed before approval.</li><li>A new AI processor must not be introduced silently.</li><li>Enterprise-specific restrictions may be agreed contractually.</li></RuleList>
-        </section>
-
-        <div className={styles.pairedSections}>
-          <section className={styles.compactSection}><SectionHeading eyebrow="ACCESS CONTROL" title="Access follows operational necessity." /><RuleList><li>Authenticated access and client- and job-level authorisation.</li><li>Least-privilege service permissions and separation of public website and protected processing functions.</li><li>Controlled administration, restricted production-document access and protected credentials.</li><li>Access is revoked when no longer required.</li><li>No default manual inspection; manual access is limited to necessary support, investigation or authorised review.</li></RuleList></section>
-          <section className={styles.compactSection}><SectionHeading eyebrow="TRACEABILITY" title="Material actions remain reviewable." /><p>Relevant events include job creation, file submission, processing start, completion or failure, workflow or model version, exception status, human review or correction, result generation and access, deletion, and administrative intervention.</p><p>Audit records must reconstruct material events without unnecessarily duplicating confidential document contents.</p></section>
-        </div>
-
-        <section className={`${styles.section} ${styles.responsible}`} id="responsible-ai">
-          <SectionHeading eyebrow="04 / RESPONSIBLE AI" title="AI output must remain epistemically accountable." intro="Evidence, inference, hypothesis and decision remain distinguishable. Agent output is decision support unless an explicitly governed automation rule applies; accountability remains with the authorised decision-maker." />
-          <ArrowModel label="Responsible decision model" items={["Evidence", "Interpretation", "Validation", "Decision"]} />
-          <div className={styles.invariants}><strong>Unknown ≠ Assumption ≠ 0</strong><span>Claim ≠ Fact</span><span>Behavioural signal ≠ Mental state</span></div>
-          <RuleList><li>A model classification is not automatically a verified fact, and confidence is not certainty.</li><li>Missing evidence stays visible; unknown information must not silently become an assumption or zero.</li><li>Contradictions must not be hidden to preserve continuity; material uncertainty requires review.</li><li>Behavioural signals do not prove mental state. Entimema does not perform psychoprofiling.</li><li>Financial and risk conclusions must rely on verifiable data and explicit methodology.</li></RuleList>
-        </section>
-
-        <section className={styles.section}>
-          <SectionHeading eyebrow="AUTOMATION BOUNDARIES" title="Automation stops where evidence becomes insufficient." intro="High-confidence routine processing may continue only under explicit rules. Agents must not fabricate missing values, and material financial or risk decisions require an accountable decision process." />
-          <div className={styles.states}><article><b>Ready</b><p>The workflow satisfies its validation criteria.</p></article><article><b>Review required</b><p>Uncertainty or exception requires authorised intervention.</p></article><article><b>Blocked</b><p>Required evidence or control is missing.</p></article></div>
-          <p className={styles.afterStates}>Low-confidence output is marked. Incomplete documents remain incomplete, missing mandatory fields remain exposed, contradictions create an exception, and human review remains available for uncertainty, exception or material consequence.</p>
-        </section>
-
-        <section className={styles.section} id="platform-governance">
-          <SectionHeading eyebrow="05 / PLATFORM GOVERNANCE" title="Security is enforced through the shared platform layer." />
-          <RuleList><li>Production and development environments remain logically separated; secrets remain outside source code.</li><li>Dependency and vulnerability checks form part of development, and code changes pass automated validation.</li><li>Deployment uses controlled source and build processes.</li><li>Security-sensitive failures must not expose confidential data; logs and alerts support investigation.</li><li>Backup and recovery behaviour must be appropriate to stored information.</li><li>New agents must use common security components rather than independent alternatives.</li></RuleList>
-        </section>
-
-        <section className={`${styles.section} ${styles.gate}`}>
-          <SectionHeading eyebrow="NEW AGENT SECURITY GATE" title="No agent bypasses the platform standard." intro="Before release, every new agent must satisfy the same acceptance gate." />
-          <ol>{["Defined purpose and data requirements", "Approved input formats", "Client and job-level isolation", "Authentication and authorisation", "Data-minimisation review", "Retention and deletion mapping", "AI-provider and subprocessor review", "Output validation rules", "Exception and human-review logic", "Audit-event mapping", "Security and privacy testing", "Confirmation of shared-platform use"].map((item, index) => <li key={item}><span>{String(index + 1).padStart(2, "0")}</span>{item}</li>)}</ol>
-        </section>
-
-        <section className={styles.section} id="privacy-notice">
-          <SectionHeading eyebrow="06 / LEGAL INFORMATION" title="Website privacy notice" intro="This notice explains how personal data submitted through the Entimema website is processed. It follows the product-security and Responsible AI standard above but addresses website visitors specifically." />
-          <div className={styles.legalGrid}>
-            <article><h3>Data controller</h3><p>The data controller is the organisation that operates Entimema and the entimema.com website.</p><p className={styles.legalNote}>The controller&apos;s full legal name, registration number and address remain subject to final legal confirmation.</p></article>
-            <article><h3>Personal data</h3><p>Contact forms may provide your name, business email, company, role, inquiry topic and message, including context about a project, partnership or active client engagement.</p></article>
-            <article><h3>Purpose and legal basis</h3><p>Information is used to review and respond to an inquiry, assess a project or partnership, or communicate about an engagement. The applicable legal basis depends on the inquiry and relationship and remains subject to final legal review.</p></article>
-            <article><h3>Recipients</h3><p>Confirmed website providers are Vercel for hosting and delivery, Resend for contact-form transmission, and Google Workspace for business correspondence.</p></article>
-            <article><h3>Optional analytics</h3><p>Google Analytics operates only after consent, to understand broad acquisition, landing-page and Resource engagement patterns and successful inquiries. Form contents are not included. Advertising storage, Google signals and ad-personalisation are disabled.</p><AnalyticsPreferencesButton className={styles.preferencesButton} /></article>
-            <article><h3>Website retention</h3><p>A specific retention period for inquiry correspondence has not yet been established in a published legal policy. It requires a business and legal decision. Analytics account-level retention must be confirmed before activation.</p></article>
-            <article><h3>Your rights</h3><p>Depending on the circumstances, you may request access, rectification, erasure, restriction or portability, object to processing, or complain to the competent supervisory authority.</p></article>
-            <article><h3>Contact and updates</h3><p>For personal-data questions, email <a href="mailto:office@entimema.com">office@entimema.com</a>. This notice may change when processing or website infrastructure changes.</p></article>
-          </div>
-        </section>
-
-        <section className={styles.section}>
-          <SectionHeading eyebrow="SERVICE PROVIDERS" title="Service providers are subject to the same purpose limitation." intro="Approved infrastructure, communication, analytics and AI-processing providers may be used only where required to deliver the service." />
-          <RuleList><li>Providers receive only information required for their role and their access is purpose-limited.</li><li>New material processors are reviewed before use, and provider changes must not weaken this standard.</li><li>Enterprise agreements may establish additional subprocessor requirements.</li><li>This page may be updated when material processing relationships change.</li></RuleList>
-        </section>
-
-        <section className={styles.section} id="enterprise">
-          <SectionHeading eyebrow="07 / ENTERPRISE & REPORTING" title="Additional controls for enterprise engagements" intro="Larger or regulated engagements may supplement—but never replace or weaken—the unified standard." />
-          <div className={styles.tags}>{["Data Processing Agreements", "Subprocessor documentation", "Agreed retention schedules", "Regional processing requirements", "Enterprise access requirements", "Security questionnaires", "Audit evidence", "Incident-notification terms", "Workflow approval controls", "Service-level commitments", "Human-review responsibilities"].map(item => <span key={item}>{item}</span>)}</div>
-        </section>
-
-        <section className={`${styles.section} ${styles.report}`}>
-          <SectionHeading eyebrow="RESPONSIBLE DISCLOSURE" title="Report a security or privacy concern" />
-          <p>If you believe you have identified a security, privacy or data-handling issue affecting Entimema, contact us with sufficient information for the matter to be assessed responsibly. Please do not include unnecessary personal data or publicly disclose the issue before Entimema has had a reasonable opportunity to investigate.</p>
-          <a href="mailto:office@entimema.com">office@entimema.com <span aria-hidden="true">↗</span></a>
-        </section>
-      </article>
-    </div>
-
-    <section className={styles.finalCta}><div><p className={styles.eyebrow}>WORKFLOW GOVERNANCE</p><h2>Security begins with the architecture of the workflow.</h2><p>Tell us what information the workflow receives, what output it creates and what controls your organisation requires. Every Entimema Agent begins from the same security, privacy and governance standard.</p><div className={styles.actions}><Link className={styles.primary} href="/contact">Discuss your requirements</Link><Link className={styles.secondaryLight} href="/agents">Explore Entimema Agents <span aria-hidden="true">↗</span></Link></div></div></section>
-  </main>;
+    </main>
+  );
 }

@@ -37,7 +37,8 @@ const columns = [
       ["FinAI by Entimema", "/finai"],
       ["About Entimema", "/about"],
       ["Contact", "/contact"],
-      ["Security & Privacy", "/privacy"],
+      ["Security & Trust", "/security"],
+      ["Privacy Notice", "/privacy"],
     ],
   },
 ] as const;

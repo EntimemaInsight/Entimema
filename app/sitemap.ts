@@ -10,6 +10,7 @@ const routes = [
   "/labs",
   "/contact",
   "/privacy",
+  "/security",
   "/financial-intelligence-launch",
   "/product/platform",
   "/product/ai-agent-manager",
