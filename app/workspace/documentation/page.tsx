@@ -1,0 +1,13 @@
+import Link from "next/link";
+import { getWorkspaceUser } from "@/lib/workspace-auth";
+import { WorkspaceFrame } from "../components/WorkspaceFrame";
+
+const sections = [
+  { number: "01", title: "Prepare the document", body: "Use an XLSX, XLS, CSV or text-based PDF income statement up to 4.5 MB. Keep period, currency and scale labels visible in the source." },
+  { number: "02", title: "Run Financial Intelligence", body: "The workflow reads the statement, maps reported lines, binds values to their source locations and applies deterministic financial calculations." },
+  { number: "03", title: "Review the result", body: "Confirm the detected entity, reporting periods, currency and scale. Review the executive summary, calculated KPIs and material findings." },
+  { number: "04", title: "Inspect the evidence", body: "Open View evidence beneath a KPI or finding to trace each conclusion back to the source sheet, cell, page or line." },
+  { number: "05", title: "Export the report", body: "Download the review-ready PDF only after the detected context and material findings are consistent with the source document." },
+];
+
+export default async function DocumentationPage(){const user=await getWorkspaceUser();return <WorkspaceFrame title="Documentation" active="documentation" user={user}><div className="workspacePage"><header className="workspacePageHero"><p className="eyebrow">PRODUCT DOCUMENTATION</p><h1>Financial Intelligence V1</h1><p>From source income statement to validated, traceable financial analysis.</p><div className="docMeta"><span>Current release <strong>V1</strong></span><span>Workflow <strong>Income statement analysis</strong></span><span>Access <strong>Private beta</strong></span></div></header><section className="documentationGrid" aria-label="Financial Intelligence guide">{sections.map(section=><article key={section.number}><span>{section.number}</span><div><h2>{section.title}</h2><p>{section.body}</p></div></article>)}</section><section className="documentationNote"><div><p className="eyebrow">CURRENT SCOPE</p><h2>What V1 supports</h2></div><ul><li>Income statements with comparable reporting periods</li><li>Reported financial lines and source-linked values</li><li>Profitability and year-over-year KPIs</li><li>Traceable findings and PDF export</li></ul><p>Scanned PDFs, balance sheets, cash-flow statements and consolidated multi-file analysis are outside the current V1 scope. Ambiguous context must be reviewed rather than assumed.</p></section><footer className="workspacePageAction"><span>Ready to process a statement?</span><Link href="/workspace/financial-intelligence">Start a new analysis →</Link></footer></div></WorkspaceFrame>}

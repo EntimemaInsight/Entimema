@@ -1,2 +1,2 @@
 import { redirect } from "next/navigation";
-export default function WorkspacePage() { redirect("/workspace/agents"); }
+export default function WorkspacePage() { redirect("/workspace/financial-intelligence"); }

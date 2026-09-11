@@ -62,15 +62,8 @@ test("long successful results remain in the document scroll flow", () => {
     "utf8",
   );
 
-  assert.match(workspace, /financialIntelligenceWorkspace/);
-  assert.match(
-    workspaceCss,
-    /body:has\(\.workspaceRoot>\.financialIntelligenceWorkspace\)\{overflow-x:hidden;overflow-y:auto\}/,
-  );
-  assert.match(
-    workspaceCss,
-    /\.workspaceRoot:has\(>\.financialIntelligenceWorkspace\)\{position:relative;inset:auto;min-height:100svh\}/,
-  );
+  assert.match(workspace, /<FinancialIntelligenceResult result=\{result\}/);
+  assert.match(workspaceCss, /\.clientWorkspaceContent\{[^}]*overflow:auto/);
   assert.match(resultCss, /\.tableScroll\s*\{\s*overflow-x:\s*auto;/);
 
   const html = render(resultFixtures().rieter);

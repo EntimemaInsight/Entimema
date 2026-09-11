@@ -165,7 +165,7 @@ test("public FI Execute is wired directly to V1 without classifier execution", (
     "backend/api/financial-intelligence/http.ts",
     "utf8",
   );
-  assert.match(page, /return <FinancialIntelligenceWorkspace/);
+  assert.match(page, /<FinancialIntelligenceWorkspace \/>/);
   assert.match(ui, /onClick=\{\(\) => void execute\(\)\}/);
   assert.deepEqual(
     [...ui.matchAll(/fetch\("([^"]+)"/g)].map((m) => m[1]),

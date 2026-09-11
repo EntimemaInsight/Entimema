@@ -1,16 +1,12 @@
 "use client";
-import Link from "next/link";
 import { FinancialIntelligenceResult } from "./FinancialIntelligenceResult";
 import { useState } from "react";
 import type { Result } from "@/backend/financial-intelligence/v1/contract";
 import { DOCUMENT_CLASSIFIER_MAX_FILE_BYTES } from "@/lib/document-classifier-upload";
+import { RUNS_KEY, readRuns, type StoredRun } from "./RunsTable";
 import styles from "./FinancialIntelligenceWorkspace.module.css";
 
-export function FinancialIntelligenceWorkspace({
-  user,
-}: {
-  user: { name: string; email: string };
-}) {
+export function FinancialIntelligenceWorkspace() {
   const [file, setFile] = useState<File | null>(null);
   const [result, setResult] = useState<Result | null>(null);
   const [busy, setBusy] = useState(false);
@@ -35,6 +31,18 @@ export function FinancialIntelligenceWorkspace({
       if (!response.ok)
         throw new Error(data.message || "The file could not be processed.");
       setResult(data);
+      const completed = data as Result;
+      const stored: StoredRun = {
+        runId: crypto.randomUUID(),
+        timestamp: new Date().toISOString(),
+        documentType: "Income statement",
+        source: file.name,
+        confidence: 1,
+        route: "financial_intelligence",
+        duration: completed.timings.totalMs,
+        status: "completed",
+      };
+      sessionStorage.setItem(RUNS_KEY, JSON.stringify([stored, ...readRuns()].slice(0, 25)));
     } catch (cause) {
       setError(
         cause instanceof Error
@@ -46,19 +54,13 @@ export function FinancialIntelligenceWorkspace({
     }
   }
   return (
-    <main
-      className={`${styles.workspace} financialIntelligenceWorkspace`}
-    >
-      <header className={styles.header}>
-        <Link href="/workspace">ENTIMEMA</Link>
-        <span>{user.name}</span>
-      </header>
+    <div className={styles.workspace}>
       <div className={styles.intro}>
-        <p>FINANCIAL INTELLIGENCE / V1</p>
-        <h1>Read your income statement.</h1>
+        <p>FINANCIAL INTELLIGENCE · V1</p>
+        <h1>New financial analysis</h1>
         <p>
-          Upload a P&amp;L to see its financial lines, profitability and
-          year-over-year performance.
+          Upload an income statement to produce structured financial lines,
+          verified KPIs and traceable findings.
         </p>
       </div>
       <section className={styles.upload} aria-label="Upload income statement">
@@ -92,6 +94,6 @@ export function FinancialIntelligenceWorkspace({
         </p>
       )}
       {result && <FinancialIntelligenceResult result={result} />}
-    </main>
+    </div>
   );
 }

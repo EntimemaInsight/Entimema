@@ -94,8 +94,9 @@ test("desktop and mobile menus consume the same navigation content", () => {
 });
 
 test("documentation references and login enter the authenticated workspace", () => {
-  assert.match(menuContent, /title: "Product documentation",[\s\S]*?href: "\/workspace\/financial-intelligence"/);
-  assert.match(menuContent, /title: "Integrations",[\s\S]*?href: "\/workspace\/agents"/);
+  assert.match(menuContent, /title: "Product documentation",[\s\S]*?href: "\/workspace\/documentation"/);
+  assert.match(menuContent, /title: "Data & security",[\s\S]*?href: "\/workspace\/data-security"/);
+  assert.doesNotMatch(menuContent, /title: "Integrations"/);
   assert.match(navbar, /className="header-login"[\s\S]*?target="_blank" rel="noopener noreferrer"[\s\S]*?>\s*Login/);
   assert.match(mobileMenu, /mobileDockLogin[\s\S]*?target="_blank" rel="noopener noreferrer">Login</);
   assert.match(resourcesMenu, /resourceDocumentation\.map[\s\S]*?target="_blank" rel="noopener noreferrer"/);

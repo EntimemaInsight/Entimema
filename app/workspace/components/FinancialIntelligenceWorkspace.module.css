@@ -1,23 +1,11 @@
 .workspace {
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 32px 24px 80px;
-  color: #172c29;
-}
-.header {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  border-bottom: 1px solid #d5dfdb;
-  padding-bottom: 24px;
-}
-.header a {
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-decoration: none;
+  max-width: 1180px;
+  margin: 0;
+  padding: 44px 48px 80px;
+  color: #15243d;
 }
 .intro {
-  margin: 56px 0 32px;
+  margin: 0 0 30px;
   max-width: 720px;
 }
 .intro > p:first-child {
@@ -26,17 +14,19 @@
   font-weight: 600;
 }
 .intro h1 {
-  font-size: clamp(32px, 5vw, 52px);
-  line-height: 1.08;
-  margin: 16px 0;
+  font-size: clamp(30px, 4vw, 44px);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+  margin: 12px 0 16px;
 }
 .intro p {
   line-height: 1.7;
 }
 .upload {
-  border: 1px solid #bacdc5;
-  background: #f4f7f5;
-  border-radius: 12px;
+  border: 1px solid #d6dde6;
+  border-left: 3px solid #de873d;
+  background: #fff;
+  border-radius: 3px;
   padding: 28px;
   display: grid;
   gap: 14px;
@@ -58,10 +48,10 @@
   justify-self: start;
   padding: 12px 28px;
   min-height: 44px;
-  background: #214d3e;
+  background: #132b4d;
   color: white;
   border: 0;
-  border-radius: 6px;
+  border-radius: 3px;
   cursor: pointer;
 }
 .upload button:disabled {
@@ -79,7 +69,7 @@
 }
 @media (max-width: 600px) {
   .workspace {
-    padding: 20px 16px 48px;
+    padding: 28px 18px 48px;
   }
   .intro {
     margin-top: 36px;

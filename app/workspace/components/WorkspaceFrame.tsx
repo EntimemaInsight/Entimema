@@ -2,4 +2,14 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { signOut } from "@/auth";
 
-export function WorkspaceFrame({children,title,active}:{children:ReactNode;title:string;active:"agents"|"runs"}){return <main className="workspaceShell"><header className="commandBar"><Link href="/workspace/agents" className="brand">ENTIMEMA</Link><span className="crumb">/ {title}</span><span className="beta">Private beta</span><form action={async()=>{"use server";await signOut({redirectTo:"/auth/sign-in"})}}><button className="signOut">Sign out</button></form></header><nav className="workspaceRail" aria-label="Workspace"><Link aria-current={active==="agents"?"page":undefined} href="/workspace/agents">Agents</Link><Link aria-current={active==="runs"?"page":undefined} href="/workspace/runs">Runs</Link><span aria-disabled="true">Tests <small>Soon</small></span><span aria-disabled="true">Settings</span></nav><section className="workspaceContent">{children}</section></main>}
+export type WorkspaceSection = "financial-intelligence" | "runs" | "documentation" | "security" | "account" | "agents";
+
+const navigation = [
+  { id: "financial-intelligence", label: "Financial Intelligence", mark: "FI", href: "/workspace/financial-intelligence" },
+  { id: "runs", label: "Runs", mark: "RN", href: "/workspace/runs" },
+  { id: "documentation", label: "Documentation", mark: "DC", href: "/workspace/documentation" },
+  { id: "security", label: "Data & Security", mark: "DS", href: "/workspace/data-security" },
+  { id: "account", label: "Account", mark: "AC", href: "/workspace/account" },
+] as const;
+
+export function WorkspaceFrame({children,title,active,user}:{children:ReactNode;title:string;active:WorkspaceSection;user?:{name:string;email:string}}){return <main className="workspaceShell clientWorkspaceShell"><header className="commandBar clientCommandBar"><Link href="/workspace/financial-intelligence" className="brand" aria-label="Entimema workspace home">ENTIMEMA</Link><span className="workspaceProduct">Financial Intelligence</span><span className="crumb">/ {title}</span><span className="beta">Private beta</span>{user&&<details className="clientUserMenu"><summary aria-label="Account menu">{user.name.slice(0,1).toUpperCase()}</summary><div><strong>{user.name}</strong><small>{user.email}</small><form action={async()=>{"use server";await signOut({redirectTo:"/auth/sign-in"})}}><button>Sign out</button></form></div></details>}</header><nav className="workspaceRail clientWorkspaceRail" aria-label="Client workspace"><p>WORKSPACE</p>{navigation.map(item=><Link key={item.id} aria-current={active===item.id?"page":undefined} href={item.href}><span aria-hidden="true">{item.mark}</span>{item.label}</Link>)}<small>Controlled financial workflow</small></nav><section className="workspaceContent clientWorkspaceContent">{children}</section></main>}
