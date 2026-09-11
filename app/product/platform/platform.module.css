@@ -8,32 +8,30 @@
   color: var(--blue);
   overflow: clip;
 }
+@media (min-width: 1001px) {
+  .page {
+    zoom: 0.9;
+  }
+}
 .journey {
   background:
-    linear-gradient(
-      104deg,
-      rgba(255, 255, 255, 0.98) 0%,
-      rgba(255, 255, 255, 0.9) 34%,
-      rgba(235, 247, 253, 0.76) 67%,
-      rgba(214, 237, 248, 0.9) 100%
+    radial-gradient(
+      circle at 88% 13%,
+      rgba(184, 213, 228, 0.52),
+      transparent 30%
     ),
     radial-gradient(
-      circle at 84% 9%,
-      rgba(92, 177, 216, 0.28),
-      transparent 29%
-    ),
-    radial-gradient(
-      circle at 14% 48%,
-      rgba(214, 239, 249, 0.38),
-      transparent 34%
+      circle at 69% 52%,
+      rgba(219, 238, 246, 0.6),
+      transparent 42%
     ),
     linear-gradient(
-      180deg,
+      108deg,
       #ffffff 0%,
-      #f5fbfe 18%,
-      #e9f5fb 52%,
-      #f4fafe 82%,
-      #ffffff 100%
+      #fbfdff 27%,
+      #f0f8fc 52%,
+      #e5f2f8 75%,
+      #dbeef6 100%
     );
 }
 .journeyGrid {
@@ -44,7 +42,7 @@
 }
 .hero {
   min-height: calc(100vh - 90px);
-  padding: clamp(100px, 10vw, 155px) 0 70px;
+  padding: clamp(56px, 5.8vw, 86px) 0 70px;
 }
 .eyebrow,
 .architectureIntro > p {
@@ -591,79 +589,24 @@
   white-space: nowrap;
   animation: tagFloat 4s ease-in-out infinite;
 }
-.dataTag::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  top: 50%;
-  width: var(--tag-line-width, 72px);
-  height: 1px;
-  background: linear-gradient(
-    var(--tag-line-direction, 90deg),
-    rgba(243, 109, 47, 0.72),
-    rgba(87, 154, 190, 0.3)
-  );
-  transform: translateY(-50%) rotate(var(--tag-line-angle, 0deg));
-  transform-origin: var(--tag-line-origin, left center);
-}
-.dataTag::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  width: 5px;
-  height: 5px;
-  border: 1px solid rgba(255, 255, 255, 0.9);
-  border-radius: 50%;
-  background: #f36d2f;
-  box-shadow: 0 0 0 3px rgba(243, 109, 47, 0.1);
-  transform: translateY(-50%);
-}
 .tagOne {
-  --tag-line-width: 88px;
-  --tag-line-angle: 8deg;
-  left: -12px;
-  top: 24px;
+  left: -4px;
+  top: 18px;
 }
 .tagTwo {
-  --tag-line-width: 92px;
-  --tag-line-direction: 270deg;
-  --tag-line-angle: -10deg;
-  --tag-line-origin: right center;
-  right: -16px;
-  top: 4px;
+  right: 4px;
+  top: 54px;
   animation-delay: -1.1s;
 }
 .tagThree {
-  --tag-line-width: 96px;
-  --tag-line-angle: -8deg;
-  left: -30px;
-  bottom: 26px;
+  left: 32px;
+  top: 162px;
   animation-delay: -2.2s;
 }
 .tagFour {
-  --tag-line-width: 90px;
-  --tag-line-direction: 270deg;
-  --tag-line-angle: 10deg;
-  --tag-line-origin: right center;
-  right: -24px;
-  bottom: 8px;
+  right: -8px;
+  bottom: 22px;
   animation-delay: -3.1s;
-}
-.tagOne::before,
-.tagThree::before {
-  left: calc(100% - 2px);
-}
-.tagOne::after,
-.tagThree::after {
-  left: calc(100% + var(--tag-line-width) - 5px);
-}
-.tagTwo::before,
-.tagFour::before {
-  right: calc(100% - 2px);
-}
-.tagTwo::after,
-.tagFour::after {
-  right: calc(100% + var(--tag-line-width) - 5px);
 }
 .outputMoment {
   position: relative;

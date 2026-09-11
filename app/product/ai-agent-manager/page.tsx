@@ -30,32 +30,34 @@ export default function AgentManagerPage() {
     <AnnouncementBar/>
     <Navbar active="product"/>
 
-    <section className={styles.hero}>
-      <div className="site-container">
-        <span className={styles.badge}>AI Agent Manager</span>
-        <h1>Put specialized AI agents to work.<br/><em>Keep every workflow under control.</em></h1>
-        <p>Bring specialized agent roles, source evidence, deterministic checks, exceptions and human review into one visible workflow.</p>
-        <div className={styles.actions}>
-          <DemoTrigger className={styles.primaryCta} initialInterest="AI Agent Manager">Discuss your first workflow</DemoTrigger>
+    <div className={styles.viewport}>
+      <section className={styles.hero}>
+        <div className="site-container">
+          <span className={styles.badge}>AI Agent Manager</span>
+          <h1>Put specialized AI agents to work.<br/><em>Keep every workflow under control.</em></h1>
+          <p>Bring specialized agent roles, source evidence, deterministic checks, exceptions and human review into one visible workflow.</p>
+          <div className={styles.actions}>
+            <DemoTrigger className={styles.primaryCta} initialInterest="AI Agent Manager">Discuss your first workflow</DemoTrigger>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section className={styles.pillars}>
-      <div className="site-container">
-        <div className={styles.pillarGrid}>
-          {pillars.map(([n,t,c], index) => <article key={n}><svg className={styles.pillarIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{pillarIcons[index]}</svg><h2>{t}</h2><p>{c}</p></article>)}
+      <section className={styles.pillars}>
+        <div className="site-container">
+          <div className={styles.pillarGrid}>
+            {pillars.map(([n,t,c], index) => <article key={n}><svg className={styles.pillarIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{pillarIcons[index]}</svg><h2>{t}</h2><p>{c}</p></article>)}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <SnapshotShowcase/>
+      <SnapshotShowcase/>
 
-    <section className={styles.finalCta}>
-      <div className="site-container">
-        <h2>Start with one controlled<br/>finance or risk workflow.</h2>
-        <div className={styles.finalActions}><DemoTrigger className="primary-cta primary-cta--light" initialInterest="AI Agent Manager">Discuss your first workflow</DemoTrigger></div>
-      </div>
-    </section>
+      <section className={styles.finalCta}>
+        <div className="site-container">
+          <h2>Start with one controlled<br/>finance or risk workflow.</h2>
+          <div className={styles.finalActions}><DemoTrigger className="primary-cta primary-cta--light" initialInterest="AI Agent Manager">Discuss your first workflow</DemoTrigger></div>
+        </div>
+      </section>
+    </div>
   </main>;
 }
