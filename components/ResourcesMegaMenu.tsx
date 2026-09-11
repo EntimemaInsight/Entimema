@@ -6,7 +6,6 @@ import { companyDestinations, isCompanyRoute } from "@/lib/company-navigation";
 import { createPortal } from "react-dom";
 import { useCallback, useEffect, useId, useLayoutEffect, useRef, useState, useSyncExternalStore } from "react";
 import { resourceStreams } from "@/app/resources/resource-data";
-import { resourceDocumentation } from "@/lib/mega-menu-content";
 import styles from "./ResourcesMegaMenu.module.css";
 
 const subscribeToClientMount = () => () => undefined;
@@ -113,18 +112,14 @@ export default function ResourcesMegaMenu({ active = false }: { active?: boolean
               ))}
             </section>
             <section className={styles.group}>
-              <h3>Documentation</h3>
-              {resourceDocumentation.map((item) => "href" in item ? (
-                <Link className={styles.item} href={item.href} key={item.title} onClick={hide} target="_blank" rel="noopener noreferrer">
-                  <strong>{item.title}</strong>
-                  <small>{item.description}</small>
-                </Link>
-              ) : (
-                <div aria-disabled="true" className={`${styles.item} ${styles.upcomingItem}`} key={item.title}>
-                  <div className={styles.itemHeading}><strong>{item.title}</strong><span>{item.status}</span></div>
-                  <small>{item.description}</small>
-                </div>
-              ))}
+              <h3>Entimema Workspace</h3>
+              <Link className={styles.item} href="/workspace" onClick={hide}>
+                <strong>Open workspace</strong>
+                <small>
+                  Access Financial Intelligence, your runs, product documentation
+                  and data-security guidance.
+                </small>
+              </Link>
             </section>
           </div>
         </div>
