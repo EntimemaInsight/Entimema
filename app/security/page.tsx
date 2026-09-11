@@ -24,7 +24,7 @@ export default function SecurityPage() {
         <header className={styles.securityHero}>
           <div className={styles.heroVisual}>
             <Image
-              src="/security-controls.png?v=20260911-final"
+              src="/security-controls.png"
               alt="Six illustrated security controls: controlled access, purpose-limited processing, source traceability, validated outputs, secure development, and incident response."
               width={1536}
               height={1024}
