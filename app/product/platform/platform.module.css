@@ -85,6 +85,7 @@
 }
 .hero .actions :global(.hero__cta) {
   margin-top: 0;
+  font-family: var(--font-sans);
 }
 .actions a,
 .finalActions a {
