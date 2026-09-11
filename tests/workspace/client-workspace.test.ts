@@ -5,6 +5,8 @@ import test from "node:test";
 const auth = readFileSync("auth.ts", "utf8");
 const frame = readFileSync("app/workspace/components/WorkspaceFrame.tsx", "utf8");
 const workspaceIndex = readFileSync("app/workspace/page.tsx", "utf8");
+const financialIntelligence = readFileSync("app/workspace/financial-intelligence/page.tsx", "utf8");
+const incomeStatement = readFileSync("app/workspace/financial-intelligence/income-statement/page.tsx", "utf8");
 const admin = readFileSync("app/workspace/admin/page.tsx", "utf8");
 const agentsIndex = readFileSync("app/workspace/agents/page.tsx", "utf8");
 const documentation = readFileSync("app/workspace/documentation/page.tsx", "utf8");
@@ -14,12 +16,20 @@ const products = readFileSync("lib/workspace-products.ts", "utf8");
 const executionAuth = readFileSync("lib/execution-auth.ts", "utf8");
 const workspaceAuth = readFileSync("lib/workspace-auth.ts", "utf8");
 
-test("authenticated customers enter a product-aware workspace home", () => {
+test("authenticated customers enter a product-aware operational workspace", () => {
   assert.match(workspaceIndex, /getWorkspaceUser\(\)/);
   assert.match(workspaceIndex, /getWorkspaceProducts\(user\.email\)/);
-  assert.match(workspaceIndex, /Your financial decision workspace/);
+  assert.match(workspaceIndex, /Controlled finance and risk workflows/);
+  assert.match(workspaceIndex, /Platform administration is not available/);
   assert.match(agentsIndex, /redirect\("\/workspace\/financial-intelligence"\)/);
   assert.match(frame, /href: "\/workspace"/);
+});
+
+test("financial intelligence separates product overview from executable workflow", () => {
+  assert.match(financialIntelligence, /Financial workflows you can trace, review and defend/);
+  assert.match(financialIntelligence, /\/workspace\/financial-intelligence\/income-statement/);
+  assert.match(incomeStatement, /requireWorkspaceProduct\("financial-intelligence"\)/);
+  assert.match(incomeStatement, /<FinancialIntelligenceWorkspace/);
 });
 
 test("client navigation exposes customer sections and gates platform administration", () => {

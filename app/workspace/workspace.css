@@ -172,3 +172,41 @@ body:has(.workspaceRoot>.financialIntelligenceWorkspace){overflow-x:hidden;overf
 @media(max-width:980px) and (min-width:761px){.platformAdmin{padding:42px 34px 70px}.environmentRegistry,.adminDomainGrid{grid-template-columns:1fr}.environmentRegistry article+article{border-left:0;border-top:1px solid #dfe4ea}}
 @media(max-width:760px){.platformAdmin{padding:30px 18px 60px}.platformAdminHero{gap:18px;flex-direction:column}.platformAdminHero h1{font-size:32px}.environmentRegistry,.adminDomainGrid{grid-template-columns:1fr}.environmentRegistry article{grid-template-columns:38px 1fr}.environmentRegistry article strong{grid-column:2}.environmentRegistry article+article{border-left:0;border-top:1px solid #dfe4ea}.roleRegistry div{grid-template-columns:1fr;gap:6px}.clientWorkspaceRail{grid-template-columns:repeat(7,minmax(0,1fr))}}
 @media(prefers-reduced-motion:reduce){.platformAdmin *{animation:none!important;transition:none!important}}
+
+
+/* Operational product architecture */
+.workspaceOperationsHome{padding-top:44px}
+.workspaceOperationsHeader{max-width:940px;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(340px,.95fr);gap:64px;align-items:end;padding-bottom:34px}
+.workspaceOperationsHeader h1{max-width:620px;margin-bottom:0;font-size:clamp(36px,4vw,50px)}
+.workspaceOperationsHeader>span{font-size:15px}
+.workspaceAccessAlert{margin:24px 0 0;padding:13px 16px;border-left:3px solid #d19700;background:#fff8dc;color:#4d5666;font-size:13px}
+.workspaceOperationalCard{grid-template-columns:minmax(260px,.9fr) minmax(300px,1.2fr) 160px}
+.workspaceOperationalCard .workspaceWorkflowPath{grid-template-columns:repeat(5,1fr)}
+.fiProductOverview{max-width:1120px;padding:44px 56px 90px}
+.clientWorkspaceContent:has(.fiProductOverview){background:#f7f8fa}
+.fiOverviewHeader{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(320px,.85fr);gap:58px;align-items:end;padding-bottom:34px;border-bottom:1px solid #d8dee6}
+.fiOverviewHeader p,.fiOverviewSection .workspaceSectionHeading p{margin:0;color:#758297;font-size:10px;font-weight:700;letter-spacing:.14em}
+.fiOverviewHeader h1{max-width:650px;margin:12px 0 0;color:#122743;font-size:clamp(36px,4.5vw,52px);font-weight:650;line-height:1.03;letter-spacing:-.045em}
+.fiOverviewHeader>span{color:#55677d;font-size:16px;line-height:1.65}
+.fiOverviewSection{padding-top:40px}
+.fiWorkflowCard{display:grid;grid-template-columns:minmax(260px,.9fr) minmax(300px,1.2fr) 140px;gap:30px;align-items:center;padding:26px 28px;border:1px solid #d4dce5;border-left:3px solid #de873d;background:#fff}
+.fiWorkflowTitle{display:flex;align-items:center;gap:15px}
+.fiWorkflowTitle>span{width:44px;height:44px;display:grid;place-items:center;background:#142945;color:#fff;font-size:10px;font-weight:700}
+.fiWorkflowTitle small{color:#768398;font-size:9px;letter-spacing:.08em}
+.fiWorkflowTitle h3{margin:6px 0 0;color:#152b47;font-size:17px}
+.fiWorkflowCard>p{margin:0;color:#58697e;font-size:13px;line-height:1.65}
+.fiWorkflowCard>a{justify-self:end;color:#14385f;font-size:12px;font-weight:700}
+.fiControlPath{display:grid;grid-template-columns:repeat(6,1fr);margin:0;padding:0;border:1px solid #d7dee6;background:#fff;list-style:none}
+.fiControlPath li{position:relative;min-height:92px;padding:19px 16px;color:#2a3e59;font-size:12px;line-height:1.4}
+.fiControlPath li+li{border-left:1px solid #e0e5ea}
+.fiControlPath span{display:block;margin-bottom:12px;color:#d19700;font-size:9px;font-weight:700}
+.fiControlGrid{display:grid;grid-template-columns:1fr 1fr;border:1px solid #d7dee6;background:#fff}
+.fiControlGrid article{padding:24px}
+.fiControlGrid article:nth-child(even){border-left:1px solid #e0e5ea}
+.fiControlGrid article:nth-child(n+3){border-top:1px solid #e0e5ea}
+.fiControlGrid h3{margin:0 0 9px;color:#18304d;font-size:14px}
+.fiControlGrid p{margin:0;color:#607086;font-size:13px;line-height:1.6}
+.fiProductOverview a:focus-visible{outline:2px solid #de873d;outline-offset:3px}
+@media(max-width:980px) and (min-width:761px){.workspaceOperationsHeader,.fiOverviewHeader{grid-template-columns:1fr;gap:20px}.fiProductOverview{padding:40px 34px 70px}.fiWorkflowCard{grid-template-columns:1fr 1fr}.fiWorkflowCard>a{grid-column:1/-1;justify-self:start}.fiControlPath{grid-template-columns:repeat(3,1fr)}.fiControlPath li:nth-child(4){border-left:0}.fiControlPath li:nth-child(n+4){border-top:1px solid #e0e5ea}}
+@media(max-width:760px){.workspaceOperationsHeader,.fiOverviewHeader{grid-template-columns:1fr;gap:18px}.fiProductOverview{padding:30px 18px 60px}.fiWorkflowCard,.fiControlGrid{grid-template-columns:1fr}.fiWorkflowCard>a{justify-self:start}.fiControlPath{grid-template-columns:1fr}.fiControlPath li+li{border-left:0;border-top:1px solid #e0e5ea}.fiControlGrid article:nth-child(even){border-left:0}.fiControlGrid article+article{border-top:1px solid #e0e5ea}}
+@media(prefers-reduced-motion:reduce){.fiProductOverview *,.workspaceOperationsHome *{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
