@@ -58,3 +58,13 @@ body:has(.workspaceRoot>.financialIntelligenceWorkspace){overflow-x:hidden;overf
 @media(max-width:980px){.docsPage{grid-template-columns:150px minmax(0,1fr);gap:42px;padding:48px 36px 80px}}
 @media(max-width:760px){.docsPage{display:block;padding:34px 20px 70px}.docsToc{position:static;margin-bottom:40px}.docsToc nav{display:grid;grid-template-columns:1fr 1fr}.docsHero h1{font-size:38px}.docsHero>p:not(.docsKicker):not(.docsCallout){font-size:16px}.docsFacts{grid-template-columns:1fr;gap:16px}.docsSection{grid-template-columns:28px 1fr;gap:12px;padding:38px 0}.docsSection h2{font-size:23px}.docsDefinitions div{grid-template-columns:1fr;gap:7px}.docsColumns{grid-template-columns:1fr;gap:24px}.docsNext{align-items:flex-start;flex-direction:column;gap:10px}}
 @media(prefers-reduced-motion:reduce){.docsPage *{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+/* Visible workspace sign-out */
+.workspaceRailFooter{margin-top:auto;padding:16px 2px 0;border-top:1px solid rgba(255,255,255,.1)}
+.clientWorkspaceRail .workspaceRailFooter small{display:block;margin:0 9px 13px;color:#728197;font-size:8px;line-height:1.5;text-transform:uppercase;letter-spacing:.1em}
+.workspaceRailFooter form{margin:0}
+.workspaceSignOut{width:100%;display:flex;align-items:center;gap:10px;padding:10px 9px;border:0;background:transparent;color:#d7e0ec;font:inherit;font-size:12px;text-align:left;cursor:pointer}
+.workspaceSignOut>span{width:25px;color:#91a0b4;font-size:13px}
+.workspaceSignOut:hover{background:#172b49;color:#fff}
+.workspaceSignOut:focus-visible{outline:2px solid #de873d;outline-offset:2px}
+@media(max-width:980px) and (min-width:761px){.clientWorkspaceRail .workspaceRailFooter small{display:none}.workspaceSignOut{justify-content:center;font-size:0}.workspaceSignOut>span{width:auto;font-size:14px}}
+@media(max-width:760px){.workspaceRailFooter{display:none}}
