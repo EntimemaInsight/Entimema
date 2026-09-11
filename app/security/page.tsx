@@ -117,6 +117,63 @@ export default function SecurityPage() {
             </p>
           </section>
           <section>
+            <h2>Infrastructure and data protection</h2>
+            <p>
+              <strong>Protected transport:</strong> Production capabilities are
+              designed to transmit customer data through protected application
+              and provider channels appropriate to the deployed workflow.
+            </p>
+            <p>
+              <strong>Customer-context isolation:</strong> Financial data is
+              associated with its authorised customer and workflow context;
+              access boundaries are assessed as part of each production
+              capability.
+            </p>
+            <p>
+              <strong>Storage and retention:</strong> Storage, retention and
+              deletion behaviour is defined against the actual infrastructure
+              used by the capability rather than assumed at platform level.
+            </p>
+          </section>
+          <section>
+            <h2>Application and operational security</h2>
+            <p>
+              <strong>Controlled development:</strong> Production changes pass
+              controlled source, validation and deployment processes before
+              release.
+            </p>
+            <p>
+              <strong>Security-aware diagnostics:</strong> Operational failures
+              and relevant events are handled with diagnostics designed to
+              support investigation without unnecessarily exposing customer
+              financial data.
+            </p>
+            <p>
+              <strong>Least-necessary access:</strong> Administrative and
+              operational access is limited to legitimate support, review and
+              security needs within the deployed capability.
+            </p>
+          </section>
+          <section>
+            <h2>Incident, recovery and deletion readiness</h2>
+            <p>
+              <strong>Incident handling:</strong> Security and data-handling
+              issues are assessed against the affected workflow, information,
+              provider and access context so containment and remediation can be
+              targeted to the actual exposure.
+            </p>
+            <p>
+              <strong>Recovery:</strong> Recovery requirements are defined in
+              relation to the information and services that a production
+              capability actually stores or depends on.
+            </p>
+            <p>
+              <strong>Deletion:</strong> Retention and deletion expectations are
+              mapped to the workflow and customer engagement, including relevant
+              provider responsibilities.
+            </p>
+          </section>
+          <section>
             <h2>Output governance</h2>
             <p>
               <strong>Ready:</strong> Supported processing and checks completed
