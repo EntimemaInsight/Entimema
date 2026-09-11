@@ -116,3 +116,18 @@ body:has(.workspaceRoot>.financialIntelligenceWorkspace){overflow-x:hidden;overf
 @media(max-width:980px) and (min-width:761px){.workspaceHome{padding:48px 36px 72px}.workspaceProductCard{grid-template-columns:1fr 1fr}.workspaceProductStatus{grid-column:1/-1;align-items:center;flex-direction:row;justify-content:space-between}.workspaceEssentials{grid-template-columns:1fr}.workspaceEssentials>a+a{border-left:0;border-top:1px solid #dfe4ea}}
 @media(max-width:760px){.workspaceHome{padding:34px 20px 60px}.workspaceHomeHero h1{font-size:38px}.workspaceHomeHero>span{font-size:16px}.workspaceProductCard{grid-template-columns:1fr;padding:22px}.workspaceProductStatus{align-items:flex-start}.workspaceWorkflowPath{grid-template-columns:1fr 1fr;gap:12px}.workspaceWorkflowPath li:after{display:none}.workspaceEssentials{grid-template-columns:1fr}.workspaceEssentials>a+a{border-left:0;border-top:1px solid #dfe4ea}}
 @media(prefers-reduced-motion:reduce){.workspaceHome *{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* Client workspace grid contract — keep navigation and content in separate tracks */
+@media(min-width:761px){
+  .clientWorkspaceShell{
+    width:100%;
+    min-width:0;
+    grid-template-areas:"top top" "rail content";
+  }
+  .clientCommandBar{grid-area:top}
+  .clientWorkspaceRail{grid-area:rail;align-self:stretch}
+  .clientWorkspaceContent{grid-area:content;min-width:0}
+}
+@media(max-width:760px){
+  .clientWorkspaceRail{grid-template-columns:repeat(6,minmax(0,1fr))}
+}
