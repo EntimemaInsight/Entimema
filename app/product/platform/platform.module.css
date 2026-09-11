@@ -81,7 +81,10 @@
   margin-top: 36px;
 }
 .hero .actions {
-  margin-top: 24px;
+  margin-top: clamp(14px, 1.4vw, 20px);
+}
+.hero .actions :global(.hero__cta) {
+  margin-top: 0;
 }
 .actions a,
 .finalActions a {
