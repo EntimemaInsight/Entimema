@@ -14,7 +14,7 @@ export function createExecutionAuthorizer(readSession: SessionReader = auth) {
     if (!email) throw new AgentError("AUTHENTICATION_REQUIRED", 401);
     if (!isWorkspaceAllowed(email)) throw new AgentError("ACCESS_FORBIDDEN", 403);
     if (!hasWorkspaceProductAccess(email, "financial-intelligence")) {
-      throw new AgentError("PRODUCT_ACCESS_FORBIDDEN", 403);
+      throw new AgentError("ACCESS_FORBIDDEN", 403);
     }
     return { actorId: createHash("sha256").update(email).digest("hex").slice(0, 16) };
   };
