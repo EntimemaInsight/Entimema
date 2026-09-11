@@ -11,11 +11,12 @@ export const portraitId = `${founderUrl}#portrait`;
 
 // Practitioner facts are limited to the previously approved Founder biography.
 // The thematic passages below interpret those disciplines, not additional career history.
-export const profileIntro = "Founder of Entimema · Finance, Financial Intelligence and Credit Risk";
+export const profileIntro = "Alexander Dimitrov is the Founder of Entimema, a financial intelligence company building controlled AI workflows for finance and risk decisions.";
 export const identityStatement = "Aleksandar Dimitrov · Александър Димитров";
 export const biography = [
-  "Alexander Dimitrov is a finance and risk practitioner whose experience spans CFO leadership, accounting, controlling, SAP-enabled financial management, credit risk and IFRS 9. He founded Entimema to turn specialist financial reasoning into controlled, traceable workflows that can operate in practice.",
-  "His perspective is shaped by recurring operating problems: fragmented source data, inconsistent definitions, spreadsheet-dependent analysis, opaque model outputs and decisions that are difficult to reproduce or defend.",
+  "He founded Entimema around a clear conviction: financial AI should not produce answers that teams are expected to trust without being able to inspect how they were reached.",
+  "Entimema turns that conviction into specialized workflows that connect source evidence, AI interpretation, deterministic validation and human review. The goal is to make financial reasoning faster and more reusable without making it less rigorous, traceable or accountable.",
+  "Alexander believes the next generation of financial systems will be defined not by how much they automate, but by how reliably they preserve meaning, expose uncertainty and support decisions that people can explain and defend.",
 ];
 export const thesis = "Financial AI becomes useful only when it preserves meaning, exposes uncertainty and remains accountable to evidence.";
 

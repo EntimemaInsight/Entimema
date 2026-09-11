@@ -164,7 +164,7 @@ export default function AboutPage() {
             <div className={`editorial-col-6 editorial-item editorial-stack ${styles.practitionerBridge}`}>
               <p className="editorial-eyebrow">The founder’s perspective</p>
               <h2 className="editorial-headline-lg">Built from finance and risk practice.</h2>
-              <p className="editorial-body-md">Founder Alexander Dimitrov brings experience across finance leadership, accounting, controlling, financial systems, credit risk and IFRS 9 to the design of controlled financial workflows.</p>
+              <p className="editorial-body-md">Alexander Dimitrov founded Entimema around a conviction: financial AI should preserve meaning, expose uncertainty and remain accountable to evidence.</p>
               <Link className="editorial-link--arrow" href="/alexander-dimitrov">About the Founder <span aria-hidden="true">→</span></Link>
             </div>
           </div>
