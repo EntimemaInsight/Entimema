@@ -16,7 +16,7 @@ const emailSet = (value?: string) =>
       .filter(Boolean),
   );
 
-const workspaceEmails = () => emailSet(process.env.WORKSPACE_ALLOWED_EMAILS);
+const customerEmails = () => emailSet(process.env.WORKSPACE_CUSTOMER_EMAILS);
 const ownerEmails = () => emailSet(process.env.WORKSPACE_PLATFORM_OWNER_EMAILS);
 const demoCustomerEmails = () => emailSet(process.env.WORKSPACE_DEMO_CUSTOMER_EMAILS);
 
@@ -28,9 +28,9 @@ export function isWorkspaceAllowed(email?: string | null) {
   if (!email) return false;
   const normalizedEmail = email.trim().toLowerCase();
   return (
-    workspaceEmails().has(normalizedEmail) ||
     ownerEmails().has(normalizedEmail) ||
-    demoCustomerEmails().has(normalizedEmail)
+    demoCustomerEmails().has(normalizedEmail) ||
+    customerEmails().has(normalizedEmail)
   );
 }
 
@@ -39,12 +39,7 @@ export function isPlatformOwner(email?: string | null) {
   const normalizedEmail = email.trim().toLowerCase();
   if (isDemoCustomer(normalizedEmail)) return false;
 
-  const configuredOwners = ownerEmails();
-  if (configuredOwners.size > 0) return configuredOwners.has(normalizedEmail);
-
-  // Bootstrap only: before an explicit owner allowlist exists, existing approved
-  // workspace members retain owner access. Configure the owner list before onboarding clients.
-  return workspaceEmails().has(normalizedEmail);
+  return ownerEmails().has(normalizedEmail);
 }
 
 export function getWorkspaceRole(email: string): WorkspaceRole {

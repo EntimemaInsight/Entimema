@@ -6,7 +6,9 @@ import styles from "./sign-in.module.css";
 const defaultDestination = "/workspace/financial-intelligence";
 
 function safeDestination(callbackUrl?: string) {
-  return callbackUrl?.startsWith("/") && !callbackUrl.startsWith("//")
+  return callbackUrl?.startsWith("/workspace") &&
+    !callbackUrl.startsWith("//") &&
+    !callbackUrl.includes("\\")
     ? callbackUrl
     : defaultDestination;
 }

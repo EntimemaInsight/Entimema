@@ -26,6 +26,7 @@ test("authenticated customers enter a product-aware operational workspace", () =
   assert.match(workspaceIndex, /Platform administration is not available/);
   assert.match(agentsIndex, /redirect\("\/workspace\/financial-intelligence"\)/);
   assert.match(frame, /href: "\/workspace"/);
+  assert.match(readFileSync("app/auth/sign-in/page.tsx", "utf8"), /startsWith\("\/workspace"\)/);
 });
 
 test("financial intelligence separates product overview from executable workflow", () => {
@@ -53,6 +54,9 @@ test("client navigation exposes customer sections and gates platform administrat
 test("platform owner and demo customer are separate server-side identities", () => {
   assert.match(auth, /WORKSPACE_PLATFORM_OWNER_EMAILS/);
   assert.match(auth, /WORKSPACE_DEMO_CUSTOMER_EMAILS/);
+  assert.match(auth, /WORKSPACE_CUSTOMER_EMAILS/);
+  assert.doesNotMatch(auth, /WORKSPACE_ALLOWED_EMAILS/);
+  assert.doesNotMatch(auth, /Bootstrap only/);
   assert.match(auth, /if \(isDemoCustomer\(normalizedEmail\)\) return false/);
   assert.match(workspaceAuth, /requirePlatformOwner/);
   assert.match(admin, /await requirePlatformOwner\(\)/);
