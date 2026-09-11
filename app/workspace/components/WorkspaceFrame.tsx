@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { signOut } from "@/auth";
 
 export type WorkspaceSection =
+  | "home"
   | "financial-intelligence"
   | "runs"
   | "documentation"
@@ -11,6 +12,7 @@ export type WorkspaceSection =
   | "agents";
 
 const navigation = [
+  { id: "home", label: "Workspace Home", mark: "WS", href: "/workspace" },
   { id: "financial-intelligence", label: "Financial Intelligence", mark: "FI", href: "/workspace/financial-intelligence" },
   { id: "runs", label: "Runs", mark: "RN", href: "/workspace/runs" },
   { id: "documentation", label: "Documentation", mark: "DC", href: "/workspace/documentation" },
@@ -37,10 +39,10 @@ export function WorkspaceFrame({
   return (
     <main className="workspaceShell clientWorkspaceShell">
       <header className="commandBar clientCommandBar">
-        <Link href="/workspace/financial-intelligence" className="brand" aria-label="Entimema workspace home">
+        <Link href="/workspace" className="brand" aria-label="Entimema workspace home">
           ENTIMEMA
         </Link>
-        <span className="workspaceProduct">Financial Intelligence</span>
+        <span className="workspaceProduct">Entimema Workspace</span>
         <span className="crumb">/ {title}</span>
         <span className="beta">Private beta</span>
         {user && (
