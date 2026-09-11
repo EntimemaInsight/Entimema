@@ -33,7 +33,7 @@ const columns = [
       { label: "Insights", href: "/resources" },
       { label: "Engineering & Resources", href: "/resources/engineering" },
       { label: "Entimema Docs & Help Center", href: "/contact?intent=client" },
-      { label: "Integrations", status: "Coming soon" },
+      { label: "Integrations" },
       { label: "Security & Trust", href: "/security" },
       { label: "Privacy Notice", href: "/privacy" },
     ],
@@ -47,7 +47,7 @@ const columns = [
   },
 ] satisfies ReadonlyArray<{
   title: string;
-  links: ReadonlyArray<readonly [string, string] | { label: string; href: string } | { label: string; status: string }>;
+  links: ReadonlyArray<readonly [string, string] | { label: string; href: string } | { label: string }>;
 }>;
 
 export default function GlobalFooter() {
@@ -96,7 +96,7 @@ export default function GlobalFooter() {
                     return (
                       <li key={item.label}>
                         <span aria-disabled="true" className={styles.upcoming}>
-                          <span>{item.label}</span><span className={styles.status}>{item.status}</span>
+                          <span>{item.label}</span>
                         </span>
                       </li>
                     );

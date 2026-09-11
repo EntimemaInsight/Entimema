@@ -17,7 +17,8 @@ test("footer separates resources from the compact company column", () => {
     assert.match(footer, new RegExp(`label: "${destination[0].replace(/[&?]/g, "\\$&")}",[\\s\\S]*?href: "${destination[1].replace(/[/?]/g, "\\$&")}"`));
   }
 
-  assert.match(footer, /label: "Integrations", status: "Coming soon"/);
+  assert.match(footer, /\{ label: "Integrations" \}/);
+  assert.doesNotMatch(footer, /label: "Integrations", status:|styles\.status/);
   assert.doesNotMatch(footer, /All Resources|FinAI by Entimema/);
   assert.match(footer, /title: "COMPANY",[\s\S]*?label: "About Entimema"[\s\S]*?label: "Contact"/);
 });

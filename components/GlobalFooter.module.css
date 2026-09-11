@@ -142,23 +142,6 @@
   cursor: default;
 }
 
-.status {
-  display: inline-flex;
-  align-items: center;
-  min-height: 20px;
-  padding: 2px 7px;
-  border: 1px solid rgba(7, 27, 77, 0.06);
-  border-radius: 5px;
-  background: #f1ee9f;
-  color: var(--brand-navy-950);
-  box-shadow: 0 8px 22px rgba(7, 27, 77, 0.06);
-  font-size: 0.625rem;
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: 0.055em;
-  text-transform: uppercase;
-}
-
 .column a:hover {
   color: var(--brand-navy-950);
   text-decoration-color: color-mix(
