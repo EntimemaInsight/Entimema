@@ -144,11 +144,11 @@
 .securityContent {
   max-width: 760px;
   margin: 0 auto;
-  padding-bottom: clamp(120px, 13vw, 190px);
+  padding-bottom: clamp(84px, 9vw, 124px);
 }
 
 .securityContent section {
-  margin-top: clamp(84px, 9vw, 128px);
+  margin-top: clamp(48px, 5vw, 68px);
 }
 
 .securityContent section:first-child {
@@ -156,11 +156,11 @@
 }
 
 .securityContent h2 {
-  margin: 0 0 30px;
-  font-size: clamp(30px, 2.7vw, 38px);
-  font-weight: 600;
-  letter-spacing: -0.035em;
-  line-height: 1.15;
+  margin: 0 0 24px;
+  font-size: clamp(26px, 2.1vw, 31px);
+  font-weight: 650;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
 }
 
 .securityContent p,
@@ -171,7 +171,7 @@
 }
 
 .securityContent p {
-  margin: 0 0 28px;
+  margin: 0 0 22px;
 }
 
 .securityContent strong {
@@ -185,8 +185,57 @@
 }
 
 .securityContent li {
-  margin: 11px 0;
+  margin: 8px 0;
   padding-left: 5px;
+}
+
+.securityCta {
+  display: flex;
+  min-height: clamp(330px, 31vw, 440px);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 72px 24px;
+  background: #fff06a;
+  color: #071b4d;
+  text-align: center;
+}
+
+.securityCta h2 {
+  margin: 0;
+  font-size: clamp(38px, 4vw, 58px);
+  font-weight: 650;
+  letter-spacing: -0.045em;
+  line-height: 1.08;
+}
+
+.securityCtaButton {
+  display: inline-flex;
+  min-width: 142px;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 40px;
+  padding: 0 26px;
+  border: 1px solid #071b4d;
+  border-radius: 8px;
+  background: #071b4d;
+  color: #fff;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 180ms ease, transform 180ms ease;
+}
+
+.securityCtaButton:hover {
+  background: #12285b;
+  transform: translateY(-1px);
+}
+
+.securityCtaButton:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 4px;
 }
 
 .securityContent a {
@@ -295,6 +344,15 @@
     font-size: 16px;
   }
 
+  .securityCta {
+    min-height: 300px;
+    padding-block: 64px;
+  }
+
+  .securityCta h2 {
+    font-size: clamp(34px, 10vw, 44px);
+  }
+
   .reference div {
     display: block;
   }
@@ -302,5 +360,15 @@
   .reference a {
     display: inline-block;
     margin-top: 17px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .securityCtaButton {
+    transition: none;
+  }
+
+  .securityCtaButton:hover {
+    transform: none;
   }
 }

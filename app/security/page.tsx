@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
+import { DemoTrigger } from "@/components/DemoDiscovery";
 import Navbar from "@/components/Navbar";
 import styles from "../trust-page.module.css";
 
@@ -142,17 +142,10 @@ export default function SecurityPage() {
           </section>
         </div>
       </article>
-      <aside className={styles.reference}>
-        <div>
-          <p>
-            Security, privacy and accountable review are part of the workflow
-            boundary.
-          </p>
-          <Link href="/privacy">
-            Read the Privacy Notice <span aria-hidden="true">→</span>
-          </Link>
-        </div>
-      </aside>
+      <section className={styles.securityCta} aria-labelledby="security-cta-title">
+        <h2 id="security-cta-title">Ready to see Entimema in action?</h2>
+        <DemoTrigger className={styles.securityCtaButton}>Get a demo</DemoTrigger>
+      </section>
     </main>
   );
 }
