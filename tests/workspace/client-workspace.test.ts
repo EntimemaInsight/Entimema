@@ -20,12 +20,15 @@ test("authenticated customers enter a product-aware operational workspace", () =
   assert.match(workspaceIndex, /getWorkspaceUser\(\)/);
   assert.match(workspaceIndex, /getWorkspaceProducts\(user\.email\)/);
   assert.match(workspaceIndex, /Controlled finance and risk workflows/);
+  assert.match(workspaceIndex, /ENTIMEMA FINANCE PLATFORM/);
+  assert.match(workspaceIndex, />Finance</);
   assert.match(workspaceIndex, /Platform administration is not available/);
   assert.match(agentsIndex, /redirect\("\/workspace\/financial-intelligence"\)/);
   assert.match(frame, /href: "\/workspace"/);
 });
 
 test("financial intelligence separates product overview from executable workflow", () => {
+  assert.match(financialIntelligence, /FINANCE \/ FINANCIAL INTELLIGENCE/);
   assert.match(financialIntelligence, /Financial workflows you can trace, review and defend/);
   assert.match(financialIntelligence, /\/workspace\/financial-intelligence\/income-statement/);
   assert.match(incomeStatement, /requireWorkspaceProduct\("financial-intelligence"\)/);

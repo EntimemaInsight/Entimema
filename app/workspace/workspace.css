@@ -210,3 +210,10 @@ body:has(.workspaceRoot>.financialIntelligenceWorkspace){overflow-x:hidden;overf
 @media(max-width:980px) and (min-width:761px){.workspaceOperationsHeader,.fiOverviewHeader{grid-template-columns:1fr;gap:20px}.fiProductOverview{padding:40px 34px 70px}.fiWorkflowCard{grid-template-columns:1fr 1fr}.fiWorkflowCard>a{grid-column:1/-1;justify-self:start}.fiControlPath{grid-template-columns:repeat(3,1fr)}.fiControlPath li:nth-child(4){border-left:0}.fiControlPath li:nth-child(n+4){border-top:1px solid #e0e5ea}}
 @media(max-width:760px){.workspaceOperationsHeader,.fiOverviewHeader{grid-template-columns:1fr;gap:18px}.fiProductOverview{padding:30px 18px 60px}.fiWorkflowCard,.fiControlGrid{grid-template-columns:1fr}.fiWorkflowCard>a{justify-self:start}.fiControlPath{grid-template-columns:1fr}.fiControlPath li+li{border-left:0;border-top:1px solid #e0e5ea}.fiControlGrid article:nth-child(even){border-left:0}.fiControlGrid article+article{border-top:1px solid #e0e5ea}}
 @media(prefers-reduced-motion:reduce){.fiProductOverview *,.workspaceOperationsHome *{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+
+/* Product domain layer */
+.workspaceDomainHeader{display:flex;align-items:center;gap:14px;padding:16px 20px;border:1px solid #d5dce5;border-bottom:0;background:#eef2f6}
+.workspaceDomainHeader>span{width:32px;height:32px;display:grid;place-items:center;border:1px solid #cbd4df;background:#fff;color:#304b6c;font-size:9px;font-weight:700}
+.workspaceDomainHeader small{color:#758297;font-size:9px;font-weight:700;letter-spacing:.1em}
+.workspaceDomainHeader h3{margin:4px 0 0;color:#142a46;font-size:16px;font-weight:650}

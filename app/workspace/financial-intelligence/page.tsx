@@ -18,7 +18,7 @@ export default async function FinancialIntelligencePage() {
       <div className="fiProductOverview">
         <header className="fiOverviewHeader">
           <div>
-            <p>FINANCIAL INTELLIGENCE</p>
+            <p>FINANCE / FINANCIAL INTELLIGENCE</p>
             <h1>Financial workflows you can trace, review and defend.</h1>
           </div>
           <span>

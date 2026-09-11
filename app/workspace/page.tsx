@@ -48,6 +48,14 @@ export default async function WorkspacePage({
             <span>{products.filter((product) => product.access === "available").length} enabled</span>
           </div>
 
+          <div className="workspaceDomainHeader">
+            <span aria-hidden="true">FI</span>
+            <div>
+              <small>ENTIMEMA FINANCE PLATFORM</small>
+              <h3>Finance</h3>
+            </div>
+          </div>
+
           <div className="workspaceProductList">
             {products.map((product) => (
               <article className="workspaceProductCard workspaceOperationalCard" key={product.id}>
