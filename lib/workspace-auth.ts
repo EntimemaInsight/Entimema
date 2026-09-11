@@ -1,16 +1,53 @@
 import "server-only";
-import { auth, isWorkspaceAllowed } from "@/auth";
+import {
+  auth,
+  getWorkspaceRole,
+  isPlatformOwner,
+  isWorkspaceAllowed,
+} from "@/auth";
 import { redirect } from "next/navigation";
 import {
   hasWorkspaceProductAccess,
   type WorkspaceProductId,
 } from "@/lib/workspace-products";
 
-export async function getWorkspaceUser() {
+export type WorkspaceUser = {
+  email: string;
+  name: string;
+  role: ReturnType<typeof getWorkspaceRole>;
+  organizationName: string;
+  environment: "platform" | "sandbox" | "customer";
+};
+
+export async function getWorkspaceUser(): Promise<WorkspaceUser> {
   const session = await auth();
   const email = session?.user?.email;
   if (!email || !isWorkspaceAllowed(email)) redirect("/auth/sign-in");
-  return { email, name: session.user?.name ?? email.split("@")[0] };
+
+  const role = getWorkspaceRole(email);
+  return {
+    email,
+    name: session.user?.name ?? email.split("@")[0],
+    role,
+    organizationName:
+      role === "platform-owner"
+        ? "Entimema"
+        : role === "organization-admin"
+          ? "Entimema Demo Company"
+          : "Customer workspace",
+    environment:
+      role === "platform-owner"
+        ? "platform"
+        : role === "organization-admin"
+          ? "sandbox"
+          : "customer",
+  };
+}
+
+export async function requirePlatformOwner() {
+  const user = await getWorkspaceUser();
+  if (!isPlatformOwner(user.email)) redirect("/workspace?access=platform-owner-required");
+  return user;
 }
 
 export async function requireWorkspaceProduct(productId: WorkspaceProductId) {

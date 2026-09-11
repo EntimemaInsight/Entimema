@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { signOut } from "@/auth";
+import type { WorkspaceUser } from "@/lib/workspace-auth";
 
 export type WorkspaceSection =
   | "home"
@@ -9,15 +10,20 @@ export type WorkspaceSection =
   | "documentation"
   | "security"
   | "account"
+  | "admin"
   | "agents";
 
-const navigation = [
+const customerNavigation = [
   { id: "home", label: "Workspace Home", mark: "WS", href: "/workspace" },
   { id: "financial-intelligence", label: "Financial Intelligence", mark: "FI", href: "/workspace/financial-intelligence" },
   { id: "runs", label: "Runs", mark: "RN", href: "/workspace/runs" },
   { id: "documentation", label: "Documentation", mark: "DC", href: "/workspace/documentation" },
   { id: "security", label: "Data & Security", mark: "DS", href: "/workspace/data-security" },
   { id: "account", label: "Account", mark: "AC", href: "/workspace/account" },
+] as const;
+
+const ownerNavigation = [
+  { id: "admin", label: "Platform Admin", mark: "PA", href: "/workspace/admin" },
 ] as const;
 
 async function signOutOfWorkspace() {
@@ -34,8 +40,13 @@ export function WorkspaceFrame({
   children: ReactNode;
   title: string;
   active: WorkspaceSection;
-  user?: { name: string; email: string };
+  user?: WorkspaceUser;
 }) {
+  const navigation =
+    user?.role === "platform-owner"
+      ? [...customerNavigation, ...ownerNavigation]
+      : customerNavigation;
+
   return (
     <main className="workspaceShell clientWorkspaceShell">
       <header className="commandBar clientCommandBar">
@@ -44,13 +55,16 @@ export function WorkspaceFrame({
         </Link>
         <span className="workspaceProduct">Entimema Workspace</span>
         <span className="crumb">/ {title}</span>
-        <span className="beta">Private beta</span>
+        <span className="beta">
+          {user?.role === "platform-owner" ? "Platform owner" : user?.environment === "sandbox" ? "Demo customer" : "Controlled access"}
+        </span>
         {user && (
           <details className="clientUserMenu">
             <summary aria-label="Account menu">{user.name.slice(0, 1).toUpperCase()}</summary>
             <div>
               <strong>{user.name}</strong>
               <small>{user.email}</small>
+              <small>{user.organizationName} · {user.role.replaceAll("-", " ")}</small>
               <form action={signOutOfWorkspace}>
                 <button>Sign out</button>
               </form>
@@ -68,7 +82,7 @@ export function WorkspaceFrame({
           </Link>
         ))}
         <div className="workspaceRailFooter">
-          <small>Controlled financial workflow</small>
+          <small>{user?.organizationName ?? "Controlled financial workflow"}</small>
           <form action={signOutOfWorkspace}>
             <button type="submit" className="workspaceSignOut">
               <span aria-hidden="true">↪</span>
