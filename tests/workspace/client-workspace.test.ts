@@ -7,6 +7,7 @@ const frame = readFileSync("app/workspace/components/WorkspaceFrame.tsx", "utf8"
 const workspaceIndex = readFileSync("app/workspace/page.tsx", "utf8");
 const financialIntelligence = readFileSync("app/workspace/financial-intelligence/page.tsx", "utf8");
 const incomeStatement = readFileSync("app/workspace/financial-intelligence/income-statement/page.tsx", "utf8");
+const incomeStatementWorkspace = readFileSync("app/workspace/components/FinancialIntelligenceWorkspace.tsx", "utf8");
 const admin = readFileSync("app/workspace/admin/page.tsx", "utf8");
 const agentsIndex = readFileSync("app/workspace/agents/page.tsx", "utf8");
 const documentation = readFileSync("app/workspace/documentation/page.tsx", "utf8");
@@ -33,6 +34,10 @@ test("financial intelligence separates product overview from executable workflow
   assert.match(financialIntelligence, /\/workspace\/financial-intelligence\/income-statement/);
   assert.match(incomeStatement, /requireWorkspaceProduct\("financial-intelligence"\)/);
   assert.match(incomeStatement, /<FinancialIntelligenceWorkspace/);
+  assert.match(incomeStatementWorkspace, /Intelligent intake/);
+  assert.match(incomeStatementWorkspace, /Deterministic validation/);
+  assert.match(incomeStatementWorkspace, /Human review/);
+  assert.match(incomeStatementWorkspace, /Traceable output/);
 });
 
 test("client navigation exposes customer sections and gates platform administration", () => {
