@@ -35,6 +35,7 @@ export default function PrivacyPage() {
               width={1296}
               height={1032}
               priority
+              unoptimized
             />
           </div>
           <div className={styles.heroCopy}>
