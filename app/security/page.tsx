@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import styles from "../trust-page.module.css";
@@ -25,17 +26,28 @@ export default function SecurityPage() {
     <main className={styles.page}>
       <Navbar />
       <article>
-        <header className={styles.hero}>
-          <p className={styles.eyebrow}>Our commitment to security</p>
-          <h1>Financial intelligence requires disciplined data handling.</h1>
-          <p className={styles.intro}>
-            Entimema combines controlled access, purpose-limited processing,
-            source traceability and human review around financial workflows.
-            Each production capability is assessed against its actual data,
-            infrastructure and deployment scope.
-          </p>
+        <header className={styles.securityHero}>
+          <div className={styles.heroVisual}>
+            <Image
+              src="/security-controls.png"
+              alt="Six illustrated security controls: access, protected data, source traceability, structured processing, verified calculations and human review."
+              width={1344}
+              height={968}
+              priority
+            />
+          </div>
+          <div className={styles.heroCopy}>
+            <p className={styles.securityEyebrow}>Our commitment to security</p>
+            <h1>Financial intelligence requires disciplined data handling.</h1>
+            <p className={styles.securityIntro}>
+              Entimema combines controlled access, purpose-limited processing,
+              source traceability and human review around financial workflows.
+              Each production capability is assessed against its actual data,
+              infrastructure and deployment scope.
+            </p>
+          </div>
         </header>
-        <div className={styles.content}>
+        <div className={styles.securityContent}>
           <section>
             <h2>Control baseline</h2>
             <p>

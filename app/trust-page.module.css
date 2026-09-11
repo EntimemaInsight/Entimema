@@ -93,6 +93,108 @@
   text-underline-offset: 3px;
 }
 
+.securityHero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr);
+  align-items: center;
+  gap: clamp(56px, 7vw, 108px);
+  padding: clamp(92px, 10vw, 148px) 0 clamp(110px, 12vw, 176px);
+}
+
+.heroVisual,
+.heroCopy {
+  min-width: 0;
+}
+
+.heroVisual img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.securityEyebrow {
+  display: inline-block;
+  margin: 0 0 22px;
+  padding: 5px 10px 6px;
+  border-radius: 4px;
+  background: #fff06a;
+  color: #071b4d;
+  font-size: 14px;
+  font-weight: 650;
+  line-height: 1.25;
+}
+
+.securityHero h1 {
+  max-width: 620px;
+  margin: 0;
+  font-size: clamp(38px, 3.6vw, 54px);
+  font-weight: 600;
+  letter-spacing: -0.045em;
+  line-height: 1.04;
+}
+
+.securityIntro {
+  max-width: 620px;
+  margin: 28px 0 0;
+  color: #253759;
+  font-size: clamp(17px, 1.25vw, 19px);
+  line-height: 1.68;
+}
+
+.securityContent {
+  max-width: 760px;
+  margin: 0 auto;
+  padding-bottom: clamp(120px, 13vw, 190px);
+}
+
+.securityContent section {
+  margin-top: clamp(84px, 9vw, 128px);
+}
+
+.securityContent section:first-child {
+  margin-top: 0;
+}
+
+.securityContent h2 {
+  margin: 0 0 30px;
+  font-size: clamp(30px, 2.7vw, 38px);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1.15;
+}
+
+.securityContent p,
+.securityContent li {
+  color: #263956;
+  font-size: 18px;
+  line-height: 1.78;
+}
+
+.securityContent p {
+  margin: 0 0 28px;
+}
+
+.securityContent strong {
+  color: #071b4d;
+  font-weight: 700;
+}
+
+.securityContent ul {
+  margin: 25px 0 30px;
+  padding-left: 25px;
+}
+
+.securityContent li {
+  margin: 11px 0;
+  padding-left: 5px;
+}
+
+.securityContent a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .preferencesButton {
   margin-top: 8px;
   padding: 0;
@@ -147,10 +249,31 @@
   outline-offset: 4px;
 }
 
+@media (max-width: 820px) {
+  .securityHero {
+    grid-template-columns: 1fr;
+    gap: 56px;
+    padding-bottom: 112px;
+  }
+
+  .heroVisual {
+    width: min(100%, 580px);
+    margin: 0 auto;
+  }
+}
+
 @media (max-width: 640px) {
   .page article,
   .reference div {
     width: calc(100% - 40px);
+  }
+
+  .securityHero {
+    padding-top: 82px;
+  }
+
+  .securityHero h1 {
+    font-size: clamp(38px, 11vw, 48px);
   }
 
   .hero {
@@ -161,9 +284,14 @@
     font-size: clamp(46px, 13vw, 62px);
   }
 
-  .content p,
-  .content li,
+  .securityContent p,
+  .securityContent li,
   .preferencesButton {
+    font-size: 17px;
+  }
+
+  .content p,
+  .content li {
     font-size: 16px;
   }
 
