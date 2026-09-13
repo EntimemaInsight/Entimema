@@ -4,7 +4,10 @@ import { agents } from "@/app/agents/agent-library-data";
 
 const allowedPartnershipTypes = new Set<string>(partnershipTypes);
 const allowedInquiryTypes = new Set<string>(clientInquiryTypes);
-const allowedKeys = new Set(["intent", "topic", "topicName", "problemArea", "agentId", "agentName", "firstName", "lastName", "email", "companyEmail", "company", "companyName", "country", "phone", "phoneNumber", "referralSource", "marketingConsent", "newsletterConsent", "role", "jobTitle", "partnershipType", "project", "inquiryType", "message", "website"]);
+const allowedPilotDocumentTypes = new Set(["Income Statement", "Management accounts", "Financial model", "Other"]);
+const allowedPilotVolumes = new Set(["1–10", "11–50", "51–200", "200+"]);
+const allowedPilotObjectives = new Set(["Faster financial analysis", "Data validation and reconciliation", "Standardized management reporting", "Traceable review and audit evidence", "Other"]);
+const allowedKeys = new Set(["intent", "topic", "topicName", "problemArea", "agentId", "agentName", "firstName", "lastName", "email", "companyEmail", "company", "companyName", "country", "phone", "phoneNumber", "referralSource", "marketingConsent", "newsletterConsent", "role", "jobTitle", "partnershipType", "project", "inquiryType", "message", "documentType", "monthlyVolume", "primaryObjective", "privacyConsent", "website"]);
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function text(value: unknown, max: number) {
@@ -57,6 +60,10 @@ export async function POST(request: Request) {
   const newsletterConsent = text(body.newsletterConsent, 3);
   const agentId = text(body.agentId, 120);
   const agentName = text(body.agentName, 200);
+  const documentType = text(body.documentType, 160);
+  const monthlyVolume = text(body.monthlyVolume, 40);
+  const primaryObjective = text(body.primaryObjective, 200);
+  const privacyConsent = text(body.privacyConsent, 3);
 
   if (!intent || (intent === "demo" && (!email || !emailPattern.test(email)))) return Response.json({ ok: false }, { status: 400 });
   if (topic && !isTopicKey(topic)) return Response.json({ ok: false }, { status: 400 });
@@ -69,6 +76,10 @@ export async function POST(request: Request) {
     if (!firstName || !lastName || !company || !country || !phone || (marketingConsent && marketingConsent !== "yes")) return Response.json({ ok: false }, { status: 400 });
     subject = `[Entimema] ${selectedAgent ? `${selectedAgent.name} demo` : "Demo discovery"} — ${company}`;
     html = row("Type", selectedAgent ? "Agent demo request" : "Demo / Discover Entimema") + row("Agent ID", agentId) + row("Agent name", agentName) + row("First name", firstName) + row("Last name", lastName) + row("E-mail", email) + row("Company", company) + row("Country", country) + row("Job title", role) + row("Phone number", phone) + row("How did you hear about Entimema?", referralSource) + row("Marketing communications consent", marketingConsent === "yes" ? "Yes" : "No");
+  } else if (intent === "pilot") {
+    if (!firstName || !lastName || !companyEmail || !emailPattern.test(companyEmail) || !companyName || !country || !jobTitle || !documentType || !allowedPilotDocumentTypes.has(documentType) || !monthlyVolume || !allowedPilotVolumes.has(monthlyVolume) || !primaryObjective || !allowedPilotObjectives.has(primaryObjective) || privacyConsent !== "yes") return Response.json({ ok: false }, { status: 400 });
+    subject = `[Entimema] Financial Intelligence pilot — ${companyName}`;
+    html = row("Type", "Financial Intelligence controlled pilot") + row("First name", firstName) + row("Last name", lastName) + row("Work email", companyEmail) + row("Company", companyName) + row("Role", jobTitle) + row("Country", country) + row("Document type", documentType) + row("Approximate monthly volume", monthlyVolume) + row("Primary objective", primaryObjective) + row("Privacy consent", "Yes");
   } else if (intent === "project") {
     if (!firstName || !lastName || !companyEmail || !emailPattern.test(companyEmail) || !companyName || !country || !jobTitle || !phoneNumber || !message || (marketingConsent && marketingConsent !== "yes")) return Response.json({ ok: false }, { status: 400 });
     const selectedTopic = topic && isTopicKey(topic) ? topicOptions[topic] : null;
@@ -91,7 +102,7 @@ export async function POST(request: Request) {
     return Response.json({ ok: false }, { status: 400 });
   }
 
-  const replyTo = intent === "project" || intent === "partnership" || intent === "client" || intent === "newsletter" ? companyEmail : email;
+  const replyTo = intent === "pilot" || intent === "project" || intent === "partnership" || intent === "client" || intent === "newsletter" ? companyEmail : email;
   if (!replyTo) return Response.json({ ok: false }, { status: 400 });
 
   const apiKey = process.env.RESEND_API_KEY;

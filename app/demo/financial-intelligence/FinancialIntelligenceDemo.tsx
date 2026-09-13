@@ -110,7 +110,7 @@ export function FinancialIntelligenceDemo() {
       <section className={styles.conversion}>
         <div><p>CONTROLLED PILOT</p><h2>Run Financial Intelligence on your own documents.</h2><span>Move from this demonstration to a scoped, paid pilot with restricted Workspace access.</span></div>
         <div>
-          <Link href="/contact?topic=Financial%20Intelligence%20pilot&intent=client">Start a controlled pilot →</Link>
+          <Link href="/pilot/financial-intelligence">Configure your pilot →</Link>
           <Link href="/financial-intelligence-launch">Explore Financial Intelligence</Link>
         </div>
       </section>
