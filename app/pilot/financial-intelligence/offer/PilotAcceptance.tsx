@@ -32,7 +32,7 @@ export function PilotAcceptance() {
       <section className={styles.accepted} aria-live="polite">
         <p>OFFER ACCEPTED</p>
         <h2>Your acceptance has been received.</h2>
-        <span>We will send the payment step and pilot-start instructions to your work email. Workspace access is activated only after payment and confirmation of valid inputs.</span>
+        <span>An automatic confirmation and the next-step instructions have been sent to your work email. Payment details follow separately. Workspace access is activated only after payment and confirmation of valid inputs.</span>
       </section>
     );
   }

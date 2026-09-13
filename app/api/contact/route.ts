@@ -22,6 +22,31 @@ function row(label: string, value: string | null) {
   return value ? `<p><strong>${escapeHtml(label)}:</strong> ${escapeHtml(value)}</p>` : "";
 }
 
+function pilotAcceptanceConfirmation(companyName: string) {
+  const company = escapeHtml(companyName);
+  return `
+    <div style="background:#f6f8fa;padding:40px 20px;color:#071b4d;font-family:Arial,sans-serif">
+      <div style="max-width:600px;margin:0 auto;background:#ffffff;border-top:3px solid #de873d;padding:36px">
+        <p style="margin:0 0 24px;font-size:12px;font-weight:700;letter-spacing:.14em">ENTIMEMA · FINANCIAL INTELLIGENCE</p>
+        <h1 style="margin:0 0 18px;font-size:30px;line-height:1.15">Your pilot offer has been accepted.</h1>
+        <p style="margin:0 0 24px;color:#53647a;line-height:1.65">We have recorded the standard Financial Intelligence pilot acceptance for <strong>${company}</strong>.</p>
+        <div style="border:1px solid #d5dde6;padding:22px;margin:0 0 24px">
+          <p style="margin:0 0 10px"><strong>Fixed pilot fee:</strong> €490 excluding VAT, where applicable</p>
+          <p style="margin:0"><strong>Payment:</strong> 100% in advance</p>
+        </div>
+        <h2 style="margin:0 0 14px;font-size:20px">What happens next</h2>
+        <ol style="margin:0 0 24px;padding-left:20px;color:#53647a;line-height:1.75">
+          <li>Entimema sends the payment details to this work email.</li>
+          <li>You confirm the supported documents and provide valid pilot inputs.</li>
+          <li>Restricted Workspace access is activated after payment and input confirmation.</li>
+          <li>The pilot result is delivered within 5 business days after valid inputs are received.</li>
+        </ol>
+        <p style="margin:0 0 12px;color:#53647a;line-height:1.65">Do not send confidential financial documents by replying to this email. Secure submission instructions will be provided separately.</p>
+        <p style="margin:0;color:#53647a;line-height:1.65">Questions? Reply to this email or contact <a href="mailto:office@entimema.com" style="color:#071b4d">office@entimema.com</a>.</p>
+      </div>
+    </div>`;
+}
+
 export async function POST(request: Request) {
   let body: Record<string, unknown>;
   try {
@@ -113,13 +138,31 @@ export async function POST(request: Request) {
   if (!apiKey) return Response.json({ ok: false }, { status: 503 });
 
   try {
-    const { error } = await new Resend(apiKey).emails.send({
-      from: "Entimema Website <website@entimema.net>",
-      to: "office@entimema.com",
-      replyTo,
-      subject,
-      html,
-    });
+    const resend = new Resend(apiKey);
+    const { error } = intent === "pilot_acceptance"
+      ? await resend.batch.send([
+          {
+            from: "Entimema <website@entimema.net>",
+            to: "office@entimema.com",
+            replyTo,
+            subject,
+            html,
+          },
+          {
+            from: "Entimema <website@entimema.net>",
+            to: replyTo,
+            replyTo: "office@entimema.com",
+            subject: "Financial Intelligence pilot — acceptance confirmed",
+            html: pilotAcceptanceConfirmation(companyName!),
+          },
+        ])
+      : await resend.emails.send({
+          from: "Entimema Website <website@entimema.net>",
+          to: "office@entimema.com",
+          replyTo,
+          subject,
+          html,
+        });
     if (error) return Response.json({ ok: false }, { status: 502 });
     return Response.json({ ok: true }, { headers: { "X-Entimema-Submission": "accepted" } });
   } catch {

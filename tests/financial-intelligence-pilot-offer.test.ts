@@ -28,3 +28,12 @@ test("standard offer acceptance is validated separately", () => {
   assert.match(api, /intent === "pilot_acceptance"/);
   assert.match(api, /Standard pilot offer accepted/);
 });
+
+test("accepted pilot triggers both internal and customer confirmations", () => {
+  assert.match(api, /resend\.batch\.send/);
+  assert.match(api, /Financial Intelligence pilot — acceptance confirmed/);
+  assert.match(api, /Do not send confidential financial documents/);
+  assert.match(api, /Restricted Workspace access is activated after payment/);
+  assert.match(acceptance, /automatic confirmation and the next-step instructions/);
+  assert.match(acceptance, /Payment details follow separately/);
+});
