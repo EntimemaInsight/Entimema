@@ -22,8 +22,8 @@ export const productDestinations = [
 export const productFeature = {
   label: "What's new",
   title: "Financial Intelligence V1",
-  description: "See how an Income Statement becomes validated, traceable financial analysis.",
-  href: "/financial-intelligence-launch",
+  description: "See how a financial statement moves from source document to validated, traceable and review-ready analysis.",
+  href: "/demo/financial-intelligence",
 } as const;
 
 export const serviceGroups = [

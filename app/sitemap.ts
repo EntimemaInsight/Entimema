@@ -12,6 +12,7 @@ const routes = [
   "/privacy",
   "/security",
   "/financial-intelligence-launch",
+  "/demo/financial-intelligence",
   "/product/platform",
   "/product/ai-agent-manager",
   "/resources",
