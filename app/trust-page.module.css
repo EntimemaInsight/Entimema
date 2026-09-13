@@ -96,9 +96,9 @@
 .securityHero {
   display: grid;
   grid-template-columns: minmax(0, 1.22fr) minmax(0, 0.78fr);
-  align-items: center;
+  align-items: start;
   gap: clamp(40px, 4.5vw, 68px);
-  padding: clamp(92px, 10vw, 148px) 0 clamp(110px, 12vw, 176px);
+  padding: clamp(64px, 7vw, 96px) 0 clamp(110px, 12vw, 176px);
 }
 
 .heroVisual,
@@ -110,6 +110,10 @@
   display: block;
   width: 100%;
   height: auto;
+}
+
+.heroCopy {
+  padding-top: clamp(8px, 1vw, 16px);
 }
 
 .securityEyebrow {
@@ -127,15 +131,15 @@
 .securityHero h1 {
   max-width: 620px;
   margin: 0;
-  font-size: clamp(38px, 3.6vw, 54px);
+  font-size: clamp(32px, 2.75vw, 42px);
   font-weight: 600;
-  letter-spacing: -0.045em;
-  line-height: 1.04;
+  letter-spacing: -0.04em;
+  line-height: 1.06;
 }
 
 .securityIntro {
   max-width: 620px;
-  margin: 28px 0 0;
+  margin: 24px 0 0;
   color: #253759;
   font-size: clamp(17px, 1.25vw, 19px);
   line-height: 1.68;
@@ -309,6 +313,10 @@
     width: min(100%, 580px);
     margin: 0 auto;
   }
+
+  .heroCopy {
+    padding-top: 0;
+  }
 }
 
 @media (max-width: 640px) {
@@ -322,7 +330,7 @@
   }
 
   .securityHero h1 {
-    font-size: clamp(38px, 11vw, 48px);
+    font-size: clamp(34px, 9.5vw, 42px);
   }
 
   .hero {
