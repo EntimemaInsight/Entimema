@@ -96,7 +96,7 @@
 .securityHero {
   display: grid;
   grid-template-columns: minmax(0, 1.22fr) minmax(0, 0.78fr);
-  align-items: start;
+  align-items: center;
   gap: clamp(40px, 4.5vw, 68px);
   padding: clamp(64px, 7vw, 96px) 0 clamp(110px, 12vw, 176px);
 }
@@ -113,7 +113,7 @@
 }
 
 .heroCopy {
-  padding-top: clamp(8px, 1vw, 16px);
+  padding-top: 0;
 }
 
 .securityEyebrow {
