@@ -43,13 +43,13 @@ export function PilotIntakeForm() {
       <section className={styles.success} aria-live="polite">
         <p className={styles.eyebrow}>PILOT CONFIGURATION RECEIVED</p>
         <h2>Your pilot request is ready for review.</h2>
-        <p>We will review the requested scope and send the proposed pilot structure, price and payment step to your work email.</p>
+        <p>Review the standard pilot scope and price. If it fits your use case, accept the offer and continue to the payment step.</p>
         <div className={styles.next}>
           <span>01 · Scope review</span>
           <span>02 · Pilot terms and payment</span>
           <span>03 · Restricted Workspace access</span>
         </div>
-        <Link href="/demo/financial-intelligence">Return to the interactive demo →</Link>
+        <Link href="/pilot/financial-intelligence/offer">Review the standard pilot offer →</Link>
       </section>
     );
   }

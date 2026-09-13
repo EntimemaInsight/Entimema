@@ -80,6 +80,10 @@ export async function POST(request: Request) {
     if (!firstName || !lastName || !companyEmail || !emailPattern.test(companyEmail) || !companyName || !country || !jobTitle || !documentType || !allowedPilotDocumentTypes.has(documentType) || !monthlyVolume || !allowedPilotVolumes.has(monthlyVolume) || !primaryObjective || !allowedPilotObjectives.has(primaryObjective) || privacyConsent !== "yes") return Response.json({ ok: false }, { status: 400 });
     subject = `[Entimema] Financial Intelligence pilot — ${companyName}`;
     html = row("Type", "Financial Intelligence controlled pilot") + row("First name", firstName) + row("Last name", lastName) + row("Work email", companyEmail) + row("Company", companyName) + row("Role", jobTitle) + row("Country", country) + row("Document type", documentType) + row("Approximate monthly volume", monthlyVolume) + row("Primary objective", primaryObjective) + row("Privacy consent", "Yes");
+  } else if (intent === "pilot_acceptance") {
+    if (!companyEmail || !emailPattern.test(companyEmail) || !companyName || privacyConsent !== "yes") return Response.json({ ok: false }, { status: 400 });
+    subject = `[Entimema] Standard pilot offer accepted — ${companyName}`;
+    html = row("Type", "Financial Intelligence standard pilot acceptance") + row("Work email", companyEmail) + row("Company", companyName) + row("Offer", "€490 excluding VAT, where applicable") + row("Payment", "100% in advance") + row("Privacy consent", "Yes");
   } else if (intent === "project") {
     if (!firstName || !lastName || !companyEmail || !emailPattern.test(companyEmail) || !companyName || !country || !jobTitle || !phoneNumber || !message || (marketingConsent && marketingConsent !== "yes")) return Response.json({ ok: false }, { status: 400 });
     const selectedTopic = topic && isTopicKey(topic) ? topicOptions[topic] : null;
@@ -102,7 +106,7 @@ export async function POST(request: Request) {
     return Response.json({ ok: false }, { status: 400 });
   }
 
-  const replyTo = intent === "pilot" || intent === "project" || intent === "partnership" || intent === "client" || intent === "newsletter" ? companyEmail : email;
+  const replyTo = intent === "pilot" || intent === "pilot_acceptance" || intent === "project" || intent === "partnership" || intent === "client" || intent === "newsletter" ? companyEmail : email;
   if (!replyTo) return Response.json({ ok: false }, { status: 400 });
 
   const apiKey = process.env.RESEND_API_KEY;
