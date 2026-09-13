@@ -51,14 +51,9 @@ export default function PrivacyPage() {
           <section>
             <h2>Scope</h2>
             <p>
-              The controller of personal data is <strong>ENTIMEMA EDPK</strong>,
+              The controller of personal data is <strong>ENTIMEMA SUPC</strong>,
               a single-member variable capital company incorporated under
               Bulgarian law, registered under UIC <strong>208447293</strong>.
-            </p>
-            <p>
-              <strong>Registered office:</strong> 117 General Danail Nikolaev
-              Street, Floor 3, Apartment 8, Tsentralen District, 4002 Plovdiv,
-              Bulgaria.
             </p>
             <p>
               This notice applies to personal data processed through Entimema’s
@@ -167,7 +162,7 @@ export default function PrivacyPage() {
             <h2>Privacy contact and updates</h2>
             <p>
               To ask a privacy question or exercise a data-subject right,
-              contact ENTIMEMA EDPK at{" "}
+              contact ENTIMEMA SUPC at{" "}
               <a href="mailto:office@entimema.com">office@entimema.com</a>.
             </p>
             <p>
