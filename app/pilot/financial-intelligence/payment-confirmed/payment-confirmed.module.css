@@ -1,0 +1,10 @@
+.page{min-height:100vh;background:#f6f8fa;color:#071b4d}
+.confirmationShell{display:grid;place-items:center;min-height:calc(100vh - 82px);padding:60px 24px}
+.paymentConfirmation{width:min(760px,100%);padding:52px;border:1px solid #cbd5df;border-top:4px solid #de873d;background:#fff}
+.paymentConfirmation p{margin:0;color:#718096;font-size:.72rem;font-weight:700;letter-spacing:.14em}
+.paymentConfirmation h1{max-width:650px;margin:14px 0 20px;font-size:clamp(2.5rem,5vw,4.5rem);line-height:1;letter-spacing:-.05em}
+.paymentConfirmation span{display:block;max-width:650px;color:#53647a;font-size:1rem;line-height:1.65}
+.paymentConfirmation a{display:inline-flex;margin-top:28px;padding:15px 18px;background:#142945;color:#fff;font-size:.84rem;font-weight:700}
+.paymentConfirmation small{display:block;margin-top:28px;padding-top:20px;border-top:1px solid #d5dde6;color:#718096;line-height:1.5}
+.page :focus-visible{outline:2px solid #de873d;outline-offset:3px}
+@media(max-width:560px){.paymentConfirmation{padding:34px 24px}.paymentConfirmation a{width:100%;justify-content:center}}

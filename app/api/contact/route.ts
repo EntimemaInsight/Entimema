@@ -36,9 +36,9 @@ function pilotAcceptanceConfirmation(companyName: string) {
         </div>
         <h2 style="margin:0 0 14px;font-size:20px">What happens next</h2>
         <ol style="margin:0 0 24px;padding-left:20px;color:#53647a;line-height:1.75">
-          <li>Entimema sends the payment details to this work email.</li>
+          <li>The secure Stripe payment page opens immediately after acceptance.</li>
           <li>You confirm the supported documents and provide valid pilot inputs.</li>
-          <li>Restricted Workspace access is activated after payment and input confirmation.</li>
+          <li>Restricted Workspace access is activated automatically after confirmed payment.</li>
           <li>The pilot result is delivered within 5 business days after valid inputs are received.</li>
         </ol>
         <p style="margin:0 0 12px;color:#53647a;line-height:1.65">Do not send confidential financial documents by replying to this email. Secure submission instructions will be provided separately.</p>

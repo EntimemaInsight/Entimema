@@ -6,6 +6,8 @@ const offer = readFileSync("app/pilot/financial-intelligence/offer/page.tsx", "u
 const acceptance = readFileSync("app/pilot/financial-intelligence/offer/PilotAcceptance.tsx", "utf8");
 const intake = readFileSync("app/pilot/financial-intelligence/PilotIntakeForm.tsx", "utf8");
 const api = readFileSync("app/api/contact/route.ts", "utf8");
+const checkout = readFileSync("app/api/checkout/pilot/route.ts", "utf8");
+const webhook = readFileSync("app/api/webhooks/stripe/route.ts", "utf8");
 
 test("pilot intake progresses to the standardized offer", () => {
   assert.match(intake, /\/pilot\/financial-intelligence\/offer/);
@@ -33,7 +35,19 @@ test("accepted pilot triggers both internal and customer confirmations", () => {
   assert.match(api, /resend\.batch\.send/);
   assert.match(api, /Financial Intelligence pilot — acceptance confirmed/);
   assert.match(api, /Do not send confidential financial documents/);
-  assert.match(api, /Restricted Workspace access is activated after payment/);
-  assert.match(acceptance, /automatic confirmation and the next-step instructions/);
-  assert.match(acceptance, /Payment details follow separately/);
+  assert.match(api, /Restricted Workspace access is activated automatically after confirmed payment/);
+  assert.match(api, /secure Stripe payment page opens immediately/);
+  assert.match(api, /activated automatically after confirmed payment/);
+});
+
+test("accepted offer continues through fixed-price Stripe Checkout", () => {
+  assert.match(acceptance, /\/api\/checkout\/pilot/);
+  assert.match(acceptance, /window\.location\.assign/);
+  assert.match(checkout, /STRIPE_PILOT_PRICE_IDS/);
+  assert.match(checkout, /mode: "payment"/);
+  assert.match(checkout, /customer_email: companyEmail/);
+  assert.match(checkout, /tax_id_collection/);
+  assert.match(checkout, /invoice_creation/);
+  assert.match(checkout, /payment-confirmed\?session_id=\{CHECKOUT_SESSION_ID\}/);
+  assert.match(webhook, /session\.metadata\?\.company_name/);
 });

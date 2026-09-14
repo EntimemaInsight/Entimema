@@ -150,7 +150,8 @@ export async function POST(request: Request) {
   }
 
   const priceId = matchingLineItems[0].price!.id;
-  const companyName = session.customer_details?.name?.trim() || email.split("@")[1];
+  const companyName = session.metadata?.company_name?.trim() ||
+    session.customer_details?.name?.trim() || email.split("@")[1];
   const accessEndsAt = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString();
   const fulfillment = await callFinancialDatabaseRpc<FulfillmentResult>(
     "workspace_fulfill_stripe_pilot",
