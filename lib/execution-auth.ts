@@ -4,7 +4,7 @@ import { auth, isWorkspaceAllowedForSignIn } from "@/auth";
 import { AgentError } from "@/backend/lib/errors";
 import { hasWorkspaceProductAccess } from "@/lib/workspace-products";
 
-export type AuthorizedActor = { actorId: string };
+export type AuthorizedActor = { actorId: string; email?: string };
 type SessionReader = () => Promise<{ user?: { email?: string | null } } | null>;
 
 export function createExecutionAuthorizer(readSession: SessionReader = auth) {
@@ -16,7 +16,7 @@ export function createExecutionAuthorizer(readSession: SessionReader = auth) {
     if (!(await hasWorkspaceProductAccess(email, "financial-intelligence"))) {
       throw new AgentError("ACCESS_FORBIDDEN", 403);
     }
-    return { actorId: createHash("sha256").update(email).digest("hex").slice(0, 16) };
+    return { actorId: createHash("sha256").update(email).digest("hex").slice(0, 16), email };
   };
 }
 
