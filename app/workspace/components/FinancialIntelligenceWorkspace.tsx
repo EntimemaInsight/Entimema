@@ -3,7 +3,6 @@ import { useState } from "react";
 import type { Result } from "@/backend/financial-intelligence/v1/contract";
 import { DOCUMENT_CLASSIFIER_MAX_FILE_BYTES } from "@/lib/document-classifier-upload";
 import { FinancialIntelligenceResult } from "./FinancialIntelligenceResult";
-import { RUNS_KEY, readRuns, type StoredRun } from "./RunsTable";
 import styles from "./FinancialIntelligenceWorkspace.module.css";
 
 const nodes = [
@@ -57,13 +56,6 @@ export function FinancialIntelligenceWorkspace() {
       if (!response.ok) throw new Error(data.message || "The file could not be processed.");
       setResult(data);
       setSelected("review");
-      const completed = data as Result;
-      const stored: StoredRun = {
-        runId: crypto.randomUUID(), timestamp: new Date().toISOString(),
-        documentType: "Income statement", source: file.name, confidence: 1,
-        route: "financial_intelligence", duration: completed.timings.totalMs, status: "completed",
-      };
-      sessionStorage.setItem(RUNS_KEY, JSON.stringify([stored, ...readRuns()].slice(0, 25)));
     } catch (cause) {
       setError(cause instanceof Error ? cause.message : "The file could not be processed.");
       setSelected("source");
