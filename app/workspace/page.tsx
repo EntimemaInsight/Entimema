@@ -15,7 +15,7 @@ export default async function WorkspacePage({
   searchParams: Promise<{ access?: string }>;
 }) {
   const user = await getWorkspaceUser();
-  const products = getWorkspaceProducts(user.email);
+  const products = await getWorkspaceProducts(user.email);
   const params = await searchParams;
   const accessNotice = params.access === "platform-owner-required";
 

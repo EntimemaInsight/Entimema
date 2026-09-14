@@ -1,6 +1,6 @@
 import "server-only";
 import { createHash } from "node:crypto";
-import { auth, isWorkspaceAllowed } from "@/auth";
+import { auth, isWorkspaceAllowedForSignIn } from "@/auth";
 import { AgentError } from "@/backend/lib/errors";
 import { hasWorkspaceProductAccess } from "@/lib/workspace-products";
 
@@ -12,8 +12,8 @@ export function createExecutionAuthorizer(readSession: SessionReader = auth) {
     const session = await readSession();
     const email = session?.user?.email?.trim().toLowerCase();
     if (!email) throw new AgentError("AUTHENTICATION_REQUIRED", 401);
-    if (!isWorkspaceAllowed(email)) throw new AgentError("ACCESS_FORBIDDEN", 403);
-    if (!hasWorkspaceProductAccess(email, "financial-intelligence")) {
+    if (!(await isWorkspaceAllowedForSignIn(email))) throw new AgentError("ACCESS_FORBIDDEN", 403);
+    if (!(await hasWorkspaceProductAccess(email, "financial-intelligence"))) {
       throw new AgentError("ACCESS_FORBIDDEN", 403);
     }
     return { actorId: createHash("sha256").update(email).digest("hex").slice(0, 16) };

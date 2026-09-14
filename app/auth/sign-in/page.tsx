@@ -1,4 +1,4 @@
-import { auth, isGitHubAuthEnabled, isWorkspaceAllowed, signIn } from "@/auth";
+import { auth, isGitHubAuthEnabled, isWorkspaceAllowedForSignIn, signIn } from "@/auth";
 import BrandLogo from "@/components/BrandLogo";
 import { redirect } from "next/navigation";
 import styles from "./sign-in.module.css";
@@ -25,7 +25,7 @@ export default async function SignInPage({ searchParams }: { searchParams: Promi
   const session = await auth();
   const params = await searchParams;
   const destination = safeDestination(params.callbackUrl);
-  if (session?.user?.email && isWorkspaceAllowed(session.user.email)) redirect(destination);
+  if (session?.user?.email && (await isWorkspaceAllowedForSignIn(session.user.email))) redirect(destination);
 
   return <main className={styles.page} data-auth-page>
     <header className={styles.header}>

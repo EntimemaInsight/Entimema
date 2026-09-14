@@ -1,5 +1,6 @@
 import "server-only";
 import { isWorkspaceAllowed } from "@/auth";
+import { hasPaidWorkspaceProductAccess } from "@/lib/workspace-entitlements";
 
 export type WorkspaceProductId = "financial-intelligence";
 
@@ -34,22 +35,24 @@ function configuredEmails(value: string) {
   );
 }
 
-export function hasWorkspaceProductAccess(email: string, productId: WorkspaceProductId) {
+export async function hasWorkspaceProductAccess(email: string, productId: WorkspaceProductId) {
   const normalizedEmail = email.trim().toLowerCase();
-  if (!isWorkspaceAllowed(normalizedEmail)) return false;
 
   if (productId === "financial-intelligence") {
     const productAllowlist = process.env.WORKSPACE_FINANCIAL_INTELLIGENCE_EMAILS?.trim();
-    if (!productAllowlist) return true;
-    return configuredEmails(productAllowlist).has(normalizedEmail);
+    if (isWorkspaceAllowed(normalizedEmail)) {
+      if (!productAllowlist) return true;
+      if (configuredEmails(productAllowlist).has(normalizedEmail)) return true;
+    }
+    return hasPaidWorkspaceProductAccess(normalizedEmail, productId);
   }
 
   return false;
 }
 
-export function getWorkspaceProducts(email: string): WorkspaceProduct[] {
-  return productCatalog.map((product) => ({
+export async function getWorkspaceProducts(email: string): Promise<WorkspaceProduct[]> {
+  return Promise.all(productCatalog.map(async (product) => ({
     ...product,
-    access: hasWorkspaceProductAccess(email, product.id) ? "available" : "not-enabled",
-  }));
+    access: (await hasWorkspaceProductAccess(email, product.id)) ? "available" : "not-enabled",
+  })));
 }

@@ -1,6 +1,7 @@
 import NextAuth from "next-auth";
 import GitHub from "next-auth/providers/github";
 import Google from "next-auth/providers/google";
+import { hasPaidWorkspaceAccess } from "@/lib/workspace-entitlements";
 
 export type WorkspaceRole = "platform-owner" | "organization-admin" | "analyst";
 
@@ -34,6 +35,11 @@ export function isWorkspaceAllowed(email?: string | null) {
   );
 }
 
+export async function isWorkspaceAllowedForSignIn(email?: string | null) {
+  if (isWorkspaceAllowed(email)) return true;
+  return email ? hasPaidWorkspaceAccess(email) : false;
+}
+
 export function isPlatformOwner(email?: string | null) {
   if (!email) return false;
   const normalizedEmail = email.trim().toLowerCase();
@@ -58,10 +64,13 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   pages: { signIn: "/auth/sign-in" },
   session: { strategy: "jwt", maxAge: 60 * 60 * 12 },
   callbacks: {
-    signIn: ({ user }) => isWorkspaceAllowed(user.email),
-    authorized: ({ auth: session, request }) => {
+    signIn: ({ user }) => isWorkspaceAllowedForSignIn(user.email),
+    authorized: async ({ auth: session, request }) => {
       if (!request.nextUrl.pathname.startsWith("/workspace")) return true;
-      return Boolean(session?.user?.email && isWorkspaceAllowed(session.user.email));
+      return Boolean(
+        session?.user?.email &&
+          (await isWorkspaceAllowedForSignIn(session.user.email)),
+      );
     },
   },
 });

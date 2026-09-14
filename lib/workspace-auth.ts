@@ -3,7 +3,7 @@ import {
   auth,
   getWorkspaceRole,
   isPlatformOwner,
-  isWorkspaceAllowed,
+  isWorkspaceAllowedForSignIn,
 } from "@/auth";
 import { redirect } from "next/navigation";
 import {
@@ -22,7 +22,7 @@ export type WorkspaceUser = {
 export async function getWorkspaceUser(): Promise<WorkspaceUser> {
   const session = await auth();
   const email = session?.user?.email;
-  if (!email || !isWorkspaceAllowed(email)) redirect("/auth/sign-in");
+  if (!email || !(await isWorkspaceAllowedForSignIn(email))) redirect("/auth/sign-in");
 
   const role = getWorkspaceRole(email);
   return {
@@ -52,7 +52,7 @@ export async function requirePlatformOwner() {
 
 export async function requireWorkspaceProduct(productId: WorkspaceProductId) {
   const user = await getWorkspaceUser();
-  if (!hasWorkspaceProductAccess(user.email, productId)) {
+  if (!(await hasWorkspaceProductAccess(user.email, productId))) {
     redirect("/workspace?access=not-enabled");
   }
   return user;
@@ -60,5 +60,8 @@ export async function requireWorkspaceProduct(productId: WorkspaceProductId) {
 
 export async function hasWorkspaceAccess() {
   const session = await auth();
-  return Boolean(session?.user?.email && isWorkspaceAllowed(session.user.email));
+  return Boolean(
+    session?.user?.email &&
+      (await isWorkspaceAllowedForSignIn(session.user.email)),
+  );
 }
