@@ -8,6 +8,7 @@ const migration = readFileSync(
   "utf8",
 );
 const auth = readFileSync("auth.ts", "utf8");
+const status = readFileSync("app/api/checkout/pilot/status/route.ts", "utf8");
 
 test("Stripe webhook verifies signatures and accepts paid pilot events only", () => {
   assert.match(webhook, /constructEvent/);
@@ -31,4 +32,11 @@ test("fulfillment is durable, tenant-scoped and idempotent", () => {
 test("paid entitlements participate in server-side workspace authorization", () => {
   assert.match(auth, /isWorkspaceAllowedForSignIn/);
   assert.match(auth, /hasPaidWorkspaceAccess/);
+});
+
+test("checkout confirmation distinguishes payment from provisioned access", () => {
+  assert.match(status, /payment_status === "paid"/);
+  assert.match(status, /STRIPE_EXPECTED_LIVEMODE/);
+  assert.match(status, /hasPaidWorkspaceProductAccess/);
+  assert.match(status, /financial_intelligence_controlled_pilot/);
 });
