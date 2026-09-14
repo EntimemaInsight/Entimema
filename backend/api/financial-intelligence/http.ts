@@ -10,6 +10,8 @@ import {
   executeV1,
   HTTP_DEADLINE_MS,
 } from "../../financial-intelligence/v1/core";
+import type { Result } from "../../financial-intelligence/v1/contract";
+import type { InspectedDocument } from "../../lib/files";
 
 // Shared transport errors keep their codes/statuses; FI owns customer-facing wording.
 const executionMessages: Partial<Record<ErrorCode, string>> = {
@@ -28,6 +30,12 @@ export function createFinancialIntelligenceHandler(deps: {
   authorize: () => Promise<AuthorizedActor>;
   rateLimiter: ExecutionRateLimiter;
   execute?: typeof executeV1;
+  recordRun?: (input: {
+    actor: AuthorizedActor;
+    document: InspectedDocument;
+    result: Result;
+    runId: string;
+  }) => Promise<unknown>;
 }) {
   return async (request: Request) => {
     const httpStarted = performance.now();
@@ -113,7 +121,16 @@ export function createFinancialIntelligenceHandler(deps: {
           ),
       });
       checkDeadline();
-      return Response.json(result, { headers });
+      if (deps.recordRun) {
+        try {
+          await deps.recordRun({ actor, document, result, runId });
+        } catch {
+          console.error(JSON.stringify({ runId, code: "RUN_HISTORY_WRITE_FAILED" }));
+        }
+      }
+      return Response.json(result, {
+        headers: { ...headers, "X-Entimema-Run-Id": runId },
+      });
     } catch (error) {
       const cause = error instanceof CoreError ? error.error : error;
       const safe =
