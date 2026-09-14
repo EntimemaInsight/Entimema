@@ -3,6 +3,26 @@ import { callFinancialDatabaseRpc } from "@/lib/financial-database";
 
 export type WorkspaceProductId = "financial-intelligence";
 
+export type WorkspaceAccessProfile = {
+  organization_name: string;
+  access_ends_at: string;
+  livemode: boolean;
+};
+
+export async function getPaidWorkspaceAccessProfile(email: string) {
+  try {
+    return await callFinancialDatabaseRpc<WorkspaceAccessProfile>(
+      "workspace_get_access_profile",
+      {
+        p_email: email.trim().toLowerCase(),
+        p_allow_test: process.env.WORKSPACE_ALLOW_TEST_ENTITLEMENTS === "true",
+      },
+    );
+  } catch {
+    return null;
+  }
+}
+
 export async function hasPaidWorkspaceProductAccess(
   email: string,
   productId: WorkspaceProductId,
