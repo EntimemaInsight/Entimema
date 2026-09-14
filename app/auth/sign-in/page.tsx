@@ -45,7 +45,7 @@ export default async function SignInPage({ searchParams }: { searchParams: Promi
           </div>
           {params.error && <p className={styles.error}>This identity is not authorized for the private beta.</p>}
           <div className={styles.providers}>
-            <form action={async () => { "use server"; await signIn("google", { redirectTo: destination }); }}>
+            <form action={async () => { "use server"; await signIn("google", { redirectTo: destination }, { prompt: "select_account" }); }}>
               <button type="submit"><GoogleIcon /><span>Continue with Google</span><i aria-hidden="true">→</i></button>
             </form>
             {isGitHubAuthEnabled && <form action={async () => { "use server"; await signIn("github", { redirectTo: destination }); }}>
