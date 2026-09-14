@@ -10,6 +10,7 @@ import {
   hasWorkspaceProductAccess,
   type WorkspaceProductId,
 } from "@/lib/workspace-products";
+import { getPaidWorkspaceAccessProfile } from "@/lib/workspace-entitlements";
 
 export type WorkspaceUser = {
   email: string;
@@ -25,22 +26,22 @@ export async function getWorkspaceUser(): Promise<WorkspaceUser> {
   if (!email || !(await isWorkspaceAllowedForSignIn(email))) redirect("/auth/sign-in");
 
   const role = getWorkspaceRole(email);
+  const paidProfile = role === "platform-owner" ? null : await getPaidWorkspaceAccessProfile(email);
   return {
     email,
     name: session.user?.name ?? email.split("@")[0],
     role,
-    organizationName:
-      role === "platform-owner"
-        ? "Entimema"
-        : role === "organization-admin"
-          ? "Entimema Demo Company"
-          : "Customer workspace",
+    organizationName: role === "platform-owner"
+      ? "Entimema"
+      : paidProfile?.organization_name ?? (role === "organization-admin" ? "Entimema Demo Company" : "Customer workspace"),
     environment:
       role === "platform-owner"
         ? "platform"
-        : role === "organization-admin"
+        : paidProfile && !paidProfile.livemode
           ? "sandbox"
-          : "customer",
+          : role === "organization-admin"
+            ? "sandbox"
+            : "customer",
   };
 }
 
