@@ -28,7 +28,7 @@ const columns = [
     links: [
       { label: "Insights", href: "/resources" },
       { label: "Engineering & Resources", href: "/resources/engineering" },
-      { label: "Entimema Docs & Help Center", href: "/contact?intent=client" },
+      { label: "Entimema Docs & Help Center", href: "/support" },
       { label: "Integrations" },
       { label: "Security", href: "/security" },
       { label: "Privacy Notice", href: "/privacy" },

@@ -10,7 +10,7 @@ test("footer separates resources from the compact company column", () => {
   for (const destination of [
     ["Insights", "/resources"],
     ["Engineering & Resources", "/resources/engineering"],
-    ["Entimema Docs & Help Center", "/contact?intent=client"],
+    ["Entimema Docs & Help Center", "/support"],
     ["Security", "/security"],
     ["Privacy Notice", "/privacy"],
   ]) {
