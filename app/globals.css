@@ -7276,9 +7276,17 @@ html.scrolling-up .site-header {
   padding-inline: 48px 76px;
   isolation: isolate;
   cursor: pointer;
+  font-family: var(--entimema-font-interface, Arial, sans-serif);
   transition:
     background-color 260ms ease,
     box-shadow 260ms ease;
+}
+
+.announcement__message > span,
+.announcement__message .announcement__product,
+.announcement__message .announcement__link,
+.announcement__close {
+  font-family: var(--entimema-font-interface, Arial, sans-serif);
 }
 
 .announcement__message > span {
