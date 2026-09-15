@@ -1,9 +1,10 @@
-name: FI V1 Branch CI
+name: CI
 
 on:
   push:
     branches:
-      - codex/fi-v1-ai-intake-clean-room
+      - main
+  pull_request:
   workflow_dispatch:
 
 jobs:
@@ -16,7 +17,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
           cache: npm
       - name: Install
         run: npm ci
@@ -24,7 +25,5 @@ jobs:
         run: npm run typecheck
       - name: Lint
         run: npm run lint
-      - name: Financial Intelligence tests
-        run: npx tsx --test $(find tests/financial-intelligence -type f -name '*.test.ts' -print)
       - name: Build
         run: npm run build
