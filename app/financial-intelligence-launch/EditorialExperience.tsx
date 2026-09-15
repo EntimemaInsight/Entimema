@@ -71,7 +71,7 @@ export default function EditorialExperience() {
       <section className={styles.output} data-fi-reveal>
         <div className={styles.sectionLabel}><span>02</span><p>Founding pilot scope</p></div>
         <div className={styles.sectionLead}><h2>A narrow scope, deliberately controlled.</h2><p>The founding pilot starts with one English-language Income Statement supplied as XLSX or text-based PDF. The boundary is explicit before execution begins.</p></div>
-        <div className={styles.report}>
+        <div className={`${styles.report} ${luxury.premiumTable}`}>
           <header><b>ENTIMEMA / V1 VERIFIED SCOPE</b><span>FOUNDING PILOT · 2026</span></header>
           <div className={styles.reportTitle}><div><p>Commercial boundary</p><h3>Known scope before broad claims.</h3></div><span>One agreed statement<br />One controlled execution</span></div>
           <div className={styles.reportRow}><span>Statement<small>Verified today</small></span><strong>Income Statement</strong><em>IN SCOPE</em></div>
@@ -85,7 +85,7 @@ export default function EditorialExperience() {
       <section className={styles.evidence} data-fi-reveal>
         <div className={styles.sectionLabel}><span>03</span><p>From document to evidence</p></div>
         <div className={styles.sectionLead}><h2>Every material value retains its source.</h2><p>The path back to the document is part of the result, not an optional technical appendix.</p></div>
-        <figure className={styles.evidenceSpread}>
+        <figure className={`${styles.evidenceSpread} ${luxury.premiumFigure}`}>
           <div className={styles.document}><header><b>Income statement</b><span>SRC–01</span></header>{values.map(([name, value], index) => <div className={index === 0 ? styles.selectedRow : styles.documentRow} key={name}><span>{name}</span><strong>{value}</strong></div>)}<div className={styles.documentLines} aria-hidden="true"><i /><i /><i /><i /></div></div>
           <figcaption className={styles.lineageCard}><p>Selected concept</p><h3>Revenue</h3><strong>€18,420,000</strong><dl><div><dt>Period</dt><dd>FY 2025</dd></div><div><dt>Unit</dt><dd>EUR</dd></div><div><dt>Confidence</dt><dd>98.4%</dd></div><div><dt>Evidence</dt><dd>SRC–01 · Row 14</dd></div></dl></figcaption>
         </figure>
@@ -98,7 +98,7 @@ export default function EditorialExperience() {
         <div className={styles.stageTable}>{stages.map(([number, title, copy, owner]) => <div className={styles.stageRow} key={number}><span>{number}</span><p>{owner}</p><h3>{title}</h3><p>{copy}</p></div>)}</div>
       </section>
 
-      <section className={styles.control} data-fi-reveal>
+      <section className={`${styles.control} ${luxury.lightControl}`} data-fi-reveal>
         <div className={styles.sectionLabel}><span>05</span><p>Proof, not plausibility</p></div>
         <div className={styles.sectionLead}><h2>The model shows its work.</h2><p>Supported relationships are recalculated. Mismatches become visible. Material ambiguity is escalated for judgement.</p></div>
         <div className={styles.controlSpread}>
@@ -110,7 +110,7 @@ export default function EditorialExperience() {
       <section className={styles.output} data-fi-reveal>
         <div className={styles.sectionLabel}><span>06</span><p>The output</p></div>
         <div className={styles.sectionLead}><h2>A decision-ready financial state.</h2><p>Comparable definitions, inspectable reconciliations and findings connected to evidence.</p></div>
-        <div className={styles.report}><header><b>ENTIMEMA / VALIDATED FINANCIAL MODEL</b><span>FI–0024 · FY 2025</span></header><div className={styles.reportTitle}><div><p>Decision state</p><h3>Ready for decision</h3></div><span>12 controls passed<br />1 judgement recorded</span></div>{values.map(([name, value, period, confidence]) => <div className={styles.reportRow} key={name}><span>{name}<small>{period}</small></span><strong>{value}</strong><em>{confidence}</em></div>)}<footer>Full evidence lineage attached</footer></div>
+        <div className={`${styles.report} ${luxury.premiumTable}`}><header><b>ENTIMEMA / VALIDATED FINANCIAL MODEL</b><span>FI–0024 · FY 2025</span></header><div className={styles.reportTitle}><div><p>Decision state</p><h3>Ready for decision</h3></div><span>12 controls passed<br />1 judgement recorded</span></div>{values.map(([name, value, period, confidence]) => <div className={styles.reportRow} key={name}><span>{name}<small>{period}</small></span><strong>{value}</strong><em>{confidence}</em></div>)}<footer>Full evidence lineage attached</footer></div>
       </section>
 
       <section className={conversion.pilotBridge} data-fi-reveal>

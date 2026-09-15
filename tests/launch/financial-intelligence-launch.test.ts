@@ -68,6 +68,9 @@ test("the luxury edition presents the proposition early and reveals evidence pro
   assert.match(reveal, /prefers-reduced-motion: reduce/);
   assert.match(luxuryCss, /luxuryWaterfall/);
   assert.match(luxuryCss, /ledgerFall/);
+  assert.match(luxuryCss, /premiumTable/);
+  assert.match(luxuryCss, /lightControl/);
+  assert.match(luxuryCss, /executionTabs/);
   assert.match(luxuryCss, /--luxury-navy: #071f43/);
   assert.doesNotMatch(luxuryCss, /oxblood|purple|violet|#8f302b/i);
   assert.match(luxuryCss, /min-height: calc\(100svh - 72px\)/);

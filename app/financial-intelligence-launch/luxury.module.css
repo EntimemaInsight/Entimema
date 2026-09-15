@@ -120,8 +120,100 @@
 }
 
 .executionLuxury :global([class*="executionSurface"]) {
-  box-shadow: 0 30px 75px rgba(73, 51, 35, .1);
+  display: grid;
+  grid-template-columns: minmax(250px, 320px) 1fr;
+  overflow: hidden;
+  border: 0;
+  border-top: 3px solid var(--luxury-navy);
+  background: #fffaf3;
+  box-shadow: 0 24px 64px rgba(7,31,67,.08);
 }
+
+.executionLuxury :global([class*="executionTabs"]) {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 28px 0;
+  border: 0;
+  border-right: 1px solid #c8d2dd;
+  background: #f3f6f8;
+}
+
+.executionLuxury :global([class*="executionTabs"] button) {
+  width: calc(100% - var(--cascade, 0px));
+  min-height: 58px;
+  margin-left: var(--cascade, 0px);
+  padding: 12px 20px;
+  border-bottom: 1px solid #d8dfe6;
+  background: transparent;
+}
+.executionLuxury :global([class*="executionTabs"] button:nth-child(2)){--cascade:12px}
+.executionLuxury :global([class*="executionTabs"] button:nth-child(3)){--cascade:24px}
+.executionLuxury :global([class*="executionTabs"] button:nth-child(4)){--cascade:36px}
+.executionLuxury :global([class*="executionTabs"] button:nth-child(5)){--cascade:48px}
+.executionLuxury :global([class*="executionTabs"] button[aria-selected="true"]){background:#fffaf3;color:var(--luxury-navy)}
+.executionLuxury :global([class*="executionTabs"] button i){top:0;right:auto;bottom:0;left:0;width:3px;height:auto;background:var(--luxury-blue)}
+
+.executionLuxury :global([class*="executionDemo"]) { min-width: 0; }
+.executionLuxury :global([class*="executionDemo"] header) { padding: 18px 28px; border-bottom: 1px solid #d8dfe6; }
+.executionLuxury :global([class*="valueJourney"]) { min-height: 350px; padding: 48px; }
+.executionLuxury :global([class*="valueState"]) { border-color: #c8d2dd; }
+.executionLuxury :global([class*="valueState"] strong) { color: var(--luxury-navy); font-variant-numeric: tabular-nums; }
+.executionLuxury :global([class*="valuePath"] span) { border-color: var(--luxury-blue); background: #fffaf3; color: var(--luxury-blue); }
+
+.executiveLedger {
+  background:
+    linear-gradient(180deg, rgba(31,93,155,.055), transparent 42%),
+    #f7f2ea;
+  color: var(--luxury-ink);
+  border-block: 1px solid #c5d0da;
+}
+.executiveLedger h2 { color: var(--luxury-navy); }
+.ledgerLabel { color: var(--luxury-blue); }
+.ledgerWaterfall { border-top-color: #9aabba; }
+.ledgerWaterfall article { border-bottom-color: #c8d2dd; }
+.ledgerWaterfall p { color: #52708e; }
+.ledgerWaterfall span { color: var(--luxury-blue); }
+.ledgerWaterfall strong { color: var(--luxury-ink); }
+
+.premiumTable {
+  max-width: 1020px;
+  padding: clamp(34px, 5vw, 58px) 0 0;
+  border: 0;
+  border-top: 3px solid var(--luxury-navy);
+  background: transparent;
+  box-shadow: none;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+.premiumTable :global(header) { padding-inline: 0; color: var(--luxury-navy); border-bottom: 1px solid #9aabba; }
+.premiumTable :global([class*="reportTitle"]) { padding: 34px 0 27px; }
+.premiumTable :global([class*="reportTitle"] h3) { max-width: 720px; color: var(--luxury-navy); font-size: clamp(2rem, 3.4vw, 3.35rem); line-height: 1.05; }
+.premiumTable :global([class*="reportRow"]) { grid-template-columns: minmax(170px, .8fr) minmax(280px, 1.5fr) 96px; padding: 17px 0; border-top-color: #c8d2dd; }
+.premiumTable :global([class*="reportRow"] strong) { color: #1f2d3d; font-family: var(--font-sans, "Segoe UI Variable", sans-serif); font-size: .98rem; font-weight: 550; text-align: right; }
+.premiumTable :global([class*="reportRow"] em) { color: var(--luxury-blue); font-weight: 700; letter-spacing: .04em; text-align: right; }
+.premiumTable :global(footer) { padding: 17px 0; border-top-color: var(--luxury-navy); color: #526476; line-height: 1.55; }
+
+.premiumFigure {
+  max-width: 1020px;
+  border: 0;
+  border-top: 3px solid var(--luxury-navy);
+  border-bottom: 1px solid #9aabba;
+  box-shadow: 0 22px 60px rgba(7,31,67,.07);
+}
+.premiumFigure :global([class*="document"]) { border-color: #c8d2dd; }
+.premiumFigure :global([class*="selectedRow"]) { color: var(--luxury-blue); }
+
+.lightControl {
+  background: #eef3f7;
+  color: var(--luxury-ink);
+}
+.lightControl :global([class*="sectionLabel"]) { color: var(--luxury-blue); }
+.lightControl :global([class*="sectionLead"] > p) { color: #4b6176; }
+.lightControl :global([class*="equation"] > div) { border-bottom-color: #bcc9d5; }
+.lightControl :global([class*="equation"] span) { color: #4b6176; }
+.lightControl :global([class*="equation"] strong) { color: var(--luxury-navy); font-variant-numeric: tabular-nums; }
+.lightControl :global([class*="equation"] > i) { color: var(--luxury-blue); }
+.lightControl :global([class*="pass"]),.lightControl :global([class*="exception"]) { background: #fffaf3; box-shadow: 0 16px 40px rgba(7,31,67,.07); }
 
 :global(html[data-fi-motion="ready"]) .luxuryPage [data-fi-reveal] {
   opacity: 0;
@@ -164,6 +256,10 @@
   .luxuryPage :global(header[class*="hero"]) { min-height: auto; }
   .ledgerWaterfall article{grid-template-columns:36px 120px 1fr}
   .executiveLedger { min-height: auto; }
+  .executionLuxury :global([class*="executionSurface"]){grid-template-columns:1fr}
+  .executionLuxury :global([class*="executionTabs"]){border-right:0;border-bottom:1px solid #c8d2dd}
+  .executionLuxury :global([class*="executionTabs"] button){width:calc(100% - var(--cascade,0px));margin-left:var(--cascade,0px)}
+  .premiumTable :global([class*="reportRow"]){grid-template-columns:1fr auto 82px}
 }
 
 @media (max-width: 620px) {
@@ -172,6 +268,10 @@
   .executiveLedger h2 { font-size: clamp(2.55rem, 12vw, 3.65rem); }
   .ledgerWaterfall article,.ledgerWaterfall article:nth-child(n){--step:0;grid-template-columns:32px 1fr;padding:16px 0}
   .ledgerWaterfall strong{grid-column:2}
+  .executionLuxury :global([class*="executionTabs"] button:nth-child(n)){--cascade:0;width:100%;margin-left:0}
+  .executionLuxury :global([class*="valueJourney"]){padding:30px 22px}
+  .premiumTable :global([class*="reportRow"]){grid-template-columns:1fr auto}
+  .premiumTable :global([class*="reportRow"] em){grid-column:2}
 }
 
 @media (prefers-reduced-motion: reduce) {

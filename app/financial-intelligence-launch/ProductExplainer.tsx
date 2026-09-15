@@ -33,7 +33,6 @@ export default function ProductExplainer() {
           <div className={styles.valuePath}><i /><span>{stage.number}</span><i /></div>
           <div className={styles.valueState}><small>CURRENT STATE</small><strong>{stage.state}</strong><p>{stage.metric}</p></div>
         </div>
-        <footer><span>Source lineage retained</span><span>Deterministic controls visible</span><span>Human judgement recorded</span></footer>
       </div>
     </div>
   </section>;
