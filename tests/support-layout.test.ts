@@ -37,6 +37,16 @@ test("support form starts with names and keeps its message field label", () => {
   assert.doesNotMatch(supportForm, /CONTACT SUPPORT|Tell us what you need/);
 });
 
+test("support form captures required company identity and explicit privacy acknowledgement", () => {
+  for (const label of ["First name*", "Last name*", "Company email*", "Company name*", "Job title*"]) {
+    assert.match(supportForm, new RegExp(`<span>${label.replace("*", "\\*")}<\\/span>`));
+  }
+  assert.match(supportForm, /name="country"/);
+  assert.match(supportForm, /countryOptions\.map/);
+  assert.match(supportForm, /name="privacyConsent" required type="checkbox" value="yes"/);
+  assert.match(supportForm, /href="\/privacy">Privacy Notice<\/a>/);
+});
+
 test("support section has no surrounding horizontal rules", () => {
   const supportRule = supportStyles.match(/\.support\{[^}]+\}/)?.[0];
 
