@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import styles from "./feature.module.css";
+import luxury from "./luxury.module.css";
 
 const stages = [
   { number: "01", label: "Evidence", title: "Source registered", detail: "FY2025_Income_Statement.xlsx", metric: "184 values", state: "REGISTERED" },
@@ -15,7 +16,7 @@ export default function ProductExplainer() {
   const [active, setActive] = useState(0);
   const stage = stages[active];
 
-  return <section className={styles.execution} aria-labelledby="execution-title">
+  return <section className={`${styles.execution} ${luxury.executionLuxury}`} data-fi-reveal aria-labelledby="execution-title">
     <div className={styles.sectionLabel}>PRODUCT IN PRACTICE</div>
     <div className={styles.executionHead}>
       <h2 id="execution-title">One value.<br/><span>A complete audit trail.</span></h2>

@@ -5,6 +5,8 @@ import test from "node:test";
 const page = readFileSync("app/financial-intelligence-launch/page.tsx", "utf8");
 const editorial = readFileSync("app/financial-intelligence-launch/EditorialExperience.tsx", "utf8");
 const css = readFileSync("app/financial-intelligence-launch/feature.module.css", "utf8");
+const luxuryCss = readFileSync("app/financial-intelligence-launch/luxury.module.css", "utf8");
+const reveal = readFileSync("app/financial-intelligence-launch/EditorialReveal.tsx", "utf8");
 const sitemap = readFileSync("app/sitemap.ts", "utf8");
 const analytics = readFileSync("app/financial-intelligence-launch/FinancialIntelligenceAnalytics.tsx", "utf8");
 const sharedAnalytics = readFileSync("lib/analytics.ts", "utf8");
@@ -49,7 +51,7 @@ test("conversion and metadata remain measurable and canonical", () => {
   assert.match(sitemap, /"\/financial-intelligence-launch"/);
 });
 
-test("the light editorial system is responsive and has no scroll effects", () => {
+test("the static editorial core remains responsive and motion-safe", () => {
   assert.match(css, /--paper:#fff7ed/);
   assert.match(css, /Georgia/);
   assert.match(css, /@media\(max-width:900px\)/);
@@ -57,4 +59,13 @@ test("the light editorial system is responsive and has no scroll effects", () =>
   assert.match(css, /@media\(prefers-reduced-motion:reduce\)/);
   assert.doesNotMatch(editorial, /useEffect|IntersectionObserver|requestAnimationFrame|data-scene|<video|autoplay/i);
   assert.doesNotMatch(css, /position:sticky|@keyframes|animation:|clip-path|filter:blur|scroll-snap/i);
+});
+
+test("the luxury edition presents the proposition early and reveals evidence progressively", () => {
+  assert.match(editorial, /The entire proposition, in one view/);
+  assert.match(editorial, /From source document to defensible financial decision/);
+  assert.match(reveal, /IntersectionObserver/);
+  assert.match(reveal, /prefers-reduced-motion: reduce/);
+  assert.match(luxuryCss, /luxuryWaterfall/);
+  assert.match(luxuryCss, /min-height: calc\(100svh - 72px\)/);
 });

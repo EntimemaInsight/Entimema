@@ -1,7 +1,9 @@
 import Link from "next/link";
 import styles from "./feature.module.css";
 import conversion from "./feature.module.css";
+import luxury from "./luxury.module.css";
 import ProductExplainer from "./ProductExplainer";
+import EditorialReveal from "./EditorialReveal";
 import { FinancialIntelligenceCta, FinancialIntelligenceViewAnalytics } from "./FinancialIntelligenceAnalytics";
 
 const stages = [
@@ -19,12 +21,13 @@ const values = [
 ] as const;
 
 export default function EditorialExperience() {
-  return <main className={styles.page}>
+  return <main className={`${styles.page} ${luxury.luxuryPage}`}>
     <FinancialIntelligenceViewAnalytics />
+    <EditorialReveal />
     <article>
       <header className={styles.hero}>
         <div className={styles.masthead}><span>ENTIMEMA</span><span>FINANCIAL INTELLIGENCE · V1</span><span>09 SEPTEMBER 2026</span></div>
-        <div className={styles.heroGrid}>
+        <div className={styles.heroGrid} data-fi-reveal>
           <div className={styles.heroCopy}>
             <p className={styles.kicker}>Financial Intelligence V1 · Founding pilot</p>
             <h1>A financial result is only useful when you can defend it.</h1>
@@ -39,14 +42,24 @@ export default function EditorialExperience() {
         <div className={styles.heroFooter}><span>Founding pilot</span><span>Income Statement · Evidence · Control</span></div>
       </header>
 
-      <div className={conversion.proofBar} aria-label="Verified pilot characteristics">
-        <div><small>Input</small><strong>English Income Statement</strong></div>
-        <div><small>Formats</small><strong>XLSX · text-based PDF</strong></div>
-        <div><small>Control</small><strong>Deterministic financial checks</strong></div>
-        <div><small>Delivery</small><strong>Traceable · human-reviewed</strong></div>
+      <div className={`${conversion.proofBar} ${luxury.waterfall}`} data-fi-reveal aria-label="Verified pilot characteristics">
+        <div><small>01 · Source</small><strong>One English Income Statement</strong></div>
+        <div><small>02 · Interpretation</small><strong>AI structures financial meaning</strong></div>
+        <div><small>03 · Control</small><strong>Code verifies the arithmetic</strong></div>
+        <div><small>04 · Result</small><strong>Traceable, reviewed and ready</strong></div>
       </div>
 
-      <section className={styles.premise}>
+      <section className={luxury.executiveLedger} data-fi-reveal aria-labelledby="executive-ledger-title">
+        <p className={luxury.ledgerLabel}>The entire proposition, in one view</p>
+        <h2 id="executive-ledger-title">From source document to defensible financial decision.</h2>
+        <div className={luxury.ledgerGrid}>
+          <p><span>Input</span><strong>Financial data with its original context intact.</strong></p>
+          <p><span>Method</span><strong>AI interpretation, deterministic validation and human review.</strong></p>
+          <p><span>Output</span><strong>A structured result with evidence and exceptions attached.</strong></p>
+        </div>
+      </section>
+
+      <section className={styles.premise} data-fi-reveal>
         <div className={styles.sectionLabel}><span>01</span><p>The premise</p></div>
         <div className={styles.premiseGrid}><h2>Extraction is not validation.</h2><div className={styles.bodyCopy}><p>A value may be copied correctly and still be unusable. Its definition, period, sign, currency or unit may be wrong for the decision.</p><p>Financial Intelligence keeps the value, its meaning and its origin together — then tests what can be tested.</p></div></div>
         <blockquote>Trust does not come from a confident answer. It comes from an answer that can be examined.</blockquote>
@@ -54,7 +67,7 @@ export default function EditorialExperience() {
 
       <div id="execution-proof"><ProductExplainer /></div>
 
-      <section className={styles.output}>
+      <section className={styles.output} data-fi-reveal>
         <div className={styles.sectionLabel}><span>02</span><p>Founding pilot scope</p></div>
         <div className={styles.sectionLead}><h2>A narrow scope, deliberately controlled.</h2><p>The founding pilot starts with one English-language Income Statement supplied as XLSX or text-based PDF. The boundary is explicit before execution begins.</p></div>
         <div className={styles.report}>
@@ -68,7 +81,7 @@ export default function EditorialExperience() {
         </div>
       </section>
 
-      <section className={styles.evidence}>
+      <section className={styles.evidence} data-fi-reveal>
         <div className={styles.sectionLabel}><span>03</span><p>From document to evidence</p></div>
         <div className={styles.sectionLead}><h2>Every material value retains its source.</h2><p>The path back to the document is part of the result, not an optional technical appendix.</p></div>
         <figure className={styles.evidenceSpread}>
@@ -78,13 +91,13 @@ export default function EditorialExperience() {
         <p className={styles.caption}>FIG. 01 — A value becomes usable only when definition, period and evidence remain attached.</p>
       </section>
 
-      <section className={styles.workflow}>
+      <section className={`${styles.workflow} ${luxury.waterfall}`} data-fi-reveal>
         <div className={styles.sectionLabel}><span>04</span><p>The controlled workflow</p></div>
         <div className={styles.sectionLead}><h2>Interpretation where meaning is ambiguous. <em>Code where truth is arithmetic.</em></h2><p>Five accountable stages replace the hidden leap from upload to answer.</p></div>
         <div className={styles.stageTable}>{stages.map(([number, title, copy, owner]) => <div className={styles.stageRow} key={number}><span>{number}</span><p>{owner}</p><h3>{title}</h3><p>{copy}</p></div>)}</div>
       </section>
 
-      <section className={styles.control}>
+      <section className={styles.control} data-fi-reveal>
         <div className={styles.sectionLabel}><span>05</span><p>Proof, not plausibility</p></div>
         <div className={styles.sectionLead}><h2>The model shows its work.</h2><p>Supported relationships are recalculated. Mismatches become visible. Material ambiguity is escalated for judgement.</p></div>
         <div className={styles.controlSpread}>
@@ -93,13 +106,13 @@ export default function EditorialExperience() {
         </div>
       </section>
 
-      <section className={styles.output}>
+      <section className={styles.output} data-fi-reveal>
         <div className={styles.sectionLabel}><span>06</span><p>The output</p></div>
         <div className={styles.sectionLead}><h2>A decision-ready financial state.</h2><p>Comparable definitions, inspectable reconciliations and findings connected to evidence.</p></div>
         <div className={styles.report}><header><b>ENTIMEMA / VALIDATED FINANCIAL MODEL</b><span>FI–0024 · FY 2025</span></header><div className={styles.reportTitle}><div><p>Decision state</p><h3>Ready for decision</h3></div><span>12 controls passed<br />1 judgement recorded</span></div>{values.map(([name, value, period, confidence]) => <div className={styles.reportRow} key={name}><span>{name}<small>{period}</small></span><strong>{value}</strong><em>{confidence}</em></div>)}<footer>Full evidence lineage attached</footer></div>
       </section>
 
-      <section className={conversion.pilotBridge}>
+      <section className={conversion.pilotBridge} data-fi-reveal>
         <div className={conversion.pilotBridgeGrid}>
           <div>
             <span className={conversion.sectionLabel}>LOW-FRICTION PRODUCT PROOF</span>
@@ -120,9 +133,9 @@ export default function EditorialExperience() {
         </div>
       </section>
 
-      <section className={styles.manifesto}><p className={styles.kicker}>The operating standard</p><h2>Finance remains accountable. The system makes that accountability easier to exercise.</h2><div className={styles.manifestoLines}>{["Unknown remains unknown.", "Extraction is tested, not trusted.", "Confidence never replaces evidence.", "Exceptions remain visible.", "Material judgement remains human."].map((line, index) => <p key={line}><span>0{index + 1}</span>{line}</p>)}</div></section>
+      <section className={`${styles.manifesto} ${luxury.waterfall}`} data-fi-reveal><p className={styles.kicker}>The operating standard</p><h2>Finance remains accountable. The system makes that accountability easier to exercise.</h2><div className={styles.manifestoLines}>{["Unknown remains unknown.", "Extraction is tested, not trusted.", "Confidence never replaces evidence.", "Exceptions remain visible.", "Material judgement remains human."].map((line, index) => <p key={line}><span>0{index + 1}</span>{line}</p>)}</div></section>
 
-      <section className={styles.cta} id="pilot-checkout"><p>Financial Intelligence V1 · Founding pilot</p><h2>Test the workflow on your Income Statement.</h2><div className={styles.ctaActions}><FinancialIntelligenceCta href="/pilot/financial-intelligence" kind="start_pilot" position="final">Configure a paid pilot </FinancialIntelligenceCta><Link href="/demo/financial-intelligence">Try the interactive demo </Link><Link href="/services/financial-data">Review the methodology </Link></div><small>Verified scope: English XLSX or text-based PDF Income Statement · Human-reviewed delivery</small></section>
+      <section className={styles.cta} id="pilot-checkout" data-fi-reveal><p>Financial Intelligence V1 · Founding pilot</p><h2>Test the workflow on your Income Statement.</h2><div className={styles.ctaActions}><FinancialIntelligenceCta href="/pilot/financial-intelligence" kind="start_pilot" position="final">Configure a paid pilot </FinancialIntelligenceCta><Link href="/demo/financial-intelligence">Try the interactive demo </Link><Link href="/services/financial-data">Review the methodology </Link></div><small>Verified scope: English XLSX or text-based PDF Income Statement · Human-reviewed delivery</small></section>
     </article>
   </main>;
 }
