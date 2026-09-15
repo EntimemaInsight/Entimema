@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import styles from "./demo.module.css";
+import reportStyles from "./report.module.css";
 
 const workflow = [
   ["IN", "AI", "Intelligent intake"],
@@ -23,6 +24,8 @@ const sourceLines = [
   ["EBITDA", "1,360,000"],
   ["Net income", "820,000"],
 ] as const;
+
+const sampleReportHref = "/demo/Entimema_Financial_Intelligence_Northstar_FY2025.pdf";
 
 export function FinancialIntelligenceDemo() {
   const [completed, setCompleted] = useState(false);
@@ -104,6 +107,30 @@ export function FinancialIntelligenceDemo() {
             <article><p>EXCEPTION</p><h3>Mapping confirmation required</h3><span>&ldquo;Administrative and other&rdquo; → Operating expenses</span><b>Human review</b></article>
             <article><p>SOURCE LINEAGE</p><h3>Every material value remains traceable</h3><span>Source label, reported value and period are retained with the normalized output.</span><b>Available</b></article>
           </div>
+          <article className={reportStyles.preview} aria-labelledby="sample-report-title">
+            <div className={reportStyles.sheet} aria-hidden="true">
+              <span>E N T I M E M A</span>
+              <small>FINANCIAL INTELLIGENCE · DEMONSTRATION REPORT</small>
+              <strong>A financial analysis<br />you can inspect.</strong>
+              <i />
+              <b>Northstar Manufacturing Ltd</b>
+              <em>FY 2025 · EUR · 5 pages</em>
+            </div>
+            <div className={reportStyles.copy}>
+              <p>TRACEABLE DELIVERABLE</p>
+              <h3 id="sample-report-title">Take the analysis with you.</h3>
+              <span>The sample report packages the executive summary, structured statement, deterministic checks, evidence lineage, review items and decision boundaries into one CFO-ready document.</span>
+              <ul>
+                <li>Fictional company and pre-validated data</li>
+                <li>Reported facts separated from calculations and judgement</li>
+                <li>No account, upload or customer information required</li>
+              </ul>
+              <div className={reportStyles.actions}>
+                <a href={sampleReportHref} target="_blank" rel="noreferrer">View full sample report <span aria-hidden="true">↗</span></a>
+                <a href={sampleReportHref} download="Entimema_Financial_Intelligence_Northstar_FY2025.pdf">Download sample report · PDF <span aria-hidden="true">↓</span></a>
+              </div>
+            </div>
+          </article>
         </section>
       ) : null}
 

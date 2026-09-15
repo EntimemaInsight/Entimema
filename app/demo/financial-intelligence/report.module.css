@@ -1,0 +1,53 @@
+.preview {
+  display: grid;
+  grid-template-columns: minmax(240px, .72fr) minmax(0, 1.28fr);
+  gap: 48px;
+  align-items: stretch;
+  margin-top: 16px;
+  padding: 34px;
+  border: 1px solid #d5dce5;
+  background: #fff;
+}
+
+.sheet {
+  min-height: 330px;
+  display: flex;
+  flex-direction: column;
+  padding: 27px 26px;
+  border: 1px solid #cbd5df;
+  border-top: 15px solid #071b4d;
+  background: #fdfefe;
+  box-shadow: 0 20px 44px rgba(7, 27, 77, .12);
+  transform: rotate(-1deg);
+}
+
+.sheet > span { color: #071b4d; font-size: .58rem; font-weight: 800; letter-spacing: .24em; }
+.sheet > small { margin-top: 38px; color: #de873d; font-size: .51rem; font-weight: 800; letter-spacing: .1em; }
+.sheet > strong { max-width: 310px; margin-top: 14px; color: #071b4d; font-size: 1.75rem; line-height: 1.05; letter-spacing: -.04em; }
+.sheet > i { height: 1px; margin: 28px 0; background: #c8d2dd; }
+.sheet > b { color: #071b4d; font-size: .75rem; }
+.sheet > em { margin-top: 7px; color: #69798f; font-size: .62rem; font-style: normal; }
+
+.copy { align-self: center; }
+.copy > p { margin: 0; color: #718096; font-size: .58rem; font-weight: 700; letter-spacing: .12em; }
+.copy h3 { margin: 10px 0 14px; color: #071b4d; font-size: 1.85rem; letter-spacing: -.035em; }
+.copy > span { display: block; max-width: 650px; color: #596a80; font-size: .82rem; line-height: 1.65; }
+.copy ul { display: grid; gap: 8px; margin: 22px 0 0; padding: 0; list-style: none; }
+.copy li { position: relative; padding-left: 18px; color: #243a59; font-size: .72rem; line-height: 1.45; }
+.copy li::before { position: absolute; left: 0; top: .5em; width: 7px; height: 7px; border: 1px solid #de873d; background: #fff8e6; content: ""; }
+
+.actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+.actions a { display: inline-flex; align-items: center; justify-content: space-between; gap: 25px; min-height: 44px; padding: 0 16px; border: 1px solid #132b4d; color: #132b4d; font-size: .7rem; font-weight: 700; }
+.actions a:last-child { background: #132b4d; color: #fff; }
+.actions a:hover { border-color: #de873d; background: #de873d; color: #fff; }
+
+@media (max-width: 760px) {
+  .preview { grid-template-columns: 1fr; padding: 24px; gap: 34px; }
+  .sheet { min-height: 285px; }
+  .actions { flex-direction: column; }
+  .actions a { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sheet { transform: none; }
+}
