@@ -1,12 +1,13 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { isTopicKey } from "./contact-config";
 import styles from "./contact.module.css";
 import { ANALYTICS_READY_EVENT, previousInternalPath, trackAnalyticsEvent } from "@/lib/analytics";
 import { useContactModal } from "@/components/DemoDiscovery";
 
-type Intent = "project" | "partnership" | "client";
+type Intent = "project" | "partnership";
 type IconProps = { className?: string };
 
 function ProjectIcon({ className }: IconProps) {
@@ -24,18 +25,17 @@ function SupportMark({ className }: IconProps) {
 const paths = [
   { intent: "project" as const, title: "New Project", Icon: ProjectIcon },
   { intent: "partnership" as const, title: "Partnerships", Icon: PartnershipIcon },
-  { intent: "client" as const, title: "Support", Icon: SupportMark },
 ];
 
 export default function ContactExperience({ initialIntent, initialTopic }: { initialIntent?: "client"; initialTopic?: string }) {
   const validTopic = initialTopic && isTopicKey(initialTopic) ? initialTopic : undefined;
   const openContact = useContactModal();
   const openedInitialTopic = useRef(false);
-  const triggerRefs = useRef<Record<Intent, HTMLButtonElement | null>>({ project: null, partnership: null, client: null });
+  const triggerRefs = useRef<Record<Intent, HTMLButtonElement | null>>({ project: null, partnership: null });
 
   useEffect(() => {
     const intent = validTopic ? "project" : initialIntent;
-    if (!intent || openedInitialTopic.current || !triggerRefs.current[intent]) return;
+    if (!intent || intent === "client" || openedInitialTopic.current || !triggerRefs.current[intent]) return;
     openedInitialTopic.current = true;
     openContact(intent, triggerRefs.current[intent], validTopic);
   }, [initialIntent, openContact, validTopic]);
@@ -44,9 +44,7 @@ export default function ContactExperience({ initialIntent, initialTopic }: { ini
     let sent = false;
     const send = () => {
       if (sent) return;
-      sent = trackAnalyticsEvent("contact_view", {
-        previous_internal_path: previousInternalPath(),
-      });
+      sent = trackAnalyticsEvent("contact_view", { previous_internal_path: previousInternalPath() });
     };
     send();
     window.addEventListener(ANALYTICS_READY_EVENT, send);
@@ -57,20 +55,16 @@ export default function ContactExperience({ initialIntent, initialTopic }: { ini
     <>
       <div className={styles.paths} aria-label="Inquiry type">
         {paths.map(({ intent: pathIntent, title, Icon }) => (
-          <button
-            aria-haspopup="dialog"
-            className={styles.path}
-            key={pathIntent}
-            onClick={(event) => openContact(pathIntent, event.currentTarget, validTopic)}
-            ref={(element) => { triggerRefs.current[pathIntent] = element; }}
-            type="button"
-          >
+          <button aria-haspopup="dialog" className={styles.path} key={pathIntent} onClick={(event) => openContact(pathIntent, event.currentTarget, validTopic)} ref={(element) => { triggerRefs.current[pathIntent] = element; }} type="button">
             <span className={styles.iconFrame} aria-hidden="true"><Icon className={styles.icon} /></span>
             <span className={styles.title}>{title}</span>
           </button>
         ))}
+        <Link className={styles.path} href="/support">
+          <span className={styles.iconFrame} aria-hidden="true"><SupportMark className={styles.icon} /></span>
+          <span className={styles.title}>Support</span>
+        </Link>
       </div>
-
       <p className={styles.emailFallback}>Prefer email? Write to us at <a href="mailto:office@entimema.com">office@entimema.com</a>.</p>
     </>
   );
