@@ -33,13 +33,13 @@ export default function SupportPage() {
       </section>
 
       <section className={styles.support} aria-labelledby="request-access-title">
-        <SupportForm />
         <div className={styles.resources}>
           <h2 id="request-access-title">Request access to documentation</h2>
           <article><span className={styles.number}>01</span><div><h3>Get started</h3><p>Set up your workspace and learn how to run your first controlled financial workflow.</p><Link href="/product/financial-intelligence">Get started <span>→</span></Link></div></article>
           <article><span className={styles.number}>02</span><div><h3>Product documentation</h3><p>Understand how Entimema processes, validates and transforms financial information.</p><Link href="/product/platform">Explore documentation <span>→</span></Link></div></article>
           <article><span className={styles.number}>03</span><div><h3>Need help?</h3><p>Send your question and the Entimema team will help with product or workflow support.</p><a href="#support-form">Contact support <span>→</span></a></div></article>
         </div>
+        <SupportForm />
       </section>
 
       <section className={styles.cta}>
