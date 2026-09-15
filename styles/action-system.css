@@ -4,13 +4,13 @@
  * authenticated workspace. Imported last so legacy page styles converge here.
  */
 
-:where(a, button, summary, input, select, textarea):focus-visible {
+html body :is(a, button, summary, input, select, textarea):focus-visible {
   outline: 3px solid rgba(255, 74, 18, .34) !important;
   outline-offset: 3px;
 }
 
 /* Primary commercial and operational actions. */
-:where(
+html body :is(
   .primary-cta,
   .ui-button--primary,
   [class*="_primaryCta_"],
@@ -42,7 +42,7 @@
   transition: transform var(--action-duration) var(--action-ease), background-color var(--action-duration) var(--action-ease), border-color var(--action-duration) var(--action-ease), box-shadow var(--action-duration) var(--action-ease) !important;
 }
 
-:where(
+html body :is(
   .primary-cta,
   .ui-button--primary,
   [class*="_primaryCta_"],
@@ -61,19 +61,19 @@
 }
 
 /* Light primary action on dark fields. */
-:where(.primary-cta--light, [class*="_cta_"] .primary-cta--light) {
+html body :is(.primary-cta--light, [class*="_cta_"] .primary-cta--light) {
   border-color: #fff !important;
   background: #fff !important;
   color: var(--action-primary) !important;
 }
-:where(.primary-cta--light, [class*="_cta_"] .primary-cta--light):hover {
+html body :is(.primary-cta--light, [class*="_cta_"] .primary-cta--light):hover {
   border-color: var(--action-surface) !important;
   background: var(--action-surface) !important;
   color: var(--action-primary) !important;
 }
 
 /* Secondary actions: contained, quiet and unambiguous. */
-:where(
+html body :is(
   .ui-button--secondary,
   [class*="_secondaryCta_"],
   [class*="_secondaryButton_"],
@@ -98,7 +98,7 @@
   text-decoration: none !important;
   transition: background-color var(--action-duration) var(--action-ease), border-color var(--action-duration) var(--action-ease), color var(--action-duration) var(--action-ease) !important;
 }
-:where(
+html body :is(
   .ui-button--secondary,
   [class*="_secondaryCta_"],
   [class*="_secondaryButton_"],
@@ -152,14 +152,14 @@
 }
 
 /* Mega-menu options and editorial actions rely on a surface change. */
-:where([class*="MegaMenu_item"], [class*="MegaMenu_featured"] a, .service-card__link, [class*="_referenceCta_"]) {
+html body :is([class*="MegaMenu_item"], [class*="MegaMenu_featured"] a, .service-card__link, [class*="_referenceCta_"]) {
   border: 0 !important;
   border-radius: var(--action-radius-compact) !important;
   text-decoration: none !important;
   box-shadow: none !important;
   transition: background-color var(--action-duration) var(--action-ease), color var(--action-duration) var(--action-ease) !important;
 }
-:where([class*="MegaMenu_item"], [class*="MegaMenu_featured"] a, .service-card__link, [class*="_referenceCta_"]):hover {
+html body :is([class*="MegaMenu_item"], [class*="MegaMenu_featured"] a, .service-card__link, [class*="_referenceCta_"]):hover {
   background: var(--action-surface) !important;
   color: var(--action-primary) !important;
   transform: none !important;
@@ -167,8 +167,8 @@
 .service-card__link { border-top: 0 !important; padding-inline: 10px !important; }
 
 /* Buttons expose state through colour, not opacity alone. */
-:where(button, [role="button"]):disabled,
-:where(button, [role="button"])[aria-disabled="true"] {
+html body :is(button, [role="button"]):disabled,
+html body :is(button, [role="button"])[aria-disabled="true"] {
   border-color: var(--action-disabled) !important;
   background: var(--action-disabled) !important;
   color: var(--action-disabled-text) !important;
@@ -189,7 +189,7 @@
 .clientWorkspaceRail a[aria-current="page"] { background: #1b3353 !important; }
 
 /* Operational buttons are compact but retain a reliable target. */
-:where(.clientWorkspaceContent, .agentWorkspace) button:not(.workflowNode):not([class*="node"]) {
+html body :is(.clientWorkspaceContent, .agentWorkspace) button:not(.workflowNode):not([class*="node"]) {
   min-height: 38px;
   border-radius: 5px;
   font-family: var(--font-sans);
@@ -198,11 +198,11 @@
 }
 
 @media (max-width: 760px) {
-  :where(a, button, summary)[class], .site-nav__item { min-height: 44px; }
+  html body :is(a, button, summary)[class], .site-nav__item { min-height: 44px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  :where(a, button, summary), :where(a, button, summary)::before, :where(a, button, summary)::after {
+  html body :is(a, button, summary), html body :is(a, button, summary)::before, html body :is(a, button, summary)::after {
     transition: none !important;
     animation: none !important;
     transform: none !important;
