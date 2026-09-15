@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import SupportForm from "./SupportForm";
@@ -15,24 +16,15 @@ export default function SupportPage() {
       <Navbar />
       <main className={styles.page}>
         <section className={styles.access} aria-labelledby="access-title">
-          <div className={styles.visual} aria-hidden="true">
-            <div className={styles.visualGrid} />
-            <div className={styles.documentCard}>
-              <span className={styles.docLabel}>FINANCIAL INTELLIGENCE</span>
-              <span className={styles.docTitle}>
-                Validated financial output
-              </span>
-              <span className={styles.docLine} />
-              <span className={styles.docLineShort} />
-              <div className={styles.docStatus}>
-                <span /> Evidence linked
-              </div>
-            </div>
-            <div className={styles.controlCard}>
-              <span>CONTROL STATUS</span>
-              <strong>Validated</strong>
-              <small>Reconciled · Traceable</small>
-            </div>
+          <div className={styles.visual}>
+            <Image
+              className={styles.heroImage}
+              src="/support-decision-workflow.webp"
+              alt="Finance professional reviewing validated financial and risk information in a controlled decision workflow."
+              fill
+              priority
+              sizes="(max-width: 820px) calc(100vw - 40px), 50vw"
+            />
           </div>
           <div className={styles.accessCopy}>
             <h2 id="access-title">Access documentation and help center</h2>
