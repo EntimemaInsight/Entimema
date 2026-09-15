@@ -26,7 +26,7 @@ export default async function ResourcesPage({ searchParams }: { searchParams: Pr
       <section className={styles.demoCta} aria-labelledby="demo-cta-title"><div className={styles.demoCtaInner}>
         <h2 id="demo-cta-title">Ready to see Entimema AI Agents in action?</h2>
         <p>Explore how AI agents can support financial analysis, risk assessment and decision workflows.</p>
-        <DemoTrigger className={styles.demoButton} initialInterest="AI Agents" />
+        <DemoTrigger className={styles.demoButton} initialInterest="AI Agents">Discuss an agent workflow</DemoTrigger>
       </div></section>
     </main>
   );

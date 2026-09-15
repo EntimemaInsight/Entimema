@@ -66,7 +66,7 @@ export default function RiskAiAgentsPage() {
           <h1 id="risk-ai-agents-title">Risk models identify.<br />Risk agents respond.</h1>
           <p className={styles.lead}>Build governed AI agents that monitor risk, analyse events, prepare actions and execute controlled workflows across credit, AML and risk operations.</p>
           <p className={styles.support}><strong>Autonomy without control is just another risk.</strong> Give agents defined roles, authorised data, explicit rules, escalation paths and human review — so risk workflows can move faster without losing accountability.</p>
-          <DemoTrigger className={styles.primaryButton} initialInterest="AI Agents" />
+          <DemoTrigger className={styles.primaryButton} initialInterest="AI Agents">Discuss a risk automation workflow</DemoTrigger>
         </div>
         <RiskAgentOperations />
       </div></section>
@@ -104,7 +104,7 @@ export default function RiskAiAgentsPage() {
         <div className={styles.relatedGrid}>{related.map(([title, copy, href]) => <Link href={href} key={title}><span><strong>{title}</strong><small>{copy}</small></span><b aria-hidden="true">↗</b></Link>)}</div>
       </div></section>
 
-      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>RISK AI AGENTS</span><h2 id="cta-title">Don&apos;t automate risk blindly.<br />Give automation boundaries.</h2><p>Start with one recurring process, explicit controls and human review. Build autonomy from there.</p><DemoTrigger className={styles.ctaButton} initialInterest="AI Agents" /></div></div></section>
+      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>RISK AI AGENTS</span><h2 id="cta-title">Don&apos;t automate risk blindly.<br />Give automation boundaries.</h2><p>Start with one recurring process, explicit controls and human review. Build autonomy from there.</p><DemoTrigger className={styles.ctaButton} initialInterest="AI Agents">Discuss a risk automation workflow</DemoTrigger></div></div></section>
     </main>
   );
 }

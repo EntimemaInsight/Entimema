@@ -92,7 +92,7 @@ export default function LabsPage() {
 
         <section className={`${styles.section} ${styles.explore}`} aria-labelledby="explore-heading" id="explore">
           <header><p className="editorial-eyebrow">08 / Explore</p><h2 className="editorial-headline-lg" id="explore-heading">Inspect the method. Explore its application.</h2><p className="editorial-body-md">Entimema Labs is practitioner-led by Alexander Dimitrov.</p></header>
-          <div className={styles.exploreLinks}><CompanyCta className={`editorial-link--research ${styles.primaryLink}`} href="/resources">Explore Entimema Research <Arrow /></CompanyCta><div><Link className="editorial-link--arrow" href="/workspace/financial-intelligence">See Financial Intelligence in practice <Arrow /></Link><p className="editorial-caption">Secure workspace · sign-in required</p></div><Link className="editorial-link--arrow" href="/alexander-dimitrov">About the Founder <Arrow /></Link><Link className="editorial-link--quiet" href="/contact">Start a conversation <Arrow /></Link></div>
+          <div className={styles.exploreLinks}><CompanyCta className={`editorial-link--research ${styles.primaryLink}`} href="/resources">Explore Entimema Research <Arrow /></CompanyCta><div><Link className="editorial-link--arrow" href="/demo/financial-intelligence">Try Financial Intelligence <Arrow /></Link><p className="editorial-caption">Interactive demo · no account required</p></div><Link className="editorial-link--arrow" href="/alexander-dimitrov">About the Founder <Arrow /></Link><Link className="editorial-link--quiet" href="/contact">Discuss a research collaboration <Arrow /></Link></div>
         </section>
       </div>
     </main>

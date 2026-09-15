@@ -4,23 +4,27 @@
 }
 
 .ui-button {
-  min-height: 44px;
+  min-height: 48px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: var(--space-1);
   padding: 0.75rem 1.25rem;
   border: 1px solid transparent;
-  border-radius: var(--radius-pill);
-  font-weight: var(--font-weight-semibold);
+  border-radius: var(--action-radius);
+  font-size: 14px;
+  font-weight: 650;
   cursor: pointer;
-  transition: transform 180ms var(--ease-standard), background-color 180ms var(--ease-standard), border-color 180ms var(--ease-standard);
+  transition: transform var(--action-duration) var(--action-ease), background-color var(--action-duration) var(--action-ease), border-color var(--action-duration) var(--action-ease), color var(--action-duration) var(--action-ease), box-shadow var(--action-duration) var(--action-ease);
 }
 .ui-button:hover { transform: translateY(-1px); }
 .ui-button:focus-visible { outline: 3px solid color-mix(in srgb, var(--brand-orange-500) 36%, transparent); outline-offset: 3px; }
-.ui-button--primary { background: var(--brand-navy-900); color: white; }
-.ui-button--secondary { background: white; color: var(--brand-navy-900); border-color: var(--brand-blue-200); }
-.ui-button--text { min-height: auto; padding-inline: 0; background: transparent; color: var(--brand-navy-900); }
+.ui-button--primary { background: var(--action-primary); color: white; box-shadow: 0 1px 2px rgba(4, 19, 63, .12); }
+.ui-button--primary:hover { background: var(--action-primary-hover); }
+.ui-button--secondary { background: white; color: var(--action-primary); border-color: var(--action-border); }
+.ui-button--secondary:hover { background: var(--action-surface); }
+.ui-button--text { min-height: 40px; padding: 8px 10px; background: transparent; color: var(--action-primary); }
+.ui-button--text:hover { background: var(--action-surface); }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }

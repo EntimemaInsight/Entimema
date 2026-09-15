@@ -1,0 +1,210 @@
+/*
+ * Entimema action system
+ * A single interaction language for the public site, conversion flow and
+ * authenticated workspace. Imported last so legacy page styles converge here.
+ */
+
+:where(a, button, summary, input, select, textarea):focus-visible {
+  outline: 3px solid rgba(255, 74, 18, .34) !important;
+  outline-offset: 3px;
+}
+
+/* Primary commercial and operational actions. */
+:where(
+  .primary-cta,
+  .ui-button--primary,
+  [class*="_primaryCta_"],
+  [class*="_primaryButton_"],
+  [class*="_ctaButton_"],
+  [class*="_demoCta_"],
+  [class*="_submit_"],
+  [class*="_accept_"] form > button,
+  [class*="_conversion_"] > div:last-child > a:first-child
+) {
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 22px;
+  border: 1px solid var(--action-primary) !important;
+  border-radius: var(--action-radius) !important;
+  background: var(--action-primary) !important;
+  color: #fff !important;
+  box-shadow: 0 1px 2px rgba(4, 19, 63, .12) !important;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 650;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none !important;
+  cursor: pointer;
+  transition: transform var(--action-duration) var(--action-ease), background-color var(--action-duration) var(--action-ease), border-color var(--action-duration) var(--action-ease), box-shadow var(--action-duration) var(--action-ease) !important;
+}
+
+:where(
+  .primary-cta,
+  .ui-button--primary,
+  [class*="_primaryCta_"],
+  [class*="_primaryButton_"],
+  [class*="_ctaButton_"],
+  [class*="_demoCta_"],
+  [class*="_submit_"],
+  [class*="_accept_"] form > button,
+  [class*="_conversion_"] > div:last-child > a:first-child
+):hover {
+  border-color: var(--action-primary-hover) !important;
+  background: var(--action-primary-hover) !important;
+  color: #fff !important;
+  box-shadow: 0 4px 12px rgba(4, 19, 63, .12) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Light primary action on dark fields. */
+:where(.primary-cta--light, [class*="_cta_"] .primary-cta--light) {
+  border-color: #fff !important;
+  background: #fff !important;
+  color: var(--action-primary) !important;
+}
+:where(.primary-cta--light, [class*="_cta_"] .primary-cta--light):hover {
+  border-color: var(--action-surface) !important;
+  background: var(--action-surface) !important;
+  color: var(--action-primary) !important;
+}
+
+/* Secondary actions: contained, quiet and unambiguous. */
+:where(
+  .ui-button--secondary,
+  [class*="_secondaryCta_"],
+  [class*="_secondaryButton_"],
+  [class*="_actions_"] > a:not(:first-child),
+  [class*="_conversion_"] > div:last-child > a:not(:first-child),
+  [class*="_next_"] + a
+) {
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 20px;
+  border: 1px solid var(--action-border) !important;
+  border-radius: var(--action-radius) !important;
+  background: #fff !important;
+  color: var(--action-primary) !important;
+  box-shadow: none !important;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 650;
+  text-decoration: none !important;
+  transition: background-color var(--action-duration) var(--action-ease), border-color var(--action-duration) var(--action-ease), color var(--action-duration) var(--action-ease) !important;
+}
+:where(
+  .ui-button--secondary,
+  [class*="_secondaryCta_"],
+  [class*="_secondaryButton_"],
+  [class*="_actions_"] > a:not(:first-child),
+  [class*="_conversion_"] > div:last-child > a:not(:first-child),
+  [class*="_next_"] + a
+):hover {
+  border-color: var(--action-border) !important;
+  background: var(--action-surface) !important;
+  color: var(--action-primary) !important;
+  transform: none !important;
+}
+
+/* Header controls and navigation use filled states, never decorative rules. */
+.header-login,
+.site-nav__item,
+[class*="MegaMenu_trigger"] {
+  min-height: 40px;
+  padding: 8px 10px !important;
+  border: 0 !important;
+  border-radius: var(--action-radius-compact) !important;
+  background: transparent !important;
+  color: var(--action-primary) !important;
+  box-shadow: none !important;
+  font-size: 13px;
+  font-weight: 650;
+  text-decoration: none !important;
+  transition: background-color var(--action-duration-fast) var(--action-ease), color var(--action-duration-fast) var(--action-ease) !important;
+}
+.header-login:hover,
+.site-nav__item:hover,
+[class*="MegaMenu_trigger"]:hover {
+  background: var(--action-surface) !important;
+  color: var(--action-primary) !important;
+  transform: none !important;
+}
+.site-nav__item.is-active,
+.site-nav__item[aria-current="page"],
+[class*="MegaMenu_active"] {
+  background: var(--action-surface-active) !important;
+  color: var(--action-primary) !important;
+}
+.site-nav__item::before,
+.site-nav__item::after,
+[class*="MegaMenu_trigger"]::before,
+[class*="MegaMenu_trigger"]::after,
+[class*="MegaMenu_item"]::before,
+[class*="MegaMenu_item"]::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* Mega-menu options and editorial actions rely on a surface change. */
+:where([class*="MegaMenu_item"], [class*="MegaMenu_featured"] a, .service-card__link, [class*="_referenceCta_"]) {
+  border: 0 !important;
+  border-radius: var(--action-radius-compact) !important;
+  text-decoration: none !important;
+  box-shadow: none !important;
+  transition: background-color var(--action-duration) var(--action-ease), color var(--action-duration) var(--action-ease) !important;
+}
+:where([class*="MegaMenu_item"], [class*="MegaMenu_featured"] a, .service-card__link, [class*="_referenceCta_"]):hover {
+  background: var(--action-surface) !important;
+  color: var(--action-primary) !important;
+  transform: none !important;
+}
+.service-card__link { border-top: 0 !important; padding-inline: 10px !important; }
+
+/* Buttons expose state through colour, not opacity alone. */
+:where(button, [role="button"]):disabled,
+:where(button, [role="button"])[aria-disabled="true"] {
+  border-color: var(--action-disabled) !important;
+  background: var(--action-disabled) !important;
+  color: var(--action-disabled-text) !important;
+  box-shadow: none !important;
+  opacity: 1 !important;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* Authenticated navigation: selected state is a calm solid field. */
+.clientWorkspaceRail a {
+  border: 0 !important;
+  border-radius: 6px;
+  text-decoration: none !important;
+  transition: background-color var(--action-duration-fast) var(--action-ease), color var(--action-duration-fast) var(--action-ease) !important;
+}
+.clientWorkspaceRail a[aria-current="page"]::before { content: none !important; display: none !important; }
+.clientWorkspaceRail a[aria-current="page"] { background: #1b3353 !important; }
+
+/* Operational buttons are compact but retain a reliable target. */
+:where(.clientWorkspaceContent, .agentWorkspace) button:not(.workflowNode):not([class*="node"]) {
+  min-height: 38px;
+  border-radius: 5px;
+  font-family: var(--font-sans);
+  font-weight: 650;
+  transition: background-color var(--action-duration-fast) var(--action-ease), border-color var(--action-duration-fast) var(--action-ease), color var(--action-duration-fast) var(--action-ease) !important;
+}
+
+@media (max-width: 760px) {
+  :where(a, button, summary)[class], .site-nav__item { min-height: 44px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :where(a, button, summary), :where(a, button, summary)::before, :where(a, button, summary)::after {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
+}

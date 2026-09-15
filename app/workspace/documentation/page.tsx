@@ -44,7 +44,7 @@ export default async function DocumentationPage() {
           <section className="docsSection" id="run">
             <p className="docsStep">02</p><div>
               <h2>Run Financial Intelligence</h2>
-              <ol><li>Open <Link href="/workspace/financial-intelligence">Financial Intelligence</Link>.</li><li>Upload one supported income statement.</li><li>Select <strong>Execute</strong>.</li><li>Wait for the workflow to map reported lines, bind values to source locations and calculate supported KPIs.</li></ol>
+              <ol><li>Open <Link href="/workspace/financial-intelligence">Financial Intelligence</Link>.</li><li>Upload one supported income statement.</li><li>Select <strong>Run analysis</strong>.</li><li>Wait for the workflow to map reported lines, bind values to source locations and calculate supported KPIs.</li></ol>
               <p className="docsCallout"><strong>Important:</strong> Run a new analysis whenever the document, period or reported values change.</p>
             </div>
           </section>

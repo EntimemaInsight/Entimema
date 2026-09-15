@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
-import { DemoTrigger } from "@/components/DemoDiscovery";
 import styles from "./platform.module.css";
 
 const layers = [
@@ -627,10 +627,9 @@ export default function PlatformExperience() {
                 data into validated, traceable and decision-ready outputs.
               </p>
               <div className={styles.actions}>
-                <DemoTrigger
-                  className="primary-cta hero__cta"
-                  initialInterest="Entimema Finance Platform"
-                />
+                <Link className="primary-cta hero__cta" href="/demo/financial-intelligence">
+                  See Financial Intelligence in action →
+                </Link>
               </div>
             </header>
             {layers.map((layer, index) => (
@@ -673,10 +672,9 @@ export default function PlatformExperience() {
             trust—and defend.
           </h2>
           <div className={styles.finalActions}>
-            <DemoTrigger
-              className="primary-cta primary-cta--light"
-              initialInterest="Financial Intelligence V1"
-            />
+            <Link className="primary-cta primary-cta--light" href="/demo/financial-intelligence">
+              Try the interactive demo →
+            </Link>
           </div>
         </div>
       </section>

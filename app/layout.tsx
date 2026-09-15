@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import "../styles/mobile-polish.css";
 import "../styles/mobile-premium.css";
+import "../styles/action-system.css";
 import ScrollExperience from "@/components/ScrollExperience";
 import GlobalFooter from "@/components/GlobalFooter";
 import AnalyticsConsent from "@/components/AnalyticsConsent";

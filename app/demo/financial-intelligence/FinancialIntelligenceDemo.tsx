@@ -49,7 +49,7 @@ export function FinancialIntelligenceDemo() {
         <header className={styles.command}>
           <div><small>FINANCE / FINANCIAL INTELLIGENCE / V1</small><strong>Northstar Manufacturing Ltd · FY 2025</strong></div>
           <button type="button" onClick={() => { setCompleted(true); setSelected(5); }} disabled={completed}>
-            {completed ? "Demo analysis complete" : "Run demo analysis"}
+            {completed ? "Demo analysis complete" : "Start the demo analysis →"}
           </button>
         </header>
 
@@ -126,8 +126,8 @@ export function FinancialIntelligenceDemo() {
                 <li>No account, upload or customer information required</li>
               </ul>
               <div className={reportStyles.actions}>
-                <a href={sampleReportHref} target="_blank" rel="noreferrer">View full sample report <span aria-hidden="true">↗</span></a>
-                <a href={sampleReportHref} download="Entimema_Financial_Intelligence_Northstar_FY2025.pdf">Download sample report · PDF <span aria-hidden="true">↓</span></a>
+                <a href={sampleReportHref} target="_blank" rel="noreferrer">View the complete sample report <span aria-hidden="true">↗</span></a>
+                <a href={sampleReportHref} download="Entimema_Financial_Intelligence_Northstar_FY2025.pdf">Download the sample report · PDF <span aria-hidden="true">↓</span></a>
               </div>
             </div>
           </article>
@@ -137,8 +137,8 @@ export function FinancialIntelligenceDemo() {
       <section className={styles.conversion}>
         <div><p>CONTROLLED PILOT</p><h2>Run Financial Intelligence on your own documents.</h2><span>Move from this demonstration to a scoped, paid pilot with restricted Workspace access.</span></div>
         <div>
-          <Link href="/pilot/financial-intelligence">Configure your pilot →</Link>
-          <Link href="/financial-intelligence-launch">Explore Financial Intelligence</Link>
+          <Link href="/pilot/financial-intelligence">Configure a paid pilot →</Link>
+          <Link href="/financial-intelligence-launch">Explore Financial Intelligence V1</Link>
         </div>
       </section>
     </div>

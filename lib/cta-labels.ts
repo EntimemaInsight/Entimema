@@ -6,6 +6,6 @@
  * - newsletter: use the shared newsletter label below;
  * - navigation and utility: keep functional labels such as "Contact us".
  */
-export const PRIMARY_COMMERCIAL_CTA = "Get a demo";
-export const GENERAL_CONSULTING_CTA = "Start a conversation";
-export const NEWSLETTER_CTA = "Subscribe to our newsletter";
+export const PRIMARY_COMMERCIAL_CTA = "Try the interactive demo";
+export const GENERAL_CONSULTING_CTA = "Discuss your workflow";
+export const NEWSLETTER_CTA = "Subscribe to Decision Signals";

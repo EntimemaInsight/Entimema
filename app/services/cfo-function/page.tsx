@@ -63,7 +63,7 @@ export default function CfoFunctionPage() {
             <h1 id="cfo-title">Build the finance function your next stage requires.</h1>
             <p className={styles.lead}>Strengthen financial control, planning, reporting, cash visibility and decision support—without building a full CFO organisation from day one.</p>
             <p className={styles.support}>Entimema combines CFO-level advisory with practical implementation of the models, controls and management routines your business needs now.</p>
-            <DemoTrigger className={styles.primaryButton} initialInterest="CFO & Financial Management">Talk to a finance advisor</DemoTrigger>
+            <DemoTrigger className={styles.primaryButton} initialInterest="CFO & Financial Management">Discuss your finance priorities</DemoTrigger>
           </div>
           <CfoDashboard />
         </div>
@@ -102,7 +102,7 @@ export default function CfoFunctionPage() {
         <div className={styles.relatedGrid}>{related.map(([title, copy, href]) => <Link href={href} key={title}><span><strong>{title}</strong><small>{copy}</small></span><b aria-hidden="true">↗</b></Link>)}</div>
       </div></section>
 
-      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>CFO ADVISORY</span><h2 id="cta-title">Build the financial capability your business needs now.</h2><p>Strengthen control, visibility and decision support with a practical finance operating model.</p><DemoTrigger className={styles.ctaButton} initialInterest="CFO & Financial Management">Talk to a finance advisor</DemoTrigger></div></div></section>
+      <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>CFO ADVISORY</span><h2 id="cta-title">Build the financial capability your business needs now.</h2><p>Strengthen control, visibility and decision support with a practical finance operating model.</p><DemoTrigger className={styles.ctaButton} initialInterest="CFO & Financial Management">Discuss your finance priorities</DemoTrigger></div></div></section>
     </main>
   );
 }

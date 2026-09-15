@@ -179,7 +179,7 @@ export default function AboutPage() {
             <div><CompanyCta className={`editorial-link--research ${styles.primaryAction}`} href="/product/platform">Explore Entimema Finance Platform <span aria-hidden="true">→</span></CompanyCta></div>
             <div className={styles.secondaryActions}>
               <Link className="editorial-link--arrow" href="/resources">Read Entimema Research <span aria-hidden="true">→</span></Link>
-              <Link className={`editorial-link--quiet ${styles.tertiaryAction}`} href="/contact">Start a conversation <span aria-hidden="true">→</span></Link>
+              <Link className={`editorial-link--quiet ${styles.tertiaryAction}`} href="/contact">Discuss a project <span aria-hidden="true">→</span></Link>
             </div>
           </div>
         </div>

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { createContext, type FormEvent, type ReactNode, useContext, useEffect, useRef, useState } from "react";
-import { PRIMARY_COMMERCIAL_CTA } from "@/lib/cta-labels";
+import { GENERAL_CONSULTING_CTA } from "@/lib/cta-labels";
 import { ANALYTICS_READY_EVENT, previousInternalPath, trackAnalyticsEvent } from "@/lib/analytics";
 import { countryOptions } from "@/lib/countries";
 import { clientInquiryTypes, partnershipTypes } from "@/app/contact/contact-config";
@@ -134,7 +134,7 @@ export function DemoDiscoveryProvider({ children }: { children: ReactNode }) {
 export function DemoTrigger({ children, className }: { children?: ReactNode; className?: string; initialInterest?: string }) {
   const context = useContext(ModalContext);
   if (!context) throw new Error("DemoTrigger must be used within DemoDiscoveryProvider.");
-  return <button className={className} onClick={(event) => context.openDemo(event.currentTarget)} type="button">{children ?? PRIMARY_COMMERCIAL_CTA}</button>;
+  return <button className={className} onClick={(event) => context.openDemo(event.currentTarget)} type="button">{children ?? GENERAL_CONSULTING_CTA}</button>;
 }
 
 export function useContactModal() {

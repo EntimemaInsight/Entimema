@@ -6,7 +6,23 @@
   --brand-orange-500: #ff4a12;
   --brand-orange-600: #ef3e05;
   --brand-blue-100: #dbe8f4;
-  --brand-blue-200: #c4d9eb;
+  --brand-blue-200: #c4d3e3;
+
+  /* Product interaction system */
+  --action-primary: #071c57;
+  --action-primary-hover: #102b70;
+  --action-on-dark: #ffffff;
+  --action-surface: #f3f6fa;
+  --action-surface-active: #e8eff7;
+  --action-border: #c4d3e3;
+  --action-muted: #66758b;
+  --action-disabled: #e6eaf0;
+  --action-disabled-text: #7b8798;
+  --action-radius: 8px;
+  --action-radius-compact: 7px;
+  --action-duration-fast: 120ms;
+  --action-duration: 170ms;
+  --action-ease: cubic-bezier(.2, .8, .2, 1);
 
   /* Neutrals */
   --surface: #ffffff;
@@ -85,8 +101,8 @@
   --space-copy-stage: clamp(30px, 3vw, 46px);
   --ease-standard: cubic-bezier(.2, .8, .2, 1);
   --ease-premium: cubic-bezier(.16, 1, .3, 1);
-  --duration-fast: 180ms;
-  --duration-standard: 360ms;
+  --duration-fast: 120ms;
+  --duration-standard: 170ms;
   --motion-grid-duration: 8.8s;
   --motion-glow-duration: 9.8s;
 

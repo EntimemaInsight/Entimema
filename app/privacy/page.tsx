@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import AnalyticsPreferencesButton from "@/components/AnalyticsPreferencesButton";
-import { DemoTrigger } from "@/components/DemoDiscovery";
+import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import styles from "../trust-page.module.css";
 
@@ -174,8 +174,8 @@ export default function PrivacyPage() {
         </div>
       </article>
       <section className={styles.securityCta} aria-labelledby="privacy-cta-title">
-        <h2 id="privacy-cta-title">Ready to see Entimema in action?</h2>
-        <DemoTrigger className={styles.securityCtaButton}>Get a demo</DemoTrigger>
+        <h2 id="privacy-cta-title">Continue exploring Financial Intelligence.</h2>
+        <Link className={styles.securityCtaButton} href="/financial-intelligence-launch">Explore Financial Intelligence V1 →</Link>
       </section>
     </main>
   );
