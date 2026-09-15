@@ -95,3 +95,35 @@ html body:not(:has([data-preserve-navigation])) :is(
     white-space: nowrap;
   }
 }
+
+/* Editorial text actions retain an underline and a trailing arrow.
+ * Filled buttons, header menus and in-page navigation are excluded. */
+html body:not(:has([data-preserve-navigation])) a:is(
+  .editorial-link, .editorial-link--arrow, .editorial-link--research,
+  .editorial-link--quiet[href^="/"], .service-card__link,
+  [class*="referenceCta"], [class*="bridgeGrid"] a
+):not(:where(.primary-cta, .ui-button, [data-company-cta], [role="button"], .site-header *, [class*="MegaMenu"] *)) {
+  text-decoration: underline !important;
+  text-decoration-color: currentColor !important;
+  text-decoration-thickness: 1px !important;
+  text-underline-offset: .22em;
+}
+
+html body:not(:has([data-preserve-navigation])) a:is(
+  .editorial-link, .editorial-link--arrow, .editorial-link--research,
+  .editorial-link--quiet[href^="/"], .service-card__link,
+  [class*="referenceCta"], [class*="bridgeGrid"] a
+):not(:where(.primary-cta, .ui-button, [data-company-cta], [role="button"], .site-header *, [class*="MegaMenu"] *))::after {
+  content: "\2192" !important;
+  display: inline-block !important;
+  position: static;
+  width: auto;
+  height: auto;
+  margin-left: .45em;
+  border: 0;
+  background: none;
+  color: inherit;
+  opacity: 1;
+  transform: none;
+  text-decoration: none;
+}
