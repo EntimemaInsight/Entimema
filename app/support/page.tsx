@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import SupportForm from "./SupportForm";
+import trustStyles from "../trust-page.module.css";
 import styles from "./support.module.css";
 
 export const metadata = {
@@ -88,10 +89,16 @@ export default function SupportPage() {
           <SupportForm />
         </section>
 
-        <section className={styles.cta}>
-          <h2>Ready to see Entimema in action?</h2>
-          <Link href="/demo/financial-intelligence">
-            Try the interactive demo
+        <section
+          className={`${styles.cta} ${trustStyles.page} ${trustStyles.securityCta}`}
+          aria-labelledby="support-cta-title"
+        >
+          <h2 id="support-cta-title">Ready to see Entimema in action?</h2>
+          <Link
+            className={trustStyles.securityCtaButton}
+            href="/demo/financial-intelligence"
+          >
+            Try the interactive demo →
           </Link>
         </section>
       </main>
