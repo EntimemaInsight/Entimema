@@ -12,6 +12,10 @@
   .page {
     zoom: 0.9;
   }
+  /* Match homepage action labels after this page's additional desktop zoom. */
+  .page :is(.actions, .finalActions) :global(.primary-cta) {
+    font-size: calc(1rem / 0.9) !important;
+  }
 }
 .journey {
   background:
