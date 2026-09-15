@@ -551,24 +551,30 @@
 
 .capability > span::before,
 .timeline span::before {
+  width: 19px;
+  height: 19px;
+  background: var(--brand-navy-950);
   color: var(--brand-navy-950);
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 17px;
-  font-weight: 400;
-  line-height: 1;
+  content: "";
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-size: contain;
 }
 
-.capability:nth-child(6n + 1) > span::before { content: "◇"; }
-.capability:nth-child(6n + 2) > span::before { content: "⊕"; }
-.capability:nth-child(6n + 3) > span::before { content: "⌁"; }
-.capability:nth-child(6n + 4) > span::before { content: "◎"; }
-.capability:nth-child(6n + 5) > span::before { content: "△"; }
-.capability:nth-child(6n) > span::before { content: "□"; }
+.capability:nth-child(6n + 1) > span::before { -webkit-mask-image: var(--solution-icon-workflow); mask-image: var(--solution-icon-workflow); }
+.capability:nth-child(6n + 2) > span::before { -webkit-mask-image: var(--solution-icon-controls); mask-image: var(--solution-icon-controls); }
+.capability:nth-child(6n + 3) > span::before { -webkit-mask-image: var(--solution-icon-reporting); mask-image: var(--solution-icon-reporting); }
+.capability:nth-child(6n + 4) > span::before { -webkit-mask-image: var(--solution-icon-data); mask-image: var(--solution-icon-data); }
+.capability:nth-child(6n + 5) > span::before { -webkit-mask-image: var(--solution-icon-risk); mask-image: var(--solution-icon-risk); }
+.capability:nth-child(6n) > span::before { -webkit-mask-image: var(--solution-icon-ai); mask-image: var(--solution-icon-ai); }
 
-.timeline li:nth-child(4n + 1) span::before { content: "◇"; }
-.timeline li:nth-child(4n + 2) span::before { content: "→"; }
-.timeline li:nth-child(4n + 3) span::before { content: "⊙"; }
-.timeline li:nth-child(4n) span::before { content: "✓"; }
+.timeline li:nth-child(4n + 1) span::before { -webkit-mask-image: var(--solution-icon-workflow); mask-image: var(--solution-icon-workflow); }
+.timeline li:nth-child(4n + 2) span::before { -webkit-mask-image: var(--solution-icon-controls); mask-image: var(--solution-icon-controls); }
+.timeline li:nth-child(4n + 3) span::before { -webkit-mask-image: var(--solution-icon-reporting); mask-image: var(--solution-icon-reporting); }
+.timeline li:nth-child(4n) span::before { -webkit-mask-image: var(--solution-icon-risk); mask-image: var(--solution-icon-risk); }
 
 .timeline li::before {
   background: var(--brand-navy-950);
