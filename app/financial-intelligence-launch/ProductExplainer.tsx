@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import styles from "./conversion.module.css";
+import { useState } from "react";
+import styles from "./executionEditorial.module.css";
 
 const stages = [
   { number: "01", label: "Evidence", title: "Source registered", detail: "FY2025_Income_Statement.xlsx", metric: "184 values", state: "REGISTERED" },
@@ -13,11 +13,6 @@ const stages = [
 
 export default function ProductExplainer() {
   const [active, setActive] = useState(0);
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const timer = window.setInterval(() => setActive((value) => value === stages.length - 1 ? 0 : value + 1), 2200);
-    return () => window.clearInterval(timer);
-  }, []);
   const stage = stages[active];
 
   return <section className={styles.execution} aria-labelledby="execution-title">
@@ -30,7 +25,7 @@ export default function ProductExplainer() {
       <div className={styles.executionTabs} role="tablist" aria-label="Execution stages">
         {stages.map((item, index) => <button key={item.number} type="button" role="tab" aria-selected={active === index} onClick={() => setActive(index)}><span>{item.number}</span><b>{item.label}</b><i /></button>)}
       </div>
-      <div className={styles.executionDemo} role="tabpanel" aria-live="polite">
+      <div className={styles.executionDemo} role="tabpanel">
         <header><span>RUN FI–0024 · ILLUSTRATIVE EXECUTION</span><b><i /> EXECUTION ACTIVE</b></header>
         <div className={styles.valueJourney}>
           <div className={styles.valueSource}><small>{stage.label.toUpperCase()}</small><h3>{stage.title}</h3><p>{stage.detail}</p></div>
