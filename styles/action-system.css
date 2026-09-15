@@ -38,9 +38,20 @@ html body :is(
   line-height: 1.2;
   text-align: center;
   text-decoration: none !important;
+  white-space: nowrap;
   cursor: pointer;
   transition: transform var(--action-duration) var(--action-ease), background-color var(--action-duration) var(--action-ease), border-color var(--action-duration) var(--action-ease), box-shadow var(--action-duration) var(--action-ease) !important;
 }
+
+/* Header conversion labels stay legible instead of compressing or wrapping. */
+.header-cta {
+  width: auto !important;
+  min-width: 190px;
+  padding-inline: 20px !important;
+  white-space: nowrap;
+}
+.header-cta__label { display: inline; }
+.header-cta__label--compact { display: none; }
 
 html body :is(
   .primary-cta,
@@ -213,6 +224,12 @@ html body :is(.clientWorkspaceContent, .agentWorkspace) button:not(.workflowNode
 
 @media (max-width: 760px) {
   html body :is(a, button, summary)[class], .site-nav__item { min-height: 44px; }
+  .header-cta {
+    min-width: 104px;
+    padding-inline: 16px !important;
+  }
+  .header-cta__label--full { display: none; }
+  .header-cta__label--compact { display: inline; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import { DemoTrigger } from "@/components/DemoDiscovery";
 import Navbar from "@/components/Navbar";
+import { GENERAL_CONSULTING_CTA } from "@/lib/cta-labels";
 import AgentLibrary from "./AgentLibrary";
 import styles from "./agents.module.css";
 
@@ -36,7 +37,7 @@ export default function AgentsPage() {
                 <span className={styles.emphasis}>for finance and risk.</span>
               </h1>
               <p>Explore focused capabilities designed to extract, validate, analyse and monitor financial and risk information within controlled, reviewable workflows.</p>
-              <DemoTrigger className={styles.demoCta}>Discuss an agent workflow</DemoTrigger>
+              <DemoTrigger className={styles.demoCta}>{GENERAL_CONSULTING_CTA}</DemoTrigger>
             </div>
             <div className={styles.values} aria-label="Why Entimema agents">
               <div className={styles.valueGrid}>

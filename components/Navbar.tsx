@@ -58,8 +58,13 @@ export default function Navbar({ active = "home" }: { active?: NavKey }) {
           <Link className="header-login" href="/auth/sign-in?callbackUrl=%2Fworkspace%2Ffinancial-intelligence" target="_blank" rel="noopener noreferrer">
             Log in
           </Link>
-          <Link className="primary-cta primary-cta--compact header-cta" href="/demo/financial-intelligence">
-            {PRIMARY_COMMERCIAL_CTA}
+          <Link
+            aria-label={PRIMARY_COMMERCIAL_CTA}
+            className="primary-cta primary-cta--compact header-cta"
+            href="/demo/financial-intelligence"
+          >
+            <span className="header-cta__label header-cta__label--full">{PRIMARY_COMMERCIAL_CTA}</span>
+            <span aria-hidden="true" className="header-cta__label header-cta__label--compact">View demo</span>
           </Link>
         </div>
       </div>
