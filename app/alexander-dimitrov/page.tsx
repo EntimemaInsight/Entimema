@@ -34,7 +34,7 @@ export default function FounderPage() {
               <p className="editorial-eyebrow">Founder of Entimema</p>
               <h1 id="founder-name" className={`editorial-display-md editorial-reveal-text ${styles.name}`}>{founderName}</h1>
               <p className={`editorial-standfirst-md ${styles.standfirst}`}>{profileIntro}</p>
-              <a className={styles.linkedinLink} data-founder-linkedin href={personSchema.sameAs[0]} target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
+              <a className={styles.linkedinLink} data-founder-linkedin href={personSchema.sameAs[0]} target="_blank" rel="noopener noreferrer">LinkedIn </a>
             </div>
             <div className={styles.portrait} data-founder-portrait>
               {/* Preserve the original 400px JPEG bytes and square source-size cap. */}
@@ -45,7 +45,7 @@ export default function FounderPage() {
             <div className={`editorial-body-md ${styles.biography}`}>{biography.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</div>
           </section>
           <section className={`editorial-section ${styles.section}`} aria-labelledby="research-heading">
-            <div className={styles.articlesHeader}><h2 id="research-heading" className="editorial-headline-xl">Alexander Dimitrov&apos;s articles</h2><Link className="editorial-link--arrow" href="/resources">Explore all research <span aria-hidden="true">→</span></Link></div>
+            <div className={styles.articlesHeader}><h2 id="research-heading" className="editorial-headline-xl">Alexander Dimitrov&apos;s articles</h2><Link className="editorial-link--arrow" href="/resources">Explore all research </Link></div>
             <div className={styles.articles}>
               {selectedArticles.map((resource) => <article key={resource.slug}>
                 <Link href={resource.canonicalPath} className={styles.researchEntry} aria-labelledby={`publication-${resource.slug}`}>
@@ -56,7 +56,7 @@ export default function FounderPage() {
                   </div>
                   <div className={styles.researchDetail}>
                     <p className={`editorial-metadata ${styles.articleMeta}`}><span>{getTopic(resource.topic)?.label}</span><span>{resource.readingMinutes} MIN READ</span></p>
-                    <h3 id={`publication-${resource.slug}`} className={`editorial-headline-md ${styles.articleTitle}`}>{resource.headline} <span aria-hidden="true">→</span></h3>
+                    <h3 id={`publication-${resource.slug}`} className={`editorial-headline-md ${styles.articleTitle}`}>{resource.headline} </h3>
                     <p className={`editorial-body-sm ${styles.researchQuestion}`}>{researchQuestions[resource.slug]}</p>
                   </div>
                 </Link>

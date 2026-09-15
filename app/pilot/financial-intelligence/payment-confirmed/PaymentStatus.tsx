@@ -38,7 +38,7 @@ export function PaymentStatus({ sessionId, initiallyPaid }: { sessionId: string;
     <p>PAYMENT NOT CONFIRMED</p>
     <h1>Your Workspace access has not been activated.</h1>
     <span>No successful payment was found for this checkout. Return to the offer when you are ready to continue.</span>
-    <Link href="/pilot/financial-intelligence/offer#accept-offer">Return to the pilot offer →</Link>
+    <Link href="/pilot/financial-intelligence/offer#accept-offer">Return to the pilot offer</Link>
   </>;
 
   return <>
@@ -47,6 +47,6 @@ export function PaymentStatus({ sessionId, initiallyPaid }: { sessionId: string;
     <span>{ready
       ? "Sign in with the same Google work email used at checkout. Your Financial Intelligence pilot is enabled for 30 days."
       : "Payment is complete. Access is being provisioned automatically; this page will update as soon as it is ready."}</span>
-    {ready ? <Link href="/auth/sign-in?callbackUrl=%2Fworkspace">Open Entimema Workspace →</Link> : <small>Usually ready within a few seconds. You may also use the access link sent by email.</small>}
+    {ready ? <Link href="/auth/sign-in?callbackUrl=%2Fworkspace">Open Entimema Workspace</Link> : <small>Usually ready within a few seconds. You may also use the access link sent by email.</small>}
   </>;
 }

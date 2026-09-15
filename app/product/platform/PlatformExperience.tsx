@@ -628,7 +628,7 @@ export default function PlatformExperience() {
               </p>
               <div className={styles.actions}>
                 <Link className="primary-cta hero__cta" href="/demo/financial-intelligence">
-                  See Financial Intelligence in action →
+                  See Financial Intelligence in action
                 </Link>
               </div>
             </header>
@@ -673,7 +673,7 @@ export default function PlatformExperience() {
           </h2>
           <div className={styles.finalActions}>
             <Link className="primary-cta primary-cta--light" href="/demo/financial-intelligence">
-              Try the interactive demo →
+              Try the interactive demo
             </Link>
           </div>
         </div>

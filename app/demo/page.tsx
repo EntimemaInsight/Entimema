@@ -26,7 +26,7 @@ export default async function DemoPage({ searchParams }: { searchParams: Promise
   const agent = agents.find((candidate) => candidate.id === agentId);
 
   if (!agent) return (
-    <main className={styles.page}>
+    <main className={styles.page} data-preserve-navigation>
       <Navbar />
       <section className={styles.safeState} aria-labelledby="demo-safe-title">
         <p className={styles.eyebrow}>DEMO REQUEST</p>
@@ -40,7 +40,7 @@ export default async function DemoPage({ searchParams }: { searchParams: Promise
   const Mark = agentMarks[agent.mark];
   const displayName = agent.name.replace(/ Agent$/, "");
   return (
-    <main className={styles.page}>
+    <main className={styles.page} data-preserve-navigation>
       <a className="skip-link" href="#demo-content">Skip to main content</a>
       <Navbar active="agents" />
       <div className={styles.atmosphere} id="demo-content">

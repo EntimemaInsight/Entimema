@@ -64,7 +64,7 @@ export function PilotAcceptance() {
         <label className={styles.consent}><input name="privacyConsent" required type="checkbox" value="yes" /><span>I accept the pilot scope and agree to the processing of this request under the <Link href="/privacy">Privacy Notice</Link>.</span></label>
         {status === "error" ? <p className={styles.error} role="alert">We recorded no payment. Please try again or email <a href="mailto:office@entimema.com">office@entimema.com</a>.</p> : null}
         <button disabled={status === "sending" || status === "checkout"} type="submit">
-          {status === "sending" ? "Recording acceptance…" : status === "checkout" ? "Opening secure checkout…" : "Accept the offer and pay securely →"}
+          {status === "sending" ? "Recording acceptance…" : status === "checkout" ? "Opening secure checkout…" : "Accept the offer and pay securely"}
         </button>
       </form>
     </section>

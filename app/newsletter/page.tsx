@@ -10,7 +10,7 @@ export default function NewsletterPage() {
         <p>ENTIMEMA INSIGHTS</p>
         <h1 id="newsletter-title">Newsletter subscriptions are coming soon.</h1>
         <div>We are preparing a dedicated subscription experience for Entimema&apos;s research across finance, risk and decision science.</div>
-        <Link href="/resources">Return to Resources <span aria-hidden="true">→</span></Link>
+        <Link href="/resources">Return to Resources </Link>
       </section>
     </main>
   );

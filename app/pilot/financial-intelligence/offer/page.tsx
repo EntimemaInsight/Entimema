@@ -84,7 +84,7 @@ export default function FinancialIntelligencePilotOfferPage() {
 
         <aside className={styles.boundary}>
           <div><p>OUTSIDE THE STANDARD SCOPE?</p><h2>Larger volume or integration requirements need a custom scope.</h2></div>
-          <a href="mailto:office@entimema.com?subject=Financial%20Intelligence%20custom%20pilot%20scope">Request custom scope →</a>
+          <a href="mailto:office@entimema.com?subject=Financial%20Intelligence%20custom%20pilot%20scope">Request custom scope</a>
         </aside>
 
         <PilotAcceptance />

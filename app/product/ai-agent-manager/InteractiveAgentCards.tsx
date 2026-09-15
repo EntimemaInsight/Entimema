@@ -56,7 +56,7 @@ export default function InteractiveAgentCards() {
     <div className={styles.agentCards} role="tablist" aria-label="Entimema specialist agents">
       {agents.map((agent, index) => <button key={agent.title} type="button" role="tab" aria-selected={active === index} className={active === index ? styles.agentCardActive : styles.agentCardButton} onClick={() => setActive(index)}>
         <div><span>{agent.eyebrow}</span><h3>{agent.title}</h3><p>{agent.copy}</p></div>
-        <footer><span>{agent.state}</span><b>{active === index ? "Viewing" : "View agent"} →</b></footer>
+        <footer><span>{agent.state}</span><b>{active === index ? "Viewing" : "View agent"}</b></footer>
       </button>)}
     </div>
     <div className={styles.libraryPreview} role="tabpanel" aria-live="polite" key={current.title}>

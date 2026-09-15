@@ -18,7 +18,6 @@ export const metadata: Metadata = {
   twitter: { card: "summary", title: labsTitle, description: labsDescription },
 };
 
-const Arrow = () => <span aria-hidden="true">→</span>;
 const publicationDate = (date: string) => new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(date));
 
 export default function LabsPage() {
@@ -34,7 +33,7 @@ export default function LabsPage() {
             <h1 className="editorial-display-lg" id="labs-heading">Research for financial and risk systems that must be trusted.</h1>
             <p className={`editorial-standfirst-md ${styles.intro}`}>Entimema Labs develops the methods, validation logic and decision architectures behind controlled financial and risk workflows.</p>
             <p className="editorial-body-md">We turn recurring practitioner problems into methods that can be inspected, tested and—within a defined scope—operationalised.</p>
-            <Link className={`editorial-link--arrow ${styles.agendaLink}`} href="#research-agenda">Explore the research agenda <Arrow /></Link>
+            <Link className={`editorial-link--arrow ${styles.agendaLink}`} href="#research-agenda">Explore the research agenda </Link>
           </div>
           <aside className={styles.readingKey} aria-label="How to read this agenda">
             <p className="editorial-technical-label">How to read this agenda</p>
@@ -72,8 +71,8 @@ export default function LabsPage() {
 
         <section className={`${styles.section} ${styles.application}`} aria-labelledby="application-heading" id="applied-system">
           <header className={styles.sectionHeader}><p className="editorial-eyebrow">05 / Applied proof</p><p className={`editorial-technical-label ${styles.exampleLabel}`}>Implemented example</p><h2 className="editorial-headline-lg" id="application-heading">Traceable Income Statement analysis</h2><p className="editorial-body-md">Financial Intelligence V1</p><p className="editorial-body-md">Research question → Method → Product control → Reviewable output</p></header>
-          <ol className={styles.applicationChain}>{applicationSteps.map((step, index) => <li key={step.title}><div className={styles.applicationStage}><span className="editorial-metadata" aria-hidden="true">0{index + 1}</span><h3>{step.title}</h3></div><div><p>{step.description}</p><Link className="editorial-link" href={researchWork(step.slug).canonicalPath}>{step.linkLabel} <Arrow /></Link></div></li>)}</ol>
-          <div className={styles.applicationBoundary}><p className="editorial-body-md"><strong>Implementation boundary.</strong> The current workflow is for eligible English Income Statements in XLSX, XLSM, CSV or text-based PDF files. It does not implement the entire Labs agenda, and its existence is not evidence of empirical validation across other financial or credit decisions.</p><div><Link className="editorial-link--arrow" href="/workspace/financial-intelligence">See Financial Intelligence in practice <Arrow /></Link><p className="editorial-caption">Secure workspace · sign-in required</p></div></div>
+          <ol className={styles.applicationChain}>{applicationSteps.map((step, index) => <li key={step.title}><div className={styles.applicationStage}><span className="editorial-metadata" aria-hidden="true">0{index + 1}</span><h3>{step.title}</h3></div><div><p>{step.description}</p><Link className="editorial-link" href={researchWork(step.slug).canonicalPath}>{step.linkLabel} </Link></div></li>)}</ol>
+          <div className={styles.applicationBoundary}><p className="editorial-body-md"><strong>Implementation boundary.</strong> The current workflow is for eligible English Income Statements in XLSX, XLSM, CSV or text-based PDF files. It does not implement the entire Labs agenda, and its existence is not evidence of empirical validation across other financial or credit decisions.</p><div><Link className="editorial-link--arrow" href="/workspace/financial-intelligence">See Financial Intelligence in practice </Link><p className="editorial-caption">Secure workspace · sign-in required</p></div></div>
         </section>
 
         <section className={styles.section} aria-labelledby="publications-heading" id="selected-work">
@@ -82,7 +81,7 @@ export default function LabsPage() {
             <div className={styles.publicationMeta}><p className="editorial-technical-label">{resourceStreams[resource.stream].label}</p><p className="editorial-metadata">{resourceTopics.find((topic) => topic.slug === resource.topic)?.label}</p>{resource.publishedAt && <time className="editorial-metadata" dateTime={resource.publishedAt}>{publicationDate(resource.publishedAt)}</time>}<p className="editorial-metadata">{resource.readingMinutes} min read</p><p className="editorial-metadata">{resource.author.name}</p></div>
             <div><h3 className="editorial-headline-md"><Link className="editorial-link" href={resource.canonicalPath}>{resource.headline}</Link></h3><p className="editorial-body-md">{reason}</p></div>
           </article>)}</div>
-          <Link className={`editorial-link--arrow ${styles.allResearch}`} href="/resources">Explore all research <Arrow /></Link>
+          <Link className={`editorial-link--arrow ${styles.allResearch}`} href="/resources">Explore all research </Link>
         </section>
 
         <section className={styles.section} aria-labelledby="open-heading" id="open-questions">
@@ -92,7 +91,7 @@ export default function LabsPage() {
 
         <section className={`${styles.section} ${styles.explore}`} aria-labelledby="explore-heading" id="explore">
           <header><p className="editorial-eyebrow">08 / Explore</p><h2 className="editorial-headline-lg" id="explore-heading">Inspect the method. Explore its application.</h2><p className="editorial-body-md">Entimema Labs is practitioner-led by Alexander Dimitrov.</p></header>
-          <div className={styles.exploreLinks}><CompanyCta className={`editorial-link--research ${styles.primaryLink}`} href="/resources">Explore Entimema Research <Arrow /></CompanyCta><div><Link className="editorial-link--arrow" href="/demo/financial-intelligence">Try Financial Intelligence <Arrow /></Link><p className="editorial-caption">Interactive demo · no account required</p></div><Link className="editorial-link--arrow" href="/alexander-dimitrov">About the Founder <Arrow /></Link><Link className="editorial-link--quiet" href="/contact">Discuss a research collaboration <Arrow /></Link></div>
+          <div className={styles.exploreLinks}><CompanyCta className={`editorial-link--research ${styles.primaryLink}`} href="/resources">Explore Entimema Research </CompanyCta><div><Link className="editorial-link--arrow" href="/demo/financial-intelligence">Try Financial Intelligence </Link><p className="editorial-caption">Interactive demo · no account required</p></div><Link className="editorial-link--arrow" href="/alexander-dimitrov">About the Founder </Link><Link className="editorial-link--quiet" href="/contact">Discuss a research collaboration </Link></div>
         </section>
       </div>
     </main>

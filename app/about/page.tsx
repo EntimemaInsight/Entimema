@@ -94,7 +94,7 @@ export default function AboutPage() {
           </dl>
           <div className={`editorial-grid editorial-grid--desktop ${styles.thesisClosing}`}>
             <p className="editorial-col-8 editorial-body-lg">Financial expertise → Controlled workflows → Decision-ready outputs</p>
-            <div className={`editorial-col-4 ${styles.alignEnd}`}><Link className="editorial-link--arrow" href="/product/platform">Explore the Finance Platform <span aria-hidden="true">→</span></Link></div>
+            <div className={`editorial-col-4 ${styles.alignEnd}`}><Link className="editorial-link--arrow" href="/product/platform">Explore the Finance Platform </Link></div>
           </div>
         </div>
       </section>
@@ -159,13 +159,13 @@ export default function AboutPage() {
               <p className="editorial-eyebrow">The research agenda</p>
               <h2 className="editorial-headline-lg">Methods built to withstand scrutiny.</h2>
               <p className="editorial-body-md">Entimema Labs develops the methodology, validation logic and decision architectures behind controlled financial and risk workflows.</p>
-              <Link className="editorial-link--arrow" href="/labs">Explore Entimema Labs <span aria-hidden="true">→</span></Link>
+              <Link className="editorial-link--arrow" href="/labs">Explore Entimema Labs </Link>
             </div>
             <div className={`editorial-col-6 editorial-item editorial-stack ${styles.practitionerBridge}`}>
               <p className="editorial-eyebrow">The founder’s perspective</p>
               <h2 className="editorial-headline-lg">Built from finance and risk practice.</h2>
               <p className="editorial-body-md">Alexander Dimitrov founded Entimema around a conviction: financial AI should preserve meaning, expose uncertainty and remain accountable to evidence.</p>
-              <Link className="editorial-link--arrow" href="/alexander-dimitrov">About the Founder <span aria-hidden="true">→</span></Link>
+              <Link className="editorial-link--arrow" href="/alexander-dimitrov">About the Founder </Link>
             </div>
           </div>
         </section>
@@ -176,10 +176,10 @@ export default function AboutPage() {
           <p className="editorial-eyebrow">See the approach in practice</p>
           <h2 id="about-closing" className="editorial-display-md">Turn financial data into decisions you can defend.</h2>
           <div className={styles.actions}>
-            <div><CompanyCta className={`editorial-link--research ${styles.primaryAction}`} href="/product/platform">Explore Entimema Finance Platform <span aria-hidden="true">→</span></CompanyCta></div>
+            <div><CompanyCta className={`editorial-link--research ${styles.primaryAction}`} href="/product/platform">Explore Entimema Finance Platform </CompanyCta></div>
             <div className={styles.secondaryActions}>
-              <Link className="editorial-link--arrow" href="/resources">Read Entimema Research <span aria-hidden="true">→</span></Link>
-              <Link className={`editorial-link--quiet ${styles.tertiaryAction}`} href="/contact">Discuss a project <span aria-hidden="true">→</span></Link>
+              <Link className="editorial-link--arrow" href="/resources">Read Entimema Research </Link>
+              <Link className={`editorial-link--quiet ${styles.tertiaryAction}`} href="/contact">Discuss a project </Link>
             </div>
           </div>
         </div>

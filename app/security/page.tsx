@@ -55,7 +55,7 @@ export default function SecurityPage() {
           <section><h2>Security review</h2><p>A security discussion can map the proposed workflow to the data received, processing purpose, provider roles, access expectations, retention approach, deletion process and human-review responsibilities.</p></section>
         </div>
       </article>
-      <section className={styles.securityCta} aria-labelledby="security-cta-title"><h2 id="security-cta-title">See controlled processing in action.</h2><Link className={styles.securityCtaButton} href="/demo/financial-intelligence">Try the interactive demo →</Link></section>
+      <section className={styles.securityCta} aria-labelledby="security-cta-title"><h2 id="security-cta-title">See controlled processing in action.</h2><Link className={styles.securityCtaButton} href="/demo/financial-intelligence">Try the interactive demo</Link></section>
     </main>
   );
 }

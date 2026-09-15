@@ -91,7 +91,7 @@ export default function SupportPage() {
           className={trustStyles.securityCtaButton}
           href="/demo/financial-intelligence"
         >
-          Try the interactive demo →
+          Try the interactive demo
         </Link>
       </section>
     </>

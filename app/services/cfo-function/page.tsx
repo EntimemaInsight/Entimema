@@ -99,7 +99,7 @@ export default function CfoFunctionPage() {
 
       <section className={styles.section} aria-labelledby="related-title"><div className="site-container">
         <SectionHeader label="NEXT STEP" title="Related services" />
-        <div className={styles.relatedGrid}>{related.map(([title, copy, href]) => <Link href={href} key={title}><span><strong>{title}</strong><small>{copy}</small></span><b aria-hidden="true">↗</b></Link>)}</div>
+        <div className={styles.relatedGrid}>{related.map(([title, copy, href]) => <Link href={href} key={title}><span><strong>{title}</strong><small>{copy}</small></span></Link>)}</div>
       </div></section>
 
       <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>CFO ADVISORY</span><h2 id="cta-title">Build the financial capability your business needs now.</h2><p>Strengthen control, visibility and decision support with a practical finance operating model.</p><DemoTrigger className={styles.ctaButton} initialInterest="CFO & Financial Management">Discuss your finance priorities</DemoTrigger></div></div></section>

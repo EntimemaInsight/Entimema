@@ -30,7 +30,7 @@ export default function EditorialExperience() {
             <h1>Financial analysis you can verify.</h1>
             <p className={styles.standfirst}>Bring an English Income Statement in XLSX or text-based PDF. Financial Intelligence V1 structures the statement, verifies supported calculations with deterministic controls, surfaces material exceptions and returns a traceable, human-reviewed result.</p>
             <div className={conversion.heroActions}>
-              <FinancialIntelligenceCta href="/demo/financial-intelligence" kind="start_pilot" position="hero"><span className={conversion.heroPrimary}>Try the interactive demo <span>→</span></span></FinancialIntelligenceCta>
+              <FinancialIntelligenceCta href="/demo/financial-intelligence" kind="start_pilot" position="hero"><span className={conversion.heroPrimary}>Try the interactive demo </span></FinancialIntelligenceCta>
               <Link className={conversion.heroSecondary} href="#execution-proof">See how the workflow works <span>↓</span></Link>
             </div>
           </div>
@@ -106,8 +106,8 @@ export default function EditorialExperience() {
             <h2>Bring one statement. <em>Judge the result yourself.</em></h2>
             <p>The founding pilot is designed to answer one commercial question quickly: does a controlled Financial Intelligence execution create enough value on your own financial data to justify the next paid workflow?</p>
             <div className={conversion.pilotActions}>
-              <FinancialIntelligenceCta href="/pilot/financial-intelligence" kind="start_pilot" position="explainer">Configure a paid pilot <span>→</span></FinancialIntelligenceCta>
-              <Link href="/services/financial-data">Review the methodology <span>→</span></Link>
+              <FinancialIntelligenceCta href="/pilot/financial-intelligence" kind="start_pilot" position="explainer">Configure a paid pilot </FinancialIntelligenceCta>
+              <Link href="/services/financial-data">Review the methodology </Link>
             </div>
           </div>
           <aside className={conversion.pilotCard}>
@@ -122,7 +122,7 @@ export default function EditorialExperience() {
 
       <section className={styles.manifesto}><p className={styles.kicker}>The operating principles</p><h2>AI should not ask finance to surrender control.</h2><div className={styles.manifestoLines}>{["Unknown is not an assumption.", "Extraction is not validation.", "Confidence is not evidence.", "A claim is not a fact.", "A result is not ready until it can be defended."].map((line, index) => <p key={line}><span>0{index + 1}</span>{line}</p>)}</div></section>
 
-      <section className={styles.cta} id="pilot-checkout"><p>Financial Intelligence V1 · Founding pilot</p><h2>Test it on your Income Statement. <em>Leave with a controlled result.</em></h2><div className={styles.ctaActions}><FinancialIntelligenceCta href="/pilot/financial-intelligence" kind="start_pilot" position="final">Configure a paid pilot <span>→</span></FinancialIntelligenceCta><Link href="/services/financial-data">Review the methodology <span>→</span></Link><Link href="/demo/financial-intelligence">Try the interactive demo <span>→</span></Link></div><small>Current verified input scope: English XLSX or text-based PDF Income Statement · Human-reviewed delivery</small></section>
+      <section className={styles.cta} id="pilot-checkout"><p>Financial Intelligence V1 · Founding pilot</p><h2>Test it on your Income Statement. <em>Leave with a controlled result.</em></h2><div className={styles.ctaActions}><FinancialIntelligenceCta href="/pilot/financial-intelligence" kind="start_pilot" position="final">Configure a paid pilot </FinancialIntelligenceCta><Link href="/services/financial-data">Review the methodology </Link><Link href="/demo/financial-intelligence">Try the interactive demo </Link></div><small>Current verified input scope: English XLSX or text-based PDF Income Statement · Human-reviewed delivery</small></section>
     </article>
   </main>;
 }

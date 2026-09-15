@@ -101,7 +101,7 @@ export default function DecisionAutomationPage() {
 
       <section className={styles.section} aria-labelledby="related-title"><div className="site-container">
         <SectionHeader label="NEXT STEP" title="Related services" />
-        <div className={styles.relatedGrid}>{related.map(([title, copy, href]) => <Link href={href} key={title}><span><strong>{title}</strong><small>{copy}</small></span><b aria-hidden="true">↗</b></Link>)}</div>
+        <div className={styles.relatedGrid}>{related.map(([title, copy, href]) => <Link href={href} key={title}><span><strong>{title}</strong><small>{copy}</small></span></Link>)}</div>
       </div></section>
 
       <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>DECISION INTELLIGENCE</span><h2 id="cta-title">Business logic becomes valuable when it can execute.</h2><p>Build a decision engine that turns models, rules and policy into controlled operational decisions.</p><DemoTrigger className={styles.ctaButton} initialInterest="Decision Automation">Discuss your decision workflow</DemoTrigger></div></div></section>

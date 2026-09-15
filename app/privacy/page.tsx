@@ -175,7 +175,7 @@ export default function PrivacyPage() {
       </article>
       <section className={styles.securityCta} aria-labelledby="privacy-cta-title">
         <h2 id="privacy-cta-title">Continue exploring Financial Intelligence.</h2>
-        <Link className={styles.securityCtaButton} href="/financial-intelligence-launch">Explore Financial Intelligence V1 →</Link>
+        <Link className={styles.securityCtaButton} href="/financial-intelligence-launch">Explore Financial Intelligence V1</Link>
       </section>
     </main>
   );

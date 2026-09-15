@@ -87,9 +87,9 @@ export default function FinaiPage() {
               <p><Link href="/alexander-dimitrov">Alexander Dimitrov</Link> founded Entimema around this thesis. His work connects financial management, credit risk, quantitative models, enterprise systems and the practical logic through which institutions actually make decisions.</p>
             </div>
             <nav className={styles.links} aria-label="Explore FinAI by Entimema">
-              <Link href="/services/financial-ai-agents">Finance AI agents <span aria-hidden="true">→</span></Link>
-              <Link href="/services/risk-ai-agents">Risk AI agents <span aria-hidden="true">→</span></Link>
-              <Link href="/resources">Entimema Research <span aria-hidden="true">→</span></Link>
+              <Link href="/services/financial-ai-agents">Finance AI agents </Link>
+              <Link href="/services/risk-ai-agents">Risk AI agents </Link>
+              <Link href="/resources">Entimema Research </Link>
             </nav>
           </div>
         </section>

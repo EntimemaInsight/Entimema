@@ -49,7 +49,7 @@ export function PilotIntakeForm() {
           <span>02 · Pilot terms and payment</span>
           <span>03 · Restricted Workspace access</span>
         </div>
-        <Link href="/pilot/financial-intelligence/offer">Continue to the pilot offer →</Link>
+        <Link href="/pilot/financial-intelligence/offer">Continue to the pilot offer</Link>
       </section>
     );
   }
@@ -93,7 +93,7 @@ export function PilotIntakeForm() {
         </label>
 
         {status === "error" ? <p className={styles.error} role="alert">We could not submit your pilot configuration. Try again or email <a href="mailto:office@entimema.com">office@entimema.com</a>.</p> : null}
-        <button className={styles.submit} disabled={status === "sending"} type="submit">{status === "sending" ? "Submitting…" : "Request my pilot scope →"}</button>
+        <button className={styles.submit} disabled={status === "sending"} type="submit">{status === "sending" ? "Submitting…" : "Request my pilot scope"}</button>
       </form>
     </section>
   );

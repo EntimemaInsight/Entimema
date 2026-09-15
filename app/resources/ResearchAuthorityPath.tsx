@@ -84,9 +84,9 @@ export default function ResearchAuthorityPath({ resource }: { resource: Resource
           <p>{resource.relatedCapability.description}</p>
         </div>
         <nav aria-label="Entimema commercial pathways">
-          <Link href={resource.relatedCapability.href}>{resource.relatedCapability.label} capability <b aria-hidden="true">→</b></Link>
-          <Link href="/financial-intelligence-launch">Financial Intelligence <b aria-hidden="true">→</b></Link>
-          <Link href="/contact">Discuss a workflow <b aria-hidden="true">→</b></Link>
+          <Link href={resource.relatedCapability.href}>{resource.relatedCapability.label} capability </Link>
+          <Link href="/financial-intelligence-launch">Financial Intelligence </Link>
+          <Link href="/contact">Discuss a workflow </Link>
         </nav>
       </div>
     </section>

@@ -1,0 +1,102 @@
+/* Public navigation: readable labels without decorative arrows or underlines.
+ * Demo pages explicitly retain their existing navigation presentation. */
+html body:not(:has([data-preserve-navigation])) {
+  --type-navigation: 1rem;
+  --entimema-menu-item: 1rem;
+  --entimema-menu-detail: .875rem;
+  --entimema-menu-category: .875rem;
+}
+
+html body:not(:has([data-preserve-navigation])) :is(a, button):is(
+  .primary-cta, .header-login, .site-nav__item,
+  nav a, nav button, button[type="submit"],
+  .ui-button, [data-company-cta],
+  [class*="primaryCta"], [class*="secondaryCta"],
+  [class*="primaryButton"], [class*="secondaryButton"],
+  [class*="ctaButton"], [class*="securityCtaButton"],
+  [class*="demoCta"], [class*="referenceCta"],
+  [class*="demoButton"], [class*="newsletterCta"],
+  [class*="bridgeGrid"] a, [class*="ctaActions"] a,
+  .service-card__link, [class*="editorial-link"],
+  [class*="MegaMenu"][class*="trigger"]
+) {
+  font-family: var(--entimema-font-interface, var(--font-sans)) !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  line-height: 1.4 !important;
+  letter-spacing: normal !important;
+  text-decoration: none !important;
+}
+
+html body:not(:has([data-preserve-navigation])) :is(a, button):is(
+  .primary-cta, .ui-button, [data-company-cta],
+  [class*="primaryCta"], [class*="secondaryCta"],
+  [class*="primaryButton"], [class*="secondaryButton"],
+  [class*="ctaButton"], [class*="securityCtaButton"], [class*="demoCta"],
+  [class*="demoButton"], [class*="newsletterCta"]
+) {
+  min-height: 48px;
+  height: auto;
+  max-width: 100%;
+  padding-block: 12px;
+  white-space: normal;
+  text-align: center;
+}
+
+html body:not(:has([data-preserve-navigation])) :is(
+  nav a, nav button, .site-header a, .site-header button,
+  [class*="GlobalFooter"] a,
+  .service-card__link, [class*="editorial-link"], [class*="referenceCta"],
+  [class*="bridgeGrid"] a, [class*="ctaActions"] a,
+  [class*="resourceCardLink"], [class*="resourceCardLink"] h3
+),
+html body:not(:has([data-preserve-navigation])) :is(
+  nav a, .site-header a, [class*="MegaMenu"] a,
+  [class*="GlobalFooter"] a
+) :is(strong, span) {
+  text-decoration: none !important;
+}
+
+html body:not(:has([data-preserve-navigation])) :is(
+  [class*="GlobalFooter"] a:not([class*="brand"]):not([class*="linkedin"]),
+  [class*="MegaMenu"] a strong
+) {
+  font-family: var(--entimema-font-interface, var(--font-sans)) !important;
+  font-size: 1rem !important;
+  line-height: 1.5 !important;
+}
+
+/* Remove only decorative link rules; retain button borders and focus outlines. */
+html body:not(:has([data-preserve-navigation])) :is(
+  [class*="editorial-link"]:not([data-company-cta]),
+  [class*="referenceCta"], .service-card__link,
+  [class*="bridgeGrid"] a
+) {
+  border-bottom: 0 !important;
+  background-image: none !important;
+}
+
+html body:not(:has([data-preserve-navigation])) :is(
+  [class*="editorial-link"], [class*="referenceCta"],
+  .service-card__link, .case-cta__link, .primary-cta
+)::before,
+html body:not(:has([data-preserve-navigation])) :is(
+  [class*="editorial-link"], [class*="referenceCta"],
+  .service-card__link, .case-cta__link, .primary-cta
+)::after {
+  content: none !important;
+  display: none !important;
+}
+
+html body:not(:has([data-preserve-navigation])) :is(
+  [class*="editorial-link"], [class*="referenceCta"], .service-card__link
+):hover {
+  opacity: .8;
+}
+
+@media (max-width: 760px) {
+  html body:not(:has([data-preserve-navigation])) .header-cta {
+    padding-inline: 16px !important;
+    white-space: nowrap;
+  }
+}

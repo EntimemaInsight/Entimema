@@ -28,7 +28,7 @@ export default function AnnouncementBar() {
         <span>
           Entimema launches <strong className="announcement__product">Financial Intelligence V1</strong> to power controlled, defensible financial decisions.{" "}
           <span className="announcement__link">
-            Explore Financial Intelligence V1 <b aria-hidden="true">→</b>
+            Explore Financial Intelligence V1
           </span>
         </span>
       </Link>

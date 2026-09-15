@@ -97,7 +97,7 @@ export default function BudgetsAndForecastingPage() {
 
       <section className={styles.section} aria-labelledby="related-title"><div className="site-container">
         <SectionHeader label="NEXT STEP" title="Related services" />
-        <div className={styles.relatedGrid}>{related.map(([title, copy, href]) => <Link href={href} key={title}><span><strong>{title}</strong><small>{copy}</small></span><b aria-hidden="true">↗</b></Link>)}</div>
+        <div className={styles.relatedGrid}>{related.map(([title, copy, href]) => <Link href={href} key={title}><span><strong>{title}</strong><small>{copy}</small></span></Link>)}</div>
       </div></section>
 
       <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>PLANNING, FORECASTING &amp; SCENARIOS</span><h2 id="cta-title">Build a planning model that stays useful as conditions change.</h2><p>Connect drivers, scenarios, forecasts and cash decisions in one repeatable process.</p><DemoTrigger className={styles.ctaButton} initialInterest="Budgets & Forecasting">Discuss your planning model</DemoTrigger></div></div></section>

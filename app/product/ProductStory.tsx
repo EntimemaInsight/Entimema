@@ -83,7 +83,7 @@ export default function ProductStory({ story }: { story: Story }) {
             <span className={styles.eyebrow}>{story.eyebrow}</span>
             <h1 id="product-title">{story.title}</h1>
             <p>{story.lead}</p>
-            <div className={styles.actions}><Link className={styles.primaryCta} href="/demo/financial-intelligence">Try the interactive demo <Arrow /></Link><Link className={styles.secondaryCta} href="/financial-intelligence-launch">Explore Financial Intelligence V1 <Arrow /></Link></div>
+            <div className={styles.actions}><Link className={styles.primaryCta} href="/demo/financial-intelligence">Try the interactive demo </Link><Link className={styles.secondaryCta} href="/financial-intelligence-launch">Explore Financial Intelligence V1 </Link></div>
           </div>
           <div className={styles.heroVisual}>{isPlatform ? <PlatformDiagram /> : <AgentDiagram />}</div>
         </div>
@@ -111,7 +111,7 @@ export default function ProductStory({ story }: { story: Story }) {
         </div>
       </div></section>
 
-      <section className={styles.cta} aria-labelledby="product-cta-title"><div className="site-container"><span>{story.heroLabel.toUpperCase()}</span><h2 id="product-cta-title">Turn financial evidence into decisions<br /><em>your organisation can defend.</em></h2><p>Start with one controlled workflow. Prove the decision architecture. Expand with confidence.</p><Link className={styles.ctaButton} href="/demo/financial-intelligence">Try the interactive demo <Arrow /></Link></div></section>
+      <section className={styles.cta} aria-labelledby="product-cta-title"><div className="site-container"><span>{story.heroLabel.toUpperCase()}</span><h2 id="product-cta-title">Turn financial evidence into decisions<br /><em>your organisation can defend.</em></h2><p>Start with one controlled workflow. Prove the decision architecture. Expand with confidence.</p><Link className={styles.ctaButton} href="/demo/financial-intelligence">Try the interactive demo </Link></div></section>
     </main>
   );
 }

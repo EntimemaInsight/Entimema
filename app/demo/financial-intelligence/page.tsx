@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function FinancialIntelligenceDemoPage() {
   return (
-    <main className={styles.page}>
+    <main className={styles.page} data-preserve-navigation>
       <Navbar active="product" />
       <FinancialIntelligenceDemo />
     </main>

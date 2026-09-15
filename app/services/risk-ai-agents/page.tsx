@@ -101,7 +101,7 @@ export default function RiskAiAgentsPage() {
 
       <section className={styles.section} aria-labelledby="related-title"><div className="site-container">
         <SectionHeader label="NEXT STEP" title="Related services" />
-        <div className={styles.relatedGrid}>{related.map(([title, copy, href]) => <Link href={href} key={title}><span><strong>{title}</strong><small>{copy}</small></span><b aria-hidden="true">↗</b></Link>)}</div>
+        <div className={styles.relatedGrid}>{related.map(([title, copy, href]) => <Link href={href} key={title}><span><strong>{title}</strong><small>{copy}</small></span></Link>)}</div>
       </div></section>
 
       <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>RISK AI AGENTS</span><h2 id="cta-title">Don&apos;t automate risk blindly.<br />Give automation boundaries.</h2><p>Start with one recurring process, explicit controls and human review. Build autonomy from there.</p><DemoTrigger className={styles.ctaButton} initialInterest="AI Agents">Discuss a risk automation workflow</DemoTrigger></div></div></section>

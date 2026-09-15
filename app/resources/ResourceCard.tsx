@@ -19,7 +19,7 @@ export default function ResourceCard({ resource }: { resource: ResourceRecord & 
         ) : <div className={styles.cardMeta}><span>{getTopic(resource.topic)?.label}</span><span>{resource.readingMinutes} MIN READ</span></div>}
         <h3>{isEngineering ? resource.headline : <ResourceSemanticText text={resource.headline} emphasis={resource.headlineEmphasis} className={styles.headlineEmphasis} />}</h3>
         <p>{resource.slogan}</p>
-        {isEngineering ? <span className={styles.readArticle}>Read article <b aria-hidden="true">→</b></span> : null}
+        {isEngineering ? <span className={styles.readArticle}>Read article </span> : null}
       </Link>
     </article>
   );

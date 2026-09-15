@@ -101,7 +101,7 @@ export default function AmlCompliancePage() {
 
       <section className={styles.section} aria-labelledby="related-title"><div className="site-container">
         <SectionHeader label="NEXT STEP" title="Related services" />
-        <div className={styles.relatedGrid}>{related.map(([title, copy, href]) => <Link href={href} key={title}><span><strong>{title}</strong><small>{copy}</small></span><b aria-hidden="true">↗</b></Link>)}</div>
+        <div className={styles.relatedGrid}>{related.map(([title, copy, href]) => <Link href={href} key={title}><span><strong>{title}</strong><small>{copy}</small></span></Link>)}</div>
       </div></section>
 
       <section className={styles.ctaSection} aria-labelledby="cta-title"><div className="site-container"><div className={styles.ctaBlock}><span>AML &amp; FRAUD INVESTIGATION</span><h2 id="cta-title">Build a clearer path from alert to defensible disposition.</h2><p>Connect risk signals, evidence, analyst review and escalation in one controlled investigation workflow.</p><DemoTrigger className={styles.ctaButton} initialInterest="Other">Discuss your investigation workflow</DemoTrigger></div></div></section>
