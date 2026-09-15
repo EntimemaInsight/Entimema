@@ -2,6 +2,13 @@
  * Demo pages and the header retain their earlier presentation.
  * Contact us (.header-cta) keeps the updated action typography. */
 
+:root {
+  --button-label-family: var(--font-sans);
+  --button-label-size: 1rem;
+  --button-label-weight: 600;
+  --button-label-leading: 1.4;
+}
+
 html body:not(:has([data-preserve-navigation])) :is(a, button):is(
   .primary-cta, .header-login, .site-nav__item,
   nav a, nav button, button[type="submit"],
@@ -126,4 +133,36 @@ html body:not(:has([data-preserve-navigation])) a:is(
   opacity: 1;
   transform: none;
   text-decoration: none;
+}
+
+/* Every contained action uses the homepage Contact us / demo typography.
+ * Navigation menus and editorial text links keep their separate presentation. */
+html body :is(a, button):is(
+  .primary-cta, .ui-button, [data-company-cta], button[type="submit"],
+  [class*="primaryCta"], [class*="secondaryCta"],
+  [class*="primaryButton"], [class*="secondaryButton"],
+  [class*="ctaButton"], [class*="securityCtaButton"],
+  [class*="demoCta"], [class*="demoButton"], [class*="newsletterCta"]
+):not(:where(.site-header :not(.header-cta), [class*="MegaMenu"] *)) {
+  font-family: var(--button-label-family) !important;
+  font-size: var(--button-label-size) !important;
+  font-weight: var(--button-label-weight) !important;
+  line-height: var(--button-label-leading) !important;
+  letter-spacing: normal !important;
+  font-style: normal !important;
+  text-transform: none !important;
+}
+
+html body :is(a, button):is(
+  .primary-cta, .ui-button, [data-company-cta], button[type="submit"],
+  [class*="primaryCta"], [class*="secondaryCta"],
+  [class*="primaryButton"], [class*="secondaryButton"],
+  [class*="ctaButton"], [class*="securityCtaButton"],
+  [class*="demoCta"], [class*="demoButton"], [class*="newsletterCta"]
+):not(:where(.site-header :not(.header-cta), [class*="MegaMenu"] *)) > :is(span, strong, b):not([aria-hidden="true"]) {
+  font-family: inherit !important;
+  font-size: inherit !important;
+  font-weight: inherit !important;
+  line-height: inherit !important;
+  letter-spacing: inherit !important;
 }

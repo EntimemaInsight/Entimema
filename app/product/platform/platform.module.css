@@ -90,8 +90,6 @@
 .actions a,
 .finalActions a {
   color: var(--blue);
-  font-size: 14px;
-  font-weight: 670;
 }
 .actions a span,
 .finalActions b {
