@@ -21,7 +21,7 @@ html body:not(:has([data-preserve-navigation])) :is(a, button):is(
   [class*="bridgeGrid"] a, [class*="ctaActions"] a,
   .service-card__link, [class*="editorial-link"],
   [class*="MegaMenu"][class*="trigger"]
-):not(:where(.site-header :not(.header-cta), [class*="MegaMenu"], [class*="MegaMenu"] *)) {
+):not(:where(.site-header :not(.header-cta), [class*="MegaMenu"], [class*="MegaMenu"] *, [class*="GlobalFooter"] *)) {
   font-family: var(--entimema-font-interface, var(--font-sans)) !important;
   font-size: 1rem !important;
   font-weight: 600 !important;
@@ -59,14 +59,6 @@ html body:not(:has([data-preserve-navigation])) :is(
   text-decoration: none !important;
 }
 
-html body:not(:has([data-preserve-navigation])) :is(
-  [class*="GlobalFooter"] a:not([class*="brand"]):not([class*="linkedin"]),
-  [class*="MegaMenu"] a strong
-):not(:where(.site-header :not(.header-cta), [class*="MegaMenu"], [class*="MegaMenu"] *)) {
-  font-family: var(--entimema-font-interface, var(--font-sans)) !important;
-  font-size: 1rem !important;
-  line-height: 1.5 !important;
-}
 
 /* Remove only decorative link rules; retain button borders and focus outlines. */
 html body:not(:has([data-preserve-navigation])) :is(
