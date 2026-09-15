@@ -3,6 +3,7 @@
   --luxury-ivory: #fffaf3;
   --luxury-ink: #071f43;
   --luxury-blue: #1f5d9b;
+  --luxury-caption: #4b6176;
   --luxury-steel: #7890aa;
   --luxury-navy: #071f43;
   --rust: #1f5d9b;
@@ -14,6 +15,15 @@
   --paper: #f7f3ec;
   --paper2: #edf2f6;
   background: var(--luxury-paper);
+}
+
+.luxuryPage :global([class*="kicker"]),
+.luxuryPage :global([class*="issueNumber"]),
+.luxuryPage :global([class*="sectionLabel"]),
+.luxuryPage :global([class*="reportTitle"] p),
+.luxuryPage :global([class*="valueSource"] small),
+.luxuryPage :global([class*="valueState"] small) {
+  color: var(--luxury-caption);
 }
 
 .luxuryPage :global(header[class*="hero"]) {
@@ -178,7 +188,7 @@
   border-block: 1px solid #c5d0da;
 }
 .executiveLedger h2 { color: var(--luxury-navy); }
-.ledgerLabel { color: var(--luxury-blue); }
+.ledgerLabel { color: var(--luxury-caption); }
 .ledgerWaterfall { border-top-color: #9aabba; }
 .ledgerWaterfall article { border-bottom-color: #c8d2dd; }
 .ledgerWaterfall p { color: #52708e; }
@@ -223,7 +233,7 @@
   background: #eef3f7;
   color: var(--luxury-ink);
 }
-.lightControl :global([class*="sectionLabel"]) { color: var(--luxury-blue); }
+.lightControl :global([class*="sectionLabel"]) { color: var(--luxury-caption); }
 .lightControl :global([class*="sectionLead"] > p) { color: #4b6176; }
 .lightControl :global([class*="equation"] > div) { border-bottom-color: #bcc9d5; }
 .lightControl :global([class*="equation"] span) { color: #4b6176; }
