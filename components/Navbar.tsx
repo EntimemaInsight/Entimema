@@ -55,7 +55,7 @@ export default function Navbar({ active = "home" }: { active?: NavKey }) {
         <div className="site-header__actions">
           <WhatWeDoMegaMenu active={active === "services"} mobile />
           <Link className="header-login" href="/auth/sign-in?callbackUrl=%2Fworkspace%2Ffinancial-intelligence" target="_blank" rel="noopener noreferrer">
-            Log in
+            Login
           </Link>
           <Link
             className="primary-cta primary-cta--compact header-cta"

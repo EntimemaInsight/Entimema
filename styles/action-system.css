@@ -136,7 +136,6 @@ html body :is(
 }
 
 /* Header controls and navigation use filled states, never decorative rules. */
-.header-login,
 .site-nav__item,
 [class*="MegaMenu_trigger"] {
   min-height: 40px;
@@ -151,7 +150,6 @@ html body :is(
   text-decoration: none !important;
   transition: background-color var(--action-duration-fast) var(--action-ease), color var(--action-duration-fast) var(--action-ease) !important;
 }
-.header-login:hover,
 .site-nav__item:hover,
 [class*="MegaMenu_trigger"]:hover {
   background: var(--action-surface) !important;

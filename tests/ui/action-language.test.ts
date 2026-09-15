@@ -13,11 +13,11 @@ const actionCss = readFileSync("styles/action-system.css", "utf8");
 const tokens = readFileSync("styles/tokens.css", "utf8");
 
 test("public navigation separates contact, self-guided demo and authentication actions", () => {
-  assert.match(navbar, />\s*Log in\s*</);
+  assert.match(navbar, />\s*Login\s*</);
   assert.match(navbar, /className="primary-cta primary-cta--compact header-cta"[\s\S]*?href="\/contact"[\s\S]*?>\s*Contact us\s*</);
   assert.match(mobileMenu, /mobileDockLogin[\s\S]*?>Log in</);
   assert.match(mobileMenu, /mobileDockContact[\s\S]*?href="\/demo\/financial-intelligence"[\s\S]*?>Try the interactive demo</);
-  assert.doesNotMatch(navbar, />\s*Login\s*</);
+  assert.doesNotMatch(navbar, />\s*Log in\s*</);
 });
 
 test("protected Workspace entry is explicit and commercial actions retain distinct meanings", () => {
