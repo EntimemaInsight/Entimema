@@ -19,7 +19,7 @@ html body :is(
   [class*="_demoCta_"],
   [class*="_submit_"],
   [class*="_accept_"] form > button,
-  [class*="_conversion_"] > div:last-child > a:first-child
+  :where([class*="_conversion_"] > div:last-child > a:first-child)
 ) {
   min-height: 48px;
   display: inline-flex;
@@ -60,7 +60,7 @@ html body :is(
   [class*="_demoCta_"],
   [class*="_submit_"],
   [class*="_accept_"] form > button,
-  [class*="_conversion_"] > div:last-child > a:first-child
+  :where([class*="_conversion_"] > div:last-child > a:first-child)
 ):hover {
   border-color: var(--action-primary-hover) !important;
   background: var(--action-primary-hover) !important;
@@ -83,13 +83,14 @@ html body :is(
   transition-duration: var(--action-duration-fast) !important;
 }
 
-/* Light primary action on dark fields. */
-html body :is(.primary-cta--light, [class*="_cta_"] .primary-cta--light) {
+/* Light actions on dark closing fields. Keep structural conversion selectors
+ * at zero specificity above so they cannot override this surface variant. */
+html body :is(.primary-cta--light, [class*="_cta_"] .primary-cta--light, [class*="_ctaBlock_"] [class*="_ctaButton_"]) {
   border-color: #fff !important;
   background: #fff !important;
   color: var(--action-primary) !important;
 }
-html body :is(.primary-cta--light, [class*="_cta_"] .primary-cta--light):hover {
+html body :is(.primary-cta--light, [class*="_cta_"] .primary-cta--light, [class*="_ctaBlock_"] [class*="_ctaButton_"]):hover {
   border-color: var(--action-surface) !important;
   background: var(--action-surface) !important;
   color: var(--action-primary) !important;
