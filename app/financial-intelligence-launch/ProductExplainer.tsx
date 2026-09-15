@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import styles from "./executionEditorial.module.css";
+import styles from "./feature.module.css";
 
 const stages = [
   { number: "01", label: "Evidence", title: "Source registered", detail: "FY2025_Income_Statement.xlsx", metric: "184 values", state: "REGISTERED" },
@@ -16,17 +16,17 @@ export default function ProductExplainer() {
   const stage = stages[active];
 
   return <section className={styles.execution} aria-labelledby="execution-title">
-    <div className={styles.sectionLabel}>CONTROLLED EXECUTION · PRODUCT IN ACTION</div>
+    <div className={styles.sectionLabel}>PRODUCT IN PRACTICE</div>
     <div className={styles.executionHead}>
-      <h2 id="execution-title">Follow one value from<br/><span>source to decision.</span></h2>
-      <p>This is the commercial difference: not a hidden jump from upload to answer, but an inspectable execution path where semantic interpretation, arithmetic control and human judgement remain explicit.</p>
+      <h2 id="execution-title">One value.<br/><span>A complete audit trail.</span></h2>
+      <p>Select a stage to see how evidence, interpretation, control and review remain connected throughout the execution.</p>
     </div>
     <div className={styles.executionSurface}>
       <div className={styles.executionTabs} role="tablist" aria-label="Execution stages">
         {stages.map((item, index) => <button key={item.number} type="button" role="tab" aria-selected={active === index} onClick={() => setActive(index)}><span>{item.number}</span><b>{item.label}</b><i /></button>)}
       </div>
       <div className={styles.executionDemo} role="tabpanel">
-        <header><span>RUN FI–0024 · ILLUSTRATIVE EXECUTION</span><b><i /> EXECUTION ACTIVE</b></header>
+        <header><span>ILLUSTRATIVE RUN · FI–0024</span><b><i /> CONTROLLED EXECUTION</b></header>
         <div className={styles.valueJourney}>
           <div className={styles.valueSource}><small>{stage.label.toUpperCase()}</small><h3>{stage.title}</h3><p>{stage.detail}</p></div>
           <div className={styles.valuePath}><i /><span>{stage.number}</span><i /></div>

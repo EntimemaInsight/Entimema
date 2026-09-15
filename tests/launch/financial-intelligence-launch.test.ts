@@ -4,27 +4,28 @@ import test from "node:test";
 
 const page = readFileSync("app/financial-intelligence-launch/page.tsx", "utf8");
 const editorial = readFileSync("app/financial-intelligence-launch/EditorialExperience.tsx", "utf8");
-const css = readFileSync("app/financial-intelligence-launch/launch.module.css", "utf8");
+const css = readFileSync("app/financial-intelligence-launch/feature.module.css", "utf8");
 const sitemap = readFileSync("app/sitemap.ts", "utf8");
 const analytics = readFileSync("app/financial-intelligence-launch/FinancialIntelligenceAnalytics.tsx", "utf8");
 const sharedAnalytics = readFileSync("lib/analytics.ts", "utf8");
 
-test("direct pricing and checkout stay private while the pilot is refined", () => {
+test("the public route offers a controlled pilot without exposing checkout internals", () => {
   assert.doesNotMatch(page + editorial, /€490|€588|buy\.stripe\.com|secure checkout/i);
-  assert.match(editorial, /Commission a pilot/);
-  assert.match(editorial, /contact\?topic=financial-data/);
+  assert.match(editorial, /Configure a paid pilot/);
+  assert.match(editorial, /\/pilot\/financial-intelligence/);
 });
 
 test("the article follows a premium editorial argument", () => {
-  const sections = ["The premise", "From document to evidence", "The controlled workflow", "Proof, not plausibility", "The output", "The manifesto", "Founding pilot"];
+  const sections = ["The premise", "From document to evidence", "The controlled workflow", "Proof, not plausibility", "The output", "The operating standard"];
   let cursor = -1;
   for (const section of sections) {
     const next = editorial.indexOf(section);
     assert.ok(next > cursor, `${section} follows the prior section`);
     cursor = next;
   }
-  assert.match(editorial, /Financial data deserves more than an AI answer/);
-  assert.match(editorial, /A defensible financial state/);
+  assert.match(editorial, /A financial result is only useful when you can defend it/);
+  assert.match(editorial, /A decision-ready financial state/);
+  assert.ok(editorial.lastIndexOf("Test the workflow on your Income Statement") > cursor);
 });
 
 test("evidence, arithmetic and accountability remain visible", () => {
@@ -49,8 +50,8 @@ test("conversion and metadata remain measurable and canonical", () => {
 });
 
 test("the light editorial system is responsive and has no scroll effects", () => {
-  assert.match(css, /--paper:#fff7ef/);
-  assert.match(css, /Georgia,"Times New Roman",serif/);
+  assert.match(css, /--paper:#fff7ed/);
+  assert.match(css, /Georgia/);
   assert.match(css, /@media\(max-width:900px\)/);
   assert.match(css, /@media\(max-width:620px\)/);
   assert.match(css, /@media\(prefers-reduced-motion:reduce\)/);
