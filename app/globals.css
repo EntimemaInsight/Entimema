@@ -7276,6 +7276,9 @@ html.scrolling-up .site-header {
   padding-inline: 48px 76px;
   isolation: isolate;
   cursor: pointer;
+  transition:
+    background-color 260ms ease,
+    box-shadow 260ms ease;
 }
 
 .announcement__message > span {
@@ -7301,7 +7304,21 @@ html.scrolling-up .site-header {
     transparent 100%
   );
   transform: skewX(-18deg);
-  animation: announcementLightSweep 5.8s cubic-bezier(.22, 1, .36, 1) infinite;
+  opacity: 0;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .announcement__message:hover {
+    background-color: rgba(41, 91, 166, .24);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.16),
+      inset 0 -1px 0 rgba(123,170,235,.28),
+      0 0 28px rgba(76,130,210,.2);
+  }
+
+  .announcement__message:hover::before {
+    animation: announcementHoverSweep 900ms cubic-bezier(.22, 1, .36, 1) both;
+  }
 }
 
 .announcement__message:focus-visible {
@@ -7313,11 +7330,10 @@ html.scrolling-up .site-header {
   z-index: 2;
 }
 
-@keyframes announcementLightSweep {
-  0%, 58% { left: -32%; opacity: 0; }
-  63% { opacity: 1; }
-  84% { left: 112%; opacity: 1; }
-  85%, 100% { left: 112%; opacity: 0; }
+@keyframes announcementHoverSweep {
+  0% { left: -32%; opacity: 0; }
+  18% { opacity: 1; }
+  100% { left: 112%; opacity: 0; }
 }
 
 @media (max-width: 560px) {
@@ -7329,5 +7345,6 @@ html.scrolling-up .site-header {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .announcement__message::before { animation: none; }
+  .announcement__message,
+  .announcement__message::before { animation: none; transition: none; }
 }
