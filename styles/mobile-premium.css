@@ -435,6 +435,78 @@
 }
 
 @media (min-width: 47.5001rem) {
-  .approach-carousel { width: 100%; }
+  .approach-carousel {
+    width: 100%;
+    margin-top: var(--space-copy-stage);
+  }
+
+  .site-page:has(> .home-stage) .approach-section__tiles {
+    grid-template-columns: repeat(2, minmax(0, 18rem));
+    gap: clamp(3rem, 7vw, 6rem);
+    margin-top: 0;
+  }
+
+  .site-page:has(> .home-stage) .approach-tile {
+    min-height: 18rem;
+    padding: 0;
+    gap: 1.75rem;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .site-page:has(> .home-stage) .approach-tile:hover {
+    border-color: transparent;
+    box-shadow: none;
+    transform: translateY(-.25rem);
+  }
+
+  .site-page:has(> .home-stage) .approach-tile__icon {
+    width: clamp(9.5rem, 12vw, 11rem);
+    height: clamp(9.5rem, 12vw, 11rem);
+    border: 1px solid rgba(255, 255, 255, .78);
+    border-radius: clamp(1.75rem, 2.5vw, 2.125rem);
+    background:
+      radial-gradient(circle at 50% 42%, rgba(255, 255, 255, .98), rgba(247, 246, 255, .82) 72%),
+      rgba(255, 255, 255, .72);
+    box-shadow:
+      0 1.25rem 3.5rem rgba(84, 70, 190, .12),
+      inset 0 1px 0 rgba(255, 255, 255, .96);
+  }
+
+  .site-page:has(> .home-stage) .approach-tile__icon svg {
+    width: 58%;
+    height: 58%;
+    stroke: #6253db;
+    stroke-width: 1.7;
+    filter: drop-shadow(0 .45rem .8rem rgba(87, 70, 199, .14));
+  }
+
+  .site-page:has(> .home-stage) .approach-tile__title {
+    display: flex;
+    justify-content: center;
+    gap: .3em;
+    color: var(--brand-navy-950);
+    font-size: clamp(1.25rem, 1.7vw, 1.5rem);
+    font-weight: 650;
+    line-height: 1.15;
+    letter-spacing: -.025em;
+    white-space: nowrap;
+  }
+
   .approach-carousel__control { display: none; }
+  .approach-carousel > .sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
 }
