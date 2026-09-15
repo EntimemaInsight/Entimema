@@ -81,19 +81,19 @@ export default function SupportPage() {
           <SupportForm />
         </section>
 
-        <section
-          className={`${styles.cta} ${trustStyles.page} ${trustStyles.securityCta}`}
-          aria-labelledby="support-cta-title"
-        >
-          <h2 id="support-cta-title">Ready to see Entimema in action?</h2>
-          <Link
-            className={trustStyles.securityCtaButton}
-            href="/demo/financial-intelligence"
-          >
-            Try the interactive demo →
-          </Link>
-        </section>
       </main>
+      <section
+        className={`${styles.cta} ${trustStyles.page} ${trustStyles.securityCta}`}
+        aria-labelledby="support-cta-title"
+      >
+        <h2 id="support-cta-title">Ready to see Entimema in action?</h2>
+        <Link
+          className={trustStyles.securityCtaButton}
+          href="/demo/financial-intelligence"
+        >
+          Try the interactive demo →
+        </Link>
+      </section>
     </>
   );
 }
