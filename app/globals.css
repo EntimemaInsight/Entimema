@@ -7356,3 +7356,40 @@ html.scrolling-up .site-header {
   .announcement__message,
   .announcement__message::before { animation: none; transition: none; }
 }
+
+/* Solutions index: mirror the detail-page badge and symbolic-marker language. */
+.service-card__badge {
+  border-color: rgba(7, 31, 67, .08);
+  border-radius: 5px;
+  background: #f1ee9f;
+  color: var(--brand-navy-950);
+  box-shadow: 0 8px 22px rgba(7, 31, 67, .055);
+}
+
+.service-card__meta > span {
+  display: inline-grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border: 1px solid rgba(7, 31, 67, .24);
+  border-radius: 5px;
+  background: rgba(255, 255, 255, .8);
+  color: var(--brand-navy-950);
+  font-size: 0;
+  box-shadow: 0 7px 18px rgba(7, 31, 67, .045);
+}
+
+.service-card__meta > span::before {
+  color: var(--brand-navy-950);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.service-card:nth-child(6n + 1) .service-card__meta > span::before { content: "◇"; }
+.service-card:nth-child(6n + 2) .service-card__meta > span::before { content: "⊕"; }
+.service-card:nth-child(6n + 3) .service-card__meta > span::before { content: "⌁"; }
+.service-card:nth-child(6n + 4) .service-card__meta > span::before { content: "◎"; }
+.service-card:nth-child(6n + 5) .service-card__meta > span::before { content: "△"; }
+.service-card:nth-child(6n) .service-card__meta > span::before { content: "□"; }
