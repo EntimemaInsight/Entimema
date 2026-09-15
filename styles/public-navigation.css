@@ -1,11 +1,6 @@
 /* Public navigation: readable labels without decorative arrows or underlines.
- * Demo pages explicitly retain their existing navigation presentation. */
-html body:not(:has([data-preserve-navigation])) {
-  --type-navigation: 1rem;
-  --entimema-menu-item: 1rem;
-  --entimema-menu-detail: .875rem;
-  --entimema-menu-category: .875rem;
-}
+ * Demo pages and the header retain their earlier presentation.
+ * Contact us (.header-cta) keeps the updated action typography. */
 
 html body:not(:has([data-preserve-navigation])) :is(a, button):is(
   .primary-cta, .header-login, .site-nav__item,
@@ -19,7 +14,7 @@ html body:not(:has([data-preserve-navigation])) :is(a, button):is(
   [class*="bridgeGrid"] a, [class*="ctaActions"] a,
   .service-card__link, [class*="editorial-link"],
   [class*="MegaMenu"][class*="trigger"]
-) {
+):not(:where(.site-header :not(.header-cta), [class*="MegaMenu"], [class*="MegaMenu"] *)) {
   font-family: var(--entimema-font-interface, var(--font-sans)) !important;
   font-size: 1rem !important;
   font-weight: 600 !important;
@@ -34,7 +29,7 @@ html body:not(:has([data-preserve-navigation])) :is(a, button):is(
   [class*="primaryButton"], [class*="secondaryButton"],
   [class*="ctaButton"], [class*="securityCtaButton"], [class*="demoCta"],
   [class*="demoButton"], [class*="newsletterCta"]
-) {
+):not(:where(.site-header :not(.header-cta), [class*="MegaMenu"], [class*="MegaMenu"] *)) {
   min-height: 48px;
   height: auto;
   max-width: 100%;
@@ -49,18 +44,18 @@ html body:not(:has([data-preserve-navigation])) :is(
   .service-card__link, [class*="editorial-link"], [class*="referenceCta"],
   [class*="bridgeGrid"] a, [class*="ctaActions"] a,
   [class*="resourceCardLink"], [class*="resourceCardLink"] h3
-),
+):not(:where(.site-header :not(.header-cta), [class*="MegaMenu"], [class*="MegaMenu"] *)),
 html body:not(:has([data-preserve-navigation])) :is(
   nav a, .site-header a, [class*="MegaMenu"] a,
   [class*="GlobalFooter"] a
-) :is(strong, span) {
+) :is(strong, span):not(:where(.site-header :not(.header-cta), [class*="MegaMenu"], [class*="MegaMenu"] *)) {
   text-decoration: none !important;
 }
 
 html body:not(:has([data-preserve-navigation])) :is(
   [class*="GlobalFooter"] a:not([class*="brand"]):not([class*="linkedin"]),
   [class*="MegaMenu"] a strong
-) {
+):not(:where(.site-header :not(.header-cta), [class*="MegaMenu"], [class*="MegaMenu"] *)) {
   font-family: var(--entimema-font-interface, var(--font-sans)) !important;
   font-size: 1rem !important;
   line-height: 1.5 !important;
@@ -71,7 +66,7 @@ html body:not(:has([data-preserve-navigation])) :is(
   [class*="editorial-link"]:not([data-company-cta]),
   [class*="referenceCta"], .service-card__link,
   [class*="bridgeGrid"] a
-) {
+):not(:where(.site-header :not(.header-cta), [class*="MegaMenu"], [class*="MegaMenu"] *)) {
   border-bottom: 0 !important;
   background-image: none !important;
 }
@@ -79,18 +74,18 @@ html body:not(:has([data-preserve-navigation])) :is(
 html body:not(:has([data-preserve-navigation])) :is(
   [class*="editorial-link"], [class*="referenceCta"],
   .service-card__link, .case-cta__link, .primary-cta
-)::before,
+):not(:where(.site-header :not(.header-cta), [class*="MegaMenu"], [class*="MegaMenu"] *))::before,
 html body:not(:has([data-preserve-navigation])) :is(
   [class*="editorial-link"], [class*="referenceCta"],
   .service-card__link, .case-cta__link, .primary-cta
-)::after {
+):not(:where(.site-header :not(.header-cta), [class*="MegaMenu"], [class*="MegaMenu"] *))::after {
   content: none !important;
   display: none !important;
 }
 
 html body:not(:has([data-preserve-navigation])) :is(
   [class*="editorial-link"], [class*="referenceCta"], .service-card__link
-):hover {
+):not(:where(.site-header :not(.header-cta), [class*="MegaMenu"], [class*="MegaMenu"] *)):hover {
   opacity: .8;
 }
 
