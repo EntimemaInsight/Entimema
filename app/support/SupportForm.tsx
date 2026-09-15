@@ -32,9 +32,6 @@ export default function SupportForm() {
 
   return (
     <div className={styles.formPanel} id="support-form">
-      <p className={styles.formEyebrow}>CONTACT SUPPORT</p>
-      <h2>How can we help?</h2>
-      <p className={styles.formIntro}>Tell us what you need and our team will get back to you.</p>
       <form className={styles.form} onSubmit={submit}>
         <label><span>First name</span><input autoComplete="given-name" name="firstName" required /></label>
         <label><span>Last name</span><input autoComplete="family-name" name="lastName" required /></label>
