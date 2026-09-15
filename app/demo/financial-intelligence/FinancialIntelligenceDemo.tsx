@@ -49,7 +49,7 @@ export function FinancialIntelligenceDemo() {
         <header className={styles.command}>
           <div><small>FINANCE / FINANCIAL INTELLIGENCE / V1</small><strong>Northstar Manufacturing Ltd · FY 2025</strong></div>
           <button type="button" onClick={() => { setCompleted(true); setSelected(5); }} disabled={completed}>
-            {completed ? "Demo analysis complete" : "Start the demo analysis →"}
+            {completed ? "Demo analysis complete" : "Start demo analysis"}
           </button>
         </header>
 

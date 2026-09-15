@@ -1,6 +1,7 @@
 "use client";
 
 import { NewsletterTrigger } from "@/components/DemoDiscovery";
+import { NEWSLETTER_CTA } from "@/lib/cta-labels";
 import styles from "./resources.module.css";
 
 export default function EditorialSubscription() {
@@ -12,7 +13,7 @@ export default function EditorialSubscription() {
         <p>Financial intelligence, credit risk and decision architecture—published for practitioners.</p>
       </div>
       <div className={styles.subscriptionAction}>
-        <NewsletterTrigger>Subscribe <b aria-hidden="true">→</b></NewsletterTrigger>
+        <NewsletterTrigger>{NEWSLETTER_CTA} <b aria-hidden="true">→</b></NewsletterTrigger>
         <small>New research and product releases only.</small>
       </div>
     </aside>

@@ -113,8 +113,8 @@ export default function ResourcesMegaMenu({ active = false }: { active?: boolean
             </section>
             <section className={styles.group}>
               <h3>Entimema Workspace</h3>
-              <Link className={styles.item} href="/workspace" onClick={hide}>
-                <strong>Open workspace</strong>
+              <Link className={styles.item} href="/auth/sign-in?callbackUrl=%2Fworkspace" onClick={hide} target="_blank" rel="noopener noreferrer">
+                <strong>Log in to Workspace</strong>
                 <small>
                   Access Financial Intelligence, your runs, product documentation
                   and data-security guidance.

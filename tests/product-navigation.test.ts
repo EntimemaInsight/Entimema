@@ -99,8 +99,8 @@ test("documentation references and login enter the authenticated workspace", () 
   assert.match(menuContent, /title: "Integrations",[\s\S]*?description: "Learn about integrations on Entimema\."[\s\S]*?status: "Coming soon"/);
   assert.match(resourcesMenu, /upcomingItem[\s\S]*?item\.status/);
   assert.match(mobileMenu, /mobileUpcomingDestination[\s\S]*?item\.status/);
-  assert.match(navbar, /className="header-login"[\s\S]*?target="_blank" rel="noopener noreferrer"[\s\S]*?>\s*Login/);
-  assert.match(mobileMenu, /mobileDockLogin[\s\S]*?target="_blank" rel="noopener noreferrer">Login</);
+  assert.match(navbar, /className="header-login"[\s\S]*?target="_blank" rel="noopener noreferrer"[\s\S]*?>\s*Log in/);
+  assert.match(mobileMenu, /mobileDockLogin[\s\S]*?target="_blank" rel="noopener noreferrer">Log in</);
   assert.match(resourcesMenu, /resourceDocumentation\.map[\s\S]*?target="_blank" rel="noopener noreferrer"/);
   assert.match(mobileMenu, /resourceDocumentation\.map[\s\S]*?target="_blank" rel="noopener noreferrer"/);
 });

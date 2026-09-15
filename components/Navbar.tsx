@@ -6,6 +6,7 @@ import BrandLogo from "./BrandLogo";
 import WhatWeDoMegaMenu from "./WhatWeDoMegaMenu";
 import ResourcesMegaMenu from "./ResourcesMegaMenu";
 import ProductMegaMenu from "./ProductMegaMenu";
+import { PRIMARY_COMMERCIAL_CTA } from "@/lib/cta-labels";
 
 type NavKey = "home" | "product" | "services" | "about" | "resources" | "agents" | "contact";
 
@@ -55,10 +56,10 @@ export default function Navbar({ active = "home" }: { active?: NavKey }) {
         <div className="site-header__actions">
           <WhatWeDoMegaMenu active={active === "services"} mobile />
           <Link className="header-login" href="/auth/sign-in?callbackUrl=%2Fworkspace%2Ffinancial-intelligence" target="_blank" rel="noopener noreferrer">
-            Login
+            Log in
           </Link>
-          <Link className="primary-cta primary-cta--compact header-cta" href="/contact" aria-current={active === "contact" ? "page" : undefined}>
-            Contact us
+          <Link className="primary-cta primary-cta--compact header-cta" href="/demo/financial-intelligence">
+            {PRIMARY_COMMERCIAL_CTA}
           </Link>
         </div>
       </div>
