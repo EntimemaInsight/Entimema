@@ -57,7 +57,7 @@ export default function SupportForm() {
           </label>
         </div>
         <label className={styles.honeypot} aria-hidden="true"><span>Website</span><input autoComplete="off" name="website" tabIndex={-1} /></label>
-        <button disabled={status === "submitting"} type="submit">{status === "submitting" ? "Sending…" : "Send request"}</button>
+        <button disabled={status === "submitting"} type="submit">{status === "submitting" ? "Submitting…" : "Submit"}</button>
         <div className={styles.formStatus} aria-live="polite">
           {status === "success" && <p className={styles.success}>Thank you. Your request has been sent.</p>}
           {status === "error" && <p className={styles.error}>We could not send your request. Please try again or email <a href="mailto:office@entimema.com">office@entimema.com</a>.</p>}
