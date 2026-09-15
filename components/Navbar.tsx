@@ -6,7 +6,6 @@ import BrandLogo from "./BrandLogo";
 import WhatWeDoMegaMenu from "./WhatWeDoMegaMenu";
 import ResourcesMegaMenu from "./ResourcesMegaMenu";
 import ProductMegaMenu from "./ProductMegaMenu";
-import { PRIMARY_COMMERCIAL_CTA } from "@/lib/cta-labels";
 
 type NavKey = "home" | "product" | "services" | "about" | "resources" | "agents" | "contact";
 
@@ -59,12 +58,10 @@ export default function Navbar({ active = "home" }: { active?: NavKey }) {
             Log in
           </Link>
           <Link
-            aria-label={PRIMARY_COMMERCIAL_CTA}
             className="primary-cta primary-cta--compact header-cta"
-            href="/demo/financial-intelligence"
+            href="/contact"
           >
-            <span className="header-cta__label header-cta__label--full">{PRIMARY_COMMERCIAL_CTA}</span>
-            <span aria-hidden="true" className="header-cta__label header-cta__label--compact">View demo</span>
+            Contact us
           </Link>
         </div>
       </div>

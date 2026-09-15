@@ -46,12 +46,10 @@ html body :is(
 /* Header conversion labels stay legible instead of compressing or wrapping. */
 .header-cta {
   width: auto !important;
-  min-width: 190px;
+  min-width: 118px;
   padding-inline: 20px !important;
   white-space: nowrap;
 }
-.header-cta__label { display: inline; }
-.header-cta__label--compact { display: none; }
 
 html body :is(
   .primary-cta,
@@ -228,8 +226,6 @@ html body :is(.clientWorkspaceContent, .agentWorkspace) button:not(.workflowNode
     min-width: 104px;
     padding-inline: 16px !important;
   }
-  .header-cta__label--full { display: none; }
-  .header-cta__label--compact { display: inline; }
 }
 
 @media (prefers-reduced-motion: reduce) {

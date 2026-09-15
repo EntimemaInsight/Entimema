@@ -12,10 +12,9 @@ const subscription = readFileSync("app/resources/EditorialSubscription.tsx", "ut
 const actionCss = readFileSync("styles/action-system.css", "utf8");
 const tokens = readFileSync("styles/tokens.css", "utf8");
 
-test("public navigation prioritizes the self-guided demo and names authentication as an action", () => {
+test("public navigation separates contact, self-guided demo and authentication actions", () => {
   assert.match(navbar, />\s*Log in\s*</);
-  assert.match(navbar, /href="\/demo\/financial-intelligence"[\s\S]*?PRIMARY_COMMERCIAL_CTA/);
-  assert.match(navbar, /header-cta__label--compact">View demo/);
+  assert.match(navbar, /className="primary-cta primary-cta--compact header-cta"[\s\S]*?href="\/contact"[\s\S]*?>\s*Contact us\s*</);
   assert.match(mobileMenu, /mobileDockLogin[\s\S]*?>Log in</);
   assert.match(mobileMenu, /mobileDockContact[\s\S]*?href="\/demo\/financial-intelligence"[\s\S]*?>Try the interactive demo</);
   assert.doesNotMatch(navbar, />\s*Login\s*</);
