@@ -52,10 +52,11 @@ export default function EditorialExperience() {
       <section className={luxury.executiveLedger} data-fi-reveal aria-labelledby="executive-ledger-title">
         <p className={luxury.ledgerLabel}>The entire proposition, in one view</p>
         <h2 id="executive-ledger-title">From source document to defensible financial decision.</h2>
-        <div className={luxury.ledgerGrid}>
-          <p><span>Input</span><strong>Financial data with its original context intact.</strong></p>
-          <p><span>Method</span><strong>AI interpretation, deterministic validation and human review.</strong></p>
-          <p><span>Output</span><strong>A structured result with evidence and exceptions attached.</strong></p>
+        <div className={luxury.ledgerWaterfall}>
+          <article><span>01</span><p>Source</p><strong>Financial data enters with its original context intact.</strong></article>
+          <article><span>02</span><p>Interpretation</p><strong>AI identifies financial meaning without inventing values.</strong></article>
+          <article><span>03</span><p>Control</p><strong>Deterministic code verifies supported relationships.</strong></article>
+          <article><span>04</span><p>Decision</p><strong>A reviewed result leaves with evidence and exceptions attached.</strong></article>
         </div>
       </section>
 
