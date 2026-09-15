@@ -122,7 +122,7 @@ export async function POST(request: Request) {
   } else if (intent === "client") {
     if (!firstName || !lastName || !companyEmail || !emailPattern.test(companyEmail) || !companyName || !jobTitle || !message || !inquiryType || !allowedInquiryTypes.has(inquiryType) || privacyConsent !== "yes" || (marketingConsent && marketingConsent !== "yes")) return Response.json({ ok: false }, { status: 400 });
     subject = `[Entimema] Existing client — ${inquiryType}`;
-    html = row("Type", "Existing client") + row("First name", firstName) + row("Last name", lastName) + row("Company email", companyEmail) + row("Company name", companyName) + row("Job title", jobTitle) + row("Country", country) + row("Phone number", phoneNumber) + row("Project / service", project) + row("Inquiry type", inquiryType) + row("Marketing communications consent", marketingConsent === "yes" ? "Yes" : "No") + row("Privacy acknowledgement", "Yes") + row("Description", message);
+    html = row("Type", "Support request") + row("First name", firstName) + row("Last name", lastName) + row("Company email", companyEmail) + row("Company name", companyName) + row("Job title", jobTitle) + row("Country", country) + row("Phone number", phoneNumber) + row("Project / service", project) + row("Inquiry type", inquiryType) + row("Marketing communications consent", marketingConsent === "yes" ? "Yes" : "No") + row("Privacy acknowledgement", "Yes") + row("Description", message);
   } else if (intent === "newsletter") {
     if (!firstName || !lastName || !companyEmail || !emailPattern.test(companyEmail) || !companyName || !jobTitle || newsletterConsent !== "yes") return Response.json({ ok: false }, { status: 400 });
     subject = `[Entimema] Newsletter subscription — ${companyName}`;
